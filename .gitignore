@@ -1,0 +1,13 @@
+/target
+/dist
+/build
+**/*.rs.bk
+Cargo.lock
+bin/
+pkg/
+wasm-pack.log
+worker/
+node_modules/
+.cargo-ok
+package-lock.json
+.DS_Store

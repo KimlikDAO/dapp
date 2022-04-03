@@ -1,0 +1,14 @@
+{
+  "private": true,
+  "name": "dapp",
+  "version": "0.0.0",
+  "description": "KimlikDAO dApp arayüzü",
+  "main": "build/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "format": "prettier --write '**/*.{js,css,json,md}'",
+    "build": "make local_deploy"
+  },
+  "author": "KimlikDAO-bot <dao@kimlikdao.org>",
+  "license": "MIT"
+}

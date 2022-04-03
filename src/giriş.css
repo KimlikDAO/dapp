@@ -1,0 +1,129 @@
+html {
+  background-size: 8px 8px;
+  min-height: 100%;
+  background: #fff;
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+a {
+  text-decoration: none;
+  color: #000;
+}
+
+h1 {
+  display: inline-block;
+}
+
+.nw {
+  white-space: nowrap;
+}
+
+.actbutton {
+  width: 115px;
+  height: 25px;
+  background: #4c5094;
+  padding: 0.8em;
+  text-align: center;
+  border-radius: 5px;
+  color: white;
+  line-height: 25px;
+}
+
+button {
+  border: 3px solid #666;
+  border-radius: 5px;
+  padding: 0.8em;
+  font-size: 13pt;
+  cursor: pointer;
+}
+
+button.act {
+  background: #aae;
+  border-color: #446;
+}
+
+/* Navigation */
+#n {
+  display: flex;
+  width: 100%;
+  margin: 8px auto;
+  justify-content: space-between;
+  max-width: 1200px;
+}
+
+#nl {
+  width: 100px;
+}
+
+/* Banner */
+#b {
+  width: 100%;
+  height: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+}
+
+#ba {
+  max-width: 40%;
+  margin: 54px 0 0 140px;
+  font-size: 14pt;
+}
+
+#ba li {
+  margin: 1.2em 0 1.2em -1.2em;
+}
+
+#bab {
+  font-size: 1.2em;
+}
+
+#bac {
+  margin: 1.6em 0.1em;
+}
+
+/* Ortaklar */
+#o {
+  width: 50%;
+  max-width: 800px;
+  margin: 7em auto;
+  display: flex;
+  justify-content: space-between;
+}
+
+#oa,
+#ol {
+  cursor: pointer;
+  width: 200px;
+  height: 150px;
+  border: 1px solid #444;
+}
+
+#s {
+  width: 100%;
+  height: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.step {
+  width: 400px;
+  margin: 1em 0.2em 1em 10em;
+  border: 4px solid #fff;
+  box-shadow: 2px 2px 10px rgb(0 0 0 / 15%);
+  border-radius: 10px;
+  padding: 1em;
+}
+
+.iphone-x {
+  position: relative;
+  margin: 40px auto;
+  width: 240px;
+  height: 520px;
+  background-color: #e3e3f0;
+  /*background-image: linear-gradient(60deg, #7371ee 1%, #a1d9d6 100%);*/
+  border-radius: 30px;
+  box-shadow: 0px 0px 0px 11px #1f1f1f, 0px 0px 0px 13px #191919,
+    0px 0px 0px 20px #111;
+}
