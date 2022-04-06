@@ -3,7 +3,7 @@
   "name": "dapp",
   "version": "0.0.0",
   "description": "KimlikDAO dApp arayüzü",
-  "main": "build/index.js",
+  "main": "serve.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "format": "prettier --write '**/*.{js,css,json,md}'",

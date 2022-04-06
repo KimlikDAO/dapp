@@ -1,18 +1,17 @@
-all: build/index.html build/index.html.gz build/index.html.br
+package: build build/ana-page build/al-page build/iptal-page
 
-runnocompile:
-	python3 py/testserv.py
+include ana/Makefile
+include al/Makefile
+include iptal/Makefile
+include ortaklar-locası/Makefile
 
-build/index.html: src/index.html
+build:
 	mkdir -p build
-	cp src/index.html build/tmp.html
-	html-minifier -c htmlminifier.conf build/tmp.html > build/index.html
-	rm build/tmp.html
 
 clean:
 	rm -rf build
 
-.PHONY: clean
+.PHONY: clean package
 
 %.gz: %
 	cp $< $@.tmp

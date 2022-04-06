@@ -25,11 +25,11 @@ class TestServer(BaseHTTPRequestHandler):
         self.end_headers()
 
         if self.path == '/':
-            fname = 'src/index.html'
+            fname = 'ana/page.html'
         elif self.path.find('.') == -1:
-            fname = 'src' + self.path + '.html'
+            fname = self.path[1:] + '/page.html'
         else:
-            fname = 'src' + self.path
+            fname = self.path[1:]
         self.wfile.write(open(fname, 'r').read().encode('utf-8'))
 
 with HTTPServer(('localhost', PORT), TestServer) as server:

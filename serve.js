@@ -29,7 +29,7 @@ async function handleRequest(event) {
 
     default:
       console.log(event.request.url)
-      throw 'BANE'
+      throw 'NAPİM'
   }
 }
 
