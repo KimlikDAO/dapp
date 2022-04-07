@@ -26,8 +26,8 @@ class TestServer(BaseHTTPRequestHandler):
 
         if self.path == '/':
             fname = 'ana/page.html'
-        elif self.path.find('.') == -1:
-            fname = self.path[1:] + '/page.html'
+        elif self.path.startswith('/al'):
+            fname = 'al/page.html'
         else:
             fname = self.path[1:]
         self.wfile.write(open(fname, 'r').read().encode('utf-8'))

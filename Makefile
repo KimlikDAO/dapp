@@ -11,7 +11,13 @@ build:
 clean:
 	rm -rf build
 
-.PHONY: clean package
+devserve:
+	python3 tools/devserve.py
+
+cf-deploy: package
+	./tools/cf-deploy.sh
+
+.PHONY: clean package devserve
 
 %.gz: %
 	cp $< $@.tmp
