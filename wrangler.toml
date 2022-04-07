@@ -3,7 +3,7 @@ account_id = "8f0c2f2271ff857947d9a5b2c38595a0"
 zone_id = "cb31764917040dd0b9a7b79e1ec099df"
 compatibility_date = "2022-04-02"
 
-name = "dapp-test"
+name = "test"
 workers_dev = true
 route = ""
 
@@ -12,15 +12,15 @@ ip = "0.0.0.0"
 port = 80
 local_protocol = "http"
 
-[env.production]
-name = "dapp"
+[env.fujitestnet]
+name = "fujitestnet"
 workers_dev = false
 route = "https://fujitestnet.kimlikdao.org/*"
 
 kv_namespaces = [
-  { binding = "DAPP_FILES", id = "1542c7001d67402e9ee9cbd43f29dd58" },
+  { binding = "KV", id = "f5dd6a87ada14a288622f94019dac027" },
 ]
 
 [build]
-command = "make"
+command = "make cf-deployment"
 upload = { format = "service-worker" }

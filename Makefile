@@ -11,10 +11,10 @@ build:
 clean:
 	rm -rf build
 
-devserve:
-	python3 tools/devserve.py
+dev:
+	python3 tools/dev.py
 
-cf-deploy: package
+cf-deployment: package
 	./tools/cf-deploy.sh
 
 .PHONY: clean package devserve
