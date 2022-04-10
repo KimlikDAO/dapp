@@ -1,6 +1,13 @@
-build/ana-page: build/ana build/ana.gz build/ana.br
+build/ana.page: build/ana build/ana.gz build/ana.br
 
-build/ana.keymap:
+.PHONY: build/ana.page
+
+build/ana.js: ana/page.js
+	google-closure-compiler -W VERBOSE -O ADVANCED --charset UTF-8 \
+	                        --js $^ \
+							| uglifyjs -m -o $@
+
+build/ana.keymap: build/ana.js
 	touch build/ana.keymap
 
 build/ana: build/ana.keymap

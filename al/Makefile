@@ -1,7 +1,14 @@
-build/al-page: build/al build/al.gz build/al.br
+build/al.page: build/al build/al.gz build/al.br
 
-build/al.keymap:
-	touch build/al.keymap
+.PHONY: build/al.page
+
+build/al.js: al/page.js
+	google-closure-compiler -W VERBOSE -O ADVANCED --charset UTF-8 \
+	                        --js $^ \
+							| uglifyjs -m -o $@
+
+build/al.keymap: build/al.js
+	tools/keyhasher $@ $^
 
 build/al: build/al.keymap
 	cp al/page.html build/al.tmp

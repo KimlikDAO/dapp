@@ -1,1 +1,3 @@
-build/iptal-page:
+build/iptal.page:
+
+.PHONY: build/iptal.page

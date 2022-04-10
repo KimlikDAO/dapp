@@ -1,4 +1,4 @@
-const s1b = document.getElementById('s1b')
+/* const s1b = document.getElementById('s1b')
 
 s1b.onclick = function () { }
 
@@ -11,3 +11,4 @@ s2b.onclick = async () => {
   acc = await ethereum.request({ method: 'eth_requestAccounts' })
   console.log(acc[0])
 }
+*/

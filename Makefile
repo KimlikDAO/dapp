@@ -1,4 +1,4 @@
-package: build build/ana-page build/al-page build/iptal-page
+payload: build build/ana.page build/al.page
 
 include ana/Makefile
 include al/Makefile
@@ -14,10 +14,10 @@ clean:
 dev:
 	python3 tools/dev.py
 
-cf-deployment: package
+cf-deployment: payload
 	./tools/cf-deploy.sh
 
-.PHONY: clean package devserve
+.PHONY: clean payload dev
 
 %.gz: %
 	cp $< $@.tmp
