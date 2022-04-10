@@ -1,6 +1,6 @@
 const s1b = document.getElementById('s1b')
 
-s1b.onclick = function() {}
+s1b.onclick = function () { }
 
 for (var i = 1; i < 4; ++i) {
   s[i] = document.getElementById('s' + i)

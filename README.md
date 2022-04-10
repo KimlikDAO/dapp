@@ -5,4 +5,5 @@ Her http request gerektiren bölümü 'sayfa' olarak adlandırıyoruz.
 Her sayfa için gerekli dosyalar http `pathname`'i ile aynı isimli
 bir klasörde toplanıyor.
 
-Buna istisna `/` pathindeki sayfa; bu sayfaya `ana` klasörünü ayırıyoruz.
+Buna istisna `/` pathindeki ana sayfa; bu sayfaya `ana` klasörünü
+ayırıyoruz.

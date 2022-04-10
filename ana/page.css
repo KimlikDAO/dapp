@@ -62,13 +62,13 @@ button.act {
   max-width: 1200px;
   margin: 0 auto;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
 }
 
 #ba {
-  max-width: 40%;
-  margin: 54px 0 0 140px;
-  font-size: 14pt;
+  max-width: 50%;
+  margin: 3em 2em;
+  font-size: 13pt;
 }
 
 #ba li {
@@ -118,7 +118,7 @@ button.act {
 
 .iphone-x {
   position: relative;
-  margin: 40px auto;
+  margin: 40px 20px;
   width: 240px;
   height: 520px;
   background-color: #e3e3f0;

@@ -18,6 +18,7 @@ class TestServer(BaseHTTPRequestHandler):
 
         if self.path.endswith('.map') or self.path.endswith(".ico"):
             self.send_response(404)
+            self.end_headers()
             return
 
         self.send_response(200)
@@ -26,7 +27,7 @@ class TestServer(BaseHTTPRequestHandler):
 
         if self.path == '/':
             fname = 'ana/page.html'
-        elif self.path.startswith('/al'):
+        elif self.path == '/al' or self.path.startswith('/al?'):
             fname = 'al/page.html'
         else:
             fname = self.path[1:]

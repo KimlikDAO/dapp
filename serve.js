@@ -7,7 +7,7 @@ async function getPrecompressed() {
 
 async function handleRequest(event) {
   const url = new URL(event.request.url)
-  const enc = event.request.headers.get('X-accept-enc')
+  const enc = event.request.cf.clientAcceptEncoding;
 
   switch (url.pathname) {
     case '/':
@@ -29,7 +29,7 @@ async function handleRequest(event) {
 
     default:
       console.log(event.request.url)
-      throw 'NAPİM'
+      throw 'NAPİM?'
   }
 }
 
