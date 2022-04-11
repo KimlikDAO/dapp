@@ -5,10 +5,8 @@
   "description": "KimlikDAO dApp arayüzü",
   "main": "serve.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "format": "prettier --write '**/*.{js,css,json,md}'",
     "build": "make local_deploy"
   },
-  "author": "KimlikDAO-bot <dao@kimlikdao.org>",
+  "author": "KimlikDAO <dao@kimlikdao.org>",
   "license": "MIT"
 }

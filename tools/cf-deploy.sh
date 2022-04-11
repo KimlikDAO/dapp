@@ -13,14 +13,12 @@ for page in $Pages; do
   for comp in $Compression; do
     key="${page}${CompressionToExtension[$comp]}"
     wrangler kv:key put --namespace-id f5dd6a87ada14a288622f94019dac027 ${key} \
-                    "build/${key}" --path
-
+             "build/${key}" --path
   done
 done
 
-set -o allexport
+# Read the CF_CACHE_PURGE_TOKEN
 source .env
-set +o allexport
 
 curl https://api.cloudflare.com/client/v4/zones/cb31764917040dd0b9a7b79e1ec099df/purge_cache \
       -H "Authorization: Bearer ${CF_CACHE_PURGE_TOKEN}" \

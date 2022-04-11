@@ -22,5 +22,5 @@ kv_namespaces = [
 ]
 
 [build]
-command = "make cf-deployment"
+# command = "make cf-deployment"
 upload = { format = "service-worker" }
