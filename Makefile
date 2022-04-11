@@ -1,4 +1,4 @@
-payload: build build/ana.page build/al.page
+payload: build build/serve.js build/ana.page build/al.page
 
 include ana/Makefile
 include al/Makefile
@@ -16,6 +16,12 @@ dev:
 
 cf-deployment: payload
 	./tools/cf-deploy.sh
+
+
+build/serve.js: serve.js workers.js
+	google-closure-compiler -W VERBOSE -O ADVANCED --charset UTF-8 \
+	                        --js $^ \
+	                        | uglifyjs -m -o $@
 
 .PHONY: clean payload dev
 

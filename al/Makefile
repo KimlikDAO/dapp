@@ -11,7 +11,7 @@ build/al.keymap: build/al.js
 	tools/keyhasher $@ $^
 	touch build/al.keymap
 
-build/al: build/al.keymap
+build/al: build/al.keymap al/page.html
 	cp al/page.html build/al.tmp
 	# keymapper build/al.keymap build/al.tmp 
 	html-minifier -c tools/html-minifier.conf build/al.tmp > build/al

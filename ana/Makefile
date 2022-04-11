@@ -10,7 +10,7 @@ build/ana.js: ana/page.js
 build/ana.keymap: build/ana.js build/ana.js.gz build/ana.js.br
 	touch build/ana.keymap
 
-build/ana: build/ana.keymap
+build/ana: build/ana.keymap ana/page.html
 	cp ana/page.html build/ana.tmp
 	# keymapper build/ana.keymap build/ana.tmp 
 	html-minifier -c tools/html-minifier.conf build/ana.tmp > build/ana

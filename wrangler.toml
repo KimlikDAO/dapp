@@ -6,6 +6,9 @@ compatibility_date = "2022-04-02"
 name = "test"
 workers_dev = true
 route = ""
+kv_namespaces = [
+  { binding = "KV", id = "15a080fd128945ecb0a9b1780f0e708a", preview_id = "69b9fd26875141d1b832ccaa3934647a" },
+]
 
 [dev]
 ip = "0.0.0.0"
@@ -16,11 +19,10 @@ local_protocol = "http"
 name = "fujitestnet"
 workers_dev = false
 route = "https://fujitestnet.kimlikdao.org/*"
-
 kv_namespaces = [
-  { binding = "KV", id = "f5dd6a87ada14a288622f94019dac027" },
+  { binding = "KV", id = "15a080fd128945ecb0a9b1780f0e708a"},
 ]
 
 [build]
-# command = "make cf-deployment"
+command = "make"
 upload = { format = "service-worker" }
