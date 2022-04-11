@@ -5,10 +5,11 @@ build/al.page: build/al build/al.gz build/al.br
 build/al.js: al/page.js
 	google-closure-compiler -W VERBOSE -O ADVANCED --charset UTF-8 \
 	                        --js $^ \
-							| uglifyjs -m -o $@
+	                        | uglifyjs -m -o $@
 
 build/al.keymap: build/al.js
 	tools/keyhasher $@ $^
+	touch build/al.keymap
 
 build/al: build/al.keymap
 	cp al/page.html build/al.tmp
