@@ -20,8 +20,7 @@ cf-deployment: payload
 
 build/serve.js: serve.js workers.js
 	google-closure-compiler -W VERBOSE -O ADVANCED --charset UTF-8 \
-	                        --js $^ \
-	                        | uglifyjs -m -o $@
+	                        --js $^ | uglifyjs -m -o $@
 
 .PHONY: clean payload dev
 

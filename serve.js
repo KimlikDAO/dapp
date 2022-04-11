@@ -18,15 +18,15 @@ async function handleRequest(event) {
     const body = await KV.get(kvKey, 'arrayBuffer');
 
     // If we don't have it, throw which prints a generic 404.
-    if (!body) throw 'Böyle bir şey yok';
+    if (!body) throw "";
 
     response = new Response(body, {
       status: 200,
       headers: {
-        'content-length': body.length,
+        'content-length': body.byteLength,
         'accept-ranges': 'bytes'
       },
-      encodeBody: ext ? 'manual' : 'auto' // If the file is compressed, tell CF not to re-encodde it.
+      'encodeBody': ext ? 'manual' : 'auto' // If the file is compressed, tell CF not to re-encodde it.
     });
 
     // If the file is compressed, set the 'Content-Encoding'.
@@ -35,8 +35,8 @@ async function handleRequest(event) {
     }
 
     // Set the mimeType.
-    const mimeType = url.pathname.endsWith('.js') ? 'application/javascript;charset=utf-8' :
-      url.pathname.endsWith('.css') ? 'text/css' : 'text/html;charset=utf-8';
+    const mimeType = url.pathname.endsWith('.css') ? 'text/css' : ((url.pathname.endsWith('.js')
+      ? 'application/javascript' : 'text/html') + ';charset=utf-8');
     response.headers.set('content-type', mimeType);
 
     // Set Cache-control and expiration
@@ -49,7 +49,7 @@ async function handleRequest(event) {
 
     // Write response to cache lazily
     event.waitUntil(caches.default.put(cacheKey, response.clone()))
-    response.headers.set('X-KimlikDAO-Cache', 'VAYAK');
+    response.headers.set('X-KimlikDAO', 'AQ');
   }
   return response;
 }
