@@ -7,8 +7,15 @@ build/ana.js: ana/page.js
 	                        --js $^ \
 	                        | uglifyjs -m -o $@
 
-build/ana.keymap: build/ana.js build/ana.js.gz build/ana.js.br
-	touch build/ana.keymap
+build/ana.css: ana/page.css
+	cat ana/page.css | csso --output $@
+
+
+build/ana.keymap: build/ana.js build/ana.js.gz build/ana.js.br \
+	              build/ana.css build/ana.css.gz build/ana.css.br
+	rm -rf $@
+	tools/keyhasher.py $@ build/ana.js
+	tools/keyhasher.py $@ build/ana.css
 
 build/ana: build/ana.keymap ana/page.html
 	cp ana/page.html build/ana.tmp

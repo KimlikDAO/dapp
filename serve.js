@@ -51,6 +51,7 @@ async function handleRequest(event) {
     event.waitUntil(caches.default.put(cacheKey, response.clone()))
     response.headers.set('X-KimlikDAO', 'AQ');
   }
+
   return response;
 }
 
