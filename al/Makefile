@@ -3,8 +3,9 @@ build/al.page: build/al build/al.gz build/al.br
 .PHONY: build/al.page
 
 build/al.js: al/page.js
+	mkdir -p build
 	google-closure-compiler -W VERBOSE -O ADVANCED --charset UTF-8 \
-	                        --js $^ \
+	                        --js $< \
 	                        | uglifyjs -m -o $@
 
 build/al.keymap: build/al.js build/al.js.gz build/al.js.br

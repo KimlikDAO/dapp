@@ -1,12 +1,9 @@
-payload: build build/serve.js build/ana.page build/al.page
+build: build/serve.js build/ana.page build/al.page
 
 include ana/Makefile
 include al/Makefile
 include iptal/Makefile
 include ortaklar-locası/Makefile
-
-build:
-	mkdir -p build
 
 clean:
 	rm -rf build
@@ -14,11 +11,11 @@ clean:
 dev:
 	python3 tools/dev.py
 
-cf-deployment: payload
+cf-deployment: build
 	./tools/cf-deploy.sh
 
-
 build/serve.js: serve.js workers.js
+	mkdir -p build
 	google-closure-compiler -W VERBOSE -O ADVANCED --charset UTF-8 \
 	                        --js $^ | uglifyjs -m -o $@
 
