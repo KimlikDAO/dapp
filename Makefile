@@ -1,3 +1,5 @@
+MAKEFLAGS=-j 4
+
 build: build/serve.js build/ana.page build/al.page
 
 include ana/Makefile
@@ -9,10 +11,10 @@ clean:
 	rm -rf build
 
 dev:
-	python3 tools/dev.py
+	tools/dev.py
 
 cf-deployment: build
-	./tools/cf-deploy.sh
+	tools/cfuploader.py
 
 build/serve.js: serve.js workers.js
 	mkdir -p build

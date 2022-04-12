@@ -1,10 +1,10 @@
 #!/usr/bin/env python
 
-import sys
-import hashlib
 import base64
+import hashlib
 import os.path
 import shutil
+import sys
 
 map_file = open(sys.argv[1], 'a+')
 

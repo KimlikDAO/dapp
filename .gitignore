@@ -11,4 +11,5 @@ node_modules/
 .cargo-ok
 package-lock.json
 .DS_Store
-.env
+.gizli
+.ipynb_checkpoints/

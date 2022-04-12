@@ -15,7 +15,7 @@ KV.get = function(key, type) {};
 /**
  * 
  */
-function addEventListener(event, actor) {};
+function addEventListener(event, listener) {};
 
 const caches = {};
 

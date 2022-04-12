@@ -1,6 +1,7 @@
 // const NOTION_URL =
 //  'https://kimlikdao.notion.site/KimlikDAO-5349424f906f45dbbb085b3dc8ed53ef';
 
+// Sonda bölü işareti olması lazım.
 const HOST_URL = 'https://fujitestnet.kimlikdao.org/';
 
 async function handleRequest(event) {
@@ -8,17 +9,18 @@ async function handleRequest(event) {
   const enc = event.request['cf']['clientAcceptEncoding'];
   const ext = enc.includes('br') ? '.br' : enc.includes('gz') ? '.gz' : '';
 
-  // We store assets in the cache with the compression suffix appended.
+  // Asset'lerin cache ve KV'deki anahtarı .br .gz gibi uzantıyı da içeriyor.
   const kvKey = (url.pathname === '/' ? 'ana' : url.pathname.substring(1)) + ext;
   const cacheKey = HOST_URL + kvKey;
 
   let response = await caches.default.match(cacheKey);
 
   if (!response) {
+    // Asset cache'te değil, KV'den çekmeye çalışıyoruz.
     const body = await KV.get(kvKey, 'arrayBuffer');
 
-    // If we don't have it, throw which prints a generic 404.
-    if (!body) throw "";
+    // KV'de de yok; throw edelim, kullanıcı açıklamasız bir 404 alsın.
+    if (!body) throw 0;
 
     response = new Response(body, {
       status: 200,
@@ -26,29 +28,36 @@ async function handleRequest(event) {
         'content-length': body.byteLength,
         'accept-ranges': 'bytes'
       },
-      'encodeBody': ext ? 'manual' : 'auto' // If the file is compressed, tell CF not to re-encodde it.
+      // Eğer asset önceden sıkıştırılmışsa bunu işaretleyelim ki CF re-encode etmeye
+      // çalışmasın.
+      'encodeBody': ext ? 'manual' : 'auto'
     });
 
-    // If the file is compressed, set the 'Content-Encoding'.
+    // Sıkıştırılmış assetse 'content-encoding' yaz.
     if (ext) {
-      response.headers.append('content-encoding', ext === '.br' ? 'br' : 'gzip');
+      response.headers.set('content-encoding', ext === '.br' ? 'br' : 'gzip');
     }
 
-    // Set the mimeType.
-    const mimeType = url.pathname.endsWith('.css') ? 'text/css' : ((url.pathname.endsWith('.js')
+    // 'content-type' yaz.
+    const contentType = url.pathname.endsWith('.css') ? 'text/css' : ((url.pathname.endsWith('.js')
       ? 'application/javascript' : 'text/html') + ';charset=utf-8');
-    response.headers.set('content-type', mimeType);
+    response.headers.set('content-type', contentType);
 
-    // Set Cache-control and expiration
-    if (url.pathname.includes('.')) { // Each file with a dot in the name is content hashed
+    // 'cache-control' ve 'expiration' yaz.
+    if (url.pathname.includes('.')) {
+      // Asset isminde nokta varsa, isim içerik hashi, en yüksek cache ayarlarını
+      // kullanabiliriz.
       response.headers.set('cache-control', 'max-age=29030400,public');
       response.headers.set('expires', 'Sun, 01 Jan 2034 00:00:00 GMT');
     } else {
+      // Kullanıcı tarayıcısı içinde nokta olmayan asset'leri 10 saniye cache'leyebilsin.
       response.headers.set('cache-control', 'max-age=10,public');
     }
 
-    // Write response to cache lazily
+    // KV'den çektiğimiz asset'i cache'e yaz.
     event.waitUntil(caches.default.put(cacheKey, response.clone()))
+    
+    // Cache'te olmadığını yolladığımız cevapta işaretle.
     response.headers.set('X-KimlikDAO', 'AQ');
   }
 
@@ -62,4 +71,4 @@ function hata(err) {
   })
 }
 
-addEventListener('fetch', event => event.respondWith(handleRequest(event)));
+addEventListener('fetch', event => event.respondWith(handleRequest(event).catch(hata)));

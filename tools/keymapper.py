@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 
-import sys
-import re
 import os.path
+import re
+import sys
 
 
 def multireplace(string, replacements):
@@ -32,7 +32,7 @@ replace = {}
 
 def wrap(txt):
     """
-    Kaza kurşunu bul/değiştirleri azaltmak için sar.
+    Yanlışlıkla bul/değiştirleri azaltmak için sar.
     """
     return '="' + txt + '"'
 
