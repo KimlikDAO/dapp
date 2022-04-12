@@ -10,10 +10,10 @@ build/al.js: al/page.js
 
 build/al.keymap: build/al.js build/al.js.gz build/al.js.br
 	rm -rf $@
-	tools/keyhasher.py $@ $^
+	tools/keyhasher.py $@ build/al.js
 
-build/al: build/al.keymap al/page.html
+build/al: build/ana.keymap build/al.keymap al/page.html
 	cp al/page.html build/al.tmp
-	# keymapper build/al.map.local build/al.tmp 
+	tools/keymapper.py build/al.tmp build/ana.keymap build/al.keymap
 	html-minifier -c tools/html-minifier.conf build/al.tmp > build/al
 	rm build/al.tmp

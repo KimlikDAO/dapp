@@ -27,9 +27,6 @@ def multireplace(string, replacements):
     return regexp.sub(lambda match: replacements[match.group(0)], string)
 
 
-replace = {}
-
-
 def wrap(txt):
     """
     Yanlışlıkla bul/değiştirleri azaltmak için sar.
@@ -41,6 +38,7 @@ def flip(name):
     return os.path.splitext(name)[0] + '/page' + os.path.splitext(name)[1]
 
 
+replace = {}
 for name in sys.argv[2:]:
     kvs = {k.strip(): v.strip() for k, v in (l.split('=') for l in open(name))}
     replace.update({wrap(flip(k)): wrap(v) for k, v in kvs.items()})
