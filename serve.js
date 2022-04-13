@@ -3,6 +3,7 @@
 
 // Sonda bölü işareti olması lazım.
 const HOST_URL = 'https://fujitestnet.kimlikdao.org/';
+const PAGE_CACHE_CONTROL = 'max-age=60,public'
 
 async function handleRequest(event) {
   const url = new URL(event.request.url)
@@ -12,55 +13,57 @@ async function handleRequest(event) {
   // Asset'lerin cache ve KV'deki anahtarı .br .gz gibi uzantıyı da içeriyor.
   const kvKey = (url.pathname === '/' ? 'ana' : url.pathname.substring(1)) + ext;
   const cacheKey = HOST_URL + kvKey;
+  const isStatic = url.pathname.includes('.');
 
   let response = await caches.default.match(cacheKey);
 
-  if (!response) {
-    // Asset cache'te değil, KV'den çekmeye çalışıyoruz.
-    const body = await KV.get(kvKey, 'arrayBuffer');
-
-    // KV'de de yok; throw edelim, kullanıcı açıklamasız bir 404 alsın.
-    if (!body) throw 0;
-
-    response = new Response(body, {
-      status: 200,
-      headers: {
-        'content-length': body.byteLength,
-        'accept-ranges': 'bytes'
-      },
-      // Eğer asset önceden sıkıştırılmışsa bunu işaretleyelim ki CF re-encode etmeye
-      // çalışmasın.
-      'encodeBody': ext ? 'manual' : 'auto'
-    });
-
-    // Sıkıştırılmış assetse 'content-encoding' yaz.
-    if (ext) {
-      response.headers.set('content-encoding', ext === '.br' ? 'br' : 'gzip');
+  if (response) {
+    if (!isStatic) {
+      response = new Response(response.body, response);
+      response.headers.set('cache-control', PAGE_CACHE_CONTROL)
     }
-
-    // 'content-type' yaz.
-    const contentType = url.pathname.endsWith('.css') ? 'text/css' : ((url.pathname.endsWith('.js')
-      ? 'application/javascript' : 'text/html') + ';charset=utf-8');
-    response.headers.set('content-type', contentType);
-
-    // 'cache-control' ve 'expiration' yaz.
-    if (url.pathname.includes('.')) {
-      // Asset isminde nokta varsa, isim içerik hashi, en yüksek cache ayarlarını
-      // kullanabiliriz.
-      response.headers.set('cache-control', 'max-age=29030400,public');
-      response.headers.set('expires', 'Sun, 01 Jan 2034 00:00:00 GMT');
-    } else {
-      // Kullanıcı tarayıcısı içinde nokta olmayan asset'leri 10 saniye cache'leyebilsin.
-      response.headers.set('cache-control', 'max-age=10,public');
-    }
-
-    // KV'den çektiğimiz asset'i cache'e yaz.
-    event.waitUntil(caches.default.put(cacheKey, response.clone()))
-    
-    // Cache'te olmadığını yolladığımız cevapta işaretle.
-    response.headers.set('X-KimlikDAO', 'AQ');
+    return response
   }
 
+  // Asset cache'te değil, KV'den çekmeye çalışıyoruz.
+  const body = await KV.get(kvKey, 'arrayBuffer');
+
+  // KV'de de yok; throw edelim, kullanıcı açıklamasız bir 404 alsın.
+  if (!body) throw 0;
+
+  response = new Response(body, {
+    status: 200,
+    headers: {
+      'content-length': body.byteLength,
+      'accept-ranges': 'bytes'
+    },
+    // Eğer asset önceden sıkıştırılmışsa bunu işaretleyelim ki CF re-encode etmeye
+    // çalışmasın.
+    'encodeBody': ext ? 'manual' : 'auto'
+  });
+
+  // Sıkıştırılmış assetse 'content-encoding' yaz.
+  if (ext) {
+    response.headers.set('content-encoding', ext === '.br' ? 'br' : 'gzip');
+  }
+
+  // 'content-type' yaz.
+  const contentType = url.pathname.endsWith('.css') ? 'text/css' : ((url.pathname.endsWith('.js')
+    ? 'application/javascript' : 'text/html') + ';charset=utf-8');
+  response.headers.set('content-type', contentType);
+
+  // 'cache-control' ve 'expiration' yaz.
+  response.headers.set('cache-control', 'max-age=29030400,public');
+  response.headers.set('expires', 'Sun, 01 Jan 2034 00:00:00 GMT');
+
+  // KV'den çektiğimiz asset'i cache'e yaz.
+  event.waitUntil(caches.default.put(cacheKey, response.clone()))
+
+  // Sayfaları CF cache'inde sonsuz dek ama kullanıcı cache'inde belli bir süre tutmak istiyoruz.
+  // Bunun sebebi CF cachi'ni purge gerektiğinde purge edebilmemiz.
+  if (!isStatic) {
+    response.headers.set('cache-control', PAGE_CACHE_CONTROL)
+  }
   return response;
 }
 

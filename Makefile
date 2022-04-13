@@ -21,7 +21,7 @@ build/serve.js: serve.js workers.js
 	google-closure-compiler -W VERBOSE -O ADVANCED --charset UTF-8 \
 	                        --js $^ | uglifyjs -m -o $@
 
-.PHONY: clean payload dev
+.PHONY: cf-deployment clean dev
 
 %.gz: %
 	cp $< $@.tmp
