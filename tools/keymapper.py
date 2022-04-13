@@ -4,6 +4,8 @@ import os.path
 import re
 import sys
 
+import toml
+
 
 def multireplace(string, replacements):
     """
@@ -38,7 +40,10 @@ def flip(name):
     return os.path.splitext(name)[0] + '/page' + os.path.splitext(name)[1]
 
 
-replace = {}
+route = toml.load('wrangler.toml')['env']['fujitestnet']['route'][:-1]
+replace = {
+    "http://localhost:8787/": route
+}
 for name in sys.argv[2:]:
     kvs = {k.strip(): v.strip() for k, v in (l.split('=') for l in open(name))}
     replace.update({wrap(flip(k)): wrap(v) for k, v in kvs.items()})
