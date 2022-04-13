@@ -4,6 +4,7 @@
 // Sonda bölü işareti olması lazım.
 const HOST_URL = 'https://fujitestnet.kimlikdao.org/';
 const PAGE_CACHE_CONTROL = 'max-age=60,public'
+const STATIC_CACHE_CONTROL = 'max-age=29030400,public'
 
 async function handleRequest(event) {
   const url = new URL(event.request.url)
@@ -13,12 +14,12 @@ async function handleRequest(event) {
   // Asset'lerin cache ve KV'deki anahtarı .br .gz gibi uzantıyı da içeriyor.
   const kvKey = (url.pathname === '/' ? 'ana' : url.pathname.substring(1)) + ext;
   const cacheKey = HOST_URL + kvKey;
-  const isStatic = url.pathname.includes('.');
+  const isPage = !url.pathname.includes('.');
 
   let response = await caches.default.match(cacheKey);
 
   if (response) {
-    if (!isStatic) {
+    if (isPage) {
       response = new Response(response.body, response);
       response.headers.set('cache-control', PAGE_CACHE_CONTROL)
     }
@@ -52,17 +53,21 @@ async function handleRequest(event) {
     ? 'application/javascript' : 'text/html') + ';charset=utf-8');
   response.headers.set('content-type', contentType);
 
+  if (isPage) {
+    response.headers.set('x-frame-options', 'DENY')
+  }
+
   // 'cache-control' ve 'expiration' yaz.
-  response.headers.set('cache-control', 'max-age=29030400,public');
   response.headers.set('expires', 'Sun, 01 Jan 2034 00:00:00 GMT');
+  response.headers.set('cache-control', STATIC_CACHE_CONTROL);
 
   // KV'den çektiğimiz asset'i cache'e yaz.
   event.waitUntil(caches.default.put(cacheKey, response.clone()))
 
   // Sayfaları CF cache'inde sonsuz dek ama kullanıcı cache'inde belli bir süre tutmak istiyoruz.
   // Bunun sebebi CF cachi'ni purge gerektiğinde purge edebilmemiz.
-  if (!isStatic) {
-    response.headers.set('cache-control', PAGE_CACHE_CONTROL)
+  if (isPage) {
+    response.headers.set('cache-control', PAGE_CACHE_CONTROL);
   }
   return response;
 }
