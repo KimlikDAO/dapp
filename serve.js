@@ -3,7 +3,7 @@
 
 // Sonda bölü işareti olması lazım.
 const HOST_URL = 'https://fujitestnet.kimlikdao.org/';
-const PAGE_CACHE_CONTROL = 'max-age=60,public'
+const PAGE_CACHE_CONTROL = 'public'
 const STATIC_CACHE_CONTROL = 'max-age=29030400,public'
 
 async function handleRequest(event) {

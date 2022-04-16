@@ -13,9 +13,9 @@ const KV = {};
 KV.get = function(key, type) {};
 
 /**
- * 
+ * @param {string} eventName
  */
-function addEventListener(event, listener) {};
+function addEventListener(eventName, listener) {};
 
 const caches = {};
 
