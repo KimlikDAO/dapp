@@ -1,9 +1,13 @@
 const KIMLIK_AS_URL = "https://mock-api.kimlikas.com"
 
-const nw = document.getElementById('nw');
-const s1a = document.getElementById('s1a');
-const s1b = document.getElementById('s1b');
-const s2a = document.getElementById('s2a');
+const Adıyla = id => document.getElementById(id);
+
+const nw = Adıyla('nw');
+const s1a = Adıyla('s1a');
+const s1b = Adıyla('s1b');
+const s2a = Adıyla('s2a');
+const s3a = Adıyla('s3a');
+const s4a = Adıyla('s4a');
 
 let Hesap = null;
 let Rand = new Uint8Array(20);
@@ -13,8 +17,17 @@ if (ethereum) {
 
   if (!Hesap) {
     s1b.innerText = 'Tarayıcı Cüzdanı Bağla';
-    s1b.onclick = cüzdanBağla;
+    s1b.target = "";
+    s1b.href = "javascript:"
+    s1b.onclick = bağlayaBasıldı;
   }
+}
+
+async function bağlayaBasıldı() {
+  await cüzdanBağla();
+
+  Adıyla('s2').classList.remove('disabled');
+  s2a.classList.remove('disabled');
 }
 
 async function cüzdanBağla() {
@@ -25,9 +38,12 @@ async function cüzdanBağla() {
     Hesap = hesaplar[0];
     const hesapAdı = Hesap.slice(0, 6) + '...' + Hesap.slice(-4);
     nw.innerText = hesapAdı;
-    s1a.innerText = hesapAdı;
-    s1a.disabled = true;
-    s1b.style.display = "none";
+    s1b.innerText += 'ndı';
+    s1b.onclick = null;
+    s1b.disabled = true;
+    s1a.style.display = "none";
+    Adıyla('s1').classList.add('done');
+    s1b.classList.add('disabled');
   } catch (error) {
     console.error(error)
   }
@@ -50,11 +66,17 @@ async function taahhütAl(hesap, rand) {
   return btoa(binary);
 }
 
-async function makeImzaCall() {
+async function açıkTCKTÇek() {
   if (!location.search || !ethereum)
     return;
 
-  await cüzdanBağla();
+  console.log(ethereum.selectedAddress);
+  if (!ethereum.isConnected()) {
+    await cüzdanBağla(false);
+    console.log('not connected');
+  } else
+    console.log('Bağlı degil')
+
   crypto.getRandomValues(Rand);
   const taahhüt = await taahhütAl(Hesap, Rand);
 
@@ -66,21 +88,50 @@ async function makeImzaCall() {
   TCKT = await fetch(imza_url).then(res => res.json());
 
   for (let key of "TCKN ad soyad dt".split(" ")) {
-    document.getElementById(key).innerText = TCKT[key];
+    document.getElementById(key).innerHTML = TCKT[key];
   }
   const TCKTElement = document.getElementById('TCKT');
-  s2a.style.display = "none";
-  document.getElementById('bss').classList.add('show');
-  TCKTElement.style.display = "block";
-  TCKTElement.classList.add('show');
+  s2a.innerText = "E-devlet'ten bilgileriniz alındı";
+  s2a.onclick = null;
+  s2a.classList.add('disabled');
+  s2a.disabled = true;
+  s2a.href = "javascript:";
+  Adıyla('s2').classList.add('done');
 
+  üçüncüAdımHazırla()
+}
+
+async function üçüncüAdımHazırla() {
+  Adıyla('s3').classList.remove('disabled');
+  s3a.classList.remove('disabled');
+  s3a.onclick = açikAnahtarAl
+}
+
+async function açikAnahtarAl() {
   const publicKey = await ethereum.request({
     'method': 'eth_getEncryptionPublicKey',
     'params': [Hesap]
-  })
+  });
+  s3a.onclick = null;
+  s3a.classList.add('disabled');
+  Adıyla('s3').classList.add('done');
+
+  sonAdımHazırla();
 }
 
-makeImzaCall();
+async function sonAdımHazırla() {
+  Adıyla('s4').classList.remove('disabled');
+  s4a.onlick = öde();
+  s4a.classList.remove('disabled');
+}
+
+async function öde() {
+
+}
+
+açıkTCKTÇek();
+// şifrelemeyeÇalış();
+
 /* const s1b = document.getElementById('s1b')
 
 s1b.onclick = function () { }

@@ -24,47 +24,56 @@
     <div id=b>
         <div id="bs">
             <div class=step id=s1>
-                <b>1. Cüzdanınızı bağlayın</b>
+                <b>1. Cüzdanınızı bağlayın.</b>
                 WalletLink uyumlu cüzdan ve ya uzantı cüzdan
                 <br>
                 <br>
-                <a href="javascript:" id=s1a class=actbutton>WalletLink</a>
-                <a href="javascript:" id=s1b class=actbutton>Tarayıcı Cüzdanı Kur</a>
+                <a href="javascript:" id=s1a class=actbutton>WalletConnect</a>
+                <a href="https://metamask.io" target="_blank" id=s1b class=actbutton>Tarayıcı Cüzdanı Kur</a>
             </div>
-            <div class=step id=s2>
-                <b>2. Kendinizi tanıtın</b>
+            <div class="step disabled" id=s2>
+                <b>2. Kendinizi tanıtın.</b>
                 E-devlet ile giriş yapıp 'Temel-Bilgileri' paylaşımını onaylayın.
                 <br>
                 <br>
                 <a href="https://mock-oauth2.kimlikdao.net/auth?response_type=code&client_id=F5CAA82F-E2CF-4F21-A745-471ABE3CE7F8&redirect_uri=http://localhost:8787/al&scope=Temel-Bilgileri"
-                    class=actbutton id="s2a">E-devlet ile giriş yap</a>
-                <div id="bss">
-                    <table id="TCKT" class="TCKT">
-                        <tr>
-                            <th>TCKN:</th><td id="TCKN"></td>
-                        </tr>
-                        <tr>
-                            <th>Ad:</th><td id="ad"></td>
-                        </tr>
-                        <tr>
-                            <th>Soyad:</th><td id="soyad"></td>
-                        </tr>
-                        <tr>
-                            <th>Doğum tarihi:</th><td id="dt"></td>
-                        </tr>
-                    </table>
-                </div>
+                    class="actbutton disabled" id="s2a">E-devlet ile giriş yap</a>
             </div>
-            <div class=step id=s3>
-                <b>3. Ödemeyi yapın TCKT cüzdanınıza gelsin</b>
+            <div class="step disabled" id=s3>
+                <b>3. TCKT'ni şifreleyelim.</b>
+                TCKT'ni şifrelememiz için cüzdan açık anahtarına ihtiyacımız var.
+                Bu işlem off-chain ve tamamen ücretsiz ve güvenli.
+                <br><br>
+                <a href="javascript:" id="s3a" class="actbutton disabled">Cüzdanıma istek yolla</a>
+            </div>
+            <div class="step disabled" id=s4>
+                <b>4. Ödemeyi yapın TCKT cüzdanınıza gelsin</b><br>
                 Cüzdanınıza ₺15 alımı için bir istek yollayacağız. Bunu onayladığınızda
                 cüzdanınızdan ücret alınır ve TCKT'niz cüzdanınıza mint edilir.
                 <br>
                 <br>
-                <a href="javascript:" id=s3a class=actbutton>Cüzdanıma istek yolla</a>
+                <a href="javascript:" id=s4a class="actbutton disabled">Ödeme isteği yolla</a>
             </div>
         </div>
-        <div class="iphone-x">
+        <div id="sa">
+            <div id="bss">
+                <table id="TCKT" class="TCKT">
+                    <tr>
+                        <th>TCKN:</th><td id="TCKN">   </td>
+                    </tr>
+                    <tr>
+                        <th>Ad:</th><td id="ad"></td>
+                    </tr>
+                    <tr>
+                        <th>Soyad:</th><td id="soyad"></td>
+                    </tr>
+                    <tr>
+                        <th>Doğum tarihi:</th><td id="dt"></td>
+                    </tr>
+                </table>
+            </div>
+            <div id="ph">
+            </div>
         </div>
     </div>
     <script async src="al/page.js"></script>
