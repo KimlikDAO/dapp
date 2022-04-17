@@ -1,0 +1,34 @@
+
+#bs {
+    max-width: 50%;
+    margin: 1em 2em;
+    font-size: 12pt;
+}
+
+#bss {
+    max-height: 0;
+}
+
+#bss.show {
+    max-height: 200px;
+}
+
+.TCKT {
+    padding: 1em;
+    border: 3px solid rgb(128, 132, 136);
+    border-radius: 10px;
+    transition: opacity .4s;
+    width: 350px;
+    height: 150px;
+    opacity: 0;
+    overflow: hidden;
+}
+
+.TCKT.show {
+    opacity: 1;
+    max-height: 200px;
+}
+
+.TCKT th {
+    text-align: right;
+}

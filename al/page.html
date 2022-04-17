@@ -5,10 +5,11 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>KimlikDAO | Blokzincirdeki kimlik kartın</title>
-    <link rel="canonical" href="https://kimlikdao.org" />
     <!--- build:css -->
     <link href="ana/page.css" rel="stylesheet" type="text/css" />
+    <link href="al/page.css" rel="stylesheet" type="text/css"/>
     <!-- endbuild -->
+    <link rel="canonical" href="https://kimlikdao.org" />
 </head>
 
 <body>
@@ -39,9 +40,21 @@
                 <br>
                 <a href="https://mock-oauth2.kimlikdao.net/auth?response_type=code&client_id=F5CAA82F-E2CF-4F21-A745-471ABE3CE7F8&redirect_uri=http://localhost:8787/al&scope=Temel-Bilgileri"
                     class=actbutton id="s2a">E-devlet ile giriş yap</a>
-                <div style="display:none" id="tckt">
-                    <span>Ad:</span><span id="ad"></span><br>
-                    <span>Soyad:</span><span id="soyad"></span>
+                <div id="bss">
+                    <table id="TCKT" class="TCKT">
+                        <tr>
+                            <th>TCKN:</th><td id="TCKN"></td>
+                        </tr>
+                        <tr>
+                            <th>Ad:</th><td id="ad"></td>
+                        </tr>
+                        <tr>
+                            <th>Soyad:</th><td id="soyad"></td>
+                        </tr>
+                        <tr>
+                            <th>Doğum tarihi:</th><td id="dt"></td>
+                        </tr>
+                    </table>
                 </div>
             </div>
             <div class=step id=s3>
