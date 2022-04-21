@@ -1,15 +1,16 @@
 #!/usr/bin/env python
 
-from http.server import BaseHTTPRequestHandler, HTTPServer
+import sys
 import time
+from http.server import BaseHTTPRequestHandler, HTTPServer
 
 HOST_NAME = "localhost"
 PORT = 8787
+STAGING = len(sys.argv) > 1 and sys.argv[1] == "--staging"
+
 
 class TestServer(BaseHTTPRequestHandler):
     def do_GET(self):
-        self.path = self.path.replace("%C5%9F", "ş")
-    
         ctype = "text/html"
         if self.path.endswith('.js'):
             ctype = 'text/javascript'
@@ -28,12 +29,13 @@ class TestServer(BaseHTTPRequestHandler):
         self.end_headers()
 
         if self.path == '/':
-            fname = 'ana/page.html'
+            fname = 'build/ana' if STAGING else 'ana/page.html'
         elif self.path == '/al' or self.path.startswith('/al?'):
-            fname = 'al/page.html'
+            fname = 'build/al' if STAGING else 'al/page.html'
         else:
-            fname = self.path[1:]
+            fname = 'build' + self.path if STAGING else self.path[1:]
         self.wfile.write(open(fname, 'r').read().encode('utf-8'))
+
 
 with HTTPServer(('localhost', PORT), TestServer) as server:
     server.serve_forever()
