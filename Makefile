@@ -5,7 +5,7 @@ build: build/serve.js build/ana.page build/al.page
 include ana/Makefile
 include al/Makefile
 include iptal/Makefile
-include ortaklar-locası/Makefile
+include ortaklar-locasi/Makefile
 
 clean:
 	rm -rf build

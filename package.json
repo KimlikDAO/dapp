@@ -8,5 +8,8 @@
     "build": "make"
   },
   "author": "KimlikDAO <dao@kimlikdao.org>",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "google-closure-compiler": "^20220502.0.0"
+  }
 }
