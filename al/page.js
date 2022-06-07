@@ -32,7 +32,7 @@ async function bağlayaBasıldı() {
 async function cüzdanBağla() {
   try {
     const hesaplar = await ethereum.request({
-      method: "eth_requestAccounts",
+      "method": "eth_requestAccounts",
     });
     Hesap = hesaplar[0];
     const hesapAdı = Hesap.slice(0, 6) + "..." + Hesap.slice(-4);
@@ -112,8 +112,8 @@ async function üçüncüAdımHazırla() {
 
 async function açikAnahtarAl() {
   const publicKey = await ethereum.request({
-    method: "eth_getEncryptionPublicKey",
-    params: [Hesap],
+    "method": "eth_getEncryptionPublicKey",
+    "params": [Hesap],
   });
   s3a.onclick = null;
   s3a.classList.add("disabled");
