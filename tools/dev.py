@@ -11,7 +11,7 @@ STAGING = len(sys.argv) > 1 and sys.argv[1] == "--staging"
 
 class TestServer(BaseHTTPRequestHandler):
     def do_GET(self):
-        ctype = "text/html"
+        ctype = "text/html;charset=utf-8"
         if self.path.endswith('.js'):
             ctype = 'text/javascript'
         elif self.path.endswith('.css'):
@@ -34,7 +34,7 @@ class TestServer(BaseHTTPRequestHandler):
             fname = 'build/al' if STAGING else 'al/page.html'
         else:
             fname = 'build' + self.path if STAGING else self.path[1:]
-        self.wfile.write(open(fname, 'r').read().encode('utf-8'))
+        self.wfile.write(open(fname, 'r', encoding='utf-8').read().encode('utf-8'))
 
 
 with HTTPServer(('localhost', PORT), TestServer) as server:
