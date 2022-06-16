@@ -1,58 +1,68 @@
 <!DOCTYPE html>
-<html lang=tr>
-
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+<html lang="tr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>KimlikDAO | Blokzincirdeki kimlik kartınız</title>
     <link rel="canonical" href="https://kimlikdao.org" />
     <!--- build:css -->
     <link href="ana/page.css" rel="stylesheet" type="text/css" />
     <!-- endbuild -->
-</head>
+  </head>
 
-<body>
+  <body>
     <!-- n harfi navigation'ın kısaltması -->
     <div id="n">
-        <h1>KimlikDAO</h1>
-        <div id=nb>
-            <button id=nl>Türkçe</button>
+      <h1>KimlikDAO</h1>
+      <div id="nb">
+        <div id="ld">
+          <button
+            onclick="showDropdown()"
+            class="ld-dropbtn"
+            id="ld-dropdown-button"
+          >
+            Türkçe
+          </button>
+          <div id="ld-dropdown-content" class="ld-dropdown-content">
+            <a href="#tr" onclick="setLanguageTurkish()">Türkçe</a>
+            <a href="#en" onclick="setLanguageEnglish()">English</a>
+          </div>
         </div>
+      </div>
     </div>
     <!-- b harfi banner'ın kısaltması -->
     <div id="b">
-        <div id=ba>
-            <b id=bab>TC Kimlik Tokeni (TCKT) nedir?</b>
-            <ul>
-                <li>dApp'lerde kullanabileceğin dijital bir kimlik kartı</li>
-                <li>Metamask gibi NFT destekleyen kripto cüzdanında durur</li>
-                <li>dApp'lerde TCKK gerektiren işlemleri yapmanı sağlar</li>
-                <li>Cüzdanında şifreli olarak durur, veri gizliliğini korur</li>
-            </ul>
-            <div id=bac>
-                <a href='/al' id=baca class=actbutton>Hemen TCKT al | ₺15</a><!-- m-dash
+      <div id="ba">
+        <b id="bab">TC Kimlik Tokeni (TCKT) nedir?</b>
+        <ul>
+          <li>dApp'lerde kullanabileceğin dijital bir kimlik kartı</li>
+          <li>Metamask gibi NFT destekleyen kripto cüzdanında durur</li>
+          <li>dApp'lerde TCKK gerektiren işlemleri yapmanı sağlar</li>
+          <li>Cüzdanında şifreli olarak durur, veri gizliliğini korur</li>
+        </ul>
+        <div id="bac">
+          <a href="/al" id="baca" class="actbutton">Hemen TCKT al | ₺15</a
+          ><!-- m-dash
                 --> <!-- m-dash
-                --><button id=bacb>Daha fazla bilgi</button>
-            </div>
+                --><button id="bacb">Daha fazla bilgi</button>
         </div>
-        <div id=ph class="show">
-        </div>
+      </div>
+      <div id="ph" class="show"></div>
     </div>
     <!-- o harfi ortaklar'ın kısaltması-->
-    <div id=o>
-        <div id=oa>
-            <b>TCKO al, DAO'ya ortak ol</b>
-            <br />
-            1 TCKO = ₺0.15
-        </div>
-        <div id=ol>
-            <b>Ortaklar locasına gir</b><br />
-            Oy ver, önerge sun, ortaklıktan çık
-        </div>
+    <div id="o">
+      <div id="oa">
+        <b>TCKO al, DAO'ya ortak ol</b>
+        <br />
+        1 TCKO = ₺0.15
+      </div>
+      <div id="ol">
+        <b>Ortaklar locasına gir</b><br />
+        Oy ver, önerge sun, ortaklıktan çık
+      </div>
     </div>
     <!-- build:js -->
     <script async src="ana/page.js"></script>
     <!-- endbuild -->
-</body>
-
+  </body>
 </html>

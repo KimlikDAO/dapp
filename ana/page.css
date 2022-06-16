@@ -109,7 +109,6 @@ button.act {
   border: 1px solid #444;
 }
 
-
 #ph.show {
   position: relative;
   margin: 40px 20px;
@@ -119,4 +118,60 @@ button.act {
   border-radius: 30px;
   box-shadow: 0px 0px 0px 11px #1f1f1f, 0px 0px 0px 13px #191919,
     0px 0px 0px 15px #111;
+}
+/*Dropdown Button*/
+.ld-dropbtn {
+  border: 3px solid #666;
+  border-radius: 5px;
+  padding: 0.8em;
+  font-size: 13pt;
+  cursor: pointer;
+}
+
+/* .dropbtn:hover,
+.dropbtn:focus {
+  background-color: #298;    will be decided later!        
+} */
+
+.ld {
+  position: relative;
+  display: inline-block;
+}
+
+.ld-dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 150px;
+  overflow: auto;
+  border-radius: 5px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  animation: growDown 300ms ease-in-out forwards;
+}
+@keyframes growDown {
+  0% {
+    transform: scaleY(0);
+  }
+  80% {
+    transform: scaleY(1.1);
+  }
+  100% {
+    transform: scaleY(1);
+  }
+}
+
+.ld-dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.ld-dropdown-content a:hover {
+  background-color: #f1f1f1; /*will be decided later! */
+}
+
+.show {
+  display: block;
 }
