@@ -1,58 +1,116 @@
 <!DOCTYPE html>
-<html lang=tr>
-
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+<html lang="tr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>KimlikDAO | Blokzincirdeki kimlik kartınız</title>
     <link rel="canonical" href="https://kimlikdao.org" />
     <!--- build:css -->
     <link href="ana/page.css" rel="stylesheet" type="text/css" />
     <!-- endbuild -->
-</head>
+  </head>
 
-<body>
+  <body>
     <!-- n harfi navigation'ın kısaltması -->
     <div id="n">
-        <h1>KimlikDAO</h1>
-        <div id=nb>
-            <button id=nl>Türkçe</button>
+      <h1>KimlikDAO</h1>
+      <div id="nb">
+        <div id="ld" class="ld">
+          <button class="ld-selected-lang">Türkçe</button>
+          <ul>
+            <div class="ld-lang-menu">
+              <li>
+                <a href="?tr">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="32"
+                    height="24"
+                    viewBox="0 0 640 480"
+                  >
+                    <g fill-rule="evenodd">
+                      <path fill="#f31930" d="M0 0h640v480H0z" />
+                      <path
+                        fill="#fff"
+                        d="M406.977 247.473c0 66.215-54.606 119.89-121.97 119.89S163.04 313.686 163.04 247.472s54.606-119.89 121.968-119.89 121.97 53.677 121.97 119.89z"
+                      />
+                      <path
+                        fill="#f31830"
+                        d="M413.077 247.467c0 52.97-43.686 95.91-97.575 95.91s-97.574-42.94-97.574-95.91 43.686-95.91 97.574-95.91 97.575 42.94 97.575 95.91z"
+                      />
+                      <path
+                        fill="#fff"
+                        d="M430.726 191.465l-.985 44.318-41.345 11.225 40.756 14.514-.984 40.642 26.58-31.738 40.164 13.934-23.233-34.06 28.352-33.868-43.513 11.998-25.793-36.964z"
+                      />
+                    </g>
+                  </svg>
+                  Türkçe
+                </a>
+              </li>
+              <li>
+                <a href="?en">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="32"
+                    height="24"
+                    viewBox="0 0 640 480"
+                  >
+                    <g fill-rule="evenodd">
+                      <path fill="#f31930" d="M0 0h640v480H0z" />
+                      <path
+                        fill="#fff"
+                        d="M406.977 247.473c0 66.215-54.606 119.89-121.97 119.89S163.04 313.686 163.04 247.472s54.606-119.89 121.968-119.89 121.97 53.677 121.97 119.89z"
+                      />
+                      <path
+                        fill="#f31830"
+                        d="M413.077 247.467c0 52.97-43.686 95.91-97.575 95.91s-97.574-42.94-97.574-95.91 43.686-95.91 97.574-95.91 97.575 42.94 97.575 95.91z"
+                      />
+                      <path
+                        fill="#fff"
+                        d="M430.726 191.465l-.985 44.318-41.345 11.225 40.756 14.514-.984 40.642 26.58-31.738 40.164 13.934-23.233-34.06 28.352-33.868-43.513 11.998-25.793-36.964z"
+                      />
+                    </g>
+                  </svg>
+                  English</a
+                >
+              </li>
+            </div>
+          </ul>
         </div>
+      </div>
     </div>
     <!-- b harfi banner'ın kısaltması -->
     <div id="b">
-        <div id=ba>
-            <b id=bab>TC Kimlik Tokeni (TCKT) nedir?</b>
-            <ul>
-                <li>dApp'lerde kullanabileceğin dijital bir kimlik kartı</li>
-                <li>Metamask gibi NFT destekleyen kripto cüzdanında durur</li>
-                <li>dApp'lerde TCKK gerektiren işlemleri yapmanı sağlar</li>
-                <li>Cüzdanında şifreli olarak durur, veri gizliliğini korur</li>
-            </ul>
-            <div id=bac>
-                <a href='/al' id=baca class=actbutton>Hemen TCKT al | ₺15</a><!-- m-dash
+      <div id="ba">
+        <b id="bab">TC Kimlik Tokeni (TCKT) nedir?</b>
+        <ul>
+          <li>dApp'lerde kullanabileceğin dijital bir kimlik kartı</li>
+          <li>Metamask gibi NFT destekleyen kripto cüzdanında durur</li>
+          <li>dApp'lerde TCKK gerektiren işlemleri yapmanı sağlar</li>
+          <li>Cüzdanında şifreli olarak durur, veri gizliliğini korur</li>
+        </ul>
+        <div id="bac">
+          <a href="/al" id="baca" class="actbutton">Hemen TCKT al | ₺15</a
+          ><!-- m-dash
                 --> <!-- m-dash
-                --><button id=bacb>Daha fazla bilgi</button>
-            </div>
+                --><button id="bacb">Daha fazla bilgi</button>
         </div>
-        <div id=ph class="show">
-        </div>
+      </div>
+      <div id="ph" class="show"></div>
     </div>
     <!-- o harfi ortaklar'ın kısaltması-->
-    <div id=o>
-        <div id=oa>
-            <b>TCKO al, DAO'ya ortak ol</b>
-            <br />
-            1 TCKO = ₺0.15
-        </div>
-        <div id=ol>
-            <b>Ortaklar locasına gir</b><br />
-            Oy ver, önerge sun, ortaklıktan çık
-        </div>
+    <div id="o">
+      <div id="oa">
+        <b>TCKO al, DAO'ya ortak ol</b>
+        <br />
+        1 TCKO = ₺0.15
+      </div>
+      <div id="ol">
+        <b>Ortaklar locasına gir</b><br />
+        Oy ver, önerge sun, ortaklıktan çık
+      </div>
     </div>
     <!-- build:js -->
     <script async src="ana/page.js"></script>
     <!-- endbuild -->
-</body>
-
+  </body>
 </html>

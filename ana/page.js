@@ -1,6 +1,6 @@
 // Adımlar
-const a = document.getElementById('a')
+const a = document.getElementById("a");
 // Banner
-const b = document.getElementById('b')
+const b = document.getElementById("b");
 // Banner, açiklama
-const ba = document.getElementById('ba')
+const ba = document.getElementById("ba");

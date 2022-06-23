@@ -11,7 +11,7 @@ clean:
 	rm -rf build
 
 dev:
-	tools/dev.py
+	python tools/dev.py
 
 cf-deployment: build
 	tools/cfuploader.py
