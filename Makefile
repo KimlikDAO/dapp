@@ -14,7 +14,7 @@ dev:
 	python tools/dev.py
 
 cf-deployment: build
-	tools/cfuploader.py
+	python tools/cfuploader.py
 
 build/serve.js: serve.js workers.js
 	mkdir -p build
