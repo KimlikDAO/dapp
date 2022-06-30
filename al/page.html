@@ -46,13 +46,53 @@
                 <br><br>
                 <a href="javascript:" id="s3a" class="actbutton disabled">Cüzdanıma istek yolla</a>
             </div>
-            <div class="step disabled" id=s4>
+            <div class="step disabled" id="s4">
+                <b>4.New Step Add Social.</b>
+                Lorem İprum falan filan xyz
+                <br><br>
+                <a href="javascript:" id="s4a" class="actbutton">Evet</a>
+                <a href="javascript:" id="s4b" class="actbutton">Hayır</a>
+                <div class="form-wrapper invisible" id="social-revoke-form">
+                    <div class="labels">
+                        <b>Adres</b> 
+                        <b>Ağırlık</b>
+                    </div>
+                    <div id="social-revoke-S">
+                         <div class="container">
+                            <input type="text" class="address-input" onblur="adresGecerliMi(this.value)">
+                            <input type="number" class="weight-input" onblur="agırlıkHesapla()" value="1">
+                        </div>
+                         <div class="container">
+                            <input type="text" class="address-input" onblur="adresGecerliMi(this.value)">
+                            <input type="number" class="weight-input" onblur="agırlıkHesapla()" value="1">
+                        </div>
+                         <div class="container">
+                            <input type="text" class="address-input" onblur="adresGecerliMi(this.value)">
+                            <input type="number" class="weight-input" onblur="agırlıkHesapla()" value="1">
+                        </div>
+                        <br id="br">
+                    </div>
+                        <br>
+                        <a href="javascript:" id="s4c" class="actbutton">+</a>
+                    <br>
+                    <br>
+                    <div class="threshold-total">
+                        <label for="threshold"><b>Threshold:</b></label>
+                        <input type="number" id="threshold" class="weight-input" value="2">
+                        <label for="total"><b>Total Weight:</b></label>
+                        <input type="number" class="weight-input" readonly value="3" id="total">
+                    </div>
+                    <a href="javascript:" id="s4d" class="actbutton">Tamam</a>
+                    <a href="javascript:" id="s4e" class="actbutton">İptal</a>
+                </div>
+            </div>
+            <div class="step disabled" id=s5>
                 <b>4. Ödemeyi yapın TCKT cüzdanınıza gelsin</b><br>
                 Cüzdanınıza ₺15 alımı için bir istek yollayacağız. Bunu onayladığınızda
                 cüzdanınızdan ücret alınır ve TCKT'niz cüzdanınıza mint edilir.
                 <br>
                 <br>
-                <a href="javascript:" id=s4a class="actbutton disabled">Ödeme isteği yolla</a>
+                <a href="javascript:" id=s5a class="actbutton disabled">Ödeme isteği yolla</a>
             </div>
         </div>
         <div id="sa">
