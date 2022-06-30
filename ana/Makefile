@@ -15,7 +15,7 @@ build/ana.css: ana/page.css
 build/ana.keymap: build/ana.js build/ana.js.gz build/ana.js.br \
 	              build/ana.css build/ana.css.gz build/ana.css.br
 	rm -rf $@
-	tools/keyhasher.py $@ build/ana.js
+	python tools/keyhasher.py $@ build/ana.js
 	tools/keyhasher.py $@ build/ana.css
 
 build/ana: build/ana.keymap ana/page.html
