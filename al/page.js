@@ -13,6 +13,7 @@ const s5a = Adıyla("s5a");
 let Hesap = null;
 let Rand = new Uint8Array(20);
 let TCKT = null;
+let inputIdSayac = 3;
 
 if (ethereum) {
   if (!Hesap) {
@@ -130,14 +131,17 @@ async function dördüncüAdımHazırla() {
   console.log("4.adım")
 }
 
-dördüncüAdımHazırla()
-
 async function socialRevokeEkle() {
   Adıyla("social-revoke-form").classList.remove("invisible")
   Adıyla("s4c").onclick = inputFieldEkle;
-  Adıyla("s4d").onclick = socialEkleOnay;
-  Adıyla("s4e").onclick = socialEkleIptal;
-  console.log("clicked evet")
+  Adıyla("s4d").onclick = socialEkleOnayla;
+  Adıyla("s4e").onclick = socialEkleIptalEt;
+  Adıyla("s4f").onclick = inputFieldCıkar;
+  for (var i = 0; i < inputIdSayac; i++) {
+    Adıyla("address" + i).onblur = blurOlunca;
+    Adıyla("weight" + i).onblur = agırlıkHesapla;
+  }
+  console.log("clicked evet");
 }
 
 async function socialRevokeEkleme() {
@@ -145,32 +149,46 @@ async function socialRevokeEkleme() {
   s4a.onclick = null;
   s4a.innerHTML = "Social Revoke Eklenmedi"
   Adıyla("s4b").style.display = "none";
-  sonAdımHazırla()
+  sonAdımHazırla();
 }
 
 async function inputFieldEkle() {
-  const div = document.createElement("div")
-  const input1 = document.createElement("input")
-  const input2 = document.createElement("input")
-  div.classList.add("container")
-  input1.classList.add("address-input")
-  input1.type = "text"
-  input1.setAttribute("onblur", "adresGecerliMi(this.value)")
-  input2.classList.add("weight-input")
-  input2.type = "number"
-  input2.onblur = agırlıkHesapla
-  input2.value = 1
-  div.appendChild(input1)
-  div.appendChild(input2)
-  Adıyla("social-revoke-S").insertBefore(div, Adıyla("br"))
-  agırlıkHesapla()
+  const div = document.createElement("div");
+  const input1 = document.createElement("input");
+  const input2 = document.createElement("input");
+  div.id = "container" + inputIdSayac;
+  div.classList.add("container");
+  input1.id = "address" + inputIdSayac;
+  input1.classList.add("address-input");
+  input1.type = "text";
+  input1.onblur = blurOlunca;
+  input2.id = "weight" + inputIdSayac;
+  input2.classList.add("weight-input");
+  input2.type = "number";
+  input2.onblur = agırlıkHesapla;
+  input2.value = 1;
+  div.appendChild(input1);
+  div.appendChild(input2);
+  Adıyla("input-fields").insertBefore(div, Adıyla("br"));
+  inputIdSayac += 1;
+  agırlıkHesapla();
+  console.log("clicked +")
 }
 
-async function socialEkleOnay() {
-  console.log('clicked Tamam');
-  const nodeList = [...document.querySelectorAll(".container")] /* adıyla */
-  const addressList = nodeList.map(element => element.children[0].value)
-  const weightList = nodeList.map(element => element.children[1].value)
+async function inputFieldCıkar() {
+  Adıyla("container" + (inputIdSayac-1)).remove();
+  inputIdSayac -= 1;
+  agırlıkHesapla();
+  console.log("clicked -")
+}
+
+async function socialEkleOnayla() {
+  let addressList = [];
+  let weightList = []
+  for (var i = 0; i < inputIdSayac; i++) {
+    addressList.push(Adıyla("address" + i).value);
+    weightList.push(Adıyla("weight" + i).value);
+  }
   const threshold = Adıyla("threshold").value;
   const totalWeight = Adıyla("total").value;
   console.log(addressList, weightList);
@@ -178,7 +196,7 @@ async function socialEkleOnay() {
   Adıyla("s4").classList.add("done");
   Adıyla("social-revoke-form").classList.add("invisible");
   s4a.onclick = null;
-  s4a.innerHTML = "Social Revoke Eklendi"
+  s4a.innerHTML = "Social Revoke Eklendi";
   Adıyla("s4b").style.display = "none";
   sonAdımHazırla()
 }
@@ -187,20 +205,23 @@ async function socialEkleOnay() {
  * Fake address validator.
  */
 async function adresGecerliMi(address) {
+  console.log(address)
   return address.length == 42 && address.startsWith("0x");
+}
+
+async function blurOlunca(event) {
+  adresGecerliMi(event.target.value);
 }
 
 async function agırlıkHesapla() {
   var total = 0;
-  const nodeList = [...document.querySelectorAll(".container")]; /* adıyla */
-  const totalWeightList = nodeList.map(element => Number(element.children[1].value));
-  for (var i in totalWeightList) {
-    total += totalWeightList[i]
+  for (var i = 0; i < inputIdSayac; i++) {
+    total += Number(Adıyla("weight" + i).value);
   }
   Adıyla("total").value = total;
 }
 
-async function socialEkleIptal() {
+async function socialEkleIptalEt() {
   Adıyla("social-revoke-form").classList.add("invisible")
   console.log('clicked İptal')
 }
