@@ -1,4 +1,5 @@
-"use strict";
+import { create as ipfs } from 'ipfs-http-client';
+
 /**
  * @fileoverview Al sayfası giriş noktası
  */
@@ -67,7 +68,7 @@ if (ethereum) {
   }
 }
 
-açıkTCKTÇek();
+TCKTYarat();
 
 /**
  * Verilen bir EVM adresini UI'da hızlıca göstermeye uygun hale getirir.
@@ -135,7 +136,7 @@ async function taahhütOluştur(hesap, rasgele) {
   return ArrayBufferBase64(taahhüt);
 }
 
-async function açıkTCKTÇek() {
+async function TCKTYarat() {
   if (!location.search || !ethereum) return;
   await cüzdanBağla();
 
@@ -147,7 +148,7 @@ async function açıkTCKTÇek() {
   Adıyla("s3").classList.remove("disabled");
   s3a.classList.remove("disabled");
 
-  let açıkTCKTPromise = taahhütOluştur(HesapAdresi, Rasgele)
+  let açıkTCKTSözü = taahhütOluştur(HesapAdresi, Rasgele)
     .then((taahhüt) =>
       fetch(KIMLIK_AS_URL + "?" + new URLSearchParams({ oauth_code: code, taahhüt: taahhüt })))
     .then((res) => res.json())
@@ -168,7 +169,7 @@ async function açıkTCKTÇek() {
     });
 
   s3a.onclick = async () => {
-    let pubKeyPromise = ethereum.request({
+    let açıkAnahtarSözü = ethereum.request({
       "method": "eth_getEncryptionPublicKey",
       "params": [HesapAdresi],
     }).then((pubKey) => {
@@ -178,8 +179,26 @@ async function açıkTCKTÇek() {
       return pubKey;
     });
 
-    const pubKey = await pubKeyPromise;
-    const açıkTCKT = await açıkTCKTPromise;
+    const açıkAnahtar = await açıkAnahtarSözü;
+    const açıkTCKT = await açıkTCKTSözü;
     console.log("Ready to encrypt");
+    const encrypted = "TEST";
+
+    const TCKT = {
+      name: "TCKT",
+      description: "TC Kimlik Tokeni",
+      image: "ipfs://",
+      unlockable: {
+        user_prompt: {
+          "en-US": ["{1} wants to view your TCKT.", "OK", "Reject"],
+          "tr-TR": ["{1} TCKT'nizi istiyor. İzin veriyor musunuz?", "Evet", "Hayır"]
+        },
+        algorithm: "x25519-xsalsa20-poly1305",
+        nonce: "",
+        ephem_pub_key: "",
+        ciphertext: encrypted
+      }
+    }
+    ipfs.add(TCKT).then((res) => console.log(res.cid));
   };
 }
