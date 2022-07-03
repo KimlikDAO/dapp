@@ -1,4 +1,8 @@
 "use strict";
+/**
+ * @fileoverview Al sayfası giriş noktası
+ */
+
 
 /**
  * @param {ArrayBuffer} buffer Base64'e dönüştürülecek buffer.
@@ -59,16 +63,11 @@ if (ethereum) {
     s1b.innerText = "Tarayıcı Cüzdanı Bağla";
     s1b.target = "";
     s1b.href = "javascript:";
-    s1b.onclick = bağlayaBasıldı;
+    s1b.onclick = cüzdanBağla;
   }
 }
 
-async function bağlayaBasıldı() {
-  await cüzdanBağla();
-
-  Adıyla("s2").classList.remove("disabled");
-  s2a.classList.remove("disabled");
-}
+açıkTCKTÇek();
 
 /**
  * Verilen bir EVM adresini UI'da hızlıca göstermeye uygun hale getirir.
@@ -86,8 +85,10 @@ function hızlıArabirimAdı(hesap) {
  * @return {Promise<string>} Arabirimde gösterilecek isim. EVM adresinin
  *                           kısaltılmış hali veya ENS / avvy domains adı.
  */
-function nihaiArabirimAdı(hesap) {
-
+async function nihaiArabirimAdı(hesap) {
+  // TODO(KimlikDAO-bot): ENS lookup, avvy domains lookup
+  await new Promise(resolve => setTimeout(resolve, 1000));
+  return "hot.kimlikdao.eth";
 }
 
 async function cüzdanBağla() {
@@ -95,16 +96,20 @@ async function cüzdanBağla() {
     const hesaplar = await ethereum.request({
       "method": "eth_requestAccounts",
     });
+    console.log("Dondu");
     HesapAdresi = hesaplar[0];
     nw.innerText = hızlıArabirimAdı(HesapAdresi);
+    nihaiArabirimAdı(HesapAdresi).then((ad) => nw.innerText = ad);
     s1b.innerText += "ndı";
     s1b.onclick = null;
     s1b.disabled = true;
     s1a.style.display = "none";
     Adıyla("s1").classList.add("done");
     s1b.classList.add("disabled");
-  } catch (error) {
-    console.error(error);
+    Adıyla("s2").classList.remove("disabled");
+    s2a.classList.remove("disabled");
+  } catch (e) {
+    console.log("kalbini kirarim");
   }
 }
 
@@ -116,7 +121,7 @@ async function cüzdanBağla() {
  * @param {!Uint8Array} rasgele bitdizisi.
  * @return {Promise<string>} Kriptografik taahhüt.
  */
-async function taahhütAl(hesap, rasgele) {
+async function taahhütOluştur(hesap, rasgele) {
   /** @type {!Uint8Array} */
   let concat = new Uint8Array(20 + 32);
   concat.set(rasgele, 0);
@@ -132,74 +137,49 @@ async function taahhütAl(hesap, rasgele) {
 
 async function açıkTCKTÇek() {
   if (!location.search || !ethereum) return;
-
-  if (ethereum.isConnected()) {
-    await cüzdanBağla();
-  } else console.log("Bağlı degil");
+  await cüzdanBağla();
 
   crypto.getRandomValues(Rasgele);
-
-  /**
-   * @type {string}
-   * @const
-   */
-  const taahhüt = await taahhütAl(HesapAdresi, Rasgele);
-
-  /**
-   * @type {URLSearchParams}
-   * @const
-   */
-  const params = new URLSearchParams(location.search);
+  const /** URLSearchParams */ params = new URLSearchParams(location.search);
+  const /** string */ code = params.get("code");
   history.replaceState(null, "", location.pathname);
 
-  const code = params.get("code");
-  const imza_url =
-    KIMLIK_AS_URL +
-    "?" +
-    new URLSearchParams({ oauth_code: code, taahhüt: taahhüt });
-  AçıkTCKT = await fetch(imza_url).then((res) => res.json());
-
-  for (let key of "TCKN ad soyad dt".split(" ")) {
-    document.getElementById(key).innerHTML = AçıkTCKT[key];
-  }
-  const TCKTElement = document.getElementById("TCKT");
-  s2a.innerText = "E-devlet'ten bilgileriniz alındı";
-  s2a.onclick = null;
-  s2a.classList.add("disabled");
-  s2a.disabled = true;
-  s2a.href = "javascript:";
-  Adıyla("s2").classList.add("done");
-
-  üçüncüAdımHazırla();
-}
-
-async function üçüncüAdımHazırla() {
   Adıyla("s3").classList.remove("disabled");
   s3a.classList.remove("disabled");
-  s3a.onclick = açıkAnahtarAl;
+
+  let açıkTCKTPromise = taahhütOluştur(HesapAdresi, Rasgele)
+    .then((taahhüt) =>
+      fetch(KIMLIK_AS_URL + "?" + new URLSearchParams({ oauth_code: code, taahhüt: taahhüt })))
+    .then((res) => res.json())
+    .then((açıkTCKT) => {
+      for (let key of "TCKN ad soyad dt".split(" ")) {
+        document.getElementById(key).innerHTML = açıkTCKT[key];
+      }
+      const TCKTElement = document.getElementById("TCKT");
+      s2a.innerText = "E-devlet'ten bilgileriniz alındı";
+      s2a.onclick = null;
+      s2a.classList.add("disabled");
+      s2a.disabled = true;
+      s2a.href = "javascript:";
+      Adıyla("s2").classList.add("done");
+
+      açıkTCKT.rasgele = window.btoa(Rasgele);
+      return açıkTCKT;
+    });
+
+  s3a.onclick = async () => {
+    let pubKeyPromise = ethereum.request({
+      "method": "eth_getEncryptionPublicKey",
+      "params": [HesapAdresi],
+    }).then((pubKey) => {
+      s3a.onclick = null;
+      s3a.classList.add("disabled");
+      Adıyla("s3").classList.add("done");
+      return pubKey;
+    });
+
+    const pubKey = await pubKeyPromise;
+    const açıkTCKT = await açıkTCKTPromise;
+    console.log("Ready to encrypt");
+  };
 }
-
-async function açıkAnahtarAl() {
-  const publicKey = await ethereum.request({
-    "method": "eth_getEncryptionPublicKey",
-    "params": [HesapAdresi],
-  });
-  s3a.onclick = null;
-  s3a.classList.add("disabled");
-  Adıyla("s3").classList.add("done");
-
-  AçıkTCKT.rand = window.btoa(Rasgele);
-  console.log(JSON.stringify(AçıkTCKT));
-
-  sonAdımHazırla();
-}
-
-async function sonAdımHazırla() {
-  Adıyla("s4").classList.remove("disabled");
-  s4a.onlick = öde();
-  s4a.classList.remove("disabled");
-}
-
-async function öde() { }
-
-açıkTCKTÇek();
