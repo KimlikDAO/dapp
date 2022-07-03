@@ -2,14 +2,16 @@
   "private": true,
   "name": "dapp",
   "version": "0.0.0",
-  "description": "KimlikDAO dApp arayüzü",
+  "description": "KimlikDAO dApp",
   "main": "build/serve.js",
+  "type": "module",
   "scripts": {
     "build": "make"
   },
   "author": "KimlikDAO <dao@kimlikdao.org>",
   "license": "MIT",
   "dependencies": {
-    "google-closure-compiler": "^20220502.0.0"
+    "google-closure-compiler": "^20220502.0.0",
+    "ipfs-http-client": "^57.0.3"
   }
 }

@@ -13,6 +13,9 @@ clean:
 dev:
 	python tools/dev.py
 
+staging: build
+	python tools/dev.py --staging
+
 cf-deployment: build
 	python tools/cfuploader.py
 
