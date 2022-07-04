@@ -1,4 +1,4 @@
-import { create as ipfs } from 'ipfs-http-client';
+import { create } from 'ipfs-http-client';
 
 /**
  * @fileoverview Al sayfası giriş noktası
@@ -179,6 +179,8 @@ async function TCKTYarat() {
       return pubKey;
     });
 
+    const ipfs = create("https://ipfs.infura.io:5001/");
+
     const açıkAnahtar = await açıkAnahtarSözü;
     const açıkTCKT = await açıkTCKTSözü;
     console.log("Ready to encrypt");
@@ -199,6 +201,6 @@ async function TCKTYarat() {
         ciphertext: encrypted
       }
     }
-    ipfs.add(TCKT).then((res) => console.log(res.cid));
+    ipfs.add(JSON.stringify(TCKT)).then((res) => console.log(res.cid.toString()));
   };
 }
