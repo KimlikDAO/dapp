@@ -1,47 +1,9 @@
 import { create } from 'ipfs-http-client';
-
+import { hex, base64 } from '/tools/çevir';
+import { encrypt } from '/tools/encrypt';
 /**
  * @fileoverview Al sayfası giriş noktası
  */
-
-
-
-const ByteToHex = [];
-
-for (let n = 0; n <= 0xff; ++n) {
-  const hexOctet = n.toString(16).padStart(2, "0");
-  ByteToHex.push(hexOctet);
-}
-
-/**
- * @param {ArrayBuffer} buffer hex'e çevrilecek buffer.
- * @return {string} hex temsil eden dizi.
- */
-function hex(buffer) {
-  const buff = new Uint8Array(buffer);
-  const octets = new Array(buff.length);
-
-  for (let i = 0; i < buff.length; ++i)
-    octets[i] = ByteToHex[buff[i]];
-
-  return octets.join("");
-}
-
-/**
- * @param {ArrayBuffer} buffer Base64'e dönüştürülecek buffer.
- * @return {string} Base64 temsil eden dizi.
- */
-function base64(buffer) {
-  /** @type {string} */
-  var binary = "";
-  var bytes = new Uint8Array(buffer);
-  /** @type {number} */
-  var len = bytes.byteLength;
-  for (var i = 0; i < len; i++) {
-    binary += String.fromCharCode(bytes[i]);
-  }
-  return window.btoa(binary);
-}
 
 /**
  * @type {string}
@@ -236,10 +198,11 @@ async function TCKTYarat() {
       return pubKey;
     });
 
+    /** @const @type {string} */
+    const algorithm = "x25519-xsalsa20-poly1305";
     const açıkAnahtar = await açıkAnahtarSözü;
-    const açıkTCKT = await açıkTCKTSözü;
-    console.log("Ready to encrypt");
-    const encrypted = "TEST";
+    const açıkTCKT = JSON.stringify(await açıkTCKTSözü);
+    const encrypted = encrypt(açıkAnahtar, açıkTCKT, algorithm);
 
     const TCKT = {
       name: "TCKT",
@@ -250,10 +213,10 @@ async function TCKTYarat() {
           "en-US": ["{1} wants to view your TCKT.", "OK", "Reject"],
           "tr-TR": ["{1} TCKT'nizi istiyor. İzin veriyor musunuz?", "Evet", "Hayır"]
         },
-        algorithm: "x25519-xsalsa20-poly1305",
-        nonce: "",
-        ephem_pub_key: "",
-        ciphertext: encrypted
+        algorithm: algorithm,
+        nonce: encrypted.nonce,
+        ephem_pub_key: encrypted.ephemPublicKey,
+        ciphertext: encrypted.ciphertext
       }
     }
 
