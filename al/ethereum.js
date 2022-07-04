@@ -9,3 +9,8 @@ const ethereum = {};
  * @return {Promise<string>}
  **/
 ethereum.request = function(params) {};
+
+/**
+ * @return {boolean}
+ */
+ethereum.isConnected = function() {};

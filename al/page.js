@@ -1,5 +1,36 @@
+import { create } from 'ipfs-http-client';
+
+/**
+ * @fileoverview Al sayfası giriş noktası
+ */
+
+
+/**
+ * @param {ArrayBuffer} buffer Base64'e dönüştürülecek buffer.
+ * @return {string} Base64 temsil eden dizi.
+ */
+function ArrayBufferBase64(buffer) {
+  /** @type {string} */
+  var binary = "";
+  var bytes = new Uint8Array(buffer);
+  /** @type {number} */
+  var len = bytes.byteLength;
+  for (var i = 0; i < len; i++) {
+    binary += String.fromCharCode(bytes[i]);
+  }
+  return window.btoa(binary);
+}
+
+/**
+ * @type {string}
+ * @const
+ */
 const KIMLIK_AS_URL = "https://mock-api.kimlikas.com";
 
+/**
+ * @noinline
+ * @param {string} id of the DOM element.
+ */
 const Adıyla = (id) => document.getElementById(id);
 
 const nw = Adıyla("nw");
@@ -9,24 +40,56 @@ const s2a = Adıyla("s2a");
 const s3a = Adıyla("s3a");
 const s4a = Adıyla("s4a");
 
-let Hesap = null;
-let Rand = new Uint8Array(20);
-let TCKT = null;
+/**
+ * Bağlı cüzdan adresi veya `null`.
+ * @type {?string}
+ */
+let HesapAdresi = null;
+
+/**
+ * Pedersen taahhüdü için rasgele bitdizisi.
+ * @type {!Uint8Array}
+ */
+let Rasgele = new Uint8Array(32);
+
+/**
+ * Dijital imzalı ama daha şifrelenmemiş TCKT. Kullanıcı tarafında oluşturulmuş
+ * rasgele bitdizisi `Rasgele`yi içermiyor olabilir.
+ * @type {Object}
+ */
+let AçıkTCKT = null;
 
 if (ethereum) {
-  if (!Hesap) {
+  if (!HesapAdresi) {
     s1b.innerText = "Tarayıcı Cüzdanı Bağla";
     s1b.target = "";
     s1b.href = "javascript:";
-    s1b.onclick = bağlayaBasıldı;
+    s1b.onclick = cüzdanBağla;
   }
 }
 
-async function bağlayaBasıldı() {
-  await cüzdanBağla();
+TCKTYarat();
 
-  Adıyla("s2").classList.remove("disabled");
-  s2a.classList.remove("disabled");
+/**
+ * Verilen bir EVM adresini UI'da hızlıca göstermeye uygun hale getirir.
+ * 
+ * @param {string} hesap EVM adresi.
+ * @return {string} Arabirimde gösterilecek isim. EVM adresinin kısaltılmış
+ *                  hali.
+ */
+function hızlıArabirimAdı(hesap) {
+  return hesap.slice(0, 6) + "..." + hesap.slice(-4);
+}
+
+/**
+ * @param {string} hesap EVM adresi.
+ * @return {Promise<string>} Arabirimde gösterilecek isim. EVM adresinin
+ *                           kısaltılmış hali veya ENS / avvy domains adı.
+ */
+async function nihaiArabirimAdı(hesap) {
+  // TODO(KimlikDAO-bot): ENS lookup, avvy domains lookup
+  await new Promise(resolve => setTimeout(resolve, 1000));
+  return "hot.kimlikdao.eth";
 }
 
 async function cüzdanBağla() {
@@ -34,116 +97,116 @@ async function cüzdanBağla() {
     const hesaplar = await ethereum.request({
       "method": "eth_requestAccounts",
     });
-    Hesap = hesaplar[0];
-    const hesapAdı = Hesap.slice(0, 6) + "..." + Hesap.slice(-4);
-    nw.innerText = hesapAdı;
+    console.log("Dondu");
+    HesapAdresi = hesaplar[0];
+    nw.innerText = hızlıArabirimAdı(HesapAdresi);
+    nihaiArabirimAdı(HesapAdresi).then((ad) => nw.innerText = ad);
     s1b.innerText += "ndı";
     s1b.onclick = null;
     s1b.disabled = true;
     s1a.style.display = "none";
     Adıyla("s1").classList.add("done");
     s1b.classList.add("disabled");
-    console.log(Hesap);
-  } catch (error) {
-    console.error(error);
+    Adıyla("s2").classList.remove("disabled");
+    s2a.classList.remove("disabled");
+  } catch (e) {
+    console.log("kalbini kirarim");
   }
 }
 
-async function taahhütAl(hesap, rand) {
-  let hex = new Uint8Array(20);
+/**
+ * Verilen bir `hesap` için `rasgele` bitdizisi ile kriptografik taahhüt
+ * oluşturur.
+ * 
+ * @param {string} hesap EVM adresi.
+ * @param {!Uint8Array} rasgele bitdizisi.
+ * @return {Promise<string>} Kriptografik taahhüt.
+ */
+async function taahhütOluştur(hesap, rasgele) {
+  /** @type {!Uint8Array} */
+  let concat = new Uint8Array(20 + 32);
+  concat.set(rasgele, 0);
 
-  for (var i = 1; i <= 20; i++)
-    hex[i - 1] = parseInt(hesap.substr(2 * i, 2), 16);
+  for (let /** number */ i = 1; i <= 20; ++i)
+    concat[i + 31] = parseInt(hesap.substring(2 * i, 2 * i + 2), 16);
 
-  let taahhüt = await crypto.subtle.digest(
-    "SHA-256",
-    new Uint8Array([hex, rand])
-  );
-  // Hash'in son 18 byte'ını base64 kodla
-  taahhüt = new Uint8Array(taahhüt.slice(14));
-  var len = taahhüt.byteLength;
-  var binary = "";
-  for (var i = 0; i < len; i++) {
-    binary += String.fromCharCode(taahhüt[i]);
-  }
-  return btoa(binary);
+  /** @type {ArrayBuffer} */
+  let taahhüt = await crypto.subtle.digest("SHA-256", concat);
+
+  return ArrayBufferBase64(taahhüt);
 }
 
-async function açıkTCKTÇek() {
+async function TCKTYarat() {
   if (!location.search || !ethereum) return;
+  await cüzdanBağla();
 
-  console.log(ethereum.selectedAddress);
-  if (ethereum.isConnected()) {
-    await cüzdanBağla();
-  } else console.log("Bağlı degil");
-
-  crypto.getRandomValues(Rand);
-  const taahhüt = await taahhütAl(Hesap, Rand);
-
-  const params = new URLSearchParams(location.search);
+  crypto.getRandomValues(Rasgele);
+  const /** URLSearchParams */ params = new URLSearchParams(location.search);
+  const /** string */ code = params.get("code");
   history.replaceState(null, "", location.pathname);
 
-  const code = params.get("code");
-  const imza_url =
-    KIMLIK_AS_URL +
-    "?" +
-    new URLSearchParams({ oauth_code: code, taahhüt: taahhüt });
-  TCKT = await fetch(imza_url).then((res) => res.json());
-
-  for (let key of "TCKN ad soyad dt".split(" ")) {
-    document.getElementById(key).innerHTML = TCKT[key];
-  }
-  const TCKTElement = document.getElementById("TCKT");
-  s2a.innerText = "E-devlet'ten bilgileriniz alındı";
-  s2a.onclick = null;
-  s2a.classList.add("disabled");
-  s2a.disabled = true;
-  s2a.href = "javascript:";
-  Adıyla("s2").classList.add("done");
-
-  üçüncüAdımHazırla();
-}
-
-async function üçüncüAdımHazırla() {
   Adıyla("s3").classList.remove("disabled");
   s3a.classList.remove("disabled");
-  s3a.onclick = açikAnahtarAl;
+
+  let açıkTCKTSözü = taahhütOluştur(HesapAdresi, Rasgele)
+    .then((taahhüt) =>
+      fetch(KIMLIK_AS_URL + "?" + new URLSearchParams({ oauth_code: code, taahhüt: taahhüt })))
+    .then((res) => res.json())
+    .then((açıkTCKT) => {
+      for (let key of "TCKN ad soyad dt".split(" ")) {
+        document.getElementById(key).innerHTML = açıkTCKT[key];
+      }
+      const TCKTElement = document.getElementById("TCKT");
+      s2a.innerText = "E-devlet'ten bilgileriniz alındı";
+      s2a.onclick = null;
+      s2a.classList.add("disabled");
+      s2a.disabled = true;
+      s2a.href = "javascript:";
+      Adıyla("s2").classList.add("done");
+
+      açıkTCKT.rasgele = window.btoa(Rasgele);
+      return açıkTCKT;
+    });
+
+  s3a.onclick = async () => {
+    let açıkAnahtarSözü = ethereum.request({
+      "method": "eth_getEncryptionPublicKey",
+      "params": [HesapAdresi],
+    }).then((pubKey) => {
+      s3a.onclick = null;
+      s3a.classList.add("disabled");
+      Adıyla("s3").classList.add("done");
+      Adıyla("s4").classList.remove("disabled");
+      s4a.classList.remove("disabled");
+      return pubKey;
+    });
+
+    const ipfs = create("https://ipfs.infura.io:5001/");
+
+    const açıkAnahtar = await açıkAnahtarSözü;
+    const açıkTCKT = await açıkTCKTSözü;
+    console.log("Ready to encrypt");
+    const encrypted = "TEST";
+
+    const TCKT = {
+      name: "TCKT",
+      description: "TC Kimlik Tokeni",
+      image: "ipfs://",
+      unlockable: {
+        user_prompt: {
+          "en-US": ["{1} wants to view your TCKT.", "OK", "Reject"],
+          "tr-TR": ["{1} TCKT'nizi istiyor. İzin veriyor musunuz?", "Evet", "Hayır"]
+        },
+        algorithm: "x25519-xsalsa20-poly1305",
+        nonce: "",
+        ephem_pub_key: "",
+        ciphertext: encrypted
+      }
+    }
+    const cidSözü = ipfs.add(JSON.stringify(TCKT));
+    s4a.onclick = async () => {
+      const cid = (await cidSözü).cid;
+      console.log(cid.toString());
+    };
+  };
 }
-
-async function açikAnahtarAl() {
-  const publicKey = await ethereum.request({
-    "method": "eth_getEncryptionPublicKey",
-    "params": [Hesap],
-  });
-  s3a.onclick = null;
-  s3a.classList.add("disabled");
-  Adıyla("s3").classList.add("done");
-
-  sonAdımHazırla();
-}
-
-async function sonAdımHazırla() {
-  Adıyla("s4").classList.remove("disabled");
-  s4a.onlick = öde();
-  s4a.classList.remove("disabled");
-}
-
-async function öde() {}
-
-açıkTCKTÇek();
-// şifrelemeyeÇalış();
-
-/* const s1b = document.getElementById('s1b')
-
-s1b.onclick = function () { }
-
-for (var i = 1; i < 4; ++i) {
-  s[i] = document.getElementById('s' + i)
-}
-
-s2b = document.getElementById('s2b')
-s2b.onclick = async () => {
-  acc = await ethereum.request({ method: 'eth_requestAccounts' })
-  console.log(acc[0])
-}
-*/
