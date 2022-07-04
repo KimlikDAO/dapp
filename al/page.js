@@ -82,36 +82,31 @@ let ChainId = null;
 let Rasgele = new Uint8Array(32);
 
 /**
- * Dijital imzalı ama daha şifrelenmemiş TCKT. Kullanıcı tarafında oluşturulmuş
- * rasgele bitdizisi `Rasgele`yi içermiyor olabilir.
- * @type {Object}
- */
-let AçıkTCKT = null;
-
-/**
  * Kurtarma adresleri basamağında kullanılan girdiler için sayaç
  * @type {number}
  */
+let InputIdSayaç = 3;
 
-let inputIdSayac = 3;
+async function giriş() {
+  if (ethereum) {
+    ethereum.on('accountsChanged', hesapAdresiDeğişti);
+    ethereum.on('chainChanged', chainIdDeğişti);
 
-
-if (ethereum) {
-  ethereum.on('accountsChanged', hesapAdresiDeğişti);
-  ethereum.on('chainChanged', chainIdDeğişti);
-
-  if (!HesapAdresi) {
-    s1b.innerText = "Tarayıcı Cüzdanı Bağla";
-    s1b.target = "";
-    s1b.href = "javascript:";
-    s1b.onclick = cüzdanBağla;
+    if (!HesapAdresi) {
+      s1b.innerText = "Tarayıcı Cüzdanı Bağla";
+      s1b.target = "";
+      s1b.href = "javascript:";
+      s1b.onclick = cüzdanBağla;
+    }
+    await ethereum.request({ "method": "eth_accounts" }).then(
+      (accounts) => { if (accounts.length > 0) return cüzdanBağla(); }
+    );
   }
-  if (ethereum.isConnected()) {
-    await cüzdanBağla();
-  }
+
+  await TCKTYarat();
 }
 
-TCKTYarat();
+giriş();
 
 async function chainIdDeğişti(chainId) {
   if (chainId != ChainId) {
@@ -157,8 +152,8 @@ async function cüzdanBağla() {
     const hesaplar = await ethereum.request({
       "method": "eth_requestAccounts",
     });
-    hesapAdresiDeğişti(hesaplar);
     ethereum.request({ "method": "eth_chainId" }).then(chainIdDeğişti);
+    await hesapAdresiDeğişti(hesaplar);
 
     s1b.innerText += "ndı 👍";
     s1b.onclick = null;
@@ -266,7 +261,7 @@ async function TCKTYarat() {
 
     Adıyla("s4a").onclick = async () => {
       Adıyla("social-revoke-form").classList.remove("invisible");
-      for (var i = 0; i < inputIdSayac; i++) {
+      for (var i = 0; i < InputIdSayaç; ++i) {
         Adıyla("adres" + i).onblur = adresBlurOlunca;
         Adıyla("ağırlık" + i).onblur = ağırlıkHesapla;
       }
@@ -276,12 +271,12 @@ async function TCKTYarat() {
       Adıyla("s4e").onclick = async () => {
         let adresler = [];
         let ağırlıklar = [];
-        for (var i = 0; i < inputIdSayac; i++) {
+        for (var i = 0; i < InputIdSayaç; i++) {
           adresler.push(Adıyla("adres" + i).value);
           ağırlıklar.push(Adıyla("ağırlık" + i).value);
         }
         const eşikDeğeri = Adıyla("eşik-değeri").value;
-        s4a.innerHTML = "Sosyal kurtarma kuruldu 👍";
+        s4a.innerHTML = "İmece iptal kuruldu 👍";
         ödemeAdımınaGeç(cidSözü, adresler, ağırlıklar, eşikDeğeri);
         console.log("clicked s4e")
       };
@@ -291,7 +286,7 @@ async function TCKTYarat() {
     }
 
     Adıyla("s4b").onclick = async () => {
-      s4a.innerHTML = "Sosyal kurtarma kurulmadı 🤌";
+      s4a.innerHTML = "İmece iptal kurulmadı 🤌";
       ödemeAdımınaGeç(cidSözü);
     }
   };
@@ -311,13 +306,11 @@ async function ödemeAdımınaGeç(cidSözü, adresler, agırlıklar, eşikDeğe
   Adıyla("s5").classList.remove("disabled");
   s5a.onclick = async () => {
     const cid = (await cidSözü).cid.bytes.slice(2);
-
     const tx = {
       to: '0xcCc0F938A2C94b0fFBa49F257902Be7F56E62cCc',
       from: HesapAdresi,
       value: '0x01',
-      data:
-        '0x7f746573' + hex(cid),
+      data: '0x7f746573' + hex(cid),
       chainId: ChainId,
     };
     try {
@@ -336,13 +329,13 @@ async function girdiAlanıEkle() {
   const div = document.createElement("div");
   const input1 = document.createElement("input");
   const input2 = document.createElement("input");
-  div.id = "container" + inputIdSayac;
+  div.id = "container" + InputIdSayaç;
   div.classList.add("container");
-  input1.id = "adres" + inputIdSayac;
+  input1.id = "adres" + InputIdSayaç;
   input1.classList.add("address-input");
   input1.type = "text";
   input1.onblur = adresBlurOlunca;
-  input2.id = "ağırlık" + inputIdSayac;
+  input2.id = "ağırlık" + InputIdSayaç;
   input2.classList.add("weight-input");
   input2.type = "number";
   input2.onblur = ağırlıkHesapla;
@@ -350,14 +343,14 @@ async function girdiAlanıEkle() {
   div.appendChild(input1);
   div.appendChild(input2);
   Adıyla("input-fields").insertBefore(div, Adıyla("br"));
-  inputIdSayac += 1;
+  InputIdSayaç += 1;
   ağırlıkHesapla();
   console.log("clicked +")
 }
 
 function girdiAlanıÇıkar() {
-  inputIdSayac -= 1;
-  Adıyla("container" + inputIdSayac).remove();
+  InputIdSayaç -= 1;
+  Adıyla("container" + InputIdSayaç).remove();
   ağırlıkHesapla();
   console.log("clicked -")
 }
@@ -380,8 +373,9 @@ function adresBlurOlunca(event) {
 }
 
 function ağırlıkHesapla() {
+  /** @type {number} */
   var total = 0;
-  for (var i = 0; i < inputIdSayac; i++) {
+  for (var /** number */ i = 0; i < InputIdSayaç; ++i) {
     total += Number(Adıyla("ağırlık" + i).value);
   }
   Adıyla("toplam-ağırlık").value = total;
