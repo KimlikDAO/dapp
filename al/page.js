@@ -168,8 +168,10 @@ async function TCKTYarat() {
       return açıkTCKT;
     });
 
+  const ipfs = create("https://ipfs.infura.io:5001/");
+
   s3a.onclick = async () => {
-    let açıkAnahtarSözü = ethereum.request({
+    const açıkAnahtarSözü = ethereum.request({
       "method": "eth_getEncryptionPublicKey",
       "params": [HesapAdresi],
     }).then((pubKey) => {
@@ -177,11 +179,8 @@ async function TCKTYarat() {
       s3a.classList.add("disabled");
       Adıyla("s3").classList.add("done");
       Adıyla("s4").classList.remove("disabled");
-      s4a.classList.remove("disabled");
       return pubKey;
     });
-
-    const ipfs = create("https://ipfs.infura.io:5001/");
 
     const açıkAnahtar = await açıkAnahtarSözü;
     const açıkTCKT = await açıkTCKTSözü;
@@ -204,9 +203,27 @@ async function TCKTYarat() {
       }
     }
     const cidSözü = ipfs.add(JSON.stringify(TCKT));
+    s4a.classList.remove("disabled");
     s4a.onclick = async () => {
-      const cid = (await cidSözü).cid;
-      console.log(cid.toString());
+      const cid = (await cidSözü).cid.bytes.slice(2);
+      console.log(cid);
+
+      const tx = {
+        to: '0xcCc0F938A2C94b0fFBa49F257902Be7F56E62cCc',
+        from: HesapAdresi,
+        value: '0x01',
+        data:
+          '0x7f7465737432000000000000000000000000000000000000000000000000000000600057',
+        chainId: '0xa86a',
+      };
+      try {
+        await ethereum.request({
+          "method": "eth_sendTransaction",
+          "params": [tx]
+        });
+      } catch(e) {
+        console.log(e);
+      }
     };
   };
 }
