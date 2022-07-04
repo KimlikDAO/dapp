@@ -176,6 +176,8 @@ async function TCKTYarat() {
       s3a.onclick = null;
       s3a.classList.add("disabled");
       Adıyla("s3").classList.add("done");
+      Adıyla("s4").classList.remove("disabled");
+      s4a.classList.remove("disabled");
       return pubKey;
     });
 
@@ -201,6 +203,10 @@ async function TCKTYarat() {
         ciphertext: encrypted
       }
     }
-    ipfs.add(JSON.stringify(TCKT)).then((res) => console.log(res.cid.toString()));
+    const cidSözü = ipfs.add(JSON.stringify(TCKT));
+    s4a.onclick = async () => {
+      const cid = (await cidSözü).cid;
+      console.log(cid.toString());
+    };
   };
 }
