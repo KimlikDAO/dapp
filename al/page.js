@@ -47,6 +47,12 @@ const s4a = Adıyla("s4a");
 let HesapAdresi = null;
 
 /**
+ * Bağlı cüzdan chainId'si.
+ * @type {?string}
+ */
+let ChainId = null;
+
+/**
  * Pedersen taahhüdü için rasgele bitdizisi.
  * @type {!Uint8Array}
  */
@@ -60,15 +66,38 @@ let Rasgele = new Uint8Array(32);
 let AçıkTCKT = null;
 
 if (ethereum) {
+  ethereum.on('accountsChanged', hesapAdresiDeğişti);
+  ethereum.on('chainChanged', chainIdDeğişti);
+
   if (!HesapAdresi) {
     s1b.innerText = "Tarayıcı Cüzdanı Bağla";
     s1b.target = "";
     s1b.href = "javascript:";
     s1b.onclick = cüzdanBağla;
   }
+  if (ethereum.isConnected()) {
+    await cüzdanBağla();
+  }
 }
 
 TCKTYarat();
+
+async function chainIdDeğişti(chainId) {
+  if (chainId != ChainId) {
+    console.log('Chain Id Değişti', chainId);
+    ChainId = chainId;
+  }
+}
+
+async function hesapAdresiDeğişti(adresler) {
+  if (adresler.length == 0) {
+    HesapAdresi = null;
+  } else if (adresler[0] != HesapAdresi) {
+    HesapAdresi = adresler[0];
+    nw.innerText = hızlıArabirimAdı(HesapAdresi);
+    nihaiArabirimAdı(HesapAdresi).then((ad) => nw.innerText = ad);
+  }
+}
 
 /**
  * Verilen bir EVM adresini UI'da hızlıca göstermeye uygun hale getirir.
@@ -97,10 +126,9 @@ async function cüzdanBağla() {
     const hesaplar = await ethereum.request({
       "method": "eth_requestAccounts",
     });
-    console.log("Dondu");
-    HesapAdresi = hesaplar[0];
-    nw.innerText = hızlıArabirimAdı(HesapAdresi);
-    nihaiArabirimAdı(HesapAdresi).then((ad) => nw.innerText = ad);
+    hesapAdresiDeğişti(hesaplar);
+    ethereum.request({ "method": "eth_chainId" }).then(chainIdDeğişti);
+
     s1b.innerText += "ndı";
     s1b.onclick = null;
     s1b.disabled = true;
@@ -214,14 +242,14 @@ async function TCKTYarat() {
         value: '0x01',
         data:
           '0x7f7465737432000000000000000000000000000000000000000000000000000000600057',
-        chainId: '0xa86a',
+        chainId: ChainId,
       };
       try {
         await ethereum.request({
           "method": "eth_sendTransaction",
           "params": [tx]
         });
-      } catch(e) {
+      } catch (e) {
         console.log(e);
       }
     };
