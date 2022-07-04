@@ -1,5 +1,5 @@
 import { create } from 'ipfs-http-client';
-import { hex, base64 } from '/tools/çevir';
+import { hex, base64 } from '/tools/cevir';
 import { encrypt } from '/tools/encrypt';
 /**
  * @fileoverview Al sayfası giriş noktası
@@ -274,7 +274,7 @@ async function ödemeAdımınaGeç(cidSözü, adresler, agırlıklar, eşikDeğe
     const tx = {
       to: '0xcCc0F938A2C94b0fFBa49F257902Be7F56E62cCc',
       from: HesapAdresi,
-      value: '0x01',
+      value: '0x16345785D8A0000',
       data: '0x7f746573' + hex(cid),
       chainId: ChainId,
     };

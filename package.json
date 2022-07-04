@@ -2,7 +2,7 @@
   "name": "dapp",
   "description": "KimlikDAO dApp",
   "author": "KimlikDAO <dao@kimlikdao.org>",
-  "license": "MIT",
+  "license": "GPL",
   "private": true,
   "version": "0.0.0",
   "main": "build/serve.js",
