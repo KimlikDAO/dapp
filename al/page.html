@@ -5,8 +5,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>KimlikDAO | Blokzincirdeki kimlik kartın</title>
-    <link href="ana/page.css" rel="stylesheet" type="text/css" />
-    <link href="al/page.css" rel="stylesheet" type="text/css"/>
+    <link href="/ana/page.css" rel="stylesheet" type="text/css" />
+    <link href="/al/page.css" rel="stylesheet" type="text/css"/>
     <link rel="canonical" href="https://kimlikdao.org" />
 </head>
 
@@ -59,32 +59,32 @@
                     </div>
                     <div id="input-fields">
                          <div id="container0" class="container">
-                            <input id="address0" class="address-input" type="text">
-                            <input id="weight0" class="weight-input" type="number" value="1">
+                            <input id="adres0" class="address-input" type="text">
+                            <input id="ağırlık0" class="weight-input" type="number" value="1">
                         </div>
                          <div id="container1" class="container">
-                            <input id="address1" class="address-input" type="text" >
-                            <input id="weight1" class="weight-input" type="number" value="1">
+                            <input id="adres1" class="address-input" type="text" >
+                            <input id="ağırlık1" class="weight-input" type="number" value="1">
                         </div>
                          <div id="container2" class="container">
-                            <input id="address2" class="address-input" type="text" >
-                            <input id="weight2" class="weight-input" type="number" value="1">
+                            <input id="adres2" class="address-input" type="text" >
+                            <input id="ağırlık2" class="weight-input" type="number" value="1">
                         </div>
                         <br id="br">
                     </div>
                         <br>
                         <a href="javascript:" id="s4c" class="actbutton">+</a>
-                        <a href="javascript:" id="s4f" class="actbutton">-</a>
+                        <a href="javascript:" id="s4d" class="actbutton">-</a>
                     <br>
                     <br>
                     <div class="threshold-total">
                         <label for="threshold"><b>Threshold:</b></label>
-                        <input type="number" id="threshold" class="weight-input" value="2">
+                        <input type="number" id="eşik-değeri" class="weight-input" value="2">
                         <label for="total"><b>Total Weight:</b></label>
-                        <input type="number" class="weight-input" readonly value="3" id="total">
+                        <input type="number" id="toplam-ağırlık" class="weight-input" readonly value="3">
                     </div>
-                    <a href="javascript:" id="s4d" class="actbutton">Tamam</a>
-                    <a href="javascript:" id="s4e" class="actbutton">İptal</a>
+                    <a href="javascript:" id="s4e" class="actbutton">Tamam</a>
+                    <a href="javascript:" id="s4f" class="actbutton">İptal</a>
                 </div>
             </div>
             <div class="step disabled" id=s5>
@@ -117,7 +117,7 @@
             </div>
         </div>
     </div>
-    <script async src="al/page.js"></script>
+    <script type="module" src="/al/page.js"></script>
 </body>
 
 </html>

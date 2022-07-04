@@ -1,15 +1,21 @@
 {
-  "private": true,
   "name": "dapp",
-  "version": "0.0.0",
-  "description": "KimlikDAO dApp arayüzü",
-  "main": "build/serve.js",
-  "scripts": {
-    "build": "make"
-  },
+  "description": "KimlikDAO dApp",
   "author": "KimlikDAO <dao@kimlikdao.org>",
   "license": "MIT",
+  "private": true,
+  "version": "0.0.0",
+  "main": "build/serve.js",
+  "scripts": {
+    "build": "make build",
+    "start": "vite dev --port 8888"
+  },
   "dependencies": {
-    "google-closure-compiler": "^20220502.0.0"
+    "ipfs-http-client": "latest"
+  },
+  "devDependencies": {
+    "express": "^4.18.1",
+    "google-closure-compiler": "latest",
+    "vite": "^2.9.13"
   }
 }
