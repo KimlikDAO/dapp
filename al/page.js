@@ -121,7 +121,6 @@ async function açikAnahtarAl() {
   s3a.classList.add("disabled");
   Adıyla("s3").classList.add("done");
   dördüncüAdımHazırla()
-  sonAdımHazırla()
 }
 
 async function dördüncüAdımHazırla() {
