@@ -39,6 +39,7 @@ const s1b = Adıyla("s1b");
 const s2a = Adıyla("s2a");
 const s3a = Adıyla("s3a");
 const s4a = Adıyla("s4a");
+const s5a = Adıyla("s5a");
 
 /**
  * Bağlı cüzdan adresi veya `null`.
@@ -64,6 +65,13 @@ let Rasgele = new Uint8Array(32);
  * @type {Object}
  */
 let AçıkTCKT = null;
+
+/**
+ * Kurtarma adresleri basamağında kullanılan girdiler için sayaç
+ * @type {number}
+ */
+
+let inputIdSayac = 3;
 
 if (ethereum) {
   ethereum.on('accountsChanged', hesapAdresiDeğişti);
@@ -230,9 +238,54 @@ async function TCKTYarat() {
         ciphertext: encrypted
       }
     }
+
     const cidSözü = ipfs.add(JSON.stringify(TCKT));
-    s4a.classList.remove("disabled");
-    s4a.onclick = async () => {
+
+    Adıyla("s4a").onclick = async () => {
+      Adıyla("social-revoke-form").classList.remove("invisible");
+      for (var i = 0; i < inputIdSayac; i++) {
+        Adıyla("adres" + i).onblur = adresBlurOlunca;
+        Adıyla("ağırlık" + i).onblur = agırlıkHesapla;
+      }
+      Adıyla("s4c").onclick = girdiAlanıEkle;
+      Adıyla("s4d").onclick = girdiAlanıCıkar;
+      Adıyla("eşik-değeri").onblur = eşikDeğeriBlurOlunca;
+      Adıyla("s4e").onclick = async () => {
+        let adresler = [];
+        let agırlıklar = [];
+        for (var i = 0; i < inputIdSayac; i++) {
+          adresler.push(Adıyla("adres" + i).value);
+          agırlıklar.push(Adıyla("ağırlık" + i).value);
+        }
+        const eşikDeğeri = Adıyla("eşik-değeri").value;
+        s4a.innerHTML = "Onay adresleri eklendi 👍";
+        ödemeAdımınaGeç(cidSözü, adresler, agırlıklar, eşikDeğeri);
+        console.log("clicked s4e")
+      };
+      Adıyla("s4f").onclick = async () => {
+        Adıyla("social-revoke-form").classList.add("invisible");
+      };
+    }
+
+    Adıyla("s4b").onclick = async () => {
+      s4a.innerHTML = "Onay adresleri eklenmeden devam edildi";
+      ödemeAdımınaGeç(cidSözü);
+    }
+  };
+}
+/**
+ * @param {Promise<Object>} cidSözü
+ * @param {?Array<string>} adresler
+ * @param {?Array<number>} agırlıklar 
+ * @param {?number} eşikDeğeri 
+ */
+async function ödemeAdımınaGeç( cidSözü, adresler, agırlıklar, eşikDeğeri) {
+  Adıyla("social-revoke-form").classList.add("invisible");
+  Adıyla("s4").classList.add("done");
+  Adıyla("s4b").style.display = "none";
+  s4a.onclick = null;
+  Adıyla("s5").classList.remove("disabled");
+    s5a.onclick = async () => {
       const cid = (await cidSözü).cid.bytes.slice(2);
       console.log(cid);
 
@@ -253,5 +306,66 @@ async function TCKTYarat() {
         console.log(e);
       }
     };
-  };
+  console.log(adresler, agırlıklar, eşikDeğeri)
 }
+
+async function girdiAlanıEkle() {
+  const div = document.createElement("div");
+  const input1 = document.createElement("input");
+  const input2 = document.createElement("input");
+  div.id = "container" + inputIdSayac;
+  div.classList.add("container");
+  input1.id = "adres" + inputIdSayac;
+  input1.classList.add("address-input");
+  input1.type = "text";
+  input1.onblur = adresBlurOlunca;
+  input2.id = "ağırlık" + inputIdSayac;
+  input2.classList.add("weight-input");
+  input2.type = "number";
+  input2.onblur = agırlıkHesapla;
+  input2.value = 1;
+  div.appendChild(input1);
+  div.appendChild(input2);
+  Adıyla("input-fields").insertBefore(div, Adıyla("br"));
+  inputIdSayac += 1;
+  agırlıkHesapla();
+  console.log("clicked +")
+}
+
+async function girdiAlanıCıkar() {
+  Adıyla("container" + (inputIdSayac - 1)).remove();
+  inputIdSayac -= 1;
+  agırlıkHesapla();
+  console.log("clicked -")
+}
+
+/**
+ * Fake address validator.
+ */
+function adresGecerliMi(adres) {
+  return adres.length == 42 && adres.startsWith("0x");
+}
+
+function eşikDeğeriGecerliMi(değer) {
+  const toplamAğırlık = Adıyla("toplam-ağırlık").value;
+  return toplamAğırlık >= değer;
+}
+
+function eşikDeğeriBlurOlunca(event) {
+  eşikDeğeriGecerliMi(event.target.value);
+}
+
+function adresBlurOlunca(event) {
+  adresGecerliMi(event.target.value);
+}
+
+async function agırlıkHesapla() {
+  var total = 0;
+  for (var i = 0; i < inputIdSayac; i++) {
+    total += Number(Adıyla("ağırlık" + i).value);
+  }
+  Adıyla("toplam-ağırlık").value = total;
+}
+
+
+  
