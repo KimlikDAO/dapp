@@ -254,12 +254,13 @@ async function TCKTYarat() {
         let adresler = [];
         let agırlıklar = [];
         for (var i = 0; i < inputIdSayac; i++) {
-          adresler.push(Adıyla("address" + i).value);
-          agırlıklar.push(Adıyla("weight" + i).value);
+          adresler.push(Adıyla("adres" + i).value);
+          agırlıklar.push(Adıyla("ağırlık" + i).value);
         }
         const eşikDeğeri = Adıyla("eşik-değeri").value;
         s4a.innerHTML = "Onay adresleri eklendi 👍";
         ödemeAdımınaGeç(cidSözü, adresler, agırlıklar, eşikDeğeri);
+        console.log("clicked s4e")
       };
       Adıyla("s4f").onclick = async () => {
         Adıyla("social-revoke-form").classList.add("invisible");
@@ -283,7 +284,7 @@ async function ödemeAdımınaGeç( cidSözü, adresler, agırlıklar, eşikDeğ
   Adıyla("s4").classList.add("done");
   Adıyla("s4b").style.display = "none";
   s4a.onclick = null;
-  s5a.classList.remove("disabled");
+  Adıyla("s5").classList.remove("disabled");
     s5a.onclick = async () => {
       const cid = (await cidSözü).cid.bytes.slice(2);
       console.log(cid);
@@ -317,7 +318,7 @@ async function girdiAlanıEkle() {
   input1.id = "adres" + inputIdSayac;
   input1.classList.add("address-input");
   input1.type = "text";
-  input1.onblur = blurOlunca;
+  input1.onblur = adresBlurOlunca;
   input2.id = "ağırlık" + inputIdSayac;
   input2.classList.add("weight-input");
   input2.type = "number";
@@ -361,9 +362,9 @@ function adresBlurOlunca(event) {
 async function agırlıkHesapla() {
   var total = 0;
   for (var i = 0; i < inputIdSayac; i++) {
-    total += Number(Adıyla("weight" + i).value);
+    total += Number(Adıyla("ağırlık" + i).value);
   }
-  Adıyla("total").value = total;
+  Adıyla("toplam-ağırlık").value = total;
 }
 
 
