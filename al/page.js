@@ -1,4 +1,4 @@
-import { create } from 'ipfs-http-client';
+import ipfs from '/tools/ipfs';
 import { hex, base64 } from '/tools/cevir';
 import { encrypt } from '/tools/encrypt';
 /**
@@ -182,8 +182,6 @@ async function TCKTYarat() {
       açıkTCKT.rasgele = window.btoa(Rasgele);
       return açıkTCKT;
     });
-
-  const ipfs = create("https://ipfs.infura.io:5001/");
 
   s3a.onclick = async () => {
     const açıkAnahtarSözü = ethereum.request({
