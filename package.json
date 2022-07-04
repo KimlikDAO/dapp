@@ -6,17 +6,16 @@
   "private": true,
   "version": "0.0.0",
   "main": "build/serve.js",
-  "type": "module",
   "scripts": {
     "build": "make build",
-    "dev": "vite dev --port 8787 -d",
-    "start": "npm run dev"
+    "start": "vite dev --port 8888"
   },
   "dependencies": {
-    "ipfs-http-client": "newest"
+    "ipfs-http-client": "latest"
   },
   "devDependencies": {
-    "google-closure-compiler": "newest",
-    "vite": "^3.0.0-beta.1"
+    "express": "^4.18.1",
+    "google-closure-compiler": "latest",
+    "vite": "^2.9.13"
   }
 }
