@@ -5,11 +5,33 @@ import { create } from 'ipfs-http-client';
  */
 
 
+
+const ByteToHex = [];
+
+for (let n = 0; n <= 0xff; ++n) {
+  const hexOctet = n.toString(16).padStart(2, "0");
+  ByteToHex.push(hexOctet);
+}
+
+/**
+ * @param {ArrayBuffer} buffer hex'e çevrilecek buffer.
+ * @return {string} hex temsil eden dizi.
+ */
+function hex(buffer) {
+  const buff = new Uint8Array(buffer);
+  const octets = new Array(buff.length);
+
+  for (let i = 0; i < buff.length; ++i)
+    octets[i] = ByteToHex[buff[i]];
+
+  return octets.join("");
+}
+
 /**
  * @param {ArrayBuffer} buffer Base64'e dönüştürülecek buffer.
  * @return {string} Base64 temsil eden dizi.
  */
-function ArrayBufferBase64(buffer) {
+function base64(buffer) {
   /** @type {string} */
   var binary = "";
   var bytes = new Uint8Array(buffer);
@@ -72,6 +94,7 @@ let AçıkTCKT = null;
  */
 
 let inputIdSayac = 3;
+
 
 if (ethereum) {
   ethereum.on('accountsChanged', hesapAdresiDeğişti);
@@ -137,7 +160,7 @@ async function cüzdanBağla() {
     hesapAdresiDeğişti(hesaplar);
     ethereum.request({ "method": "eth_chainId" }).then(chainIdDeğişti);
 
-    s1b.innerText += "ndı";
+    s1b.innerText += "ndı 👍";
     s1b.onclick = null;
     s1b.disabled = true;
     s1a.style.display = "none";
@@ -169,12 +192,11 @@ async function taahhütOluştur(hesap, rasgele) {
   /** @type {ArrayBuffer} */
   let taahhüt = await crypto.subtle.digest("SHA-256", concat);
 
-  return ArrayBufferBase64(taahhüt);
+  return base64(taahhüt);
 }
 
 async function TCKTYarat() {
   if (!location.search || !ethereum) return;
-  await cüzdanBağla();
 
   crypto.getRandomValues(Rasgele);
   const /** URLSearchParams */ params = new URLSearchParams(location.search);
@@ -193,7 +215,7 @@ async function TCKTYarat() {
         document.getElementById(key).innerHTML = açıkTCKT[key];
       }
       const TCKTElement = document.getElementById("TCKT");
-      s2a.innerText = "E-devlet'ten bilgileriniz alındı";
+      s2a.innerText = "E-devlet'ten bilgileriniz alındı 👍";
       s2a.onclick = null;
       s2a.classList.add("disabled");
       s2a.disabled = true;
@@ -212,6 +234,7 @@ async function TCKTYarat() {
       "params": [HesapAdresi],
     }).then((pubKey) => {
       s3a.onclick = null;
+      s3a.innerText = "Açık anahtarınızı aldık 👍";
       s3a.classList.add("disabled");
       Adıyla("s3").classList.add("done");
       Adıyla("s4").classList.remove("disabled");
@@ -245,21 +268,21 @@ async function TCKTYarat() {
       Adıyla("social-revoke-form").classList.remove("invisible");
       for (var i = 0; i < inputIdSayac; i++) {
         Adıyla("adres" + i).onblur = adresBlurOlunca;
-        Adıyla("ağırlık" + i).onblur = agırlıkHesapla;
+        Adıyla("ağırlık" + i).onblur = ağırlıkHesapla;
       }
       Adıyla("s4c").onclick = girdiAlanıEkle;
-      Adıyla("s4d").onclick = girdiAlanıCıkar;
+      Adıyla("s4d").onclick = girdiAlanıÇıkar;
       Adıyla("eşik-değeri").onblur = eşikDeğeriBlurOlunca;
       Adıyla("s4e").onclick = async () => {
         let adresler = [];
-        let agırlıklar = [];
+        let ağırlıklar = [];
         for (var i = 0; i < inputIdSayac; i++) {
           adresler.push(Adıyla("adres" + i).value);
-          agırlıklar.push(Adıyla("ağırlık" + i).value);
+          ağırlıklar.push(Adıyla("ağırlık" + i).value);
         }
         const eşikDeğeri = Adıyla("eşik-değeri").value;
-        s4a.innerHTML = "Onay adresleri eklendi 👍";
-        ödemeAdımınaGeç(cidSözü, adresler, agırlıklar, eşikDeğeri);
+        s4a.innerHTML = "Sosyal kurtarma kuruldu 👍";
+        ödemeAdımınaGeç(cidSözü, adresler, ağırlıklar, eşikDeğeri);
         console.log("clicked s4e")
       };
       Adıyla("s4f").onclick = async () => {
@@ -268,44 +291,44 @@ async function TCKTYarat() {
     }
 
     Adıyla("s4b").onclick = async () => {
-      s4a.innerHTML = "Onay adresleri eklenmeden devam edildi";
+      s4a.innerHTML = "Sosyal kurtarma kurulmadı 🤌";
       ödemeAdımınaGeç(cidSözü);
     }
   };
 }
+
 /**
- * @param {Promise<Object>} cidSözü
- * @param {?Array<string>} adresler
- * @param {?Array<number>} agırlıklar 
- * @param {?number} eşikDeğeri 
+ * @param {!Promise<Object>} cidSözü
+ * @param {!Array<string>=} adresler
+ * @param {!Array<number>=} ağırlıklar
+ * @param {number=} eşikDeğeri
  */
-async function ödemeAdımınaGeç( cidSözü, adresler, agırlıklar, eşikDeğeri) {
+async function ödemeAdımınaGeç(cidSözü, adresler, agırlıklar, eşikDeğeri) {
   Adıyla("social-revoke-form").classList.add("invisible");
   Adıyla("s4").classList.add("done");
   Adıyla("s4b").style.display = "none";
   s4a.onclick = null;
   Adıyla("s5").classList.remove("disabled");
-    s5a.onclick = async () => {
-      const cid = (await cidSözü).cid.bytes.slice(2);
-      console.log(cid);
+  s5a.onclick = async () => {
+    const cid = (await cidSözü).cid.bytes.slice(2);
 
-      const tx = {
-        to: '0xcCc0F938A2C94b0fFBa49F257902Be7F56E62cCc',
-        from: HesapAdresi,
-        value: '0x01',
-        data:
-          '0x7f7465737432000000000000000000000000000000000000000000000000000000600057',
-        chainId: ChainId,
-      };
-      try {
-        await ethereum.request({
-          "method": "eth_sendTransaction",
-          "params": [tx]
-        });
-      } catch (e) {
-        console.log(e);
-      }
+    const tx = {
+      to: '0xcCc0F938A2C94b0fFBa49F257902Be7F56E62cCc',
+      from: HesapAdresi,
+      value: '0x01',
+      data:
+        '0x7f746573' + hex(cid),
+      chainId: ChainId,
     };
+    try {
+      await ethereum.request({
+        "method": "eth_sendTransaction",
+        "params": [tx]
+      });
+    } catch (e) {
+      console.log(e);
+    }
+  };
   console.log(adresler, agırlıklar, eşikDeğeri)
 }
 
@@ -322,26 +345,23 @@ async function girdiAlanıEkle() {
   input2.id = "ağırlık" + inputIdSayac;
   input2.classList.add("weight-input");
   input2.type = "number";
-  input2.onblur = agırlıkHesapla;
+  input2.onblur = ağırlıkHesapla;
   input2.value = 1;
   div.appendChild(input1);
   div.appendChild(input2);
   Adıyla("input-fields").insertBefore(div, Adıyla("br"));
   inputIdSayac += 1;
-  agırlıkHesapla();
+  ağırlıkHesapla();
   console.log("clicked +")
 }
 
-async function girdiAlanıCıkar() {
-  Adıyla("container" + (inputIdSayac - 1)).remove();
+function girdiAlanıÇıkar() {
   inputIdSayac -= 1;
-  agırlıkHesapla();
+  Adıyla("container" + inputIdSayac).remove();
+  ağırlıkHesapla();
   console.log("clicked -")
 }
 
-/**
- * Fake address validator.
- */
 function adresGecerliMi(adres) {
   return adres.length == 42 && adres.startsWith("0x");
 }
@@ -359,13 +379,10 @@ function adresBlurOlunca(event) {
   adresGecerliMi(event.target.value);
 }
 
-async function agırlıkHesapla() {
+function ağırlıkHesapla() {
   var total = 0;
   for (var i = 0; i < inputIdSayac; i++) {
     total += Number(Adıyla("ağırlık" + i).value);
   }
   Adıyla("toplam-ağırlık").value = total;
 }
-
-
-  
