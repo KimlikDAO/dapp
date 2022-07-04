@@ -35,4 +35,4 @@ function base64(buffer) {
     return window.btoa(binary);
 }
 
-export { hex, base64 };
+export { hex, base64 }

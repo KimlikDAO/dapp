@@ -199,10 +199,12 @@ async function TCKTYarat() {
     });
 
     /** @const @type {string} */
-    const algorithm = "x25519-xsalsa20-poly1305";
+    const algoritma = "x25519-xsalsa20-poly1305";
     const açıkAnahtar = await açıkAnahtarSözü;
     const açıkTCKT = JSON.stringify(await açıkTCKTSözü);
-    const encrypted = encrypt(açıkAnahtar, açıkTCKT, algorithm);
+    const doldur = new Uint8Array((512 - açıkTCKT.length) / 2);
+    crypto.getRandomValues(doldur);
+    const encrypted = encrypt(açıkAnahtar, açıkTCKT + hex(doldur), algoritma);
 
     const TCKT = {
       name: "TCKT",
@@ -213,7 +215,7 @@ async function TCKTYarat() {
           "en-US": ["{1} wants to view your TCKT.", "OK", "Reject"],
           "tr-TR": ["{1} TCKT'nizi istiyor. İzin veriyor musunuz?", "Evet", "Hayır"]
         },
-        algorithm: algorithm,
+        algorithm: algoritma,
         nonce: encrypted.nonce,
         ephem_pub_key: encrypted.ephemPublicKey,
         ciphertext: encrypted.ciphertext
