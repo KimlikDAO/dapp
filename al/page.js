@@ -67,7 +67,7 @@ let Rasgele = new Uint8Array(32);
 let AçıkTCKT = null;
 
 /**
- * Sosyal Onay Oluşturma Basamağında Kullanılan Girdiler için Sayacı
+ * Kurtarma adresleri basamağında kullanılan girdiler için sayaç
  * @type {number}
  */
 
@@ -342,8 +342,8 @@ async function girdiAlanıCıkar() {
 /**
  * Fake address validator.
  */
-function adresGecerliMi(address) {
-  return address.length == 42 && address.startsWith("0x");
+function adresGecerliMi(adres) {
+  return adres.length == 42 && adres.startsWith("0x");
 }
 
 function eşikDeğeriGecerliMi(değer) {
