@@ -1,6 +1,5 @@
-import { assert, describe, expect, it } from 'vitest'
+import { assert, describe, it } from 'vitest';
 import evm from '/tools/evm';
-
 
 describe('adresDüzelt tests', () => {
   it('Should add checksum to lower case address', () => {
@@ -20,6 +19,10 @@ describe('adresDüzelt tests', () => {
   it('Should reject malformed checksum', () => {
     assert.equal(
       evm.adresDüzelt("0x79883D9acbc4abac6d2d216693f66fcc5a0bcbc1"),
+      null
+    );
+    assert.equal(
+      evm.adresDüzelt("0x79883d9acbc4abac6d2d216693f66fcc5a0bcbC1"),
       null
     );
   })

@@ -2,7 +2,8 @@ import { importer } from 'ipfs-unixfs-importer'
 
 const URL = "https://ipfs.infura.io:5001/api/v0/add?stream-channels=true&progress=false";
 
-// TODO(KimlikDAO-bot): Gelen hash ile yerel hesaplanan hash'i karşılaştır.
+// TODO(KimlikDAO-bot): Tek bloklu dosyalar için CID hesaplamanın çok daha 
+//                      bir yolu olmalı. Bunu kodlayıp dependency'leri keselim.
 
 async function hash(content) {
     let options = { onlyHash: true }
@@ -18,13 +19,13 @@ export default {
     add: async (contents) => {
         const formData = new FormData()
         formData.append("blob", new Blob([contents]));
-        const uzakSöz = fetch(URL, {
+        const gelenSöz = fetch(URL, {
             method: "POST",
             body: formData
         }).then((res) => res.json()).then((res) => res.Hash)
-        const yakınSöz = hash(contents);
-        const uzak = await uzakSöz;
-        const yakın = await yakınSöz;
-        return uzak == yakın.toString() ? yakın : null;
+        const yerelöz = hash(contents);
+        const gelen = await gelenSöz;
+        const yerel = await yerelSöz;
+        return gelen == yerel.toString() ? yerel : null;
     }
 }
