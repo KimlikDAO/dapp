@@ -1,6 +1,6 @@
 const ByteToHex = [];
 
-for (let n = 0; n <= 0xff; ++n) {
+for (let /** number */ n = 0; n <= 0xff; ++n) {
     const hexOctet = n.toString(16).padStart(2, "0");
     ByteToHex.push(hexOctet);
 }
@@ -13,7 +13,7 @@ function hex(buffer) {
     const buff = new Uint8Array(buffer);
     const octets = new Array(buff.length);
 
-    for (let i = 0; i < buff.length; ++i)
+    for (let /** number */ i = 0; i < buff.length; ++i)
         octets[i] = ByteToHex[buff[i]];
 
     return octets.join("");
