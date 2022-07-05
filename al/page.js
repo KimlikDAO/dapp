@@ -204,6 +204,11 @@ async function TCKTYarat() {
     crypto.getRandomValues(doldur);
     const encrypted = encrypt(açıkAnahtar, açıkTCKT + hex(doldur));
 
+    /**
+     * @type {string}
+     * @const
+     * @noinline
+     */
     const KimlikDAOUrl = "https://kimlikdao.org";
     const TCKT = {
       name: "TCKT",
@@ -264,19 +269,29 @@ async function TCKTYarat() {
  * @param {!Array<number>=} ağırlıklar
  * @param {number=} eşikDeğeri
  */
-async function ödemeAdımınaGeç(cidSözü, adresler, agırlıklar, eşikDeğeri) {
+async function ödemeAdımınaGeç(cidSözü, adresler, ağırlıklar, eşikDeğeri) {
   Adıyla("social-revoke-form").classList.add("invisible");
   Adıyla("s4").classList.add("done");
   Adıyla("s4b").style.display = "none";
   s4a.onclick = null;
   Adıyla("s5").classList.remove("disabled");
+
+  let iptalData = null;
+
+  if (adresler) {
+    iptalData = evm.uint256(eşikDeğeri) + evm.uint256(adresler.length);
+    for (let i = 0; i < adresler.length; ++i) {
+      iptalData += evm.uint160(ağırlıklar[i]) + adresler[i].slice(2).toLowerCase();
+    }
+  }
+
   s5a.onclick = async () => {
     const cid = (await cidSözü).bytes.slice(2);
     const tx = {
       to: '0xcCc0F938A2C94b0fFBa49F257902Be7F56E62cCc',
       from: HesapAdresi,
       value: '0x16345785D8A0000',
-      data: '0x7f746573' + hex(cid),
+      data: iptalData ? '0x7f746573' + hex(cid) + iptalData : '0xAD74D572' + hex(cid),
       chainId: ChainId,
     };
     try {
@@ -288,7 +303,6 @@ async function ödemeAdımınaGeç(cidSözü, adresler, agırlıklar, eşikDeğe
       console.log(e);
     }
   };
-  console.log(adresler, agırlıklar, eşikDeğeri)
 }
 
 async function girdiAlanıEkle() {

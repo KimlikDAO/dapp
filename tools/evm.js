@@ -40,4 +40,8 @@ function adresDüzelt(adres) {
   return new TextDecoder('ascii').decode(saglama);
 }
 
-export default { adresDüzelt }
+const uint256 = (sayı) => sayı.toString(16).padStart(64, '0');
+
+const uint160 = (sayı) => sayı.toString(16).padStart(24, '0');
+
+export default { adresDüzelt, uint256, uint160 }
