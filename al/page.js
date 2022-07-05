@@ -204,10 +204,13 @@ async function TCKTYarat() {
     crypto.getRandomValues(doldur);
     const encrypted = encrypt(açıkAnahtar, açıkTCKT + hex(doldur));
 
+    const KimlikDAOUrl = "https://kimlikdao.org";
     const TCKT = {
       name: "TCKT",
-      description: "TC Kimlik Tokeni",
-      image: "ipfs://",
+      description: "KimlikDAO TC Kimlik Tokeni",
+      image: KimlikDAOUrl + "/TCKT.svg",
+      external_url: KimlikDAOUrl,
+      animation_url: KimlikDAOUrl + "/TCKT.mp4",
       unlockable: {
         user_prompt: {
           "en-US": ["{1} wants to view your TCKT.", "OK", "Reject"],
