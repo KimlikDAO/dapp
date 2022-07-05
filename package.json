@@ -6,9 +6,11 @@
   "private": true,
   "version": "0.0.0",
   "main": "build/serve.js",
+  "type": "module",
   "scripts": {
     "build": "make build",
-    "start": "make dev"
+    "start": "make dev",
+    "test": "vitest"
   },
   "dependencies": {
     "ipfs-unixfs-importer": "^9.0.10",
@@ -19,6 +21,7 @@
   "devDependencies": {
     "express": "^4.18.1",
     "google-closure-compiler": "latest",
-    "vite": "^2.9.13"
+    "vite": "^2.9.13",
+    "vitest": "latest"
   }
 }

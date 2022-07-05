@@ -1,7 +1,6 @@
-const fs = require('fs')
-const path = require('path')
-const express = require('express')
-const { createServer: createViteServer } = require('vite')
+import express from 'express'
+import { readFileSync } from 'fs'
+import { createServer as createViteServer } from 'vite'
 
 async function createServer() {
   const app = express()
@@ -16,7 +15,8 @@ async function createServer() {
     const file = req.originalUrl == '/' ? 'ana/page.html' : 'al/page.html';
 
     console.log(req.originalUrl);
-    let page = fs.readFileSync(path.resolve(__dirname, "../", file), 'utf-8');
+    let page = readFileSync(file, 'utf-8');
+
     res.status(200).set({ 'Content-type': 'text/html;charset=utf-8' }).end(page);
   })
 
