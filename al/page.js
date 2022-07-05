@@ -1,5 +1,6 @@
 import { base64, hex } from '/tools/cevir';
 import { encrypt } from '/tools/encrypt';
+import evm from '/tools/evm';
 import ipfs from '/tools/ipfs';
 
 /**
@@ -317,10 +318,6 @@ function girdiAlanıÇıkar() {
   console.log("clicked -")
 }
 
-function adresGecerliMi(adres) {
-  return adres.length == 42 && adres.startsWith("0x");
-}
-
 function eşikDeğeriGecerliMi(değer) {
   const toplamAğırlık = Adıyla("toplam-ağırlık").value;
   return toplamAğırlık >= değer;
@@ -331,7 +328,9 @@ function eşikDeğeriBlurOlunca(event) {
 }
 
 function adresBlurOlunca(event) {
-  adresGecerliMi(event.target.value);
+  const yeni = evm.adresDüzelt(event.target.value);
+  if (yeni) event.target.value = yeni;
+  else console.log("oha"); // TODO(MuhammetCoskun): Arabirimde hata göster
 }
 
 function ağırlıkHesapla() {

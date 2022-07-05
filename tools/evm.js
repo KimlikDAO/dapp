@@ -1,11 +1,11 @@
-import  { keccak256 } from 'js-sha3';
+import { keccak256 } from 'js-sha3';
 
 /**
  * Verilen bir adresin checksum'ı yoksa ekler, varsa sağlamasını yapar.
  * Sadece arabirimde kullanıcı girdisini düzeltmek üzere kullanılmalı.
  *
  * @param {string} adres
- * @return {?string} Düzeltilmiş adres ve ya sağlama hatası varsa null.
+ * @return {?string} Düzeltilmiş adres veya sağlama hatası varsa `null`.
  */
 function adresDüzelt(adres) {
   if (adres.length != 42 || !adres.startsWith("0x")) return null;
