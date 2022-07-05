@@ -27,3 +27,17 @@ describe('adresDüzelt tests', () => {
     );
   })
 })
+
+describe('adresGeçerli tests', () => {
+  it('Should accept valid', () => {
+    assert(
+      evm.adresGeçerli("0x79883D9aCBc4aBac6d2d216693F66FcC5A0BcBC1")
+    );
+  })
+
+  it('Should reject invalid', () => {
+    assert.isFalse(
+      evm.adresGeçerli("0x79883D9acbc4aBac6d2d216693F66FcC5A0BcBC1")
+    );
+  })
+})

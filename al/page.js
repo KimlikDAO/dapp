@@ -181,7 +181,7 @@ async function TCKTYarat() {
       s2a.href = "javascript:";
       Adıyla("s2").classList.add("done");
 
-      açıkTCKT.rasgele = window.btoa(Rasgele);
+      açıkTCKT.rasgele = base64(Rasgele);
       return açıkTCKT;
     });
 
@@ -231,28 +231,51 @@ async function TCKTYarat() {
     const cidSözü = ipfs.add(JSON.stringify(TCKT));
 
     Adıyla("s4a").onclick = async () => {
-      Adıyla("social-revoke-form").classList.remove("invisible");
+      Adıyla("sr").classList.remove("invisible");
       for (var i = 0; i < InputIdSayaç; ++i) {
-        Adıyla("adres" + i).onblur = adresBlurOlunca;
-        Adıyla("ağırlık" + i).onblur = ağırlıkHesapla;
+        Adıyla("sr:a" + i).onblur = adresBlurOlunca;
+        Adıyla("sr:w" + i).onblur = ağırlıkHesapla;
       }
       Adıyla("s4c").onclick = girdiAlanıEkle;
       Adıyla("s4d").onclick = girdiAlanıÇıkar;
-      Adıyla("eşik-değeri").onblur = eşikDeğeriBlurOlunca;
+      Adıyla("sr:t").onblur = eşikDeğeriBlurOlunca;
       Adıyla("s4e").onclick = async () => {
-        let adresler = [];
-        let ağırlıklar = [];
-        for (var i = 0; i < InputIdSayaç; i++) {
-          adresler.push(Adıyla("adres" + i).value);
-          ağırlıklar.push(Adıyla("ağırlık" + i).value);
+        let adresAğırlığı = {};
+        /** @type {boolean} */
+        let geçerli = true;
+        /** @type {number} */
+        let toplamAğırlık = 0;
+
+        for (let /** number */ i = 0; i < InputIdSayaç; ++i) {
+          const adres = Adıyla("sr:a" + i).value;
+          if (!evm.adresGeçerli(adres) || adres in adresAğırlığı) {
+            geçerli = false;
+            console.log("hatalı girdi", i);
+            // TODO(MuhammetCoskun): hata bildir kırmızi vs.
+          }
+          /** @type {number} */
+          const ağırlık = parseInt(Adıyla("sr:w" + i).value);
+          adresAğırlığı[adres] = ağırlık;
+          toplamAğırlık += ağırlık;
         }
-        const eşikDeğeri = Adıyla("eşik-değeri").value;
-        s4a.innerHTML = "İmece iptal kuruldu 👍";
-        ödemeAdımınaGeç(cidSözü, adresler, ağırlıklar, eşikDeğeri);
+        const eşikDeğeri = parseInt(Adıyla("sr:t").value);
+        if (toplamAğırlık < eşikDeğeri) {
+          geçerli = false;
+          // TODO(MuhammetCoskun): hata bildir
+        }
+        console.log(toplamAğırlık, eşikDeğeri);
+        if (geçerli) {
+          s4a.innerHTML = "İmece iptal kuruldu 👍";
+          Adıyla("sr").classList.add("invisible");
+          Adıyla("s4").classList.add("done");
+          Adıyla("s4b").style.display = "none";
+          s4a.onclick = null;
+          ödemeAdımınaGeç(cidSözü, adresAğırlığı, eşikDeğeri);
+        }
         console.log("clicked s4e")
       };
       Adıyla("s4f").onclick = async () => {
-        Adıyla("social-revoke-form").classList.add("invisible");
+        Adıyla("sr").classList.add("invisible");
       };
     }
 
@@ -269,19 +292,16 @@ async function TCKTYarat() {
  * @param {!Array<number>=} ağırlıklar
  * @param {number=} eşikDeğeri
  */
-async function ödemeAdımınaGeç(cidSözü, adresler, ağırlıklar, eşikDeğeri) {
-  Adıyla("social-revoke-form").classList.add("invisible");
-  Adıyla("s4").classList.add("done");
-  Adıyla("s4b").style.display = "none";
-  s4a.onclick = null;
+async function ödemeAdımınaGeç(cidSözü, adresAğırlığı, eşikDeğeri) {
   Adıyla("s5").classList.remove("disabled");
 
   let iptalData = null;
 
-  if (adresler) {
-    iptalData = evm.uint256(eşikDeğeri) + evm.uint256(adresler.length);
-    for (let i = 0; i < adresler.length; ++i) {
-      iptalData += evm.uint160(ağırlıklar[i]) + adresler[i].slice(2).toLowerCase();
+  if (adresAğırlığı) {
+    console.log(InputIdSayaç);
+    iptalData = evm.uint256(eşikDeğeri) + evm.uint256(InputIdSayaç);
+    for (let adres in adresAğırlığı) {
+      iptalData += evm.uint160(adresAğırlığı[adres]) + adres.slice(2).toLowerCase();
     }
   }
 
@@ -309,20 +329,20 @@ async function girdiAlanıEkle() {
   const div = document.createElement("div");
   const input1 = document.createElement("input");
   const input2 = document.createElement("input");
-  div.id = "container" + InputIdSayaç;
+  div.id = "sr:c" + InputIdSayaç;
   div.classList.add("container");
-  input1.id = "adres" + InputIdSayaç;
+  input1.id = "sr:a" + InputIdSayaç;
   input1.classList.add("address-input");
   input1.type = "text";
   input1.onblur = adresBlurOlunca;
-  input2.id = "ağırlık" + InputIdSayaç;
+  input2.id = "sr:w" + InputIdSayaç;
   input2.classList.add("weight-input");
   input2.type = "number";
   input2.onblur = ağırlıkHesapla;
   input2.value = 1;
   div.appendChild(input1);
   div.appendChild(input2);
-  Adıyla("input-fields").insertBefore(div, Adıyla("br"));
+  Adıyla("sr:f").insertBefore(div, Adıyla("br"));
   InputIdSayaç += 1;
   ağırlıkHesapla();
   console.log("clicked +")
@@ -330,13 +350,13 @@ async function girdiAlanıEkle() {
 
 function girdiAlanıÇıkar() {
   InputIdSayaç -= 1;
-  Adıyla("container" + InputIdSayaç).remove();
+  Adıyla("sr:c" + InputIdSayaç).remove();
   ağırlıkHesapla();
   console.log("clicked -")
 }
 
 function eşikDeğeriGecerliMi(değer) {
-  const toplamAğırlık = Adıyla("toplam-ağırlık").value;
+  const toplamAğırlık = Adıyla("sr:s").value;
   return toplamAğırlık >= değer;
 }
 
@@ -354,7 +374,7 @@ function ağırlıkHesapla() {
   /** @type {number} */
   var total = 0;
   for (var /** number */ i = 0; i < InputIdSayaç; ++i) {
-    total += Number(Adıyla("ağırlık" + i).value);
+    total += parseInt(Adıyla("sr:w" + i).value);
   }
-  Adıyla("toplam-ağırlık").value = total;
+  Adıyla("sr:s").value = total;
 }
