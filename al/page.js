@@ -286,12 +286,12 @@ async function ödemeAdımınaGeç(cidSözü, adresler, ağırlıklar, eşikDeğ
   }
 
   s5a.onclick = async () => {
-    const cid = (await cidSözü).bytes.slice(2);
+    const cid = hex((await cidSözü).bytes.slice(2));
     const tx = {
       to: '0xcCc0F938A2C94b0fFBa49F257902Be7F56E62cCc',
       from: HesapAdresi,
       value: '0x16345785D8A0000',
-      data: iptalData ? '0x7f746573' + hex(cid) + iptalData : '0xAD74D572' + hex(cid),
+      data: iptalData ? '0x964cefc3' + cid + iptalData : '0x780900dc' + cid,
       chainId: ChainId,
     };
     try {
