@@ -196,13 +196,11 @@ async function TCKTYarat() {
       return pubKey;
     });
 
-    /** @const @type {string} */
-    const algoritma = "x25519-xsalsa20-poly1305";
     const açıkAnahtar = await açıkAnahtarSözü;
     const açıkTCKT = JSON.stringify(await açıkTCKTSözü);
     const doldur = new Uint8Array((512 - açıkTCKT.length) / 2);
     crypto.getRandomValues(doldur);
-    const encrypted = encrypt(açıkAnahtar, açıkTCKT + hex(doldur), algoritma);
+    const encrypted = encrypt(açıkAnahtar, açıkTCKT + hex(doldur));
 
     const TCKT = {
       name: "TCKT",
@@ -213,7 +211,7 @@ async function TCKTYarat() {
           "en-US": ["{1} wants to view your TCKT.", "OK", "Reject"],
           "tr-TR": ["{1} TCKT'nizi istiyor. İzin veriyor musunuz?", "Evet", "Hayır"]
         },
-        algorithm: algoritma,
+        algorithm: "x25519-xsalsa20-poly1305",
         nonce: encrypted.nonce,
         ephem_pub_key: encrypted.ephemPublicKey,
         ciphertext: encrypted.ciphertext
@@ -268,7 +266,7 @@ async function ödemeAdımınaGeç(cidSözü, adresler, agırlıklar, eşikDeğe
   s4a.onclick = null;
   Adıyla("s5").classList.remove("disabled");
   s5a.onclick = async () => {
-    const cid = (await cidSözü).cid.bytes.slice(2);
+    const cid = (await cidSözü).bytes.slice(2);
     const tx = {
       to: '0xcCc0F938A2C94b0fFBa49F257902Be7F56E62cCc',
       from: HesapAdresi,
