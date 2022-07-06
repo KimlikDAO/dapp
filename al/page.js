@@ -167,7 +167,7 @@ async function TCKTYarat() {
   Adıyla("s3").classList.remove("disabled");
   s3a.classList.remove("disabled");
 
-  let açıkTCKTSözü = taahhütOluştur(HesapAdresi, Rasgele)
+  const açıkTCKTSözü = taahhütOluştur(HesapAdresi, Rasgele)
     .then((taahhüt) =>
       fetch(KIMLIK_AS_URL + "?" + new URLSearchParams({ oauth_code: code, taahhüt: taahhüt })))
     .then((res) => res.json())
@@ -201,100 +201,100 @@ async function TCKTYarat() {
       return pubKey;
     });
 
-    const açıkAnahtar = await açıkAnahtarSözü;
-    const açıkTCKT = await açıkTCKTSözü;
-    const dolgu = new Uint8Array((512 - açıkTCKT.length) / 2);
-    crypto.getRandomValues(dolgu);
-    const encrypted = encrypt(açıkAnahtar, açıkTCKT + hex(dolgu));
-
-    /**
-     * @type {string}
-     * @const
-     * @noinline
-     */
-    const KimlikDAOUrl = "https://kimlikdao.org";
-    const TCKT = {
-      name: "TCKT",
-      description: "KimlikDAO TC Kimlik Tokeni",
-      image: KimlikDAOUrl + "/TCKT.svg",
-      external_url: KimlikDAOUrl,
-      animation_url: KimlikDAOUrl + "/TCKT.mp4",
-      unlockable: {
-        user_prompt: {
-          "en-US": ["{1} wants to view your TCKT.", "OK", "Reject"],
-          "tr-TR": ["{1} TCKT'nizi istiyor. İzin veriyor musunuz?", "Evet", "Hayır"]
-        },
-        algorithm: "x25519-xsalsa20-poly1305",
-        nonce: encrypted.nonce,
-        ephem_pub_key: encrypted.ephemPublicKey,
-        ciphertext: encrypted.ciphertext
-      }
-    }
-
-    const cidSözü = ipfs.add(JSON.stringify(TCKT));
-
-    Adıyla("s4a").onclick = async () => {
-      Adıyla("sr").classList.remove("invisible");
-      for (var i = 0; i < InputIdSayaç; ++i) {
-        Adıyla("sr:a" + i).onblur = adresBlurOlunca;
-        Adıyla("sr:w" + i).onblur = ağırlıkHesapla;
-      }
-      Adıyla("s4c").onclick = girdiAlanıEkle;
-      Adıyla("s4d").onclick = girdiAlanıÇıkar;
-      Adıyla("sr:t").onblur = eşikDeğeriBlurOlunca;
-      Adıyla("s4e").onclick = async () => {
-        /** !Object<string, number> */
-        let adresAğırlığı = {};
-        /** @type {boolean} */
-        let geçerli = true;
-        /** @type {number} */
-        let toplamAğırlık = 0;
-
-        for (let /** number */ i = 0; i < InputIdSayaç; ++i) {
-          const adres = Adıyla("sr:a" + i).value;
-          if (!evm.adresGeçerli(adres) || adres in adresAğırlığı) {
-            geçerli = false;
-            console.log("hatalı girdi", i);
-            // TODO(MuhammetCoskun): hata bildir kırmızi vs.
+    const cidSözü = Promise.all([açıkTCKTSözü, açıkAnahtarSözü])
+      .then(([açıkTCKT, açıkAnahtar]) => {
+        const dolgu = new Uint8Array((512 - açıkTCKT.length) / 2);
+        crypto.getRandomValues(dolgu);
+        const encrypted = encrypt(açıkAnahtar, açıkTCKT + hex(dolgu));
+        /**
+         * @type {string}
+         * @const
+         * @noinline
+         */
+        const KimlikDAOUrl = "https://kimlikdao.org";
+        const TCKT = {
+          name: "TCKT",
+          description: "KimlikDAO TC Kimlik Tokeni",
+          image: KimlikDAOUrl + "/TCKT.svg",
+          external_url: KimlikDAOUrl,
+          animation_url: KimlikDAOUrl + "/TCKT.mp4",
+          unlockable: {
+            user_prompt: {
+              "en-US": ["{1} wants to view your TCKT.", "OK", "Reject"],
+              "tr-TR": ["{1} TCKT'nizi istiyor. İzin veriyor musunuz?", "Evet", "Hayır"]
+            },
+            algorithm: "x25519-xsalsa20-poly1305",
+            nonce: encrypted.nonce,
+            ephem_pub_key: encrypted.ephemPublicKey,
+            ciphertext: encrypted.ciphertext
           }
-          /** @type {number} */
-          const ağırlık = parseInt(Adıyla("sr:w" + i).value);
-          adresAğırlığı[adres] = ağırlık;
-          toplamAğırlık += ağırlık;
         }
-        /** @type {number} */
-        const eşikDeğeri = parseInt(Adıyla("sr:t").value);
-        if (toplamAğırlık < eşikDeğeri) {
-          geçerli = false;
-          // TODO(MuhammetCoskun): hata bildir
-        }
-        if (geçerli) {
-          s4a.innerHTML = "İmece iptal kuruldu 👍";
-          Adıyla("sr").classList.add("invisible");
-          Adıyla("s4").classList.add("done");
-          Adıyla("s4b").style.display = "none";
-          s4a.onclick = null;
-          ödemeAdımınaGeç(cidSözü, adresAğırlığı, eşikDeğeri);
-        }
-      };
-      Adıyla("s4f").onclick = () => {
-        Adıyla("sr").classList.add("invisible");
-      };
-    }
+        return ipfs.add(JSON.stringify(TCKT));
+      });
 
+    Adıyla("s4a").onclick = async () => imeceIptalKur(cidSözü);
     Adıyla("s4b").onclick = async () => {
-      s4a.innerHTML = "İmece iptal kurulmadı 🤌";
+      s4b.innerHTML = "İmece iptal kurulmadı 🤌";
       ödemeAdımınaGeç(cidSözü);
     }
+  };
+}
+
+async function imeceIptalKur(cidSözü) {
+  Adıyla("sr").classList.remove("invisible");
+  for (let i = 0; i < InputIdSayaç; ++i) {
+    Adıyla("sr:a" + i).onblur = adresBlurOlunca;
+    Adıyla("sr:w" + i).onblur = ağırlıkHesapla;
+  }
+  Adıyla("s4c").onclick = girdiAlanıEkle;
+  Adıyla("s4d").onclick = girdiAlanıÇıkar;
+  Adıyla("sr:t").onblur = eşikDeğeriBlurOlunca;
+  Adıyla("s4e").onclick = async () => {
+    /** !Object<string, number> */
+    let adresAğırlığı = {};
+    /** @type {boolean} */
+    let geçerli = true;
+    /** @type {number} */
+    let toplamAğırlık = 0;
+
+    for (let /** number */ i = 0; i < InputIdSayaç; ++i) {
+      const adres = Adıyla("sr:a" + i).value;
+      if (!evm.adresGeçerli(adres) || adres in adresAğırlığı) {
+        geçerli = false;
+        console.log("hatalı girdi", i);
+        // TODO(MuhammetCoskun): hata bildir kırmızi vs.
+      }
+      /** @type {number} */
+      const ağırlık = parseInt(Adıyla("sr:w" + i).value);
+      adresAğırlığı[adres] = ağırlık;
+      toplamAğırlık += ağırlık;
+    }
+    /** @type {number} */
+    const eşikDeğeri = parseInt(Adıyla("sr:t").value);
+    if (toplamAğırlık < eşikDeğeri) {
+      geçerli = false;
+      // TODO(MuhammetCoskun): hata bildir
+    }
+    if (geçerli) {
+      s4a.innerHTML = "İmece iptal kuruldu 👍";
+      Adıyla("sr").classList.add("invisible");
+      Adıyla("s4").classList.add("done");
+      Adıyla("s4b").style.display = "none";
+      s4a.onclick = null;
+      ödemeAdımınaGeç(cidSözü, adresAğırlığı, eşikDeğeri);
+    }
+  };
+  Adıyla("s4f").onclick = () => {
+    Adıyla("sr").classList.add("invisible");
   };
 }
 
 /**
  * Ödeme adımını gösterir, ödeme onayını alıp evm provider'a yollar.
  *
- * @param {!Promise<Object>} cidSözü
- * @param {!Object<string, number>=} adresler
- * @param {number=} eşikDeğeri
+ * @param {!Promise<Object>} cidSözü gelmekte olan ipfs CID'i.
+ * @param {!Object<string, number>=} adresAğırlığı (adres, ağırlık) ikilileri.
+ * @param {number=} eşikDeğeri imece iptal için gereken oy eşiği.
  */
 async function ödemeAdımınaGeç(cidSözü, adresAğırlığı, eşikDeğeri) {
   Adıyla("s5").classList.remove("disabled");
