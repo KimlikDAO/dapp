@@ -22,7 +22,7 @@ export default {
     const gelenSöz = fetch(URL, {
       method: "POST",
       body: formData
-    }).then((res) => res.json()).then((res) => res.Hash)
+    }).then((res) => res.json()).then((res) => res["Hash"])
     const yerelSöz = hash(contents);
     const gelen = await gelenSöz;
     const yerel = await yerelSöz;

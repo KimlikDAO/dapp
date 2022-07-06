@@ -26,7 +26,7 @@ build/serve.js: tools/serve.js tools/workers.js
 	                        --js_output_file $@
 	uglifyjs $@ -m -o $@
 
-.PHONY: cf-deployment clean dev
+.PHONY: cf-deployment clean dev staging
 
 %.gz: %
 	cp $< $@.tmp

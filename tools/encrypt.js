@@ -1,5 +1,5 @@
 import nacl from 'tweetnacl';
-import naclUtil from 'tweetnacl-util';
+import { base64, decodeBase64 } from '/tools/cevir';
 
 /**
  * @param publicKey - The public key of the message recipient.
@@ -7,28 +7,18 @@ import naclUtil from 'tweetnacl-util';
  * @return The encrypted data.
  */
 export function encrypt(publicKey, data) {
+  const keypair = nacl.box.keyPair();
+  let pubKeyUInt8Array = decodeBase64(publicKey);
+  data = new TextEncoder().encode(data);
+  const nonce = new Uint8Array(nacl.box.nonceLength);
+  crypto.getRandomValues(nonce);
 
-  const ephemeralKeyPair = nacl.box.keyPair();
-  let pubKeyUInt8Array;
-  try {
-    pubKeyUInt8Array = naclUtil.decodeBase64(publicKey);
-  } catch (err) {
-    throw new Error('Bad public key');
-  }
-
-  const msgParamsUInt8Array = naclUtil.decodeUTF8(data);
-  const nonce = nacl.randomBytes(nacl.box.nonceLength);
-
-  const encryptedMessage = nacl.box(
-    msgParamsUInt8Array,
+  const encrypted = nacl.box(
+    data,
     nonce,
     pubKeyUInt8Array,
-    ephemeralKeyPair.secretKey,
+    keypair.secretKey,
   );
 
-  return [
-    naclUtil.encodeBase64(nonce),
-    naclUtil.encodeBase64(ephemeralKeyPair.publicKey),
-    naclUtil.encodeBase64(encryptedMessage),
-  ];
+  return [base64(nonce), base64(keypair.publicKey), base64(encrypted)];
 }
