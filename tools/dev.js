@@ -1,5 +1,5 @@
 import express from 'express'
-import { readFileSync, rmSync } from 'fs'
+import { readFileSync } from 'fs'
 import { createServer as createViteServer } from 'vite'
 
 async function createServer() {
@@ -12,7 +12,7 @@ async function createServer() {
   app.use(vite.middlewares)
 
   app.use('*', async (req, res) => {
-    if (req.originalUrl == '/favicon.cio')
+    if (req.originalUrl == '/favicon.ico')
       return res.status(404).end();
 
     const file = req.originalUrl == '/' ? 'ana/page.html' : 'al/page.html';

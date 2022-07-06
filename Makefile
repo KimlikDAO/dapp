@@ -19,10 +19,12 @@ staging: build
 cf-deployment: build
 	python tools/cfuploader.py
 
-build/serve.js: serve.js workers.js
+build/serve.js: tools/serve.js tools/workers.js
 	mkdir -p build
 	google-closure-compiler -W VERBOSE -O ADVANCED --charset UTF-8 \
-	                        --js $^ | uglifyjs -m -o $@
+	                        --js $^ \
+	                        --js_output_file $@
+	uglifyjs $@ -m -o $@
 
 .PHONY: cf-deployment clean dev
 

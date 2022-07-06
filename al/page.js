@@ -236,7 +236,8 @@ async function TCKTYarat() {
 
     Adıyla("s4a").onclick = async () => imeceIptalKur(cidSözü);
     Adıyla("s4b").onclick = async () => {
-      Adıyla("s4b").innerHTML = "İmece iptal kurulmadı 🤌";
+      Adıyla("s4b").innerText = "İmece iptal kurulmadı 🤌";
+      Adıyla("sr").classList.add("invisible");
       ödemeAdımınaGeç(cidSözü);
     }
   };
