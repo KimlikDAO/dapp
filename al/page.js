@@ -1,11 +1,12 @@
+/**
+ * @fileoverview Al sayfası giriş noktası
+ *
+ */
+
 import { base64, hex } from '/tools/cevir';
 import { encrypt } from '/tools/encrypt';
 import evm from '/tools/evm';
 import ipfs from '/tools/ipfs';
-
-/**
- * @fileoverview Al sayfası giriş noktası
- */
 
 /**
  * @type {string}
@@ -15,9 +16,9 @@ const KIMLIK_AS_URL = "https://mock-api.kimlikas.com";
 
 /**
  * @noinline
- * @param {string} id of the DOM element.
+ * @param {string} ad DOM biriminin adı.
  */
-const Adıyla = (id) => document.getElementById(id);
+const Adıyla = (ad) => document.getElementById(ad);
 
 const nw = Adıyla("nw");
 const s1a = Adıyla("s1a");
@@ -172,10 +173,10 @@ async function TCKTYarat() {
       fetch(KIMLIK_AS_URL + "?" + new URLSearchParams({ oauth_code: code, taahhüt: taahhüt })))
     .then((res) => res.json())
     .then((TCKT) => {
-      for (let key of "TCKN ad soyad dt".split(" ")) {
-        document.getElementById(key).innerHTML = TCKT[key];
+      for (let ad of "TCKN ad soyad dt".split(" ")) {
+        document.getElementById(ad).innerHTML = TCKT[ad];
       }
-      const TCKTElement = document.getElementById("TCKT");
+      const TCKTElement = Adıyla("TCKT");
       s2a.innerText = "E-devlet'ten bilgileriniz alındı 👍";
       s2a.onclick = null;
       s2a.classList.add("disabled");
@@ -230,7 +231,8 @@ async function TCKTYarat() {
           }
         }
         return ipfs.add(JSON.stringify(TCKT));
-      });
+      })
+      .catch((e) => console.log("Anahtar verilmedi"));
 
     Adıyla("s4a").onclick = async () => imeceIptalKur(cidSözü);
     Adıyla("s4b").onclick = async () => {
@@ -242,7 +244,7 @@ async function TCKTYarat() {
 
 async function imeceIptalKur(cidSözü) {
   Adıyla("sr").classList.remove("invisible");
-  for (let i = 0; i < InputIdSayaç; ++i) {
+  for (let /** number */ i = 0; i < InputIdSayaç; ++i) {
     Adıyla("sr:a" + i).onblur = adresBlurOlunca;
     Adıyla("sr:w" + i).onblur = ağırlıkHesapla;
   }
@@ -250,7 +252,7 @@ async function imeceIptalKur(cidSözü) {
   Adıyla("s4d").onclick = girdiAlanıÇıkar;
   Adıyla("sr:t").onblur = eşikDeğeriBlurOlunca;
   Adıyla("s4e").onclick = async () => {
-    /** !Object<string, number> */
+    /** @type {!Object<string, number>} */
     let adresAğırlığı = {};
     /** @type {boolean} */
     let geçerli = true;
@@ -299,6 +301,7 @@ async function imeceIptalKur(cidSözü) {
 async function ödemeAdımınaGeç(cidSözü, adresAğırlığı, eşikDeğeri) {
   Adıyla("s5").classList.remove("disabled");
 
+  /** @type {?string} */
   let iptalData = null;
   if (adresAğırlığı) {
     iptalData = evm.uint256(eşikDeğeri) + evm.uint256(InputIdSayaç);
