@@ -49,6 +49,7 @@ function adresDüzelt(adres) {
 function adresGeçerli(adres) {
   if (adres.length != 42 || !adres.startsWith("0x")) return false;
   adres = adres.slice(2);
+  /** @type {string} */
   let entropi = keccak256(adres.toLowerCase());
 
   for (let i = 0; i < adres.length; ++i) {
@@ -65,8 +66,10 @@ function adresGeçerli(adres) {
   return true;
 }
 
+/** @type {function(number):string} */
 const uint256 = (sayı) => sayı.toString(16).padStart(64, '0');
 
+/** @type {function(number):string} */
 const uint160 = (sayı) => sayı.toString(16).padStart(24, '0');
 
 export default { adresDüzelt, adresGeçerli, uint160, uint256 }

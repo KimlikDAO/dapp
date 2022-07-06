@@ -14,3 +14,4 @@ package-lock.json
 pkg/
 wasm-pack.log
 worker/
+__pycache__/

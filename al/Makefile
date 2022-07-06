@@ -9,7 +9,9 @@ build/al.js: al/page.js tools/cevir.js tools/encrypt.js tools/evm.js \
 	mkdir -p build
 	google-closure-compiler -W VERBOSE -O ADVANCED --charset UTF-8 \
 	                        --module_resolution NODE \
-	                        --js $^
+	                        --js $^ \
+	                        --js_output_file $@
+	uglifyjs $@ -m -o $@
 
 build/al.css: al/page.css
 	mkdir -p build

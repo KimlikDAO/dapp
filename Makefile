@@ -14,7 +14,7 @@ dev:
 	node tools/dev
 
 staging: build
-	python tools/dev.py --staging
+	python tools/staging.py
 
 cf-deployment: build
 	python tools/cfuploader.py

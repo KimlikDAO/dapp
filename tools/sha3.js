@@ -656,6 +656,7 @@
   }
 })();
 
+/** @type {function(string):string} */
 const keccak256 = self["keccak256"];
 
 export { keccak256 }

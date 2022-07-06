@@ -168,9 +168,9 @@ async function TCKTYarat() {
   Adıyla("s3").classList.remove("disabled");
   s3a.classList.remove("disabled");
 
-  const açıkTCKTSözü = taahhütOluştur(HesapAdresi, Rasgele)
+  const açıkTCKTSözü = taahhütOluştur(/** @type {string} */(HesapAdresi), Rasgele)
     .then((taahhüt) =>
-      fetch(KIMLIK_AS_URL + "?" + new URLSearchParams({ oauth_code: code, taahhüt: taahhüt })))
+      fetch(KIMLIK_AS_URL + "?" + new URLSearchParams({ "oauth_code": code, "taahhüt": taahhüt })))
     .then((res) => res.json())
     .then((TCKT) => {
       for (let ad of "TCKN ad soyad dt".split(" ")) {

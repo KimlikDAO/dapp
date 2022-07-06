@@ -39,21 +39,21 @@ def wrap(txt):
 def flip(name):
     return os.path.splitext(name)[0] + '/page' + os.path.splitext(name)[1]
 
+if __name__ =="__main__":
+    route = toml.load('wrangler.toml')['env']['fujitestnet']['route'][:-1]
+    replace = {
+        "http://localhost:8787/": route
+    }
+    for name in sys.argv[2:]:
+        kvs = {k.strip(): v.strip() for k, v in (l.split('=') for l in open(name))}
+        replace.update({wrap(flip(k)): wrap(v) for k, v in kvs.items()})
 
-route = toml.load('wrangler.toml')['env']['fujitestnet']['route'][:-1]
-replace = {
-    "http://localhost:8787/": route
-}
-for name in sys.argv[2:]:
-    kvs = {k.strip(): v.strip() for k, v in (l.split('=') for l in open(name))}
-    replace.update({wrap(flip(k)): wrap(v) for k, v in kvs.items()})
+    print("Şu kurallara göre güncellenecek:", replace)
 
-print("Şu kurallara göre güncellenecek:", replace)
+    f = open(sys.argv[1], 'r+')
+    out = multireplace(f.read(), replace)
 
-f = open(sys.argv[1], 'r+')
-out = multireplace(f.read(), replace)
-
-f.seek(0)
-f.write(out)
-f.truncate()
-f.close()
+    f.seek(0)
+    f.write(out)
+    f.truncate()
+    f.close()
