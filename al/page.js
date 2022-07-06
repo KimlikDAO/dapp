@@ -158,8 +158,10 @@ async function TCKTYarat() {
   if (!location.search || !ethereum) return;
 
   crypto.getRandomValues(Rasgele);
-  const /** URLSearchParams */ params = new URLSearchParams(location.search);
-  const /** string */ code = params.get("code");
+  /** @type {URLSearchParams} */
+  const params = new URLSearchParams(location.search);
+  /** @type {string} */
+  const code = params.get("code");
   history.replaceState(null, "", location.pathname);
 
   Adıyla("s3").classList.remove("disabled");
@@ -169,9 +171,9 @@ async function TCKTYarat() {
     .then((taahhüt) =>
       fetch(KIMLIK_AS_URL + "?" + new URLSearchParams({ oauth_code: code, taahhüt: taahhüt })))
     .then((res) => res.json())
-    .then((açıkTCKT) => {
+    .then((TCKT) => {
       for (let key of "TCKN ad soyad dt".split(" ")) {
-        document.getElementById(key).innerHTML = açıkTCKT[key];
+        document.getElementById(key).innerHTML = TCKT[key];
       }
       const TCKTElement = document.getElementById("TCKT");
       s2a.innerText = "E-devlet'ten bilgileriniz alındı 👍";
@@ -180,9 +182,10 @@ async function TCKTYarat() {
       s2a.disabled = true;
       s2a.href = "javascript:";
       Adıyla("s2").classList.add("done");
-
-      açıkTCKT.rasgele = base64(Rasgele);
-      return açıkTCKT;
+      TCKT.rasgele = base64(Rasgele);
+      // TODO(KimlikDAO-bot): Kullanıcı tarafında gelen TCKT'nin fazladan veri
+      // içermediğini denetle. Fazla verileri işaretleme riski yüzünden sil.
+      return JSON.stringify(TCKT);
     });
 
   s3a.onclick = async () => {
@@ -199,10 +202,10 @@ async function TCKTYarat() {
     });
 
     const açıkAnahtar = await açıkAnahtarSözü;
-    const açıkTCKT = JSON.stringify(await açıkTCKTSözü);
-    const doldur = new Uint8Array((512 - açıkTCKT.length) / 2);
-    crypto.getRandomValues(doldur);
-    const encrypted = encrypt(açıkAnahtar, açıkTCKT + hex(doldur));
+    const açıkTCKT = await açıkTCKTSözü;
+    const dolgu = new Uint8Array((512 - açıkTCKT.length) / 2);
+    crypto.getRandomValues(dolgu);
+    const encrypted = encrypt(açıkAnahtar, açıkTCKT + hex(dolgu));
 
     /**
      * @type {string}
@@ -240,6 +243,7 @@ async function TCKTYarat() {
       Adıyla("s4d").onclick = girdiAlanıÇıkar;
       Adıyla("sr:t").onblur = eşikDeğeriBlurOlunca;
       Adıyla("s4e").onclick = async () => {
+        /** !Object<string, number> */
         let adresAğırlığı = {};
         /** @type {boolean} */
         let geçerli = true;
@@ -258,12 +262,12 @@ async function TCKTYarat() {
           adresAğırlığı[adres] = ağırlık;
           toplamAğırlık += ağırlık;
         }
+        /** @type {number} */
         const eşikDeğeri = parseInt(Adıyla("sr:t").value);
         if (toplamAğırlık < eşikDeğeri) {
           geçerli = false;
           // TODO(MuhammetCoskun): hata bildir
         }
-        console.log(toplamAğırlık, eşikDeğeri);
         if (geçerli) {
           s4a.innerHTML = "İmece iptal kuruldu 👍";
           Adıyla("sr").classList.add("invisible");
@@ -272,9 +276,8 @@ async function TCKTYarat() {
           s4a.onclick = null;
           ödemeAdımınaGeç(cidSözü, adresAğırlığı, eşikDeğeri);
         }
-        console.log("clicked s4e")
       };
-      Adıyla("s4f").onclick = async () => {
+      Adıyla("s4f").onclick = () => {
         Adıyla("sr").classList.add("invisible");
       };
     }
@@ -287,18 +290,17 @@ async function TCKTYarat() {
 }
 
 /**
+ * Ödeme adımını gösterir, ödeme onayını alıp evm provider'a yollar.
+ *
  * @param {!Promise<Object>} cidSözü
- * @param {!Array<string>=} adresler
- * @param {!Array<number>=} ağırlıklar
+ * @param {!Object<string, number>=} adresler
  * @param {number=} eşikDeğeri
  */
 async function ödemeAdımınaGeç(cidSözü, adresAğırlığı, eşikDeğeri) {
   Adıyla("s5").classList.remove("disabled");
 
   let iptalData = null;
-
   if (adresAğırlığı) {
-    console.log(InputIdSayaç);
     iptalData = evm.uint256(eşikDeğeri) + evm.uint256(InputIdSayaç);
     for (let adres in adresAğırlığı) {
       iptalData += evm.uint160(adresAğırlığı[adres]) + adres.slice(2).toLowerCase();
