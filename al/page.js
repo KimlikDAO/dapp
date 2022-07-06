@@ -161,7 +161,7 @@ async function TCKTYarat() {
   crypto.getRandomValues(Rasgele);
   /** @type {URLSearchParams} */
   const params = new URLSearchParams(location.search);
-  /** @type {string} */
+  /** @type {?string} */
   const code = params.get("code");
   history.replaceState(null, "", location.pathname);
 
@@ -206,7 +206,7 @@ async function TCKTYarat() {
       .then(([açıkTCKT, açıkAnahtar]) => {
         const dolgu = new Uint8Array((512 - açıkTCKT.length) / 2);
         crypto.getRandomValues(dolgu);
-        const encrypted = encrypt(açıkAnahtar, açıkTCKT + hex(dolgu));
+        const [nonce, ephemPubKey, ciphertext] = encrypt(açıkAnahtar, açıkTCKT + hex(dolgu));
         /**
          * @type {string}
          * @const
@@ -225,18 +225,18 @@ async function TCKTYarat() {
               "tr-TR": ["{1} TCKT'nizi istiyor. İzin veriyor musunuz?", "Evet", "Hayır"]
             },
             algorithm: "x25519-xsalsa20-poly1305",
-            nonce: encrypted.nonce,
-            ephem_pub_key: encrypted.ephemPublicKey,
-            ciphertext: encrypted.ciphertext
+            nonce: nonce,
+            ephem_pub_key: ephemPubKey,
+            ciphertext: ciphertext
           }
         }
         return ipfs.add(JSON.stringify(TCKT));
       })
-      .catch((e) => console.log("Anahtar verilmedi"));
+      .catch((e) => console.log(e + "TCKT oluşturamadık: Kullanıcı reddetti veya IPFS hatası"));
 
     Adıyla("s4a").onclick = async () => imeceIptalKur(cidSözü);
     Adıyla("s4b").onclick = async () => {
-      s4b.innerHTML = "İmece iptal kurulmadı 🤌";
+      Adıyla("s4b").innerHTML = "İmece iptal kurulmadı 🤌";
       ödemeAdımınaGeç(cidSözü);
     }
   };

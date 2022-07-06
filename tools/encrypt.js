@@ -2,7 +2,6 @@ import nacl from 'tweetnacl';
 import naclUtil from 'tweetnacl-util';
 
 /**
- *
  * @param publicKey - The public key of the message recipient.
  * @param data - The message data.
  * @return The encrypted data.
@@ -27,10 +26,9 @@ export function encrypt(publicKey, data) {
     ephemeralKeyPair.secretKey,
   );
 
-  const output = {
-    nonce: naclUtil.encodeBase64(nonce),
-    ephemPublicKey: naclUtil.encodeBase64(ephemeralKeyPair.publicKey),
-    ciphertext: naclUtil.encodeBase64(encryptedMessage),
-  };
-  return output;
+  return [
+    naclUtil.encodeBase64(nonce),
+    naclUtil.encodeBase64(ephemeralKeyPair.publicKey),
+    naclUtil.encodeBase64(encryptedMessage),
+  ];
 }

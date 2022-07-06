@@ -2,11 +2,14 @@ build/al.page: build/al build/al.gz build/al.br
 
 .PHONY: build/al.page
 
-build/al.js: al/page.js al/ethereum.js
+build/al.js: al/page.js tools/cevir.js tools/encrypt.js tools/evm.js \
+             tools/ipfs.js \
+             tools/sha3.js \
+             al/ethereum.js
 	mkdir -p build
 	google-closure-compiler -W VERBOSE -O ADVANCED --charset UTF-8 \
-	                        --js $^ \
-	                        | uglifyjs -m -o $@
+	                        --module_resolution NODE \
+	                        --js $^
 
 build/al.css: al/page.css
 	mkdir -p build

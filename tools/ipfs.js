@@ -12,7 +12,7 @@ async function hash(content) {
   for await (const { cid } of importer([{ content }], null, options)) {
     lastCid = cid
   }
-  return lastCid
+  return lastCid;
 }
 
 export default {

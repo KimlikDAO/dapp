@@ -6,7 +6,7 @@ for (let /** number */ n = 0; n <= 0xff; ++n) {
 }
 
 /**
- * @param {ArrayBuffer} buffer hex'e çevrilecek buffer.
+ * @param {ArrayBuffer | Uint8Array} buffer hex'e çevrilecek buffer.
  * @return {string} hex temsil eden dizi.
  */
 function hex(buffer) {
@@ -20,7 +20,7 @@ function hex(buffer) {
 }
 
 /**
- * @param {ArrayBuffer} buffer Base64'e dönüştürülecek buffer.
+ * @param {ArrayBuffer | Uint8Array} buffer Base64'e dönüştürülecek buffer.
  * @return {string} Base64 temsil eden dizi.
  */
 function base64(buffer) {

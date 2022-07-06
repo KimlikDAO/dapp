@@ -2,10 +2,10 @@ MAKEFLAGS=-j 4
 
 build: build/serve.js build/ana.page build/al.page
 
-include ana/Makefile
 include al/Makefile
+include ana/Makefile
 include iptal/Makefile
-include ortaklar-locasi/Makefile
+include ortaklar/Makefile
 
 clean:
 	rm -rf build

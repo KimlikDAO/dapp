@@ -14,3 +14,8 @@ ethereum.request = function(params) {};
  * @return {boolean}
  */
 ethereum.isConnected = function() {};
+
+/**
+ * @param {string} eventName
+ */
+ethereum.on = function(eventName, handler) {};
