@@ -20,6 +20,19 @@ function hex(buffer) {
 }
 
 /**
+ * @param {string} hex olarak kodlanmış veri.
+ * @return {Uint8Array} byte dizisi
+ */
+function hexten(hex) {
+  if (hex.length & 1) hex += "0";
+  const len = hex.length;
+  let r = new Uint8Array(len / 2);
+  for (let i = 0; i < len; i += 2)
+    r[i] = parseInt(hex.slice(i, i + 2), 16);
+  return r;
+}
+
+/**
  * @param {ArrayBuffer|Uint8Array} buffer base64'e dönüştürülecek buffer.
  * @return {string} base64 temsil eden dizi.
  */
@@ -38,7 +51,7 @@ function base64(buffer) {
 /**
  * @param {string} b64 base64 olarak yazılı veri.
  */
-function decodeBase64(b64) {
+function base64ten(b64) {
   const decoded = window.atob(b64);
   const buffer = new Uint8Array(decoded.length);
   const len = decoded.length;
@@ -47,4 +60,4 @@ function decodeBase64(b64) {
   return buffer;
 };
 
-export { base64, decodeBase64, hex }
+export { base64, base64ten, hex, hexten }

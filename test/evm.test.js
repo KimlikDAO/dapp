@@ -40,4 +40,4 @@ describe('adresGeçerli tests', () => {
       evm.adresGeçerli("0x79883D9acbc4aBac6d2d216693F66FcC5A0BcBC1")
     );
   })
-})
+});

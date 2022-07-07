@@ -174,7 +174,7 @@ async function TCKTYarat() {
     .then((res) => res.json())
     .then((TCKT) => {
       for (let ad of "TCKN ad soyad dt".split(" ")) {
-        document.getElementById(ad).innerHTML = TCKT[ad];
+        Adıyla(ad).innerHTML = TCKT[ad];
       }
       const TCKTElement = Adıyla("TCKT");
       s2a.innerText = "E-devlet'ten bilgileriniz alındı 👍";
