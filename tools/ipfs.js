@@ -42,9 +42,8 @@ async function yaz(veri) {
 
   return Promise.all([gelenSöz, hash(encoded)])
     .then(([gelen, yerel]) => {
-      if (CID(yerel) != gelen) {
+      if (CID(yerel) != gelen)
         Promise.reject("IPFS'ten farklı sonuç döndü.");
-      }
       return yerel;
     })
 }

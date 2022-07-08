@@ -12,12 +12,7 @@
     "start": "make dev",
     "test": "vitest"
   },
-  "dependencies": {
-    "ipfs-unixfs-importer": "^9.0.10",
-    "js-sha3": "^0.8.0",
-    "tweetnacl": "^1.0.3",
-    "tweetnacl-util": "^0.15.1"
-  },
+  "dependencies": {},
   "devDependencies": {
     "express": "^4.18.1",
     "google-closure-compiler": "latest",
