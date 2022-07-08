@@ -80,7 +80,9 @@ async function giriş() {
       s1b.href = "javascript:";
       s1b.onclick = cüzdanBağla;
     }
-    await ethereum.request({ "method": "eth_accounts" }).then(
+    await ethereum.request(/** @type {RequestParams} */({
+      method: "eth_accounts"
+    })).then(
       (accounts) => { if (accounts.length > 0) return cüzdanBağla(); }
     );
   }
@@ -92,7 +94,6 @@ giriş();
 
 async function chainIdDeğişti(chainId) {
   if (chainId != ChainId) {
-    console.log('Chain Id Değişti', chainId);
     ChainId = chainId;
     chainDropdownOluştur(chainId);
   }
@@ -106,11 +107,11 @@ function chainDropdownOluştur(yeniChain) {
       const li = document.createElement("li");
       li.onclick = async () => {
         try {
-          await ethereum.request({
-            method: 'wallet_switchEthereumChain',
-            params: [{ chainId: key }],
-          });
-        } catch (e) {console.log(e)}
+          await ethereum.request(/** @type {RequestParams} */({
+            method: "wallet_switchEthereumChain",
+            params: [{ "chainId": key }],
+          }));
+        } catch (e) { console.log(e) }
       }
       li.innerHTML = zincirler[key].isim;
       ul.appendChild(li);
@@ -153,10 +154,12 @@ async function nihaiArabirimAdı(hesap) {
 
 async function cüzdanBağla() {
   try {
-    const hesaplar = await ethereum.request({
-      "method": "eth_requestAccounts",
-    });
-    ethereum.request({ "method": "eth_chainId" }).then(chainIdDeğişti);
+    const hesaplar = await ethereum.request(/** @type {RequestParams} */({
+      method: "eth_requestAccounts",
+    }));
+    ethereum.request(/** @type {RequestParams} */({
+      method: "eth_chainId"
+    })).then(chainIdDeğişti);
     await hesapAdresiDeğişti(hesaplar);
 
     Adıyla("nc").classList.remove("invisible");
@@ -230,10 +233,10 @@ async function TCKTYarat() {
     });
 
   s3a.onclick = async () => {
-    const açıkAnahtarSözü = ethereum.request({
-      "method": "eth_getEncryptionPublicKey",
-      "params": [HesapAdresi],
-    }).then((pubKey) => {
+    const açıkAnahtarSözü = ethereum.request(/** @type {RequestParams} */({
+      method: "eth_getEncryptionPublicKey",
+      params: [HesapAdresi],
+    })).then((pubKey) => {
       s3a.onclick = null;
       s3a.innerText = "Açık anahtarınızı aldık 👍";
       s3a.classList.add("disabled");
@@ -260,22 +263,23 @@ async function TCKTYarat() {
          */
         const KimlikDAOUrl = "https://kimlikdao.org";
         const TCKT = {
-          "name": "TCKT",
-          "description": "KimlikDAO TC Kimlik Tokeni",
-          "image": KimlikDAOUrl + "/TCKT.svg",
-          "external_url": KimlikDAOUrl,
-          "animation_url": KimlikDAOUrl + "/TCKT.mp4",
-          "unlockable": {
-            "user_prompt": {
+          name: "TCKT",
+          description: "KimlikDAO TC Kimlik Tokeni",
+          image: KimlikDAOUrl + "/TCKT.svg",
+          external_url: KimlikDAOUrl,
+          animation_url: KimlikDAOUrl + "/TCKT.mp4",
+          unlockable: {
+            user_prompt: {
               "en-US": ["{1} wants to view your TCKT.", "OK", "Reject"],
               "tr-TR": ["{1} TCKT'nizi istiyor. İzin veriyor musunuz?", "Evet", "Hayır"]
             },
-            "algorithm": "x25519-xsalsa20-poly1305",
-            "nonce": nonce,
-            "ephem_pub_key": ephemPubKey,
-            "ciphertext": ciphertext
+            algorithm: "x25519-xsalsa20-poly1305",
+            nonce: nonce,
+            ephem_pub_key: ephemPubKey,
+            ciphertext: ciphertext
           }
         }
+        console.log(JSON.stringify(TCKT));
         return ipfs.yaz(JSON.stringify(TCKT));
       })
       .catch((e) => console.log(e + "TCKT oluşturamadık: Kullanıcı reddetti veya IPFS hatası"));
@@ -359,18 +363,18 @@ async function ödemeAdımınaGeç(cidSözü, adresAğırlığı, eşikDeğeri) 
 
   s5a.onclick = async () => {
     const cid = hex(await cidSözü);
-    const tx = /** @dict */ {
-      "to": "0xcCc0F938A2C94b0fFBa49F257902Be7F56E62cCc",
-      "from": HesapAdresi,
-      "value": "0x16345785D8A0000",
-      "data": iptalData ? "0x964cefc3" + cid + iptalData : "0x780900dc" + cid,
-      "chainId": ChainId,
-    };
+    const tx = /** @type {Transaction} */({
+      to: "0xcCc0F938A2C94b0fFBa49F257902Be7F56E62cCc",
+      from: HesapAdresi,
+      value: "0x16345785D8A0000",
+      data: iptalData ? "0x964cefc3" + cid + iptalData : "0x780900dc" + cid,
+      chainId: ChainId,
+    });
     try {
-      await ethereum.request({
-        "method": "eth_sendTransaction",
-        "params": [tx]
-      });
+      await ethereum.request(/** @type {RequestParams} */({
+        method: "eth_sendTransaction",
+        params: [tx]
+      }));
     } catch (e) {
       console.log(e);
     }
