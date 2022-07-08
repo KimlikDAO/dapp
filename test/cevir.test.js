@@ -1,5 +1,5 @@
 import { assert, describe, it } from 'vitest';
-import { hex, hexten } from '/tools/cevir';
+import { hex, hexten } from '/lib/cevir';
 
 describe('cevir tests', () => {
   it('should convert binary to hex', () => {

@@ -2,11 +2,10 @@ build/al.page: build/al build/al.gz build/al.br
 
 .PHONY: build/al.page
 
-build/al.js: al/page.js tools/cevir.js tools/evm.js \
-             tools/encrypt.js \
-             tools/ipfs.js \
-             tools/sha3.js \
-             al/ethereum.js
+build/al.js: al/page.js \
+             lib/cevir.js lib/evm.js lib/encrypt.js \
+             lib/ipfs.js lib/sha3.js \
+             lib/ethereum.js
 	mkdir -p build
 	google-closure-compiler -W VERBOSE -O ADVANCED --charset UTF-8 \
 	                        --module_resolution NODE \

@@ -1,5 +1,5 @@
 import { assert, describe, it } from 'vitest';
-import evm from '/tools/evm';
+import evm from '/lib/evm';
 
 describe('adresDüzelt tests', () => {
   it('Should add checksum to lower case address', () => {

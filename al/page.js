@@ -3,10 +3,10 @@
  *
  */
 
-import { base64, hex } from '/tools/cevir';
-import { encrypt } from '/tools/encrypt';
-import evm from '/tools/evm';
-import ipfs from '/tools/ipfs';
+import { base64, hex } from '/lib/cevir';
+import { encrypt } from '/lib/encrypt';
+import evm from '/lib/evm';
+import ipfs from '/lib/ipfs';
 
 /**
  * @type {string}

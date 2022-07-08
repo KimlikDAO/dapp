@@ -1,6 +1,5 @@
 import { assert, describe, it } from 'vitest';
-import { hexten } from '/tools/cevir';
-import { keccak256 } from '/tools/sha3';
+import { keccak256 } from '/lib/sha3';
 
 describe('keccak256 tests', () => {
   it('should output correct string value', () => {

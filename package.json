@@ -14,9 +14,12 @@
   },
   "dependencies": {},
   "devDependencies": {
-    "express": "^4.18.1",
     "google-closure-compiler": "latest",
+    "express": "^4.18.1",
     "vite": "latest",
-    "vitest": "latest"
+    "vitest": "latest",
+    "@ipld/dag-pb": "latest",
+    "ipfs-unixfs": "latest",
+    "multiformats": "latest"
   }
 }
