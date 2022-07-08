@@ -26,13 +26,13 @@ class TestServer(BaseHTTPRequestHandler):
             fname = 'build/al'
         elif self.path.endswith('.js'):
             ctype = 'text/javascript'
-            fname = base + self.path[:-8] + '.js'
+            fname = base + self.path
         elif self.path.endswith('.css'):
             ctype = 'text/css'
-            fname = base + self.path[:-9] + '.css'
+            fname = base + self.path
         elif self.path.endswith('.png'):
             ctype = 'image/png'
-            fname = base + self.path[:-9] + '.png'
+            fname = base + self.path
 
         if self.path.endswith('.map') or self.path.endswith(".ico"):
             self.send_response(404)

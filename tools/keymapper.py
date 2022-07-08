@@ -37,7 +37,7 @@ def wrap(txt):
 
 
 def flip(name):
-    return os.path.splitext(name)[0] + '/page' + os.path.splitext(name)[1]
+    return '/' + os.path.splitext(name)[0] + '/page' + os.path.splitext(name)[1]
 
 
 if __name__ == "__main__":

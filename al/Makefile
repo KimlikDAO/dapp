@@ -8,6 +8,7 @@ build/al.js: al/page.js \
              lib/ethereum.js lib/TCKT.js
 	mkdir -p build
 	google-closure-compiler -W VERBOSE -O ADVANCED --charset UTF-8 \
+	                        --emit_use_strict \
 	                        --module_resolution NODE \
 	                        --assume_function_wrapper \
 	                        --dependency_mode PRUNE \
