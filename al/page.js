@@ -30,19 +30,19 @@ const s5a = Adıyla("s5a");
 
 const zincirler = {
   "0x1": {
-    "isim": "Ethereum",
+    isim: "Ethereum",
   },
   "0xa86a": {
-    "isim": "Avalanche",
+    isim: "Avalanche",
   },
   "0x89": {
-    "isim": "Polygon",
+    isim: "Polygon",
   },
   "0xa4b1": {
-    "isim": "Arbitrum",
+    isim: "Arbitrum",
   },
   "0xfa": {
-    "isim": "Fantom",
+    isim: "Fantom",
   },
 };
 /**
