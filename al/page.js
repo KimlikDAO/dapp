@@ -260,20 +260,20 @@ async function TCKTYarat() {
          */
         const KimlikDAOUrl = "https://kimlikdao.org";
         const TCKT = {
-          name: "TCKT",
-          description: "KimlikDAO TC Kimlik Tokeni",
-          image: KimlikDAOUrl + "/TCKT.svg",
-          external_url: KimlikDAOUrl,
-          animation_url: KimlikDAOUrl + "/TCKT.mp4",
-          unlockable: {
-            user_prompt: {
+          "name": "TCKT",
+          "description": "KimlikDAO TC Kimlik Tokeni",
+          "image": KimlikDAOUrl + "/TCKT.svg",
+          "external_url": KimlikDAOUrl,
+          "animation_url": KimlikDAOUrl + "/TCKT.mp4",
+          "unlockable": {
+            "user_prompt": {
               "en-US": ["{1} wants to view your TCKT.", "OK", "Reject"],
               "tr-TR": ["{1} TCKT'nizi istiyor. İzin veriyor musunuz?", "Evet", "Hayır"]
             },
-            algorithm: "x25519-xsalsa20-poly1305",
-            nonce: nonce,
-            ephem_pub_key: ephemPubKey,
-            ciphertext: ciphertext
+            "algorithm": "x25519-xsalsa20-poly1305",
+            "nonce": nonce,
+            "ephem_pub_key": ephemPubKey,
+            "ciphertext": ciphertext
           }
         }
         return ipfs.yaz(JSON.stringify(TCKT));
@@ -359,12 +359,12 @@ async function ödemeAdımınaGeç(cidSözü, adresAğırlığı, eşikDeğeri) 
 
   s5a.onclick = async () => {
     const cid = hex(await cidSözü);
-    const tx = {
-      to: '0xcCc0F938A2C94b0fFBa49F257902Be7F56E62cCc',
-      from: HesapAdresi,
-      value: '0x16345785D8A0000',
-      data: iptalData ? '0x964cefc3' + cid + iptalData : '0x780900dc' + cid,
-      chainId: ChainId,
+    const tx = /** @dict */ {
+      "to": "0xcCc0F938A2C94b0fFBa49F257902Be7F56E62cCc",
+      "from": HesapAdresi,
+      "value": "0x16345785D8A0000",
+      "data": iptalData ? "0x964cefc3" + cid + iptalData : "0x780900dc" + cid,
+      "chainId": ChainId,
     };
     try {
       await ethereum.request({
