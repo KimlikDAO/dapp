@@ -144,6 +144,7 @@ button.act {
   right: 0;
   animation: growDown 300ms ease-in-out forwards;
   transform-origin: top center;
+  list-style: none;
 }
 
 @keyframes growDown {
@@ -160,10 +161,6 @@ button.act {
 
 .ld:hover ul {
   display: block;
-}
-
-.ld ul {
-  list-style: none;
 }
 
 .ld ul li a {

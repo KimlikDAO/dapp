@@ -28,6 +28,23 @@ const s3a = Adıyla("s3a");
 const s4a = Adıyla("s4a");
 const s5a = Adıyla("s5a");
 
+const zincirler = {
+  "0x1": {
+    isim: "Ethereum",
+  },
+  "0xa86a": {
+    isim: "Avalanche",
+  },
+  "0x89": {
+    isim: "Polygon",
+  },
+  "0xa4b1": {
+    isim: "Arbitrum",
+  },
+  "0xfa": {
+    isim: "Fantom",
+  },
+};
 /**
  * Bağlı cüzdan adresi veya `null`.
  * @type {?string}
@@ -77,7 +94,29 @@ async function chainIdDeğişti(chainId) {
   if (chainId != ChainId) {
     console.log('Chain Id Değişti', chainId);
     ChainId = chainId;
+    chainDropdownOluştur(chainId);
   }
+}
+
+function chainDropdownOluştur(yeniChain) {
+  Adıyla("nc").innerHTML = zincirler[yeniChain].isim;
+  const ul = document.createElement("ul");
+  for (const key in zincirler) {
+    if (key != yeniChain) {
+      const li = document.createElement("li");
+      li.onclick = async () => {
+        try {
+          await ethereum.request({
+            method: 'wallet_switchEthereumChain',
+            params: [{ chainId: key }],
+          });
+        } catch (e) {console.log(e)}
+      }
+      li.innerHTML = zincirler[key].isim;
+      ul.appendChild(li);
+    }
+  }
+  Adıyla("nc").appendChild(ul);
 }
 
 async function hesapAdresiDeğişti(adresler) {
@@ -120,6 +159,7 @@ async function cüzdanBağla() {
     ethereum.request({ "method": "eth_chainId" }).then(chainIdDeğişti);
     await hesapAdresiDeğişti(hesaplar);
 
+    Adıyla("nc").classList.remove("invisible");
     s1b.innerText += "ndı 👍";
     s1b.onclick = null;
     s1b.disabled = true;
