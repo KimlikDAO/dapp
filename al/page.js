@@ -242,11 +242,17 @@ async function TCKTYarat() {
       return pubKey;
     });
 
+    /** @type {Promise<Uint8Array>} */
     const cidSözü = Promise.all([açıkTCKTSözü, açıkAnahtarSözü])
       .then(([açıkTCKT, açıkAnahtar]) => {
-        const dolgu = new Uint8Array((512 - açıkTCKT.length) / 2);
+        let gizle = new Uint8Array(1000);
+        let { written } = new TextEncoder().encodeInto(açıkTCKT, gizle);
+        let dolgu = new Uint8Array(1000 - written);
         crypto.getRandomValues(dolgu);
-        const [nonce, ephemPubKey, ciphertext] = encrypt(açıkAnahtar, açıkTCKT + hex(dolgu));
+        gizle.set(dolgu, written);
+
+        const [nonce, ephemPubKey, ciphertext] = encrypt(açıkAnahtar, gizle);
+
         /**
          * @type {string}
          * @const
@@ -270,7 +276,7 @@ async function TCKTYarat() {
             ciphertext: ciphertext
           }
         }
-        return ipfs.add(JSON.stringify(TCKT));
+        return ipfs.yaz(JSON.stringify(TCKT));
       })
       .catch((e) => console.log(e + "TCKT oluşturamadık: Kullanıcı reddetti veya IPFS hatası"));
 
@@ -335,7 +341,7 @@ async function imeceIptalKur(cidSözü) {
 /**
  * Ödeme adımını gösterir, ödeme onayını alıp evm provider'a yollar.
  *
- * @param {!Promise<Object>} cidSözü gelmekte olan ipfs CID'i.
+ * @param {Promise<Uint8Array>} cidSözü gelmekte olan ipfs CID'i.
  * @param {!Object<string, number>=} adresAğırlığı (adres, ağırlık) ikilileri.
  * @param {number=} eşikDeğeri imece iptal için gereken oy eşiği.
  */
@@ -345,14 +351,14 @@ async function ödemeAdımınaGeç(cidSözü, adresAğırlığı, eşikDeğeri) 
   /** @type {?string} */
   let iptalData = null;
   if (adresAğırlığı) {
-    iptalData = evm.uint256(eşikDeğeri) + evm.uint256(InputIdSayaç);
+    iptalData = evm.uint256(/** @type {number} */(eşikDeğeri)) + evm.uint256(InputIdSayaç);
     for (let adres in adresAğırlığı) {
       iptalData += evm.uint160(adresAğırlığı[adres]) + adres.slice(2).toLowerCase();
     }
   }
 
   s5a.onclick = async () => {
-    const cid = hex((await cidSözü).bytes.slice(2));
+    const cid = hex(await cidSözü);
     const tx = {
       to: '0xcCc0F938A2C94b0fFBa49F257902Be7F56E62cCc',
       from: HesapAdresi,

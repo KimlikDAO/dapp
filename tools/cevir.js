@@ -25,11 +25,46 @@ function hex(buffer) {
  */
 function hexten(hex) {
   if (hex.length & 1) hex += "0";
-  const len = hex.length;
-  let r = new Uint8Array(len / 2);
-  for (let i = 0; i < len; i += 2)
-    r[i] = parseInt(hex.slice(i, i + 2), 16);
+  let r = new Uint8Array(hex.length / 2);
+  for (let i = 0; i < r.length; ++i)
+    r[i] = parseInt(hex.slice(2 * i, 2 * i + 2), 16);
   return r;
+}
+
+const Base58Chars =
+  '123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz';
+
+const Base58Map = (() => {
+  const base58M = Array(256).fill(-1)
+  for (let i = 0; i < Base58Chars.length; ++i)
+    base58M[Base58Chars.charCodeAt(i)] = i
+
+  return base58M
+})();
+
+function base58(bytes) {
+  const result = []
+
+  for (const byte of bytes) {
+    let carry = byte
+    for (let j = 0; j < result.length; ++j) {
+      const x = (Base58Map[result[j]] << 8) + carry
+      result[j] = Base58Chars.charCodeAt(x % 58)
+      carry = (x / 58) | 0
+    }
+    while (carry) {
+      result.push(Base58Chars.charCodeAt(carry % 58))
+      carry = (carry / 58) | 0
+    }
+  }
+
+  for (const byte of bytes)
+    if (byte) break
+    else result.push('1'.charCodeAt(0))
+
+  result.reverse()
+
+  return String.fromCharCode(...result)
 }
 
 /**
@@ -60,4 +95,4 @@ function base64ten(b64) {
   return buffer;
 };
 
-export { base64, base64ten, hex, hexten }
+export { base58, base64, base64ten, hex, hexten }

@@ -3,14 +3,13 @@ import { base64, base64ten } from '/tools/cevir';
 let nacl = {};
 
 /**
- * @param publicKey - The public key of the message recipient.
- * @param data - The message data.
- * @return The encrypted data.
+ * @param {string} publicKey base64 olarak publicKey
+ * @param {Uint8Array} data
+ * @return Şifreleme nonce'ı publikeKey ve şifrelenmiş veri.
  */
 export function encrypt(publicKey, data) {
   const keypair = nacl.box.keyPair();
   let pubKeyUInt8Array = base64ten(publicKey);
-  data = new TextEncoder().encode(data);
   const nonce = new Uint8Array(nacl.box.nonceLength);
   crypto.getRandomValues(nonce);
 
