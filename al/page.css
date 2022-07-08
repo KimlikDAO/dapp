@@ -90,7 +90,50 @@
 }
 
 /*------------------------------------------*/
+/*----------------ChainDropdown-------------*/
 
+.chain {
+    position: relative;
+}
+
+.chain ul {
+    margin: 5px 0;
+    padding: 0;
+    background-color: #fff;
+    border: 1px solid #f8f8f8;
+    border-radius: 5px;
+    box-shadow: 0px 1px 20px rgba(0, 0, 0, 0.2);
+    display: none;
+    position: absolute;
+    top: 45px;
+    right: 0;
+    animation: growDown 300ms ease-in-out forwards;
+    transform-origin: top center;
+    list-style: none;
+}
+
+.chain:hover ul {
+    display: block;
+}
+
+.chain ul li {
+    padding: 5px 13px;
+}
+
+.chain ul li:hover {
+    background-color: #f2f2f2;
+  }
+
+.chain ul li a {
+    display: flex;
+    align-items: center;
+}
+
+.chain ul li a svg {
+    margin-right: 5px;
+}
+
+/*------------------------------------------*/
 .TCKT {
     margin-top: 2em;
     padding: 1em;
