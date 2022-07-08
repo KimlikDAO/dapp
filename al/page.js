@@ -362,13 +362,15 @@ async function ödemeAdımınaGeç(cidSözü, adresAğırlığı, eşikDeğeri) 
   }
 
   s5a.onclick = async () => {
+    /** @type {string} */
     const cid = hex(await cidSözü);
+    /** @type {Transaction} */
     const tx = /** @type {Transaction} */({
       to: "0xcCc0F938A2C94b0fFBa49F257902Be7F56E62cCc",
-      from: HesapAdresi,
+      from: /** @type {string} */(HesapAdresi),
       value: "0x16345785D8A0000",
       data: iptalData ? "0x964cefc3" + cid + iptalData : "0x780900dc" + cid,
-      chainId: ChainId,
+      chainId: /** @type {string} */(ChainId),
     });
     try {
       await ethereum.request(/** @type {RequestParams} */({
