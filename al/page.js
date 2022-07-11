@@ -5,10 +5,10 @@
 
 import { imeceİptalKur } from '/al/imeceİptal';
 import { base64, hex } from '/lib/cevir';
+import dom from '/lib/dom';
 import { encrypt } from '/lib/encrypt';
 import evm from '/lib/evm';
 import ipfs from '/lib/ipfs';
-import dom from '/lib/dom';
 
 /**
  * @type {string}
@@ -63,12 +63,8 @@ async function giriş() {
     ethereum.on('accountsChanged', hesapAdresiDeğişti);
     ethereum.on('chainChanged', chainIdDeğişti);
 
-    if (!HesapAdresi) {
-      s1b.innerText = "Tarayıcı Cüzdanı Bağla";
-      s1b.target = "";
-      s1b.href = "javascript:";
-      s1b.onclick = cüzdanBağla;
-    }
+    s1b.onclick = cüzdanBağla;
+
     await ethereum.request(/** @type {RequestParams} */({
       method: "eth_accounts"
     })).then(

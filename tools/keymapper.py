@@ -29,15 +29,23 @@ def multireplace(string, replacements):
     return regexp.sub(lambda match: replacements[match.group(0)], string)
 
 
-def wrap(txt):
-    """
-    Yanlışlıkla bul/değiştirleri azaltmak için sar.
-    """
-    return '="' + txt + '"'
+def inlines(file):
+    kvs = {}
+    for k, v in (l.rsplit('->', 1) for l in file):
+        v = open(v.rstrip()).read()
+        if k.startswith('js:'):
+            k = f'<script src="{k[3:]}">'
+            v = '<script>' + v
+        kvs[k] = v
+    return kvs
 
 
-def flip(name):
-    return '/' + os.path.splitext(name)[0] + '/page' + os.path.splitext(name)[1]
+def keymap(file):
+    return {k: v.rstrip() for k, v in (l.rsplit('->', 1) for l in file)}
+
+
+def resolve(entry):
+    return open(entry[5:]).read() if entry.startswith('file:') else entry
 
 
 if __name__ == "__main__":
@@ -46,9 +54,8 @@ if __name__ == "__main__":
         "http://localhost:8787/": route
     }
     for name in sys.argv[2:]:
-        kvs = {k.strip(): v.strip()
-               for k, v in (l.split('=') for l in open(name))}
-        replace.update({wrap(flip(k)): wrap(v) for k, v in kvs.items()})
+        f = open(name)
+        replace.update(inlines(f) if name.endswith('.inlines') else keymap(f))
 
     print("Şu kurallara göre güncellenecek:", replace)
 

@@ -19,8 +19,14 @@ shutil.copyfile(
 shutil.copyfile(
     f_name + '.br', os.path.join(os.path.dirname(f_name), h + '.br'))
 
-if f_name.startswith('build/'):
-    f_name = f_name[6:]
 
-print(f_name + "=" + h)
-map_file.write(f_name + "=" + h + "\n")
+def to_source(name):
+    name = name[6:]
+    parts = os.path.splitext(name)
+    return '/' + parts[0] + '/page' + parts[1]
+
+
+f_name = sys.argv[3] if len(sys.argv) >= 4 else to_source(f_name)
+
+print(f_name + "->" + h)
+map_file.write(f_name + "->" + h + "\n")
