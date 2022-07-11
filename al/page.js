@@ -3,10 +3,12 @@
  *
  */
 
+import { imeceİptalKur } from '/al/imeceİptal';
 import { base64, hex } from '/lib/cevir';
 import { encrypt } from '/lib/encrypt';
 import evm from '/lib/evm';
 import ipfs from '/lib/ipfs';
+import dom from '/lib/dom';
 
 /**
  * @type {string}
@@ -14,19 +16,12 @@ import ipfs from '/lib/ipfs';
  */
 const KIMLIK_AS_URL = "https://mock-api.kimlikas.com";
 
-/**
- * @noinline
- * @param {string} ad DOM biriminin adı.
- */
-const Adıyla = (ad) => document.getElementById(ad);
-
-const nw = Adıyla("nw");
-const s1a = Adıyla("s1a");
-const s1b = Adıyla("s1b");
-const s2a = Adıyla("s2a");
-const s3a = Adıyla("s3a");
-const s4a = Adıyla("s4a");
-const s5a = Adıyla("s5a");
+const nw = dom.adla("nw");
+const s1a = dom.adla("s1a");
+const s1b = dom.adla("s1b");
+const s2a = dom.adla("s2a");
+const s3a = dom.adla("s3a");
+const s5a = dom.adla("s5a");
 
 const zincirler = {
   "0x1": {
@@ -63,12 +58,6 @@ let ChainId = null;
  */
 let Rasgele = new Uint8Array(32);
 
-/**
- * Kurtarma adresleri basamağında kullanılan girdiler için sayaç
- * @type {number}
- */
-let InputIdSayaç = 3;
-
 async function giriş() {
   if (ethereum) {
     ethereum.on('accountsChanged', hesapAdresiDeğişti);
@@ -100,7 +89,7 @@ async function chainIdDeğişti(chainId) {
 }
 
 function chainDropdownOluştur(yeniChain) {
-  Adıyla("nc").innerHTML = zincirler[yeniChain].isim;
+  dom.adla("nc").innerHTML = zincirler[yeniChain].isim;
   const ul = document.createElement("ul");
   for (const key in zincirler) {
     if (key != yeniChain) {
@@ -117,7 +106,7 @@ function chainDropdownOluştur(yeniChain) {
       ul.appendChild(li);
     }
   }
-  Adıyla("nc").appendChild(ul);
+  dom.adla("nc").appendChild(ul);
 }
 
 async function hesapAdresiDeğişti(adresler) {
@@ -162,14 +151,14 @@ async function cüzdanBağla() {
     })).then(chainIdDeğişti);
     await hesapAdresiDeğişti(hesaplar);
 
-    Adıyla("nc").classList.remove("invisible");
+    dom.adla("nc").classList.remove("invisible");
     s1b.innerText += "ndı 👍";
     s1b.onclick = null;
     s1b.disabled = true;
     s1a.style.display = "none";
-    Adıyla("s1").classList.add("done");
+    dom.adla("s1").classList.add("done");
     s1b.classList.add("disabled");
-    Adıyla("s2").classList.remove("disabled");
+    dom.adla("s2").classList.remove("disabled");
     s2a.classList.remove("disabled");
   } catch (e) {
     console.log("kalbini kirarim");
@@ -186,7 +175,7 @@ async function cüzdanBağla() {
  */
 async function taahhütOluştur(hesap, rasgele) {
   /** @type {!Uint8Array} */
-  let concat = new Uint8Array(20 + 32);
+  let concat = new Uint8Array(32 + 20);
   concat.set(rasgele, 0);
 
   for (let /** number */ i = 1; i <= 20; ++i)
@@ -208,7 +197,7 @@ async function TCKTYarat() {
   const code = params.get("code");
   history.replaceState(null, "", location.pathname);
 
-  Adıyla("s3").classList.remove("disabled");
+  dom.adla("s3").classList.remove("disabled");
   s3a.classList.remove("disabled");
 
   const açıkTCKTSözü = taahhütOluştur(/** @type {string} */(HesapAdresi), Rasgele)
@@ -217,15 +206,15 @@ async function TCKTYarat() {
     .then((res) => res.json())
     .then((TCKT) => {
       for (let ad of "TCKN ad soyad dt".split(" ")) {
-        Adıyla(ad).innerHTML = TCKT[ad];
+        dom.adla(ad).innerHTML = TCKT[ad];
       }
-      const TCKTElement = Adıyla("TCKT");
+      const TCKTElement = dom.adla("TCKT");
       s2a.innerText = "E-devlet'ten bilgileriniz alındı 👍";
       s2a.onclick = null;
       s2a.classList.add("disabled");
       s2a.disabled = true;
       s2a.href = "javascript:";
-      Adıyla("s2").classList.add("done");
+      dom.adla("s2").classList.add("done");
       TCKT.rasgele = base64(Rasgele);
       // TODO(KimlikDAO-bot): Kullanıcı tarafında gelen TCKT'nin fazladan veri
       // içermediğini denetle. Fazla verileri işaretleme riski yüzünden sil.
@@ -240,8 +229,8 @@ async function TCKTYarat() {
       s3a.onclick = null;
       s3a.innerText = "Açık anahtarınızı aldık 👍";
       s3a.classList.add("disabled");
-      Adıyla("s3").classList.add("done");
-      Adıyla("s4").classList.remove("disabled");
+      dom.adla("s3").classList.add("done");
+      dom.adla("s4").classList.remove("disabled");
       return pubKey;
     });
 
@@ -284,61 +273,8 @@ async function TCKTYarat() {
       })
       .catch((e) => console.log(e + "TCKT oluşturamadık: Kullanıcı reddetti veya IPFS hatası"));
 
-    Adıyla("s4a").onclick = async () => imeceIptalKur(cidSözü);
-    Adıyla("s4b").onclick = async () => {
-      Adıyla("s4b").innerText = "İmece iptal kurulmadı 🤌";
-      Adıyla("sr").classList.add("invisible");
-      ödemeAdımınaGeç(cidSözü);
-    }
-  };
-}
-
-async function imeceIptalKur(cidSözü) {
-  Adıyla("sr").classList.remove("invisible");
-  for (let /** number */ i = 0; i < InputIdSayaç; ++i) {
-    Adıyla("sr:a" + i).onblur = adresBlurOlunca;
-    Adıyla("sr:w" + i).onblur = ağırlıkHesapla;
-  }
-  Adıyla("s4c").onclick = girdiAlanıEkle;
-  Adıyla("s4d").onclick = girdiAlanıÇıkar;
-  Adıyla("sr:t").onblur = eşikDeğeriBlurOlunca;
-  Adıyla("s4e").onclick = async () => {
-    /** @type {!Object<string, number>} */
-    let adresAğırlığı = {};
-    /** @type {boolean} */
-    let geçerli = true;
-    /** @type {number} */
-    let toplamAğırlık = 0;
-
-    for (let /** number */ i = 0; i < InputIdSayaç; ++i) {
-      const adres = Adıyla("sr:a" + i).value;
-      if (!evm.adresGeçerli(adres) || adres in adresAğırlığı) {
-        geçerli = false;
-        console.log("hatalı girdi", i);
-        // TODO(MuhammetCoskun): hata bildir kırmızi vs.
-      }
-      /** @type {number} */
-      const ağırlık = parseInt(Adıyla("sr:w" + i).value);
-      adresAğırlığı[adres] = ağırlık;
-      toplamAğırlık += ağırlık;
-    }
-    /** @type {number} */
-    const eşikDeğeri = parseInt(Adıyla("sr:t").value);
-    if (toplamAğırlık < eşikDeğeri) {
-      geçerli = false;
-      // TODO(MuhammetCoskun): hata bildir
-    }
-    if (geçerli) {
-      s4a.innerHTML = "İmece iptal kuruldu 👍";
-      Adıyla("sr").classList.add("invisible");
-      Adıyla("s4").classList.add("done");
-      Adıyla("s4b").style.display = "none";
-      s4a.onclick = null;
-      ödemeAdımınaGeç(cidSözü, adresAğırlığı, eşikDeğeri);
-    }
-  };
-  Adıyla("s4f").onclick = () => {
-    Adıyla("sr").classList.add("invisible");
+    imeceİptalKur()
+      .then(([adresAğırlığı, eşik]) => öde(cidSözü, adresAğırlığı, eşik));
   };
 }
 
@@ -346,16 +282,18 @@ async function imeceIptalKur(cidSözü) {
  * Ödeme adımını gösterir, ödeme onayını alıp evm provider'a yollar.
  *
  * @param {Promise<Uint8Array>} cidSözü gelmekte olan ipfs CID'i.
- * @param {!Object<string, number>=} adresAğırlığı (adres, ağırlık) ikilileri.
- * @param {number=} eşikDeğeri imece iptal için gereken oy eşiği.
+ * @param {Object<string, number>} adresAğırlığı (adres, ağırlık) ikilileri.
+ * @param {number} eşik imece iptal için gereken oy eşiği.
  */
-async function ödemeAdımınaGeç(cidSözü, adresAğırlığı, eşikDeğeri) {
-  Adıyla("s5").classList.remove("disabled");
+async function öde(cidSözü, adresAğırlığı, eşik) {
+  dom.adla("s5").classList.remove("disabled");
 
   /** @type {?string} */
   let iptalData = null;
-  if (adresAğırlığı) {
-    iptalData = evm.uint256(/** @type {number} */(eşikDeğeri)) + evm.uint256(InputIdSayaç);
+  const len = adresAğırlığı.length;
+  if (len) {
+    delete adresAğırlığı.length;
+    iptalData = evm.uint256(/** @type {number} */(eşik)) + evm.uint256(len);
     for (let adres in adresAğırlığı) {
       iptalData += evm.uint160(adresAğırlığı[adres]) + adres.slice(2).toLowerCase();
     }
@@ -381,58 +319,4 @@ async function ödemeAdımınaGeç(cidSözü, adresAğırlığı, eşikDeğeri) 
       console.log(e);
     }
   };
-}
-
-async function girdiAlanıEkle() {
-  const div = document.createElement("div");
-  const input1 = document.createElement("input");
-  const input2 = document.createElement("input");
-  div.id = "sr:c" + InputIdSayaç;
-  div.classList.add("container");
-  input1.id = "sr:a" + InputIdSayaç;
-  input1.classList.add("address-input");
-  input1.type = "text";
-  input1.onblur = adresBlurOlunca;
-  input2.id = "sr:w" + InputIdSayaç;
-  input2.classList.add("weight-input");
-  input2.type = "number";
-  input2.onblur = ağırlıkHesapla;
-  input2.value = 1;
-  div.appendChild(input1);
-  div.appendChild(input2);
-  Adıyla("sr:f").insertBefore(div, Adıyla("br"));
-  InputIdSayaç += 1;
-  ağırlıkHesapla();
-  console.log("clicked +")
-}
-
-function girdiAlanıÇıkar() {
-  InputIdSayaç -= 1;
-  Adıyla("sr:c" + InputIdSayaç).remove();
-  ağırlıkHesapla();
-  console.log("clicked -")
-}
-
-function eşikDeğeriGecerliMi(değer) {
-  const toplamAğırlık = Adıyla("sr:s").value;
-  return toplamAğırlık >= değer;
-}
-
-function eşikDeğeriBlurOlunca(event) {
-  eşikDeğeriGecerliMi(event.target.value);
-}
-
-function adresBlurOlunca(event) {
-  const yeni = evm.adresDüzelt(event.target.value);
-  if (yeni) event.target.value = yeni;
-  else console.log("oha"); // TODO(MuhammetCoskun): Arabirimde hata göster
-}
-
-function ağırlıkHesapla() {
-  /** @type {number} */
-  var total = 0;
-  for (var /** number */ i = 0; i < InputIdSayaç; ++i) {
-    total += parseInt(Adıyla("sr:w" + i).value);
-  }
-  Adıyla("sr:s").value = total;
 }
