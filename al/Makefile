@@ -39,5 +39,5 @@ build/al: al/page.html al/page.inlines \
           build/ana.keymap build/al.keymap build/al-wallet-inline.js 
 	cp al/page.html build/al.tmp
 	tools/keymapper.py build/al.tmp build/ana.keymap build/al.keymap al/page.inlines
-	html-minifier -c tools/html-minifier.conf build/al.tmp > build/al
+	html-minifier -c tools/html-minifier.conf build/al.tmp -o build/al
 	rm build/al.tmp

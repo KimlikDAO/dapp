@@ -5,8 +5,9 @@ build/ana.page: build/ana build/ana.gz build/ana.br
 build/ana.js: ana/page.js
 	mkdir -p build
 	google-closure-compiler -W VERBOSE -O ADVANCED --charset UTF-8 \
-	                        --js $^ \
-	                        | uglifyjs -m -o $@
+                        --js $^ \
+                        --js_output_file $@
+	uglifyjs $@ -m -o $@
 
 build/ana.css: ana/page.css
 	mkdir -p build
@@ -15,11 +16,11 @@ build/ana.css: ana/page.css
 build/ana.keymap: build/ana.js build/ana.js.gz build/ana.js.br \
 	              build/ana.css build/ana.css.gz build/ana.css.br
 	rm -rf $@
-	python tools/keyhasher.py $@ build/ana.js
-	python tools/keyhasher.py $@ build/ana.css
+	tools/keyhasher.py $@ build/ana.js
+	tools/keyhasher.py $@ build/ana.css
 
-build/ana: build/ana.keymap ana/page.html
+build/ana: build/ana.keymap ana/page.html ana/page.inlines
 	cp ana/page.html build/ana.tmp
-	python tools/keymapper.py build/ana.tmp build/ana.keymap
-	html-minifier -c tools/html-minifier.conf build/ana.tmp > build/ana
+	tools/keymapper.py build/ana.tmp build/ana.keymap ana/page.inlines
+	html-minifier -c tools/html-minifier.conf build/ana.tmp -o build/ana
 	rm build/ana.tmp

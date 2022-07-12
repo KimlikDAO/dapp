@@ -37,6 +37,8 @@ def inlines(file):
         if k.startswith('js:'):
             k = f'<script src="{k[3:]}">'
             v = '<script>' + v
+        elif k.startswith('svg:'):
+            k = f'<img src="{k[4:]}">'
         kvs[k] = v
     return kvs
 

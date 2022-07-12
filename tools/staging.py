@@ -33,6 +33,9 @@ class TestServer(BaseHTTPRequestHandler):
         elif self.path.endswith('.png'):
             ctype = 'image/png'
             fname = base + self.path
+        elif self.path.endswith('.svg'):
+            ctype = 'image/svg+xml'
+            fname = base + self.path
 
         if self.path.endswith('.map') or self.path.endswith(".ico"):
             self.send_response(404)
