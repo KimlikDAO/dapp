@@ -14,8 +14,9 @@ h1 {
   display: inline-block;
 }
 
-.nw {
+#nw {
   white-space: nowrap;
+  width: 10em;
 }
 
 .actbutton {

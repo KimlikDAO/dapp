@@ -28,5 +28,5 @@ def to_source(name):
 
 f_name = sys.argv[3] if len(sys.argv) >= 4 else to_source(f_name)
 
-print(f_name + "->" + h)
-map_file.write(f_name + "->" + h + "\n")
+print(f_name + " -> " + h)
+map_file.write(f_name + " -> " + h + "\n")

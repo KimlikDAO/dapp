@@ -82,7 +82,7 @@
     text-align: center;
 }
 
-.threshold-total {
+.sr:t {
     display:flex;
     justify-content: right;
     align-items: center;

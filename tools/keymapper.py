@@ -32,7 +32,8 @@ def multireplace(string, replacements):
 def inlines(file):
     kvs = {}
     for k, v in (l.rsplit('->', 1) for l in file):
-        v = open(v.rstrip()).read()
+        k = k.strip()
+        v = open(v.strip()).read()
         if k.startswith('js:'):
             k = f'<script src="{k[3:]}">'
             v = '<script>' + v
@@ -41,11 +42,7 @@ def inlines(file):
 
 
 def keymap(file):
-    return {k: v.rstrip() for k, v in (l.rsplit('->', 1) for l in file)}
-
-
-def resolve(entry):
-    return open(entry[5:]).read() if entry.startswith('file:') else entry
+    return {k.strip(): v.strip() for k, v in (l.rsplit('->', 1) for l in file)}
 
 
 if __name__ == "__main__":
