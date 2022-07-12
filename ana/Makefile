@@ -19,7 +19,8 @@ build/ana.keymap: build/ana.js build/ana.js.gz build/ana.js.br \
 	tools/keyhasher.py $@ build/ana.js
 	tools/keyhasher.py $@ build/ana.css
 
-build/ana: build/ana.keymap ana/page.html ana/page.inlines
+build/ana: build/ana.keymap ana/page.html ana/page.inlines \
+           ana/page.inlines ana/tr.svg
 	cp ana/page.html build/ana.tmp
 	tools/keymapper.py build/ana.tmp build/ana.keymap ana/page.inlines
 	html-minifier -c tools/html-minifier.conf build/ana.tmp -o build/ana
