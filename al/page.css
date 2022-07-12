@@ -118,18 +118,15 @@
 
 .chain ul li {
     padding: 5px 13px;
-}
-
-.chain ul li:hover {
-    background-color: #f2f2f2;
-  }
-
-.chain ul li a {
     display: flex;
     align-items: center;
 }
 
-.chain ul li a svg {
+.chain ul li:hover {
+    background-color: #f2f2f2;
+}
+
+.chain ul li img {
     margin-right: 5px;
 }
 

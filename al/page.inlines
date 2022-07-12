@@ -1,1 +1,6 @@
 js:/al/wallet-inline.js -> build/al-wallet-inline.js
+svg:/al/img/ethereum.svg -> al/img/ethereum.svg
+svg:/al/img/arbitrum.svg -> al/img/arbitrum.svg
+svg:/al/img/avalanche.svg -> al/img/avalanche.svg
+svg:/al/img/polygon.svg -> al/img/polygon.svg
+svg:/al/img/fantom.svg -> al/img/fantom.svg

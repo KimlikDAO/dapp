@@ -23,23 +23,6 @@ const s2a = dom.adla("s2a");
 const s3a = dom.adla("s3a");
 const s5a = dom.adla("s5a");
 
-const zincirler = {
-  "0x1": {
-    isim: "Ethereum",
-  },
-  "0xa86a": {
-    isim: "Avalanche",
-  },
-  "0x89": {
-    isim: "Polygon",
-  },
-  "0xa4b1": {
-    isim: "Arbitrum",
-  },
-  "0xfa": {
-    isim: "Fantom",
-  },
-};
 /**
  * Bağlı cüzdan adresi veya `null`.
  * @type {?string}
@@ -79,30 +62,11 @@ giriş();
 
 async function chainIdDeğişti(chainId) {
   if (chainId != ChainId) {
+    if(ChainId) dom.adla("nc:"+ ChainId).style.display = "flex";
+    dom.adla("nc:"+ chainId).style.display = "none";
+    dom.adla("nc:i").src = dom.adla("nc:i"+ chainId).src;
     ChainId = chainId;
-    chainDropdownOluştur(chainId);
   }
-}
-
-function chainDropdownOluştur(yeniChain) {
-  dom.adla("nc").innerHTML = zincirler[yeniChain].isim;
-  const ul = document.createElement("ul");
-  for (const key in zincirler) {
-    if (key != yeniChain) {
-      const li = document.createElement("li");
-      li.onclick = async () => {
-        try {
-          await ethereum.request(/** @type {RequestParams} */({
-            method: "wallet_switchEthereumChain",
-            params: [{ "chainId": key }],
-          }));
-        } catch (e) { console.log(e) }
-      }
-      li.innerHTML = zincirler[key].isim;
-      ul.appendChild(li);
-    }
-  }
-  dom.adla("nc").appendChild(ul);
 }
 
 async function hesapAdresiDeğişti(adresler) {
@@ -146,8 +110,15 @@ async function cüzdanBağla() {
       method: "eth_chainId"
     })).then(chainIdDeğişti);
     await hesapAdresiDeğişti(hesaplar);
-
-    dom.adla("nc").classList.remove("invisible");
+    const ul = dom.adla("nc:d");
+    ul.onclick = async (event) => {
+      try {
+        await ethereum.request(/** @type {RequestParams} */({
+          method: "wallet_switchEthereumChain",
+          params: [{ "chainId": event.target.id.slice(3) }],
+        }));
+      } catch (e) { console.log(e) }
+    }
     s1b.innerText += "ndı 👍";
     s1b.onclick = null;
     s1b.disabled = true;
