@@ -12,14 +12,13 @@
     "start": "make dev",
     "test": "vitest"
   },
-  "dependencies": {},
   "devDependencies": {
-    "google-closure-compiler": "latest",
-    "express": "^4.18.1",
-    "vite": "latest",
-    "vitest": "latest",
     "@ipld/dag-pb": "latest",
+    "express": "latest",
+    "google-closure-compiler": "latest",
     "ipfs-unixfs": "latest",
-    "multiformats": "latest"
+    "multiformats": "latest",
+    "vite": "latest",
+    "vitest": "latest"
   }
 }
