@@ -64,7 +64,7 @@ async function chainIdDeğişti(chainId) {
   if (chainId != ChainId) {
     if(ChainId) dom.adla("nc:"+ ChainId).style.display = "flex";
     dom.adla("nc:"+ chainId).style.display = "none";
-    dom.adla("nc:i").src = dom.adla("nc:i"+ chainId).src;
+    dom.adla("nc:i").src = dom.adla("ci:"+ chainId).src;
     ChainId = chainId;
   }
 }
@@ -110,10 +110,19 @@ async function cüzdanBağla() {
       method: "eth_chainId"
     })).then(chainIdDeğişti);
     await hesapAdresiDeğişti(hesaplar);
+    const button = dom.adla("nc");
+    button.onclick = () => {
+      const content = dom.adla("nc:w");
+      content.classList.add("show");
+      const backdrop = dom.adla("nc:bd");
+      backdrop.onclick = () => content.classList.remove("show")
+    };
     const ul = dom.adla("nc:d");
-    ul.onclick = async (event) => {
+    ul.onclick = (event) => {
+      const content = dom.adla("nc:w");
+      content.classList.remove("show");
       try {
-        await ethereum.request(/** @type {RequestParams} */({
+          ethereum.request(/** @type {RequestParams} */({
           method: "wallet_switchEthereumChain",
           params: [{ "chainId": event.target.id.slice(3) }],
         }));

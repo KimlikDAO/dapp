@@ -14,6 +14,12 @@ h1 {
   display: inline-block;
 }
 
+#nb {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
 #nw {
   white-space: nowrap;
   width: 10em;
