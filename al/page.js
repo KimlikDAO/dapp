@@ -15,6 +15,11 @@ import ipfs from '/lib/ipfs';
  * @const
  */
 const KIMLIK_AS_URL = "https://mock-api.kimlikas.com";
+/**
+ * @const {string}
+ * @noinline
+ */
+const KIMLIK_DAO_URL = "https://kimlikdao.org";
 
 const nw = dom.adla("nw");
 const s1a = dom.adla("s1a");
@@ -145,14 +150,11 @@ async function taahhütOluştur(hesap, rasgele) {
   for (let /** number */ i = 1; i <= 20; ++i)
     concat[i + 31] = parseInt(hesap.substring(2 * i, 2 * i + 2), 16);
 
-  /** @type {ArrayBuffer} */
-  let taahhüt = await crypto.subtle.digest("SHA-256", concat);
-
-  return base64(taahhüt);
+  return crypto.subtle.digest("SHA-256", concat).then(base64);
 }
 
 async function TCKTYarat() {
-  if (!location.search || !ethereum) return;
+  if (!location.search) return;
 
   /**
    * Pedersen taahhüdü için rasgele bitdizisi.
@@ -215,18 +217,12 @@ async function TCKTYarat() {
 
         const [nonce, ephemPubKey, ciphertext] = encrypt(açıkAnahtar, gizle);
 
-        /**
-         * @type {string}
-         * @const
-         * @noinline
-         */
-        const KimlikDAOUrl = "https://kimlikdao.org";
         const TCKT = {
           name: "TCKT",
           description: "KimlikDAO TC Kimlik Tokeni",
-          image: KimlikDAOUrl + "/TCKT.svg",
-          external_url: KimlikDAOUrl,
-          animation_url: KimlikDAOUrl + "/TCKT.mp4",
+          image: KIMLIK_DAO_URL + "/TCKT.svg",
+          external_url: KIMLIK_DAO_URL,
+          animation_url: KIMLIK_DAO_URL + "/TCKT.mp4",
           unlockable: {
             user_prompt: {
               "en-US": ["{1} wants to view your TCKT.", "OK", "Reject"],
@@ -238,7 +234,6 @@ async function TCKTYarat() {
             ciphertext: ciphertext
           }
         }
-        console.log(JSON.stringify(TCKT));
         return ipfs.yaz(JSON.stringify(TCKT));
       })
       .catch((e) => console.log(e + "TCKT oluşturamadık: Kullanıcı reddetti veya IPFS hatası"));
