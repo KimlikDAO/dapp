@@ -121,10 +121,6 @@
     z-index: 1;
 }
 
-.show {
-    display: block !important;
-}
-
 .dropdown-content li {
     height: 45px;
     margin: 5px;
