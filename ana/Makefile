@@ -21,7 +21,6 @@ build/ana.keymap: build/ana.js build/ana.js.gz build/ana.js.br \
 
 build/ana: build/ana.keymap ana/page.html ana/page.inlines \
            ana/page.inlines ana/tr.svg
-	cp ana/page.html build/ana.tmp
-	tools/keymapper.py build/ana.tmp build/ana.keymap ana/page.inlines
-	html-minifier -c tools/html-minifier.conf build/ana.tmp -o build/ana
-	rm build/ana.tmp
+	cp ana/page.html build/ana
+	tools/keymapper.py build/ana build/ana.keymap ana/page.inlines
+	html-minifier -c tools/html-minifier.conf build/ana -o build/ana
