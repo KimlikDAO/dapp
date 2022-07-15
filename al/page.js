@@ -15,6 +15,11 @@ import ipfs from '/lib/ipfs';
  * @const
  */
 const KIMLIK_AS_URL = "https://mock-api.kimlikas.com";
+/**
+ * @const {string}
+ * @noinline
+ */
+const KIMLIK_DAO_URL = "https://kimlikdao.org";
 
 const nw = dom.adla("nw");
 const s1a = dom.adla("s1a");
@@ -35,32 +40,20 @@ let HesapAdresi = null;
  */
 let ChainId = null;
 
-/**
- * Pedersen taahhüdü için rasgele bitdizisi.
- * @type {!Uint8Array}
- */
-let Rasgele = new Uint8Array(32);
+if (ethereum) {
+  ethereum.on('accountsChanged', hesapAdresiDeğişti);
+  ethereum.on('chainChanged', chainIdDeğişti);
 
-async function giriş() {
-  if (ethereum) {
-    ethereum.on('accountsChanged', hesapAdresiDeğişti);
-    ethereum.on('chainChanged', chainIdDeğişti);
+  s1b.onclick = cüzdanBağla;
 
-    s1b.onclick = cüzdanBağla;
-
-    await ethereum.request(/** @type {RequestParams} */({
-      method: "eth_accounts"
-    })).then(
-      (accounts) => { if (accounts.length > 0) return cüzdanBağla(); }
-    );
-  }
-
-  await TCKTYarat();
+  ethereum.request(/** @type {RequestParams} */({
+    method: "eth_accounts"
+  })).then(
+    (accounts) => { if (accounts.length > 0) return cüzdanBağla(); }
+  ).then(TCKTYarat);
 }
 
-giriş();
-
-async function chainIdDeğişti(chainId) {
+function chainIdDeğişti(chainId) {
   if (chainId != ChainId) {
     if(ChainId) dom.adla("nc:"+ ChainId).style.display = "flex";
     dom.adla("nc:"+ chainId).style.display = "none";
@@ -69,7 +62,7 @@ async function chainIdDeğişti(chainId) {
   }
 }
 
-async function hesapAdresiDeğişti(adresler) {
+function hesapAdresiDeğişti(adresler) {
   if (adresler.length == 0) {
     HesapAdresi = null;
   } else if (adresler[0] != HesapAdresi) {
@@ -125,7 +118,7 @@ async function cüzdanBağla() {
       if (event.target.nodeName != "LI") li = event.target.parentElement;
       const newChainId = li.id.slice(3);
       try {
-          ethereum.request(/** @type {RequestParams} */({
+        ethereum.request(/** @type {RequestParams} */({
           method: "wallet_switchEthereumChain",
           params: [{ "chainId": newChainId }],
         }));
@@ -160,14 +153,17 @@ async function taahhütOluştur(hesap, rasgele) {
   for (let /** number */ i = 1; i <= 20; ++i)
     concat[i + 31] = parseInt(hesap.substring(2 * i, 2 * i + 2), 16);
 
-  /** @type {ArrayBuffer} */
-  let taahhüt = await crypto.subtle.digest("SHA-256", concat);
-
-  return base64(taahhüt);
+  return crypto.subtle.digest("SHA-256", concat).then(base64);
 }
 
 async function TCKTYarat() {
-  if (!location.search || !ethereum) return;
+  if (!location.search) return;
+
+  /**
+   * Pedersen taahhüdü için rasgele bitdizisi.
+   * @type {!Uint8Array}
+   */
+  let Rasgele = new Uint8Array(32);
 
   crypto.getRandomValues(Rasgele);
   /** @type {URLSearchParams} */
@@ -224,18 +220,12 @@ async function TCKTYarat() {
 
         const [nonce, ephemPubKey, ciphertext] = encrypt(açıkAnahtar, gizle);
 
-        /**
-         * @type {string}
-         * @const
-         * @noinline
-         */
-        const KimlikDAOUrl = "https://kimlikdao.org";
         const TCKT = {
           name: "TCKT",
           description: "KimlikDAO TC Kimlik Tokeni",
-          image: KimlikDAOUrl + "/TCKT.svg",
-          external_url: KimlikDAOUrl,
-          animation_url: KimlikDAOUrl + "/TCKT.mp4",
+          image: KIMLIK_DAO_URL + "/TCKT.svg",
+          external_url: KIMLIK_DAO_URL,
+          animation_url: KIMLIK_DAO_URL + "/TCKT.mp4",
           unlockable: {
             user_prompt: {
               "en-US": ["{1} wants to view your TCKT.", "OK", "Reject"],
@@ -247,7 +237,6 @@ async function TCKTYarat() {
             ciphertext: ciphertext
           }
         }
-        console.log(JSON.stringify(TCKT));
         return ipfs.yaz(JSON.stringify(TCKT));
       })
       .catch((e) => console.log(e + "TCKT oluşturamadık: Kullanıcı reddetti veya IPFS hatası"));

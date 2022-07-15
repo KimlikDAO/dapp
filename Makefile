@@ -14,10 +14,10 @@ dev:
 	node tools/dev
 
 staging: build
-	python tools/staging.py
+	tools/staging.py
 
 cf-deployment: build
-	python tools/cfuploader.py
+	tools/cfuploader.py
 
 build/serve.js: tools/serve.js tools/workers.js
 	mkdir -p build
