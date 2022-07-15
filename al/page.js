@@ -3,6 +3,7 @@
  *
  */
 
+import Cüzdan from '/al/cüzdan';
 import { imeceİptalKur } from '/al/imeceİptal';
 import { base64, hex } from '/lib/cevir';
 import dom from '/lib/dom';
@@ -10,132 +11,13 @@ import { encrypt } from '/lib/encrypt';
 import evm from '/lib/evm';
 import ipfs from '/lib/ipfs';
 
-/**
- * @type {string}
- * @const
- */
+/** @const {string} */
 const KIMLIK_AS_URL = "https://mock-api.kimlikas.com";
 /**
  * @const {string}
  * @noinline
  */
 const KIMLIK_DAO_URL = "https://kimlikdao.org";
-
-const nw = dom.adla("nw");
-const s1a = dom.adla("s1a");
-const s1b = dom.adla("s1b");
-const s2a = dom.adla("s2a");
-const s3a = dom.adla("s3a");
-const s5a = dom.adla("s5a");
-
-/**
- * Bağlı cüzdan adresi veya `null`.
- * @type {?string}
- */
-let HesapAdresi = null;
-
-/**
- * Bağlı cüzdan chainId'si.
- * @type {?string}
- */
-let ChainId = null;
-
-if (ethereum) {
-  ethereum.on('accountsChanged', hesapAdresiDeğişti);
-  ethereum.on('chainChanged', chainIdDeğişti);
-
-  s1b.onclick = cüzdanBağla;
-
-  ethereum.request(/** @type {RequestParams} */({
-    method: "eth_accounts"
-  })).then(
-    (accounts) => { if (accounts.length > 0) return cüzdanBağla(); }
-  ).then(TCKTYarat);
-}
-
-function chainIdDeğişti(chainId) {
-  if (chainId != ChainId) {
-    if(ChainId) dom.adla("nc:"+ ChainId).style.display = "flex";
-    dom.adla("nc:"+ chainId).style.display = "none";
-    dom.adla("nc:i").src = dom.adla("nc:"+ chainId).firstElementChild.src;
-    ChainId = chainId;
-  }
-}
-
-function hesapAdresiDeğişti(adresler) {
-  if (adresler.length == 0) {
-    HesapAdresi = null;
-  } else if (adresler[0] != HesapAdresi) {
-    HesapAdresi = adresler[0];
-    nw.innerText = hızlıArabirimAdı(HesapAdresi);
-    nihaiArabirimAdı(HesapAdresi).then((ad) => nw.innerText = ad);
-  }
-}
-
-/**
- * Verilen bir EVM adresini UI'da hızlıca göstermeye uygun hale getirir.
- * 
- * @param {string} hesap EVM adresi.
- * @return {string} Arabirimde gösterilecek isim. EVM adresinin kısaltılmış
- *                  hali.
- */
-function hızlıArabirimAdı(hesap) {
-  return hesap.slice(0, 6) + "..." + hesap.slice(-4);
-}
-
-/**
- * @param {string} hesap EVM adresi.
- * @return {Promise<string>} Arabirimde gösterilecek isim. EVM adresinin
- *                           kısaltılmış hali veya ENS / avvy domains adı.
- */
-async function nihaiArabirimAdı(hesap) {
-  // TODO(KimlikDAO-bot): ENS lookup, avvy domains lookup
-  await new Promise(resolve => setTimeout(resolve, 1000));
-  return "hot.kimlikdao.eth";
-}
-
-async function cüzdanBağla() {
-  try {
-    const hesaplar = await ethereum.request(/** @type {RequestParams} */({
-      method: "eth_requestAccounts",
-    }));
-    ethereum.request(/** @type {RequestParams} */({
-      method: "eth_chainId"
-    })).then(chainIdDeğişti);
-    await hesapAdresiDeğişti(hesaplar);
-    const button = dom.adla("nc");
-    button.onclick = () => {
-      const content = dom.adla("nc:w");
-      content.classList.remove("invisible");
-      const backdrop = dom.adla("nc:bd");
-      backdrop.onclick = () => content.classList.add("invisible")
-    };
-    const ul = dom.adla("nc:d");
-    ul.onclick = (event) => {
-      const content = dom.adla("nc:w");
-      content.classList.add("invisible");
-      let li = event.target;
-      if (event.target.nodeName != "LI") li = event.target.parentElement;
-      const newChainId = li.id.slice(3);
-      try {
-        ethereum.request(/** @type {RequestParams} */({
-          method: "wallet_switchEthereumChain",
-          params: [{ "chainId": newChainId }],
-        }));
-      } catch (e) { console.log(e) }
-    }
-    s1b.innerText += "ndı 👍";
-    s1b.onclick = null;
-    s1b.disabled = true;
-    s1a.style.display = "none";
-    dom.adla("s1").classList.add("done");
-    s1b.classList.add("disabled");
-    dom.adla("s2").classList.remove("disabled");
-    s2a.classList.remove("disabled");
-  } catch (e) {
-    console.log("kalbini kirarim");
-  }
-}
 
 /**
  * Verilen bir `hesap` için `rasgele` bitdizisi ile kriptografik taahhüt
@@ -156,26 +38,27 @@ async function taahhütOluştur(hesap, rasgele) {
   return crypto.subtle.digest("SHA-256", concat).then(base64);
 }
 
-async function TCKTYarat() {
+function TCKTYarat() {
   if (!location.search) return;
-
   /**
    * Pedersen taahhüdü için rasgele bitdizisi.
    * @type {!Uint8Array}
    */
   let Rasgele = new Uint8Array(32);
-
   crypto.getRandomValues(Rasgele);
+
   /** @type {URLSearchParams} */
   const params = new URLSearchParams(location.search);
   /** @type {?string} */
   const code = params.get("code");
   history.replaceState(null, "", location.pathname);
 
+  const s3a = dom.adla("s3a");
   dom.adla("s3").classList.remove("disabled");
   s3a.classList.remove("disabled");
 
-  const açıkTCKTSözü = taahhütOluştur(/** @type {string} */(HesapAdresi), Rasgele)
+  const açıkTCKTSözü = taahhütOluştur(
+    /** @type {string} */(Cüzdan.adres()), Rasgele)
     .then((taahhüt) =>
       fetch(KIMLIK_AS_URL + "?" + new URLSearchParams({ "oauth_code": code, "taahhüt": taahhüt })))
     .then((res) => res.json())
@@ -196,10 +79,10 @@ async function TCKTYarat() {
       return JSON.stringify(TCKT);
     });
 
-  s3a.onclick = async () => {
+  s3a.onclick = () => {
     const açıkAnahtarSözü = ethereum.request(/** @type {RequestParams} */({
       method: "eth_getEncryptionPublicKey",
-      params: [HesapAdresi],
+      params: [Cüzdan.adres()],
     })).then((pubKey) => {
       s3a.onclick = null;
       s3a.innerText = "Açık anahtarınızı aldık 👍";
@@ -237,7 +120,7 @@ async function TCKTYarat() {
             ciphertext: ciphertext
           }
         }
-        return ipfs.yaz(JSON.stringify(TCKT));
+        return ipfs.yaz(JSON.stringify(TCKT)).then(hex);
       })
       .catch((e) => console.log(e + "TCKT oluşturamadık: Kullanıcı reddetti veya IPFS hatası"));
 
@@ -253,7 +136,7 @@ async function TCKTYarat() {
  * @param {Object<string, number>} adresAğırlığı (adres, ağırlık) ikilileri.
  * @param {number} eşik imece iptal için gereken oy eşiği.
  */
-async function öde(cidSözü, adresAğırlığı, eşik) {
+function öde(cidSözü, adresAğırlığı, eşik) {
   dom.adla("s5").classList.remove("disabled");
 
   /** @type {?string} */
@@ -267,24 +150,41 @@ async function öde(cidSözü, adresAğırlığı, eşik) {
     }
   }
 
-  s5a.onclick = async () => {
-    /** @type {string} */
-    const cid = hex(await cidSözü);
-    /** @type {Transaction} */
-    const tx = /** @type {Transaction} */({
-      to: "0xcCc0F938A2C94b0fFBa49F257902Be7F56E62cCc",
-      from: /** @type {string} */(HesapAdresi),
-      value: "0x16345785D8A0000",
-      data: iptalData ? "0x964cefc3" + cid + iptalData : "0x780900dc" + cid,
-      chainId: /** @type {string} */(ChainId),
-    });
-    try {
-      await ethereum.request(/** @type {RequestParams} */({
+  dom.adla("s5a").onclick = () => {
+    cidSözü.then((cid) => {
+      /** @type {Transaction} */
+      const tx = /** @type {Transaction} */({
+        to: "0xcCc0F938A2C94b0fFBa49F257902Be7F56E62cCc",
+        from: /** @type {string} */(Cüzdan.adres()),
+        value: "0x16345785D8A0000",
+        data: iptalData ? "0x964cefc3" + cid + iptalData : "0x780900dc" + cid,
+        chainId: /** @type {string} */(Cüzdan.ağ()),
+      });
+
+      ethereum.request(/** @type {RequestParams} */({
         method: "eth_sendTransaction",
         params: [tx]
-      }));
-    } catch (e) {
-      console.log(e);
-    }
+      })).catch((e) => console.log(e));
+    });
   };
+}
+
+if (ethereum) {
+  s1b.onclick = Cüzdan.bağla;
+
+  Cüzdan.bağlanınca(() => {
+    const s1a = dom.adla("s1a");
+    const s1b = dom.adla("s1b");
+    const s2a = dom.adla("s2a");
+    s1b.innerText += "ndı 👍";
+    s1b.onclick = null;
+    s1b.disabled = true;
+    s1a.style.display = "none";
+    dom.adla("s1").classList.add("done");
+    s1b.classList.add("disabled");
+    dom.adla("s2").classList.remove("disabled");
+    s2a.classList.remove("disabled");
+
+    TCKTYarat();
+  });
 }
