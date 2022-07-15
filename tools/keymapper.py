@@ -33,12 +33,15 @@ def inlines(file):
     kvs = {}
     for k, v in (l.rsplit('->', 1) for l in file):
         k = k.strip()
-        v = open(v.strip()).read()
+        v = v.strip()
+        v = "" if v == 'erase' else open(v).read()
         if k.startswith('js:'):
             k = f'<script src="{k[3:]}">'
             v = '<script>' + v
         elif k.startswith('svg:'):
             k = f'<img src="{k[4:]}">'
+        elif k.startswith('css:'):
+            k = f'<link href="{k[4:]}" rel="stylesheet" type="text/css" />'
         kvs[k] = v
     return kvs
 

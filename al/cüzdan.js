@@ -4,7 +4,7 @@ import dom from "/lib/dom";
 let Adres = null;
 /** @type {string} */
 let Ağ = "0xa86a";
-/** @type {function()} */
+/** @type {?function()} */
 let F = null;
 
 /** @type {Element} */
@@ -16,7 +16,6 @@ const AğButonu = dom.adla("nc");
 const ağ = () => Ağ;
 /** @type {function():?string} */
 const adres = () => Adres;
-/** @type {Promise<()>} */
 
 /**
  * Verilen bir EVM adresini UI'da hızlıca göstermeye uygun hale getirir.
@@ -39,6 +38,9 @@ async function nihaiArabirimAdı(hesap) {
   return new Promise((resolve) => setTimeout(resolve("hot.kimlikdao.eth"), 1000));
 }
 
+/**
+ * @param {string} yeniAğ harf dizisi olarak yeni ağ adı.
+ */
 function ağDeğişti(yeniAğ) {
   console.log("Ağ değişti: " + yeniAğ);
   if (yeniAğ != Ağ) {
@@ -49,6 +51,9 @@ function ağDeğişti(yeniAğ) {
   }
 }
 
+/**
+ * @param {Array<string>} adresler cüzdandan gelen adresler dizisi.
+ */
 function adresDeğişti(adresler) {
   console.log("Adres değişti: " + adresler);
 
@@ -75,21 +80,15 @@ function bağlanınca(f) {
 function bağla() {
   ethereum
     .request(
-      /** @type {RequestParams} */({
-        method: "eth_requestAccounts",
-      })
-    )
+      /** @type {RequestParams} */({ method: "eth_requestAccounts" }))
     .then(adresDeğişti)
     .catch((e) => console.log(e));
 
   ethereum
     .request(
-      /** @type {RequestParams} */({
-        method: "eth_chainId",
-      })
-    )
+      /** @type {RequestParams} */({ method: "eth_chainId" }))
     .then(ağDeğişti)
-    .catch((e) => console.log("Ağ" + e));
+    .catch((e) => console.log("Ağ alınamadı" + e));
 }
 
 if (ethereum) {

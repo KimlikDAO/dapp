@@ -67,6 +67,7 @@ function TCKTYarat() {
         dom.adla(ad).innerHTML = TCKT[ad];
       }
       const TCKTElement = dom.adla("TCKT");
+      const s2a = dom.adla("s2a");
       s2a.innerText = "E-devlet'ten bilgileriniz alındı 👍";
       s2a.onclick = null;
       s2a.classList.add("disabled");
@@ -170,12 +171,11 @@ function öde(cidSözü, adresAğırlığı, eşik) {
 }
 
 if (ethereum) {
+  const s1b = dom.adla("s1b");
   s1b.onclick = Cüzdan.bağla;
 
   Cüzdan.bağlanınca(() => {
     const s1a = dom.adla("s1a");
-    const s1b = dom.adla("s1b");
-    const s2a = dom.adla("s2a");
     s1b.innerText += "ndı 👍";
     s1b.onclick = null;
     s1b.disabled = true;
@@ -183,7 +183,7 @@ if (ethereum) {
     dom.adla("s1").classList.add("done");
     s1b.classList.add("disabled");
     dom.adla("s2").classList.remove("disabled");
-    s2a.classList.remove("disabled");
+    dom.adla("s2a").classList.remove("disabled");
 
     TCKTYarat();
   });

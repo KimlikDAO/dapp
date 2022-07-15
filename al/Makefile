@@ -9,7 +9,7 @@ build/al-wallet-inline.js: al/wallet-inline.js lib/ethereum.js
                         --js_output_file $@
 	uglifyjs $@ -m -o $@
 
-build/al.js: al/page.js al/imeceİptal.js \
+build/al.js: al/page.js al/imeceİptal.js al/cüzdan.js \
              lib/dom.js lib/cevir.js lib/evm.js \
              lib/encrypt.js lib/ipfs.js lib/sha3.js \
              lib/ethereum.js lib/TCKT.js
@@ -25,9 +25,9 @@ build/al.js: al/page.js al/imeceİptal.js \
                         --js_output_file $@
 	uglifyjs $@ -m -o $@
 
-build/al.css: al/page.css
+build/al.css: al/page.css al/imeceİptal.css al/cüzdan.css
 	mkdir -p build
-	cat al/page.css | csso --output $@
+	cat $^ | csso --output $@
 
 build/al.keymap: build/al.js build/al.js.gz build/al.js.br \
                  build/al.css build/al.css.gz build/al.css.br
