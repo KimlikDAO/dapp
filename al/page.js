@@ -35,41 +35,29 @@ let HesapAdresi = null;
  */
 let ChainId = null;
 
-/**
- * Pedersen taahhüdü için rasgele bitdizisi.
- * @type {!Uint8Array}
- */
-let Rasgele = new Uint8Array(32);
+if (ethereum) {
+  ethereum.on('accountsChanged', hesapAdresiDeğişti);
+  ethereum.on('chainChanged', chainIdDeğişti);
 
-async function giriş() {
-  if (ethereum) {
-    ethereum.on('accountsChanged', hesapAdresiDeğişti);
-    ethereum.on('chainChanged', chainIdDeğişti);
+  s1b.onclick = cüzdanBağla;
 
-    s1b.onclick = cüzdanBağla;
-
-    await ethereum.request(/** @type {RequestParams} */({
-      method: "eth_accounts"
-    })).then(
-      (accounts) => { if (accounts.length > 0) return cüzdanBağla(); }
-    );
-  }
-
-  await TCKTYarat();
+  ethereum.request(/** @type {RequestParams} */({
+    method: "eth_accounts"
+  })).then(
+    (accounts) => { if (accounts.length > 0) return cüzdanBağla(); }
+  ).then(TCKTYarat);
 }
 
-giriş();
-
-async function chainIdDeğişti(chainId) {
+function chainIdDeğişti(chainId) {
   if (chainId != ChainId) {
-    if(ChainId) dom.adla("nc:"+ ChainId).style.display = "flex";
-    dom.adla("nc:"+ chainId).style.display = "none";
-    dom.adla("nc:i").src = dom.adla("ci:"+ chainId).src;
+    if (ChainId) dom.adla("nc:" + ChainId).style.display = "flex";
+    dom.adla("nc:" + chainId).style.display = "none";
+    dom.adla("nc:i").src = dom.adla("ci:" + chainId).src;
     ChainId = chainId;
   }
 }
 
-async function hesapAdresiDeğişti(adresler) {
+function hesapAdresiDeğişti(adresler) {
   if (adresler.length == 0) {
     HesapAdresi = null;
   } else if (adresler[0] != HesapAdresi) {
@@ -122,7 +110,7 @@ async function cüzdanBağla() {
       const content = dom.adla("nc:w");
       content.classList.remove("show");
       try {
-          ethereum.request(/** @type {RequestParams} */({
+        ethereum.request(/** @type {RequestParams} */({
           method: "wallet_switchEthereumChain",
           params: [{ "chainId": event.target.id.slice(3) }],
         }));
@@ -165,6 +153,12 @@ async function taahhütOluştur(hesap, rasgele) {
 
 async function TCKTYarat() {
   if (!location.search || !ethereum) return;
+
+  /**
+   * Pedersen taahhüdü için rasgele bitdizisi.
+   * @type {!Uint8Array}
+   */
+  let Rasgele = new Uint8Array(32);
 
   crypto.getRandomValues(Rasgele);
   /** @type {URLSearchParams} */
