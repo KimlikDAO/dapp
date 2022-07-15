@@ -57,7 +57,7 @@ function chainIdDeğişti(chainId) {
   if (chainId != ChainId) {
     if(ChainId) dom.adla("nc:"+ ChainId).style.display = "flex";
     dom.adla("nc:"+ chainId).style.display = "none";
-    dom.adla("nc:i").src = dom.adla("nc:i"+ chainId).src;
+    dom.adla("nc:i").src = dom.adla("nc:"+ chainId).firstElementChild.src;
     ChainId = chainId;
   }
 }
