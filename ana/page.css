@@ -5,6 +5,11 @@ html {
   font-family: -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
+h1 {
+  padding: 3px;
+  margin: 10px;
+}
+
 .invisible {
   display: none;
 }
@@ -50,10 +55,10 @@ h1 {
 }
 
 button {
-  border: 3px solid #666;
+  border: 1px solid #333;
+  min-height: 48px;
   border-radius: 5px;
-  padding: 0.8em;
-  font-size: 13pt;
+  font-size: 12pt;
   cursor: pointer;
 }
 

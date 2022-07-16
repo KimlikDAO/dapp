@@ -3,13 +3,19 @@
     cursor: pointer;
 }
 
-.chain-button {
-    min-height: 54px;
-    min-width: 54px;
-    padding: 2px 0 0 0;
+#nc {
+    min-width: 48px;
+    padding-top: 4px;
+    border-radius: 6px 0 0 6px;
 }
 
-.dropdown-content {
+#na {
+    margin-left:-5px;
+    border-left: 0;
+    border-radius: 0 6px 6px 0;
+}
+
+#ncd {
     margin: 5px 0;
     padding: 0;
     width: 215px;
@@ -27,7 +33,7 @@
     z-index: 1;
 }
 
-.dropdown-content li {
+#ncd li {
     height: 45px;
     margin: 5px;
     padding: 5px 13px;
@@ -36,11 +42,11 @@
     justify-content: left;
 }
 
-.dropdown-content li:hover {
+#ncd li:hover {
     background-color: #f2f2f2;
 }
 
-.dropdown-content li.sel {
+#ncd li.sel {
     background-color: #eee;
 }
 

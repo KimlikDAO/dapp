@@ -47,9 +47,9 @@ function ağDeğişti(yeniAğ) {
   console.log("Ağ değişti: " + yeniAğ);
 
   if (yeniAğ != Ağ) {
-    dom.adla("nc:" + Ağ).classList.remove("sel");
-    dom.adla("nc:" + yeniAğ).classList.add("sel");
-    dom.adla("nc:i").src = dom.adla("nc:" + yeniAğ).firstElementChild.src;
+    dom.adla("nc" + Ağ).classList.remove("sel");
+    dom.adla("nc" + yeniAğ).classList.add("sel");
+    dom.adla("nci").src = dom.adla("nc" + yeniAğ).firstElementChild.src;
     Ağ = yeniAğ;
   }
 }
@@ -104,18 +104,18 @@ if (window["ethereum"]) {
   ethereum.on("chainChanged", ağDeğişti);
 
   dom.adla("nc").onclick = () => {
-    const content = dom.adla("nc:w");
+    const content = dom.adla("ncw");
     content.classList.remove("invisible");
-    const backdrop = dom.adla("nc:bd");
+    const backdrop = dom.adla("ncbd");
     backdrop.onclick = () => content.classList.add("invisible")
   };
 
-  dom.adla("nc:d").onclick = (event) => {
-    const content = dom.adla("nc:w");
+  dom.adla("ncd").onclick = (event) => {
+    const content = dom.adla("ncw");
     content.classList.add("invisible");
     let li = event.target;
     if (event.target.nodeName != "LI") li = event.target.parentElement;
-    const newChainId = li.id.slice(3);
+    const newChainId = li.id.slice(2);
     ethereum.request(/** @type {RequestParams} */({
       method: "wallet_switchEthereumChain",
       params: [{ "chainId": newChainId }],
