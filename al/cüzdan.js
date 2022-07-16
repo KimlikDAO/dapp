@@ -104,21 +104,29 @@ if (window["ethereum"]) {
   ethereum.on("chainChanged", ağDeğişti);
 
   dom.adla("nc").onclick = () => {
-    const content = dom.adla("ncw");
-    content.classList.remove("invisible");
+    const menu = dom.adla("ncw");
+    menu.style.display = "block";
     const backdrop = dom.adla("ncbd");
-    backdrop.onclick = () => content.classList.add("invisible")
+    backdrop.onclick = () => menu.style.display = "none";
+  };
+
+  dom.adla("na").onclick = () => {
+    const menu = dom.adla("naw");
+    menu.style.display = "block";
+    const backdrop = dom.adla("nabd");
+    backdrop.onclick = () => menu.style.display = "none";
   };
 
   dom.adla("ncd").onclick = (event) => {
-    const content = dom.adla("ncw");
-    content.classList.add("invisible");
+    dom.adla("ncw").style.display = "none";
     let li = event.target;
     if (event.target.nodeName != "LI") li = event.target.parentElement;
-    const newChainId = li.id.slice(2);
+    if (!li.id.startsWith("nc0x")) return;
+    const ağ = li.id.slice(2);
+    console.log(ağ);
     ethereum.request(/** @type {RequestParams} */({
       method: "wallet_switchEthereumChain",
-      params: [{ "chainId": newChainId }],
+      params: [{ "chainId": ağ }],
     })).catch((e) => console.log(e))
   }
 

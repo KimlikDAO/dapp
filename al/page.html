@@ -20,11 +20,11 @@
         </a>
         <!-- navigation buttons -->
         <div id=nb>
-            <div class="dropdown">
+            <div class="ncdd">
                 <button id=nc><img id="nci" src="/al/img/avalanche.svg" width="32px" height="32px"></button>
-                <div id="ncw" class="invisible">
+                <div id="ncw" style="display:none">
                     <div id="ncbd" class="backdrop"></div>
-                    <ul id=ncd class="dropdown-content">
+                    <ul id=ncd>
                         <li id="nc0x1"><img src="/al/img/ethereum.svg" width="32px" height="32px"> Ethereum</li>
                         <li class="sel" id="nc0xa86a"><img src="/al/img/avalanche.svg" width="32px" height="32px"> Avalanche</li>
                         <li id="nc0x89"><img src="/al/img/polygon.svg" width="32px" height="32px"> Polygon</li>
@@ -33,7 +33,16 @@
                     </ul>
                 </div>
             </div>
-            <button id=na>Bağlı değil</button>
+            <div class="ncdd">
+                <button id=na>Bağlı değil</button>
+                <div id="naw" style="display:none">
+                    <div id="nabd" class="backdrop"></div>
+                    <ul id="nad">
+                        <li>Explorer'da görüntüle</li>
+                        <li>Cüzdanı kapat</li>
+                    </ul>
+                </div>
+            </div>
             <!-- naviation language -->
             <button id=nl>Türkçe</button>
         </div>

@@ -1,11 +1,11 @@
-.dropdown {
+.ncdd {
     position: relative;
     cursor: pointer;
 }
 
 #nc {
     min-width: 48px;
-    padding-top: 4px;
+    padding-top: 5px;
     border-radius: 6px 0 0 6px;
 }
 
@@ -15,7 +15,7 @@
     border-radius: 0 6px 6px 0;
 }
 
-#ncd {
+#ncd, #nad {
     margin: 5px 0;
     padding: 0;
     width: 215px;
@@ -33,16 +33,16 @@
     z-index: 1;
 }
 
-#ncd li {
+#ncd li, #nad li {
     height: 45px;
-    margin: 5px;
-    padding: 5px 13px;
+    margin: 1px;
+    padding: 6px 13px;
     display: flex;
     align-items: center;
     justify-content: left;
 }
 
-#ncd li:hover {
+#ncd li:hover, #nad li:hover {
     background-color: #f2f2f2;
 }
 
