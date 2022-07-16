@@ -20,7 +20,7 @@
     display: block;
     position: absolute;
     top: 50px;
-    right: 0;
+    left: -10px;
     animation: growDown 300ms ease-in-out forwards;
     transform-origin: top center;
     list-style: none;
@@ -39,7 +39,6 @@
 .dropdown-content li:hover {
     background-color: #f2f2f2;
 }
-
 
 .backdrop {
     display: block;

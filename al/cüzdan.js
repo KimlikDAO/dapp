@@ -43,6 +43,7 @@ async function nihaiArabirimAdı(hesap) {
  */
 function ağDeğişti(yeniAğ) {
   console.log("Ağ değişti: " + yeniAğ);
+
   if (yeniAğ != Ağ) {
     dom.adla("nc:" + Ağ).style.display = "flex";
     dom.adla("nc:" + yeniAğ).style.display = "none";
@@ -116,8 +117,14 @@ if (ethereum) {
 
   ethereum.request(/** @type {RequestParams} */({ method: "eth_accounts" }))
     .then((accounts) => {
-      if (accounts.length > 0)
+      if (accounts.length > 0) {
         adresDeğişti(accounts);
+        ethereum
+          .request(
+          /** @type {RequestParams} */({ method: "eth_chainId" }))
+          .then(ağDeğişti)
+          .catch((e) => console.log("Ağ alınamadı" + e));
+      }
     });
 }
 

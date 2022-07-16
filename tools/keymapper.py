@@ -34,7 +34,7 @@ def inlines(file):
     for k, v in (l.rsplit('->', 1) for l in file):
         k = k.strip()
         v = v.strip()
-        v = "" if v == 'erase' else open(v).read()
+        v = "" if v == 'cmd:erase' else open(v).read()
         if k.startswith('js:'):
             k = f'<script src="{k[3:]}">'
             v = '<script>' + v
