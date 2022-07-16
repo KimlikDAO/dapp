@@ -40,6 +40,10 @@
     background-color: #f2f2f2;
 }
 
+.dropdown-content li.sel {
+    background-color: #eee;
+}
+
 .backdrop {
     display: block;
     position: fixed;

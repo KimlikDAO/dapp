@@ -170,21 +170,27 @@ function öde(cidSözü, adresAğırlığı, eşik) {
   };
 }
 
-if (ethereum) {
+if (window["ethereum"]) {
   const s1b = dom.adla("s1b");
   s1b.onclick = Cüzdan.bağla;
 
   Cüzdan.bağlanınca(() => {
+    console.log("Bağlandi")
     const s1a = dom.adla("s1a");
     s1b.innerText += "ndı 👍";
     s1b.onclick = null;
     s1b.disabled = true;
+    s1b.classList.add("disabled");
+
     s1a.style.display = "none";
     dom.adla("s1").classList.add("done");
-    s1b.classList.add("disabled");
     dom.adla("s2").classList.remove("disabled");
     dom.adla("s2a").classList.remove("disabled");
 
     TCKTYarat();
+  });
+
+  Cüzdan.kopunca(() => {
+    location.reload();
   });
 }

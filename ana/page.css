@@ -5,6 +5,10 @@ html {
   font-family: -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
+.invisible {
+  display: none;
+}
+
 a {
   text-decoration: none;
   color: #000;
@@ -62,7 +66,7 @@ button.act {
 #n {
   display: flex;
   width: 100%;
-  margin: 8px auto;
+  margin: 0 auto;
   justify-content: space-between;
   max-width: 1200px;
 }

@@ -1,8 +1,4 @@
 
-.invisible {
-    display: none;
-}
-
 .form-wrapper {
     animation: growDown 300ms ease-in-out forwards;
     transform-origin: top center;
