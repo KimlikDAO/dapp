@@ -34,7 +34,7 @@ function göster(sonra) {
   dom.adla("iibe").onclick = girdiAlanıEkle;
   dom.adla("iibc").onclick = girdiAlanıÇıkar;
   dom.adla("iit").onblur = eşikDeğeriBlurOlunca;
-  dom.adla("s4e").onclick = async () => {
+  dom.adla("s4e").onclick = () => {
     /** @type {!Object<string, number>} */
     let adresAğırlığı = {};
     /** @type {boolean} */
@@ -74,7 +74,7 @@ function göster(sonra) {
   };
 }
 
-async function girdiAlanıEkle() {
+function girdiAlanıEkle() {
   const div = document.createElement("div");
   const input1 = document.createElement("input");
   const input2 = document.createElement("input");
