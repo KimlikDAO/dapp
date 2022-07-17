@@ -19,6 +19,15 @@ const ağ = () => Ağ;
 /** @type {function():?string} */
 const adres = () => Adres;
 
+/** @type {object} */
+const adresLinki = {
+  "0x1": "etherscan.io",
+  "0xa86a": "snowtrace.io",
+  "0x89": "polygonscan.com",
+  "0xa4b1": "arbiscan.io",
+  "0xfa": "ftmscan.com",
+}
+
 /**
  * Verilen bir EVM adresini UI'da hızlıca göstermeye uygun hale getirir.
  *
@@ -129,6 +138,20 @@ if (window["ethereum"]) {
       params: [{ "chainId": ağ }],
     })).catch((e) => console.log(e))
   }
+
+  dom.adla("nad1").onclick = () => {
+    navigator.clipboard.writeText(Adres);
+  }
+
+  dom.adla("nad2").onclick = () => {
+    const url = "https://" + adresLinki[Ağ] + "/address/" + Adres;
+    window.open(url, "_blank");
+  }
+
+  dom.adla("nad").onclick = () => {
+    dom.adla("naw").style.display = "none";
+  }
+
 
   ethereum
     .request(/** @type {RequestParams} */({ method: "eth_chainId" }))

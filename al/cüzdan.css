@@ -30,7 +30,7 @@
     animation: growDown 300ms ease-in-out forwards;
     transform-origin: top center;
     list-style: none;
-    z-index: 1;
+    z-index: 2;
 }
 
 #ncd li, #nad li {
@@ -53,7 +53,7 @@
 .backdrop {
     display: block;
     position: fixed;
-    z-index: 0.9;
+    z-index: 1;
     left: 0;
     top: 0;
     width: 100vw;
