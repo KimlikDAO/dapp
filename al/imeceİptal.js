@@ -1,3 +1,7 @@
+/**
+ * @fileoverview İmece iptal parçası. DOM'da `ii` öneki bu parçaya ayrılmıştır.
+ */
+
 import dom from "/lib/dom";
 import evm from "/lib/evm";
 
@@ -7,25 +11,29 @@ import evm from "/lib/evm";
  */
 let InputIdSayaç = 3;
 
-async function imeceİptalKur() {
-  return [{}, 0];
-
-  // dom.adla("s4a").onclick = async () => göster();
-  /*dom.adla("s4b").onclick = async () => {
-    dom.adla("s4b").innerText = "İmece iptal kurulmadı 🤌";
-    dom.adla("sr").classList.add("invisible");
-    ödemeAdımınaGeç(cidSözü);
-  }*/
-
-  dom.adla("sr").classList.remove("invisible");
-
-  for (let /** number */ i = 0; i < InputIdSayaç; ++i) {
-    dom.adla("sr:a" + i).onblur = adresBlurOlunca;
-    dom.adla("sr:w" + i).onblur = ağırlıkHesapla;
+/**
+ * İmece iptal kurulumunu yapar ve verilmiş callback fonksiyonunu çağırır.
+ * 
+ * @param {function(Object<string,number>,number)} sonra
+ */
+function imeceİptalKurVe(sonra) {
+  dom.adla("iibg").onclick = () => göster(sonra);
+  dom.adla("iibi").onclick = () => {
+    dom.adla("iibi").innerText = "İmece iptal kurulmadı 🤌";
+    dom.adla("ii").classList.add("invisible");
+    sonra({}, 0);
   }
-  dom.adla("s4c").onclick = girdiAlanıEkle;
-  dom.adla("s4d").onclick = girdiAlanıÇıkar;
-  dom.adla("sr:t").onblur = eşikDeğeriBlurOlunca;
+}
+
+function göster(sonra) {
+  dom.adla("ii").classList.remove("invisible");
+  for (let /** number */ i = 0; i < InputIdSayaç; ++i) {
+    dom.adla("iia" + i).onblur = adresBlurOlunca;
+    dom.adla("iiw" + i).onblur = ağırlıkHesapla;
+  }
+  dom.adla("iibe").onclick = girdiAlanıEkle;
+  dom.adla("iibc").onclick = girdiAlanıÇıkar;
+  dom.adla("iit").onblur = eşikDeğeriBlurOlunca;
   dom.adla("s4e").onclick = async () => {
     /** @type {!Object<string, number>} */
     let adresAğırlığı = {};
@@ -35,34 +43,34 @@ async function imeceİptalKur() {
     let toplamAğırlık = 0;
 
     for (let /** number */ i = 0; i < InputIdSayaç; ++i) {
-      const adres = dom.adla("sr:a" + i).value;
+      const adres = dom.adla("iia" + i).value;
       if (!evm.adresGeçerli(adres) || adres in adresAğırlığı) {
         geçerli = false;
         console.log("hatalı girdi", i);
         // TODO(MuhammetCoskun): hata bildir kırmızi vs.
       }
       /** @type {number} */
-      const ağırlık = parseInt(dom.adla("sr:w" + i).value);
+      const ağırlık = parseInt(dom.adla("iiw" + i).value);
       adresAğırlığı[adres] = ağırlık;
       toplamAğırlık += ağırlık;
     }
     /** @type {number} */
-    const eşikDeğeri = parseInt(dom.adla("sr:t").value);
+    const eşikDeğeri = parseInt(dom.adla("iit").value);
     if (toplamAğırlık < eşikDeğeri) {
       geçerli = false;
       // TODO(MuhammetCoskun): hata bildir
     }
     if (geçerli) {
-      dom.adla("s4a").innerHTML = "İmece iptal kuruldu 👍";
-      dom.adla("sr").classList.add("invisible");
+      dom.adla("iibi").innerHTML = "İmece iptal kuruldu 👍";
+      dom.adla("ii").classList.add("invisible");
       dom.adla("s4").classList.add("done");
-      dom.adla("s4b").style.display = "none";
-      dom.adla("s4a").onclick = null;
-      //ödemeAdımınaGeç(cidSözü, adresAğırlığı, eşikDeğeri);
+      dom.adla("iibi").style.display = "none";
+      dom.adla("iibg").onclick = null;
+      sonra(adresAğırlığı, eşikDeğeri);
     }
   };
   dom.adla("s4f").onclick = () => {
-    dom.adla("sr").classList.add("invisible");
+    dom.adla("ii").classList.add("invisible");
   };
 }
 
@@ -70,20 +78,20 @@ async function girdiAlanıEkle() {
   const div = document.createElement("div");
   const input1 = document.createElement("input");
   const input2 = document.createElement("input");
-  div.id = "sr:c" + InputIdSayaç;
+  div.id = "iic" + InputIdSayaç;
   div.classList.add("container");
-  input1.id = "sr:a" + InputIdSayaç;
+  input1.id = "iia" + InputIdSayaç;
   input1.classList.add("address-input");
   input1.type = "text";
   input1.onblur = adresBlurOlunca;
-  input2.id = "sr:w" + InputIdSayaç;
+  input2.id = "iiw" + InputIdSayaç;
   input2.classList.add("weight-input");
   input2.type = "number";
   input2.onblur = ağırlıkHesapla;
   input2.value = 1;
   div.appendChild(input1);
   div.appendChild(input2);
-  dom.adla("sr:f").insertBefore(div, dom.adla("br"));
+  dom.adla("iif").insertBefore(div, dom.adla("br"));
   InputIdSayaç += 1;
   ağırlıkHesapla();
   console.log("clicked +")
@@ -91,13 +99,13 @@ async function girdiAlanıEkle() {
 
 function girdiAlanıÇıkar() {
   InputIdSayaç -= 1;
-  dom.adla("sr:c" + InputIdSayaç).remove();
+  dom.adla("iic" + InputIdSayaç).remove();
   ağırlıkHesapla();
   console.log("clicked -")
 }
 
 function eşikDeğeriGecerliMi(değer) {
-  const toplamAğırlık = dom.adla("sr:s").value;
+  const toplamAğırlık = dom.adla("iis").value;
   return toplamAğırlık >= değer;
 }
 
@@ -115,9 +123,9 @@ function ağırlıkHesapla() {
   /** @type {number} */
   let total = 0;
   for (let /** number */ i = 0; i < InputIdSayaç; ++i) {
-    total += parseInt(dom.adla("sr:w" + i).value);
+    total += parseInt(dom.adla("iiw" + i).value);
   }
-  dom.adla("sr:s").value = total;
+  dom.adla("iis").value = total;
 }
 
-export { imeceİptalKur };
+export { imeceİptalKurVe };
