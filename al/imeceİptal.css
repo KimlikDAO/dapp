@@ -24,13 +24,13 @@
     border: 2.4px solid #4c5094;
 }
 
-.labels {
+.imlbl {
     display: flex;
     justify-content: space-between;
-    margin: 2em 0.1em 0.8em 0;
+    margin: 1em 0.1em 0.8em 0;
 }
 
-.container {
+.imcont {
     display: flex;
     justify-content: space-between;
     margin: 0.8em auto;
@@ -38,6 +38,7 @@
 
 .address-input {
     width: 85%;
+    font-family: monospace;
 }
 
 .weight-input {
