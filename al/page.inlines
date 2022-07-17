@@ -4,5 +4,7 @@ svg:/al/img/arbitrum.svg -> al/img/arbitrum.svg
 svg:/al/img/avalanche.svg -> al/img/avalanche.svg
 svg:/al/img/polygon.svg -> al/img/polygon.svg
 svg:/al/img/fantom.svg -> al/img/fantom.svg
+svg:/al/img/copy.svg -> al/img/copy.svg
+svg:/al/img/external-link.svg -> al/img/external-link.svg
 css:/al/cüzdan.css -> cmd:erase
 css:/al/imeceİptal.css -> cmd:erase
