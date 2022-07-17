@@ -144,6 +144,11 @@ if (window["ethereum"]) {
   }
 
   dom.adla("nad2").onclick = () => {
+    const url = "https://debank.com/profile/" + Adres;
+    window.open(url, "_blank");
+  }
+
+  dom.adla("nad3").onclick = () => {
     const url = "https://" + adresLinki[Ağ] + "/address/" + Adres;
     window.open(url, "_blank");
   }
