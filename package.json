@@ -13,12 +13,13 @@
     "test": "vitest"
   },
   "devDependencies": {
-    "@ipld/dag-pb": "latest",
-    "express": "latest",
-    "google-closure-compiler": "latest",
-    "ipfs-unixfs": "latest",
-    "multiformats": "latest",
-    "vite": "latest",
-    "vitest": "latest"
+    "@ipld/dag-pb": "^2.1.17",
+    "csso": "^5.0.4",
+    "express": "^4.18.1",
+    "google-closure-compiler": "^20220601.0.0",
+    "ipfs-unixfs": "^6.0.9",
+    "multiformats": "^9.7.0",
+    "vite": "^3.0.2",
+    "vitest": "^0.18.1"
   }
 }

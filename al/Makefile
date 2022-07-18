@@ -4,17 +4,17 @@ build/al.page: build/al build/al.gz build/al.br
 
 build/al-wallet-inline.js: al/wallet-inline.js lib/ethereum.js
 	mkdir -p build
-	google-closure-compiler -W VERBOSE -O ADVANCED --charset UTF-8 \
+	npx google-closure-compiler -W VERBOSE -O ADVANCED --charset UTF-8 \
                         --js $^ \
                         --js_output_file $@
-	uglifyjs $@ -m -o $@
+	npx uglifyjs $@ -m -o $@
 
 build/al.js: al/page.js al/imeceİptal.js al/cüzdan.js \
              lib/dom.js lib/cevir.js lib/evm.js \
              lib/encrypt.js lib/ipfs.js lib/sha3.js \
              lib/ethereum.js lib/TCKT.js
 	mkdir -p build
-	google-closure-compiler -W VERBOSE -O ADVANCED --charset UTF-8 \
+	npx google-closure-compiler -W VERBOSE -O ADVANCED --charset UTF-8 \
                         --emit_use_strict \
                         --module_resolution NODE \
                         --assume_function_wrapper \
@@ -23,11 +23,11 @@ build/al.js: al/page.js al/imeceİptal.js al/cüzdan.js \
                         --process_common_js_modules \
                         --js $^ \
                         --js_output_file $@
-	uglifyjs $@ -m -o $@
+	npx uglifyjs $@ -m -o $@
 
 build/al.css: al/page.css al/imeceİptal.css al/cüzdan.css
 	mkdir -p build
-	cat $^ | csso --output $@
+	cat $^ | npx csso --output $@
 
 build/al.keymap: build/al.js build/al.js.gz build/al.js.br \
                  build/al.css build/al.css.gz build/al.css.br

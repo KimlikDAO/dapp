@@ -21,10 +21,10 @@ cf-deployment: build
 
 build/serve.js: tools/serve.js tools/workers.js
 	mkdir -p build
-	google-closure-compiler -W VERBOSE -O ADVANCED --charset UTF-8 \
+	npx google-closure-compiler -W VERBOSE -O ADVANCED --charset UTF-8 \
 	                        --js $^ \
 	                        --js_output_file $@
-	uglifyjs $@ -m -o $@
+	npx uglifyjs $@ -m -o $@
 
 .PHONY: cf-deployment clean dev staging
 
