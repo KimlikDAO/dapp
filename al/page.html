@@ -74,41 +74,41 @@
                 <br><br>
                 <a href="javascript:" id="s3a" class="actbutton disabled">Cüzdanıma istek yolla</a>
             </div>
-            <div class="step disabled" id="s4">
-                <!-- im: imeceIptal -->
+            <!-- im: imeceIptal -->
+            <div class="step disabled" id="im">
                 <b>4. İmece iptal adresleri.</b>
                 Fiyatı $2'dan $1'a düşürmek için imece iptal adresleri eklemek istiyor musunuz?
                 <br><br>
                 <a href="javascript:" id="imbg" class="actbutton">Evet</a>
                 <a href="javascript:" id="imbi" class="actbutton">Hayır</a>
-                <div id="im" class="form-wrapper" style="display:none">
+                <div id="imc" style="display:none">
                     <div class="imlbl">
                         <b>Adres</b>
                         <b>Ağırlık</b>
                     </div>
-                    <div id="imf"><!--
-                        --><div id="imc0" class="imcont">
-                            <input id="ima0" class="address-input" type="text">
-                            <input id="imw0" class="weight-input" type="number" value="1">
-                        </div><!--
-                        --><div id="imc1" class="imcont">
-                            <input id="ima1" class="address-input" type="text">
-                            <input id="imw1" class="weight-input" type="number" value="1">
-                        </div><!--
-                        --><div id="imc2" class="imcont">
-                            <input id="ima2" class="address-input" type="text">
-                            <input id="imw2" class="weight-input" type="number" value="1">
-                        </div><!--
-                    --></div>
+                    <div id="imf">
+                        <div class="imcont">
+                            <input class="imai" type="text">
+                            <input class="imwi" type="number" value="1">
+                        </div>
+                        <div class="imcont">
+                            <input class="imai" type="text">
+                            <input class="imwi" type="number" value="1">
+                        </div>
+                        <div class="imcont">
+                            <input class="imai" type="text">
+                            <input class="imwi" type="number" value="1">
+                        </div>
+                    </div>
                     <br>
                     <a href="javascript:" id="imbe" class="actbutton">+</a>
                     <br>
                     <br>
                     <div class="imtb">
                         <label for="imt"><b>Eşik:</b></label>
-                        <input type="number" id="imt" class="weight-input" value="2">
+                        <input type="number" id="imt" class="imwi" value="2">
                         <label for="ims"><b>Toplam ağırlık:</b></label>
-                        <input type="number" id="ims" class="weight-input" readonly value="3">
+                        <input type="number" id="ims" class="imwi" readonly value="3">
                     </div>
                     <a href="javascript:" id="s4e" class="actbutton">Tamam</a>
                     <a href="javascript:" id="s4f" class="actbutton">İptal</a>

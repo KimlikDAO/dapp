@@ -89,7 +89,7 @@ function TCKTYarat() {
       s3a.innerText = "Açık anahtarınızı aldık 👍";
       s3a.classList.add("disabled");
       dom.adla("s3").classList.add("done");
-      dom.adla("s4").classList.remove("disabled");
+      dom.adla("im").classList.remove("disabled");
       return pubKey;
     });
 
