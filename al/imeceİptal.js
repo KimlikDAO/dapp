@@ -6,9 +6,9 @@ import dom from "/lib/dom";
 import evm from "/lib/evm";
 
 /** @const {Element} */
-const GösterButonu = dom.adla("imbg");
+const GösterButonu = dom.adla("imbe");
 /** @const {Element} */
-const İptalButonu = dom.adla("imbi");
+const İptalButonu = dom.adla("imbh");
 
 /**
  * İmece iptal kurulumunu yapar ve verilmiş callback fonksiyonunu çağırır.
@@ -32,10 +32,10 @@ function atla(sonra) {
 
 function göster(sonra) {
   dom.adla("imc").style.display = "block";
-  dom.adla("imbg").style.display = "none";
-  dom.adla("imbi").style.display = "none";
+  dom.adla("imbe").style.display = "none";
+  dom.adla("imbh").style.display = "none";
 
-  dom.adla("s4f").onclick = () => atla(sonra);
+  dom.adla("imbi").onclick = () => atla(sonra);
 
   /** @const {HTMLCollection} */
   const rows = dom.adla("imf").children;
@@ -43,9 +43,9 @@ function göster(sonra) {
     rows[i].firstElementChild.onblur = adresBlurOlunca;
     rows[i].lastElementChild.onblur = ağırlıkHesapla;
   }
-  dom.adla("imbe").onclick = girdiAlanıEkle;
+  dom.adla("imba").onclick = girdiAlanıEkle;
   dom.adla("imt").onblur = eşikDeğeriBlurOlunca;
-  dom.adla("s4e").onclick = () => {
+  dom.adla("imbt").onclick = () => {
     /** @type {!Object<string, number>} */
     let adresAğırlığı = {};
     /** @type {boolean} */
@@ -73,10 +73,10 @@ function göster(sonra) {
       // TODO(MuhammetCoskun): hata bildir
     }
     if (geçerli) {
-      dom.adla("imbi").innerText = "İmece iptal kuruldu 👍";
+      dom.adla("imbh").innerText = "İmece iptal kuruldu 👍";
       dom.adla("imc").classList.add("invisible");
-      dom.adla("s4").classList.add("done");
-      dom.adla("imbg").onclick = null;
+      dom.adla("im").classList.add("done");
+      dom.adla("imbe").onclick = null;
       adresAğırlığı["length"] = dom.adla("imf").childElementCount;
       sonra(adresAğırlığı, eşikDeğeri);
     }

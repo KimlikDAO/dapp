@@ -9,18 +9,18 @@ let Bağlanınca = null;
 /** @type {?function()} */
 let Kopunca = null;
 
-/** @type {Element} */
+/** @const {Element} */
 const AdresButonu = dom.adla("na");
-/** @type {Element} */
+/** @const {Element} */
 const AğButonu = dom.adla("nc");
 
-/** @type {function():string} */
+/** @const {function():string} */
 const ağ = () => Ağ;
-/** @type {function():?string} */
+/** @const {function():?string} */
 const adres = () => Adres;
 
-/** @type {object} */
-const adresLinki = {
+/** @const {Object<string,string>} */
+const AdresLinki = {
   "0x1": "etherscan.io",
   "0xa86a": "snowtrace.io",
   "0x89": "polygonscan.com",
@@ -64,7 +64,7 @@ function ağDeğişti(yeniAğ) {
 }
 
 /**
- * @param {Array<string>} adresler cüzdandan gelen adresler dizisi.
+ * @param {!Array<string>} adresler cüzdandan gelen adresler dizisi.
  */
 function adresDeğişti(adresler) {
   console.log("Adres değişti: " + adresler);
@@ -140,7 +140,7 @@ if (window["ethereum"]) {
   }
 
   dom.adla("nad1").onclick = () => {
-    navigator.clipboard.writeText(Adres);
+    navigator.clipboard.writeText(/** @type {string} */(Adres));
   }
 
   dom.adla("nad2").onclick = () => {
@@ -149,14 +149,13 @@ if (window["ethereum"]) {
   }
 
   dom.adla("nad3").onclick = () => {
-    const url = "https://" + adresLinki[Ağ] + "/address/" + Adres;
+    const url = "https://" + AdresLinki[Ağ] + "/address/" + Adres;
     window.open(url, "_blank");
   }
 
   dom.adla("nad").onclick = () => {
     dom.adla("naw").style.display = "none";
   }
-
 
   ethereum
     .request(/** @type {RequestParams} */({ method: "eth_chainId" }))
@@ -165,7 +164,7 @@ if (window["ethereum"]) {
 
   ethereum.request(/** @type {RequestParams} */({ method: "eth_accounts" }))
     .then((accounts) => {
-      if (accounts.length > 0) adresDeğişti(accounts);
+      if (accounts.length > 0) adresDeğişti(/** Array<string> */(accounts));
     });
 }
 
