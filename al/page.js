@@ -56,7 +56,7 @@ function TCKTYarat() {
   const s3a = dom.adla("s3a");
   dom.adla("s3").classList.remove("disabled");
   s3a.classList.remove("disabled");
-
+  dom.adla("nft").classList.add("flipped");
   const açıkTCKTSözü = taahhütOluştur(
     /** @type {string} */(Cüzdan.adres()), Rasgele)
     .then((taahhüt) =>
