@@ -42,6 +42,7 @@ body {
     width: 250px;
     height: 250px;
     margin-top: 2em;
+    perspective: 1000px;
 }
 
 .nft-container {
