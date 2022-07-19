@@ -56,7 +56,7 @@ function TCKTYarat() {
   const s3a = dom.adla("s3a");
   dom.adla("s3").classList.remove("disabled");
   s3a.classList.remove("disabled");
-  dom.adla("nft").classList.add("flipped");
+
   const açıkTCKTSözü = taahhütOluştur(
     /** @type {string} */(Cüzdan.adres()), Rasgele)
     .then((taahhüt) =>
@@ -64,9 +64,9 @@ function TCKTYarat() {
     .then((res) => res.json())
     .then((TCKT) => {
       for (let ad of "TCKN ad soyad dt".split(" ")) {
-        dom.adla(ad).innerHTML = TCKT[ad];
+        dom.adla(ad).innerText = TCKT[ad];
       }
-      const TCKTElement = dom.adla("TCKT");
+      dom.adla("nft").classList.add("flipped");
       const s2a = dom.adla("s2a");
       s2a.innerText = "E-devlet'ten bilgileriniz alındı 👍";
       s2a.onclick = null;
