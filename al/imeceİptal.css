@@ -1,52 +1,51 @@
-
-.form-wrapper {
+#imc {
     animation: growDown 300ms ease-in-out forwards;
     transform-origin: top center;
 }
 
-.form-wrapper input {
+#imc input {
     height: 28px;
     font-size: 12pt;
     border: 1px solid grey;
     box-sizing: border-box;
     border-radius: 0.4em;
-    transition: border 0.3s;
     outline: none;
 }
 
-.form-wrapper input::-webkit-outer-spin-button,
-.form-wrapper input::-webkit-inner-spin-button {
+#imc input::-webkit-outer-spin-button,
+#imc input::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
 }
 
-.form-wrapper input:focus {
+#imc input:focus {
     border: 2.4px solid #4c5094;
 }
 
-.labels {
+.imlbl {
     display: flex;
     justify-content: space-between;
-    margin: 2em 0.1em 0.8em 0;
+    margin: 1em 0.1em 0.8em 0;
 }
 
-.container {
+.imcont {
     display: flex;
     justify-content: space-between;
     margin: 0.8em auto;
 }
 
-.address-input {
+.imai {
     width: 85%;
+    font-family: monospace;
 }
 
-.weight-input {
+.imwi {
     width: 10%;
     text-align: center;
 }
 
-.sr:t {
-    display:flex;
+.imtb {
+    display: flex;
     justify-content: right;
     align-items: center;
     margin-bottom: 10px;

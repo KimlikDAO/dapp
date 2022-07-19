@@ -4,7 +4,7 @@
  */
 
 import Cüzdan from '/al/cüzdan';
-import { imeceİptalKur } from '/al/imeceİptal';
+import { imeceİptalKurVe } from '/al/imeceİptal';
 import { base64, hex } from '/lib/cevir';
 import dom from '/lib/dom';
 import { encrypt } from '/lib/encrypt';
@@ -89,7 +89,7 @@ function TCKTYarat() {
       s3a.innerText = "Açık anahtarınızı aldık 👍";
       s3a.classList.add("disabled");
       dom.adla("s3").classList.add("done");
-      dom.adla("s4").classList.remove("disabled");
+      dom.adla("im").classList.remove("disabled");
       return pubKey;
     });
 
@@ -125,8 +125,8 @@ function TCKTYarat() {
       })
       .catch((e) => console.log(e + "TCKT oluşturamadık: Kullanıcı reddetti veya IPFS hatası"));
 
-    imeceİptalKur()
-      .then(([adresAğırlığı, eşik]) => öde(cidSözü, adresAğırlığı, eşik));
+    imeceİptalKurVe(
+      (adresAğırlığı, eşik) => öde(cidSözü, adresAğırlığı, eşik));
   };
 }
 
@@ -190,7 +190,9 @@ if (window["ethereum"]) {
     TCKTYarat();
   });
 
-  Cüzdan.kopunca(() => {
-    location.reload();
-  });
+  // İleride cüzdan adresi değiştiğinde kullanıcıya tekrar bilgileri
+  // girdirmek yerine arka planda tekrar KimlikAS requesti yollayacağız.
+  // Şimdilik kolaylık adına sadece sayfayı yeniliyoruz.
+  Cüzdan.adresDeğişince(() => location.reload());
+  Cüzdan.kopunca(() => location.reload());
 }

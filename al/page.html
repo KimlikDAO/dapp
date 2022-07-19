@@ -75,46 +75,44 @@
                 <br><br>
                 <a href="javascript:" id="s3a" class="actbutton disabled">Cüzdanıma istek yolla</a>
             </div>
-            <div class="step disabled" id="s4">
+            <!-- im: imeceIptal -->
+            <div class="step disabled" id="im">
                 <b>4. İmece iptal adresleri.</b>
                 Fiyatı $2'dan $1'a düşürmek için imece iptal adresleri eklemek istiyor musunuz?
                 <br><br>
-                <a href="javascript:" id="s4a" class="actbutton">Evet</a>
-                <a href="javascript:" id="s4b" class="actbutton">Hayır</a>
-                <!-- sr: Social Revoke -->
-                <div class="form-wrapper invisible" id="sr">
-                    <div class="labels">
+                <a href="javascript:" id="imbe" class="actbutton">Evet</a>
+                <a href="javascript:" id="imbh" class="actbutton">Hayır</a>
+                <div id="imc" style="display:none">
+                    <div class="imlbl">
                         <b>Adres</b>
                         <b>Ağırlık</b>
                     </div>
-                    <div id="sr:f">
-                        <div id="sr:c0" class="container">
-                            <input id="sr:a0" class="address-input" type="text">
-                            <input id="sr:w0" class="weight-input" type="number" value="1">
+                    <div id="imf">
+                        <div class="imcont">
+                            <input class="imai" type="text">
+                            <input class="imwi" type="number" value="1">
                         </div>
-                        <div id="sr:c1" class="container">
-                            <input id="sr:a1" class="address-input" type="text">
-                            <input id="sr:w1" class="weight-input" type="number" value="1">
+                        <div class="imcont">
+                            <input class="imai" type="text">
+                            <input class="imwi" type="number" value="1">
                         </div>
-                        <div id="sr:c2" class="container">
-                            <input id="sr:a2" class="address-input" type="text">
-                            <input id="sr:w2" class="weight-input" type="number" value="1">
+                        <div class="imcont">
+                            <input class="imai" type="text">
+                            <input class="imwi" type="number" value="1">
                         </div>
-                        <br id="br">
                     </div>
                     <br>
-                    <a href="javascript:" id="s4c" class="actbutton">+</a>
-                    <a href="javascript:" id="s4d" class="actbutton">-</a>
+                    <a href="javascript:" id="imba" class="actbutton">+</a>
                     <br>
                     <br>
-                    <div class="sr:t">
-                        <label for="threshold"><b>Threshold:</b></label>
-                        <input type="number" id="sr:t" class="weight-input" value="2">
-                        <label for="total"><b>Total Weight:</b></label>
-                        <input type="number" id="sr:s" class="weight-input" readonly value="3">
+                    <div class="imtb">
+                        <label for="imt"><b>Eşik:</b></label>
+                        <input type="number" id="imt" class="imwi" value="2">
+                        <label for="ims"><b>Toplam ağırlık:</b></label>
+                        <input type="number" id="ims" class="imwi" readonly value="3">
                     </div>
-                    <a href="javascript:" id="s4e" class="actbutton">Tamam</a>
-                    <a href="javascript:" id="s4f" class="actbutton">İptal</a>
+                    <a href="javascript:" id="imbt" class="actbutton">Tamam</a>
+                    <a href="javascript:" id="imbi" class="actbutton">İptal</a>
                 </div>
             </div>
             <div class="step disabled" id=s5>
