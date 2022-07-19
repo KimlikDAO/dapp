@@ -23,7 +23,9 @@ async function createServer() {
     res.status(200).set({ 'Content-type': 'text/html;charset=utf-8' }).end(page);
   })
 
-  app.listen(8787)
+  const port = 8787;
+  app.listen(port)
+  console.log(`Ana sayfaya su adreste calisiyor: http://0.0.0.0:${port}`)
 }
 
 createServer()
