@@ -4,7 +4,7 @@ build/al.page: build/al build/al.gz build/al.br
 
 build/al-wallet-inline.js: al/wallet-inline.js lib/ethereum.js
 	mkdir -p build
-	npx google-closure-compiler -W VERBOSE -O ADVANCED --charset UTF-8 \
+	google-closure-compiler -W VERBOSE -O ADVANCED --charset UTF-8 \
                         --js $^ \
                         --js_output_file $@
 	npx uglifyjs $@ -m -o $@
@@ -14,7 +14,7 @@ build/al.js: al/page.js al/imeceİptal.js al/cüzdan.js \
              lib/encrypt.js lib/ipfs.js lib/sha3.js \
              lib/ethereum.js lib/TCKT.js
 	mkdir -p build
-	npx google-closure-compiler -W VERBOSE -O ADVANCED --charset UTF-8 \
+	google-closure-compiler -W VERBOSE -O ADVANCED --charset UTF-8 \
                         --emit_use_strict \
                         --module_resolution NODE \
                         --assume_function_wrapper \
@@ -39,4 +39,4 @@ build/al: al/page.html al/page.inlines \
           build/ana.keymap build/al.keymap build/al-wallet-inline.js 
 	cp al/page.html build/al
 	tools/keymapper.py build/al build/ana.keymap build/al.keymap al/page.inlines
-	html-minifier -c tools/html-minifier.conf build/al -o build/al
+	npx html-minifier -c tools/html-minifier.conf build/al -o build/al

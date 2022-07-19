@@ -25,7 +25,7 @@ async function createServer() {
 
   const port = 8787;
   app.listen(port)
-  console.log(`Ana sayfaya su adreste calisiyor: http://0.0.0.0:${port}`)
+  console.log(`Ana sayfaya şu adreste çalışıyor: http://localhost:${port}`)
 }
 
 createServer()

@@ -4,7 +4,7 @@ build/ana.page: build/ana build/ana.gz build/ana.br
 
 build/ana.js: ana/page.js
 	mkdir -p build
-	npx google-closure-compiler -W VERBOSE -O ADVANCED --charset UTF-8 \
+	google-closure-compiler -W VERBOSE -O ADVANCED --charset UTF-8 \
                         --js $^ \
                         --js_output_file $@
 	npx uglifyjs $@ -m -o $@
