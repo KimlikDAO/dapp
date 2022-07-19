@@ -62,6 +62,19 @@ button {
   cursor: pointer;
 }
 
+.cef {
+  background-position: center;
+  transition: background 0.8s;
+}
+.cef:hover {
+  background: #fff radial-gradient(circle, transparent 1%, #fff 1%) center/15000%;
+}
+.cef:active {
+  background-color: #eee;
+  background-size: 100%;
+  transition: background 0s;
+}
+
 button.act {
   background: #aae;
   border-color: #446;
