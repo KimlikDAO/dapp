@@ -40,12 +40,13 @@
                     <ul id="nad">
                         <li id="nad1"><img src="/al/img/copy.svg" width="16px" height="16px"> Adresi Kopyala</li>
                         <li id="nad2"><img src="/al/img/debank.svg" width=16px height=16px> DeBank'ta görüntüle</li>
-                        <li id="nad3"><img src="/al/img/external-link.svg" width="16px" height="16px"> Explorer'da görüntüle</li>
+                        <li id="nad3"><img src="/al/img/external-link.svg" width="16px" height="16px"> Explorer'da
+                            görüntüle</li>
                     </ul>
                 </div>
             </div>
             <!-- naviation language -->
-            <button id=nl>Türkçe</button>
+            <button id=nl class="cef">Türkçe</button>
         </div>
     </div>
     <div id=b>
@@ -127,28 +128,26 @@
         </div>
         <div id="sa">
             <div id="bss">
-                <table id="TCKT" class="TCKT">
-                    <tr>
-                        <th>TCKN:</th>
-                        <td id="TCKN"> </td>
-                    </tr>
-                    <tr>
-                        <th>Ad:</th>
-                        <td id="ad"></td>
-                    </tr>
-                    <tr>
-                        <th>Soyad:</th>
-                        <td id="soyad"></td>
-                    </tr>
-                    <tr>
-                        <th>Doğum tarihi:</th>
-                        <td id="dt"></td>
-                    </tr>
-                </table>
-            </div>
-            <div id="ph">
+                <div id="TCKT" class="TCKT">
+                    <!-- <div style="position:absolute">
+                        <img src="/al/img/frame.svg" width="250px" height="250px">
+                    </div> -->
+                    <div id="TCKT-kb">
+                        <label for="TCKN">TCKN</label>
+                        <div id="TCKN"> </div>
+                        <label for="ad">Ad</label>
+                        <div id="ad"> </div>
+                        <label for="soyad">Soyad</label>
+                        <div id="soyad"> </div>
+                        <label for="dt">Doğum tarihi</label>
+                        <div id="dt"> </div>
+                    </div>
+                </div>
             </div>
         </div>
+        <div id="ph">
+        </div>
+    </div>
     </div>
     <script async type="module" src="/al/page.js"></script>
 </body>

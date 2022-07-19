@@ -35,18 +35,23 @@ body {
     opacity: 0.8;
 }
 
-.TCKT {
+#TCKT {
     margin-top: 2em;
     padding: 1em;
-    border: 3px solid rgb(128, 132, 136);
+    border: 1px solid #f8f8f8;
+    box-shadow: 2px 2px 10px rgb(0 0 0 / 15%);
     border-radius: 10px;
     transition: opacity .4s;
-    width: 300px;
-    height: 150px;
+    width: 250px;
+    height: 250px;
     overflow: hidden;
 }
 
-.TCKT th {
-    text-align: right;
-    width: 110px;
+#TCKT-kb {
+    padding: 50px 0 50px 70px;
+    position:absolute;
+}
+
+#TCKT-kb label {
+    font-size: 7px;
 }
