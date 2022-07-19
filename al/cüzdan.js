@@ -8,6 +8,8 @@ let Ağ = "0xa86a";
 let Bağlanınca = null;
 /** @type {?function()} */
 let Kopunca = null;
+/** @type {?function()} */
+let AdresDeğişince = null;
 
 /** @const {Element} */
 const AdresButonu = dom.adla("na");
@@ -81,6 +83,8 @@ function adresDeğişti(adresler) {
     if (Bağlanınca) {
       Bağlanınca();
       Bağlanınca = null;
+    } else {
+      AdresDeğişince();
     }
   }
 }
@@ -92,6 +96,10 @@ function bağlanınca(f) {
 
 function kopunca(f) {
   Kopunca = f;
+}
+
+function adresDeğişince(f) {
+  AdresDeğişince = f;
 }
 
 function bağla() {
@@ -171,6 +179,7 @@ if (window["ethereum"]) {
 export default {
   ağ,
   adres,
+  adresDeğişince,
   bağla,
   bağlanınca,
   kopunca

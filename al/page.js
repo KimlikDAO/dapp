@@ -190,7 +190,9 @@ if (window["ethereum"]) {
     TCKTYarat();
   });
 
-  Cüzdan.kopunca(() => {
-    location.reload();
-  });
+  // İleride cüzdan adresi değiştiğinde kullanıcıya tekrar bilgileri
+  // girdirmek yerine arka planda tekrar KimlikAS requesti yollayacağız.
+  // Şimdilik kolaylık adına sadece sayfayı yeniliyoruz.
+  Cüzdan.adresDeğişince(() => location.reload());
+  Cüzdan.kopunca(() => location.reload());
 }
