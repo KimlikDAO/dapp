@@ -14,7 +14,7 @@ KV.get = function(key, type) {};
 
 /**
  * @param {string} eventName
- * @param {function(Object):Object} listener
+ * @param {function(Object)} listener
  */
 function addEventListener(eventName, listener) {};
 
