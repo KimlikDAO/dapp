@@ -20,10 +20,10 @@ class TestServer(BaseHTTPRequestHandler):
         base = 'build'
         if self.path == '/':
             ctype = "text/html;charset=utf-8"
-            fname = 'build/ana'
+            fname = 'build/ana.html'
         elif self.path == '/al' or self.path.startswith('/al?'):
             ctype = "text/html;charset=utf-8"
-            fname = 'build/al'
+            fname = 'build/al.html'
         elif self.path.endswith('.js'):
             ctype = 'text/javascript'
             fname = base + self.path

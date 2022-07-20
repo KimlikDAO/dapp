@@ -1,26 +1,20 @@
-build/ana.page: build/ana build/ana.gz build/ana.br
-
-.PHONY: build/ana.page
-
-build/ana.js: ana/page.js
-	mkdir -p build
+build/ana/page.js: ana/page.js
+	mkdir -p build/ana
 	google-closure-compiler -W VERBOSE -O ADVANCED --charset UTF-8 \
                         --js $^ \
                         --js_output_file $@
 	npx uglifyjs $@ -m -o $@
 
-build/ana.css: ana/page.css
-	mkdir -p build
-	cat ana/page.css | npx csso --output $@
+build/ana/page.css: ana/page.css
+	mkdir -p build/ana
+	cat $^ | npx csso --output $@
 
-build/ana.keymap: build/ana.js build/ana.js.gz build/ana.js.br \
-	              build/ana.css build/ana.css.gz build/ana.css.br
+build/ana/page.keymap: $(call compressions, build/ana/page.js) \
+	                   $(call compressions, build/ana/page.css)
 	rm -rf $@
-	tools/keyhasher.py $@ build/ana.js
-	tools/keyhasher.py $@ build/ana.css
+	tools/keyhasher.py $@ build/ana/page.js build/ana/page.css
 
-build/ana: build/ana.keymap ana/page.html ana/page.inlines \
-           ana/page.inlines ana/tr.svg
-	cp ana/page.html build/ana
-	tools/keymapper.py build/ana build/ana.keymap ana/page.inlines
-	npx html-minifier -c tools/html-minifier.conf build/ana -o build/ana
+build/ana.html: ana/page.html build/ana/page.keymap ana/page.inlines ana/tr.svg
+	cp $< $@
+	tools/keymapper.py $@ build/ana/page.keymap ana/page.inlines
+	npx html-minifier -c tools/html-minifier.conf $@ -o $@

@@ -1,11 +1,21 @@
 MAKEFLAGS=-j 4
 
-build: build/serve.js build/ana.page build/al.page
+PAGES = al ana
+
+compressions = $(1) $(addsuffix .br, $(1)) $(addsuffix .gz, $(1))
+
+all: build
 
 include al/Makefile
 include ana/Makefile
 include iptal/Makefile
 include ortaklar/Makefile
+
+PAGE_TARGETS = $(addsuffix .page, $(addprefix build/, $(PAGES)))
+
+$(PAGE_TARGETS): build/%.page: build/%.html build/%.html.gz build/%.html.br
+
+build: build/serve.js build/ana.page build/al.page
 
 clean:
 	rm -rf build
@@ -27,7 +37,7 @@ build/serve.js: tools/serve.js tools/workers.js
                         --js_output_file $@
 	npx uglifyjs $@ -m -o $@
 
-.PHONY: cf-deployment clean dev staging
+.PHONY: cf-deployment clean dev staging $(PAGE_TARGETS)
 
 %.gz: %
 	cp $< $@.tmp

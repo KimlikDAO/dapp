@@ -60,7 +60,10 @@ function ağDeğişti(yeniAğ) {
   if (yeniAğ != Ağ) {
     dom.adla("nc" + Ağ).classList.remove("sel");
     dom.adla("nc" + yeniAğ).classList.add("sel");
-    dom.adla("nci").src = dom.adla("nc" + yeniAğ).firstElementChild.src;
+    const nc = dom.adla("nc");
+    nc.replaceChild(
+      dom.adla("nc" + yeniAğ).firstElementChild.cloneNode(true),
+      nc.firstElementChild);
     Ağ = yeniAğ;
   }
 }

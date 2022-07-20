@@ -19,6 +19,7 @@
     "html-minifier": "^4.0.0",
     "ipfs-unixfs": "^6.0.9",
     "multiformats": "^9.7.0",
+    "svgo": "^2.8.0",
     "uglify-js": "latest",
     "vite": "^3.0.2",
     "vitest": "^0.18.1"
