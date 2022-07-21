@@ -10,14 +10,10 @@ ayırıyoruz.
 
 ## Kullanım
 Yazılımcıların dApp'i test etmesi için gereken adımlar:
-- Önce build ve dev sunucusu için kullandığımız araçları yükleyelim.
-`
-npm install
-`
+- `yarn install` gerekli build toollarını ve dev sunucusunu yükler
 
-- `make dev` yazarak artık dev sunucuyu çalıştırabiliriz:
-    - Ana sayfaya erişmek icin http://localhost:8787
-- `staging` ve `deployment` için; yani `make build` komutuna bağlı şeyleri çalıştırmadan önce `npx` komutuna ve `google-closure-compiler`'a ihtiyacımız olacak.
-    - `npx` bizim desteklediğimiz npm sürümlerinde hali hazırda kurulu geliyor.
-    - `npm install -g google-closure-compiler` yazarak `google-closure-compiler`'ı kurabiliriz.
-    - `make staging` yazarak deploy için hazırlanmış dApp'i kendi bilgisayarımızda yine http://localhost:8787 adresinde çalıştırabiliriz.
+- `make dev` dev sunucuyu çalıştırır.
+    - http://localhost:8787/al
+- `make staging` deploya hazır dApp'i `build` edip staging sunucusunu çalıştırır
+    - http://localhost:8787/al
+- `make cf-deployment` deploya hazır dApp'i Cloudflare'e yükler

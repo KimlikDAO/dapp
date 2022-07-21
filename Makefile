@@ -1,4 +1,4 @@
-MAKEFLAGS=-j 4
+MAKEFLAGS=-j 8
 
 PAGES = al ana
 
@@ -35,7 +35,7 @@ build/serve.js: tools/serve.js tools/workers.js
                         --assume_function_wrapper \
                         --js $^ \
                         --js_output_file $@
-	npx uglifyjs $@ -m -o $@
+	yarn uglifyjs $@ -m -o $@
 
 .PHONY: cf-deployment clean dev staging $(PAGE_TARGETS)
 
