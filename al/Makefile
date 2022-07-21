@@ -52,6 +52,5 @@ build/al.html: al/page.html al/page.inlines \
                build/inl/wallet-inline.js \
                $(INL_SVGS)
 	cp $< $@
-	echo $^
 	tools/keymapper.py $@ build/ana/page.keymap build/al/page.keymap al/page.inlines
 	yarn html-minifier -c tools/html-minifier.conf $@ -o $@

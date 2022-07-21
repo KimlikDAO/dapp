@@ -15,7 +15,7 @@ PAGE_TARGETS = $(addsuffix .page, $(addprefix build/, $(PAGES)))
 
 $(PAGE_TARGETS): build/%.page: build/%.html build/%.html.gz build/%.html.br
 
-build: build/serve.js build/ana.page build/al.page
+build: build/ana.page build/al.page
 
 clean:
 	rm -rf build
@@ -26,15 +26,15 @@ dev:
 staging: build
 	tools/staging.py
 
-cf-deployment: build
+cf-deployment: build build/serve.js
 	tools/cfuploader.py
 
 build/serve.js: tools/serve.js tools/workers.js
 	mkdir -p build
-	google-closure-compiler -W VERBOSE -O ADVANCED --charset UTF-8 \
-                        --assume_function_wrapper \
-                        --js $^ \
-                        --js_output_file $@
+	yarn google-closure-compiler -W VERBOSE -O ADVANCED --charset UTF-8 \
+                             --assume_function_wrapper \
+                             --js $^ \
+                             --js_output_file $@
 	yarn uglifyjs $@ -m -o $@
 
 .PHONY: cf-deployment clean dev staging $(PAGE_TARGETS)
