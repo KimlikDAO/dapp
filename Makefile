@@ -26,10 +26,10 @@ dev:
 staging: build
 	tools/staging.py
 
-cf-deployment: build build/serve.js
+cf-deployment: build build/prod.js
 	tools/cfuploader.py
 
-build/serve.js: tools/serve.js tools/workers.js
+build/prod.js: tools/prod.js tools/workers.js
 	mkdir -p build
 	yarn google-closure-compiler -W VERBOSE -O ADVANCED --charset UTF-8 \
                              --assume_function_wrapper \

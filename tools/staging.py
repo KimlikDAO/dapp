@@ -9,7 +9,7 @@ from http.server import BaseHTTPRequestHandler, HTTPServer
 HOST_NAME = "localhost"
 PORT = 8787
 
-ROUTE = toml.load('wrangler.toml')['env']['fujitestnet']['route'][:-1]
+ROUTE = toml.load('wrangler.toml')['env']['beta']['route'][:-1]
 REVERSE = {
     ROUTE: "http://localhost:8787/"
 }

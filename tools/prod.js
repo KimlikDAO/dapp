@@ -2,21 +2,31 @@
 //  'https://kimlikdao.notion.site/KimlikDAO-5349424f906f45dbbb085b3dc8ed53ef';
 
 // Sonda bölü işareti olması lazım.
-const HOST_URL = 'https://fujitestnet.kimlikdao.org/';
+/** @const {string} */
+const HOST_URL = 'https://beta.kimlikdao.org/';
+/** @const {string} */
 const PAGE_CACHE_CONTROL = 'public'
+/** @const {string} */
 const STATIC_CACHE_CONTROL = 'max-age=29030400,public'
 
 addEventListener('fetch', (event) => {
+  /** @const {URL} */
   const url = new URL(event.request.url)
+  /** @const {string} */
   const enc = event.request['cf']['clientAcceptEncoding'];
+  /** @const {string} */
   const ext = enc.includes('br') ? '.br' : enc.includes('gz') ? '.gz' : '';
 
   // Asset'lerin cache ve KV'deki anahtarı .br .gz gibi uzantıyı da içeriyor.
+  /** @const {string} */
   const kvKey = (url.pathname === '/' ? 'ana' : url.pathname.substring(1)) + ext;
+  /** @const {string} */
   const cacheKey = HOST_URL + kvKey;
+  /** @const {boolean} */
   const isPage = !url.pathname.includes('.');
 
   // Asset'i CF'ten almaya çalışıyoruz.
+  /** @const {Promise<Response>} */
   const fromCache = caches.default.match(cacheKey).then((response) => {
     if (!response) return Promise.reject();
     if (isPage) {
@@ -31,9 +41,11 @@ addEventListener('fetch', (event) => {
   // Asset cache'te değilse (veya cache'te beklenmedik bir yoğunluk varsa)
   // KV'den gelen sonucu cache'e yazılmak üzere sıraya alıp KV sonucunu
   // döndürüyoruz
+  /** @const {Promise<Response>} */
   const fromKV = KV.get(kvKey, 'arrayBuffer').then((body) => {
     if (!body) return Promise.reject();
 
+    /** @type {Response} */
     let response = new Response(body, {
       status: 200,
       headers: {
@@ -51,6 +63,7 @@ addEventListener('fetch', (event) => {
     }
 
     // 'content-type' yaz.
+    /** @const {string} */
     const contentType = url.pathname.endsWith('.css') ? 'text/css' : ((url.pathname.endsWith('.js')
       ? 'application/javascript' : 'text/html') + ';charset=utf-8');
     response.headers.set('content-type', contentType);
@@ -77,6 +90,9 @@ addEventListener('fetch', (event) => {
   event.respondWith(Promise.any([fromCache, fromKV]).catch(bulunamadı));
 });
 
+/**
+ * @return {Response}
+ */
 function bulunamadı(err) {
   return new Response('NAPIM? Hata oluştu ' + err, {
     status: 404,

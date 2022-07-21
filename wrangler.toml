@@ -15,10 +15,10 @@ ip = "0.0.0.0"
 port = 8787
 local_protocol = "http"
 
-[env.fujitestnet]
-name = "fujitestnet"
+[env.beta]
+name = "beta"
 workers_dev = false
-route = "https://fujitestnet.kimlikdao.org/*"
+route = "https://beta.kimlikdao.org/*"
 kv_namespaces = [
   { binding = "KV", id = "15a080fd128945ecb0a9b1780f0e708a"},
 ]

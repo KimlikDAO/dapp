@@ -9,7 +9,7 @@ import requests
 import toml
 
 
-CF_ENV = 'fujitestnet'
+CF_ENV = 'beta'
 
 SAYFALAR = {
     'al', 'ana'

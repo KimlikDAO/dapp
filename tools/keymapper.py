@@ -51,7 +51,7 @@ def keymap(file):
 
 
 if __name__ == "__main__":
-    route = toml.load('wrangler.toml')['env']['fujitestnet']['route'][:-1]
+    route = toml.load('wrangler.toml')['env']['beta']['route'][:-1]
     replace = {
         "http://localhost:8787/": route
     }
