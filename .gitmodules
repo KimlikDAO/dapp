@@ -1,0 +1,4 @@
+[submodule "font/sfnt2woff-zopfli"]
+	path = font/sfnt2woff-zopfli
+	url = git@github.com:bramstein/sfnt2woff-zopfli
+	ignore = dirty

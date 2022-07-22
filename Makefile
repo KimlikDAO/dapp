@@ -6,6 +6,7 @@ compressions = $(1) $(addsuffix .br, $(1)) $(addsuffix .gz, $(1))
 
 all: build
 
+include font/Makefile
 include al/Makefile
 include ana/Makefile
 include iptal/Makefile

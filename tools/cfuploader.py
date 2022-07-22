@@ -70,7 +70,7 @@ def is_static_upload(name: str) -> bool:
     """
     Verilen bir ismin CF'e yüklenmesi gereken bir static olup olmadığını tespit eder.
     """
-    return name != 'serve.js' and name not in existing and stem(name) not in SAYFALAR
+    return name != 'prod.js' and name not in existing and stem(name) not in SAYFALAR
 
 
 existing = get_existing(NAMESPACE_ID)

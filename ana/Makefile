@@ -5,9 +5,10 @@ build/ana/page.js: ana/page.js
                              --js_output_file $@
 	yarn uglifyjs $@ -m -o $@
 
-build/ana/page.css: ana/page.css
+build/ana/page.css: ana/lato.css ana/page.css \
+                    $(ttfFonts) $(woffFonts) $(woff2Fonts)
 	mkdir -p build/ana
-	cat $^ | yarn csso --output $@
+	cat ana/lato.css ana/page.css | yarn csso --output $@
 
 build/ana/page.keymap: $(call compressions, build/ana/page.js) \
 	                   $(call compressions, build/ana/page.css)

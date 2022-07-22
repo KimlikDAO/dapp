@@ -1,11 +1,23 @@
 html {
+  -webkit-text-size-adjust: 100%;
   background-size: 8px 8px;
-  min-height: 100%;
   background: #fff;
-  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  margin: 0;
+  min-height: 100%;
+  overflow-y: scroll;
+  color: #333;
+}
+
+body {
+  margin: 0;
+}
+
+b {
+  font-weight: 700;
 }
 
 h1 {
+  font-weight: 700;
   padding: 3px;
   margin: 10px;
 }
@@ -54,21 +66,68 @@ h1 {
   cursor: default;
 }
 
+button:hover {
+  background-color: #F3F4F6;
+  text-decoration: none;
+  transition-duration: 0.1s;
+}
+
+button:disabled {
+  background-color: #FAFBFC;
+  border-color: rgba(27, 31, 35, 0.15);
+  color: #959DA5;
+  cursor: default;
+}
+
+button:active {
+  background-color: #EDEFF2;
+  box-shadow: rgba(225, 228, 232, 0.2) 0 1px 0 inset;
+  transition: none 0s;
+}
+
+button:focus {
+  outline: 1px transparent;
+}
+
+button:before {
+  display: none;
+}
+
+button:-webkit-details-marker {
+  display: none;
+}
+
+
 button {
-  border: 1px solid #333;
-  min-height: 48px;
+  font-family: 'lt', sans-serif;
+  background-color: #FAFBFC;
+  border: 1px solid rgba(27, 31, 35, 0.15);
+  box-shadow: rgba(27, 31, 35, 0.04) 0 1px 0, rgba(255, 255, 255, 0.25) 0 1px 0 inset;
+  transition: background-color 0.2s cubic-bezier(0.3, 0, 0.5, 1);
+
+  user-select: none;
+  min-height: 45px;
   border-radius: 5px;
   font-size: 12pt;
   cursor: pointer;
+  margin: 0;
+}
+
+button:hover {
+  background-color: #F3F4F6;
+  text-decoration: none;
+  transition-duration: 0.1s;
 }
 
 .cef {
   background-position: center;
   transition: background 0.8s;
 }
+
 .cef:hover {
   background: #fff radial-gradient(circle, transparent 1%, #fff 1%) center/15000%;
 }
+
 .cef:active {
   background-color: #eee;
   background-size: 100%;
@@ -148,6 +207,7 @@ button.act {
   box-shadow: 0px 0px 0px 11px #1f1f1f, 0px 0px 0px 13px #191919,
     0px 0px 0px 15px #111;
 }
+
 /* Language Dropdown */
 .ld {
   margin-top: 20px;
@@ -180,9 +240,11 @@ button.act {
   0% {
     transform: scaleY(0);
   }
+
   80% {
     transform: scaleY(1.1);
   }
+
   100% {
     transform: scaleY(1);
   }
