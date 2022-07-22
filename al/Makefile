@@ -25,7 +25,9 @@ build/al/page.css: al/page.css al/imeceİptal.css al/cüzdan.css
 	mkdir -p build/al
 	cat $^ | yarn csso --output $@
 
-INLINE_SVGS = avalanche.svg copy.svg external-link.svg debank.svg
+INLINE_SVGS = avalanche.svg \
+              copy.svg external-link.svg debank.svg \
+              paste.svg
 
 INL_SVGS = $(addprefix build/inl/, $(INLINE_SVGS))
 
