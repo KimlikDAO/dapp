@@ -17,7 +17,7 @@ REVERSE = {
 
 class TestServer(BaseHTTPRequestHandler):
     def do_GET(self):
-        base = 'build'
+        fname = 'build' + self.path
         if self.path == '/':
             ctype = "text/html;charset=utf-8"
             fname = 'build/ana.html'
@@ -26,16 +26,18 @@ class TestServer(BaseHTTPRequestHandler):
             fname = 'build/al.html'
         elif self.path.endswith('.js'):
             ctype = 'text/javascript'
-            fname = base + self.path
         elif self.path.endswith('.css'):
             ctype = 'text/css'
-            fname = base + self.path
         elif self.path.endswith('.png'):
             ctype = 'image/png'
-            fname = base + self.path
         elif self.path.endswith('.svg'):
             ctype = 'image/svg+xml'
-            fname = base + self.path
+        elif self.path.endswith('.ttf'):
+            ctype = 'font/ttf'
+        elif self.path.endswith('.woff'):
+            ctype = 'font/woff'
+        elif self.path.endswith('.woff2'):
+            ctype = 'font/woff2'
 
         if self.path.endswith('.map') or self.path.endswith(".ico"):
             self.send_response(404)
