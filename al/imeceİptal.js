@@ -70,7 +70,6 @@ function göster(sonra) {
     if (toplamAğırlık < eşikDeğeri) {
       geçerli = false;
       dom.adla("imt").classList.add("invalid");
-      // TODO(MuhammetCoskun): hata bildir
     }
     if (geçerli) {
       dom.adla("imbh").innerText = "İmece iptal kuruldu 👍";
@@ -124,8 +123,7 @@ function adresBlurOlunca(event) {
     event.target.classList.remove("invalid");
   } else {
     event.target.classList.add("invalid");
-    console.log("oha");
-  }; // TODO(MuhammetCoskun): Arabirimde hata göster
+  };
 }
 
 function yapıştır(event) {
