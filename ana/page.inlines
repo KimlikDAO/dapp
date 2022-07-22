@@ -1,2 +1,2 @@
 svg:/ana/tr.svg -> ana/tr.svg
-css:/ana/font.css -> cmd:erase
+css:/font/lato-ttf.css -> cmd:erase

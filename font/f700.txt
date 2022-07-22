@@ -1,0 +1,4 @@
+dApp'lerde kullanabileceğin dijital bir kimlik kartı
+Metamask gibi NFT destekleyen kripto cüzdanında durur
+dApp'lerde TCKK gerektiren işlemleri yapmanı sağlar
+Cüzdanında şifreli olarak durur, veri gizliliğini korur

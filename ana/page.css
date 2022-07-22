@@ -1,4 +1,17 @@
 html {
+  font-family: 'f', sans-serif;
+  font-size: 11pt;
+  font-weight: 400;
+}
+
+button {
+  font-family: 'f', sans-serif;
+  font-size: 11pt;
+  font-weight: 700;
+  color: #555;
+}
+
+html {
   -webkit-text-size-adjust: 100%;
   background-size: 8px 8px;
   background: #fff;

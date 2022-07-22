@@ -17,10 +17,12 @@ Yazılımcıların dApp'i test etmesi için gereken adımlar:
 
 Staging ve deployment adımları için birkaç araca daha ihtiyacımız var
 ```shell
-brew install woff2
 brew install zopfli
 brew install brotli
+pip install fonttools
+brew install woff2
 ```
-- `make staging` deploya hazır dApp'i `build` edip staging sunucusunu çalıştırır
+- `make staging` deploya hazır dApp'i `build` edip staging sunucusunu
+   çalıştırır
     - http://localhost:8787/al
 - `make cf-deployment` deploya hazır dApp'i Cloudflare'e yükler

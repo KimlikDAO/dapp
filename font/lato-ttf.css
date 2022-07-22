@@ -61,16 +61,3 @@
   font-weight: 700;
   font-style: italic;
 }
-
-html {
-  font-family: 'f', sans-serif;
-  font-size: 11pt;
-  font-weight: 400;
-}
-
-button {
-  font-family: 'f', sans-serif;
-  font-size: 11pt;
-  font-weight: 700;
-  color: #555;
-}
