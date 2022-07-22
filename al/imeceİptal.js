@@ -40,8 +40,7 @@ function göster(sonra) {
   /** @const {HTMLCollection} */
   const rows = dom.adla("imf").children;
   for (let i = 0; i < rows.length; ++i) {
-    rows[i].firstElementChild.onblur = adresBlurOlunca;
-    rows[i].lastElementChild.onblur = ağırlıkHesapla;
+    fonksiyonelYap(rows[i]);
   }
   dom.adla("imba").onclick = girdiAlanıEkle;
   dom.adla("imt").onblur = eşikDeğeriBlurOlunca;
@@ -62,7 +61,7 @@ function göster(sonra) {
         // TODO(KimlikDAO-bot): hata bildir kırmızi vs.
       }
       /** @type {number} */
-      const ağırlık = parseInt(satır[i].lastElementChild.value);
+      const ağırlık = parseInt(satır[i].children[3].value);
       adresAğırlığı[adres] = ağırlık;
       toplamAğırlık += ağırlık;
     }
@@ -70,6 +69,7 @@ function göster(sonra) {
     const eşikDeğeri = parseInt(dom.adla("imt").value);
     if (toplamAğırlık < eşikDeğeri) {
       geçerli = false;
+      dom.adla("imt").classList.add("invalid");
       // TODO(MuhammetCoskun): hata bildir
     }
     if (geçerli) {
@@ -83,23 +83,26 @@ function göster(sonra) {
   };
 }
 
+function fonksiyonelYap(satır) {
+  const elemanlar = satır.children;
+  elemanlar[0].value = "";
+  elemanlar[0].onblur = adresBlurOlunca;
+  elemanlar[0].classList.remove("invalid");
+  elemanlar[1].onclick = yapıştır;
+  elemanlar[2].onclick = birAzalt;
+  elemanlar[3].onblur = ağırlıkBlurOlunca;
+  elemanlar[3].onclick = (e) => e.target.value = "";
+  elemanlar[3].value = 1;
+  elemanlar[4].onclick = birArttır;
+  elemanlar[5].onclick = satırSil;
+}
+
 function girdiAlanıEkle() {
-  const div = document.createElement("div");
-  const input1 = document.createElement("input");
-  const input2 = document.createElement("input");
-  div.classList.add("imcont");
-  input1.classList.add("imai");
-  input1.type = "text";
-  input1.onblur = adresBlurOlunca;
-  input2.classList.add("imwi");
-  input2.type = "number";
-  input2.onblur = ağırlıkHesapla;
-  input2.value = 1;
-  div.appendChild(input1);
-  div.appendChild(input2);
-  dom.adla("imf").appendChild(div);
+  const form = dom.adla("imf");
+  let yeniSatır = form.firstElementChild.cloneNode(true);
+  fonksiyonelYap(yeniSatır);
+  form.appendChild(yeniSatır);
   ağırlıkHesapla();
-  console.log("clicked +")
 }
 
 function eşikDeğeriGecerliMi(değer) {
@@ -108,14 +111,69 @@ function eşikDeğeriGecerliMi(değer) {
 }
 
 function eşikDeğeriBlurOlunca(event) {
-  eşikDeğeriGecerliMi(event.target.value);
+  dom.adla("imt").classList.remove("invalid");
+  const geçerli = eşikDeğeriGecerliMi(event.target.value);
+  if (!geçerli) dom.adla("imt").classList.add("invalid");
 }
 
 function adresBlurOlunca(event) {
   console.log(event.target.value);
   const düz = evm.adresDüzelt(event.target.value);
-  if (düz) event.target.value = düz;
-  else console.log("oha"); // TODO(MuhammetCoskun): Arabirimde hata göster
+  if (düz) {
+    event.target.value = düz;
+    event.target.classList.remove("invalid");
+  } else {
+    event.target.classList.add("invalid");
+    console.log("oha");
+  }; // TODO(MuhammetCoskun): Arabirimde hata göster
+}
+
+function yapıştır(event) {
+  let a = event.target;
+  if ( event.target.nodeName != "A") a = event.target.parentElement;
+  const node = a.previousElementSibling;
+  navigator.clipboard.readText().then((value) =>{
+    const düz = evm.adresDüzelt(value);
+    if (düz) {
+      node.value = düz;
+      node.classList.remove("invalid");
+    } else {
+      node.classList.add("invalid");
+      node.value = value;
+    }
+  })
+}
+
+function satırSil(event) {
+  let a = event.target;
+  if ( event.target.nodeName != "A") a = event.target.parentElement;
+  a.parentElement.remove();
+  ağırlıkHesapla();
+}
+
+function birAzalt(event) {
+  const node = event.target.nextElementSibling;
+  if (node.value == 1) return;
+  node.value = parseInt(node.value) - 1;
+  ağırlıkHesapla();
+}
+
+function birArttır(event) {
+  const node = event.target.previousElementSibling;
+  if (node.value == 9) return;
+  node.value = parseInt(node.value) + 1;
+  ağırlıkHesapla();
+}
+
+function ağırlıkBlurOlunca(event) {
+  ağırlıkDüzenle(event);
+  ağırlıkHesapla();
+}
+
+function ağırlıkDüzenle(event) {
+  let n = event.target.value;
+  if (n > 9) event.target.value = 9;
+  if (n < 1 || n == "") event.target.value = 1;
 }
 
 function ağırlıkHesapla() {
@@ -125,7 +183,7 @@ function ağırlıkHesapla() {
   const satır = dom.adla("imf").children;
 
   for (let /** number */ i = 0; i < satır.length; ++i) {
-    total += parseInt(satır[i].lastElementChild.value);
+    total += parseInt(satır[i].children[3].value);
   }
   dom.adla("ims").value = total;
 }
