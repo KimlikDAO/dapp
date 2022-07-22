@@ -63,7 +63,9 @@ function TCKTYarat() {
       fetch(KIMLIK_AS_URL + "?" + new URLSearchParams({ "oauth_code": code, "taahhüt": taahhüt })))
     .then((res) => res.json())
     .then((TCKT) => {
-      for (let ad of "TCKN ad soyad dt".split(" ")) {
+      TCKT["annead"] = "Ayşe"
+      TCKT["babaad"] = "Mehmet"
+      for (let ad of "TCKN ad soyad dt annead babaad".split(" ")) {
         dom.adla(ad).innerText = TCKT[ad];
       }
       dom.adla("nft").classList.add("flipped");
