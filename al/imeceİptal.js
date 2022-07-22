@@ -26,6 +26,7 @@ function atla(sonra) {
   İptalButonu.style.display = "inline";
   İptalButonu.innerText = "İmece iptal kurulmadı 🤌";
   İptalButonu.classList.add("done");
+  dom.adla("im").classList.add("done");
   dom.adla("imc").style.display = "none";
   sonra({}, 0);
 }
