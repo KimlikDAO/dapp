@@ -16,6 +16,38 @@
 
 @font-face {
   font-family: 'f';
+  src: url('/font/Lato2OFL/Lato-Medium.ttf') format('truetype');
+
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'f';
+  src: url('/font/Lato2OFL/Lato-MediumItalic.ttf') format('truetype');
+
+  font-weight: 500;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'f';
+  src: url('/font/Lato2OFL/Lato-Semibold.ttf') format('truetype');
+
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'f';
+  src: url('/font/Lato2OFL/Lato-SemiboldItalic.ttf') format('truetype');
+
+  font-weight: 600;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'f';
   src: url('/font/Lato2OFL/Lato-Bold.ttf') format('truetype');
 
   font-weight: 700;
@@ -32,6 +64,13 @@
 
 html {
   font-family: 'f', sans-serif;
-  font-size: 14px;
+  font-size: 11pt;
   font-weight: 400;
+}
+
+button {
+  font-family: 'f', sans-serif;
+  font-size: 11pt;
+  font-weight: 700;
+  color: #555;
 }
