@@ -8,8 +8,17 @@ const HOST_URL = 'https://beta.kimlikdao.org/';
 const PAGE_CACHE_CONTROL = 'public'
 /** @const {string} */
 const STATIC_CACHE_CONTROL = 'max-age=29030400,public'
+/** @const {Object<string,string>} */
+const MIMES = {
+  "css": "text/css",
+  "js": "application/javascript;charset=utf-8",
+  "svg": "image/svg+xml",
+  "ttf": "font/ttf",
+  "woff": "font/woff",
+  "woff2": "font/woff2",
+};
 
-addEventListener('fetch', (event) => {
+addEventListener('fetch', async (event) => {
   /** @const {URL} */
   const url = new URL(event.request.url)
   /** @const {string} */
@@ -22,14 +31,14 @@ addEventListener('fetch', (event) => {
   const kvKey = (url.pathname === '/' ? 'ana' : url.pathname.substring(1)) + ext;
   /** @const {string} */
   const cacheKey = HOST_URL + kvKey;
-  /** @const {boolean} */
-  const isPage = !url.pathname.includes('.');
+  /** @const {number} */
+  const idx = url.pathname.lastIndexOf('.');
 
   // Asset'i CF'ten almaya çalışıyoruz.
   /** @const {Promise<Response>} */
   const fromCache = caches.default.match(cacheKey).then((response) => {
     if (!response) return Promise.reject();
-    if (isPage) {
+    if (idx == -1) {
       response = new Response(response.body, response);
       response.headers.set('cache-control', PAGE_CACHE_CONTROL);
     }
@@ -62,14 +71,11 @@ addEventListener('fetch', (event) => {
       response.headers.set('content-encoding', ext === '.br' ? 'br' : 'gzip');
     }
 
-    // 'content-type' yaz.
-    /** @const {string} */
-    const contentType = url.pathname.endsWith('.css') ? 'text/css' : ((url.pathname.endsWith('.js')
-      ? 'application/javascript' : 'text/html') + ';charset=utf-8');
-    response.headers.set('content-type', contentType);
-
-    if (isPage) {
+    if (idx == -1) {
+      response.headers.set('content-type', "text/html;charset=utf-8");
       response.headers.set('x-frame-options', 'DENY')
+    } else {
+      response.headers.set('content-type', MIMES[url.pathname.slice(idx + 1)]);
     }
 
     // 'cache-control' ve 'expiration' yaz.
@@ -81,7 +87,7 @@ addEventListener('fetch', (event) => {
 
     // Sayfaları CF cache'inde sonsuz dek ama kullanıcı cache'inde belli bir süre tutmak istiyoruz.
     // Bunun sebebi CF cachi'ni purge gerektiğinde purge edebilmemiz.
-    if (isPage) {
+    if (idx != 1) {
       response.headers.set('cache-control', PAGE_CACHE_CONTROL);
     }
     return response;
