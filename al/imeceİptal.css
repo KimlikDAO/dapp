@@ -56,17 +56,18 @@
 
 .imbtn.paste {
   border-radius: 4px;
-  margin: 0 4px;
+  margin: 0 2em 0 1px;
 }
 
 .delete {
   position: relative;
   visibility: hidden;
   width: 22px;
-  height: 28px;
+  height: 22px;
   opacity: 0.3;
   border-radius: 4px;
   transition: all 0.3s;
+  margin-top: 3px;
 }
 
 .delete:hover {
@@ -77,7 +78,7 @@
 .delete:before,
 .delete:after {
   position: absolute;
-  top: 7px;
+  top: 4px;
   right: 10px;
   height: 14px;
   width: 2px;
@@ -130,5 +131,5 @@
 }
 
 .invalid {
-  border: 1px solid red;
+  border: 1px solid #f21;
 }

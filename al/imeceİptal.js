@@ -110,7 +110,7 @@ function girdiAlanıEkle() {
 function eşikDeğeriBlurOlunca(event) {
   dom.adla("imt").classList.remove("invalid");
   const geçerli =
-      parseInt(event.target.value) <= parseInt(dom.adla("ims").value);
+    parseInt(event.target.value) <= parseInt(dom.adla("ims").value);
   if (!geçerli) dom.adla("imt").classList.add("invalid");
 }
 
@@ -141,8 +141,8 @@ function yapıştır(event) {
 }
 
 function satırSil(event) {
-  let a = event.target;
-  if (event.target.nodeName != "A") a = event.target.parentElement;
+  let a = event.target.nodeName == "A"
+    ? event.target : event.target.parentElement
   a.parentElement.remove();
   ağırlıkHesapla();
 }
@@ -162,14 +162,10 @@ function birArttır(event) {
 }
 
 function ağırlıkBlurOlunca(event) {
-  ağırlıkDüzenle(event);
+  let val = event.target.value;
+  if (val > 9) event.target.value = 9;
+  if (val < 1 || val == "") event.target.value = 1;
   ağırlıkHesapla();
-}
-
-function ağırlıkDüzenle(event) {
-  let n = event.target.value;
-  if (n > 9) event.target.value = 9;
-  if (n < 1 || n == "") event.target.value = 1;
 }
 
 function ağırlıkHesapla() {
@@ -177,7 +173,6 @@ function ağırlıkHesapla() {
   let total = 0;
   /** @const {HTMLCollection} */
   const satır = İptalciler.children;
-
   for (let /** number */ i = 0; i < satır.length; ++i) {
     total += parseInt(satır[i].children[3].value);
   }

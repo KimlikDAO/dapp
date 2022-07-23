@@ -4,6 +4,10 @@ html {
   font-weight: 400;
 }
 
+input {
+  font-family: 'f', sans-serif;
+}
+
 button {
   font-family: 'f', sans-serif;
   font-size: 11pt;
