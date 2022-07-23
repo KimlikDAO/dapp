@@ -9,6 +9,8 @@ import evm from "/lib/evm";
 const GösterButonu = dom.adla("imbe");
 /** @const {Element} */
 const İptalButonu = dom.adla("imbh");
+/** @const {Element} */
+const İptalciler = dom.adla("imf");
 
 /**
  * İmece iptal kurulumunu yapar ve verilmiş callback fonksiyonunu çağırır.
@@ -32,6 +34,7 @@ function atla(sonra) {
 }
 
 function göster(sonra) {
+  dom.adla("im").classList.remove("done");
   dom.adla("imc").style.display = "block";
   dom.adla("imbe").style.display = "none";
   dom.adla("imbh").style.display = "none";
@@ -39,9 +42,9 @@ function göster(sonra) {
   dom.adla("imbi").onclick = () => atla(sonra);
 
   /** @const {HTMLCollection} */
-  const rows = dom.adla("imf").children;
-  for (let i = 0; i < rows.length; ++i) {
-    fonksiyonelYap(rows[i]);
+  const satır = İptalciler.children;
+  for (let i = 0; i < satır.length; ++i) {
+    işlevEkle(satır[i]);
   }
   dom.adla("imba").onclick = girdiAlanıEkle;
   dom.adla("imt").onblur = eşikDeğeriBlurOlunca;
@@ -53,7 +56,7 @@ function göster(sonra) {
     /** @type {number} */
     let toplamAğırlık = 0;
 
-    const satır = dom.adla("imf").children;
+    const satır = İptalciler.children;
     for (let i = 0; i < satır.length; ++i) {
       const adres = satır[i].firstElementChild.value;
       if (!evm.adresGeçerli(adres) || adres in adresAğırlığı) {
@@ -77,13 +80,13 @@ function göster(sonra) {
       dom.adla("imc").classList.add("invisible");
       dom.adla("im").classList.add("done");
       dom.adla("imbe").onclick = null;
-      adresAğırlığı["length"] = dom.adla("imf").childElementCount;
+      adresAğırlığı["length"] = İptalciler.childElementCount;
       sonra(adresAğırlığı, eşikDeğeri);
     }
   };
 }
 
-function fonksiyonelYap(satır) {
+function işlevEkle(satır) {
   const elemanlar = satır.children;
   elemanlar[0].value = "";
   elemanlar[0].onblur = adresBlurOlunca;
@@ -98,28 +101,22 @@ function fonksiyonelYap(satır) {
 }
 
 function girdiAlanıEkle() {
-  const form = dom.adla("imf");
-  let yeniSatır = form.firstElementChild.cloneNode(true);
-  fonksiyonelYap(yeniSatır);
-  form.appendChild(yeniSatır);
+  let yeniSatır = İptalciler.firstElementChild.cloneNode(true);
+  işlevEkle(yeniSatır);
+  İptalciler.appendChild(yeniSatır);
   ağırlıkHesapla();
-}
-
-function eşikDeğeriGecerliMi(değer) {
-  const toplamAğırlık = dom.adla("ims").value;
-  return toplamAğırlık >= değer;
 }
 
 function eşikDeğeriBlurOlunca(event) {
   dom.adla("imt").classList.remove("invalid");
-  const geçerli = eşikDeğeriGecerliMi(event.target.value);
+  const geçerli =
+      parseInt(event.target.value) <= parseInt(dom.adla("ims").value);
   if (!geçerli) dom.adla("imt").classList.add("invalid");
 }
 
 function adresBlurOlunca(event) {
-  console.log(event.target.value);
   const düz = evm.adresDüzelt(event.target.value);
-  if (düz) {
+  if (düz || !event.target.value) {
     event.target.value = düz;
     event.target.classList.remove("invalid");
   } else {
@@ -129,9 +126,9 @@ function adresBlurOlunca(event) {
 
 function yapıştır(event) {
   let a = event.target;
-  if ( event.target.nodeName != "A") a = event.target.parentElement;
+  if (event.target.nodeName != "A") a = event.target.parentElement;
   const node = a.previousElementSibling;
-  navigator.clipboard.readText().then((value) =>{
+  navigator.clipboard.readText().then((value) => {
     const düz = evm.adresDüzelt(value);
     if (düz) {
       node.value = düz;
@@ -145,7 +142,7 @@ function yapıştır(event) {
 
 function satırSil(event) {
   let a = event.target;
-  if ( event.target.nodeName != "A") a = event.target.parentElement;
+  if (event.target.nodeName != "A") a = event.target.parentElement;
   a.parentElement.remove();
   ağırlıkHesapla();
 }
@@ -179,7 +176,7 @@ function ağırlıkHesapla() {
   /** @type {number} */
   let total = 0;
   /** @const {HTMLCollection} */
-  const satır = dom.adla("imf").children;
+  const satır = İptalciler.children;
 
   for (let /** number */ i = 0; i < satır.length; ++i) {
     total += parseInt(satır[i].children[3].value);

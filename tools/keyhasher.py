@@ -8,12 +8,11 @@ import sys
 
 
 args = list(reversed(sys.argv[1:]))
+map_file = open(args.pop(), 'a+')
 compress = True
 if args[-1] == '--nocompress':
     compress = False
     args.pop()
-
-map_file = open(args.pop(), 'a+')
 
 for f_name in args:
     h = hashlib.sha256(open(f_name, 'rb').read()).digest()

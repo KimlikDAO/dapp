@@ -10,7 +10,7 @@ build/ana/page.css: build/font/lato.css ana/page.css
 	cat $^ | yarn csso --output $@
 
 build/ana/page.keymap: $(call compressions, build/ana/page.js) \
-	                   $(call compressions, build/ana/page.css)
+                       $(call compressions, build/ana/page.css)
 	rm -rf $@
 	tools/keyhasher.py $@ build/ana/page.js build/ana/page.css
 

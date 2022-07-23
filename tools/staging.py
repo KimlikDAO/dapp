@@ -34,8 +34,6 @@ class TestServer(BaseHTTPRequestHandler):
             ctype = 'image/svg+xml'
         elif self.path.endswith('.ttf'):
             ctype = 'font/ttf'
-        elif self.path.endswith('.woff'):
-            ctype = 'font/woff'
         elif self.path.endswith('.woff2'):
             ctype = 'font/woff2'
 

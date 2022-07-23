@@ -14,7 +14,6 @@ const MIMES = {
   "js": "application/javascript;charset=utf-8",
   "svg": "image/svg+xml",
   "ttf": "font/ttf",
-  "woff": "font/woff",
   "woff2": "font/woff2",
 };
 
