@@ -104,7 +104,7 @@ function TCKTYarat() {
 
         const [nonce, ephemPubKey, ciphertext] = encrypt(açıkAnahtar, gizle);
 
-        const TCKT = {
+        const TCKTData = {
           name: "TCKT",
           description: "KimlikDAO TC Kimlik Tokeni",
           image: KIMLIK_DAO_URL + "/TCKT.svg",
@@ -121,7 +121,7 @@ function TCKTYarat() {
             ciphertext: ciphertext
           }
         }
-        return ipfs.yaz(JSON.stringify(TCKT)).then(hex);
+        return ipfs.yaz(JSON.stringify(TCKTData)).then(hex);
       })
       .catch((e) => console.log(e + "TCKT oluşturamadık: Kullanıcı reddetti veya IPFS hatası"));
 
