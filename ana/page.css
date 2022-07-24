@@ -39,8 +39,25 @@ h1 {
   margin: 10px;
 }
 
-.invisible {
-  display: none;
+.act.btn {
+  background: #4c5094;
+  color: white;
+  border: 1px solid #4c5094;
+}
+
+.btn {
+  transition: all 0.1;
+  background-color: #FAFBFC;
+  border: 1px solid rgba(27, 31, 35, 0.15);
+  touch-action: manipulation;
+  display: inline-block;
+  padding: 12px 12px 13px;
+  line-height: 1;
+  user-select: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 0;
+  color: #333;
 }
 
 a {
@@ -113,7 +130,6 @@ button:before {
 button:-webkit-details-marker {
   display: none;
 }
-
 
 button {
   background-color: #FAFBFC;

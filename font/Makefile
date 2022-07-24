@@ -24,11 +24,11 @@ build/font/fonts.keymap: $(call compressions, $(TtfFonts)) \
 	tools/keyhasher.py $@ $(TtfFonts)
 	tools/keyhasher.py $@ --nocompress $(Woff2Fonts)
 
-build/font/%.ttf:
+build/font/%.ttf: font/%.txt
 	mkdir -p build/font
 	pyftsubset $(SourceDir)/$($(basename $(notdir $@))Source) \
            $(PyftsubsetParams) \
-           --text-file=font/$(basename $(notdir $@)).txt \
+           --text-file=$< \
            --output-file=$@
 
 build/font/%.woff2: build/font/%.ttf font/Makefile

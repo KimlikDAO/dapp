@@ -5,7 +5,7 @@
 
 if (window["ethereum"]) {
   const s1b = document.getElementById("s1b");
-  s1b.innerText = "Tarayıcı Cüzdanı Bağla";
+  s1b.innerText = "Tarayıcı cüzdanı bağla";
   s1b.target = "";
   s1b.href = "javascript:";
 }

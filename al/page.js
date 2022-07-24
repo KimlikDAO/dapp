@@ -68,9 +68,9 @@ function TCKTYarat() {
       }
       dom.adla("nft").classList.add("flipped");
       const s2a = dom.adla("s2a");
-      s2a.innerText = "E-devlet'ten bilgileriniz alındı 👍";
+      s2a.innerText = "E-devlet'ten bilgileriniz alındı ✓";
       s2a.onclick = null;
-      s2a.classList.add("disabled");
+      s2a.classList.remove("act");
       s2a.disabled = true;
       s2a.href = "javascript:";
       dom.adla("s2").classList.add("done");
@@ -86,8 +86,8 @@ function TCKTYarat() {
       params: [Cüzdan.adres()],
     })).then((pubKey) => {
       s3a.onclick = null;
-      s3a.innerText = "Açık anahtarınızı aldık 👍";
-      s3a.classList.add("disabled");
+      s3a.innerText = "Açık anahtarınızı aldık ✓";
+      s3a.classList.remove("act");
       dom.adla("s3").classList.add("done");
       dom.adla("im").classList.remove("disabled");
       return pubKey;
@@ -175,12 +175,11 @@ if (window["ethereum"]) {
   s1b.onclick = Cüzdan.bağla;
 
   Cüzdan.bağlanınca(() => {
-    console.log("Bağlandi")
     const s1a = dom.adla("s1a");
-    s1b.innerText += "ndı 👍";
+    s1b.innerText += "ndı ✓";
     s1b.onclick = null;
     s1b.disabled = true;
-    s1b.classList.add("disabled");
+    s1b.classList.remove("act");
 
     s1a.style.display = "none";
     dom.adla("s1").classList.add("done");
