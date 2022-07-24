@@ -120,25 +120,6 @@
   border-left: none;
 }
 
-.imnr {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 40px;
-  height: 28px;
-  color: #fff;
-  border: 1px solid #0c56d0;;
-  border-radius: 7px;
-  background-color: #0a65f8;
-  transition: all 0.4s;
-  font-weight: 700;
-}
-
-.imnr:hover {
-  background-color: #0c56d0;;
-  box-shadow: 2px 2px 10px rgb(0 0 0 / 15%);
-}
-
 .imdi {
   width: 5%;
   border: none;
