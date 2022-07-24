@@ -37,25 +37,29 @@
   height: 250px;
   margin-top: 2em;
   perspective: 1000px;
+  z-index: 20;
 }
 
 .nft-container {
   position: absolute;
-  width: 100%;
-  height: 100%;
+  width: 250px;
+  height: 250px;
   transform-style: preserve-3d;
-  transition: all 1s ease;
-  overflow: visible;
+  transition: all 1s ease-in;
 }
 
 .nft-container.flipped {
   transform: rotateY(180deg);
 }
 
+.nft-container.scaled {
+  transform: rotateY(180deg) scale(0.44) translate(92px, 1198px);
+}
+
 .TCKT {
   position: absolute;
-  width: 100%;
-  height: 100%;
+  width: 250px;
+  height: 250px;
   backface-visibility: hidden;
   box-shadow: 2px 2px 10px rgb(0 0 0 / 15%);
   border-radius: 10px;
@@ -79,4 +83,111 @@
 
 #TCKT-kb label {
   font-size: 7px;
+}
+
+/* -------------mobile-----------------*/
+
+.mobile {
+  width: 290px;
+  height: 500px;
+  margin-top: 60px;
+  border: 2px solid black;
+  background-color: #333;
+  color: #fff;
+  overflow: hidden;
+}
+
+.mo_first_row {
+  padding: 0px 20px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 10px;
+  background-color: black;
+}
+
+.mo_first_row_col {
+  display: flex;
+  justify-content: right;
+}
+
+.mo_sec_row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  font-weight: 700;
+  padding-top: 40px;
+}
+
+.mo_thi_row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  padding-bottom: 20px;
+}
+
+.mo_fou_row {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 5px 20px;
+  font-size: 10px;
+}
+
+.circle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-color: hsl(206,85%,57.5%);
+  align-items: center;
+}
+
+.mo_fif_row {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding-top: 40px;
+  font-size: 10px;
+}
+
+.mo_fif_tok {
+  text-align: center;
+  width: 50%;
+  height: 20px;
+  color: #ccc;
+}
+
+.mo_fif_nft {
+  text-align: center;
+  width: 50%;
+  border-bottom: 1px solid #fff;
+  height: 20px;
+}
+
+.mo_six_row {
+  display: flex;
+  justify-content: space-around;
+  padding: 25px 20px;
+  height: 350px;
+  background-color: black;
+}
+
+.mo_first_nft {
+  width: 110px;
+  height: 110px;
+  /* background-color: #fff; */
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.mo_sec_nft {
+  width: 110px;
+  height: 110px;
+  /* background-color: #fff; */
+  border: 1px solid #ccc;
+  border-radius: 5px;
 }

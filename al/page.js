@@ -65,7 +65,7 @@ const TCKTYarat = () => {
       for (let ad of "TCKN ad soyad dt annead babaad".split(" ")) {
         dom.adla(ad).innerText = AçıkTCKT[ad];
       }
-      dom.adla("nft").classList.add("flipped");
+      dom.adla("nft").classList.add("scaled");
       const s2a = dom.adla("s2a");
       s2a.innerText = "E-devlet'ten bilgileriniz alındı ✓";
       s2a.onclick = null;
