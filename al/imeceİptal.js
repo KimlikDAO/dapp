@@ -48,6 +48,8 @@ function göster(sonra) {
   }
   dom.adla("imba").onclick = girdiAlanıEkle;
   dom.adla("imt").onblur = eşikDeğeriBlurOlunca;
+  dom.adla("imtm").onclick = () => eşikBirDegiştir(-1);
+  dom.adla("imtp").onclick = () => eşikBirDegiştir(1);
   dom.adla("imbt").onclick = () => {
     /** @type {!Object<string, number>} */
     let adresAğırlığı = {};
@@ -167,6 +169,13 @@ function ağırlıkBlurOlunca(event) {
   if (val > 9) event.target.value = 9;
   if (val < 1 || val == "") event.target.value = 1;
   ağırlıkHesapla();
+}
+
+function eşikBirDegiştir(n) {
+  const eşik = dom.adla("imt");
+  let sınır = n == 1 ? 99 : 1 ;
+  if (eşik.value == sınır) return;
+  eşik.value = parseInt(eşik.value) + n;
 }
 
 function ağırlıkHesapla() {
