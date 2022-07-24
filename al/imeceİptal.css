@@ -15,10 +15,10 @@
   margin: 0;
 }
 
-.imlbl {
+#imlbl {
   display: flex;
   justify-content: space-between;
-  margin: 2em 2em 0.8em 0;
+  margin: 2em 3em 0.8em 0;
 }
 
 .imcont {
@@ -26,7 +26,7 @@
   margin: 0.8em auto;
 }
 
-.imcont:hover .delete {
+.im3 .imcont:hover .imdel {
   visibility: visible;
 }
 
@@ -39,6 +39,10 @@
 
 .imai:focus {
   box-shadow: 2px 2px 10px rgb(0 0 0 / 15%);
+}
+
+.imin {
+  border: 1px solid #dc3545;
 }
 
 .imbtn {
@@ -59,7 +63,7 @@
   margin: 0 2em 0 1px;
 }
 
-.delete {
+.imdel {
   position: relative;
   visibility: hidden;
   width: 22px;
@@ -67,16 +71,15 @@
   opacity: 0.3;
   border-radius: 4px;
   transition: all 0.3s;
-  margin-top: 3px;
+  margin: 4px 0 0 10px;
 }
 
-.delete:hover {
+.imdel:hover {
   opacity: 1;
-  transform: rotateZ(90deg);
 }
 
-.delete:before,
-.delete:after {
+.imdel:before,
+.imdel:after {
   position: absolute;
   top: 4px;
   right: 10px;
@@ -87,11 +90,11 @@
   background-color: #333;
 }
 
-.delete:before {
+.imdel:before {
   transform: rotate(45deg);
 }
 
-.delete:after {
+.imdel:after {
   transform: rotate(-45deg);
 }
 
@@ -121,15 +124,10 @@
   width: 5%;
   border: none;
   text-align: center;
-  background-color: #f2f2f2;
 }
 
 .imdc {
   text-align: right;
   margin-right: 44px;
   font-weight: 700;
-}
-
-.invalid {
-  border: 1px solid #f21;
 }

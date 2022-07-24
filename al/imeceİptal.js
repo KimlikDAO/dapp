@@ -2,6 +2,7 @@
  * @fileoverview İmece iptal parçası. DOM'da `im` öneki bu parçaya ayrılmıştır.
  */
 
+import Cüzdan from "/al/cüzdan";
 import dom from "/lib/dom";
 import evm from "/lib/evm";
 
@@ -38,10 +39,9 @@ function göster(sonra) {
   dom.adla("imc").style.display = "block";
   dom.adla("imbe").style.display = "none";
   dom.adla("imbh").style.display = "none";
-
   dom.adla("imbi").onclick = () => atla(sonra);
 
-  /** @const {HTMLCollection} */
+  /** @const {NodeList<!Element>} */
   const satır = İptalciler.children;
   for (let i = 0; i < satır.length; ++i) {
     işlevEkle(satır[i]);
@@ -58,11 +58,14 @@ function göster(sonra) {
 
     const satır = İptalciler.children;
     for (let i = 0; i < satır.length; ++i) {
-      const adres = satır[i].firstElementChild.value;
-      if (!evm.adresGeçerli(adres) || adres in adresAğırlığı) {
+      /** @const {Element} */
+      const girdi = satır[i].firstElementChild;
+      /** @const {string} */
+      const adres = girdi.value;
+      if (!evm.adresGeçerli(adres) || adres in adresAğırlığı ||
+        adres.toLowerCase() == Cüzdan.adres()) {
         geçerli = false;
-        console.log("hatalı girdi", i);
-        // TODO(KimlikDAO-bot): hata bildir kırmızi vs.
+        satır[i].firstElementChild.classList.add("imin");
       }
       /** @type {number} */
       const ağırlık = parseInt(satır[i].children[3].value);
@@ -73,13 +76,14 @@ function göster(sonra) {
     const eşikDeğeri = parseInt(dom.adla("imt").value);
     if (toplamAğırlık < eşikDeğeri) {
       geçerli = false;
-      dom.adla("imt").classList.add("invalid");
+      dom.adla("imt").classList.add("imin");
     }
     if (geçerli) {
-      dom.adla("imbh").innerText = "İmece iptal kuruldu 👍";
-      dom.adla("imc").classList.add("invisible");
+      İptalButonu.style.display = "inline";
+      İptalButonu.innerText = "İmece iptal kuruldu 👍";
+      İptalButonu.onclick = null;
+      dom.adla("imc").style.display = "none";
       dom.adla("im").classList.add("done");
-      dom.adla("imbe").onclick = null;
       adresAğırlığı["length"] = İptalciler.childElementCount;
       sonra(adresAğırlığı, eşikDeğeri);
     }
@@ -89,8 +93,8 @@ function göster(sonra) {
 function işlevEkle(satır) {
   const elemanlar = satır.children;
   elemanlar[0].value = "";
-  elemanlar[0].onblur = adresBlurOlunca;
-  elemanlar[0].classList.remove("invalid");
+  elemanlar[0].onblur = (e) => girdiDüzelt(e.target);
+  elemanlar[0].classList.remove("imin");
   elemanlar[1].onclick = yapıştır;
   elemanlar[2].onclick = birAzalt;
   elemanlar[3].onblur = ağırlıkBlurOlunca;
@@ -104,46 +108,43 @@ function girdiAlanıEkle() {
   let yeniSatır = İptalciler.firstElementChild.cloneNode(true);
   işlevEkle(yeniSatır);
   İptalciler.appendChild(yeniSatır);
+  if (İptalciler.childElementCount >= 3)
+    İptalciler.classList.add("im3");
   ağırlıkHesapla();
 }
 
 function eşikDeğeriBlurOlunca(event) {
-  dom.adla("imt").classList.remove("invalid");
   const geçerli =
     parseInt(event.target.value) <= parseInt(dom.adla("ims").value);
-  if (!geçerli) dom.adla("imt").classList.add("invalid");
+  dom.adla("imt").classList.toggle("imin", geçerli);
 }
 
-function adresBlurOlunca(event) {
-  const düz = evm.adresDüzelt(event.target.value);
-  if (düz || !event.target.value) {
-    event.target.value = düz;
-    event.target.classList.remove("invalid");
-  } else {
-    event.target.classList.add("invalid");
-  };
+function girdiDüzelt(girdi) {
+  const değer = girdi.value;
+  const düz = evm.adresDüzelt(değer);
+  if (düz) girdi.value = düz
+  /** @const {boolean} */
+  const hataVar = değer &&
+    (!düz || değer.toLowerCase() == Cüzdan.adres().toLowerCase())
+  girdi.classList.toggle("imin", hataVar);
 }
 
 function yapıştır(event) {
-  let a = event.target;
-  if (event.target.nodeName != "A") a = event.target.parentElement;
-  const node = a.previousElementSibling;
-  navigator.clipboard.readText().then((value) => {
-    const düz = evm.adresDüzelt(value);
-    if (düz) {
-      node.value = düz;
-      node.classList.remove("invalid");
-    } else {
-      node.classList.add("invalid");
-      node.value = value;
-    }
-  })
+  let a = event.target.nodeName == 'A'
+    ? event.target : event.target.parentElement;
+  const girdi = a.previousElementSibling;
+  navigator.clipboard.readText().then(
+    (değer) => {
+      girdi.value = değer;
+      girdiDüzelt(girdi);
+    })
 }
 
 function satırSil(event) {
   let a = event.target.nodeName == "A"
     ? event.target : event.target.parentElement
   a.parentElement.remove();
+  if (İptalciler.childElementCount < 3) İptalciler.classList.remove("im3");
   ağırlıkHesapla();
 }
 
@@ -171,7 +172,7 @@ function ağırlıkBlurOlunca(event) {
 function ağırlıkHesapla() {
   /** @type {number} */
   let total = 0;
-  /** @const {HTMLCollection} */
+  /** @const {NodeList<!Element>} */
   const satır = İptalciler.children;
   for (let /** number */ i = 0; i < satır.length; ++i) {
     total += parseInt(satır[i].children[3].value);
