@@ -37,26 +37,22 @@ const AdresLinki = {
  * @return {string} Arabirimde gösterilecek isim. EVM adresinin kısaltılmış
  *                  hali.
  */
-function hızlıArabirimAdı(hesap) {
-  return hesap.slice(0, 6) + "..." + hesap.slice(-4);
-}
+const hızlıArabirimAdı = (hesap) => hesap.slice(0, 6) + "..." + hesap.slice(-4);
 
 /**
  * @param {string} hesap EVM adresi.
  * @return {Promise<string>} Arabirimde gösterilecek isim. EVM adresinin
  *                           kısaltılmış hali veya ENS / avvy domains adı.
+ *
+ * TODO(KimlikDAO-bot): ENS lookup, avvy domains lookup
  */
-async function nihaiArabirimAdı(hesap) {
-  // TODO(KimlikDAO-bot): ENS lookup, avvy domains lookup
-  return new Promise((resolve) => setTimeout(resolve("hot.kimlikdao.eth"), 1000));
-}
+const nihaiArabirimAdı = (hesap) =>
+  new Promise((resolve) => setTimeout(resolve("hot.kimlikdao.eth"), 1000));
 
 /**
  * @param {string} yeniAğ harf dizisi olarak yeni ağ adı.
  */
-function ağDeğişti(yeniAğ) {
-  console.log("Ağ değişti: " + yeniAğ);
-
+const ağDeğişti = (yeniAğ) => {
   if (yeniAğ != Ağ) {
     dom.adla("nc" + Ağ).classList.remove("sel");
     dom.adla("nc" + yeniAğ).classList.add("sel");
@@ -71,7 +67,7 @@ function ağDeğişti(yeniAğ) {
 /**
  * @param {!Array<string>} adresler cüzdandan gelen adresler dizisi.
  */
-function adresDeğişti(adresler) {
+const adresDeğişti = (adresler) => {
   console.log("Adres değişti: " + adresler);
 
   if (adresler.length == 0) {
@@ -92,20 +88,20 @@ function adresDeğişti(adresler) {
   }
 }
 
-function bağlanınca(f) {
+const bağlanınca = (f) => {
   if (Adres) f();
   else Bağlanınca = f;
 }
 
-function kopunca(f) {
+const kopunca = (f) => {
   Kopunca = f;
 }
 
-function adresDeğişince(f) {
+const adresDeğişince = (f) => {
   AdresDeğişince = f;
 }
 
-function bağla() {
+const bağla = () => {
   ethereum
     .request(
       /** @type {RequestParams} */({ method: "eth_requestAccounts" }))

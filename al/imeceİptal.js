@@ -18,12 +18,12 @@ const İptalciler = dom.adla("imf");
  * 
  * @param {function(Object<string,number>,number)} sonra
  */
-function imeceİptalKurVe(sonra) {
+const imeceİptalKurVe = (sonra) => {
   GösterButonu.onclick = () => göster(sonra);
   İptalButonu.onclick = () => atla(sonra);
 }
 
-function atla(sonra) {
+const atla = (sonra) => {
   GösterButonu.style.display = "inline";
   GösterButonu.innerText = "Yine de kur";
   İptalButonu.style.display = "inline";
@@ -34,7 +34,7 @@ function atla(sonra) {
   sonra({}, 0);
 }
 
-function göster(sonra) {
+const göster = (sonra) => {
   dom.adla("im").classList.remove("done");
   dom.adla("imc").style.display = "block";
   dom.adla("imbe").style.display = "none";
@@ -92,7 +92,7 @@ function göster(sonra) {
   };
 }
 
-function işlevEkle(satır) {
+const işlevEkle = (satır) => {
   const elemanlar = satır.children;
   elemanlar[0].value = "";
   elemanlar[0].onblur = (e) => girdiDüzelt(e.target);
@@ -106,7 +106,7 @@ function işlevEkle(satır) {
   elemanlar[5].onclick = satırSil;
 }
 
-function girdiAlanıEkle() {
+const girdiAlanıEkle = () => {
   let yeniSatır = İptalciler.firstElementChild.cloneNode(true);
   işlevEkle(yeniSatır);
   İptalciler.appendChild(yeniSatır);
@@ -115,13 +115,13 @@ function girdiAlanıEkle() {
   ağırlıkHesapla();
 }
 
-function eşikDeğeriBlurOlunca(event) {
+const eşikDeğeriBlurOlunca = (event) => {
   const geçerli =
     parseInt(event.target.value) <= parseInt(dom.adla("ims").value);
   dom.adla("imt").classList.toggle("imin", geçerli);
 }
 
-function girdiDüzelt(girdi) {
+const girdiDüzelt = (girdi) => {
   const değer = girdi.value;
   const düz = evm.adresDüzelt(değer);
   if (düz) girdi.value = düz
@@ -131,7 +131,7 @@ function girdiDüzelt(girdi) {
   girdi.classList.toggle("imin", hataVar);
 }
 
-function yapıştır(event) {
+const yapıştır = (event) => {
   let a = event.target.nodeName == 'A'
     ? event.target : event.target.parentElement;
   const girdi = a.previousElementSibling;
@@ -142,7 +142,7 @@ function yapıştır(event) {
     })
 }
 
-function satırSil(event) {
+const satırSil = (event) => {
   let a = event.target.nodeName == "A"
     ? event.target : event.target.parentElement
   a.parentElement.remove();
@@ -150,35 +150,35 @@ function satırSil(event) {
   ağırlıkHesapla();
 }
 
-function birAzalt(event) {
+const birAzalt = (event) => {
   const node = event.target.nextElementSibling;
   if (node.value == 1) return;
   node.value = parseInt(node.value) - 1;
   ağırlıkHesapla();
 }
 
-function birArttır(event) {
+const birArttır = (event) => {
   const node = event.target.previousElementSibling;
   if (node.value == 9) return;
   node.value = parseInt(node.value) + 1;
   ağırlıkHesapla();
 }
 
-function ağırlıkBlurOlunca(event) {
+const ağırlıkBlurOlunca = (event) => {
   let val = event.target.value;
   if (val > 9) event.target.value = 9;
   if (val < 1 || val == "") event.target.value = 1;
   ağırlıkHesapla();
 }
 
-function eşikBirDegiştir(n) {
+const eşikBirDegiştir = (n) => {
   const eşik = dom.adla("imt");
-  let sınır = n == 1 ? 99 : 1 ;
+  let sınır = n == 1 ? 99 : 1;
   if (eşik.value == sınır) return;
   eşik.value = parseInt(eşik.value) + n;
 }
 
-function ağırlıkHesapla() {
+const ağırlıkHesapla = () => {
   /** @type {number} */
   let total = 0;
   /** @const {NodeList<!Element>} */
