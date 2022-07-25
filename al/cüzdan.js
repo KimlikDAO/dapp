@@ -4,7 +4,7 @@ import dom from "/lib/dom";
 let Adres = null;
 /** @type {string} */
 let Ağ = "0xa86a";
-/** @type {?function()} */
+/** @type {?function(string)} */
 let Bağlanınca = null;
 /** @type {?function()} */
 let Kopunca = null;
@@ -80,7 +80,7 @@ const adresDeğişti = (adresler) => {
       if (ad) AdresButonu.innerText = ad;
     });
     if (Bağlanınca) {
-      Bağlanınca();
+      Bağlanınca(Adres);
       Bağlanınca = null;
     } else {
       AdresDeğişince();
@@ -181,5 +181,6 @@ export default {
   adresDeğişince,
   bağla,
   bağlanınca,
+  hızlıArabirimAdı,
   kopunca
 };

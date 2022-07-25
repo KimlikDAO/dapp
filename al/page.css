@@ -88,7 +88,7 @@
 
 /* -------------mobile-----------------*/
 
-.mo {
+#mo {
   width: 280px;
   height: 550px;
   margin-top: 30px;
@@ -111,7 +111,7 @@
   padding-bottom: 20px;
 }
 
-.motr {
+#motr {
   background-color: #E8F9FD;
   padding: 5px 20px;
   color: #999;

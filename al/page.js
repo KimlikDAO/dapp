@@ -154,7 +154,7 @@ if (window["ethereum"]) {
   const s1b = dom.adla("s1b");
   s1b.onclick = Cüzdan.bağla;
 
-  Cüzdan.bağlanınca(() => {
+  Cüzdan.bağlanınca((adres) => {
     const s1a = dom.adla("s1a");
     s1b.innerText += "ndı ✓";
     s1b.onclick = null;
@@ -165,6 +165,7 @@ if (window["ethereum"]) {
     dom.adla("s1").classList.add("done");
     dom.adla("s2").classList.remove("disabled");
     dom.adla("s2a").classList.remove("disabled");
+    dom.adla("motr").innerText = Cüzdan.hızlıArabirimAdı(adres);
 
     if (!location.search) {
       dom.adla("s2a").classList.add("act");
