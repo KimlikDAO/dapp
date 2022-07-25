@@ -40,7 +40,7 @@ h1 {
 }
 
 .act.btn {
-  background: #0c56d0;
+  background: #3d67ab;
   color: white;
   border: 1px solid #0a46a7;
   font-weight: 700;
@@ -52,7 +52,6 @@ h1 {
 }
 
 .btn {
-  transition: all 0.1;
   background-color: #FAFBFC;
   border: 1px solid rgba(27, 31, 35, 0.15);
   touch-action: manipulation;

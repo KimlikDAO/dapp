@@ -121,14 +121,14 @@ if (window["ethereum"]) {
 
   dom.adla("nc").onclick = () => {
     const menu = dom.adla("ncw");
-    menu.style.display = "block";
+    menu.style.display = "";
     const backdrop = dom.adla("ncbd");
     backdrop.onclick = () => menu.style.display = "none";
   };
 
   dom.adla("na").onclick = () => {
     const menu = dom.adla("naw");
-    menu.style.display = "block";
+    menu.style.display = "";
     const backdrop = dom.adla("nabd");
     backdrop.onclick = () => menu.style.display = "none";
   };

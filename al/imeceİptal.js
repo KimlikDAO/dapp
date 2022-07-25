@@ -24,9 +24,9 @@ const imeceİptalKurVe = (sonra) => {
 }
 
 const atla = (sonra) => {
-  GösterButonu.style.display = "inline";
+  GösterButonu.style.display = "";
   GösterButonu.innerText = "Yine de kur";
-  İptalButonu.style.display = "inline";
+  İptalButonu.style.display = "";
   İptalButonu.innerText = "İmece iptal kurulmadı 🤌";
   İptalButonu.classList.add("done");
   dom.adla("im").classList.add("done");
@@ -36,9 +36,9 @@ const atla = (sonra) => {
 
 const göster = (sonra) => {
   dom.adla("im").classList.remove("done");
-  dom.adla("imc").style.display = "block";
-  dom.adla("imbe").style.display = "none";
-  dom.adla("imbh").style.display = "none";
+  dom.adla("imc").style.display = "";
+  GösterButonu.style.display = "none";
+  İptalButonu.style.display = "none";
   dom.adla("imbi").onclick = () => atla(sonra);
 
   /** @const {NodeList<!Element>} */
@@ -48,8 +48,8 @@ const göster = (sonra) => {
   }
   dom.adla("imba").onclick = girdiAlanıEkle;
   dom.adla("imt").onblur = eşikDeğeriBlurOlunca;
-  dom.adla("imtm").onclick = () => eşikBirDegiştir(-1);
-  dom.adla("imtp").onclick = () => eşikBirDegiştir(1);
+  dom.adla("imtm").onclick = () => eşikBirDeğiştir(false);
+  dom.adla("imtp").onclick = () => eşikBirDeğiştir(true);
   dom.adla("imbt").onclick = () => {
     /** @type {!Object<string, number>} */
     let adresAğırlığı = {};
@@ -81,8 +81,8 @@ const göster = (sonra) => {
       dom.adla("imt").classList.add("imin");
     }
     if (geçerli) {
-      İptalButonu.style.display = "inline";
-      İptalButonu.innerText = "İmece iptal kuruldu 👍";
+      İptalButonu.style.display = "";
+      İptalButonu.innerText = "İmece iptal kuruldu ✓";
       İptalButonu.onclick = null;
       dom.adla("imc").style.display = "none";
       dom.adla("im").classList.add("done");
@@ -171,11 +171,12 @@ const ağırlıkBlurOlunca = (event) => {
   ağırlıkHesapla();
 }
 
-const eşikBirDegiştir = (n) => {
+const eşikBirDeğiştir = (artır) => {
   const eşik = dom.adla("imt");
-  let sınır = n == 1 ? 99 : 1;
-  if (eşik.value == sınır) return;
-  eşik.value = parseInt(eşik.value) + n;
+  const değer = parseInt(eşik.value);
+  const toplam = parseInt(dom.adla("ims").value);
+  eşik.value = artır
+    ? Math.min(değer + 1, 99, toplam) : Math.max(değer - 1, 1);
 }
 
 const ağırlıkHesapla = () => {
@@ -187,6 +188,9 @@ const ağırlıkHesapla = () => {
     total += parseInt(satır[i].children[3].value);
   }
   dom.adla("ims").value = total;
+  const eşik = dom.adla("imt");
+  if (eşik.value > total)
+    eşik.value = total;
 }
 
 export { imeceİptalKurVe };

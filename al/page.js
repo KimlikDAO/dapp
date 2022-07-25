@@ -39,7 +39,6 @@ const taahhütOluştur = (hesap, rasgele) => {
 }
 
 const TCKTYarat = () => {
-  if (!location.search) return;
   /**
    * Pedersen taahhüdü için rasgele bitdizisi.
    * @type {!Uint8Array}
@@ -165,7 +164,11 @@ if (window["ethereum"]) {
     dom.adla("s2").classList.remove("disabled");
     dom.adla("s2a").classList.remove("disabled");
 
-    TCKTYarat();
+    if (!location.search) {
+      dom.adla("s2a").classList.add("act");
+    } else {
+      TCKTYarat();
+    }
   });
 
   // İleride cüzdan adresi değiştiğinde kullanıcıya tekrar bilgileri
