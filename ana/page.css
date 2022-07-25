@@ -182,11 +182,6 @@ button:hover {
   transition: background 0s;
 }
 
-button.act {
-  background: #aae;
-  border-color: #446;
-}
-
 /* Navigation */
 #n {
   display: flex;

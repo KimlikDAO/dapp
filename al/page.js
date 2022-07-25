@@ -143,7 +143,9 @@ const öde = (cidSözü, adresAğırlığı, eşik) => {
       let döndü = adresAğırlığı.length
         ? TCKT.createWithRevokers(cid, eşik, adresAğırlığı)
         : TCKT.create(cid);
-      döndü.catch((e) => console.log(e));
+      döndü
+        .then(() => dom.adla("nft").classList.add("scaleandmove"))
+        .catch(() => dom.adla("nft").classList.add("scaleandmove"));
     });
   };
 }
