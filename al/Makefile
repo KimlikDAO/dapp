@@ -8,7 +8,7 @@ build/inl/wallet-inline.js: al/wallet-inline.js lib/ethereum.js
 build/al/page.js: al/page.js al/imeceİptal.js al/cüzdan.js \
                   lib/dom.js lib/cevir.js lib/evm.js \
                   lib/encrypt.js lib/ipfs.js lib/sha3.js \
-                  lib/ethereum.js lib/TCKTData.js
+                  lib/ethereum.js lib/TCKT.js lib/TCKTData.js
 	mkdir -p build/al
 	yarn google-closure-compiler -W VERBOSE -O ADVANCED --charset UTF-8 \
                              --emit_use_strict \

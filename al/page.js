@@ -8,8 +8,8 @@ import { imeceİptalKurVe } from '/al/imeceİptal';
 import { base64, hex } from '/lib/cevir';
 import dom from '/lib/dom';
 import { encrypt } from '/lib/encrypt';
-import evm from '/lib/evm';
 import ipfs from '/lib/ipfs';
+import TCKT from '/lib/TCKT';
 
 /** @const {string} */
 const KIMLIK_AS_URL = "https://mock-api.kimlikas.com";
@@ -27,7 +27,7 @@ const KIMLIK_DAO_URL = "https://kimlikdao.org";
  * @param {!Uint8Array} rasgele bitdizisi.
  * @return {Promise<string>} Kriptografik taahhüt.
  */
-async function taahhütOluştur(hesap, rasgele) {
+const taahhütOluştur = (hesap, rasgele) => {
   /** @type {!Uint8Array} */
   let concat = new Uint8Array(32 + 20);
   concat.set(rasgele, 0);
@@ -38,7 +38,7 @@ async function taahhütOluştur(hesap, rasgele) {
   return crypto.subtle.digest("SHA-256", concat).then(base64);
 }
 
-function TCKTYarat() {
+const TCKTYarat = () => {
   if (!location.search) return;
   /**
    * Pedersen taahhüdü için rasgele bitdizisi.
@@ -62,9 +62,9 @@ function TCKTYarat() {
     .then((taahhüt) =>
       fetch(KIMLIK_AS_URL + "?" + new URLSearchParams({ "oauth_code": code, "taahhüt": taahhüt })))
     .then((res) => res.json())
-    .then((TCKT) => {
+    .then((AçıkTCKT) => {
       for (let ad of "TCKN ad soyad dt annead babaad".split(" ")) {
-        dom.adla(ad).innerText = TCKT[ad];
+        dom.adla(ad).innerText = AçıkTCKT[ad];
       }
       dom.adla("nft").classList.add("flipped");
       const s2a = dom.adla("s2a");
@@ -74,10 +74,10 @@ function TCKTYarat() {
       s2a.disabled = true;
       s2a.href = "javascript:";
       dom.adla("s2").classList.add("done");
-      TCKT.rasgele = base64(Rasgele);
+      AçıkTCKT.rasgele = base64(Rasgele);
       // TODO(KimlikDAO-bot): Kullanıcı tarafında gelen TCKT'nin fazladan veri
       // içermediğini denetle. Fazla verileri işaretleme riski yüzünden sil.
-      return JSON.stringify(TCKT);
+      return JSON.stringify(AçıkTCKT);
     });
 
   s3a.onclick = () => {
@@ -93,7 +93,7 @@ function TCKTYarat() {
       return pubKey;
     });
 
-    /** @type {Promise<Uint8Array>} */
+    /** @type {Promise<string>} */
     const cidSözü = Promise.all([açıkTCKTSözü, açıkAnahtarSözü])
       .then(([açıkTCKT, açıkAnahtar]) => {
         let gizle = new Uint8Array(1000);
@@ -133,39 +133,18 @@ function TCKTYarat() {
 /**
  * Ödeme adımını gösterir, ödeme onayını alıp evm provider'a yollar.
  *
- * @param {Promise<Uint8Array>} cidSözü gelmekte olan ipfs CID'i.
+ * @param {Promise<string>} cidSözü gelmekte olan ipfs CID'i.
  * @param {Object<string, number>} adresAğırlığı (adres, ağırlık) ikilileri.
  * @param {number} eşik imece iptal için gereken oy eşiği.
  */
-function öde(cidSözü, adresAğırlığı, eşik) {
+const öde = (cidSözü, adresAğırlığı, eşik) => {
   dom.adla("s5").classList.remove("disabled");
-
-  /** @type {?string} */
-  let iptalData = null;
-  const len = adresAğırlığı.length;
-  if (len) {
-    delete adresAğırlığı.length;
-    iptalData = evm.uint256(/** @type {number} */(eşik)) + evm.uint256(len);
-    for (let adres in adresAğırlığı) {
-      iptalData += evm.uint160(adresAğırlığı[adres]) + adres.slice(2).toLowerCase();
-    }
-  }
-
   dom.adla("s5a").onclick = () => {
     cidSözü.then((cid) => {
-      /** @type {Transaction} */
-      const tx = /** @type {Transaction} */({
-        to: "0xcCc0F938A2C94b0fFBa49F257902Be7F56E62cCc",
-        from: /** @type {string} */(Cüzdan.adres()),
-        value: "0x16345785D8A0000",
-        data: iptalData ? "0x964cefc3" + cid + iptalData : "0x780900dc" + cid,
-        chainId: /** @type {string} */(Cüzdan.ağ()),
-      });
-
-      ethereum.request(/** @type {RequestParams} */({
-        method: "eth_sendTransaction",
-        params: [tx]
-      })).catch((e) => console.log(e));
+      let döndü = adresAğırlığı.length
+        ? TCKT.createWithRevokers(cid, eşik, adresAğırlığı)
+        : TCKT.create(cid);
+      döndü.catch((e) => console.log(e));
     });
   };
 }

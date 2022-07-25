@@ -21,7 +21,7 @@ const ağ = () => Ağ;
 /** @const {function():?string} */
 const adres = () => Adres;
 
-/** @const {Object<string,string>} */
+/** @const {Object<string, string>} */
 const AdresLinki = {
   "0x1": "etherscan.io",
   "0xa86a": "snowtrace.io",
