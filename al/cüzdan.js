@@ -119,18 +119,27 @@ if (window["ethereum"]) {
   ethereum.on("accountsChanged", adresDeğişti);
   ethereum.on("chainChanged", ağDeğişti);
 
-  dom.adla("nc").onclick = () => {
-    const menu = dom.adla("ncw");
-    menu.style.display = "";
-    const backdrop = dom.adla("ncbd");
-    backdrop.onclick = () => menu.style.display = "none";
+  const ağMenüsü = dom.adla("ncw");
+  const adresMenüsü = dom.adla("naw");
+
+  AğButonu.onclick = (event) => {
+    ağMenüsü.style.display = "";
+    adresMenüsü.style.display = "none";
+    event.stopPropagation();
+    window.onclick = () => {
+      ağMenüsü.style.display = "none";
+      window.onclick = null;
+    }
   };
 
-  dom.adla("na").onclick = () => {
-    const menu = dom.adla("naw");
-    menu.style.display = "";
-    const backdrop = dom.adla("nabd");
-    backdrop.onclick = () => menu.style.display = "none";
+  AdresButonu.onclick = (event) => {
+    ağMenüsü.style.display = "none";
+    adresMenüsü.style.display = "";
+    event.stopPropagation();
+    window.onclick = () => {
+      adresMenüsü.style.display = "none";
+      window.onclick = null;
+    }
   };
 
   dom.adla("ncd").onclick = (event) => {

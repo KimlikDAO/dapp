@@ -70,6 +70,7 @@ const TCKTYarat = () => {
       s2a.innerText = "E-devlet'ten bilgileriniz alındı ✓";
       s2a.onclick = null;
       s2a.classList.remove("act");
+      s2a.classList.add("dis");
       s2a.disabled = true;
       s2a.href = "javascript:";
       dom.adla("s2").classList.add("done");
@@ -84,9 +85,10 @@ const TCKTYarat = () => {
       method: "eth_getEncryptionPublicKey",
       params: [Cüzdan.adres()],
     })).then((pubKey) => {
-      s3a.onclick = null;
       s3a.innerText = "Açık anahtarınızı aldık ✓";
       s3a.classList.remove("act");
+      s3a.classList.add("dis");
+      s3a.onclick = null;
       dom.adla("s3").classList.add("done");
       dom.adla("im").classList.remove("disabled");
       return pubKey;
@@ -160,6 +162,7 @@ if (window["ethereum"]) {
     s1b.onclick = null;
     s1b.disabled = true;
     s1b.classList.remove("act");
+    s1b.classList.add("dis");
 
     s1a.style.display = "none";
     dom.adla("s1").classList.add("done");

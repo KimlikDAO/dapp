@@ -53,6 +53,10 @@ h1 {
   box-shadow: 2px 2px 10px rgb(0 0 0 / 15%);
 }
 
+.btn.dis {
+  cursor: default;
+}
+
 .btn {
   background-color: #FAFBFC;
   border: 1px solid rgba(27, 31, 35, 0.15);
@@ -99,20 +103,6 @@ h1 {
   font-weight: 700;
   line-height: 25px;
   transition: width 0.2s, background-color 0.2s;
-}
-
-.actbutton:hover {
-  background-color: #0a46a7;
-  ;
-  box-shadow: 2px 2px 10px rgb(0 0 0 / 15%);
-}
-
-.actbutton.disabled {
-  cursor: default;
-}
-
-.actbutton.done {
-  cursor: default;
 }
 
 button:hover {
