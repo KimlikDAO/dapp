@@ -21,38 +21,30 @@
     </a>
     <!-- navigation buttons -->
     <div id=nb>
-      <div class="ncdd">
-        <button id=nc>
-          <img src="/al/img/avalanche.svg">
-        </button>
-        <div id="ncw" style="display:none">
-          <ul id=ncd>
-            <li id="nc0x1"><img src="/al/img/ethereum.svg" width="32" height="32"> Ethereum</li>
-            <li id="nc0xa86a" class="sel"><img src="/al/img/avalanche.svg"> Avalanche</li>
-            <li id="nc0x89"><img src="/al/img/polygon.svg" width="32" height="32"> Polygon</li>
-            <li id="nc0xa4b1"><img src="/al/img/arbitrum.svg" width="32" height="32"> Arbitrum</li>
-            <li id="nc0xfa"><img src="/al/img/fantom.svg" width="32" height="32"> Fantom</li>
-          </ul>
-        </div>
-      </div>
-      <div class="ncdd">
-        <button id=na>Bağlı değil</button>
-        <div id="naw" style="display:none">
-          <ul id="nad">
-            <li id="nad1"><img src="/al/img/copy.svg"> Adresi Kopyala</li>
-            <li id="nad2"><img src="/al/img/debank.svg"> DeBank'ta görüntüle</li>
-            <li id="nad3"><img src="/al/img/external-link.svg"> Explorer'da
-              görüntüle</li>
-          </ul>
-        </div>
-      </div>
+      <button id=nc>
+        <img src="/al/img/avalanche.svg">
+      </button>
+      <ul id=ncd style="display:none">
+        <li id="nc0x1"><img src="/al/img/ethereum.svg" width="32" height="32"> Ethereum</li>
+        <li id="nc0xa86a" class="sel"><img src="/al/img/avalanche.svg"> Avalanche</li>
+        <li id="nc0x89"><img src="/al/img/polygon.svg" width="32" height="32"> Polygon</li>
+        <li id="nc0xa4b1"><img src="/al/img/arbitrum.svg" width="32" height="32"> Arbitrum</li>
+        <li id="nc0xfa"><img src="/al/img/fantom.svg" width="32" height="32"> Fantom</li>
+      </ul>
+      <button id=na>Bağlı değil</button>
+      <ul id=nad style="display:none">
+        <li id="nad1"><img src="/al/img/copy.svg"> Adresi Kopyala</li>
+        <li id="nad2"><img src="/al/img/debank.svg"> DeBank'ta görüntüle</li>
+        <li id="nad3"><img src="/al/img/external-link.svg"> Explorer'da
+          görüntüle</li>
+      </ul>
       <!-- naviation language -->
       <button id=nl>Türkçe</button>
     </div>
   </div>
   <div id=b>
     <div id="bs">
-      <div class=step id=s1>
+      <div id=s1 class=step>
         <b>1. Cüzdanınızı bağlayın.</b>
         WalletLink uyumlu cüzdan ve ya uzantı cüzdan
         <br>
@@ -61,7 +53,7 @@
         <a href="https://metamask.io" target="_blank" id=s1b class="btn">MetaMask kur</a>
         <script src="/al/wallet-inline.js"></script>
       </div>
-      <div class="step disabled" id=s2>
+      <div id=s2 class="step disabled">
         <b>2. Kendinizi tanıtın.</b>
         E-devlet ile giriş yapıp 'Temel-Bilgileri' paylaşımını onaylayın.
         <br>
@@ -69,7 +61,7 @@
         <a href="https://mock-oauth2.kimlikdao.net/auth?response_type=code&client_id=F5CAA82F-E2CF-4F21-A745-471ABE3CE7F8&redirect_uri=http://localhost:8787/al&scope=Temel-Bilgileri&state=0xa86a"
           class="btn" id="s2a">E-devlet ile giriş yap</a>
       </div>
-      <div class="step disabled" id=s3>
+      <div id=s3 class="step disabled">
         <b>3. TCKT'ni şifreleyelim.</b>
         TCKT'ni şifrelememiz için cüzdan açık anahtarına ihtiyacımız var.
         Bu işlem off-chain, tamamen ücretsiz ve güvenli.
@@ -77,7 +69,7 @@
         <a href="javascript:" id="s3a" class="act btn">Cüzdanıma istek yolla</a>
       </div>
       <!-- im: imeceIptal -->
-      <div class="step disabled" id="im">
+      <div id="im" class="step disabled">
         <b>4. İmece iptal adresleri.</b>
         Fiyatı $2'dan $1'a düşürmek için imece iptal adresleri eklemek istiyor musunuz?
         <br>
@@ -178,8 +170,6 @@
           <div class="mofirn"></div>
         </div>
       </div>
-    </div>
-    <div id="ph">
     </div>
   </div>
   <script async type="module" src="/al/page.js"></script>

@@ -116,6 +116,7 @@ const girdiAlanıEkle = () => {
 }
 
 const eşikDeğeriBlurOlunca = (event) => {
+  /** @const {boolean} */
   const geçerli =
     parseInt(event.target.value) <= parseInt(dom.adla("ims").value);
   dom.adla("imt").classList.toggle("imin", geçerli);

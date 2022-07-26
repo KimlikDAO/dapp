@@ -1,6 +1,7 @@
-.ncdd {
+#nb {
   position: relative;
-  cursor: pointer;
+  display: flex;
+  align-items: center;
 }
 
 #nc {
@@ -10,14 +11,21 @@
 }
 
 #na {
-  margin-left: -5px;
+  white-space: nowrap;
+  width: 10em;
   border-left: 0;
   border-radius: 0 6px 6px 0;
 }
 
+#nl {
+  margin-left: 1ex;
+  width: 100px;
+}
+
 #ncd,
 #nad {
-  margin: 5px 0;
+  cursor: pointer;
+  margin: 10px 0;
   padding: 0;
   width: 215px;
   background-color: #fff;

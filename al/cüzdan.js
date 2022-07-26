@@ -88,8 +88,11 @@ const adresDeğişti = (adresler) => {
   }
 }
 
+/**
+ * @param {function(string)} f bağlanınca bir kez çalıştırılacak fonksiyon.
+ */
 const bağlanınca = (f) => {
-  if (Adres) f();
+  if (Adres) f(Adres);
   else Bağlanınca = f;
 }
 
@@ -119,8 +122,8 @@ if (window["ethereum"]) {
   ethereum.on("accountsChanged", adresDeğişti);
   ethereum.on("chainChanged", ağDeğişti);
 
-  const ağMenüsü = dom.adla("ncw");
-  const adresMenüsü = dom.adla("naw");
+  const ağMenüsü = dom.adla("ncd");
+  const adresMenüsü = dom.adla("nad");
 
   AğButonu.onclick = (event) => {
     ağMenüsü.style.display = "";
@@ -142,13 +145,12 @@ if (window["ethereum"]) {
     }
   };
 
-  dom.adla("ncd").onclick = (event) => {
-    dom.adla("ncw").style.display = "none";
+  ağMenüsü.onclick = (event) => {
+    ağMenüsü.style.display = "none";
     let li = event.target;
     if (event.target.nodeName != "LI") li = event.target.parentElement;
     if (!li.id.startsWith("nc0x")) return;
     const ağ = li.id.slice(2);
-    console.log(ağ);
     ethereum.request(/** @type {RequestParams} */({
       method: "wallet_switchEthereumChain",
       params: [{ "chainId": ağ }],
@@ -167,10 +169,6 @@ if (window["ethereum"]) {
   dom.adla("nad3").onclick = () => {
     const url = "https://" + AdresLinki[Ağ] + "/address/" + Adres;
     window.open(url, "_blank");
-  }
-
-  dom.adla("nad").onclick = () => {
-    dom.adla("naw").style.display = "none";
   }
 
   ethereum
