@@ -183,11 +183,15 @@
   left: 5px;
   padding-top: 40px;
   opacity: 0;
-  animation: popup 0.5s ease-in;
+  transform: scale(0);
+  transition-property: transform, opacity;
+  transition-duration: 0.4s;
+  transition-timing-function: ease-in;
 }
 
 #mofirw.show {
   opacity: 1;
+  transform: scale(1);
 }
 
 .mofirwyn {
@@ -208,13 +212,4 @@
 .mofirwn {
   font-weight: 100;
   border-right: 0.3px solid #ccc;
-}
-
-@keyframes popup {
-  0% {
-    transform: scale(0);
-  }
-  100% {
-    transform: scale(1)
-  }
 }
