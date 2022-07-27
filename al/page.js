@@ -66,6 +66,8 @@ const TCKTYarat = () => {
         dom.adla(ad).innerText = AçıkTCKT[ad];
       }
       dom.adla("nft").classList.add("flipped");
+      dom.adla("mofirw").classList.add("show");
+      dom.adla("mobg").classList.add("whenmsg");
       const s2a = dom.adla("s2a");
       s2a.innerText = "E-devlet'ten bilgileriniz alındı ✓";
       s2a.onclick = null;
@@ -81,6 +83,8 @@ const TCKTYarat = () => {
     });
 
   s3a.onclick = () => {
+    dom.adla("mofirw").classList.remove("show");
+    dom.adla("mobg").classList.remove("whenmsg");
     const açıkAnahtarSözü = ethereum.request(/** @type {RequestParams} */({
       method: "eth_getEncryptionPublicKey",
       params: [Cüzdan.adres()],
