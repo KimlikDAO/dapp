@@ -110,7 +110,7 @@
 
 #mobg.whenmsg {
   background: #f2f2f2;
-  filter: blur(2px);
+  filter: blur(1px);
 }
 
 .mofr {
