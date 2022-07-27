@@ -45,7 +45,7 @@
   height: 250px;
   transform-style: preserve-3d;
   transition: all 1s ease-in;
-  box-shadow: 2px 2px 10px rgb(0 0 0 / 15%);
+  box-shadow: 0px 2px 10px rgb(0 0 0 / 15%);
   border-radius: 10px;
   background: #fff;
   margin: 0 0 0 15px;
@@ -95,6 +95,22 @@
   border: 5px solid #333;
   border-radius: 40px;
   font-weight: 700;
+  position: relative;
+  overflow: hidden;
+  z-index: -1;
+}
+
+#mobg {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  transition: background 0.3s ease-in; 
+  z-index: -10;
+}
+
+#mobg.whenmsg {
+  background: #f2f2f2;
+  filter: blur(2px);
 }
 
 .mofr {
@@ -149,9 +165,57 @@
 }
 
 .mofirn {
-  box-shadow: 1px 1px 5px rgb(0 0 0 / 15%);
+  box-shadow: 0px 1px 5px rgb(0 0 0 / 15%);
   width: 125px;
   height: 125px;
   border: 1px solid #ccc;
   border-radius: 5px;
+}
+
+#mofirw {
+  position: absolute;
+  box-shadow: 0px 1px 5px rgb(0 0 0 / 15%); 
+  border-radius: 10px;
+  text-align: center;
+  background: rgb(255 255 255 / 0.8);
+  backdrop-filter: blur(1px);
+  width: 250px;
+  top: 300px;
+  left: 15px;
+  padding-top: 40px;
+  opacity: 0;
+  animation: popup 0.5s ease-in;
+}
+
+#mofirw.show {
+  opacity: 1;
+}
+
+.mofirwyn {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20px;
+  border-top: 0.3px solid #ccc;
+  border: 0 0 4px 4px;
+  overflow: hidden;
+}
+
+.mofirwyn div {
+  width: 50%;
+  padding: 5px 10px;
+  color: rgb(10 122 255);
+}
+
+.mofirwn {
+  font-weight: 100;
+  border-right: 0.3px solid #ccc;
+}
+
+@keyframes popup {
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1)
+  }
 }
