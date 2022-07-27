@@ -109,7 +109,6 @@
 }
 
 #mobg.whenmsg {
-  background: #f2f2f2;
   filter: blur(1px);
 }
 
@@ -179,9 +178,9 @@
   text-align: center;
   background: rgb(255 255 255 / 0.8);
   backdrop-filter: blur(1px);
-  width: 250px;
+  width: 270px;
   top: 300px;
-  left: 15px;
+  left: 5px;
   padding-top: 40px;
   opacity: 0;
   animation: popup 0.5s ease-in;
