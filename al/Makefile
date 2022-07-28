@@ -1,39 +1,43 @@
 build/al/wallet-inline.js: al/wallet-inline.js lib/ethereum.js
-	mkdir -p build/al
+	mkdir -p $(dir $@)
 	yarn google-closure-compiler -W VERBOSE -O ADVANCED --charset UTF-8 \
+                             --assume_function_wrapper \
                              --js $^ \
                              --js_output_file $@
 	yarn uglifyjs $@ -m -o $@
 
-build/al/sayfa.js: al/sayfa.js al/imeceİptal.js birim/cüzdan.js \
+build/al/sayfa.js: al/sayfa.js al/imeceİptal.js \
+                   birim/cüzdan/birim.js birim/telefon/birim.js \
                    lib/dom.js lib/çevir.js lib/evm.js \
                    lib/encrypt.js lib/ipfs.js lib/sha3.js \
                    lib/ethereum.js lib/TCKT.js lib/TCKTData.js
-	mkdir -p build/al
+	mkdir -p $(dir $@)
 	yarn google-closure-compiler -W VERBOSE -O ADVANCED --charset UTF-8 \
                              --emit_use_strict \
                              --module_resolution NODE \
                              --assume_function_wrapper \
                              --dependency_mode PRUNE \
                              --entry_point $< \
-                             --process_common_js_modules \
                              --js $^ \
                              --js_output_file $@
 	yarn uglifyjs $@ -m -o $@
 
-build/al/sayfa.css: al/sayfa.css al/imeceİptal.css birim/cüzdan/birim.css
+build/al/sayfa.css: al/sayfa.css al/imeceİptal.css
 	mkdir -p build/al
 	cat $^ | yarn csso --output $@
 
-build/al/sayfa.keymap: $(call compressions, build/al/sayfa.js) \
-                       $(call compressions, build/al/sayfa.css) \
-                       $(call compressions, $(REQ_SVGS))
+ASSETS = build/al/sayfa.css build/al/sayfa.js
+build/al/sayfa.keymap: $(call compressions, $(ASSETS))
 	rm -rf $@
-	tools/keyhasher.py $@ build/al/sayfa.js build/al/sayfa.css $(REQ_SVGS)
+	tools/keyhasher.py $@ $(ASSETS)
 
 build/al.html: al/sayfa.html al/sayfa.inlines \
                build/ana/sayfa.keymap build/al/sayfa.keymap \
-               build/al/wallet-inline.js
+               build/al/wallet-inline.js \
+               al/imeceİptal.html \
+               birim/telefon/birim.html \
+               build/al/img/paste.svg.inl \
+               build/birim/cüzdan/birim.html
 	cp $< $@
 	tools/keymapper.py $@ build/ana/sayfa.keymap build/al/sayfa.keymap al/sayfa.inlines
 	yarn html-minifier -c tools/html-minifier.conf $@ -o $@
