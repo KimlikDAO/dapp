@@ -1,4 +1,4 @@
-#mo {
+#te {
   width: 280px;
   height: 550px;
   margin-top: 30px;
@@ -10,7 +10,7 @@
   z-index: -1;
 }
 
-#mobg {
+#tebg {
   position: absolute;
   height: 100%;
   width: 100%;
@@ -18,25 +18,25 @@
   z-index: -10;
 }
 
-#mobg.whenmsg {
+#tebg.whenmsg {
   filter: blur(1px);
 }
 
-.mofr {
+.tefr {
   display: flex;
   justify-content: center;
   font-size: 24px;
   padding-top: 60px;
 }
 
-.mosr {
+.tesr {
   display: flex;
   justify-content: center;
   font-size: 10px;
   padding-bottom: 20px;
 }
 
-#motr {
+#tetr {
   background-color: #E8F9FD;
   padding: 5px 20px;
   color: #999;
@@ -45,13 +45,13 @@
   border-radius: 13px;
 }
 
-.mofor {
+.tefor {
   display: flex;
   padding-top: 40px;
   font-size: 12px;
 }
 
-.mofort {
+.tefort {
   width: 50%;
   height: 26px;
   text-align: center;
@@ -59,7 +59,7 @@
   border-bottom: 1px solid #73777B;
 }
 
-.moforn {
+.teforn {
   width: 50%;
   height: 25px;
   text-align: center;
@@ -67,13 +67,13 @@
   color: #3d67ab;
 }
 
-.mofir {
+.tefir {
   display: flex;
   justify-content: space-around;
   padding: 25px 5px;
 }
 
-.mofirn {
+.tefirn {
   box-shadow: 0px 1px 5px rgb(0 0 0 / 15%);
   width: 125px;
   height: 125px;
@@ -81,7 +81,7 @@
   border-radius: 5px;
 }
 
-#mofirw {
+#tefirw {
   position: absolute;
   box-shadow: 0px 1px 5px rgb(0 0 0 / 15%);
   border-radius: 10px;
@@ -99,12 +99,12 @@
   transition-timing-function: ease-in;
 }
 
-#mofirw.show {
+#tefirw.show {
   opacity: 1;
   transform: scale(1);
 }
 
-.mofirwyn {
+.tefirwyn {
   display: flex;
   justify-content: space-around;
   margin-top: 20px;
@@ -113,13 +113,13 @@
   overflow: hidden;
 }
 
-.mofirwyn div {
+.tefirwyn div {
   width: 50%;
   padding: 5px 10px;
   color: rgb(10 122 255);
 }
 
-.mofirwn {
+.tefirwn {
   font-weight: 100;
   border-right: 0.3px solid #ccc;
 }
