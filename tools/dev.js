@@ -12,15 +12,19 @@ async function run() {
 
   app.use(vite.middlewares)
 
-  app.use('*', async (req, res) => {
-    if (req.originalUrl == '/favicon.ico')
-      return res.status(404).end();
+  app.use('*', async (req, res, next) => {
+    try {
+      const file = req.originalUrl == '/' ? 'ana/page.html' : 'al/page.html';
+      let page = readFileSync(file, 'utf-8');
+      page = await vite.transformIndexHtml(req.originalUrl, page)
 
-    const file = req.originalUrl == '/' ? 'ana/page.html' : 'al/page.html';
-
-    console.log(req.originalUrl);
-    let page = readFileSync(file, 'utf-8');
-    res.status(200).set({ 'Content-type': 'text/html;charset=utf-8' }).end(page);
+      res.status(200).set({ 'Content-type': 'text/html;charset=utf-8' }).end(page);
+    } catch (e) {
+      // If an error is caught, let Vite fix the stack trace so it maps back to
+      // your actual source code.
+      vite.ssrFixStacktrace(e)
+      next(e)
+    }
   })
 
   const port = 8787;
