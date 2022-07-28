@@ -2,7 +2,7 @@
  * @fileoverview İmece iptal parçası. DOM'da `im` öneki bu parçaya ayrılmıştır.
  */
 
-import Cüzdan from "/al/cüzdan";
+import Cüzdan from "/birim/cüzdan/birim";
 import dom from "/lib/dom";
 import evm from "/lib/evm";
 

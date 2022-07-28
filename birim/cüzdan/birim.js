@@ -15,6 +15,8 @@ let AdresDeğişince = null;
 const AdresButonu = dom.adla("na");
 /** @const {Element} */
 const AğButonu = dom.adla("nc");
+/** @const {Element} */
+const DilButonu = dom.adla("nl");
 
 /** @const {function():string} */
 const ağ = () => Ağ;
@@ -123,27 +125,9 @@ if (window["ethereum"]) {
   ethereum.on("chainChanged", ağDeğişti);
 
   const ağMenüsü = dom.adla("ncd");
-  const adresMenüsü = dom.adla("nad");
-
-  AğButonu.onclick = (event) => {
-    ağMenüsü.style.display = "";
-    adresMenüsü.style.display = "none";
-    event.stopPropagation();
-    window.onclick = () => {
-      ağMenüsü.style.display = "none";
-      window.onclick = null;
-    }
-  };
-
-  AdresButonu.onclick = (event) => {
-    ağMenüsü.style.display = "none";
-    adresMenüsü.style.display = "";
-    event.stopPropagation();
-    window.onclick = () => {
-      adresMenüsü.style.display = "none";
-      window.onclick = null;
-    }
-  };
+  dom.menüYarat(AğButonu, ağMenüsü);
+  dom.menüYarat(AdresButonu, dom.adla("nad"));
+  dom.menüYarat(DilButonu, dom.adla("nld"));
 
   ağMenüsü.onclick = (event) => {
     ağMenüsü.style.display = "none";

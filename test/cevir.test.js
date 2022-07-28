@@ -1,7 +1,7 @@
 import { assert, describe, it } from 'vitest';
-import { hex, hexten } from '/lib/cevir';
+import { hex, hexten } from '/lib/çevir';
 
-describe('cevir tests', () => {
+describe('çevir tests', () => {
   it('should convert binary to hex', () => {
     assert.equal(
       hex(Uint8Array.from([1, 2, 3])),

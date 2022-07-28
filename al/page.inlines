@@ -1,9 +1,0 @@
-css:/al/cüzdan.css -> cmd:erase
-css:/al/imeceİptal.css -> cmd:erase
-css:/font/lato-ttf.css -> cmd:erase
-js:/al/wallet-inline.js -> build/inl/wallet-inline.js
-svg:/al/img/avalanche.svg -> build/inl/avalanche.svg
-svg:/al/img/copy.svg -> build/inl/copy.svg
-svg:/al/img/debank.svg -> build/inl/debank.svg
-svg:/al/img/external-link.svg -> build/inl/external-link.svg
-svg:/al/img/paste.svg -> build/inl/paste.svg

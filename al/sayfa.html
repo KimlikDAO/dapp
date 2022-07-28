@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang=tr>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>KimlikDAO | Blokzincirdeki kimlik kartın</title>
+  <link href="/font/lato-ttf.css" rel="stylesheet" type="text/css" />
+  <link href="/ana/sayfa.css" rel="stylesheet" type="text/css" />
+  <link href="/al/sayfa.css" rel="stylesheet" type="text/css" />
+  <link rel="canonical" href="https://kimlikdao.org" />
+</head>
+
+<body>
+  <!-- n harfi navigation'ın kısaltması -->
+  <div id="n">
+    <a href="/">
+      <h1>KimlikDAO</h1>
+    </a>
+    <birim:cüzdan/>
+  </div>
+  <div id=b>
+    <div id="bs">
+      <div id=s1 class=step>
+        <b>1. Cüzdanınızı bağlayın.</b>
+        WalletLink uyumlu cüzdan ve ya uzantı cüzdan
+        <br>
+        <br>
+        <a href="https://rabby.io" target="_blank" id=s1a class="btn">Rabby kur</a>
+        <a href="https://metamask.io" target="_blank" id=s1b class="btn">MetaMask kur</a>
+        <script src="/al/wallet-inline.js"></script>
+      </div>
+      <div id=s2 class="step disabled">
+        <b>2. Kendinizi tanıtın.</b>
+        E-devlet ile giriş yapıp 'Temel-Bilgileri' paylaşımını onaylayın.
+        <br>
+        <br>
+        <a href="https://mock-oauth2.kimlikdao.net/auth?response_type=code&client_id=F5CAA82F-E2CF-4F21-A745-471ABE3CE7F8&redirect_uri=http://localhost:8787/al&scope=Temel-Bilgileri&state=0xa86a"
+          class="btn" id="s2a">E-devlet ile giriş yap</a>
+      </div>
+      <div id=s3 class="step disabled">
+        <b>3. TCKT'ni şifreleyelim.</b>
+        TCKT'ni şifrelememiz için cüzdan açık anahtarına ihtiyacımız var.
+        Bu işlem off-chain, tamamen ücretsiz ve güvenli.
+        <br><br>
+        <a href="javascript:" id="s3a" class="act btn">Cüzdanıma istek yolla</a>
+      </div>
+      <altbirim:imeceİptal/>
+      <div class="step disabled" id=s5>
+        <b>5. Ödemeyi yapın TCKT cüzdanınıza gelsin</b><br>
+        Cüzdanınıza ₺15 alımı için bir istek yollayacağız. Bunu onayladığınızda
+        cüzdanınızdan ücret alınır ve TCKT'niz cüzdanınıza mint edilir.
+        <br>
+        <br>
+        <a href="javascript:" id=s5a class="act btn">Ödeme isteği yolla</a>
+      </div>
+    </div>
+    <div id="sa">
+      <div id="bss">
+        <div id="nft" class="nft-container">
+          <div class="TCKT locked">🔒</div>
+          <div id="TCKT" class="TCKT unlocked">
+            <div id="TCKT-kb">
+              <label for="TCKN">TCKN</label>
+              <div id="TCKN"> </div>
+              <label for="ad">Ad</label>
+              <div id="ad"> </div>
+              <label for="soyad">Soyad</label>
+              <div id="soyad"> </div>
+              <label for="dt">Doğum tarihi</label>
+              <div id="dt"> </div>
+              <label for="annead">Anne adı</label>
+              <div id="annead"> </div>
+              <label for="babaad">Baba adı</label>
+              <div id="babaad"> </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <birim:telefon/>
+    </div>
+  </div>
+  <script async type="module" src="/al/sayfa.js"></script>
+</body>
+
+</html>

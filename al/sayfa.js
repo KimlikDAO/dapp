@@ -2,10 +2,9 @@
  * @fileoverview Al sayfası giriş noktası
  *
  */
-
-import Cüzdan from '/al/cüzdan';
+import Cüzdan from '/birim/cüzdan/birim';
 import { imeceİptalKurVe } from '/al/imeceİptal';
-import { base64, hex } from '/lib/cevir';
+import { base64, hex } from '/lib/çevir';
 import dom from '/lib/dom';
 import { encrypt } from '/lib/encrypt';
 import ipfs from '/lib/ipfs';

@@ -1,7 +1,11 @@
 #nb {
-  position: relative;
+  display: flex;
+}
+
+.nb {
   display: flex;
   align-items: center;
+  position: relative;
 }
 
 #nc {
@@ -24,10 +28,21 @@
 
 #ncd,
 #nad {
+  width: 215px;
+  left: -10px;
+}
+
+#nld {
+  right: -5px;
+  width: 150px;
+}
+
+#ncd,
+#nad,
+#nld {
   cursor: pointer;
   margin: 10px 0;
   padding: 0;
-  width: 215px;
   background-color: #fff;
   border: 1px solid #f8f8f8;
   border-radius: 5px;
@@ -35,7 +50,6 @@
   display: block;
   position: absolute;
   top: 50px;
-  left: -10px;
   animation: growDown 300ms ease-in-out forwards;
   transform-origin: top center;
   list-style: none;
@@ -43,7 +57,8 @@
 }
 
 #ncd li,
-#nad li {
+#nad li,
+#nld li {
   height: 45px;
   margin: 1px;
   padding: 6px 13px;
@@ -53,7 +68,8 @@
 }
 
 #ncd li:hover,
-#nad li:hover {
+#nad li:hover,
+#nld li:hover {
   background-color: #f2f2f2;
 }
 
