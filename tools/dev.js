@@ -9,12 +9,12 @@ const sayfaOku = (dosyaAdı) => {
   const konum = path.dirname(dosyaAdı);
 
   sayfa = sayfa.replace(/<birim:([^\/]*)\/>/g, (_, birimAdı) => {
-    stiller.push("birim/" + birimAdı + "/birim.css");
-    return readFileSync("birim/" + birimAdı + "/birim.html", "utf-8");
+    stiller.push("birim/" + birimAdı.trim() + "/birim.css");
+    return readFileSync("birim/" + birimAdı.trim() + "/birim.html", "utf-8");
   });
   sayfa = sayfa.replace(/<altbirim:([^\/]*)\/>/g, (_, altbirimAdı) => {
-    stiller.push(konum + "/" + altbirimAdı + ".css");
-    return readFileSync(konum + "/" + altbirimAdı + ".html", "utf-8");
+    stiller.push(konum + "/" + altbirimAdı.trim() + ".css");
+    return readFileSync(konum + "/" + altbirimAdı.trim() + ".html", "utf-8");
   });
   let linkler = "";
   for (const stil of stiller)
