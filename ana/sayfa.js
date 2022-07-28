@@ -1,2 +1,1 @@
-// Banner, açiklama
-const ba = document.getElementById("ba");
+import Cüzdan from '/birim/cüzdan/birim';
