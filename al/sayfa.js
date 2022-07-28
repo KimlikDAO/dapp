@@ -2,14 +2,14 @@
  * @fileoverview Al sayfası giriş noktası
  *
  */
+import { imeceİptalKurVe } from '/al/imeceİptal';
 import Cüzdan from '/birim/cüzdan/birim';
 import Telefon from '/birim/telefon/birim';
-import { imeceİptalKurVe } from '/al/imeceİptal';
-import { base64, hex } from '/lib/çevir';
 import dom from '/lib/dom';
 import { encrypt } from '/lib/encrypt';
 import ipfs from '/lib/ipfs';
 import TCKT from '/lib/TCKT';
+import { base64, hex } from '/lib/çevir';
 
 /** @const {string} */
 const KIMLIK_AS_URL = "https://mock-api.kimlikas.com";
@@ -83,12 +83,12 @@ const TCKTYarat = () => {
     });
 
   s3a.onclick = () => {
-    dom.adla("tefirw").classList.remove("show");
-    dom.adla("tebg").classList.remove("whenmsg");
     const açıkAnahtarSözü = ethereum.request(/** @type {RequestParams} */({
       method: "eth_getEncryptionPublicKey",
       params: [Cüzdan.adres()],
     })).then((pubKey) => {
+      dom.adla("tefirw").classList.remove("show");
+      dom.adla("tebg").classList.remove("whenmsg");
       s3a.innerText = "Açık anahtarınızı aldık ✓";
       s3a.classList.remove("act");
       s3a.classList.add("dis");

@@ -84,7 +84,7 @@ const adresDeğişti = (adresler) => {
     if (Bağlanınca) {
       Bağlanınca(Adres);
       Bağlanınca = null;
-    } else {
+    } else if (AdresDeğişince) {
       AdresDeğişince();
     }
   }

@@ -25,24 +25,6 @@ build/al/sayfa.css: al/sayfa.css al/imeceİptal.css birim/cüzdan/birim.css
 	mkdir -p build/al
 	cat $^ | yarn csso --output $@
 
-INLINE_SVGS = avalanche.svg \
-              copy.svg external-link.svg debank.svg \
-              paste.svg
-
-INL_SVGS = $(addprefix build/inl/, $(INLINE_SVGS))
-
-REQUEST_SVGS = $(filter-out $(INLINE_SVGS), $(notdir $(wildcard al/img/*.svg)))
-
-REQ_SVGS = $(addprefix build/al/img/, $(REQUEST_SVGS))
-
-$(INL_SVGS): build/inl/%.svg: al/img/%.svg
-	mkdir -p build/inl
-	yarn svgo --config tools/svgo-inline-config.js $^ --output $@
-
-$(REQ_SVGS): build/al/img/%.svg: al/img/%.svg
-	mkdir -p build/al/img
-	yarn svgo --config tools/svgo-config.js $^ --output $@
-
 build/al/sayfa.keymap: $(call compressions, build/al/sayfa.js) \
                        $(call compressions, build/al/sayfa.css) \
                        $(call compressions, $(REQ_SVGS))

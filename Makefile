@@ -1,5 +1,5 @@
-MAKEFLAGS=-j 8
-PAGES = al ana
+MAKEFLAGS := -j 8
+PAGES := al ana
 
 all: build
 

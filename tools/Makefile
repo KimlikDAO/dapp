@@ -1,4 +1,4 @@
-PAGE_TARGETS = $(addsuffix .sayfa, $(addprefix build/, $(PAGES)))
+PAGE_TARGETS := $(addsuffix .sayfa, $(addprefix build/, $(PAGES)))
 
 $(PAGE_TARGETS): build/%.sayfa: build/%.html build/%.html.gz build/%.html.br
 
@@ -17,6 +17,10 @@ build/prod.js: tools/prod.js tools/workers.js
 build/%.svg: %.svg
 	mkdir -p $(dir $@)
 	yarn svgo --config tools/svgo-config.js $^ --output $@
+
+build/%.svg.inl: %.svg
+	mkdir -p $(dir $@)
+	yarn svgo --config tools/svgo-inline-config.js $^ --output $@
 
 %.gz: %
 	cp $< $@.tmp
