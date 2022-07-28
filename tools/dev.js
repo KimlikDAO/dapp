@@ -1,14 +1,15 @@
 import express from 'express'
 import { readFileSync } from 'fs'
-import { createServer as createViteServer } from 'vite'
+import { createServer } from 'vite'
 
-async function createServer() {
+async function run() {
   const app = express()
 
-  const vite = await createViteServer({
-    server: { middlewareMode: 'ssr' }
+  const vite = await createServer({
+    server: { middlewareMode: true },
+    appType: 'custom'
   })
-  // use vite's connect instance as middleware
+
   app.use(vite.middlewares)
 
   app.use('*', async (req, res) => {
@@ -19,7 +20,6 @@ async function createServer() {
 
     console.log(req.originalUrl);
     let page = readFileSync(file, 'utf-8');
-
     res.status(200).set({ 'Content-type': 'text/html;charset=utf-8' }).end(page);
   })
 
@@ -28,4 +28,4 @@ async function createServer() {
   console.log(`Ana sayfaya şu adreste çalışıyor: http://localhost:${port}`)
 }
 
-createServer()
+run()
