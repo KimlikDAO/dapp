@@ -10,6 +10,8 @@ let Bağlanınca = null;
 let Kopunca = null;
 /** @type {?function()} */
 let AdresDeğişince = null;
+/** @type {?string} */
+let BağlaMetni;
 
 /** @const {Element} */
 const AdresButonu = dom.adla("na");
@@ -74,10 +76,15 @@ const adresDeğişti = (adresler) => {
 
   if (adresler.length == 0) {
     Adres = null;
-    Kopunca();
+    AdresButonu.innerText = BağlaMetni;
+    AdresButonu.onclick = bağla;
+    if (Kopunca) Kopunca();
   } else if (adresler[0] != Adres) {
     Adres = adresler[0];
+    BağlaMetni = AdresButonu.innerText;
     AdresButonu.innerText = hızlıArabirimAdı(Adres);
+    dom.menüYarat(AdresButonu, dom.adla("nad"));
+
     nihaiArabirimAdı(Adres).then((ad) => {
       if (ad) AdresButonu.innerText = ad;
     });
@@ -126,8 +133,9 @@ if (window["ethereum"]) {
 
   const ağMenüsü = dom.adla("ncd");
   dom.menüYarat(AğButonu, ağMenüsü);
-  dom.menüYarat(AdresButonu, dom.adla("nad"));
   dom.menüYarat(DilButonu, dom.adla("nld"));
+
+  AdresButonu.onclick = bağla;
 
   ağMenüsü.onclick = (event) => {
     ağMenüsü.style.display = "none";
