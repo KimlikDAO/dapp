@@ -9,6 +9,8 @@ import dom from '/lib/dom';
  * @param {number} eşik imece iptal için gereken oy eşiği.
  */
 export const öde = (cidSözü, adresAğırlığı, eşik) => {
+  const paraDüğmesi = dom.adla("odb");
+  dom.menüYarat(paraDüğmesi, paraDüğmesi.firstElementChild);
   dom.adla("od").classList.remove("disabled");
   dom.adla("oda").onclick = () => {
     cidSözü.then((cid) => {

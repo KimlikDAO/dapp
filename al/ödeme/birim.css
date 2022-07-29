@@ -1,9 +1,10 @@
 #odb {
   border-radius: 0 6px 6px 0;
   border: 1px solid #ccc;
-  padding: 3px;
+  padding: 0 6px 0 4px;
   display: flex;
   align-items: center;
+  position: relative;
 }
 
 #oda {
@@ -11,5 +12,32 @@
 }
 
 #odc {
-  display: flex
+  display: flex;
+}
+
+#odd {
+  cursor: pointer;
+  padding: 0;
+  background-color: #fff;
+  border: 1px solid #f8f8f8;
+  border-radius: 5px;
+  box-shadow: 0px 1px 20px rgba(0, 0, 0, 0.2);
+  display: block;
+  position: absolute;
+  bottom: 45px;
+  left: -5px;
+  animation: growDown 300ms ease-in-out forwards;
+  transform-origin: bottom left;
+  list-style: none;
+  z-index: 2;
+  margin: 0;
+}
+
+#odd li {
+  height: 45px;
+  margin: 1px;
+  padding: 6px 13px;
+  display: flex;
+  align-items: center;
+  justify-content: left;
 }

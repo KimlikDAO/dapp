@@ -51,7 +51,7 @@ const hızlıArabirimAdı = (hesap) => hesap.slice(0, 6) + "..." + hesap.slice(-
  * TODO(KimlikDAO-bot): ENS lookup, avvy domains lookup
  */
 const nihaiArabirimAdı = (hesap) =>
-  new Promise((resolve) => setTimeout(resolve("hot.kimlikdao.eth"), 1000));
+  new Promise((resolve) => null);
 
 /**
  * @param {string} yeniAğ harf dizisi olarak yeni ağ adı.
