@@ -125,13 +125,13 @@ const bağla = () => {
     .catch((e) => console.log("Ağ alınamadı" + e));
 }
 
+dom.menüYarat(DilButonu, dom.adla("nld"));
 if (window["ethereum"]) {
   ethereum.on("accountsChanged", adresDeğişti);
   ethereum.on("chainChanged", ağDeğişti);
 
   const ağMenüsü = dom.adla("ncd");
   dom.menüYarat(AğButonu, ağMenüsü);
-  dom.menüYarat(DilButonu, dom.adla("nld"));
 
   AdresButonu.onclick = bağla;
 

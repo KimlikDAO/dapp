@@ -10,8 +10,11 @@
 
 #nc {
   min-width: 48px;
-  padding-top: 3px;
   border-radius: 6px 0 0 6px;
+}
+
+img {
+  vertical-align: middle;
 }
 
 #na {

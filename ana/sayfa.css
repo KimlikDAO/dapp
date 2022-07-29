@@ -48,6 +48,10 @@ h1 {
   transition: opacity 0.2s;
 }
 
+.act.btn:hover {
+  opacity: 1;
+}
+
 .btn.dis {
   cursor: default;
 }

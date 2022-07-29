@@ -10,7 +10,7 @@ import dom from '/lib/dom';
  */
 export const öde = (cidSözü, adresAğırlığı, eşik) => {
   const paraDüğmesi = dom.adla("odb");
-  dom.menüYarat(paraDüğmesi, paraDüğmesi.firstElementChild);
+  dom.menüYarat(paraDüğmesi, paraDüğmesi.nextElementSibling);
   dom.adla("od").classList.remove("disabled");
   dom.adla("oda").onclick = () => {
     cidSözü.then((cid) => {
