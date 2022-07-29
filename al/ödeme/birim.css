@@ -1,0 +1,15 @@
+#odb {
+  border-radius: 0 6px 6px 0;
+  border: 1px solid #ccc;
+  padding: 3px;
+  display: flex;
+  align-items: center;
+}
+
+#oda {
+  border-radius: 6px 0 0 6px;
+}
+
+#odc {
+  display: flex
+}

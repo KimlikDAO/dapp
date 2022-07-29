@@ -32,7 +32,6 @@
 /*--------------nft box---------------------*/
 
 #bss {
-  position: relative;
   width: 250px;
   height: 250px;
   margin-top: 2em;

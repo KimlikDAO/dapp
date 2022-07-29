@@ -13,8 +13,15 @@ const sayfaOku = (dosyaAdı) => {
     return readFileSync("birim/" + birimAdı.trim() + "/birim.html", "utf-8");
   });
   sayfa = sayfa.replace(/<altbirim:([^\/]*)\/>/g, (_, altbirimAdı) => {
-    stiller.push(konum + "/" + altbirimAdı.trim() + ".css");
-    return readFileSync(konum + "/" + altbirimAdı.trim() + ".html", "utf-8");
+    altbirimAdı = altbirimAdı.trim();
+    try {
+      let file = readFileSync(konum + "/" + altbirimAdı + ".html", "utf-8");
+      stiller.push(konum + "/" + altbirimAdı + ".css");
+      return file;
+    } catch (e) {
+      stiller.push(konum + "/" + altbirimAdı + "/birim.css");
+      return readFileSync(konum + "/" + altbirimAdı + "/birim.html", "utf-8");
+    }
   });
   let linkler = "";
   for (const stil of stiller)

@@ -3,12 +3,12 @@
  *
  */
 import { imeceİptalKurVe } from '/al/imeceİptal';
+import { öde } from '/al/ödeme/birim';
 import Cüzdan from '/birim/cüzdan/birim';
 import Telefon from '/birim/telefon/birim';
 import dom from '/lib/dom';
 import { encrypt } from '/lib/encrypt';
 import ipfs from '/lib/ipfs';
-import TCKT from '/lib/TCKT';
 import { base64, hex } from '/lib/çevir';
 
 /** @const {string} */
@@ -132,27 +132,6 @@ const TCKTYarat = () => {
 
     imeceİptalKurVe(
       (adresAğırlığı, eşik) => öde(cidSözü, adresAğırlığı, eşik));
-  };
-}
-
-/**
- * Ödeme adımını gösterir, ödeme onayını alıp evm provider'a yollar.
- *
- * @param {Promise<string>} cidSözü gelmekte olan ipfs CID'i.
- * @param {Object<string, number>} adresAğırlığı (adres, ağırlık) ikilileri.
- * @param {number} eşik imece iptal için gereken oy eşiği.
- */
-const öde = (cidSözü, adresAğırlığı, eşik) => {
-  dom.adla("s5").classList.remove("disabled");
-  dom.adla("s5a").onclick = () => {
-    cidSözü.then((cid) => {
-      let döndü = adresAğırlığı.length
-        ? TCKT.createWithRevokers(cid, eşik, adresAğırlığı)
-        : TCKT.create(cid);
-      döndü
-        .then(() => dom.adla("nft").classList.add("scaleandmove"))
-        .catch(() => dom.adla("nft").classList.add("scaleandmove"));
-    });
   };
 }
 

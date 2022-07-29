@@ -72,8 +72,6 @@ const ağDeğişti = (yeniAğ) => {
  * @param {!Array<string>} adresler cüzdandan gelen adresler dizisi.
  */
 const adresDeğişti = (adresler) => {
-  console.log("Adres değişti: " + adresler);
-
   if (adresler.length == 0) {
     Adres = null;
     AdresButonu.innerText = BağlaMetni;
