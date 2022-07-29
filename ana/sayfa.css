@@ -176,7 +176,6 @@ button:hover {
   max-width: 1200px;
   margin: 0 auto;
   display: flex;
-  justify-content: center;
 }
 
 #ba {
@@ -191,27 +190,12 @@ button:hover {
 
 #bab {
   font-size: 1.2em;
+  display: flex;
+  justify-content: center;
 }
 
 #bac {
   margin: 1.6em 0.1em;
-}
-
-/* Ortaklar */
-#o {
-  width: 50%;
-  max-width: 800px;
-  margin: 7em auto;
-  display: flex;
-  justify-content: space-between;
-}
-
-#oa,
-#ol {
-  cursor: pointer;
-  width: 200px;
-  height: 150px;
-  border: 1px solid #444;
 }
 
 @keyframes growDown {
@@ -226,4 +210,118 @@ button:hover {
   100% {
     transform: scaleY(1);
   }
+}
+/*------------carousel-----------*/
+
+.ana_cont {
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
+  padding: 30px;
+}
+
+#crs {
+  width: 40%;
+  height: 80%;
+  margin-top: 30px;
+}
+
+.crs__top {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 80%;
+}
+
+.crs__slider {
+  position: relative;
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  text-align: center;
+  opacity: 0.3
+}
+
+.crs__slider:hover {
+  opacity: 0.7;
+}
+
+.crs__slider.prev::before,
+.crs__slider.next::before {
+  position: absolute;
+  content: "";
+  top: 0px;
+  left: 0px;
+  width: 12px;
+  height: 12px;
+  box-sizing: border-box;
+  border: solid rgb(0, 0, 0);
+  border-radius: 2px;
+} 
+
+.crs__slider.prev::before {
+  transform: rotate(45deg);
+  border-width: 0 0 4px 4px;
+}
+
+.crs__slider.next::before {
+  transform: rotate(-45deg);
+  border-width: 0 4px 4px 0px;
+}
+
+.crs__page__container {
+  width: 100%;
+  height: 100%;
+}
+
+.crs__pages {
+  position: relative;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.crs__page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  opacity: 0;
+  transition: opacity 0.6s ease-in;
+  font-weight: 700;
+}
+
+.crs__page.selected {
+  opacity: 1;
+}
+
+.crs__bttm {
+  text-align: center;
+  height: 20%;
+}
+
+.crs__btn {
+  display: inline-block;
+  width: 9px;
+  height: 9px;
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 50%;
+  margin: 5px 5px;
+}
+
+.crs__btn:hover {
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.crs__btn.current {
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.crsbtns {
+  display: flex;
+  justify-content: space-evenly;
 }
