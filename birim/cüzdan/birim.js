@@ -136,9 +136,8 @@ if (window["ethereum"]) {
   AdresButonu.onclick = bağla;
 
   ağMenüsü.onclick = (event) => {
-    ağMenüsü.style.display = "none";
-    let li = event.target;
-    if (event.target.nodeName != "LI") li = event.target.parentElement;
+    let li = event.target.nodeName == "LI"
+      ? event.target : event.target.parentElement;
     if (!li.id.startsWith("nc0x")) return;
     const ağ = li.id.slice(2);
     ethereum.request(/** @type {RequestParams} */({

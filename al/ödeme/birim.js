@@ -11,6 +11,16 @@ import dom from '/lib/dom';
 export const öde = (cidSözü, adresAğırlığı, eşik) => {
   const paraDüğmesi = dom.adla("odb");
   dom.menüYarat(paraDüğmesi, paraDüğmesi.nextElementSibling);
+
+  paraDüğmesi.nextElementSibling.onclick = (event) => {
+    let li = event.target.nodeName == "LI"
+      ? event.target : event.target.parentElement;
+    if (!li.id.startsWith("odd")) return;
+    paraDüğmesi.replaceChild(li.lastElementChild.cloneNode(true),
+      paraDüğmesi.firstElementChild);
+    console.log(li)
+  }
+
   dom.adla("od").classList.remove("disabled");
   dom.adla("oda").onclick = () => {
     cidSözü.then((cid) => {

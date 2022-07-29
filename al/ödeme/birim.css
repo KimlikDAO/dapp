@@ -2,6 +2,7 @@
   border-radius: 0 6px 6px 0;
   border: 1px solid #0a46a7;
   padding: 0 6px;
+  min-width: 32px;
   display: flex;
   align-items: center;
   background: #3d67ab;
@@ -54,13 +55,37 @@
 }
 
 .ods {
-  font-weight: 700;
   text-align: end;
   min-width: 5ex;
   margin-right: 0.5ex;
 }
 
 .odt {
-  color: #777;
+  font-weight: 400;
+  color: #888;
   margin: 0 2ex 0 0.5ex;
+}
+
+h4 {
+  padding: 1ex 0;
+  margin: 1ex 0;
+}
+
+#odi {
+  margin: 2em 1em 3em;
+  color: #666;
+}
+
+.odu {
+  line-height: 1.5;
+  display: inline-block;
+  min-width: 20em;
+}
+
+.odv {
+  display: inline-block;
+}
+
+b.odu {
+  margin: 0.6ex 0;
 }
