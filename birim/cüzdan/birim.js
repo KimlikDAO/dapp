@@ -57,7 +57,14 @@ const nihaiArabirimAdı = (hesap) =>
  * @param {string} yeniAğ harf dizisi olarak yeni ağ adı.
  */
 const ağDeğişti = (yeniAğ) => {
-  if (yeniAğ != Ağ) {
+  if (!(yeniAğ in AdresLinki)) {
+    // Kullanıcı desteklemediğimiz bir ağa geçerse (uzantı cüzdanı
+    // arabiriminden), en son seçili ağa geri geçme isteği yolluyoruz.
+    ethereum.request(/** @type {RequestParams} */({
+      method: "wallet_switchEthereumChain",
+      params: [{ "chainId": Ağ }],
+    })).catch((e) => console.log(e));
+  } else if (yeniAğ != Ağ) {
     dom.adla("nc" + Ağ).classList.remove("sel");
     dom.adla("nc" + yeniAğ).classList.add("sel");
     const nc = dom.adla("nc");
@@ -143,7 +150,7 @@ if (window["ethereum"]) {
     ethereum.request(/** @type {RequestParams} */({
       method: "wallet_switchEthereumChain",
       params: [{ "chainId": ağ }],
-    })).catch((e) => console.log(e))
+    })).catch((e) => console.log(e));
   }
 
   dom.adla("nad1").onclick = () => {
