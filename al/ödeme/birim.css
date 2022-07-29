@@ -48,10 +48,15 @@
   display: flex;
   align-items: center;
   justify-content: right;
+  transition: background-color 0.3s;
+}
+
+#odd li.sel {
+  background:#f6f6f6;
 }
 
 #odd li:hover{
-  background-color: #f2f2f2;
+  background: #f2f2f2;
 }
 
 .ods {
@@ -63,7 +68,7 @@
 .odt {
   font-weight: 400;
   color: #888;
-  margin: 0 2ex 0 0.5ex;
+  margin: 0 2ex 0 1ex;
 }
 
 h4 {
@@ -72,20 +77,29 @@ h4 {
 }
 
 #odi {
-  margin: 2em 1em 3em;
-  color: #666;
+  font-size: 11pt;
+  margin: 2em 2em 3em;
+  color: #555;
 }
 
 .odu {
   line-height: 1.5;
   display: inline-block;
-  min-width: 20em;
+  min-width: 18em;
 }
 
 .odv {
+  min-width: 2ex;
+  text-align: right;
+  display: inline-block;
+}
+
+.odv0 {
+  min-width: 5ex;
+  text-align: left;
   display: inline-block;
 }
 
 b.odu {
-  margin: 0.6ex 0;
+  margin: 1ex 0;
 }
