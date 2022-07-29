@@ -2,7 +2,7 @@
  * @fileoverview Al sayfası giriş noktası
  *
  */
-import { imeceİptalKurVe } from '/al/imeceİptal';
+import { imeceİptalKurVe } from '/al/imeceİptal/birim';
 import { öde } from '/al/ödeme/birim';
 import Cüzdan from '/birim/cüzdan/birim';
 import Telefon from '/birim/telefon/birim';
