@@ -1,5 +1,21 @@
 @font-face {
   font-family: 'f';
+  src: url('/font/Lato2OFL/Lato-Thin.ttf') format('truetype');
+
+  font-weight: 275;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'f';
+  src: url('/font/Lato2OFL/Lato-ThinItalic.ttf') format('truetype');
+
+  font-weight: 275;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'f';
   src: url('/font/Lato2OFL/Lato-Regular.ttf') format('truetype');
 
   font-weight: 400;
@@ -59,5 +75,21 @@
   src: url('/font/Lato2OFL/Lato-BlackItalic.ttf') format('truetype');
 
   font-weight: 700;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'f';
+  src: url('/font/Lato2OFL/Lato-Heavy.ttf') format('truetype');
+
+  font-weight: 800;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'f';
+  src: url('/font/Lato2OFL/Lato-HeavyItalic.ttf') format('truetype');
+
+  font-weight: 800;
   font-style: italic;
 }

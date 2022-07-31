@@ -42,11 +42,17 @@ Cüzdan.bağlanınca((adres) =>
     sayfaDeğiştir(eski, currentPageIndex);
   }
   
-  for (let i = 0 ; i < navButtons.childElementCount; ++i) {
+  for (let i= 0 ; i < navButtons.childElementCount; ++i) {
     navButtons.children[i].onclick = () => {
       const eski = currentPageIndex;
       currentPageIndex = i;
       sayfaDeğiştir(eski, currentPageIndex);
     }
   }
+  
+
+  const döndür = setInterval(() => {
+    nextBtn.onclick()
+  }, 4000)
+
   
