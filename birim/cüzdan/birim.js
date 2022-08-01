@@ -8,8 +8,10 @@ let Ağ = "0xa86a";
 let Bağlanınca = null;
 /** @type {?function()} */
 let Kopunca = null;
-/** @type {?function()} */
+/** @type {?function(string)} */
 let AdresDeğişince = null;
+/** @type {?function(string)} */
+let AğDeğişince = null;
 /** @type {?string} */
 let BağlaMetni;
 
@@ -72,6 +74,7 @@ const ağDeğişti = (yeniAğ) => {
       dom.adla("nc" + yeniAğ).firstElementChild.cloneNode(true),
       nc.firstElementChild);
     Ağ = yeniAğ;
+    if (AğDeğişince) AğDeğişince(yeniAğ);
   }
 }
 
@@ -97,7 +100,7 @@ const adresDeğişti = (adresler) => {
       Bağlanınca(Adres);
       Bağlanınca = null;
     } else if (AdresDeğişince) {
-      AdresDeğişince();
+      AdresDeğişince(Adres);
     }
   }
 }
@@ -112,6 +115,10 @@ const bağlanınca = (f) => {
 
 const kopunca = (f) => {
   Kopunca = f;
+}
+
+const ağDeğişince = (f) => {
+  AğDeğişince = f;
 }
 
 const adresDeğişince = (f) => {
@@ -180,6 +187,7 @@ if (window["ethereum"]) {
 
 export default {
   ağ,
+  ağDeğişince,
   adres,
   adresDeğişince,
   bağla,

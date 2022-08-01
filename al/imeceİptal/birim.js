@@ -14,7 +14,27 @@ const İptalButonu = dom.adla("imbh");
 /** @const {Element} */
 const İptalciler = dom.adla("imf");
 
-const göster = () => dom.adla("im").classList.remove("disabled");
+const Ekler = {
+  "0x1": ["ether", "'den", "'e"],
+  "0xa86a": ["AVAX", "'tan", "'a"],
+  "0x89": ["MATIC", "'ten", "'e"],
+  "0xa4b1": ["ether", "'den", "'e"],
+  "0xfa": ["FTM", "'dan", "'a"]
+};
+
+const fiyatGöster = (ağ) => {
+  const kelam = Ekler[ağ];
+  TCKT.priceIn(0, false).then((fiyat) =>
+    dom.adla("imft").innerText = (fiyat / 10000) + " " + kelam[0] + kelam[1]);
+  TCKT.priceIn(0, true).then((fiyat) =>
+    dom.adla("imfs").innerText = (fiyat / 10000) + " " + kelam[0] + kelam[2]);
+}
+
+const göster = () => {
+  fiyatGöster(Cüzdan.ağ());
+  Cüzdan.ağDeğişince(fiyatGöster);
+  dom.adla("im").classList.remove("disabled");
+}
 
 /**
  * İmece iptal kurulumunu yapar ve verilmiş callback fonksiyonunu çağırır.
@@ -22,12 +42,6 @@ const göster = () => dom.adla("im").classList.remove("disabled");
  * @param {function(Object<string,number>,number)} sonra
  */
 const kurVe = (sonra) => {
-  console.log("GOSTER");
-  TCKT.priceIn(0, 1).then((fiyat) => {
-    console.log("adf");
-    dom.adla("imft").innerText = fiyat + " AVAX'tan";
-  })
-
   GösterButonu.onclick = () => kutularıAç(sonra);
   İptalButonu.onclick = () => atla(sonra);
 }
