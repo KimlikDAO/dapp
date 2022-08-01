@@ -1,3 +1,4 @@
+import Cüzdan from "/birim/cüzdan/birim";
 import Telefon from "/birim/telefon/birim";
 import dom from '/lib/dom';
 
@@ -18,8 +19,10 @@ let SergiSaati = null;
  * @param {number} yeni
  */
 const kartDeğiştir = (yeniKart) => {
-  if (yeniKart == 1) Telefon.nftCevir();
-  yeniKart == 2
+  if (yeniKart == 0) Telefon.nftGöster();
+  if (yeniKart == 1) Telefon.nftKilitle();
+  if (yeniKart == 2) Telefon.nftCüzdanaYolla();
+  yeniKart == 3
     ? Telefon.kutuGöster(
       "Bağlı app TCKT'nizin açık haline erişmek istiyor. İzin veriyor musunuz?")
     : Telefon.kutuKapat();
@@ -32,13 +35,11 @@ const kartDeğiştir = (yeniKart) => {
 
 SağDüğme.onclick = () => {
   kartDeğiştir((Kart + 1) % 4);
-  clearInterval(SergiSaati);
   sergiSaatiKur();
 }
 
 SolDüğme.onclick = () => {
   kartDeğiştir((Kart + 3) % 4);
-  clearInterval(SergiSaati);
   sergiSaatiKur();
 }
 
@@ -46,7 +47,13 @@ for (let i = 0; i < Boncuklar.childElementCount; ++i) {
   Boncuklar.children[i].onclick = () => kartDeğiştir(i);
 }
 
-let sergiSaatiKur = () =>
-  SergiSaati = setInterval(() => kartDeğiştir((Kart + 1) % 4), 3000);
+let sergiSaatiKur = () => {
+  if (SergiSaati) clearInterval(SergiSaati);
+  SergiSaati = setInterval(() => kartDeğiştir((Kart + 1) % 4), 5000);
+}
 
+Cüzdan.bağlanınca((adres) =>
+  Telefon.adresGir(Cüzdan.hızlıArabirimAdı(adres)));
+
+Telefon.nftGöster();
 sergiSaatiKur();

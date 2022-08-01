@@ -1,5 +1,10 @@
 import dom from '/lib/dom';
 
+/**@const {Element} */
+const nft = dom.adla("tenft");
+/**@const {Element} */
+const nftButton = dom.adla("tenft-button");
+
 const adresGir = (adres) => dom.adla("tetr").innerText = adres;
 
 const kutuGöster = (metin) => {
@@ -15,6 +20,27 @@ const kutuKapat = () => {
   dom.adla("tebg").classList.remove("whenmsg");
 }
 
-const nftCevir = () => dom.adla("tenftt").classList.add("flipped");
+const nftGöster = () => {
+  dom.adla("tenftb").style.display = "";
+  nft.classList.remove("moveintowallet");
+  nft.classList.add("flipped");
+  nftButton.classList.add("show");
+}
 
-export default { adresGir, kutuGöster, kutuKapat, nftCevir };
+const nftKilitle = () => {
+  nft.classList.remove("flipped");
+}
+
+const nftCüzdanaYolla = () => {
+  nft.classList.add("moveintowallet");
+  nftButton.classList.remove("show");
+}
+
+export default {
+  adresGir,
+  kutuGöster,
+  kutuKapat,
+  nftCüzdanaYolla,
+  nftGöster,
+  nftKilitle,
+};

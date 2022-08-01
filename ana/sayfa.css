@@ -230,6 +230,7 @@ button:hover {
   width: 100%;
   color: #3c4043;
   background: rgb(244, 244, 244);
+  z-index: -20;
 }
 
 .second_header {
