@@ -18,8 +18,10 @@ let SergiSaati = null;
  * @param {number} yeni
  */
 const kartDeğiştir = (yeniKart) => {
-  if (yeniKart == 1) Telefon.nftCevir();
-  yeniKart == 2
+  if (yeniKart == 0) Telefon.nftGöster();
+  if (yeniKart == 1) Telefon.nftKilitle();
+  if (yeniKart == 2) Telefon.nftCüzdanaYolla();
+  yeniKart == 3
     ? Telefon.kutuGöster(
       "Bağlı app TCKT'nizin açık haline erişmek istiyor. İzin veriyor musunuz?")
     : Telefon.kutuKapat();
@@ -49,4 +51,5 @@ for (let i = 0; i < Boncuklar.childElementCount; ++i) {
 let sergiSaatiKur = () =>
   SergiSaati = setInterval(() => kartDeğiştir((Kart + 1) % 4), 3000);
 
+Telefon.nftGöster();
 sergiSaatiKur();
