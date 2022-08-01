@@ -5,54 +5,37 @@ import dom from '/lib/dom'
 Cüzdan.bağlanınca((adres) =>
   Telefon.adresGir(Cüzdan.hızlıArabirimAdı(adres)));
 
-  let currentPageIndex= 0;
+let currentPageIndex = 0;
+const nextBtn = dom.adla("crsnb");
+const prevBtn = dom.adla("crspb");
+const navs = dom.adla("crsnavs");
+const page = dom.adla("crspgs");
+const navButtons = dom.adla("crsnavs");
 
-  const getCurrentPage = (index) => {
-    const currentPage = dom.adla("crspgs").children[index];
-    return currentPage;
-  }
-  
-  const getCurrentNav = (index) => {
-    const currentNav = dom.adla("crsnavs").children[index];
-    return currentNav;
-  }
-  
-  const nextBtn = dom.adla("crsnb");
-  const prevBtn = dom.adla("crspb");
-  const navButtons = dom.adla("crsnavs");
-  
-  const sayfaDeğiştir = (eski, yeni) => {
-    getCurrentPage(eski).classList.remove("selected");
-    getCurrentNav(eski).classList.remove("current");
-    getCurrentPage(yeni).classList.add("selected");
-    getCurrentNav(yeni).classList.add("current");
-  }
-  
-  nextBtn.onclick = () => {
-    const eski = currentPageIndex;
-    currentPageIndex = currentPageIndex == 3 
-    ? 0 : currentPageIndex + 1; 
-    sayfaDeğiştir(eski, currentPageIndex);
-  }
-  
-  prevBtn.onclick = () => {
-    const eski = currentPageIndex;
-    currentPageIndex = currentPageIndex == 0 
-    ? 3 : currentPageIndex - 1; 
-    sayfaDeğiştir(eski, currentPageIndex);
-  }
-  
-  for (let i= 0 ; i < navButtons.childElementCount; ++i) {
-    navButtons.children[i].onclick = () => {
-      const eski = currentPageIndex;
-      currentPageIndex = i;
-      sayfaDeğiştir(eski, currentPageIndex);
-    }
-  }
-  
+/**
+ * @param {number} eski
+ * @param {number} yeni
+ */
+const sayfaDeğiştir = (yeni) => {
+  if ( yeni == 1) Telefon.nftCevir();
+  yeni == 2 ?
+    Telefon.kutuGöster("App cüzdanınızın açık anahtarına ulaşmak istiyor. İzin veriyor musunuz?")
+    : Telefon.kutuKapat();
+  page.children[currentPageIndex].classList.remove("selected");
+  navs.children[currentPageIndex].classList.remove("current");
+  page.children[yeni].classList.add("selected");
+  navs.children[yeni].classList.add("current");
+  currentPageIndex = yeni;
+}
 
-  const döndür = setInterval(() => {
-    nextBtn.onclick()
-  }, 4000)
+nextBtn.onclick = () =>
+  sayfaDeğiştir((currentPageIndex + 1) % 4);
 
-  
+prevBtn.onclick = () =>
+  sayfaDeğiştir((currentPageIndex + 3) % 4);
+
+for (let i = 0; i < navButtons.childElementCount; ++i) {
+  navButtons.children[i].onclick = () => sayfaDeğiştir(i);
+}
+
+setInterval(() => sayfaDeğiştir((currentPageIndex + 1) % 4), 4000);
