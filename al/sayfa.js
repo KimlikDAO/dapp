@@ -66,8 +66,7 @@ const TCKTYarat = () => {
         dom.adla(ad).innerText = AçıkTCKT[ad];
       }
       dom.adla("nft").classList.add("flipped");
-      dom.adla("tefirw").classList.add("show");
-      dom.adla("tebg").classList.add("whenmsg");
+      Telefon.kutuGöster("App cüzdanınızın açık anahtarına ulaşmak istiyor. İzin veriyor musunuz?");
       const s2a = dom.adla("s2a");
       s2a.innerText = "E-devlet'ten bilgileriniz alındı ✓";
       s2a.onclick = null;
@@ -87,8 +86,7 @@ const TCKTYarat = () => {
       method: "eth_getEncryptionPublicKey",
       params: [Cüzdan.adres()],
     })).then((pubKey) => {
-      dom.adla("tefirw").classList.remove("show");
-      dom.adla("tebg").classList.remove("whenmsg");
+      Telefon.kutuKapat();
       s3a.innerText = "Açık anahtarınızı aldık ✓";
       s3a.classList.remove("act");
       s3a.classList.add("dis");

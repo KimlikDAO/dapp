@@ -160,23 +160,23 @@ button:hover {
   transition: background 0s;
 }
 
-/* Navigation */
 #n {
   display: flex;
-  width: 100%;
-  margin: 0 auto;
+  height: 80px;
   justify-content: space-between;
-  max-width: 1200px;
+  align-items: center;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background-color: #fff;
 }
 
 /* Banner */
 #b {
-  width: 100%;
-  height: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
   display: flex;
   justify-content: center;
+  flex-wrap: wrap;
 }
 
 #ba {
@@ -191,27 +191,12 @@ button:hover {
 
 #bab {
   font-size: 1.2em;
+  display: flex;
+  justify-content: center;
 }
 
 #bac {
   margin: 1.6em 0.1em;
-}
-
-/* Ortaklar */
-#o {
-  width: 50%;
-  max-width: 800px;
-  margin: 7em auto;
-  display: flex;
-  justify-content: space-between;
-}
-
-#oa,
-#ol {
-  cursor: pointer;
-  width: 200px;
-  height: 150px;
-  border: 1px solid #444;
 }
 
 @keyframes growDown {
@@ -226,4 +211,39 @@ button:hover {
   100% {
     transform: scaleY(1);
   }
+}
+
+/*------------carousel-----------*/
+
+.crs__tel__cont {
+  display: flex;
+  width: 100%;
+  max-width: 1200px;
+}
+
+.main__header {
+  padding-top: 50px;
+  font-size: 40pt;
+  text-align: center;
+  font-weight: 800;
+  height: 200px;
+  width: 100%;
+  color: #3c4043;
+  background: rgb(244, 244, 244);
+}
+
+.second_header {
+  color: #888;
+  font-size: 13pt;
+  margin-top: 20px;
+}
+
+.ana_cont {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.ana_cont>#te {
+  margin-top: -30px;
 }

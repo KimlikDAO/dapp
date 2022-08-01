@@ -1,13 +1,11 @@
 #te {
   width: 280px;
   height: 550px;
-  margin-top: 30px;
   border: 5px solid #333;
   border-radius: 40px;
-  font-weight: 700;
   position: relative;
   overflow: hidden;
-  z-index: -1;
+  background: white;
 }
 
 #tebg {
@@ -93,15 +91,13 @@
   left: 5px;
   padding-top: 40px;
   opacity: 0;
-  transform: scale(0);
   transition-property: transform, opacity;
   transition-duration: 0.4s;
   transition-timing-function: ease-in;
 }
 
 #tefirw.show {
-  opacity: 1;
-  transform: scale(1);
+  opacity: 1;/*TODO MuhammetCoskun animation*/
 }
 
 .tefirwyn {
@@ -122,4 +118,79 @@
 .tefirwn {
   font-weight: 100;
   border-right: 0.3px solid #ccc;
+}
+
+/*telefon nft*/
+
+#tenft {
+  /* display: none; */
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.7);
+}
+
+.te-nft-container {
+  position: absolute;
+  width: 250px;
+  height: 250px;
+  top: 50px;
+  left: 15px;
+  transform-style: preserve-3d;
+  transition-property: transform, border;
+  transition-duration: 1s;
+  transition-timing-function: ease-in;
+  box-shadow: 0px 2px 10px rgb(0 0 0 / 15%);
+  border-radius: 10px;
+  background: #fff;
+}
+
+#tenft-button {
+  position: absolute;
+  width: 250px;
+  height: 30px;
+  background-color: #fff;
+  top: 310px;
+  left: 15px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0px 2px 10px rgb(0 0 0 / 15%);
+  /* display: none; */
+}
+
+.te-nft-container.flipped {
+  transform: rotateY(180deg);
+}
+
+.te-TCKT {
+  position: absolute;
+  width: 250px;
+  height: 250px;
+  backface-visibility: hidden;
+}
+
+.te-TCKT.locked {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.te-TCKT.unlocked {
+  transform: rotateY(180deg);
+}
+
+#teTCKT-kb {
+  padding: 18px 40px;
+  position: absolute;
+}
+
+#teTCKT-kb label {
+  font-size: 7px;
+}
+
+.xyz {
+  width: 250px;
+  height: 250px;
+  perspective: 1000px;
 }

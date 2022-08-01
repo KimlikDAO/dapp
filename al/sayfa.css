@@ -10,6 +10,13 @@
   margin: 0 auto;
 }
 
+#nal {
+  display: flex;
+  width: 100%;
+  margin: 0 auto;
+  justify-content: space-between;
+  max-width: 1200px;
+}
 .step {
   width: 500px;
   margin: 1em;
@@ -34,7 +41,7 @@
 #bss {
   width: 250px;
   height: 250px;
-  margin-top: 2em;
+  margin: 2em 0;
   perspective: 1000px;
 }
 
