@@ -2,7 +2,7 @@
  * @fileoverview Al sayfası giriş noktası
  *
  */
-import { imeceİptalKurVe } from '/al/imeceİptal/birim';
+import İmeceİptal from '/al/imeceİptal/birim';
 import { öde } from '/al/ödeme/birim';
 import Cüzdan from '/birim/cüzdan/birim';
 import Telefon from '/birim/telefon/birim';
@@ -94,7 +94,7 @@ const TCKTYarat = () => {
       s3a.classList.add("dis");
       s3a.onclick = null;
       dom.adla("s3").classList.add("done");
-      dom.adla("im").classList.remove("disabled");
+      İmeceİptal.göster();
       return pubKey;
     });
 
@@ -130,7 +130,7 @@ const TCKTYarat = () => {
       })
       .catch((e) => console.log(e + "TCKT oluşturamadık: Kullanıcı reddetti veya IPFS hatası"));
 
-    imeceİptalKurVe(
+    İmeceİptal.kurVe(
       (adresAğırlığı, eşik) => öde(cidSözü, adresAğırlığı, eşik));
   };
 }

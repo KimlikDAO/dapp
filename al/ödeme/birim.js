@@ -1,5 +1,5 @@
-import TCKT from '/lib/TCKT';
 import dom from '/lib/dom';
+import TCKT from '/lib/TCKT';
 
 const imgeEkle = (imge, satır) => {
   imge = imge.cloneNode(true);

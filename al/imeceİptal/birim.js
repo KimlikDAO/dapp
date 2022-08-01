@@ -5,6 +5,7 @@
 import Cüzdan from "/birim/cüzdan/birim";
 import dom from "/lib/dom";
 import evm from "/lib/evm";
+import TCKT from "/lib/TCKT";
 
 /** @const {Element} */
 const GösterButonu = dom.adla("imbe");
@@ -13,13 +14,21 @@ const İptalButonu = dom.adla("imbh");
 /** @const {Element} */
 const İptalciler = dom.adla("imf");
 
+const göster = () => dom.adla("im").classList.remove("disabled");
+
 /**
  * İmece iptal kurulumunu yapar ve verilmiş callback fonksiyonunu çağırır.
  * 
  * @param {function(Object<string,number>,number)} sonra
  */
-const imeceİptalKurVe = (sonra) => {
-  GösterButonu.onclick = () => göster(sonra);
+const kurVe = (sonra) => {
+  console.log("GOSTER");
+  TCKT.priceIn(0, 1).then((fiyat) => {
+    console.log("adf");
+    dom.adla("imft").innerText = fiyat + " AVAX'tan";
+  })
+
+  GösterButonu.onclick = () => kutularıAç(sonra);
   İptalButonu.onclick = () => atla(sonra);
 }
 
@@ -34,7 +43,7 @@ const atla = (sonra) => {
   sonra({}, 0);
 }
 
-const göster = (sonra) => {
+const kutularıAç = (sonra) => {
   dom.adla("im").classList.remove("done");
   dom.adla("imc").style.display = "";
   GösterButonu.style.display = "none";
@@ -194,4 +203,4 @@ const ağırlıkHesapla = () => {
     eşik.value = total;
 }
 
-export { imeceİptalKurVe };
+export default { kurVe, göster };
