@@ -24,10 +24,11 @@ const Ekler = {
 
 const fiyatGöster = (ağ) => {
   const kelam = Ekler[ağ];
-  TCKT.priceIn(0, false).then((fiyat) =>
-    dom.adla("imft").innerText = (fiyat / 10000) + " " + kelam[0] + kelam[1]);
-  TCKT.priceIn(0, true).then((fiyat) =>
-    dom.adla("imfs").innerText = (fiyat / 10000) + " " + kelam[0] + kelam[2]);
+  TCKT.priceIn(0).then(([çok, az]) => {
+    dom.adla("imft").innerText = (çok / 10000) + " " + kelam[0] + kelam[1];
+    dom.adla("imfs").innerText = (az / 10000) + " " + kelam[0] + kelam[2];
+    dom.adla("imfu").innerText = Math.round(100 * (çok - az) / çok);
+  });
 }
 
 const göster = () => {
