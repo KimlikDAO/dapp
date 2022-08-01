@@ -22,7 +22,7 @@ const kutuKapat = () => {
 }
 
 const nftGöster = () => {
-  dom.adla("tenftb").style.display = "block";
+  dom.adla("tenftb").style.display = "";
   nft.classList.remove("moveintowallet");
   nft.classList.add("flipped");
   nftButton.style.display = "flex";
