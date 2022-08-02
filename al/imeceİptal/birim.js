@@ -14,7 +14,8 @@ const İptalButonu = dom.adla("imbh");
 /** @const {Element} */
 const İptalciler = dom.adla("imf");
 
-const Ekler = {
+/** @const {Object<string, Array<string>>} */
+const Kelam = {
   "0x1": ["ether", "'den", "'e"],
   "0xa86a": ["AVAX", "'tan", "'a"],
   "0x89": ["MATIC", "'ten", "'e"],
@@ -23,7 +24,7 @@ const Ekler = {
 };
 
 const fiyatGöster = (ağ) => {
-  const kelam = Ekler[ağ];
+  const kelam = Kelam[ağ];
   TCKT.priceIn(0).then(([çok, az]) => {
     dom.adla("imft").innerText = (çok / 10000) + " " + kelam[0] + kelam[1];
     dom.adla("imfs").innerText = (az / 10000) + " " + kelam[0] + kelam[2];
@@ -131,10 +132,13 @@ const işlevEkle = (satır) => {
 }
 
 const girdiAlanıEkle = () => {
+  /** @const {number} */
+  const tane = İptalciler.childElementCount;
+  if (tane >= 5) return;
   let yeniSatır = İptalciler.firstElementChild.cloneNode(true);
   işlevEkle(yeniSatır);
   İptalciler.appendChild(yeniSatır);
-  if (İptalciler.childElementCount >= 3)
+  if (tane >= 3)
     İptalciler.classList.add("im3");
   ağırlıkHesapla();
 }
