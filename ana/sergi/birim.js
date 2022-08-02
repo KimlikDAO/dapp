@@ -14,7 +14,10 @@ const Kartlar = dom.adla("sepgs");
 let Kart = 0;
 /** @type {?Interval} */
 let SergiSaati = null;
-
+/** @const {Element} */
+const carousel = dom.adla("sepgs");
+/**@const {number} */
+const width = document.getElementById("sepgc").getBoundingClientRect().width;
 /**
  * @param {number} yeni
  */
@@ -26,10 +29,9 @@ const kartDeğiştir = (yeniKart) => {
     ? Telefon.kutuGöster(
       "Bağlı app TCKT'nizin açık haline erişmek istiyor. İzin veriyor musunuz?")
     : Telefon.kutuKapat();
-  Kartlar.children[Kart].classList.remove("selected");
   Boncuklar.children[Kart].classList.remove("current");
-  Kartlar.children[yeniKart].classList.add("selected");
   Boncuklar.children[yeniKart].classList.add("current");
+  carousel.style.transform = `translate3d(${- yeniKart * width}px, 0, 0)`;
   Kart = yeniKart;
 }
 
