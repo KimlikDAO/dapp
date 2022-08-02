@@ -1,11 +1,10 @@
 #nb {
   display: flex;
-  margin: 10px;
+  align-items: center;
 }
 
 .nb {
   display: flex;
-  align-items: center;
   position: relative;
 }
 
@@ -53,7 +52,7 @@ img {
   box-shadow: 0px 1px 20px rgba(0, 0, 0, 0.2);
   display: block;
   position: absolute;
-  top: 50px;
+  top: 45px;
   animation: growDown 300ms ease-in-out forwards;
   transform-origin: top center;
   list-style: none;

@@ -49,7 +49,7 @@ for (let i = 0; i < Boncuklar.childElementCount; ++i) {
 
 let sergiSaatiKur = () => {
   if (SergiSaati) clearInterval(SergiSaati);
-  SergiSaati = setInterval(() => kartDeğiştir((Kart + 1) % 4), 5000);
+  SergiSaati = setInterval(() => kartDeğiştir((Kart + 1) % 4), 4000);
 }
 
 Cüzdan.bağlanınca((adres) =>

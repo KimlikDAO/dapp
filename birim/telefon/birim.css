@@ -18,7 +18,7 @@
 }
 
 #tebg.whenmsg {
-  filter: blur(1px);
+  filter: blur(3px);
 }
 
 .tefr {
@@ -90,7 +90,6 @@
   width: 270px;
   top: 250px;
   left: 5px;
-  padding-top: 40px;
   opacity: 0;
   transition-property: transform, opacity;
   transition-duration: 0.4s;
@@ -101,10 +100,13 @@
   opacity: 1;/*TODO MuhammetCoskun animation*/
 }
 
+#tefirwt {
+  padding: 35px 10px;
+}
+
 #tefirwyn {
   display: flex;
   height: 40px;
-  margin-top: 40px;
   border-top: 0.3px solid #ccc;
 }
 
@@ -117,8 +119,6 @@
   font-weight: 700;
   border-left: 0.3px solid #ccc;
 }
-
-/*telefon nft*/
 
 #tenftb {
   width: 100%;
