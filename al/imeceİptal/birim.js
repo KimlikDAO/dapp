@@ -14,20 +14,13 @@ const İptalButonu = dom.adla("imbh");
 /** @const {Element} */
 const İptalciler = dom.adla("imf");
 
-/** @const {Object<string, Array<string>>} */
-const Kelam = {
-  "0x1": ["ether", "'den", "'e"],
-  "0xa86a": ["AVAX", "'tan", "'a"],
-  "0x89": ["MATIC", "'ten", "'e"],
-  "0xa4b1": ["ether", "'den", "'e"],
-  "0xfa": ["FTM", "'dan", "'a"]
-};
-
 const fiyatGöster = (ağ) => {
-  const kelam = Kelam[ağ];
+  const ekler = Cüzdan.ParaEkleri[ağ];
   TCKT.priceIn(0).then(([çok, az]) => {
-    dom.adla("imft").innerText = (çok / 10000) + " " + kelam[0] + kelam[1];
-    dom.adla("imfs").innerText = (az / 10000) + " " + kelam[0] + kelam[2];
+    dom.adla("imft").innerText = ((çok / 10000) + " ").replace(".", ",")
+      + ekler[0] + ekler[1];
+    dom.adla("imfs").innerText = ((az / 10000) + " ").replace(".", ",")
+      + ekler[0] + ekler[2];
     dom.adla("imfu").innerText = Math.round(100 * (çok - az) / çok);
   });
 }
@@ -54,6 +47,7 @@ const atla = (sonra) => {
   İptalButonu.style.display = "";
   İptalButonu.innerText = "İmece iptal kurulmadı 🤌";
   İptalButonu.classList.add("done");
+  dom.butonDurdur(İptalButonu);
   dom.adla("im").classList.add("done");
   dom.adla("imc").style.display = "none";
   sonra({}, 0);
@@ -90,7 +84,7 @@ const kutularıAç = (sonra) => {
       /** @const {string} */
       const adres = girdi.value;
       if (!evm.adresGeçerli(adres) || adres in adresAğırlığı ||
-        adres.toLowerCase() == Cüzdan.adres()) {
+        adres.toLowerCase() === Cüzdan.adres()) {
         geçerli = false;
         satır[i].firstElementChild.classList.add("imin");
       }
@@ -156,12 +150,12 @@ const girdiDüzelt = (girdi) => {
   if (düz) girdi.value = düz
   /** @const {boolean} */
   const hataVar = değer &&
-    (!düz || değer.toLowerCase() == Cüzdan.adres().toLowerCase())
+    (!düz || değer.toLowerCase() === Cüzdan.adres().toLowerCase())
   girdi.classList.toggle("imin", hataVar);
 }
 
 const yapıştır = (event) => {
-  let a = event.target.nodeName == 'A'
+  let a = event.target.nodeName === 'A'
     ? event.target : event.target.parentElement;
   const girdi = a.previousElementSibling;
   navigator.clipboard.readText().then(
@@ -196,7 +190,7 @@ const birArttır = (event) => {
 const ağırlıkBlurOlunca = (event) => {
   let val = event.target.value;
   if (val > 9) event.target.value = 9;
-  if (val < 1 || val == "") event.target.value = 1;
+  if (val < 1 || val === "") event.target.value = 1;
   ağırlıkHesapla();
 }
 

@@ -69,11 +69,9 @@ const TCKTYarat = () => {
       Telefon.kutuGöster("App cüzdanınızın açık anahtarına ulaşmak istiyor. İzin veriyor musunuz?");
       const s2a = dom.adla("s2a");
       s2a.innerText = "E-devlet'ten bilgileriniz alındı ✓";
-      s2a.onclick = null;
       s2a.classList.remove("act");
-      s2a.classList.add("dis");
-      s2a.disabled = true;
       s2a.href = "javascript:";
+      dom.butonDurdur(s2a);
       dom.adla("s2").classList.add("done");
       AçıkTCKT.rasgele = base64(Rasgele);
       // TODO(KimlikDAO-bot): Kullanıcı tarafında gelen TCKT'nin fazladan veri
@@ -89,8 +87,7 @@ const TCKTYarat = () => {
       Telefon.kutuKapat();
       s3a.innerText = "Açık anahtarınızı aldık ✓";
       s3a.classList.remove("act");
-      s3a.classList.add("dis");
-      s3a.onclick = null;
+      dom.butonDurdur(s3a);
       dom.adla("s3").classList.add("done");
       İmeceİptal.göster();
       return pubKey;
@@ -140,10 +137,8 @@ if (window["ethereum"]) {
   Cüzdan.bağlanınca((adres) => {
     const s1a = dom.adla("s1a");
     s1b.innerText += "ndı ✓";
-    s1b.onclick = null;
-    s1b.disabled = true;
     s1b.classList.remove("act");
-    s1b.classList.add("dis");
+    dom.butonDurdur(s1b);
 
     s1a.style.display = "none";
     dom.adla("s1").classList.add("done");

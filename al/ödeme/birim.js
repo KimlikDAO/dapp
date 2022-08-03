@@ -81,9 +81,12 @@ export const öde = (cidSözü, adresAğırlığı, eşik) => {
       kesirGir(fiyat[1], döküm.children[0]);
       if (!iptalli)
         kesirGir(fiyat[0] - fiyat[1], döküm.children[1]);
-
       if (para != 0)
         kesirGir(fiyat[+iptalli], toplamSatırı);
+      let paraMetni = ("" + (fiyat[+iptalli] / 10000)).replace(".", ",");
+      dom.adla("odf").innerText =  para == 0
+        ? paraMetni + " " + Cüzdan.ParaEkleri[Cüzdan.ağ()][0]
+        : (para == 3 ? "₺" : "$") + paraMetni;
       return fiyat;
     });
 
