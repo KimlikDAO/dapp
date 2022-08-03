@@ -21,10 +21,10 @@ const width = document.getElementById("sepgc").getBoundingClientRect().width;
  * @param {number} yeniKart
  */
 const kartDeğiştir = (yeniKart) => {
-  if (yeniKart == 0) Telefon.nftGöster();
-  if (yeniKart == 1) Telefon.nftKilitle();
-  if (yeniKart == 2) Telefon.nftCüzdanaYolla();
-  yeniKart == 3
+  if (yeniKart === 0) Telefon.nftGöster();
+  if (yeniKart === 1) Telefon.nftKilitle();
+  if (yeniKart === 2) Telefon.nftCüzdanaYolla();
+  yeniKart === 3
     ? Telefon.kutuGöster(
       "Bağlı app TCKT'nizin açık haline erişmek istiyor. İzin veriyor musunuz?")
     : Telefon.kutuKapat();

@@ -11,7 +11,7 @@ let Kopunca = null;
 /** @type {?function(string)} */
 let AdresDeğişince = null;
 /** @type {?function(string)} */
-let AğDeğişince = null;
+let AğDeğişince = [];
 /** @type {?string} */
 let BağlaMetni;
 
@@ -53,7 +53,7 @@ const hızlıArabirimAdı = (hesap) => hesap.slice(0, 6) + "..." + hesap.slice(-
  * TODO(KimlikDAO-bot): ENS lookup, avvy domains lookup
  */
 const nihaiArabirimAdı = (hesap) =>
-  new Promise((resolve) => null);
+  new Promise((_) => null);
 
 /**
  * @param {string} yeniAğ harf dizisi olarak yeni ağ adı.
@@ -74,7 +74,7 @@ const ağDeğişti = (yeniAğ) => {
       dom.adla("nc" + yeniAğ).firstElementChild.cloneNode(true),
       nc.firstElementChild);
     Ağ = yeniAğ;
-    if (AğDeğişince) AğDeğişince(yeniAğ);
+    for (const f of AğDeğişince) f(yeniAğ);
   }
 }
 
@@ -82,12 +82,14 @@ const ağDeğişti = (yeniAğ) => {
  * @param {!Array<string>} adresler cüzdandan gelen adresler dizisi.
  */
 const adresDeğişti = (adresler) => {
-  if (adresler.length == 0) {
+  if (adresler.length === 0) {
     Adres = null;
     AdresButonu.innerText = BağlaMetni;
     AdresButonu.onclick = bağla;
     if (Kopunca) Kopunca();
   } else if (adresler[0] != Adres) {
+    /** @const {?string} */
+    const eskiAdres = Adres;
     Adres = adresler[0];
     BağlaMetni = AdresButonu.innerText;
     AdresButonu.innerText = hızlıArabirimAdı(Adres);
@@ -96,9 +98,8 @@ const adresDeğişti = (adresler) => {
     nihaiArabirimAdı(Adres).then((ad) => {
       if (ad) AdresButonu.innerText = ad;
     });
-    if (Bağlanınca) {
+    if (!eskiAdres) {
       Bağlanınca(Adres);
-      Bağlanınca = null;
     } else if (AdresDeğişince) {
       AdresDeğişince(Adres);
     }
@@ -118,7 +119,7 @@ const kopunca = (f) => {
 }
 
 const ağDeğişince = (f) => {
-  AğDeğişince = f;
+  AğDeğişince.push(f);
 }
 
 const adresDeğişince = (f) => {

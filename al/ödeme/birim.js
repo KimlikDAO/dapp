@@ -1,3 +1,4 @@
+import Cüzdan from "/birim/cüzdan/birim";
 import dom from '/lib/dom';
 import TCKT from '/lib/TCKT';
 
@@ -9,9 +10,11 @@ const imgeEkle = (imge, satır) => {
 }
 
 const kesirGir = (sayı, hane) => {
+  hane = hane.children[2];
   const kesir = sayı % 10000;
   hane.innerText = (sayı - kesir) / 10000;
-  hane.nextElementSibling.innerText = kesir;
+  hane.nextElementSibling.innerText =
+    ("" + (kesir / 10000)).slice(2).padEnd(2, "0");
 }
 
 /**
@@ -26,51 +29,88 @@ export const öde = (cidSözü, adresAğırlığı, eşik) => {
   const paraDüğmesi = dom.adla("odb");
   /** @const {Element} */
   const döküm = dom.adla("odi");
+  /** @const {Element} */
+  const toplamSatırı = döküm.lastElementChild;
   /** @const {boolean} */
   const iptalli = !!eşik;
   /** @type {string} */
   let para = "0";
+  /** @type {string} */
+  let ağ = null;
 
-  dom.menüYarat(paraDüğmesi, paraDüğmesi.nextElementSibling);
+  const ağDeğişti = (yeniAğ) => {
+    /** @const {Element} */
+    const li = dom.adla("odd" + yeniAğ);
 
-  if (iptalli) {
-    döküm.children[1].remove();
+    // Menü 'native token'i ayarla.
+    li.style.display = "";
+    for (const diğerAğ of ["0x1", "0xa86a", "0x89", "0xa4b1", "0xfa"]) {
+      if (diğerAğ != yeniAğ) dom.adla("odd" + diğerAğ).style.display = "none";
+    }
+
+    // Yeni ağdaki fiyatları çek ve göster.
+    for (let i = 0; i <= 3; ++i) {
+      const satır = dom.adla("odd" + (i == 0 ? yeniAğ : i));
+      TCKT.priceIn(i).then((fiyat) => {
+        satır.firstElementChild.innerText = fiyat[+iptalli] / 10000;
+      });
+    }
+
+    // Ağ ücreti imgesini ekle
+    imgeEkle(li.lastElementChild, döküm.children[2]);
+    imgeEkle(li.lastElementChild, toplamSatırı.lastElementChild);
+    paraDeğişti(para, para == 0 ? li.lastElementChild : null);
   }
-  // Ağ ücreti imgesini ekle
-  imgeEkle(paraDüğmesi.nextElementSibling.lastElementChild.lastElementChild,
-    döküm.lastElementChild.previousElementSibling);
 
-  const ağDeğişince = (ağ) => {}
+  const paraDeğişti = (yeniPara, imgeAslı) => {
+    para = yeniPara;
 
-  const paraDeğişince = (yeniPara, imgeAslı) => {
-    paraDüğmesi.replaceChild(imgeAslı.cloneNode(true), paraDüğmesi.firstElementChild);
-    imgeEkle(imgeAslı, döküm.children[0]);
-    if (!iptalli)
-      imgeEkle(imgeAslı, döküm.children[1]);
-    TCKT.priceIn(yeniPara).then((fiyat) => {
-      kesirGir(fiyat[1], döküm.children[0].children[2]);
+    if (imgeAslı) {
+      paraDüğmesi.replaceChild(imgeAslı.cloneNode(true), paraDüğmesi.firstElementChild);
+      imgeEkle(imgeAslı, döküm.children[0]);
       if (!iptalli)
-        kesirGir(fiyat[0] - fiyat[1], döküm.children[1].children[2]);
-      döküm.lastElementChild.lastElementChild.style.display = yeniPara == 0
-        ? "none" : "";
-      if (yeniPara == 0) {
-        const satır = döküm.lastElementChild;
-        console.log(fiyat[iptalli], iptalli);
-        const [tam, kesir] = tamVeKesir(2 + fiyat[+iptalli]);
-        satır.children[2].innerText = tam;
-        satır.children[3].innerText = kesir;
-        imgeEkle(imgeAslı, satır);
+        imgeEkle(imgeAslı, döküm.children[1]);
+      imgeEkle(imgeAslı, toplamSatırı);
+    }
+
+    // Eğer 'native token'da ödemiyorsak, ağ ücretini ayrıca göster
+    toplamSatırı.lastElementChild.style.display = para == 0 ? "none" : "inline-block";
+
+    const ağÜcretiSözü = TCKT.estimatedNetworkFee();
+    const fiyatSözü = TCKT.priceIn(para).then((fiyat) => {
+      kesirGir(fiyat[1], döküm.children[0]);
+      if (!iptalli)
+        kesirGir(fiyat[0] - fiyat[1], döküm.children[1]);
+
+      if (para != 0)
+        kesirGir(fiyat[+iptalli], toplamSatırı);
+      return fiyat;
+    });
+
+    Promise.all([fiyatSözü, ağÜcretiSözü]).then(([fiyat, ağÜcreti]) => {
+      kesirGir(ağÜcreti, döküm.children[2]);
+      if (para == 0) {
+        kesirGir(fiyat[+iptalli] + ağÜcreti, toplamSatırı);
+      } else {
+        kesirGir(ağÜcreti, toplamSatırı.lastElementChild);
       }
-    })
+    });
   }
 
+  // Ek ücreti göster / gizle.
+  döküm.children[1].style.display = iptalli ? "none" : "";
+  // Para menüsünü yarat.
+  dom.menüYarat(paraDüğmesi, paraDüğmesi.nextElementSibling);
   paraDüğmesi.nextElementSibling.onclick = (event) => {
     /** @const {Element} */
     const li = event.target.nodeName == "LI"
       ? event.target : event.target.parentElement;
     if (!li.id.startsWith("odd")) return;
-    paraDeğişince(li.id[3], li.lastElementChild);
+    paraDeğişti(li.id[3], li.lastElementChild);
   };
+
+  ağDeğişti(Cüzdan.ağ());
+  Cüzdan.ağDeğişince(ağDeğişti);
 
   dom.adla("od").classList.remove("disabled");
   dom.adla("oda").onclick = () => {

@@ -181,6 +181,7 @@ button:hover {
   padding: 0 1em;
   display: flex;
   align-items: center;
+  min-width: 10ex;
 }
 
 /* Banner */
