@@ -43,18 +43,23 @@ export const öde = (cidSözü, adresAğırlığı, eşik) => {
     const li = dom.adla("odd" + yeniAğ);
 
     // Menü 'native token'i ayarla.
-    li.style.display = "";
     for (const diğerAğ of ["0x1", "0xa86a", "0x89", "0xa4b1", "0xfa"]) {
       if (diğerAğ != yeniAğ) dom.adla("odd" + diğerAğ).style.display = "none";
     }
 
     // Yeni ağdaki fiyatları çek ve göster.
     for (let i = 0; i <= 3; ++i) {
-      const satır = dom.adla("odd" + (i == 0 ? yeniAğ : i));
-      TCKT.priceIn(i).then((fiyat) => {
-        satır.firstElementChild.innerText = fiyat[+iptalli] / 10000;
-      });
+      const tokenLi = dom.adla("odd" + (i == 0 ? yeniAğ : i));
+      const tokenYok = (i > 0) && TCKT.TokenAddress[yeniAğ][i] === "";
+      tokenLi.style.display = tokenYok ? "none" : "";
+      if (!tokenYok)
+        TCKT.priceIn(i).then((fiyat) => {
+          tokenLi.firstElementChild.innerText = fiyat[+iptalli] / 10000;
+        });
     }
+
+    // yeniAğ'da mevcut token yoksa 'native token'e geç
+    if (TCKT.TokenAddress[yeniAğ][para] === "") para = 0;
 
     // Ağ ücreti imgesini ekle
     imgeEkle(li.lastElementChild, döküm.children[2]);
