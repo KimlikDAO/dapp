@@ -14,9 +14,11 @@ const Kartlar = dom.adla("sepgs");
 let Kart = 0;
 /** @type {?Interval} */
 let SergiSaati = null;
+/** @const {number} */
+const width = document.getElementById("sepgc").getBoundingClientRect().width;
 
 /**
- * @param {number} yeni
+ * @param {number} yeniKart
  */
 const kartDeğiştir = (yeniKart) => {
   if (yeniKart == 0) Telefon.nftGöster();
@@ -26,10 +28,9 @@ const kartDeğiştir = (yeniKart) => {
     ? Telefon.kutuGöster(
       "Bağlı app TCKT'nizin açık haline erişmek istiyor. İzin veriyor musunuz?")
     : Telefon.kutuKapat();
-  Kartlar.children[Kart].classList.remove("selected");
   Boncuklar.children[Kart].classList.remove("current");
-  Kartlar.children[yeniKart].classList.add("selected");
   Boncuklar.children[yeniKart].classList.add("current");
+  Kartlar.style.transform = `translate3d(-${yeniKart * width}px, 0, 0)`;
   Kart = yeniKart;
 }
 
@@ -47,7 +48,7 @@ for (let i = 0; i < Boncuklar.childElementCount; ++i) {
   Boncuklar.children[i].onclick = () => kartDeğiştir(i);
 }
 
-let sergiSaatiKur = () => {
+const sergiSaatiKur = () => {
   if (SergiSaati) clearInterval(SergiSaati);
   SergiSaati = setInterval(() => kartDeğiştir((Kart + 1) % 4), 4000);
 }
