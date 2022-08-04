@@ -10,7 +10,7 @@ let Bağlanınca = null;
 let Kopunca = null;
 /** @type {?function(string)} */
 let AdresDeğişince = null;
-/** @type {?function(string)} */
+/** @type {!Array<function(string)>} */
 let AğDeğişince = [];
 /** @type {?string} */
 let BağlaMetni;
@@ -151,9 +151,11 @@ if (window["ethereum"]) {
   AdresButonu.onclick = bağla;
 
   ağMenüsü.onclick = (event) => {
-    let li = event.target.nodeName == "LI"
+    /** @const {Element} */
+    const li = event.target.nodeName == "LI"
       ? event.target : event.target.parentElement;
     if (!li.id.startsWith("nc0x")) return;
+    /** @const {string} */
     const ağ = li.id.slice(2);
     ethereum.request(/** @type {RequestParams} */({
       method: "wallet_switchEthereumChain",
@@ -186,7 +188,7 @@ if (window["ethereum"]) {
     });
 }
 
-/** @const {Object<string, Array<string>>} */
+/** @const {Object<string, !Array<string>>} */
 const ParaEkleri = {
   "0x1": ["ether", "'den", "'e"],
   "0xa86a": ["AVAX", "'tan", "'a"],

@@ -56,6 +56,7 @@ const TCKTYarat = () => {
   dom.adla("s3").classList.remove("disabled");
   s3a.classList.remove("disabled");
 
+  /** @const {Promise<string>} */
   const açıkTCKTSözü = taahhütOluştur(
     /** @type {string} */(Cüzdan.adres()), Rasgele)
     .then((taahhüt) =>
@@ -80,6 +81,7 @@ const TCKTYarat = () => {
     });
 
   s3a.onclick = () => {
+    /** @const {Promise<string>} */
     const açıkAnahtarSözü = ethereum.request(/** @type {RequestParams} */({
       method: "eth_getEncryptionPublicKey",
       params: [Cüzdan.adres()],
@@ -131,6 +133,7 @@ const TCKTYarat = () => {
 }
 
 if (window["ethereum"]) {
+  /** @const {Element} */
   const s1b = dom.adla("s1b");
   s1b.onclick = Cüzdan.bağla;
 

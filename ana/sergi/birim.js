@@ -12,8 +12,8 @@ const Boncuklar = dom.adla("senavs");
 const Kartlar = dom.adla("sepgs");
 /** @type {number} */
 let Kart = 0;
-/** @type {?Interval} */
-let SergiSaati = null;
+/** @type {number} */
+let SergiSaati = 0;
 /** @const {number} */
 const width = document.getElementById("sepgc").getBoundingClientRect().width;
 
@@ -44,7 +44,7 @@ SolDüğme.onclick = () => {
   sergiSaatiKur();
 }
 
-for (let i = 0; i < Boncuklar.childElementCount; ++i) {
+for (let /** number */ i = 0; i < Boncuklar.childElementCount; ++i) {
   Boncuklar.children[i].onclick = () => kartDeğiştir(i);
 }
 

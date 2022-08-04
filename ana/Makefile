@@ -1,4 +1,4 @@
-build/ana/sayfa.js: ana/sayfa.js \
+build/ana/sayfa.js: ana/sayfa.js ana/sergi/birim.js \
                     birim/cüzdan/birim.js birim/telefon/birim.js \
                     lib/dom.js \
                     lib/ethereum.js
@@ -25,6 +25,7 @@ build/ana/sayfa.keymap: $(call compressions, $(ASSETS))
 	tools/keyhasher.py $@ $(ASSETS)
 
 build/ana.html: ana/sayfa.html build/ana/sayfa.keymap ana/sayfa.inlines \
+                build/ana/ok.svg.inl \
                 birim/telefon/birim.html \
                 build/birim/cüzdan/birim.html
 	cp $< $@

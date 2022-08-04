@@ -1,12 +1,18 @@
 import dom from '/lib/dom';
 
-/**@const {Element} */
+/** @const {Element} */
 const nft = dom.adla("tenft");
-/**@const {Element} */
+/** @const {Element} */
 const nftButton = dom.adla("tenft-button");
 
+/**
+ * @param {string} adres Telefonda gösterilecek adres.
+ */
 const adresGir = (adres) => dom.adla("tetr").innerText = adres;
 
+/**
+ * @param {string} metin İletişim kutusunda gösterilecek metin.
+ */
 const kutuGöster = (metin) => {
   /** @const {Element} */
   const kutu = dom.adla("tefirw");
@@ -15,6 +21,9 @@ const kutuGöster = (metin) => {
   dom.adla("tebg").classList.add("whenmsg");
 }
 
+/**
+ * Telefondaki iletişim kutusunu kapatır.
+ */
 const kutuKapat = () => {
   dom.adla("tefirw").classList.remove("show");
   dom.adla("tebg").classList.remove("whenmsg");

@@ -14,7 +14,11 @@ const İptalButonu = dom.adla("imbh");
 /** @const {Element} */
 const İptalciler = dom.adla("imf");
 
+/**
+ * @param {string} ağ Native tokeninde TCKT fiyatının gösterileceği ağ.
+ */
 const fiyatGöster = (ağ) => {
+  /** @const {!Array<string>} */
   const ekler = Cüzdan.ParaEkleri[ağ];
   TCKT.priceIn(0).then(([çok, az]) => {
     dom.adla("imft").innerText = ((çok / 1000000) + " ").replace(".", ",")
@@ -41,6 +45,9 @@ const kurVe = (sonra) => {
   İptalButonu.onclick = () => atla(sonra);
 }
 
+/**
+ * @param {function(Object<string,number>,number)} sonra
+ */
 const atla = (sonra) => {
   GösterButonu.style.display = "";
   GösterButonu.innerText = "Yine de kur";
@@ -53,6 +60,9 @@ const atla = (sonra) => {
   sonra({}, 0);
 }
 
+/**
+ * @param {function(Object<string,number>,number)} sonra
+ */
 const kutularıAç = (sonra) => {
   dom.adla("im").classList.remove("done");
   dom.adla("imc").style.display = "";
@@ -77,8 +87,9 @@ const kutularıAç = (sonra) => {
     /** @type {number} */
     let toplamAğırlık = 0;
 
+    /** @const {NodeList<!Element>} */
     const satır = İptalciler.children;
-    for (let i = 0; i < satır.length; ++i) {
+    for (let /** number */ i = 0; i < satır.length; ++i) {
       /** @const {Element} */
       const girdi = satır[i].firstElementChild;
       /** @const {string} */
@@ -111,7 +122,11 @@ const kutularıAç = (sonra) => {
   };
 }
 
+/**
+ * @param {Element} satır
+ */
 const işlevEkle = (satır) => {
+  /** @const {NodeList<!Element>} */
   const elemanlar = satır.children;
   elemanlar[0].value = "";
   elemanlar[0].onblur = (e) => girdiDüzelt(e.target);
@@ -129,6 +144,7 @@ const girdiAlanıEkle = () => {
   /** @const {number} */
   const tane = İptalciler.childElementCount;
   if (tane >= 5) return;
+  /** @type {Element} */
   let yeniSatır = İptalciler.firstElementChild.cloneNode(true);
   işlevEkle(yeniSatır);
   İptalciler.appendChild(yeniSatır);
@@ -144,6 +160,9 @@ const eşikDeğeriBlurOlunca = (event) => {
   dom.adla("imt").classList.toggle("imin", geçerli);
 }
 
+/**
+ * @param {Element} girdi
+ */
 const girdiDüzelt = (girdi) => {
   const değer = girdi.value;
   const düz = evm.adresDüzelt(değer);
@@ -154,6 +173,9 @@ const girdiDüzelt = (girdi) => {
   girdi.classList.toggle("imin", hataVar);
 }
 
+/**
+ * @param {Event} event
+ */
 const yapıştır = (event) => {
   let a = event.target.nodeName === 'A'
     ? event.target : event.target.parentElement;

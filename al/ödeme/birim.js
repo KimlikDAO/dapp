@@ -2,6 +2,10 @@ import Cüzdan from "/birim/cüzdan/birim";
 import dom from '/lib/dom';
 import TCKT from '/lib/TCKT';
 
+/**
+ * @param {Element} imge
+ * @param {Element} satır
+ */
 const imgeEkle = (imge, satır) => {
   imge = imge.cloneNode(true);
   imge.width = 16;
@@ -9,8 +13,13 @@ const imgeEkle = (imge, satır) => {
   satır.replaceChild(imge, satır.children[1]);
 }
 
+/**
+ * @param {number} sayı
+ * @param {Element} hane
+ */
 const kesirGir = (sayı, hane) => {
   hane = hane.children[2];
+  /** @const {number} */
   const kesir = sayı % 1000000;
   hane.innerText = (sayı - kesir) / 1000000;
   hane.nextElementSibling.innerText =
@@ -33,9 +42,10 @@ export const öde = (cidSözü, adresAğırlığı, eşik) => {
   const toplamSatırı = döküm.lastElementChild;
   /** @const {boolean} */
   const iptalli = !!eşik;
-  /** @type {string} */
-  let para = "0";
+  /** @type {number} */
+  let para = 0;
 
+  /** @const {function(string)} */
   const ağDeğişti = (yeniAğ) => {
     /** @const {Element} */
     const li = dom.adla("odd" + yeniAğ);
@@ -67,6 +77,10 @@ export const öde = (cidSözü, adresAğırlığı, eşik) => {
     paraDeğişti(para, para == 0 ? li.lastElementChild : null);
   }
 
+  /**
+   * @param {number} yeniPara
+   * @param {?Element} imgeAslı
+   */
   const paraDeğişti = (yeniPara, imgeAslı) => {
     para = yeniPara;
 
@@ -81,14 +95,17 @@ export const öde = (cidSözü, adresAğırlığı, eşik) => {
     // Eğer 'native token'da ödemiyorsak, ağ ücretini ayrıca göster
     toplamSatırı.lastElementChild.style.display = para == 0 ? "none" : "inline-block";
 
+    /** @const {Promise<number>} */
     const ağÜcretiSözü = TCKT.estimateNetworkFee();
+    /** @const {Promise<Array<number>>} */
     const fiyatSözü = TCKT.priceIn(para).then((fiyat) => {
       kesirGir(fiyat[1], döküm.children[0]);
       if (!iptalli)
         kesirGir(fiyat[0] - fiyat[1], döküm.children[1]);
       if (para != 0)
         kesirGir(fiyat[+iptalli], toplamSatırı);
-      let paraMetni = ("" + (fiyat[+iptalli] / 1000000)).replace(".", ",");
+      /** @const {string} */
+      const paraMetni = ("" + (fiyat[+iptalli] / 1000000)).replace(".", ",");
       dom.adla("odf").innerText = para == 0
         ? paraMetni + " " + Cüzdan.ParaEkleri[Cüzdan.ağ()][0]
         : (para == 3 ? "₺" : "$") + paraMetni;
@@ -113,7 +130,7 @@ export const öde = (cidSözü, adresAğırlığı, eşik) => {
     const li = event.target.nodeName == "LI"
       ? event.target : event.target.parentElement;
     if (!li.id.startsWith("odd")) return;
-    paraDeğişti(li.id[3], li.lastElementChild);
+    paraDeğişti(parseInt(li.id[3]), li.lastElementChild);
   };
 
   ağDeğişti(Cüzdan.ağ());
