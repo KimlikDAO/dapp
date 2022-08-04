@@ -65,6 +65,10 @@
   margin-right: 0.5ex;
 }
 
+/* od estimate */
+.ode {
+  color: #777;
+}
 
 .odt {
   font-weight: 700;

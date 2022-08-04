@@ -35,8 +35,6 @@ export const öde = (cidSözü, adresAğırlığı, eşik) => {
   const iptalli = !!eşik;
   /** @type {string} */
   let para = "0";
-  /** @type {string} */
-  let ağ = null;
 
   const ağDeğişti = (yeniAğ) => {
     /** @const {Element} */
@@ -49,8 +47,10 @@ export const öde = (cidSözü, adresAğırlığı, eşik) => {
 
     // Yeni ağdaki fiyatları çek ve göster.
     for (let i = 0; i <= 3; ++i) {
+      /** @const {Element} */
       const tokenLi = dom.adla("odd" + (i == 0 ? yeniAğ : i));
-      const tokenYok = (i > 0) && TCKT.TokenAddress[yeniAğ][i] === "";
+      /** @const {boolean} */
+      const tokenYok = (i > 0) && !TCKT.isTokenAvailable(yeniAğ, i);
       tokenLi.style.display = tokenYok ? "none" : "";
       if (!tokenYok)
         TCKT.priceIn(i).then((fiyat) => {
@@ -59,7 +59,7 @@ export const öde = (cidSözü, adresAğırlığı, eşik) => {
     }
 
     // yeniAğ'da mevcut token yoksa 'native token'e geç
-    if (TCKT.TokenAddress[yeniAğ][para] === "") para = 0;
+    if (!TCKT.isTokenAvailable(yeniAğ, para)) para = 0;
 
     // Ağ ücreti imgesini ekle
     imgeEkle(li.lastElementChild, döküm.children[2]);
@@ -81,7 +81,7 @@ export const öde = (cidSözü, adresAğırlığı, eşik) => {
     // Eğer 'native token'da ödemiyorsak, ağ ücretini ayrıca göster
     toplamSatırı.lastElementChild.style.display = para == 0 ? "none" : "inline-block";
 
-    const ağÜcretiSözü = TCKT.estimatedNetworkFee();
+    const ağÜcretiSözü = TCKT.estimateNetworkFee();
     const fiyatSözü = TCKT.priceIn(para).then((fiyat) => {
       kesirGir(fiyat[1], döküm.children[0]);
       if (!iptalli)
@@ -89,7 +89,7 @@ export const öde = (cidSözü, adresAğırlığı, eşik) => {
       if (para != 0)
         kesirGir(fiyat[+iptalli], toplamSatırı);
       let paraMetni = ("" + (fiyat[+iptalli] / 10000)).replace(".", ",");
-      dom.adla("odf").innerText =  para == 0
+      dom.adla("odf").innerText = para == 0
         ? paraMetni + " " + Cüzdan.ParaEkleri[Cüzdan.ağ()][0]
         : (para == 3 ? "₺" : "$") + paraMetni;
       return fiyat;
@@ -104,7 +104,6 @@ export const öde = (cidSözü, adresAğırlığı, eşik) => {
       }
     });
   }
-
   // Ek ücreti göster / gizle.
   döküm.children[1].style.display = iptalli ? "none" : "";
   // Para menüsünü yarat.
@@ -122,13 +121,16 @@ export const öde = (cidSözü, adresAğırlığı, eşik) => {
 
   dom.adla("od").classList.remove("disabled");
   dom.adla("oda").onclick = () => {
-    cidSözü.then((cid) => {
-      let döndü = adresAğırlığı.length
-        ? TCKT.createWithRevokers(cid, eşik, adresAğırlığı)
-        : TCKT.create(cid);
-      döndü
-        .then(() => dom.adla("nft").classList.add("scaleandmove"))
-        .catch(() => dom.adla("nft").classList.add("scaleandmove"));
-    });
+    let sonuç = para == 0
+      ? cidSözü.then((cid) =>
+        TCKT.createWithRevokers(cid, eşik, adresAğırlığı))
+      : Promise.all([cidSözü, TCKT.getPermissionFor(para, iptalli)]).then(([cid, imza]) => {
+        console.log(cid, imza);
+        return TCKT.createWithRevokersWithTokenPayment(cid, eşik, adresAğırlığı, imza);
+      })
+
+    sonuç
+      .then(() => dom.adla("nft").classList.add("scaleandmove"))
+      .catch(console.log);
   };
 }
