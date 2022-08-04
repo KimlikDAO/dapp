@@ -17,9 +17,9 @@ const İptalciler = dom.adla("imf");
 const fiyatGöster = (ağ) => {
   const ekler = Cüzdan.ParaEkleri[ağ];
   TCKT.priceIn(0).then(([çok, az]) => {
-    dom.adla("imft").innerText = ((çok / 10000) + " ").replace(".", ",")
+    dom.adla("imft").innerText = ((çok / 1000000) + " ").replace(".", ",")
       + ekler[0] + ekler[1];
-    dom.adla("imfs").innerText = ((az / 10000) + " ").replace(".", ",")
+    dom.adla("imfs").innerText = ((az / 1000000) + " ").replace(".", ",")
       + ekler[0] + ekler[2];
     dom.adla("imfu").innerText = Math.round(100 * (çok - az) / çok);
   });

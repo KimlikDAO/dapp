@@ -11,10 +11,10 @@ const imgeEkle = (imge, satır) => {
 
 const kesirGir = (sayı, hane) => {
   hane = hane.children[2];
-  const kesir = sayı % 10000;
-  hane.innerText = (sayı - kesir) / 10000;
+  const kesir = sayı % 1000000;
+  hane.innerText = (sayı - kesir) / 1000000;
   hane.nextElementSibling.innerText =
-    ("" + (kesir / 10000)).slice(2).padEnd(2, "0");
+    ("" + (kesir / 1000000)).slice(2).padEnd(2, "0");
 }
 
 /**
@@ -54,7 +54,7 @@ export const öde = (cidSözü, adresAğırlığı, eşik) => {
       tokenLi.style.display = tokenYok ? "none" : "";
       if (!tokenYok)
         TCKT.priceIn(i).then((fiyat) => {
-          tokenLi.firstElementChild.innerText = fiyat[+iptalli] / 10000;
+          tokenLi.firstElementChild.innerText = fiyat[+iptalli] / 1000000;
         });
     }
 
@@ -88,7 +88,7 @@ export const öde = (cidSözü, adresAğırlığı, eşik) => {
         kesirGir(fiyat[0] - fiyat[1], döküm.children[1]);
       if (para != 0)
         kesirGir(fiyat[+iptalli], toplamSatırı);
-      let paraMetni = ("" + (fiyat[+iptalli] / 10000)).replace(".", ",");
+      let paraMetni = ("" + (fiyat[+iptalli] / 1000000)).replace(".", ",");
       dom.adla("odf").innerText = para == 0
         ? paraMetni + " " + Cüzdan.ParaEkleri[Cüzdan.ağ()][0]
         : (para == 3 ? "₺" : "$") + paraMetni;
@@ -126,7 +126,7 @@ export const öde = (cidSözü, adresAğırlığı, eşik) => {
         TCKT.createWithRevokers(cid, eşik, adresAğırlığı))
       : Promise.all([cidSözü, TCKT.getPermissionFor(para, iptalli)]).then(([cid, imza]) => {
         console.log(cid, imza);
-        return TCKT.createWithRevokersWithTokenPayment(cid, eşik, adresAğırlığı, imza);
+        return TCKT.createWithRevokersWithTokenPermit(cid, eşik, adresAğırlığı, imza);
       })
 
     sonuç
