@@ -1,4 +1,24 @@
-dApp'lerde kullanabileceğin dijital bir kimlik kartı
-Metamask gibi NFT destekleyen kripto cüzdanında durur
-dApp'lerde TCKK gerektiren işlemleri yapmanı sağlar
-Cüzdanında şifreli olarak durur, veri gizliliğini korur
+ 
+Rabby kur MetaMask kur
+Tarayıcı cüzdanı bağlandı
+E-devlet ile giriş yap
+E-devlet'ten bilgileriniz alındı
+Cüzdanıma istek yolla
+Türkçe English Bağlı değil Evet Hayır
+0123456789x
+abcdefABCDEF
+Adres Ağırlık Toplam ağırlık Eşik
+Tamam
+Yine de kur
+İmece iptal kurulmadı
+Yine de kur
+Ödeme isteği yolla
+KimlikDAO
+TCKT al
+Hemen TCKT al | ₺19
+Daha fazla bilgi
+1. Cüzdanınızı bağlayın.
+2. Kendinizi tanıtın.
+3. TCKT'nizi şifreleyelim.
+4. 3. TCKT'nizi şifreleyelim.
+5. Ödemeyi yapın TCKT cüzdanınıza gelsin

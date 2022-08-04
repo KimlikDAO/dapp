@@ -8,9 +8,10 @@ PyftsubsetParams = --no-recommended-glyphs \
 f400Source = Lato-Regular.ttf
 f500Source = Lato-Medium.ttf
 f600Source = Lato-SemiBold.ttf
-f700Source = Lato-Black.ttf
+f700Source = Lato-Bold.ttf
+f800Source = Lato-Heavy.ttf
 
-FontFaces = f400 f700
+FontFaces = f400 f700 f800
 TtfFonts = $(addsuffix .ttf,$(addprefix build/font/,$(FontFaces)))
 Woff2Fonts = $(TtfFonts:ttf=woff2)
 

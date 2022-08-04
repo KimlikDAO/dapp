@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 
-import os.path
 import re
 import sys
 
@@ -50,6 +49,30 @@ def keymap(file):
     return {k.strip(): v.strip() for k, v in (l.rsplit('->', 1) for l in file)}
 
 
+def process_html(file, out):
+    root = 'birim'
+
+    def birim(name):
+        name = name.group(1).strip()
+        try:
+            return open(f'build/{root}/{name}.html', 'r').read()
+        except:
+            pass
+        try:
+            return open(f'build/{root}/{name}/birim.html', 'r').read()
+        except:
+            pass
+        try:
+            return open(f'{root}/{name}.html', 'r').read()
+        except:
+            pass
+        return open(f'{root}/{name}/birim.html', 'r').read()
+    out = re.compile('<birim:([^\/]*)\/>').sub(birim, out)
+    root = file[6:-11] if (file.endswith('sayfa.html')
+                           or file.endswith('birim.html')) else file[6:-5]
+    return re.compile('<altbirim:([^\/]*)\/>').sub(birim, out)
+
+
 if __name__ == "__main__":
     route = toml.load('wrangler.toml')['env']['beta']['route'][:-1]
     replace = {
@@ -62,7 +85,12 @@ if __name__ == "__main__":
     print("Şu kurallara göre güncellenecek:", replace)
 
     f = open(sys.argv[1], 'r+')
-    out = multireplace(f.read(), replace)
+    out = f.read()
+
+    if (sys.argv[1].endswith('.html')):
+        out = process_html(sys.argv[1], out)
+
+    out = multireplace(out, replace)
 
     f.seek(0)
     f.write(out)

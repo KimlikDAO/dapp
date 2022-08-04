@@ -145,20 +145,6 @@ button:hover {
   transition-duration: 0.1s;
 }
 
-.cef {
-  background-position: center;
-  transition: background 0.8s;
-}
-
-.cef:hover {
-  background: #fff radial-gradient(circle, transparent 1%, #fff 1%) center/15000%;
-}
-
-.cef:active {
-  background-color: #eee;
-  transition: background-color 0s;
-}
-
 #n {
   display: flex;
   height: 80px;

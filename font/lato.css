@@ -10,15 +10,6 @@
 
 @font-face {
   font-family: 'f';
-  src: url('/font/f400i.woff2') format('woff2'),
-    url('/font/f400i.ttf') format('truetype');
-
-  font-weight: 400;
-  font-style: italic;
-}
-
-@font-face {
-  font-family: 'f';
   src: url('/font/f700.woff2') format('woff2'),
     url('/font/f700.ttf') format('truetype');
 
@@ -29,9 +20,10 @@
 
 @font-face {
   font-family: 'f';
-  src: url('/font/f700i.woff2') format('woff2'),
-    url('/font/f700i.ttf') format('truetype');
+  src: url('/font/f800.woff2') format('woff2'),
+    url('/font/f800.ttf') format('truetype');
 
-  font-weight: 700;
-  font-style: italic;
+  font-weight: 800;
+  font-style: normal;
+  font-display: block;
 }

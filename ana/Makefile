@@ -14,6 +14,7 @@ build/ana/sayfa.js: ana/sayfa.js ana/sergi/birim.js \
 	yarn uglifyjs $@ -m -o $@
 
 build/ana/sayfa.css: build/font/lato.css ana/sayfa.css \
+                     ana/sergi/birim.css \
                      birim/cüzdan/birim.css \
                      birim/telefon/birim.css
 	mkdir -p build/ana

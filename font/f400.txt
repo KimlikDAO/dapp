@@ -1,19 +1,4 @@
-dApp'lerde kullanabileceğin dijital bir kimlik kartı
-Metamask gibi NFT destekleyen kripto cüzdanında durur
-dApp'lerde TCKK gerektiren işlemleri yapmanı sağlar
-Cüzdanında şifreli olarak durur, veri gizliliğini korur
-TCKN
-22345678902
-Ad
-Kaan
-Soyad
-Ankara
-Doğum tarihi
-1975.06.12
-Anne adı
-Ayşe
-Baba adı
-Mehmet
+ ’
 0123456789
 abcçdefgğhıijklmnoöprsştuüvyz
 ABCÇDEFGĞHIİJKLMNOÖPRSŞTUÜVYZ

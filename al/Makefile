@@ -22,7 +22,9 @@ build/al/sayfa.js: al/sayfa.js al/imeceİptal/birim.js al/ödeme/birim.js \
                              --js_output_file $@
 	yarn uglifyjs $@ -m -o $@
 
-build/al/sayfa.css: al/sayfa.css al/imeceİptal/birim.css
+build/al/sayfa.css: al/sayfa.css \
+                    al/imeceİptal/birim.css \
+                    al/ödeme/birim.css
 	mkdir -p build/al
 	cat $^ | yarn csso --output $@
 
