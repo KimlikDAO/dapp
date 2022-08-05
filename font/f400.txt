@@ -2,3 +2,4 @@
 0123456789
 abcçdefgğhıijklmnoöprsştuüvyz
 ABCÇDEFGĞHIİJKLMNOÖPRSŞTUÜVYZ
+Explorer'da görüntüle
