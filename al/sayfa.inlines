@@ -1,3 +1,4 @@
 css:/font/lato-ttf.css -> cmd:erase
 js:/al/wallet-inline.js -> build/al/wallet-inline.js
-svg:/al/img/paste.svg -> build/al/imeceİptal/paste.svg.inl
+svg:/al/imeceİptal/paste.svg -> build/al/imeceİptal/paste.svg.inl
+jsmodule -> cmd:erase

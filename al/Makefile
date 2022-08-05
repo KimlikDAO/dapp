@@ -1,3 +1,5 @@
+include al/ödeme/Makefile
+
 build/al/wallet-inline.js: al/wallet-inline.js lib/ethereum.js
 	mkdir -p $(dir $@)
 	yarn google-closure-compiler -W VERBOSE -O ADVANCED --charset UTF-8 \
@@ -36,6 +38,7 @@ build/al/sayfa.keymap: $(call compressions, $(ASSETS))
 build/al.html: al/sayfa.html al/sayfa.inlines \
                build/font/fonts.keymap \
                build/ana/sayfa.keymap build/al/sayfa.keymap \
+               build/al/ödeme/birim.keymap \
                build/al/wallet-inline.js \
                al/imeceİptal/birim.html \
                build/al/imeceİptal/paste.svg.inl \
@@ -44,5 +47,6 @@ build/al.html: al/sayfa.html al/sayfa.inlines \
 	cp $< $@
 	tools/keymapper.py $@ build/ana/sayfa.keymap build/al/sayfa.keymap \
                           al/sayfa.inlines \
+                          build/al/ödeme/birim.keymap \
                           build/font/fonts.keymap
 	yarn html-minifier -c tools/html-minifier.conf $@ -o $@

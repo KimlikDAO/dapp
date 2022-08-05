@@ -18,7 +18,7 @@ local_protocol = "http"
 [env.beta]
 name = "beta"
 workers_dev = false
-route = "https://beta.kimlikdao.org/*"
+route = "https://kimlikdao.org/*"
 kv_namespaces = [
   { binding = "KV", id = "15a080fd128945ecb0a9b1780f0e708a"},
 ]

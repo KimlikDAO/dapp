@@ -3,7 +3,7 @@
 
 // Sonda bölü işareti olması lazım.
 /** @const {string} */
-const HOST_URL = 'https://beta.kimlikdao.org/';
+const HOST_URL = 'https://kimlikdao.org/';
 /** @const {string} */
 const PAGE_CACHE_CONTROL = 'public'
 /** @const {string} */

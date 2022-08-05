@@ -41,6 +41,8 @@ def inlines(file):
             k = f'<img src="{k[4:]}">'
         elif k.startswith('css:'):
             k = f'<link href="{k[4:]}" rel="stylesheet" type="text/css" />'
+        elif k.startswith('jsmodule'):
+            k = 'type="module"'
         kvs[k] = v
     return kvs
 
