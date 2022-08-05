@@ -54,7 +54,7 @@ def batch_upload(names: list[str]):
 
 def purge_cache():
     data = {
-        'files': [ROUTE + page + ext for page in SAYFALAR for ext in EXT]
+        'files': [ROUTE + page + ".html" + ext for page in SAYFALAR for ext in EXT]
     }
     return requests.post(ZONES_URL + 'purge_cache', data=json.dumps(data), headers={
         'content-type': 'application/json',
