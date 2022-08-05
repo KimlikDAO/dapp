@@ -30,10 +30,10 @@ build/al/sayfa.css: al/sayfa.css \
 	mkdir -p build/al
 	cat $^ | yarn csso --output $@
 
-ASSETS = build/al/sayfa.css build/al/sayfa.js
-build/al/sayfa.keymap: $(call compressions, $(ASSETS))
+AL_ASSETS := build/al/sayfa.css build/al/sayfa.js
+build/al/sayfa.keymap: $(call compressions, $(AL_ASSETS))
 	rm -rf $@
-	tools/keyhasher.py $@ $(ASSETS)
+	tools/keyhasher.py $@ $(AL_ASSETS)
 
 build/al.html: al/sayfa.html al/sayfa.inlines \
                build/font/fonts.keymap \

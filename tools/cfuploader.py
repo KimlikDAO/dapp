@@ -3,11 +3,11 @@
 import base64
 import json
 import os
+import os.path
 import sys
 
 import requests
 import toml
-
 
 CF_ENV = 'beta'
 
@@ -70,7 +70,8 @@ def is_static_upload(name: str) -> bool:
     """
     Verilen bir ismin CF'e yüklenmesi gereken bir static olup olmadığını tespit eder.
     """
-    return name != 'prod.js' and name not in existing and stem(name) not in SAYFALAR
+    return (os.path.isfile('build/' + name) and name != 'prod.js' and
+            name not in existing and stem(name) not in SAYFALAR)
 
 
 existing = get_existing(NAMESPACE_ID)
@@ -79,13 +80,15 @@ existing = get_existing(NAMESPACE_ID)
 static_upload = list(filter(is_static_upload, os.listdir('build')))
 if static_upload:
     print("🌀 Statik asset'ler yükleniyor")
+    print(static_upload)
     batch_upload(static_upload)
 else:
     print("✅ Statik asset'ler aynı, bu adım atlanıyor")
 
 # (2) Sayfaları yükle
-page_upload = [page + ext for page in SAYFALAR for ext in EXT]
+page_upload = [page + '.html' + ext for page in SAYFALAR for ext in EXT]
 print("🌀 Sayfalar yükleniyor")
+print(page_upload)
 batch_upload(page_upload)
 
 # (3) Cache purge et

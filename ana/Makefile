@@ -20,10 +20,10 @@ build/ana/sayfa.css: build/font/lato.css ana/sayfa.css \
 	mkdir -p build/ana
 	cat $^ | yarn csso --output $@
 
-ASSETS = build/ana/sayfa.js build/ana/sayfa.css
-build/ana/sayfa.keymap: $(call compressions, $(ASSETS))
+ANA_ASSETS := build/ana/sayfa.js build/ana/sayfa.css
+build/ana/sayfa.keymap: $(call compressions, $(ANA_ASSETS))
 	rm -rf $@ && mkdir -p $(dir $@)
-	tools/keyhasher.py $@ $(ASSETS)
+	tools/keyhasher.py $@ $(ANA_ASSETS)
 
 build/ana.html: ana/sayfa.html build/ana/sayfa.keymap ana/sayfa.inlines \
                 build/ana/ok.svg.inl \
@@ -33,5 +33,5 @@ build/ana.html: ana/sayfa.html build/ana/sayfa.keymap ana/sayfa.inlines \
                 build/birim/cüzdan/birim.html
 	cp $< $@
 	tools/keymapper.py $@ build/ana/sayfa.keymap ana/sayfa.inlines \
-                          build/font/fonts.keymap
+                  build/font/fonts.keymap
 	yarn html-minifier -c tools/html-minifier.conf $@ -o $@

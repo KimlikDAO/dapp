@@ -16,6 +16,11 @@ const MIMES = {
   "ttf": "font/ttf",
   "woff2": "font/woff2",
 };
+/** @const {Object<string, string>} */
+const PAGES = {
+  "/": "ana.html",
+  "/al": "al.html",
+}
 
 addEventListener('fetch', async (event) => {
   /** @const {URL} */
@@ -27,13 +32,13 @@ addEventListener('fetch', async (event) => {
 
   // Asset'lerin cache ve KV'deki anahtarı .br .gz gibi uzantıyı da içeriyor.
   /** @const {string} */
-  const kvKey = (url.pathname === '/' ? 'ana' : url.pathname.substring(1)) + ext;
+  const kvKey = (PAGES[url.pathname] ? PAGES[url.pathname] : url.pathname.substring(1)) + ext;
   /** @const {string} */
   const cacheKey = HOST_URL + kvKey;
   /** @const {number} */
   const idx = url.pathname.lastIndexOf('.');
 
-  // Asset'i CF'ten almaya çalışıyoruz.
+  // Asset'i CF cache'ten almaya çalışıyoruz.
   /** @const {Promise<Response>} */
   const fromCache = caches.default.match(cacheKey).then((response) => {
     if (!response) return Promise.reject();
@@ -99,7 +104,7 @@ addEventListener('fetch', async (event) => {
  * @return {Response}
  */
 function bulunamadı(err) {
-  return new Response('NAPIM? Hata oluştu ' + err, {
+  return new Response('NAPİM? Hata oluştu ' + err, {
     status: 404,
     headers: { 'content-type': 'text/plain;charset=utf-8' }
   })

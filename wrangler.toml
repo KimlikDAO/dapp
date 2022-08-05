@@ -7,7 +7,7 @@ name = "test"
 workers_dev = true
 route = ""
 kv_namespaces = [
-  { binding = "KV", id = "15a080fd128945ecb0a9b1780f0e708a", preview_id = "69b9fd26875141d1b832ccaa3934647a" },
+  { binding = "KV", id = "836c46196848459ba8b3348e383bddf2", preview_id = "836c46196848459ba8b3348e383bddf2" },
 ]
 
 [dev]
@@ -19,9 +19,7 @@ local_protocol = "http"
 name = "beta"
 workers_dev = false
 route = "https://kimlikdao.org/*"
-kv_namespaces = [
-  { binding = "KV", id = "15a080fd128945ecb0a9b1780f0e708a"},
-]
+kv_namespaces = [{ binding = "KV", id = "836c46196848459ba8b3348e383bddf2" }]
 
 [build]
 command = "make cf-deployment"
