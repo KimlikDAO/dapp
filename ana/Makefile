@@ -27,8 +27,10 @@ build/ana/sayfa.keymap: $(call compressions, $(ASSETS))
 
 build/ana.html: ana/sayfa.html build/ana/sayfa.keymap ana/sayfa.inlines \
                 build/ana/ok.svg.inl \
+                build/font/fonts.keymap \
                 birim/telefon/birim.html \
                 build/birim/cüzdan/birim.html
 	cp $< $@
-	tools/keymapper.py $@ build/ana/sayfa.keymap ana/sayfa.inlines
+	tools/keymapper.py $@ build/ana/sayfa.keymap ana/sayfa.inlines \
+                          build/font/fonts.keymap
 	yarn html-minifier -c tools/html-minifier.conf $@ -o $@

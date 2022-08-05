@@ -34,6 +34,7 @@ build/al/sayfa.keymap: $(call compressions, $(ASSETS))
 	tools/keyhasher.py $@ $(ASSETS)
 
 build/al.html: al/sayfa.html al/sayfa.inlines \
+               build/font/fonts.keymap \
                build/ana/sayfa.keymap build/al/sayfa.keymap \
                build/al/wallet-inline.js \
                al/imeceİptal/birim.html \
@@ -41,5 +42,7 @@ build/al.html: al/sayfa.html al/sayfa.inlines \
                birim/telefon/birim.html \
                build/birim/cüzdan/birim.html
 	cp $< $@
-	tools/keymapper.py $@ build/ana/sayfa.keymap build/al/sayfa.keymap al/sayfa.inlines
+	tools/keymapper.py $@ build/ana/sayfa.keymap build/al/sayfa.keymap \
+                          al/sayfa.inlines \
+                          build/font/fonts.keymap
 	yarn html-minifier -c tools/html-minifier.conf $@ -o $@

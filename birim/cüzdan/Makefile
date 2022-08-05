@@ -1,6 +1,4 @@
-INLINE_SVG := avalanche.svg \
-              copy.svg external-link.svg debank.svg \
-              en.svg tr.svg
+INLINE_SVG := avalanche.svg
 
 INLINE_SVG_OUT := $(foreach item,$(INLINE_SVG),build/birim/cüzdan/img/$(item).inl)
 
