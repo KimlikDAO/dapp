@@ -20,7 +20,7 @@ const MIMES = {
 const PAGES = {
   "/": "ana.html",
   "/al": "al.html",
-}
+};
 
 addEventListener('fetch', async (event) => {
   /** @const {URL} */
@@ -28,9 +28,8 @@ addEventListener('fetch', async (event) => {
   /** @const {string} */
   const enc = event.request['cf']['clientAcceptEncoding'];
   /** @const {string} */
-  const ext = enc.includes('br') ? '.br' : enc.includes('gz') ? '.gz' : '';
-
-  // Asset'lerin cache ve KV'deki anahtarı .br .gz gibi uzantıyı da içeriyor.
+  const ext = url.pathname.endsWith('.woff2') ? ''
+    : enc.includes('br') ? '.br' : enc.includes('gz') ? '.gz' : '';
   /** @const {string} */
   const kvKey = (PAGES[url.pathname] ? PAGES[url.pathname] : url.pathname.substring(1)) + ext;
   /** @const {string} */
@@ -67,7 +66,7 @@ addEventListener('fetch', async (event) => {
       },
       // Eğer asset önceden sıkıştırılmışsa bunu işaretleyelim ki CF re-encode etmeye
       // çalışmasın.
-      'encodeBody': ext ? 'manual' : 'auto'
+      'encodeBody': 'manual'
     });
 
     // Sıkıştırılmış assetse 'content-encoding' yaz.
