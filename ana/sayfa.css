@@ -167,7 +167,7 @@ button:hover {
   display: flex;
 }
 
-.nd {
+#nd {
   text-align: center;
   margin: 0 15px;
   padding: 0 1em;
@@ -181,6 +181,7 @@ button:hover {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
+  margin-bottom: 10em;
 }
 
 #ba {
@@ -256,5 +257,21 @@ h1 {
   #bu {
     flex-wrap: wrap-reverse;
     margin-top: 350px;
+  }
+}
+
+@media (max-width: 650px) {
+  #nd {
+    display: none;
+  }
+}
+
+@media (max-width: 550px) {
+  #nl {
+    display: none;
+  }
+
+  #nkd {
+    display: none;
   }
 }

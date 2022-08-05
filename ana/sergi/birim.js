@@ -14,13 +14,14 @@ const Kartlar = dom.adla("sepgs");
 let Kart = 0;
 /** @type {number} */
 let SergiSaati = 0;
-/** @const {number} */
-const width = document.getElementById("sepgc").getBoundingClientRect().width;
 
 /**
  * @param {number} yeniKart
  */
 const kartDeğiştir = (yeniKart) => {
+  /** @const {number} */
+  const width = document.getElementById("sepgc").getBoundingClientRect().width;
+
   if (yeniKart === 0) Telefon.nftGöster();
   if (yeniKart === 1) Telefon.nftKilitle();
   if (yeniKart === 2) Telefon.nftCüzdanaYolla();

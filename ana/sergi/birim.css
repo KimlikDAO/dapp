@@ -107,5 +107,6 @@
 @media (max-width: 930px) {
   #se {
     width: 90%;
+    margin-right:0;
   }
 }
