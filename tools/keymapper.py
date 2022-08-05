@@ -52,27 +52,27 @@ def keymap(file):
 
 
 def process_html(file, out):
-    root = 'birim'
+    parent = 'birim'
 
-    def birim(name):
+    def fetch(name):
         name = name.group(1).strip()
         try:
-            return open(f'build/{root}/{name}.html', 'r').read()
+            return open(f'build/{parent}/{name}.html', 'r').read()
         except:
             pass
         try:
-            return open(f'build/{root}/{name}/birim.html', 'r').read()
+            return open(f'build/{parent}/{name}/birim.html', 'r').read()
         except:
             pass
         try:
-            return open(f'{root}/{name}.html', 'r').read()
+            return open(f'{parent}/{name}.html', 'r').read()
         except:
             pass
-        return open(f'{root}/{name}/birim.html', 'r').read()
-    out = re.compile('<birim:([^\/]*)\/>').sub(birim, out)
-    root = file[6:-11] if (file.endswith('sayfa.html')
-                           or file.endswith('birim.html')) else file[6:-5]
-    return re.compile('<altbirim:([^\/]*)\/>').sub(birim, out)
+        return open(f'{parent}/{name}/birim.html', 'r').read()
+    out = re.compile('<birim:([^\/]*)\/>').sub(fetch, out)
+    parent = file[6:-11] if (file.endswith('sayfa.html')
+                             or file.endswith('birim.html')) else file[6:-5]
+    return re.compile('<altbirim:([^\/]*)\/>').sub(fetch, out)
 
 
 if __name__ == "__main__":
