@@ -1,3 +1,4 @@
 css:/font/lato-ttf.css -> cmd:erase
 svg:/ana/ok.svg -> build/ana/ok.svg.inl
+svg:/ana/discord.svg -> build/ana/discord.svg.inl
 jsmodule -> cmd:erase

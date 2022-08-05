@@ -33,8 +33,9 @@ b {
   font-weight: 700;
 }
 
-h1 {
+h2 {
   font-weight: 700;
+  font-size: 21pt;
   padding: 3px;
   margin: 10px;
 }
@@ -157,6 +158,11 @@ button:hover {
   background-color: #fff;
 }
 
+#nk {
+  display: flex;
+  align-items: center;
+}
+
 .nf {
   display: flex;
 }
@@ -211,15 +217,13 @@ button:hover {
   }
 }
 
-/*------------carousel-----------*/
-
-.crs__tel__cont {
+#bt {
   display: flex;
   width: 100%;
   max-width: 1200px;
 }
 
-.main__header {
+h1 {
   padding-top: 50px;
   font-size: 38pt;
   text-align: center;
@@ -229,20 +233,28 @@ button:hover {
   color: #3c4043;
   background: rgb(244, 244, 244);
   z-index: -20;
+  margin: 0;
 }
 
-.second_header {
+#bz {
   color: #888;
   font-size: 13pt;
-  margin-top: 20px;
+  margin-top: 2em;
 }
 
-.ana_cont {
+#bu {
   display: flex;
   justify-content: center;
   width: 100%;
 }
 
-.ana_cont>#te {
+#bu>#te {
   margin-top: -30px;
+}
+
+@media (max-width: 930px) {
+  #bu {
+    flex-wrap: wrap-reverse;
+    margin-top: 350px;
+  }
 }

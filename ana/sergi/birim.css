@@ -103,3 +103,9 @@
 #seal {
   margin-right: 20px;
 }
+
+@media (max-width: 930px) {
+  #se {
+    width: 90%;
+  }
+}

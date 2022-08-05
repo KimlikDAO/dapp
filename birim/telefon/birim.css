@@ -1,5 +1,6 @@
 #te {
   width: 280px;
+  min-width: 280px;
   height: 550px;
   border: 5px solid #333;
   border-radius: 40px;
@@ -98,7 +99,7 @@
 }
 
 #tefirw.show {
-  opacity: 1;/*TODO MuhammetCoskun animation*/
+  opacity: 1;
 }
 
 #tefirwt {
@@ -111,7 +112,8 @@
   border-top: 0.3px solid #ccc;
 }
 
-#tefirwn, #tefirwy {
+#tefirwn,
+#tefirwy {
   width: 50%;
   padding: 10px;
 }

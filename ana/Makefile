@@ -27,6 +27,7 @@ build/ana/sayfa.keymap: $(call compressions, $(ASSETS))
 
 build/ana.html: ana/sayfa.html build/ana/sayfa.keymap ana/sayfa.inlines \
                 build/ana/ok.svg.inl \
+                build/ana/discord.svg.inl \
                 build/font/fonts.keymap \
                 birim/telefon/birim.html \
                 build/birim/cüzdan/birim.html
