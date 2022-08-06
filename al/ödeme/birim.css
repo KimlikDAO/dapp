@@ -1,13 +1,13 @@
 #odb {
-  border-radius: 0 6px 6px 0;
-  border: 1px solid #0a46a7;
-  padding: 0 6px;
-  min-width: 32px;
-  display: flex;
   align-items: center;
   background: #3d67ab;
   border-left: 0;
+  border-radius: 0 6px 6px 0;
+  border: 1px solid #0a46a7;
+  display: flex;
+  min-width: 32px;
   opacity: 0.9;
+  padding: 0 6px;
 }
 
 #odb:hover {
@@ -19,35 +19,35 @@
 }
 
 #odc {
-  position: relative;
   display: inline-flex;
+  position: relative;
 }
 
 #odd {
-  cursor: pointer;
-  padding: 0;
-  background-color: #fff;
-  border: 1px solid #f8f8f8;
-  border-radius: 5px;
-  box-shadow: 0px 1px 20px rgba(0, 0, 0, 0.2);
-  display: block;
-  position: absolute;
-  bottom: 50px;
-  right: -10px;
   animation: growDown 300ms ease-in-out forwards;
-  transform-origin: bottom right;
+  background-color: #fff;
+  border-radius: 5px;
+  border: 1px solid #f8f8f8;
+  bottom: 50px;
+  box-shadow: 0px 1px 20px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  display: block;
   list-style: none;
-  z-index: 2;
   margin: 0;
+  padding: 0;
+  position: absolute;
+  right: -10px;
+  transform-origin: bottom right;
+  z-index: 2;
 }
 
 #odd li {
+  align-items: center;
+  display: flex;
   height: 45px;
+  justify-content: right;
   margin: 1px;
   padding: 6px 13px;
-  display: flex;
-  align-items: center;
-  justify-content: right;
   transition: background-color 0.3s;
 }
 
@@ -60,9 +60,9 @@
 }
 
 .ods {
-  text-align: end;
-  min-width: 5ex;
   margin-right: 0.5ex;
+  min-width: 5ex;
+  text-align: end;
 }
 
 /* od estimate */
@@ -87,22 +87,27 @@ h4 {
 }
 
 .odu {
-  line-height: 1.5;
   display: inline-block;
+  line-height: 1.5;
   min-width: 60%;
 }
 
 .odv {
-  min-width: 1ex;
-  text-align: right;
   display: inline-block;
+  margin-left: 2px;
+  min-width: 1em;
+  text-align: right;
 }
 
 .odv0 {
-  text-align: left;
   display: inline-block;
+  text-align: left;
 }
 
 b.odu {
   margin: 1ex 0;
+}
+
+#odi img {
+  vertical-align: text-bottom;
 }
