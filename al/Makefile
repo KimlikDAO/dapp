@@ -41,6 +41,7 @@ build/al.html: al/sayfa.html al/sayfa.inlines \
                build/al/ödeme/birim.keymap \
                build/al/wallet-inline.js \
                al/imeceİptal/birim.html \
+               al/ödeme/birim.html \
                build/al/imeceİptal/paste.svg.inl \
                birim/telefon/birim.html \
                build/birim/cüzdan/birim.html

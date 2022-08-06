@@ -69,10 +69,9 @@ const ağDeğişti = (yeniAğ) => {
   } else if (yeniAğ != Ağ) {
     dom.adla("nc" + Ağ).classList.remove("sel");
     dom.adla("nc" + yeniAğ).classList.add("sel");
-    const nc = dom.adla("nc");
-    nc.replaceChild(
+    AğButonu.replaceChild(
       dom.adla("nc" + yeniAğ).firstElementChild.cloneNode(true),
-      nc.firstElementChild);
+      AğButonu.firstElementChild);
     Ağ = yeniAğ;
     for (const f of AğDeğişince) f(yeniAğ);
   }
@@ -142,14 +141,11 @@ const bağla = () => {
 
 dom.menüYarat(DilButonu, dom.adla("nld"));
 if (window["ethereum"]) {
-  ethereum.on("accountsChanged", adresDeğişti);
-  ethereum.on("chainChanged", ağDeğişti);
-
   const ağMenüsü = dom.adla("ncd");
+  const avax = dom.adla("nc0xa86a");
+  avax.replaceChild(AğButonu.firstElementChild.cloneNode(true),
+    avax.firstElementChild);
   dom.menüYarat(AğButonu, ağMenüsü);
-
-  AdresButonu.onclick = bağla;
-
   ağMenüsü.onclick = (event) => {
     /** @const {Element} */
     const li = event.target.nodeName == "LI"
@@ -163,9 +159,9 @@ if (window["ethereum"]) {
     })).catch((e) => console.log(e));
   }
 
-  dom.adla("nad1").onclick = () => {
+  AdresButonu.onclick = bağla;
+  dom.adla("nad1").onclick = () =>
     navigator.clipboard.writeText(/** @type {string} */(Adres));
-  }
 
   dom.adla("nad2").onclick = () => {
     const url = "https://debank.com/profile/" + Adres;
@@ -176,6 +172,9 @@ if (window["ethereum"]) {
     const url = "https://" + AdresLinki[Ağ] + "/address/" + Adres;
     window.open(url, "_blank");
   }
+
+  ethereum.on("accountsChanged", adresDeğişti);
+  ethereum.on("chainChanged", ağDeğişti);
 
   ethereum
     .request(/** @type {RequestParams} */({ method: "eth_chainId" }))
