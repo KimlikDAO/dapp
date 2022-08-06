@@ -11,7 +11,7 @@ if (/iPad|iPhone|iPod/.test(userAgent)) {
   /** @const {Element} */
   const s1a = s1b.previousElementSibling;
   s1a.style.display = "none";
-  if (window["ethereum"] && ethereum.isBraveWallet) {
+  if (window["ethereum"] && navigator["brave"]) {
     s1b.innerText = "Tarayıcı cüzdanı bağla";
     s1b.target = "";
     s1b.href = "javascript:";

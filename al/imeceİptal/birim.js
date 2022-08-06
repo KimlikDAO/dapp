@@ -147,9 +147,9 @@ const girdiAlanıEkle = () => {
   /** @type {Element} */
   let yeniSatır = İptalciler.firstElementChild.cloneNode(true);
   işlevEkle(yeniSatır);
-  İptalciler.appendChild(yeniSatır);
-  if (tane >= 3)
+  if (tane >= 2)
     İptalciler.classList.add("im3");
+  İptalciler.appendChild(yeniSatır);
   ağırlıkHesapla();
 }
 

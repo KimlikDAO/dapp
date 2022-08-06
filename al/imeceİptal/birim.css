@@ -4,9 +4,9 @@
 }
 
 #imc input {
-  min-height: 28px;
-  box-sizing: border-box;
+  height: 28px;
   outline: none;
+  /*box-sizing: border-box;*/
 }
 
 #imc input::-webkit-outer-spin-button,
@@ -26,7 +26,7 @@
   margin: 0.8em auto;
 }
 
-.im3 .imcont:hover .imdel {
+.im3 > .imcont:hover > .imdel {
   visibility: visible;
 }
 
@@ -43,6 +43,10 @@
 
 .imin {
   border: 1px solid #dc3545;
+}
+
+.imb {
+  margin: auto 0;
 }
 
 #imbe {
@@ -121,6 +125,7 @@
   border: 1px solid #ccc;
   border-right: none;
   border-left: none;
+  border-radius: 0;
 }
 
 #ims {
@@ -132,9 +137,7 @@
 }
 
 .imtc {
-  display: flex;
   justify-content: right;
-  align-items: center;
 }
 
 .imtc a {

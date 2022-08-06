@@ -139,7 +139,7 @@ if (window["ethereum"]) {
 
   Cüzdan.bağlanınca((adres) => {
     const s1a = dom.adla("s1a");
-    s1b.innerText += "ndı ✓";
+    s1b.innerText = "Cüzdan bağlandı ✓";
     s1b.classList.remove("act");
     dom.butonDurdur(s1b);
 
