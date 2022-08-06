@@ -190,8 +190,11 @@ const yapıştır = (event) => {
 const satırSil = (event) => {
   let a = event.target.nodeName == "A"
     ? event.target : event.target.parentElement
-  a.parentElement.remove();
-  if (İptalciler.childElementCount < 3) İptalciler.classList.remove("im3");
+  const satırSayısı = İptalciler.childElementCount;
+  if (satırSayısı <= 3)
+    İptalciler.classList.remove("im3");
+  if (satırSayısı >= 3)
+    a.parentElement.remove();
   ağırlıkHesapla();
 }
 
