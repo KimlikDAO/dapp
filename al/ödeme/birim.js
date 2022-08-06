@@ -1,4 +1,5 @@
 import Cüzdan from "/birim/cüzdan/birim";
+import Telefon from '/birim/telefon/birim';
 import dom from '/lib/dom';
 import TCKT from '/lib/TCKT';
 
@@ -7,18 +8,27 @@ import TCKT from '/lib/TCKT';
  * @param {Element} satır
  */
 const imgeEkle = (imge, satır) => {
+  satır = satır.lastElementChild;
   imge = imge.cloneNode(true);
   imge.width = 16;
   imge.height = 16;
-  satır.replaceChild(imge, satır.children[1]);
+  satır.replaceChild(imge, satır.firstElementChild);
 }
 
 /**
- * @param {number} sayı
- * @param {Element} hane
+ * @param {number} para
+ * @return {string} metin olarak yazılmış para miktarı
  */
-const kesirGir = (sayı, hane) => {
-  hane = hane.children[2];
+const paradanMetne = (para) => ("" + (para / 1_000_000)).replace(".", ",")
+
+/**
+ * Verilen para miktarının tam sayı ve ondalık kısmını hane'ye ayrı ayrı yazar.
+ * @param {number} sayı
+ * @param {Element} satır
+ */
+const kesirGir = (sayı, satır) => {
+  /** @const {Element} */
+  const hane = satır.lastElementChild.children[1];
   /** @const {number} */
   const kesir = sayı % 1000000;
   hane.innerText = (sayı - kesir) / 1000000;
@@ -37,9 +47,9 @@ export const öde = (cidSözü, adresAğırlığı, eşik) => {
   /** @const {Element} */
   const paraDüğmesi = dom.adla("odb");
   /** @const {Element} */
-  const döküm = dom.adla("odi");
+  const döküm = dom.adla("odi").firstElementChild;
   /** @const {Element} */
-  const toplamSatırı = döküm.lastElementChild;
+  const toplamKutusu = döküm.children[3].lastElementChild;
   /** @const {boolean} */
   const iptalli = !!eşik;
   /** @type {number} */
@@ -51,7 +61,7 @@ export const öde = (cidSözü, adresAğırlığı, eşik) => {
     const li = dom.adla("odd" + yeniAğ);
 
     // Menü 'native token'i ayarla.
-    for (const diğerAğ of ["0x1", "0xa86a", "0x89", "0xa4b1", "0xfa"]) {
+    for (const diğerAğ in Cüzdan.ParaEkleri) {
       if (diğerAğ != yeniAğ) dom.adla("odd" + diğerAğ).style.display = "none";
     }
 
@@ -64,7 +74,7 @@ export const öde = (cidSözü, adresAğırlığı, eşik) => {
       tokenLi.style.display = tokenYok ? "none" : "";
       if (!tokenYok)
         TCKT.priceIn(i).then((fiyat) => {
-          tokenLi.firstElementChild.innerText = fiyat[+iptalli] / 1000000;
+          tokenLi.firstElementChild.innerText = paradanMetne(fiyat[+iptalli]);
         });
     }
 
@@ -73,7 +83,7 @@ export const öde = (cidSözü, adresAğırlığı, eşik) => {
 
     // Ağ ücreti imgesini ekle
     imgeEkle(li.lastElementChild, döküm.children[2]);
-    imgeEkle(li.lastElementChild, toplamSatırı.lastElementChild);
+    imgeEkle(li.lastElementChild, toplamKutusu);
     paraDeğişti(para, para == 0 ? li.lastElementChild : null);
   }
 
@@ -89,11 +99,11 @@ export const öde = (cidSözü, adresAğırlığı, eşik) => {
       imgeEkle(imgeAslı, döküm.children[0]);
       if (!iptalli)
         imgeEkle(imgeAslı, döküm.children[1]);
-      imgeEkle(imgeAslı, toplamSatırı);
+      imgeEkle(imgeAslı, döküm.children[3]);
     }
 
     // Eğer 'native token'da ödemiyorsak, ağ ücretini ayrıca göster
-    toplamSatırı.lastElementChild.style.display = para == 0 ? "none" : "inline-block";
+    toplamKutusu.lastElementChild.style.display = para == 0 ? "none" : "inline-block";
 
     /** @const {Promise<number>} */
     const ağÜcretiSözü = TCKT.estimateNetworkFee();
@@ -103,9 +113,9 @@ export const öde = (cidSözü, adresAğırlığı, eşik) => {
       if (!iptalli)
         kesirGir(fiyat[0] - fiyat[1], döküm.children[1]);
       if (para != 0)
-        kesirGir(fiyat[+iptalli], toplamSatırı);
+        kesirGir(fiyat[+iptalli], döküm.children[3]);
       /** @const {string} */
-      const paraMetni = ("" + (fiyat[+iptalli] / 1000000)).replace(".", ",");
+      const paraMetni = paradanMetne(fiyat[+iptalli]);
       dom.adla("odf").innerText = para == 0
         ? paraMetni + " " + Cüzdan.ParaEkleri[Cüzdan.ağ()][0]
         : (para == 3 ? "₺" : "$") + paraMetni;
@@ -115,9 +125,9 @@ export const öde = (cidSözü, adresAğırlığı, eşik) => {
     Promise.all([fiyatSözü, ağÜcretiSözü]).then(([fiyat, ağÜcreti]) => {
       kesirGir(ağÜcreti, döküm.children[2]);
       if (para == 0) {
-        kesirGir(fiyat[+iptalli] + ağÜcreti, toplamSatırı);
+        kesirGir(fiyat[+iptalli] + ağÜcreti, döküm.children[3]);
       } else {
-        kesirGir(ağÜcreti, toplamSatırı.lastElementChild);
+        kesirGir(ağÜcreti, toplamKutusu);
       }
     });
   }
@@ -145,9 +155,5 @@ export const öde = (cidSözü, adresAğırlığı, eşik) => {
         console.log(cid, imza);
         return TCKT.createWithRevokersWithTokenPermit(cid, eşik, adresAğırlığı, imza);
       })
-
-    sonuç
-      .then(() => dom.adla("nft").classList.add("scaleandmove"))
-      .catch(console.log);
   };
 }

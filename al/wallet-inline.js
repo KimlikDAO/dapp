@@ -5,9 +5,13 @@
 /** @const {Element} */
 const s1b = document.getElementById("s1b");
 /** @const {string} */
-const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+const userAgent = (navigator.userAgent || navigator.vendor || window.opera).toLowerCase();
+/** @const {boolean} */
+const isIOS = /ipad|iphone|ipod/.test(userAgent);
+/** @const {boolean} */
+const isAndroid = userAgent.indexOf("android") != -1;
 
-if (/iPad|iPhone|iPod/.test(userAgent)) {
+if (isIOS || isAndroid) {
   /** @const {Element} */
   const s1a = s1b.previousElementSibling;
   s1a.style.display = "none";
@@ -18,7 +22,9 @@ if (/iPad|iPhone|iPod/.test(userAgent)) {
   } else {
     s1b.classList.add('act');
     s1b.innerText = "Brave Browser kur";
-    s1b.href = "//apps.apple.com/us/app/brave-private-browser-adblock/id1052879175";
+    s1b.href = isIOS
+      ? "//apps.apple.com/us/app/brave-private-browser-adblock/id1052879175"
+      : "//play.google.com/store/apps/details?id=com.brave.browser";
   }
 } else {
   if (window["ethereum"]) {
