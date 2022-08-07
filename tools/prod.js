@@ -1,6 +1,3 @@
-// const NOTION_URL =
-//  'https://kimlikdao.notion.site/KimlikDAO-5349424f906f45dbbb085b3dc8ed53ef';
-
 // Sonda bölü işareti olması lazım.
 /** @const {string} */
 const HOST_URL = 'https://kimlikdao.org/';
@@ -8,7 +5,7 @@ const HOST_URL = 'https://kimlikdao.org/';
 const PAGE_CACHE_CONTROL = 'max-age=90,public'
 /** @const {string} */
 const STATIC_CACHE_CONTROL = 'max-age=29030400,public'
-/** @const {Object<string,string>} */
+/** @const {Object<string, string>} */
 const MIMES = {
   "css": "text/css",
   "js": "application/javascript;charset=utf-8",
@@ -31,7 +28,7 @@ addEventListener('fetch', async (event) => {
   const ext = url.pathname.endsWith('.woff2') ? ''
     : enc.includes('br') ? '.br' : enc.includes('gz') ? '.gz' : '';
   /** @const {string} */
-  const kvKey = (PAGES[url.pathname] ? PAGES[url.pathname] : url.pathname.substring(1)) + ext;
+  const kvKey = (url.pathname in PAGES ? PAGES[url.pathname] : url.pathname.substring(1)) + ext;
   /** @const {string} */
   const cacheKey = HOST_URL + kvKey;
   /** @const {number} */
@@ -90,7 +87,7 @@ addEventListener('fetch', async (event) => {
 
     // Sayfaları CF cache'inde sonsuz dek ama kullanıcı cache'inde belli bir süre tutmak istiyoruz.
     // Bunun sebebi CF cachi'ni purge gerektiğinde purge edebilmemiz.
-    if (idx != 1) {
+    if (idx == -1) {
       response.headers.set('cache-control', PAGE_CACHE_CONTROL);
     }
     return response;

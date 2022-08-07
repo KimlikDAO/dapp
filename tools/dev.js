@@ -28,6 +28,11 @@ const sayfaOku = (dosyaAdı) => {
     linkler += `  <link href="${stil}" rel="stylesheet" type="text/css" />\n`
   return sayfa.replace("</head>", linkler + "\n</head>");
 }
+/** @const {Object<string, string>} */
+const PAGES = {
+  "/": "ana/sayfa.html",
+  "/al": "al/sayfa.html",
+};
 
 async function sun() {
   const app = express()
@@ -39,18 +44,20 @@ async function sun() {
 
   app.use(vite.middlewares)
 
-  app.use(["/", "/al"], async (req, res, next) => {
+  app.use("/", async (req, res) => {
     try {
-      console.log(req.originalUrl);
-      const dosyaAdı = req.originalUrl == '/' ? 'ana/sayfa.html' : 'al/sayfa.html';
-      let sayfa = sayfaOku(dosyaAdı);
-      sayfa = await vite.transformIndexHtml(req.originalUrl, sayfa)
-      res.status(200)
-        .set({ 'Content-type': 'text/html;charset=utf-8' })
-        .end(sayfa);
+      if (!(req.path in PAGES)) {
+        console.log(req.originalUrl);
+        res.status(200).end();
+      } else {
+        let sayfa = sayfaOku(PAGES[req.path]);
+        sayfa = await vite.transformIndexHtml(req.path, sayfa)
+        res.status(200)
+          .set({ 'Content-type': 'text/html;charset=utf-8' })
+          .end(sayfa);
+      }
     } catch (e) {
       vite.ssrFixStacktrace(e)
-      next(e)
     }
   })
 
