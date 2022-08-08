@@ -155,5 +155,9 @@ export const öde = (cidSözü, adresAğırlığı, eşik) => {
         console.log(cid, imza);
         return TCKT.createWithRevokersWithTokenPermit(cid, eşik, adresAğırlığı, imza);
       })
+
+    sonuç
+      .then(Telefon.nftTeleGeriAl)
+      .catch(Telefon.nftTeleGeriAl);
   };
 }

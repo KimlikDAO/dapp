@@ -154,8 +154,8 @@ button:hover {
   box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
   position: sticky;
   top: 0;
-  z-index: 20;
   background-color: #fff;
+  z-index: 20;
 }
 
 #nk {
@@ -233,7 +233,6 @@ h1 {
   width: 100%;
   color: #3c4043;
   background: rgb(244, 244, 244);
-  z-index: -20;
   margin: 0;
 }
 

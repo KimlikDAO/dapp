@@ -1,21 +1,19 @@
 #te {
-  width: 280px;
-  min-width: 280px;
-  height: 550px;
-  border: 5px solid #333;
   border-radius: 40px;
+  border: 5px solid #333;
+  height: 550px;
+  min-width: 280px;
   position: relative;
-  overflow: hidden;
-  z-index: 1;
+  width: 280px;
 }
 
 #tebg {
-  position: absolute;
-  height: 100%;
-  width: 100%;
-  transition: filter 0.3s ease-in;
   background-color: #fff;
-  filter: none;
+  border-radius: 40px;
+  height: 100%;
+  position: absolute;
+  transition: filter 0.3s ease-in;
+  width: 100%;
 }
 
 #tebg.whenmsg {
@@ -24,47 +22,47 @@
 
 .tefr {
   display: flex;
-  justify-content: center;
   font-size: 24px;
+  justify-content: center;
   padding-top: 60px;
 }
 
 .tesr {
   display: flex;
+  font-size: 9pt;
   justify-content: center;
-  font-size: 10px;
   padding-bottom: 20px;
 }
 
 #tetr {
   background-color: #E8F9FD;
-  padding: 5px 20px;
-  color: #999;
-  width: fit-content;
-  margin: 0 80px;
   border-radius: 13px;
+  color: #999;
+  margin: 0 80px;
+  padding: 5px 20px;
+  width: fit-content;
 }
 
 .tefor {
   display: flex;
-  padding-top: 40px;
   font-size: 12px;
+  padding-top: 40px;
 }
 
 .tefort {
-  width: 50%;
+  border-bottom: 1px solid #73777B;
+  color: #73777B;
   height: 26px;
   text-align: center;
-  color: #73777B;
-  border-bottom: 1px solid #73777B;
+  width: 50%;
 }
 
 .teforn {
-  width: 50%;
-  height: 25px;
-  text-align: center;
   border-bottom: 2px solid #3d67ab;
   color: #3d67ab;
+  height: 25px;
+  text-align: center;
+  width: 50%;
 }
 
 .tefir {
@@ -74,27 +72,24 @@
 }
 
 .tefirn {
-  box-shadow: 0px 1px 5px rgb(0 0 0 / 15%);
-  width: 125px;
-  height: 125px;
-  border: 1px solid #ccc;
   border-radius: 5px;
+  border: 1px solid #ccc;
+  box-shadow: 0px 1px 5px rgb(0 0 0 / 15%);
+  height: 125px;
+  width: 125px;
 }
 
 #tefirw {
-  position: absolute;
-  box-shadow: 0px 2px 10px rgb(0 0 0 / 15%);
+  background: rgb(255 255 255 / 0.8);
   border-radius: 10px;
-  text-align: center;
-  background: rgb(255 255 255 / 0.95);
-  backdrop-filter: blur(1px);
-  width: 270px;
-  top: 250px;
+  box-shadow: 0px 2px 10px rgb(0 0 0 / 15%);
   left: 5px;
   opacity: 0;
-  transition-property: transform, opacity;
-  transition-duration: 0.4s;
-  transition-timing-function: ease-in;
+  position: absolute;
+  text-align: center;
+  top: 250px;
+  transition: opacity 0.4s ease-in;
+  width: 270px;
 }
 
 #tefirw.show {
@@ -106,52 +101,57 @@
 }
 
 #tefirwyn {
+  border-top: 0.3px solid #ccc;
   display: flex;
   height: 40px;
-  border-top: 0.3px solid #ccc;
 }
 
 #tefirwn,
 #tefirwy {
-  width: 50%;
   padding: 10px;
+  width: 50%;
 }
 
 #tefirwy {
-  font-weight: 700;
   border-left: 0.3px solid #ccc;
+  font-weight: 700;
 }
 
 #tenftb {
-  width: 100%;
   height: 100%;
-  perspective: 1000px;
+  perspective: 750px;
+  position: absolute;
+  width: 100%;
+}
+
+#tenftb.whenmsg {
+  filter: blur(3px);
 }
 
 #tenft-button {
-  display: flex;
-  position: absolute;
-  opacity: 0;
-  width: 25px;
-  height: 3px;
-  background-color: #fff;
-  bottom: 100px;
-  left: 15px;
-  border-radius: 4px;
   align-items: center;
-  justify-content: center;
+  background-color: #fff;
+  border-radius: 4px;
+  bottom: 209px;
   box-shadow: 0px 2px 10px rgb(0 0 0 / 15%);
-  transition-property: opacity, bottom, width, height;
+  display: flex;
+  height: 30px;
+  justify-content: center;
+  left: 15px;
+  opacity: 0;
+  position: absolute;
+  transform-style: preserve-3d;
+  transform: scale(0.5) translate(-70px, 265px);
   transition-duration: 1s;
+  transition-property: opacity, transform;
   transition-timing-function: ease-in;
-  z-index: -50;
+  width: 250px;
+  z-index: -1;
 }
 
 #tenft-button.show {
-  width: 250px;
-  height: 30px;
+  transform: none;
   opacity: 1;
-  bottom: 209px;
 }
 
 #teTCKT {
@@ -178,14 +178,19 @@
   border: 2px solid #ccc;
 }
 
-#teTCKTArt, #teTCKTInfo {
+#teTCKT.movedown {
+  transform: translate3d(0, 335px, 0) rotateY(180deg);
+}
+
+#teTCKTArt,
+#teTCKTInfo {
   position: absolute;
   width: 250px;
   height: 250px;
   backface-visibility: hidden;
 }
 
-#teTCKTArt{
+#teTCKTArt {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -195,11 +200,70 @@
   transform: rotateY(180deg);
 }
 
-#teTCKT-kb {
-  padding: 18px 40px;
-  position: absolute;
+.tepagescontainer {
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
 }
 
-#teTCKT-kb label {
+.tepages {
+  width: 400%;
+  height: 100%;
+  display: flex;
+  transition: transform 1s;
+}
+
+.tepage {
+  width: 25%;
+  height: 100%;
+}
+
+.tenft_slider {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  padding: 10px;
+  opacity: 0.3;
+  top: 110px;
+}
+
+.tenft_slider:hover {
+  opacity: 0.7;
+}
+
+.tenft_slider.prev {
+  left: 0;
+}
+
+.tenft_slider.next {
+  right: 0;
+}
+
+.tenft_slider.prev::before,
+.tenft_slider.next::before {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  content: "";
+  border: solid rgb(0 0 0);
+  border-radius: 2px;
+  box-sizing: border-box;
+}
+
+.tenft_slider.prev::before {
+  border-width: 0 0 4px 4px;
+  transform: rotate(45deg);
+}
+
+.tenft_slider.next::before {
+  border-width: 0 4px 4px 0;
+  transform: rotate(-45deg);
+}
+
+.tepage0 {
+  padding: 1ex 40px;
+}
+
+.tepage0 label {
   font-size: 7px;
 }

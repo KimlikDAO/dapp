@@ -46,7 +46,7 @@ const tanı = () => {
     .then((res) => res.json())
     .then((AçıkTCKT) => {
       for (let ad of "TCKN ad soyad dt annead babaad".split(" ")) {
-        dom.adla(ad).innerText = AçıkTCKT[ad];
+        dom.adla("te" + ad).innerText = AçıkTCKT[ad];
       }
       Telefon.nftÇevir();
       Telefon.kutuGöster("App cüzdanınızın açık anahtarına ulaşmak istiyor. İzin veriyor musunuz?");

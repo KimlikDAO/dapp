@@ -58,7 +58,7 @@
   animation: growDown 300ms ease-in-out forwards;
   transform-origin: top center;
   list-style: none;
-  z-index: 2;
+  z-index: 20;
 }
 
 #ncd li,

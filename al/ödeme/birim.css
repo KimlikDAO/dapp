@@ -38,7 +38,6 @@
   position: absolute;
   right: -10px;
   transform-origin: bottom right;
-  z-index: 2;
 }
 
 #odd li {

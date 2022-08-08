@@ -4,6 +4,10 @@ import dom from '/lib/dom';
 const nft = dom.adla("teTCKT");
 /** @const {Element} */
 const nftButton = dom.adla("tenft-button");
+/** @const {Element} */
+const Kartlar = dom.adla("tepgs");
+/** @type {number} */
+let Kart = 0;
 
 /**
  * @param {string} adres Telefonda gösterilecek adres.
@@ -19,6 +23,7 @@ const kutuGöster = (metin) => {
   kutu.firstElementChild.innerText = metin;
   kutu.classList.add("show");
   dom.adla("tebg").classList.add("whenmsg");
+  dom.adla("tenftb").classList.add("whenmsg");
 }
 
 /**
@@ -27,22 +32,82 @@ const kutuGöster = (metin) => {
 const kutuKapat = () => {
   dom.adla("tefirw").classList.remove("show");
   dom.adla("tebg").classList.remove("whenmsg");
+  dom.adla("tenftb").classList.remove("whenmsg");
 }
 
+/**
+ * Ana sayfa Telefon görselinin içinde temsili nft'yi gösterir
+ */
 const nftGöster = () => {
-  dom.adla("tenftb").style.display = "";
+  nft.style.display = "";
+  nftButton.style.display = "";
   nft.classList.remove("moveintowallet");
   nft.classList.add("flipped");
   nftButton.classList.add("show");
 }
 
-const nftÇevir = () => {
-  nft.classList.toggle("flipped");
+const nftÇevir = () => nft.classList.toggle("flipped");
+
+/**
+ * Ana sayfa Telefon görselinin içinde temsili nft'yi kilitli olarak gösterir
+ */
+const nftKilitle = () => {
+  nft.classList.remove("moveintowallet");
+  nft.classList.remove("flipped");
+  nftButton.classList.add("show");
 }
 
+/**
+ * Temsili nft'yi nftler kısmına yollar
+ */
 const nftCüzdanaYolla = () => {
   nft.classList.add("moveintowallet");
   nftButton.classList.remove("show");
+}
+
+/**
+ * Temsili nft'yi Al sayfasında daha yukarıda gösterir
+ */
+const nftYukarıGönder = () => {
+  nft.classList.remove("flipped");
+  nft.style.top = "0";
+  nft.style.left = "20px";
+  dom.adla("te").previousElementSibling.appendChild(nft);
+  nft.style.display = "";
+}
+
+/**
+ * Temsili nft'nin Al sayfasında bilgi içeren yüzünü gösterir
+ */
+const nftYukarıdaGöster = () => {
+  nft.classList.add("flipped");
+}
+
+/**
+ * Temsili nft'yi Al sayfasında tekrar telefon görseline içine alır
+ */
+const nftTeleGeriAl = () => {
+  nft.classList.add("movedown");
+  nftButton.style.display ="";
+  nftButton.classList.add("show");
+}
+
+/**
+ * Nft'nin bilgi içeren yüzündeki slider düğmelerinin fonksiyonları
+ */
+ const kartDeğiştir = (yeniKart) => {
+  /** @const {number} */
+  const width = Kartlar.children[0].getBoundingClientRect().width;
+  Kartlar.style.transform = `translate3d(-${yeniKart * width}px, 0, 0)`;
+  Kart = yeniKart;
+}
+
+dom.adla("tenftsso").onclick = () => {
+  kartDeğiştir((Kart + 1) % 2);
+}
+
+dom.adla("tenftssa").onclick = () => {
+  kartDeğiştir((Kart + 1) % 2);
 }
 
 export default {
@@ -52,4 +117,8 @@ export default {
   nftÇevir,
   nftCüzdanaYolla,
   nftGöster,
+  nftKilitle,
+  nftTeleGeriAl,
+  nftYukarıdaGöster,
+  nftYukarıGönder,
 };

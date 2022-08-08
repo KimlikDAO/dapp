@@ -77,6 +77,8 @@ const TCKTYarat = () => {
   };
 }
 
+Telefon.nftYukarıGönder();
+
 if (window["ethereum"]) {
   /** @const {Element} */
   const s1b = dom.adla("s1b");

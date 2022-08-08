@@ -20,7 +20,7 @@ let SergiSaati = 0;
  */
 const kartDeğiştir = (yeniKart) => {
   /** @const {number} */
-  const width = document.getElementById("sepgc").getBoundingClientRect().width;
+  const width = Kartlar.firstElementChild.getBoundingClientRect().width;
 
   if (yeniKart === 0) Telefon.nftGöster();
   if (yeniKart === 1) Telefon.nftÇevir();
