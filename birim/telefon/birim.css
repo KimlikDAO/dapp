@@ -6,7 +6,7 @@
   border-radius: 40px;
   position: relative;
   overflow: hidden;
-  z-index: -15;
+  z-index: 1;
 }
 
 #tebg {
@@ -15,7 +15,6 @@
   width: 100%;
   transition: filter 0.3s ease-in;
   background-color: #fff;
-  z-index: -10;
   filter: none;
 }
 
@@ -129,21 +128,6 @@
   perspective: 1000px;
 }
 
-.te-nft-container {
-  position: absolute;
-  width: 250px;
-  height: 250px;
-  top: 50px;
-  left: 15px;
-  transform-style: preserve-3d;
-  transition-property: transform, border;
-  transition-duration: 1s;
-  transition-timing-function: ease-in;
-  box-shadow: 0px 2px 10px rgb(0 0 0 / 15%);
-  border-radius: 10px;
-  background: #fff;
-}
-
 #tenft-button {
   display: flex;
   position: absolute;
@@ -170,29 +154,44 @@
   bottom: 209px;
 }
 
-.te-nft-container.flipped {
-  transform: rotateY(180deg);
+#teTCKT {
+  position: absolute;
+  width: 250px;
+  height: 250px;
+  top: 50px;
+  left: 15px;
+  transform-style: preserve-3d;
+  transition-property: transform, border;
+  transition-duration: 1s;
+  transition-timing-function: ease-in;
+  box-shadow: 0px 2px 10px rgb(0 0 0 / 15%);
+  border-radius: 10px;
+  background: #fff;
 }
 
-.te-nft-container.moveintowallet {
+#teTCKT.flipped {
+  transform: rotateY(-180deg);
+}
+
+#teTCKT.moveintowallet {
   transform: translate(-70px, 265px) scale(0.5);
   border: 2px solid #ccc;
 }
 
-.te-TCKT {
+#teTCKTArt, #teTCKTInfo {
   position: absolute;
   width: 250px;
   height: 250px;
   backface-visibility: hidden;
 }
 
-.te-TCKT.locked {
+#teTCKTArt{
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.te-TCKT.unlocked {
+#teTCKTInfo {
   transform: rotateY(180deg);
 }
 

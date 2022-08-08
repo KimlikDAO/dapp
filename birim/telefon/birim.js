@@ -1,7 +1,7 @@
 import dom from '/lib/dom';
 
 /** @const {Element} */
-const nft = dom.adla("tenft");
+const nft = dom.adla("teTCKT");
 /** @const {Element} */
 const nftButton = dom.adla("tenft-button");
 

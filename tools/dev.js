@@ -44,8 +44,9 @@ async function sun() {
 
   app.use(vite.middlewares)
 
-  app.use("/", async (req, res) => {
+  app.use(["/", "/ana"], async (req, res, next) => {
     try {
+      console.log("HELP")
       if (!(req.path in PAGES)) {
         console.log(req.originalUrl);
         res.status(200).end();
@@ -58,6 +59,7 @@ async function sun() {
       }
     } catch (e) {
       vite.ssrFixStacktrace(e)
+      next(e)
     }
   })
 
