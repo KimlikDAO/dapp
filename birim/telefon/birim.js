@@ -41,6 +41,7 @@ const kutuKapat = () => {
 const nftGöster = () => {
   nft.style.display = "";
   nftButton.style.display = "";
+  nftButton.onclick ||= nftÇevir;
   nft.classList.remove("moveintowallet");
   nft.classList.add("flipped");
   nftButton.classList.add("show");
@@ -88,14 +89,15 @@ const nftYukarıdaGöster = () => {
  */
 const nftTeleGeriAl = () => {
   nft.classList.add("movedown");
-  nftButton.style.display ="";
+  nftButton.style.display = "";
+  nftButton.onclick = nftÇevir;
   nftButton.classList.add("show");
 }
 
 /**
  * Nft'nin bilgi içeren yüzündeki slider düğmelerinin fonksiyonları
  */
- const kartDeğiştir = (yeniKart) => {
+const kartDeğiştir = (yeniKart) => {
   /** @const {number} */
   const width = Kartlar.children[0].getBoundingClientRect().width;
   Kartlar.style.transform = `translate3d(-${yeniKart * width}px, 0, 0)`;
