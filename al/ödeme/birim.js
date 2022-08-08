@@ -151,10 +151,8 @@ export const öde = (cidSözü, adresAğırlığı, eşik) => {
     let sonuç = para == 0
       ? cidSözü.then((cid) =>
         TCKT.createWithRevokers(cid, eşik, adresAğırlığı))
-      : Promise.all([cidSözü, TCKT.getPermissionFor(para, iptalli)]).then(([cid, imza]) => {
-        console.log(cid, imza);
-        return TCKT.createWithRevokersWithTokenPermit(cid, eşik, adresAğırlığı, imza);
-      })
+      : Promise.all([cidSözü, TCKT.getPermissionFor(para, iptalli)]).then(([cid, imza]) =>
+        TCKT.createWithRevokersWithTokenPermit(cid, eşik, adresAğırlığı, imza));
 
     sonuç
       .then(Telefon.nftTeleGeriAl)

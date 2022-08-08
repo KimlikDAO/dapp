@@ -24,57 +24,62 @@ const TCKTYarat = () => {
   s3a.classList.remove("disabled");
 
   const açıkTCKTSözü = Tanışma.tanı();
+  const açıkAnahtarSözü = new Promise((resolve) => {
+    const açıkAnahtar = window.localStorage[Cüzdan.adres().toLowerCase()];
+    if (açıkAnahtar) resolve(açıkAnahtar)
+    else s3a.onclick = () => {
+      ethereum.request(/** @type {RequestParams} */({
+        method: "eth_getEncryptionPublicKey",
+        params: [Cüzdan.adres()],
+      })).then((açıkAnahtar) => {
+        window.localStorage[Cüzdan.adres().toLowerCase()] = açıkAnahtar;
+        resolve(açıkAnahtar)
+      }).catch(console.log);
+    }
+  }).then((açıkAnahtar) => {
+    Telefon.kutuKapat();
+    s3a.innerText = "Açık anahtarınızı aldık ✓";
+    s3a.classList.remove("act");
+    dom.butonDurdur(s3a);
+    dom.adla("s3").classList.add("done");
+    İmeceİptal.göster();
+    return açıkAnahtar;
+  });
 
-  s3a.onclick = () => {
-    /** @const {Promise<string>} */
-    const açıkAnahtarSözü = ethereum.request(/** @type {RequestParams} */({
-      method: "eth_getEncryptionPublicKey",
-      params: [Cüzdan.adres()],
-    })).then((pubKey) => {
-      Telefon.kutuKapat();
-      s3a.innerText = "Açık anahtarınızı aldık ✓";
-      s3a.classList.remove("act");
-      dom.butonDurdur(s3a);
-      dom.adla("s3").classList.add("done");
-      İmeceİptal.göster();
-      return pubKey;
-    });
+  /** @type {Promise<string>} */
+  const cidSözü = Promise.all([açıkTCKTSözü, açıkAnahtarSözü])
+    .then(([açıkTCKT, açıkAnahtar]) => {
+      let gizle = new Uint8Array(1000);
+      let { written } = new TextEncoder().encodeInto(açıkTCKT, gizle);
+      let dolgu = new Uint8Array(1000 - written);
+      crypto.getRandomValues(dolgu);
+      gizle.set(dolgu, written);
 
-    /** @type {Promise<string>} */
-    const cidSözü = Promise.all([açıkTCKTSözü, açıkAnahtarSözü])
-      .then(([açıkTCKT, açıkAnahtar]) => {
-        let gizle = new Uint8Array(1000);
-        let { written } = new TextEncoder().encodeInto(açıkTCKT, gizle);
-        let dolgu = new Uint8Array(1000 - written);
-        crypto.getRandomValues(dolgu);
-        gizle.set(dolgu, written);
+      const [nonce, ephemPubKey, ciphertext] = encrypt(açıkAnahtar, gizle);
 
-        const [nonce, ephemPubKey, ciphertext] = encrypt(açıkAnahtar, gizle);
-
-        const TCKTData = {
-          name: "TCKT",
-          description: "KimlikDAO TC Kimlik Tokeni",
-          image: KIMLIK_DAO_URL + "/TCKT.svg",
-          external_url: KIMLIK_DAO_URL,
-          animation_url: KIMLIK_DAO_URL + "/TCKT.mp4",
-          unlockable: {
-            user_prompt: {
-              "en-US": ["{1} wants to view your TCKT.", "OK", "Reject"],
-              "tr-TR": ["{1} TCKT'nizi istiyor. İzin veriyor musunuz?", "Evet", "Hayır"]
-            },
-            algorithm: "x25519-xsalsa20-poly1305",
-            nonce: nonce,
-            ephem_pub_key: ephemPubKey,
-            ciphertext: ciphertext
-          }
+      const TCKTData = {
+        name: "TCKT",
+        description: "KimlikDAO TC Kimlik Tokeni",
+        image: KIMLIK_DAO_URL + "/TCKT.svg",
+        external_url: KIMLIK_DAO_URL,
+        animation_url: KIMLIK_DAO_URL + "/TCKT.mp4",
+        unlockable: {
+          user_prompt: {
+            "en-US": ["{1} wants to view your TCKT.", "OK", "Reject"],
+            "tr-TR": ["{1} TCKT'nizi istiyor. İzin veriyor musunuz?", "Evet", "Hayır"]
+          },
+          algorithm: "x25519-xsalsa20-poly1305",
+          nonce: nonce,
+          ephem_pub_key: ephemPubKey,
+          ciphertext: ciphertext
         }
-        return ipfs.yaz(JSON.stringify(TCKTData)).then(hex);
-      })
-      .catch((e) => console.log(e + "TCKT oluşturamadık: Kullanıcı reddetti veya IPFS hatası"));
+      }
+      return ipfs.yaz(JSON.stringify(TCKTData)).then(hex);
+    })
+    .catch((e) => console.log(e + "TCKT oluşturamadık: Kullanıcı reddetti veya IPFS hatası"));
 
-    İmeceİptal.kurVe(
-      (adresAğırlığı, eşik) => öde(cidSözü, adresAğırlığı, eşik));
-  };
+  İmeceİptal.kurVe(
+    (adresAğırlığı, eşik) => öde(cidSözü, adresAğırlığı, eşik));
 }
 
 Telefon.nftYukarıGönder();
