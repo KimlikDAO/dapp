@@ -5,8 +5,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>KimlikDAO | Blokzincirdeki kimlik kartın</title>
-  <link rel="preload" crossorigin href="/font/f400.woff2" as="font"/>
-  <link rel="preload" crossorigin href="/font/f700.woff2" as="font"/>
+  <link rel="preload" crossorigin href="/font/f400.woff2" as="font" />
+  <link rel="preload" crossorigin href="/font/f700.woff2" as="font" />
   <link href="/font/lato-ttf.css" rel="stylesheet" type="text/css" />
   <link href="/ana/sayfa.css" rel="stylesheet" type="text/css" />
   <link href="/al/sayfa.css" rel="stylesheet" type="text/css" />
@@ -18,7 +18,7 @@
     <a href="/">
       <h2>KimlikDAO</h2>
     </a>
-    <birim:cüzdan/>
+    <birim:cüzdan />
   </div>
   <div id=b>
     <div id="bs">
@@ -31,14 +31,7 @@
         <a href="//rabby.io" target="_blank" id=s1b class="btn">Rabby kur</a>
         <script src="/al/wallet-inline.js"></script>
       </div>
-      <div id=s2 class="step disabled">
-        <b>2. Kendinizi tanıtın.</b>
-        E-devlet ile giriş yapıp 'Temel-Bilgileri' paylaşımını onaylayın.
-        <br>
-        <br>
-        <a href="https://mock-oauth2.kimlikdao.net/auth?response_type=code&client_id=F5CAA82F-E2CF-4F21-A745-471ABE3CE7F8&redirect_uri=http://localhost:8787/al&scope=Temel-Bilgileri"
-          class="btn" id="s2a">E-devlet ile giriş yap</a>
-      </div>
+      <altbirim:tanışma />
       <div id=s3 class="step disabled">
         <b>3. TCKT'nizi şifreleyelim.</b>
         TCKT'ni şifrelememiz için cüzdan açık anahtarına ihtiyacımız var.
@@ -46,8 +39,8 @@
         <br><br>
         <a href="javascript:" id="s3a" class="act btn">Cüzdanıma istek yolla</a>
       </div>
-      <altbirim:imeceİptal/>
-      <altbirim:ödeme/>
+      <altbirim:imeceİptal />
+      <altbirim:ödeme />
     </div>
     <div id="sa">
       <div id="bss">
@@ -71,7 +64,7 @@
           </div>
         </div>
       </div>
-      <birim:telefon/>
+      <birim:telefon />
     </div>
   </div>
   <script async type="module" src="/al/sayfa.js"></script>

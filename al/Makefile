@@ -8,7 +8,9 @@ build/al/wallet-inline.js: al/wallet-inline.js lib/ethereum.js
                              --js_output_file $@
 	yarn uglifyjs $@ -m -o $@
 
-build/al/sayfa.js: al/sayfa.js al/imeceİptal/birim.js al/ödeme/birim.js \
+build/al/sayfa.js: al/sayfa.js \
+                   al/imeceİptal/birim.js al/ödeme/birim.js \
+                   al/tanışma/birim.js \
                    birim/cüzdan/birim.js birim/telefon/birim.js \
                    lib/dom.js lib/çevir.js lib/evm.js \
                    lib/encrypt.js lib/ipfs.js lib/sha3.js \
@@ -42,6 +44,7 @@ build/al.html: al/sayfa.html al/sayfa.inlines \
                build/al/wallet-inline.js \
                al/imeceİptal/birim.html \
                al/ödeme/birim.html \
+               al/tanışma/birim.html \
                build/al/imeceİptal/paste.svg.inl \
                birim/telefon/birim.html \
                build/birim/cüzdan/birim.html

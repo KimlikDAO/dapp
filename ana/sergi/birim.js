@@ -23,7 +23,7 @@ const kartDeğiştir = (yeniKart) => {
   const width = document.getElementById("sepgc").getBoundingClientRect().width;
 
   if (yeniKart === 0) Telefon.nftGöster();
-  if (yeniKart === 1) Telefon.nftKilitle();
+  if (yeniKart === 1) Telefon.nftÇevir();
   if (yeniKart === 2) Telefon.nftCüzdanaYolla();
   yeniKart === 3
     ? Telefon.kutuGöster(

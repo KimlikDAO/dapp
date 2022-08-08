@@ -3,82 +3,27 @@
  *
  */
 import İmeceİptal from '/al/imeceİptal/birim';
+import Tanışma from '/al/tanışma/birim';
 import { öde } from '/al/ödeme/birim';
 import Cüzdan from '/birim/cüzdan/birim';
 import Telefon from '/birim/telefon/birim';
 import dom from '/lib/dom';
 import { encrypt } from '/lib/encrypt';
 import ipfs from '/lib/ipfs';
-import { base64, hex } from '/lib/çevir';
+import { hex } from '/lib/çevir';
 
-/** @const {string} */
-const KIMLIK_AS_URL = "https://mock-api.kimlikas.com";
 /**
  * @const {string}
  * @noinline
  */
 const KIMLIK_DAO_URL = "https://kimlikdao.org";
 
-/**
- * Verilen bir `hesap` için `rasgele` bitdizisi ile kriptografik taahhüt
- * oluşturur.
- * 
- * @param {string} hesap EVM adresi.
- * @param {!Uint8Array} rasgele bitdizisi.
- * @return {Promise<string>} Kriptografik taahhüt.
- */
-const taahhütOluştur = (hesap, rasgele) => {
-  /** @type {!Uint8Array} */
-  let concat = new Uint8Array(32 + 20);
-  concat.set(rasgele, 0);
-
-  for (let /** number */ i = 1; i <= 20; ++i)
-    concat[i + 31] = parseInt(hesap.substring(2 * i, 2 * i + 2), 16);
-
-  return crypto.subtle.digest("SHA-256", concat).then(base64);
-}
-
 const TCKTYarat = () => {
-  /**
-   * Pedersen taahhüdü için rasgele bitdizisi.
-   * @type {!Uint8Array}
-   */
-  let Rasgele = new Uint8Array(32);
-  crypto.getRandomValues(Rasgele);
-
-  /** @type {URLSearchParams} */
-  const params = new URLSearchParams(location.search);
-  /** @type {?string} */
-  const code = params.get("code");
-  history.replaceState(null, "", location.pathname);
-
   const s3a = dom.adla("s3a");
   dom.adla("s3").classList.remove("disabled");
   s3a.classList.remove("disabled");
 
-  /** @const {Promise<string>} */
-  const açıkTCKTSözü = taahhütOluştur(
-    /** @type {string} */(Cüzdan.adres()), Rasgele)
-    .then((taahhüt) =>
-      fetch(KIMLIK_AS_URL + "?" + new URLSearchParams({ "oauth_code": code, "taahhüt": taahhüt })))
-    .then((res) => res.json())
-    .then((AçıkTCKT) => {
-      for (let ad of "TCKN ad soyad dt annead babaad".split(" ")) {
-        dom.adla(ad).innerText = AçıkTCKT[ad];
-      }
-      dom.adla("nft").classList.add("flipped");
-      Telefon.kutuGöster("App cüzdanınızın açık anahtarına ulaşmak istiyor. İzin veriyor musunuz?");
-      const s2a = dom.adla("s2a");
-      s2a.innerText = "E-devlet'ten bilgileriniz alındı ✓";
-      s2a.classList.remove("act");
-      s2a.href = "javascript:";
-      dom.butonDurdur(s2a);
-      dom.adla("s2").classList.add("done");
-      AçıkTCKT.rasgele = base64(Rasgele);
-      // TODO(KimlikDAO-bot): Kullanıcı tarafında gelen TCKT'nin fazladan veri
-      // içermediğini denetle. Fazla verileri işaretleme riski yüzünden sil.
-      return JSON.stringify(AçıkTCKT);
-    });
+  const açıkTCKTSözü = Tanışma.tanı();
 
   s3a.onclick = () => {
     /** @const {Promise<string>} */
@@ -142,18 +87,14 @@ if (window["ethereum"]) {
     s1b.innerText = "Cüzdan bağlandı ✓";
     s1b.classList.remove("act");
     dom.butonDurdur(s1b);
-
     s1a.style.display = "none";
     dom.adla("s1").classList.add("done");
-    dom.adla("s2").classList.remove("disabled");
-    dom.adla("s2a").classList.remove("disabled");
-    Telefon.adresGir(Cüzdan.hızlıArabirimAdı(adres));
 
-    if (!location.search) {
-      dom.adla("s2a").classList.add("act");
-    } else {
+    Telefon.adresGir(Cüzdan.hızlıArabirimAdı(adres));
+    Tanışma.göster();
+
+    if (location.search)
       TCKTYarat();
-    }
   });
 
   // İleride cüzdan adresi değiştiğinde kullanıcıya tekrar bilgileri

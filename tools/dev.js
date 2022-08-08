@@ -46,7 +46,6 @@ async function sun() {
 
   app.use(["/", "/ana"], async (req, res, next) => {
     try {
-      console.log("HELP")
       if (!(req.path in PAGES)) {
         console.log(req.originalUrl);
         res.status(200).end();

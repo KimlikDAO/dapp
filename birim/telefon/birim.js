@@ -36,8 +36,8 @@ const nftGöster = () => {
   nftButton.classList.add("show");
 }
 
-const nftKilitle = () => {
-  nft.classList.remove("flipped");
+const nftÇevir = () => {
+  nft.classList.toggle("flipped");
 }
 
 const nftCüzdanaYolla = () => {
@@ -49,7 +49,7 @@ export default {
   adresGir,
   kutuGöster,
   kutuKapat,
+  nftÇevir,
   nftCüzdanaYolla,
   nftGöster,
-  nftKilitle,
 };
