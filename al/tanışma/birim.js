@@ -64,11 +64,15 @@ const tanı = () => {
 }
 
 const göster = () => {
-  dom.adla("ta").classList.remove("disabled");
-  dom.adla("taa").classList.remove("disabled");
+  const EDevletDüğmesi = dom.adla("taa");
+  const PDFDüğmesi = dom.adla("tab");
 
-  if (!location.search)
-    dom.adla("taa").classList.add("act");
+  dom.adla("ta").classList.remove("disabled");
+
+  if (!location.search) {
+    EDevletDüğmesi.classList.add("act");
+    PDFDüğmesi.style.display = "";
+  }
 }
 
 export default {

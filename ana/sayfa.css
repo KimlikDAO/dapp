@@ -40,6 +40,10 @@ h2 {
   margin: 10px;
 }
 
+.btn.lft {
+  margin-right: 1ex;
+}
+
 .act.btn {
   background: #3d67ab;
   color: white;
