@@ -1,60 +1,58 @@
 #!/usr/bin/env python
 
-import toml
-import keymapper
-import sys
-import time
+import os
 from http.server import BaseHTTPRequestHandler, HTTPServer
+from urllib.parse import urlparse
 
+import toml
+
+import keymapper
+
+CF_CONFIG = toml.load('wrangler.toml')
 HOST_NAME = "localhost"
-PORT = 8787
-
-ROUTE = toml.load('wrangler.toml')['env']['beta']['route'][:-1]
+PORT = CF_CONFIG['dev']['port']
+ROUTE = CF_CONFIG['env']['beta']['route'][:-1]
 REVERSE = {
     ROUTE: "http://localhost:8787/"
+}
+
+PAGES = {
+    "/": "/ana.html",
+    "/al": "/al.html",
+    "/incele": "/incele.html"
+}
+
+MIMES = {
+    "js": "text/javascript;charset=utf-8",
+    "css": "text/css",
+    "png": "image/png",
+    "svg": "image/svg+xml",
+    "ttf": "font/ttf",
+    "woff2": "font/woff2",
+    "ico": "image/x-icon",
 }
 
 
 class TestServer(BaseHTTPRequestHandler):
     def do_GET(self):
-        fname = 'build' + self.path
-        is_binary = False
-        if self.path == '/':
+        fname = PAGES.get(urlparse(self.path).path, None)
+        if fname:
+            fname = 'build' + fname
             ctype = "text/html;charset=utf-8"
-            fname = 'build/ana.html'
-        elif self.path == '/al' or self.path.startswith('/al?'):
-            ctype = "text/html;charset=utf-8"
-            fname = 'build/al.html'
-        elif self.path.endswith('.js'):
-            ctype = 'text/javascript'
-        elif self.path.endswith('.css'):
-            ctype = 'text/css'
-        elif self.path.endswith('.png'):
-            ctype = 'image/png'
-        elif self.path.endswith('.svg'):
-            ctype = 'image/svg+xml'
-        elif self.path.endswith('.ttf'):
-            ctype = 'font/ttf'
-            is_binary = True
-        elif self.path.endswith('.woff2'):
-            ctype = 'font/woff2'
-            is_binary = True
-
-        if self.path.endswith('.map') or self.path.endswith(".ico"):
-            self.send_response(404)
-            self.end_headers()
-            return
+        else:
+            fname = 'build' + self.path
+            ctype = MIMES[os.path.splitext(self.path)[1][1:]]
 
         self.send_response(200)
         self.send_header("Content-type", ctype)
         self.end_headers()
 
-        file = open(fname, 'br').read() if is_binary else open(
-            fname, 'r', encoding='utf-8').read()
+        file = open(fname, 'br').read()
         if ctype.startswith('text/html'):
-            file = keymapper.multireplace(file, REVERSE)
-        self.wfile.write(file if is_binary else file.encode())
+            file = keymapper.multireplace(
+                file.decode('utf-8'), REVERSE).encode('utf-8')
+        self.wfile.write(file)
 
 
-with HTTPServer(('localhost', PORT), TestServer) as server:
+with HTTPServer((HOST_NAME, PORT), TestServer) as server:
     server.serve_forever()
