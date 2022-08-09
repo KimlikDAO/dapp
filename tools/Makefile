@@ -14,6 +14,15 @@ build/prod.js: tools/prod.js tools/workers.js
                              --js_output_file $@
 	yarn uglifyjs $@ -m -o $@
 
+build/sitemap.txt:
+	mkdir -p $(dir $@)
+	echo "https://kimlikdao.org" > $@
+	$(foreach s, $(filter-out ana, $(PAGES)), echo "https://kimlikdao.org/$s" >> $@;)
+
+build/sitemap: $(call compressions, build/sitemap.txt)
+
+.PHONY: build/sitemap
+
 build/%.svg: %.svg
 	mkdir -p $(dir $@)
 	yarn svgo --config tools/svgo-config.js $^ --output $@

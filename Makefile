@@ -23,7 +23,7 @@ dev:
 staging: build
 	tools/staging.py
 
-cf-deployment: build build/prod.js
+cf-deployment: build build/prod.js build/sitemap
 	tools/cfuploader.py
 
 .PHONY: cf-deployment clean dev staging
