@@ -19,11 +19,13 @@ import { hex } from '/lib/çevir';
 const KIMLIK_DAO_URL = "https://kimlikdao.org";
 
 const TCKTYarat = () => {
+  Telefon.kutuGöster("App cüzdanınızın açık anahtarına ulaşmak istiyor. İzin veriyor musunuz?");
   const s3a = dom.adla("s3a");
   dom.adla("s3").classList.remove("disabled");
   s3a.classList.remove("disabled");
 
   const açıkTCKTSözü = Tanışma.tanı();
+
   const açıkAnahtarSözü = new Promise((resolve) => {
     const açıkAnahtar = window.localStorage[Cüzdan.adres().toLowerCase()];
     if (açıkAnahtar) resolve(açıkAnahtar)

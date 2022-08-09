@@ -49,7 +49,6 @@ const tanı = () => {
         dom.adla("te" + ad).innerText = AçıkTCKT[ad];
       }
       Telefon.nftÇevir();
-      Telefon.kutuGöster("App cüzdanınızın açık anahtarına ulaşmak istiyor. İzin veriyor musunuz?");
       /** @const {Element} */
       const OAuthDüğmesi = dom.adla("taa");
       OAuthDüğmesi.innerText = "E-devlet'ten bilgileriniz alındı ✓";
