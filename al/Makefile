@@ -50,7 +50,7 @@ build/al.html: al/sayfa.html al/sayfa.inlines \
                build/birim/cüzdan/birim.html
 	cp $< $@
 	tools/keymapper.py $@ build/ana/sayfa.keymap build/al/sayfa.keymap \
-                          al/sayfa.inlines \
-                          build/al/ödeme/birim.keymap \
-                          build/font/fonts.keymap
+                       al/sayfa.inlines \
+                       build/al/ödeme/birim.keymap \
+                       build/font/fonts.keymap
 	yarn html-minifier -c tools/html-minifier.conf $@ -o $@

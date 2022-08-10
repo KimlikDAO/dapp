@@ -1,13 +1,10 @@
 import dom from '/lib/dom';
+import '/birim/TCKT/birim';
 
 /** @const {Element} */
-const nft = dom.adla("teTCKT");
+const nft = dom.adla("tc");
 /** @const {Element} */
 const nftButton = dom.adla("tenft-button");
-/** @const {Element} */
-const Kartlar = dom.adla("tepgs");
-/** @type {number} */
-let Kart = 0;
 
 /**
  * @param {string} adres Telefonda gösterilecek adres.
@@ -92,24 +89,6 @@ const nftTeleGeriAl = () => {
   nftButton.style.display = "";
   nftButton.onclick = nftÇevir;
   nftButton.classList.add("show");
-}
-
-/**
- * Nft'nin bilgi içeren yüzündeki slider düğmelerinin fonksiyonları
- */
-const kartDeğiştir = (yeniKart) => {
-  /** @const {number} */
-  const width = Kartlar.children[0].getBoundingClientRect().width;
-  Kartlar.style.transform = `translate3d(-${yeniKart * width}px, 0, 0)`;
-  Kart = yeniKart;
-}
-
-dom.adla("tenftsso").onclick = () => {
-  kartDeğiştir((Kart + 1) % 2);
-}
-
-dom.adla("tenftssa").onclick = () => {
-  kartDeğiştir((Kart + 1) % 2);
 }
 
 export default {
