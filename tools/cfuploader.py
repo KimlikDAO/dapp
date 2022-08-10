@@ -9,19 +9,23 @@ import sys
 import requests
 import toml
 
-CF_ENV = 'beta'
-
 SAYFALAR = {
-    'al', 'ana'
+    'al', 'ana',
 }
+
+NAMED_ASSET = {
+    'sitemap.txt',
+    'favicon.ico',
+}
+
 EXT = ['', '.br', '.gz']
 
-config = toml.load('wrangler.toml')
-
-ROUTE = config['env'][CF_ENV]['route'][:-1]
-ACCOUNT_ID = config['account_id']
-ZONE_ID = config['zone_id']
-NAMESPACE_ID = config['kv_namespaces'][0]['id']
+CF_ENV = 'beta'
+CF_CONFIG = toml.load('wrangler.toml')
+ROUTE = CF_CONFIG['env'][CF_ENV]['route'][:-1]
+ACCOUNT_ID = CF_CONFIG['account_id']
+ZONE_ID = CF_CONFIG['zone_id']
+NAMESPACE_ID = CF_CONFIG['kv_namespaces'][0]['id']
 CF_UPLOADER_TOKEN = toml.load('.gizli')['CF_UPLOADER_TOKEN']
 
 URL = "https://api.cloudflare.com/client/v4"
@@ -46,38 +50,37 @@ def batch_upload(names: list[str]):
             open('build/' + name, 'rb').read()).decode()
         to_upload.append(b)
 
-    return requests.put(ACCOUNTS_URL + 'bulk', data=json.dumps(to_upload), headers={
+    to_upload = json.dumps(to_upload, separators=(',', ':'))
+    return requests.put(ACCOUNTS_URL + 'bulk', data=to_upload, headers={
         'content-type': 'application/json',
         'authorization': 'Bearer ' + CF_UPLOADER_TOKEN
     })
 
 
-def purge_cache():
-    data = {
-        'files': [ROUTE + page + ".html" + ext for page in SAYFALAR for ext in EXT]
+def purge_cache(assets):
+    to_upload = {
+        'files': [ROUTE + asset for asset in assets]
     }
-    return requests.post(ZONES_URL + 'purge_cache', data=json.dumps(data), headers={
+    to_upload = json.dumps(data, separators=(',', ':'))
+    return requests.post(ZONES_URL + 'purge_cache', data=to_upload, headers={
         'content-type': 'application/json',
         'authorization': 'Bearer ' + CF_UPLOADER_TOKEN
     })
-
-
-def stem(name):
-    return name.split('.', 1)[0]
 
 
 def is_static_upload(name: str) -> bool:
     """
     Verilen bir ismin CF'e yüklenmesi gereken bir static olup olmadığını tespit eder.
     """
-    return (os.path.isfile('build/' + name) and name != 'prod.js' and
-            name not in existing and stem(name) not in SAYFALAR)
+    return name != 'prod.js' and name not in existing and name not in named_upload
 
 
 existing = get_existing(NAMESPACE_ID)
+named_upload = ([page + '.html' + ext for page in SAYFALAR for ext in EXT] +
+                [named + ext for named in NAMED_ASSET for ext in EXT])
+static_upload = list(filter(is_static_upload, next(os.walk('build'))[2]))
 
 # (1) Statik asset'leri yükle
-static_upload = list(filter(is_static_upload, os.listdir('build')))
 if static_upload:
     print("🌀 Statik asset'ler yükleniyor")
     print(static_upload)
@@ -85,12 +88,11 @@ if static_upload:
 else:
     print("✅ Statik asset'ler aynı, bu adım atlanıyor")
 
-# (2) Sayfaları yükle
-page_upload = [page + '.html' + ext for page in SAYFALAR for ext in EXT]
-print("🌀 Sayfalar yükleniyor")
-print(page_upload)
-batch_upload(page_upload)
+# (2) Named asset'leri yükle
+print("🌀 Named asset'ler yükleniyor")
+print(named_upload)
+batch_upload(named_upload)
 
 # (3) Cache purge et
 print("🌀 Cache purge ediliyor")
-purge_cache()
+purge_cache(named_upload)

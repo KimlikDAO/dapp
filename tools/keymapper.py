@@ -76,9 +76,13 @@ def process_html(file, out):
 
 
 if __name__ == "__main__":
-    route = toml.load('wrangler.toml')['env']['beta']['route'][:-1]
+    CF_CONFIG = toml.load('wrangler.toml')
+    HOST_NAME = "localhost"
+    PORT = CF_CONFIG['dev']['port']
+    ROUTE = CF_CONFIG['env']['beta']['route'][:-1]
+
     replace = {
-        "http://localhost:8787/": route
+        f"http://{HOST_NAME}:{PORT}/": ROUTE
     }
     for name in sys.argv[2:]:
         f = open(name)

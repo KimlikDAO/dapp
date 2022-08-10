@@ -13,7 +13,7 @@ HOST_NAME = "localhost"
 PORT = CF_CONFIG['dev']['port']
 ROUTE = CF_CONFIG['env']['beta']['route'][:-1]
 REVERSE = {
-    ROUTE: "http://localhost:8787/"
+    ROUTE: f"http://{HOST_NAME}:{PORT}/"
 }
 
 PAGES = {
@@ -23,13 +23,13 @@ PAGES = {
 }
 
 MIMES = {
-    "js": "text/javascript;charset=utf-8",
     "css": "text/css",
-    "png": "image/png",
+    "js": "text/javascript;charset=utf-8",
     "svg": "image/svg+xml",
     "ttf": "font/ttf",
     "woff2": "font/woff2",
     "ico": "image/x-icon",
+    "txt": "text/plain",
 }
 
 

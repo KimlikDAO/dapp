@@ -3,68 +3,66 @@ import { readFileSync } from 'fs'
 import path from 'path'
 import { createServer } from 'vite'
 
-const sayfaOku = (dosyaAdı) => {
+const birimOku = (dosyaAdı) => {
   let stiller = [];
-  let sayfa = readFileSync(dosyaAdı, 'utf-8');
-  const konum = path.dirname(dosyaAdı);
+  let sayfa = "";
+  try {
+    sayfa = readFileSync(dosyaAdı, 'utf-8');
+    stiller.push("/" + dosyaAdı.slice(0, -5) + ".css");
+  } catch (e) {
+    sayfa = readFileSync(dosyaAdı.slice(0, -11) + '.html', 'utf-8');
+    stiller.push("/" + dosyaAdı.slice(0, -11) + '.css');
+  }
 
   sayfa = sayfa.replace(/<birim:([^\/]*)\/>/g, (_, birimAdı) => {
-    stiller.push("birim/" + birimAdı.trim() + "/birim.css");
-    return readFileSync("birim/" + birimAdı.trim() + "/birim.html", "utf-8");
+    let [birim, altStiller] = birimOku(`birim/${birimAdı.trim()}/birim.html`);
+    stiller.push(...altStiller);
+    return birim;
   });
-  sayfa = sayfa.replace(/<altbirim:([^\/]*)\/>/g, (_, altbirimAdı) => {
-    altbirimAdı = altbirimAdı.trim();
-    try {
-      let file = readFileSync(konum + "/" + altbirimAdı + ".html", "utf-8");
-      stiller.push(konum + "/" + altbirimAdı + ".css");
-      return file;
-    } catch (e) {
-      stiller.push(konum + "/" + altbirimAdı + "/birim.css");
-      return readFileSync(konum + "/" + altbirimAdı + "/birim.html", "utf-8");
-    }
+  sayfa = sayfa.replace(/<altbirim:([^\/]*)\/>/g, (_, birimAdı) => {
+    let [birim, altStiller] = birimOku(`${path.dirname(dosyaAdı)}/${birimAdı.trim()}/birim.html`);
+    stiller.push(...altStiller);
+    return birim;
   });
-  let linkler = "";
-  for (const stil of stiller)
-    linkler += `  <link href="${stil}" rel="stylesheet" type="text/css" />\n`
-  return sayfa.replace("</head>", linkler + "\n</head>");
+  return [sayfa, stiller];
 }
+
+/** @param {string} dosyaAdı */
+const sayfaOku = (dosyaAdı) => {
+  let [sayfa, stiller] = birimOku(dosyaAdı);
+  stiller = stiller
+    .map((stil) => `  <link href="${stil}" rel="stylesheet" type="text/css" />\n`)
+    .join('');
+  return sayfa.replace("</head>", stiller + "</head>");
+}
+
 /** @const {Object<string, string>} */
-const PAGES = {
+const SAYFALAR = {
   "/": "ana/sayfa.html",
   "/al": "al/sayfa.html",
 };
 
-async function sun() {
+createServer({
+  server: { middlewareMode: true },
+  appType: 'custom'
+}).then((vite) => {
   const app = express()
-
-  const vite = await createServer({
-    server: { middlewareMode: true },
-    appType: 'custom'
-  })
-
   app.use(vite.middlewares)
-
-  app.use(["/", "/ana"], async (req, res, next) => {
-    try {
-      if (!(req.path in PAGES)) {
-        console.log(req.originalUrl);
-        res.status(200).end();
-      } else {
-        let sayfa = sayfaOku(PAGES[req.path]);
-        sayfa = await vite.transformIndexHtml(req.path, sayfa)
+  app.use(Object.keys(SAYFALAR), (req, res, next) => {
+    if (!(req.path in SAYFALAR)) {
+      res.status(200).end(); // Dev sunucuda hata vermemeye çalış
+    } else {
+      let sayfa = sayfaOku(SAYFALAR[req.path]);
+      vite.transformIndexHtml(req.path, sayfa).then((sayfa) => {
         res.status(200)
           .set({ 'Content-type': 'text/html;charset=utf-8' })
           .end(sayfa);
-      }
-    } catch (e) {
-      vite.ssrFixStacktrace(e)
-      next(e)
+      }).catch((e) => {
+        vite.ssrFixStacktrace(e)
+        next(e)
+      })
     }
   })
-
-  const port = 8787;
-  app.listen(port)
-  console.log(`Ana sayfaya şu adreste çalışıyor: http://localhost:${port}`)
-}
-
-sun()
+  console.log(`Ana sayfaya şu adreste çalışıyor: http://localhost:8787`)
+  app.listen(8787);
+})
