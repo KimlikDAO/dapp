@@ -51,7 +51,7 @@ const tanı = () => {
       Telefon.nftÇevir();
       /** @const {Element} */
       const OAuthDüğmesi = dom.adla("taa");
-      OAuthDüğmesi.innerText = dom.TR ? "E-devlet'ten bilgileriniz alındı ✓" : "We got your info ✓";
+      OAuthDüğmesi.innerText = dom.TR ? "E-devlet’ten bilgileriniz alındı ✓" : "We got your info ✓";
       OAuthDüğmesi.classList.remove("act");
       OAuthDüğmesi.href = "javascript:";
       dom.butonDurdur(OAuthDüğmesi);

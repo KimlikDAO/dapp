@@ -2,9 +2,9 @@
 /** @const {string} */
 const HOST_URL = 'https://kimlikdao.org/';
 /** @const {string} */
-const PAGE_CACHE_CONTROL = 'max-age=0,private'
+const PAGE_CACHE_CONTROL = 'max-age=90,public';
 /** @const {string} */
-const STATIC_CACHE_CONTROL = 'max-age=29030400,public'
+const STATIC_CACHE_CONTROL = 'max-age=29030400,public';
 /** @const {Object<string, string>} */
 const MIMES = {
   "css": "text/css",
@@ -17,16 +17,12 @@ const MIMES = {
 };
 /** @const {Object<string, string>} */
 const PAGES = {
-  "/": "ana",
-  "/al": "al",
-  "/get": "al",
-  "/incele": "incele",
-  "/view": "incele"
-};
-/** @const {Object<string, null>} */
-const EN_PAGES = {
-  "/get": 0,
-  "/view": 0,
+  "?tr": "ana-tr.html",
+  "?en" : "ana-en.html",
+  "/al": "al-tr.html",
+  "/get": "al-en.html",
+  "/incele": "incele-tr.html",
+  "/view": "incele-en.html"
 };
 
 addEventListener('fetch', async (event) => {
@@ -39,20 +35,15 @@ addEventListener('fetch', async (event) => {
     : enc.includes('br') ? '.br' : enc.includes('gz') ? '.gz' : '';
   /** @const {number} */
   const idx = url.pathname.lastIndexOf('.');
-  /** @const {?string} */
-  const lang = (idx !== -1) ? null : (() => {
-    /** @const {?string} */
+  /** @const {string} */
+  const kvKey = url.pathname == '/' ? (() => {
+    if (url.search) return PAGES[url.search];
     const cookie = event.request.headers.get('cookie');
     if (cookie)
-      return cookie.startsWith('l=en') ? "en" : "tr";
-    if (url.pathname !== "/")
-      return url.pathname in EN_PAGES ? "en" : "tr";
-    /** @const {?string} */
+      return cookie.startsWith('l=en') ? "ana-en.html" : "ana-tr.html";
     const acceptLang = event.request.headers.get('accept-language');
-    return acceptLang && acceptLang.includes('tr') ? "tr" : "en";
-  })();
-  /** @const {string} */
-  const kvKey = (idx == -1 ? PAGES[url.pathname] + `-${lang}.html` : url.pathname.substring(1)) + ext;
+    return acceptLang && acceptLang.includes('tr') ? "ana-tr.html" : "ana-en.html";
+  })() + ext : (idx == -1 ? PAGES[url.pathname] : url.pathname.substring(1)) + ext;
   /** @const {string} */
   const cacheKey = HOST_URL + kvKey;
 
@@ -90,14 +81,11 @@ addEventListener('fetch', async (event) => {
     });
 
     // Sıkıştırılmış assetse 'content-encoding' yaz.
-    if (ext) {
+    if (ext)
       response.headers.set('content-encoding', ext === '.br' ? 'br' : 'gzip');
-    }
 
-    if (idx == -1) {
-      response.headers.set('content-language', lang == 'tr' ? 'tr-TR' : 'en-US');
+    if (idx == -1)
       response.headers.set('x-frame-options', 'DENY')
-    }
 
     // KV'den çektiğimiz asset'i cache'e yaz.
     event.waitUntil(caches.default.put(cacheKey, response.clone()))
@@ -106,6 +94,7 @@ addEventListener('fetch', async (event) => {
     // Bunun sebebi CF cachi'ni purge gerektiğinde purge edebilmemiz.
     if (idx == -1)
       response.headers.set('cache-control', PAGE_CACHE_CONTROL);
+
     return response;
   })
 

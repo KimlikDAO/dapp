@@ -149,11 +149,9 @@ dom.adla("nld").onclick = (event) => {
   if (dom.TR) {
     if (dil == "en") {
       const sayfalar = {
-        "/": "/",
+        "/": "/?en",
         "/al": "/get",
-        "/get": "/get",
         "/incele": "/view",
-        "/view": "/view",
       }
       document.cookie = "l=en; path=/; max-age=1000000";
       window.location.href = sayfalar[window.location.pathname];
@@ -161,10 +159,8 @@ dom.adla("nld").onclick = (event) => {
   } else {
     if (dil == "tr") {
       const sayfalar = {
-        "/": "/",
-        "/al": "/al",
+        "/": "/?tr",
         "/get": "/al",
-        "/incele": "/incele",
         "/view": "/incele",
       }; document.cookie = "l=tr; path=/; max-age=1000000";
       window.location.href = sayfalar[window.location.pathname];
