@@ -26,8 +26,9 @@ const kartDeğiştir = (yeniKart) => {
   if (yeniKart === 1) Telefon.nftÇevir();
   if (yeniKart === 2) Telefon.nftCüzdanaYolla();
   yeniKart === 3
-    ? Telefon.kutuGöster(
-      "Bağlı app TCKT'nizin açık haline erişmek istiyor. İzin veriyor musunuz?")
+    ? Telefon.kutuGöster(dom.TR
+      ? "Bağlı app TCKT'nizin açık haline erişmek istiyor. İzin veriyor musunuz?"
+      : "The connected app would like to access your TCKT.")
     : Telefon.kutuKapat();
   Boncuklar.children[Kart].classList.remove("current");
   Boncuklar.children[yeniKart].classList.add("current");

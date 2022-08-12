@@ -46,12 +46,12 @@ const tanı = () => {
     .then((res) => res.json())
     .then((AçıkTCKT) => {
       for (let ad of "TCKN ad soyad dt annead babaad".split(" ")) {
-        dom.adla("te" + ad).innerText = AçıkTCKT[ad];
+        dom.adla("tc" + ad).innerText = AçıkTCKT[ad];
       }
       Telefon.nftÇevir();
       /** @const {Element} */
       const OAuthDüğmesi = dom.adla("taa");
-      OAuthDüğmesi.innerText = "E-devlet'ten bilgileriniz alındı ✓";
+      OAuthDüğmesi.innerText = dom.TR ? "E-devlet'ten bilgileriniz alındı ✓" : "We got your info ✓";
       OAuthDüğmesi.classList.remove("act");
       OAuthDüğmesi.href = "javascript:";
       dom.butonDurdur(OAuthDüğmesi);

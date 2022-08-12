@@ -1,5 +1,5 @@
+import '/birim/tckt/birim';
 import dom from '/lib/dom';
-import '/birim/TCKT/birim';
 
 /** @const {Element} */
 const nft = dom.adla("tc");

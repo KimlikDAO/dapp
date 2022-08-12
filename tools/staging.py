@@ -17,9 +17,10 @@ REVERSE = {
 }
 
 PAGES = {
-    "/": "/ana.html",
-    "/al": "/al.html",
-    "/incele": "/incele.html"
+    "/": "/ana-tr.html",
+    "/al": "/al-tr.html",
+    "/get": "/al-en.html",
+    "/incele": "/incele-en.html"
 }
 
 MIMES = {

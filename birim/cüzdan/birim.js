@@ -136,10 +136,42 @@ const bağla = () => {
     .request(
       /** @type {RequestParams} */({ method: "eth_chainId" }))
     .then(ağDeğişti)
-    .catch((e) => console.log("Ağ alınamadı" + e));
+    .catch(console.log);
 }
 
 dom.menüYarat(DilButonu, dom.adla("nld"));
+dom.adla("nld").onclick = (event) => {
+  /** @const {Element} */
+  const li = event.target.nodeName == "LI"
+    ? event.target : event.target.parentElement;
+  /** @const {string} */
+  const dil = li.id.slice(2);
+  if (dom.TR) {
+    if (dil == "en") {
+      const sayfalar = {
+        "/": "/",
+        "/al": "/get",
+        "/get": "/get",
+        "/incele": "/view",
+        "/view": "/view",
+      }
+      document.cookie = "l=en; path=/; max-age=1000000";
+      window.location.href = sayfalar[window.location.pathname];
+    }
+  } else {
+    if (dil == "tr") {
+      const sayfalar = {
+        "/": "/",
+        "/al": "/al",
+        "/get": "/al",
+        "/incele": "/incele",
+        "/view": "/incele",
+      }; document.cookie = "l=tr; path=/; max-age=1000000";
+      window.location.href = sayfalar[window.location.pathname];
+    }
+  }
+};
+
 if (window["ethereum"]) {
   const ağMenüsü = dom.adla("ncd");
   const avax = dom.adla("nc0xa86a");
@@ -156,7 +188,7 @@ if (window["ethereum"]) {
     ethereum.request(/** @type {RequestParams} */({
       method: "wallet_switchEthereumChain",
       params: [{ "chainId": ağ }],
-    })).catch((e) => console.log(e));
+    })).catch(console.log);
   }
 
   AdresButonu.onclick = bağla;
@@ -179,7 +211,7 @@ if (window["ethereum"]) {
   ethereum
     .request(/** @type {RequestParams} */({ method: "eth_chainId" }))
     .then(ağDeğişti)
-    .catch((e) => console.log("Ağ alınamadı" + e));
+    .catch(console.log);
 
   ethereum.request(/** @type {RequestParams} */({ method: "eth_accounts" }))
     .then((accounts) => {
@@ -188,12 +220,18 @@ if (window["ethereum"]) {
 }
 
 /** @const {Object<string, !Array<string>>} */
-const ParaEkleri = {
+const Paralar = dom.TR ? {
   "0x1": ["ether", "’den", "’e"],
   "0xa86a": ["AVAX", "’tan", "’a"],
   "0x89": ["MATIC", "’ten", "’e"],
   "0xa4b1": ["ether", "'den", "’e"],
   "0xfa": ["FTM", "’dan", "’a"]
+} : {
+  "0x1": ["ether"],
+  "0xa86a": ["AVAX"],
+  "0x89": ["MATIC"],
+  "0xa4b1": ["ether"],
+  "0xfa": ["FTM"],
 };
 
 export default {
@@ -205,5 +243,5 @@ export default {
   bağlanınca,
   hızlıArabirimAdı,
   kopunca,
-  ParaEkleri
+  Paralar
 };

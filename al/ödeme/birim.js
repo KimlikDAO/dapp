@@ -16,12 +16,6 @@ const imgeEkle = (imge, satır) => {
 }
 
 /**
- * @param {number} para
- * @return {string} metin olarak yazılmış para miktarı
- */
-const paradanMetne = (para) => ("" + (para / 1_000_000)).replace(".", ",")
-
-/**
  * Verilen para miktarının tam sayı ve ondalık kısmını hane'ye ayrı ayrı yazar.
  * @param {number} sayı
  * @param {Element} satır
@@ -61,7 +55,7 @@ export const öde = (cidSözü, adresAğırlığı, eşik) => {
     const li = dom.adla("odd" + yeniAğ);
 
     // Menü 'native token'i ayarla.
-    for (const diğerAğ in Cüzdan.ParaEkleri) {
+    for (const diğerAğ in Cüzdan.Paralar) {
       if (diğerAğ != yeniAğ) dom.adla("odd" + diğerAğ).style.display = "none";
     }
 
@@ -74,7 +68,7 @@ export const öde = (cidSözü, adresAğırlığı, eşik) => {
       tokenLi.style.display = tokenYok ? "none" : "";
       if (!tokenYok)
         TCKT.priceIn(i).then((fiyat) => {
-          tokenLi.firstElementChild.innerText = paradanMetne(fiyat[+iptalli]);
+          tokenLi.firstElementChild.innerText = dom.paradanMetne(fiyat[+iptalli]);
         });
     }
 
@@ -115,9 +109,9 @@ export const öde = (cidSözü, adresAğırlığı, eşik) => {
       if (para != 0)
         kesirGir(fiyat[+iptalli], döküm.children[3]);
       /** @const {string} */
-      const paraMetni = paradanMetne(fiyat[+iptalli]);
+      const paraMetni = dom.paradanMetne(fiyat[+iptalli]);
       dom.adla("odf").innerText = para == 0
-        ? paraMetni + " " + Cüzdan.ParaEkleri[Cüzdan.ağ()][0]
+        ? paraMetni + " " + Cüzdan.Paralar[Cüzdan.ağ()][0]
         : (para == 3 ? "₺" : "$") + paraMetni;
       return fiyat;
     });

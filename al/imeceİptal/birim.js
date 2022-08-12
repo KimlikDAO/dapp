@@ -19,12 +19,10 @@ const İptalciler = dom.adla("imf");
  */
 const fiyatGöster = (ağ) => {
   /** @const {!Array<string>} */
-  const ekler = Cüzdan.ParaEkleri[ağ];
+  const ekler = Cüzdan.Paralar[ağ];
   TCKT.priceIn(0).then(([çok, az]) => {
-    dom.adla("imft").innerText = ((çok / 1000000) + " ").replace(".", ",")
-      + ekler[0] + ekler[1];
-    dom.adla("imfs").innerText = ((az / 1000000) + " ").replace(".", ",")
-      + ekler[0] + ekler[2];
+    dom.adla("imft").innerText = dom.paradanMetne(çok) + " " + ekler[0] + (dom.TR ? ekler[1] : "");
+    dom.adla("imfs").innerText = dom.paradanMetne(az) + " " + ekler[0] + (dom.TR ? ekler[2] : "");
     dom.adla("imfu").innerText = Math.round(100 * (çok - az) / çok);
   });
 }
@@ -50,9 +48,9 @@ const kurVe = (sonra) => {
  */
 const atla = (sonra) => {
   GösterButonu.style.display = "";
-  GösterButonu.innerText = "Yine de kur";
+  GösterButonu.innerText = dom.TR ? "Yine de kur" : "Setup social revoke";
   İptalButonu.style.display = "";
-  İptalButonu.innerText = "İmece iptal kurulmadı 🤌";
+  İptalButonu.innerText = dom.TR ? "İmece iptal kurulmadı 🤌" : "Social revoke is not set 🤌";
   İptalButonu.classList.add("done");
   dom.butonDurdur(İptalButonu);
   dom.adla("im").classList.add("done");
@@ -112,7 +110,7 @@ const kutularıAç = (sonra) => {
     }
     if (geçerli) {
       İptalButonu.style.display = "";
-      İptalButonu.innerText = "İmece iptal kuruldu ✓";
+      İptalButonu.innerText = dom.TR ? "İmece iptal kuruldu ✓" : "Social revoke setup is complete ✓";
       İptalButonu.onclick = null;
       dom.adla("imc").style.display = "none";
       dom.adla("im").classList.add("done");

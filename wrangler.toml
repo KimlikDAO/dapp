@@ -5,7 +5,7 @@ compatibility_date = "2022-04-02"
 
 name = "test"
 workers_dev = true
-route = ""
+route = "localhost"
 kv_namespaces = [
   { binding = "KV", id = "836c46196848459ba8b3348e383bddf2", preview_id = "836c46196848459ba8b3348e383bddf2" },
 ]

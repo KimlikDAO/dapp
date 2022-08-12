@@ -9,13 +9,17 @@ import sys
 import requests
 import toml
 
+DIL = {
+    'en', 'tr'
+}
+
 SAYFALAR = {
     'al', 'ana',
 }
 
 NAMED_ASSET = {
     'sitemap.txt',
-    'favicon.ico',
+    # 'favicon.ico',
 }
 
 EXT = ['', '.br', '.gz']
@@ -61,7 +65,7 @@ def purge_cache(assets):
     to_upload = {
         'files': [ROUTE + asset for asset in assets]
     }
-    to_upload = json.dumps(data, separators=(',', ':'))
+    to_upload = json.dumps(to_upload, separators=(',', ':'))
     return requests.post(ZONES_URL + 'purge_cache', data=to_upload, headers={
         'content-type': 'application/json',
         'authorization': 'Bearer ' + CF_UPLOADER_TOKEN
@@ -76,7 +80,7 @@ def is_static_upload(name: str) -> bool:
 
 
 existing = get_existing(NAMESPACE_ID)
-named_upload = ([page + '.html' + ext for page in SAYFALAR for ext in EXT] +
+named_upload = ([f'{sayfa}-{dil}.html{ext}' for sayfa in SAYFALAR for ext in EXT for dil in DIL] +
                 [named + ext for named in NAMED_ASSET for ext in EXT])
 static_upload = list(filter(is_static_upload, next(os.walk('build'))[2]))
 

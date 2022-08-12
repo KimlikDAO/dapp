@@ -19,7 +19,10 @@ import { hex } from '/lib/çevir';
 const KIMLIK_DAO_URL = "https://kimlikdao.org";
 
 const TCKTYarat = () => {
-  Telefon.kutuGöster("App cüzdanınızın açık anahtarına ulaşmak istiyor. İzin veriyor musunuz?");
+  Telefon.kutuGöster(dom.TR
+    ? "App cüzdanınızın açık anahtarına ulaşmak istiyor. İzin veriyor musunuz?"
+    : "This website would like your public encryption key."
+  );
   const s3a = dom.adla("s3a");
   dom.adla("s3").classList.remove("disabled");
   s3a.classList.remove("disabled");
@@ -40,7 +43,7 @@ const TCKTYarat = () => {
     }
   }).then((açıkAnahtar) => {
     Telefon.kutuKapat();
-    s3a.innerText = "Açık anahtarınızı aldık ✓";
+    s3a.innerText = dom.TR ? "Açık anahtarınızı aldık ✓" : "We got your public key ✓";
     s3a.classList.remove("act");
     dom.butonDurdur(s3a);
     dom.adla("s3").classList.add("done");
@@ -78,7 +81,7 @@ const TCKTYarat = () => {
       }
       return ipfs.yaz(JSON.stringify(TCKTData)).then(hex);
     })
-    .catch((e) => console.log(e + "TCKT oluşturamadık: Kullanıcı reddetti veya IPFS hatası"));
+    .catch(console.log);
 
   İmeceİptal.kurVe(
     (adresAğırlığı, eşik) => öde(cidSözü, adresAğırlığı, eşik));
@@ -93,7 +96,7 @@ if (window["ethereum"]) {
 
   Cüzdan.bağlanınca((adres) => {
     const s1a = dom.adla("s1a");
-    s1b.innerText = "Cüzdan bağlandı ✓";
+    s1b.innerText = dom.TR ? "Cüzdan bağlandı ✓" : "Wallet connected ✓";
     s1b.classList.remove("act");
     dom.butonDurdur(s1b);
     s1a.style.display = "none";

@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html lang=tr>
+<html data-en-lang="en" lang=tr>
 
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>KimlikDAO | Blokzincirdeki kimlik kartın</title>
+  <title data-en="KimlikDAO | On-chain digital ID">KimlikDAO | Blokzincirdeki kimlik kartın</title>
   <link rel="preload" crossorigin href="/font/f400.woff2" as="font" />
   <link rel="preload" crossorigin href="/font/f700.woff2" as="font" />
-  <link href="/font/lato-ttf.css" rel="stylesheet" type="text/css" />
+  <link href="/font/lato-ttf.css" rel="stylesheet" type="text/css" data-remove />
   <link href="/ana/sayfa.css" rel="stylesheet" type="text/css" />
   <link href="/al/sayfa.css" rel="stylesheet" type="text/css" />
 </head>
@@ -22,22 +22,23 @@
   </div>
   <div id=b>
     <div id="bs">
-      <div id=s1 class=step>
-        <b>1. Cüzdanınızı bağlayın.</b>
-        MetaMask, Rabby veya Brave tarayıcı cüzdanı.
+      <div id=s1 class=step><!--
+        --><b data-en="1. Connect your wallet.">1. Cüzdanınızı bağlayın.</b>
+        <span data-phantom data-en="MetaMask, Rabby or Brave Browser wallet."
+          >MetaMask, Rabby veya Brave tarayıcı cüzdanı.</span>
         <br>
         <br>
-        <a href="//metamask.io" target="_blank" id=s1a class="btn lft">MetaMask kur</a>
-        <a href="//rabby.io" target="_blank" id=s1b class="btn">Rabby kur</a>
-        <script src="/al/wallet-inline.js"></script>
+        <a href="//metamask.io" target="_blank" id=s1a class="btn lft" data-en="Install MetaMask">MetaMask kur</a>
+        <a href="//rabby.io" target="_blank" id=s1b class="btn" data-en="Install Rabby">Rabby kur</a>
+        <script data-inline src="/al/bağla.js"></script>
       </div>
       <altbirim:tanışma />
       <div id=s3 class="step disabled">
-        <b>3. TCKT'nizi şifreleyelim.</b>
-        TCKT'ni şifrelememiz için cüzdan açık anahtarına ihtiyacımız var.
-        Bu işlem off-chain, tamamen ücretsiz ve güvenli.
+        <b data-en="3. Let’s encrypt your TCKT.">3. TCKT’nizi şifreleyelim.</b>
+        <span data-phantom data-en="Now we'll encrypt your TCKT. Accept the request to provide your public encryption key. This operation is off-chain, free and secure.">TCKT’ni şifrelememiz için cüzdan açık anahtarına ihtiyacımız var.
+        Bu işlem off-chain, tamamen ücretsiz ve güvenli.</span>
         <br><br>
-        <a href="javascript:" id="s3a" class="act btn">Cüzdanıma istek yolla</a>
+        <a href="javascript:" id="s3a" class="act btn" data-en="Request public key">Cüzdanıma istek yolla</a>
       </div>
       <altbirim:imeceİptal />
       <altbirim:ödeme />
@@ -47,7 +48,7 @@
       <birim:telefon />
     </div>
   </div>
-  <script async type="module" src="/al/sayfa.js"></script>
+  <script async type="module" src="/al/sayfa.js" data-remove-type></script>
 </body>
 
 </html>

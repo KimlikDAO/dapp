@@ -1,10 +1,15 @@
-PAGE_TARGETS := $(addsuffix .sayfa, $(addprefix build/, $(PAGES)))
-
-$(PAGE_TARGETS): build/%.sayfa: build/%.html build/%.html.gz build/%.html.br
-
 compressions = $(1) $(addsuffix .br, $(1)) $(addsuffix .gz, $(1))
 
+PAGE_TARGETS := $(addsuffix .sayfa, $(addprefix build/, $(PAGES)))
+
+$(PAGE_TARGETS): build/%.sayfa: $(call compressions,build/%-en.html build/%-tr.html)
+
 .PHONY: $(PAGE_TARGETS)
+
+removeLang = $(basename $(basename $(subst -,., $(1))))
+
+Lang-en := false
+Lang-tr := true
 
 build/prod.js: tools/prod.js tools/workers.js
 	mkdir -p build
@@ -14,10 +19,14 @@ build/prod.js: tools/prod.js tools/workers.js
                              --js_output_file $@
 	yarn uglifyjs $@ -m -o $@
 
+al-en := get
+incele-en := view
+
 build/sitemap.txt:
 	mkdir -p $(dir $@)
 	echo "https://kimlikdao.org" > $@
 	$(foreach s, $(filter-out ana, $(PAGES)), echo "https://kimlikdao.org/$s" >> $@;)
+	$(foreach s, $(filter-out ana, $(PAGES)), echo "https://kimlikdao.org/$($s-en)" >> $@;)
 
 build/sitemap: $(call compressions, build/sitemap.txt)
 
@@ -43,3 +52,5 @@ build/%.svg.inl: %.svg
 	touch -d 2022-01-01T00:00:00 $@.tmp
 	brotli --force -w 24 --quality=11 --rm --output=$@ $@.tmp
 	touch $@
+
+.SECONDARY:

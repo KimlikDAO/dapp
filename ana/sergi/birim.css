@@ -69,6 +69,8 @@
   height: 100%;
   font-weight: 400;
   font-size: 15pt;
+  padding: 0 1em;
+  line-height: 1.6;
 }
 
 #senavs {

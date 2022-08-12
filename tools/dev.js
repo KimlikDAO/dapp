@@ -1,7 +1,8 @@
-import express from 'express'
-import { readFileSync } from 'fs'
-import path from 'path'
-import { createServer } from 'vite'
+import express from 'express';
+import { readFileSync } from 'fs';
+import path from 'path';
+import { parse } from 'toml';
+import { createServer } from 'vite';
 
 const birimOku = (dosyaAdı) => {
   let stiller = [];
@@ -40,6 +41,7 @@ const sayfaOku = (dosyaAdı) => {
 const SAYFALAR = {
   "/": "ana/sayfa.html",
   "/al": "al/sayfa.html",
+  "/get": "al/sayfa.html",
 };
 
 createServer({
@@ -63,6 +65,8 @@ createServer({
       })
     }
   })
-  console.log(`Ana sayfaya şu adreste çalışıyor: http://localhost:8787`)
-  app.listen(8787);
+  const cfConfig = parse(readFileSync('wrangler.toml'));
+  const port = cfConfig.dev.port;
+  console.log(`Ana sayfaya şu adreste çalışıyor: http://localhost:${port}`)
+  app.listen(port);
 })

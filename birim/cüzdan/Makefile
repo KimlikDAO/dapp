@@ -10,13 +10,4 @@ build/birim/cüzdan/birim.keymap: $(call compressions, $(REQUEST_SVG_OUT))
 	mkdir -p $(dir $@) && rm -rf $@
 	tools/keyhasher.py $@ $(REQUEST_SVG_OUT)
 
-build/birim/cüzdan/birim.inlines: $(INLINE_SVG_OUT)
-	mkdir -p $(dir $@)
-	> $@
-	$(foreach s, $^, echo "svg:/$(s:build/%.inl=%) -> $s" >> $@;)
-
-build/birim/cüzdan/birim.html: birim/cüzdan/birim.html \
-                               build/birim/cüzdan/birim.keymap \
-                               build/birim/cüzdan/birim.inlines
-	mkdir -p $(dir $@) && cp $< $@
-	tools/keymapper.py $@ $(filter-out $<,$^)
+birim/cüzdan.birim: birim/cüzdan/birim.html $(INLINE_SVG_OUT)

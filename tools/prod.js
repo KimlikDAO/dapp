@@ -2,7 +2,7 @@
 /** @const {string} */
 const HOST_URL = 'https://kimlikdao.org/';
 /** @const {string} */
-const PAGE_CACHE_CONTROL = 'max-age=90,public'
+const PAGE_CACHE_CONTROL = 'max-age=0,private'
 /** @const {string} */
 const STATIC_CACHE_CONTROL = 'max-age=29030400,public'
 /** @const {Object<string, string>} */
@@ -12,13 +12,21 @@ const MIMES = {
   "svg": "image/svg+xml",
   "ttf": "font/ttf",
   "woff2": "font/woff2",
-  "txt": "text/plain",
   "ico": "image/x-icon",
+  "txt": "text/plain",
 };
 /** @const {Object<string, string>} */
 const PAGES = {
-  "/": "ana.html",
-  "/al": "al.html",
+  "/": "ana",
+  "/al": "al",
+  "/get": "al",
+  "/incele": "incele",
+  "/view": "incele"
+};
+/** @const {Object<string, null>} */
+const EN_PAGES = {
+  "/get": 0,
+  "/view": 0,
 };
 
 addEventListener('fetch', async (event) => {
@@ -29,12 +37,24 @@ addEventListener('fetch', async (event) => {
   /** @const {string} */
   const ext = url.pathname.endsWith('.woff2') ? ''
     : enc.includes('br') ? '.br' : enc.includes('gz') ? '.gz' : '';
-  /** @const {string} */
-  const kvKey = (url.pathname in PAGES ? PAGES[url.pathname] : url.pathname.substring(1)) + ext;
-  /** @const {string} */
-  const cacheKey = HOST_URL + kvKey;
   /** @const {number} */
   const idx = url.pathname.lastIndexOf('.');
+  /** @const {?string} */
+  const lang = (idx !== -1) ? null : (() => {
+    /** @const {?string} */
+    const cookie = event.request.headers.get('cookie');
+    if (cookie)
+      return cookie.startsWith('l=en') ? "en" : "tr";
+    if (url.pathname !== "/")
+      return url.pathname in EN_PAGES ? "en" : "tr";
+    /** @const {?string} */
+    const acceptLang = event.request.headers.get('accept-language');
+    return acceptLang && acceptLang.includes('tr') ? "tr" : "en";
+  })();
+  /** @const {string} */
+  const kvKey = (idx == -1 ? PAGES[url.pathname] + `-${lang}.html` : url.pathname.substring(1)) + ext;
+  /** @const {string} */
+  const cacheKey = HOST_URL + kvKey;
 
   // Asset'i CF cache'ten almaya çalışıyoruz.
   /** @const {Promise<Response>} */
@@ -60,11 +80,12 @@ addEventListener('fetch', async (event) => {
     let response = new Response(body, {
       status: 200,
       headers: {
+        'accept-ranges': 'bytes',
+        'cache-control': STATIC_CACHE_CONTROL,
         'content-length': body.byteLength,
-        'accept-ranges': 'bytes'
+        'content-type': idx == -1 ? "text/html;charset=utf-8" : MIMES[url.pathname.slice(idx + 1)],
+        'expires': 'Sun, 01 Jan 2034 00:00:00 GMT',
       },
-      // Eğer asset önceden sıkıştırılmışsa bunu işaretleyelim ki CF re-encode etmeye
-      // çalışmasın.
       'encodeBody': 'manual'
     });
 
@@ -74,24 +95,17 @@ addEventListener('fetch', async (event) => {
     }
 
     if (idx == -1) {
-      response.headers.set('content-type', "text/html;charset=utf-8");
+      response.headers.set('content-language', lang == 'tr' ? 'tr-TR' : 'en-US');
       response.headers.set('x-frame-options', 'DENY')
-    } else {
-      response.headers.set('content-type', MIMES[url.pathname.slice(idx + 1)]);
     }
-
-    // 'cache-control' ve 'expiration' yaz.
-    response.headers.set('expires', 'Sun, 01 Jan 2034 00:00:00 GMT');
-    response.headers.set('cache-control', STATIC_CACHE_CONTROL);
 
     // KV'den çektiğimiz asset'i cache'e yaz.
     event.waitUntil(caches.default.put(cacheKey, response.clone()))
 
     // Sayfaları CF cache'inde sonsuz dek ama kullanıcı cache'inde belli bir süre tutmak istiyoruz.
     // Bunun sebebi CF cachi'ni purge gerektiğinde purge edebilmemiz.
-    if (idx == -1) {
+    if (idx == -1)
       response.headers.set('cache-control', PAGE_CACHE_CONTROL);
-    }
     return response;
   })
 

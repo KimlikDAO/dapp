@@ -1,56 +1,57 @@
 <div id=od class="step disabled">
-  <h4>5. Ödemeyi yapın TCKT cüzdanınıza gelsin</h4>
-  Cüzdanınıza <span id=odf>$1,5</span> alımı için bir istek yollayacağız. Onayladığınızda
-  cüzdanınızdan ücret alınır ve TCKT'niz cüzdanınıza mint edilir.
+  <h4 data-en="5. Send the payment and receive your TCKT.">5. Ödemeyi yapın TCKT cüzdanınıza gelsin</h4>
+  <span data-phantom data-en="We'll send your wallet a request for a transaction of value &lt;span id=odf>$1.5&lt;/span>. When confirmed, your TCKT will be minted in the same transaction.">Cüzdanınıza
+    <span id=odf>$1,5</span> alımı için bir istek yollayacağız. Onayladığınızda
+    cüzdanınızdan ücret alınır ve TCKT'niz cüzdanınıza mint edilir.</span>
   <table id=odi>
     <tr>
-      <td>KimlikDAO ücreti</td>
-      <td><i></i><span class="odv">1</span>,<span class="odv0">00</span></td>
+      <td data-en="KimlikDAO fee">KimlikDAO ücreti</td>
+      <td><i></i><span class="odv">1</span><!-- en:. -->,<span class="odv0">00</span></td>
     </tr>
     <tr>
-      <td>İmece iptal kurmama</td>
-      <td><i></i><span class="odv">0</span>,<span class="odv0">50</span></td>
+      <td data-en="Social revoke omission fee">İmece iptal kurmama</td>
+      <td><i></i><span class="odv">0</span><!-- en:. -->,<span class="odv0">50</span></td>
     </tr>
     <tr class="ode">
-      <td>Tahmini ağ ücreti</td>
-      <td><i></i><span class="odv">0</span>,<span class="odv0">002</span></td>
+      <td data-en="Network fee (estimated)">Tahmini ağ ücreti</td>
+      <td><i></i><span class="odv">0</span><!-- en:. -->,<span class="odv0">002</span></td>
     </tr>
     <tr class="odt">
-      <td>Toplam</td>
-      <td><i></i><span class="odv">0</span>,<span class="odv0">002</span>
-        <span> + <i></i><span class="odv">0</span>,<span class="odv0">002</span></span>
+      <td data-en="Total">Toplam</td>
+      <td><i></i><span class="odv">0</span><!-- en:. -->,<span class="odv0">002</span>
+        <span> + <i></i><span class="odv">0</span><!-- en:. -->,<span class="odv0">002</span></span>
       </td>
     </tr>
   </table>
   <div id="odc">
-    <a href="javascript:" id=oda class="act btn">Ödeme isteği yolla</a>
+    <a href="javascript:" id=oda class="act btn" data-en="Authorize payment in wallet">Ödeme isteği yolla</a>
     <a href="javascript:" id=odb>
       <img src="/al/ödeme/AVAX.svg" height=32 width=32>
     </a>
     <ul id=odd style="display:none">
       <li id="odd2">
-        <span class="ods">1.00</span><span class="odp">USDC</span><img src="/al/ödeme/USDC.svg" height=32 width=32>
+        <span class="ods" data-en="1.00">1,00</span><span class="odp">USDC</span><img src="/al/ödeme/USDC.svg" height=32 width=32>
       </li>
       <li id="odd1">
-        <span class="ods">1.00</span><span class="odp">USDT</span><img src="/al/ödeme/USDT.svg" height=32 width=32>
+        <span class="ods" data-en="1.00">1,00</span><span class="odp">USDT</span><img src="/al/ödeme/USDT.svg" height=32 width=32>
       </li>
       <li id="odd3">
-        <span class="ods">19.00</span><span class="odp">TRYB</span><img src="/al/ödeme/TRYB.svg" height=32 width=32>
+        <span class="ods" data-en="19.00">19,00</span><span class="odp">TRYB</span><img src="/al/ödeme/TRYB.svg" height=32 width=32>
       </li>
       <li id="odd0xa86a">
-        <span class="ods">0.01</span><span class="odp">AVAX</span><img src="/al/ödeme/AVAX.svg" height=32 width=32>
+        <span class="ods" data-en="0.01">0,01</span><span class="odp">AVAX</span><img src="/al/ödeme/AVAX.svg" height=32 width=32>
       </li>
       <li id="odd0x1">
-        <span class="ods">0.0006</span><span class="odp">ETH</span><img src="/al/ödeme/ETH.svg" height=32 width=32>
+        <span class="ods" data-en="0.0006">0,0006</span><span class="odp">ETH</span><img src="/al/ödeme/ETH.svg" height=32 width=32>
       </li>
       <li id="odd0x89">
-        <span class="ods">0.0006</span><span class="odp">MATIC</span><img src="/al/ödeme/MATIC.svg" height=32 width=32>
+        <span class="ods" data-en="0.0006">0,0006</span><span class="odp">MATIC</span><img src="/al/ödeme/MATIC.svg" height=32 width=32>
       </li>
       <li id="odd0xa4b1">
-        <span class="ods">0.0006</span><span class="odp">ETH</span><img src="/al/ödeme/ETH.svg" height=32 width=32>
+        <span class="ods" data-en="0.0006">0,0006</span><span class="odp">ETH</span><img src="/al/ödeme/ETH.svg" height=32 width=32>
       </li>
       <li id="odd0xfa">
-        <span class="ods">0.0006</span><span class="odp">FTM</span><img src="/al/ödeme/FTM.svg" height=32 width=32>
+        <span class="ods" data-en="0.0006">0,0006</span><span class="odp">FTM</span><img src="/al/ödeme/FTM.svg" height=32 width=32>
       </li>
     </ul>
   </div>
