@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html data-en-lang=en lang=tr>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title data-en="KimlikDAO | View TCKT">KimlikDAO | TCKT'nizi inceleyin</title>
+  <link rel="preload" crossorigin href="/font/f400.woff2" as="font" />
+  <link rel="preload" crossorigin href="/font/f700.woff2" as="font" />
+  <link href="/font/lato-ttf.css" rel="stylesheet" type="text/css" data-remove />
+  <link href="/ana/sayfa.css" rel="stylesheet" type="text/css" />
+  <link href="/incele/sayfa.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+  <div id="inbd" style="display:none">
+    <div id="inmc">
+      <div id="inmii" class="inm" style="display:none">
+        Yeni bir imece iptal adresi eklemek için adres ve ağırlık giriniz.
+        <div id="iniilbl">
+          <b data-en="Address">Adres</b>
+          <b data-en="Weight">Ağırlık</b>
+        </div>
+        <div id="inmiic" class="inmic">
+          <input id="iniii" type="text" spellcheck="false">
+          <a href="javascript:" id="iniiy" class="iniibtn paste" data-en-title="Paste" title="Yapıştır"><img
+              src="/al/imeceİptal/paste.svg" data-inline></a>
+          <a href="javascript:" id="iniim" class="iniibtn minus">-</a>
+          <input id="iniiw" class="inmwi" type="number" value="1">
+          <a href="javascript:" id="iniip" class="iniibtn plus">+</a>
+        </div>
+        <div class="inorc">
+          <a href="javascript:" id="iniio" class="act btn lft" data-en="OK">Tamam</a>
+          <a href="javascript:" id="iniir" class="btn" data-en="Cancel">İptal</a>
+        </div>
+      </div>
+      <div id="inmes" class="inm" style="display:none">Eşik değerini belirleyiniz.
+        <div id="inmesc" class="inmic">
+          <a href="javascript:" id="inesm" class="iniibtn minus">-</a>
+          <input id="inesw" class="inmwi" type="number" value="1">
+          <a href="javascript:" id="inesp" class="iniibtn plus">+</a>
+        </div>
+        <div class="inorc">
+          <a href="javascript:" id="ineso" class="act btn lft">Tamam</a>
+          <a href="javascript:" id="inesr" class="btn">İptal</a>
+        </div>
+      </div>
+      <div id="inmsy" class="inm" style="display:none">
+        TCKT'nizi silmek istiyor musunuz ?
+        <div class="inorc">
+          <a href="javascript:" id="insyo" class="btn lft danger">Tamam</a>
+          <a href="javascript:" id="insyr" class="btn">İptal</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="nal">
+    <a href="/">
+      <h2>KimlikDAO</h2>
+    </a>
+    <birim:cüzdan />
+  </div>
+  <div id="in">
+    <div id="intckt">
+      <birim:tckt />
+      <div id="intcktb">Gizle / Aç</div>
+    </div>
+    <div id="inbtn">
+      <a href="javascript:" id="inbtn0" class="btn" data-en="Add to wallet">Cüzdanına ekle</a>
+      <a href="javascript:" id="inbtn1" class="btn" data-en="Add social revoker">İmece iptal adresi ekle</a>
+      <a href="javascript:" id="inbtn2" class="btn" data-en="Decrease revoke threshold">Eşik azalt</a>
+      <a href=" javascript:" id="inbtn3" class="btn danger" data-en="Destruct TCKT">TCKT yoket</a>
+    </div>
+  </div>
+  <script async type="module" src="/incele/sayfa.js" data-remove-type></script>
+</body>
+
+</html>

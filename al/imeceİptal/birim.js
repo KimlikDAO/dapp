@@ -50,7 +50,7 @@ const atla = (sonra) => {
   GösterButonu.style.display = "";
   GösterButonu.innerText = dom.TR ? "Yine de kur" : "Setup social revoke";
   İptalButonu.style.display = "";
-  İptalButonu.innerText = dom.TR ? "İmece iptal kurulmadı 🤌" : "Social revoke is not set 🤌";
+  İptalButonu.innerText = dom.TR ? "İmece iptal kurulmadı 🤌" : "Skipped 🤌";
   İptalButonu.classList.add("done");
   dom.butonDurdur(İptalButonu);
   dom.adla("im").classList.add("done");

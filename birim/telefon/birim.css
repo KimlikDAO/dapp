@@ -152,7 +152,15 @@
   opacity: 1;
 }
 
+#tenftb>#tc {
+  top: 45px;
+  left: 15px;
+  width: 250px;
+  height: 250px;
+  font-size: 10pt;
+}
+
 #tc.moveintowallet {
-  transform: translate(-70px, 265px) scale(0.5);
+  transform: translate(-70px, 270px) scale(0.5);
   border: 2px solid #ccc;
 }

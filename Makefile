@@ -1,16 +1,14 @@
 MAKEFLAGS := -j 8
-PAGES := al ana
+PAGES := al ana incele
 
 all: build
 
 include tools/Makefile
 include font/Makefile
-include birim/cüzdan/Makefile
 include al/Makefile
 include ana/Makefile
+include birim/cüzdan/Makefile
 include iptal/Makefile
-
-build: build/ana.sayfa build/al.sayfa
 
 clean:
 	rm -rf build

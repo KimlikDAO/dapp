@@ -68,8 +68,6 @@ const nftCüzdanaYolla = () => {
  */
 const nftYukarıGönder = () => {
   nft.classList.remove("flipped");
-  nft.style.top = "0";
-  nft.style.left = "20px";
   dom.adla("te").previousElementSibling.appendChild(nft);
   nft.style.display = "";
 }

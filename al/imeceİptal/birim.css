@@ -6,7 +6,6 @@
 #imc input {
   height: 28px;
   outline: none;
-  /*box-sizing: border-box;*/
 }
 
 #imc input::-webkit-outer-spin-button,

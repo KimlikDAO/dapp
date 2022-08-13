@@ -6,6 +6,8 @@ $(PAGE_TARGETS): build/%.sayfa: $(call compressions,build/%-en.html build/%-tr.h
 
 .PHONY: $(PAGE_TARGETS)
 
+build: $(PAGE_TARGETS)
+
 removeLang = $(basename $(basename $(subst -,., $(1))))
 
 Lang-en := false

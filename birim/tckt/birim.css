@@ -1,9 +1,7 @@
 #tc {
   position: absolute;
-  width: 250px;
-  height: 250px;
-  top: 50px;
-  left: 15px;
+  width: 280px;
+  height: 280px;
   transform-style: preserve-3d;
   transition-property: transform, border;
   transition-duration: 1s;
@@ -18,20 +16,19 @@
   transform: rotateY(-180deg);
 }
 
-
 #tc.movedown {
-  transform: translate3d(0, 335px, 0);
+  transform: translate3d(5px, 345px, 0px) scale(0.892);
 }
 
 #tc.movedown.flipped {
-  transform: translate3d(0, 335px, 0) rotateY(-180deg);
+  transform: translate3d(0, 345px, 0px) rotateY(-180deg) scale(0.892);
 }
 
 #tca,
 #tci {
   position: absolute;
-  width: 250px;
-  height: 250px;
+  width: 100%;
+  height: 100%;
   backface-visibility: hidden;
 }
 
@@ -60,6 +57,7 @@
 }
 
 .tcp {
+  padding: 5ex 55px;
   width: 25%;
   height: 100%;
 }
@@ -104,10 +102,6 @@
 #tcsa::before {
   border-width: 0 4px 4px 0;
   transform: rotate(-45deg);
-}
-
-.tcp0 {
-  padding: 1ex 40px;
 }
 
 .tcp0>label {

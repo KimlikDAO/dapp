@@ -73,6 +73,18 @@ h2 {
   border-radius: 5px;
   cursor: pointer;
   margin: 0;
+  /*text-align: center;*/
+}
+
+.btn.danger {
+  color: #fff;
+  background-color: #d9534f;
+  border-color: #d43f3a;
+  opacity: 0.9;
+}
+
+.btn.danger:hover {
+  opacity: 1;
 }
 
 a {
@@ -160,6 +172,14 @@ button:hover {
   top: 0;
   background-color: #fff;
   z-index: 20;
+}
+
+#nal {
+  display: flex;
+  width: 100%;
+  margin: 0 auto;
+  justify-content: space-between;
+  max-width: 1200px;
 }
 
 #nk {

@@ -42,6 +42,7 @@ const SAYFALAR = {
   "/": "ana/sayfa.html",
   "/al": "al/sayfa.html",
   "/get": "al/sayfa.html",
+  "/incele": "incele/sayfa.html",
 };
 
 createServer({

@@ -35,11 +35,11 @@ build/al/sayfa.css: al/sayfa.css al/*/*.css
 	cat $^ | yarn csso --output $@
 
 build/al/sayfa.keymap: $(call compressions, build/al/sayfa.css)
-	mkdir -p $(dir $@) $$ > $@
+	mkdir -p $(dir $@) && > $@
 	tools/keyhasher.py $@ build/al/sayfa.css
 
 build/al/sayfa-%.keymap: $(call compressions, build/al/sayfa-%.js)
-	mkdir -p $(dir $@) $$ > $@
+	mkdir -p $(dir $@) && > $@
 	tools/keyhasher.py $@ build/al/sayfa-$*.js
 
 build/al-%.html: al/sayfa.html \

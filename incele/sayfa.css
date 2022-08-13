@@ -1,0 +1,151 @@
+#in {
+  margin: 5em 0;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  /*align-items: center;*/
+}
+
+#intckt {
+  position: relative;
+  width: 280px;
+  height: 390px;
+  perspective: 1000px;
+}
+
+#intcktb {
+  position: absolute;
+  width: 280px;
+  height: 30px;
+  top: 300px;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0px 2px 10px rgb(0 0 0 / 15%);
+  border-radius: 4px;
+  background: #fff;
+  cursor: pointer;
+}
+
+#inbtn {
+  max-width: 250px;
+  height: 250px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin: 0 2em;
+}
+
+#inbd {
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgb(0 0 0 / 15%);
+  backdrop-filter: blur(1px);
+  z-index: 5;
+}
+
+#inmc {
+  position: absolute;
+  max-width: 500px;
+  width: 80%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 1em;
+  background-color: #fff;
+  box-shadow: 2px 2px 10px rgb(0 0 0 / 15%);
+  border-radius: 10px;
+}
+
+#inmc input::-webkit-outer-spin-button,
+#inmc input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.inm {
+  width: 100%;
+  padding: 1.5em;
+}
+
+#iniilbl {
+  margin-top: 2em;
+  display: flex;
+  justify-content: space-between;
+  margin-right: 10px;
+}
+
+.inmic {
+  width: 100%;
+  display: flex;
+  margin: 1em auto;
+}
+
+.inmic input {
+  height: 28px;
+  outline: none;
+}
+
+.inorc {
+  margin-top: 2em;
+}
+
+#iniii {
+  width: 90%;
+  font-family: monospace;
+  border: 1px solid #c2c2c2;
+  border-radius: 4px;
+}
+
+#iniii:focus {
+  box-shadow: 2px 2px 10px rgb(0 0 0 / 15%);
+}
+
+#iniii.inin {
+  border: 1px solid #dc3545;
+}
+
+.iniibtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+}
+
+.iniibtn:hover {
+  box-shadow: 2px 2px 10px rgb(0 0 0 / 15%);
+}
+
+.iniibtn.paste {
+  border-radius: 4px;
+  margin: 0 2em 0 1px;
+}
+
+.inmwi {
+  width: 5%;
+  text-align: center;
+  border: 1px solid #ccc;
+  border-right: none;
+  border-left: none;
+  border-radius: 0;
+}
+
+.iniibtn.plus {
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+  border: 1px solid #ccc;
+  border-left: none;
+}
+
+.iniibtn.minus {
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+  border: 1px solid #ccc;
+  border-right: none;
+}
+
