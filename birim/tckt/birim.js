@@ -2,6 +2,8 @@ import dom from '/lib/dom';
 
 /** @const {Element} */
 const Kartlar = dom.adla("tck");
+/** @const {Element} */
+const tckt = dom.adla("tc");
 /** @type {number} */
 let Kart = 0;
 
@@ -12,10 +14,12 @@ const kartDeğiştir = (yeniKart) => {
   Kart = yeniKart;
 }
 
-dom.adla("tcso").onclick = () => {
-  kartDeğiştir((Kart + 1) % 2);
-}
+dom.adla("tcso").onclick = () => kartDeğiştir((Kart + 1) % 2);
 
-dom.adla("tcsa").onclick = () => {
-  kartDeğiştir((Kart + 1) % 2);
-}
+dom.adla("tcsa").onclick = () => kartDeğiştir((Kart + 1) % 2);
+
+const yüzGöster = (bilgiYüzü) => tckt.classList.toggle("flipped", bilgiYüzü);
+
+const çevir = () => tckt.classList.toggle("flipped");
+
+export default { çevir, yüzGöster };

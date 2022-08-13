@@ -16,14 +16,6 @@
   transform: rotateY(-180deg);
 }
 
-#tc.movedown {
-  transform: translate3d(5px, 345px, 0px) scale(0.892);
-}
-
-#tc.movedown.flipped {
-  transform: translate3d(0, 345px, 0px) rotateY(-180deg) scale(0.892);
-}
-
 #tca,
 #tci {
   position: absolute;
@@ -57,7 +49,6 @@
 }
 
 .tcp {
-  padding: 5ex 55px;
   width: 25%;
   height: 100%;
 }
@@ -102,6 +93,10 @@
 #tcsa::before {
   border-width: 0 4px 4px 0;
   transform: rotate(-45deg);
+}
+
+.tcp0 {
+  padding: 4ex 40px;
 }
 
 .tcp0>label {

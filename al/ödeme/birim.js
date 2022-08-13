@@ -147,9 +147,8 @@ export const öde = (cidSözü, adresAğırlığı, eşik) => {
         TCKT.createWithRevokers(cid, eşik, adresAğırlığı))
       : Promise.all([cidSözü, TCKT.getPermissionFor(para, iptalli)]).then(([cid, imza]) =>
         TCKT.createWithRevokersWithTokenPermit(cid, eşik, adresAğırlığı, imza));
-
     sonuç
-      .then(Telefon.nftTeleGeriAl)
-      .catch(Telefon.nftTeleGeriAl);
+      .then(Telefon.nftGeriAl)
+      .catch(Telefon.nftGeriAl);
   };
 }

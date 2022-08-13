@@ -1,5 +1,5 @@
 import Cüzdan from '/birim/cüzdan/birim';
-import Telefon from '/birim/telefon/birim';
+import Tckt from '/birim/tckt/birim';
 import dom from '/lib/dom';
 import { base64 } from '/lib/çevir';
 
@@ -48,7 +48,7 @@ const tanı = () => {
       for (let ad of "TCKN ad soyad dt annead babaad".split(" ")) {
         dom.adla("tc" + ad).innerText = AçıkTCKT[ad];
       }
-      Telefon.nftÇevir();
+      Tckt.yüzGöster(true);
       /** @const {Element} */
       const OAuthDüğmesi = dom.adla("taa");
       OAuthDüğmesi.innerText = dom.TR ? "E-devlet’ten bilgileriniz alındı ✓" : "We got your info ✓";

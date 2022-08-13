@@ -47,7 +47,7 @@ h4 {
   position: relative;
   width: 280px;
   height: 280px;
-  margin: 2em auto;
+  margin: 2em auto 3em;
   perspective: 1000px;
   z-index: 1;
 }

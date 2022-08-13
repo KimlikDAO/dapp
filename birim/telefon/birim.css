@@ -164,3 +164,11 @@
   transform: translate(-70px, 270px) scale(0.5);
   border: 2px solid #ccc;
 }
+
+#tc.movedown {
+  transform: translate3d(5px, 360px, 0px) scale(0.892);
+}
+
+#tc.movedown.flipped {
+  transform: translate3d(0, 360px, 0px) rotateY(-180deg) scale(0.892);
+}

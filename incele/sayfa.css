@@ -3,13 +3,12 @@
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  /*align-items: center;*/
 }
 
 #intckt {
   position: relative;
   width: 280px;
-  height: 390px;
+  height: 360px;
   perspective: 1000px;
 }
 
@@ -17,7 +16,7 @@
   position: absolute;
   width: 280px;
   height: 30px;
-  top: 300px;
+  top: 310px;
   left: 0;
   display: flex;
   justify-content: center;
@@ -60,6 +59,7 @@
   background-color: #fff;
   box-shadow: 2px 2px 10px rgb(0 0 0 / 15%);
   border-radius: 10px;
+  flex-wrap: wrap;
 }
 
 #inmc input::-webkit-outer-spin-button,
@@ -68,9 +68,18 @@
   margin: 0;
 }
 
+#inx {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  font-weight: 700;
+  cursor: pointer;
+  padding: 1em;
+}
+
 .inm {
   width: 100%;
-  padding: 1.5em;
+  padding: 3em 1.5em 1.5em;
 }
 
 #iniilbl {
@@ -149,3 +158,9 @@
   border-right: none;
 }
 
+#iniio.disabled {
+  background-color: #FAFBFC;
+  border-color: rgba(27, 31, 35, 0.15);
+  color: #959DA5;
+  cursor: default;
+}

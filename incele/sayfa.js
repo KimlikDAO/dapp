@@ -3,21 +3,21 @@
  *
   */
 import Cüzdan from '/birim/cüzdan/birim';
-import '/birim/TCKT/birim';
+import Tckt from '/birim/tckt/birim';
 import dom from '/lib/dom';
 import evm from "/lib/evm";
 import TCKT from '/lib/TCKT';
 
 /** @const {Element} */
-const cüzdanaEkleDüğmesi = dom.adla("inbtn0");
+const CüzdanaEkleDüğmesi = dom.adla("inbtn0");
 /** @const {Element} */
-const imeceİptalDüğmesi = dom.adla("inbtn1");
+const İmeceİptalDüğmesi = dom.adla("inbtn1");
 /** @const {Element} */
 const esikAzaltmaDüğmesi = dom.adla("inbtn2");
 /** @const {Element} */
 const silDüğmesi = dom.adla("inbtn3");
 /** @const {Element} */
-const nftCevirDüğmesi = dom.adla("intcktb");
+const ÇevirDüğmesi = dom.adla("intcktb");
 /** @const {Element} */
 const mask = dom.adla("inbd");
 /** @const {Element} */
@@ -28,7 +28,7 @@ const esikModal = dom.adla("inmes");
 const silModal = dom.adla("inmsy");
 
 dom.adla("tc").style.display = "";
-nftCevirDüğmesi.onclick = () => dom.adla("tc").classList.toggle("flipped");
+ÇevirDüğmesi.onclick = Tckt.çevir;
 
 const modalKapat = () => {
   mask.style.display = "none";
@@ -37,35 +37,37 @@ const modalKapat = () => {
   silModal.style.display = "none";
 }
 
-mask.onclick = (e) => {
+mask.onmousedown = (e) => {
   if (e.target != mask) return;
   modalKapat();
 };
 
+dom.adla("inx").onclick = modalKapat;
+
 const cüzdanaEkle = () => {
   ethereum.request({
     method: 'wallet_watchAsset',
-    params: {
+    params: /** @type {WatchAssetParams} */({
       type: 'ERC721',
       options: {
         address: TCKT.TCKT_ADDR,
         symbol: 'TCKT',
-        decimals: 0,
-      },
-    },
-  })
-    .then((resolved) => {
-      if (!resolved) return;
-      cüzdanaEkleDüğmesi.innerText = "Eklendi 👍";
-      dom.butonDurdur(cüzdanaEkleDüğmesi);
-    })
-    .catch(console.error);
+        decimals: "0",
+      }
+    }),
+  }).then((resolved) => {
+    if (!resolved) return;
+    CüzdanaEkleDüğmesi.innerText = dom.TR ? "Eklendi ✓" : "Added to wallet ✓";
+    dom.butonDurdur(CüzdanaEkleDüğmesi);
+  }).catch(console.log);
 }
 
 const imeceİptalModalGöster = () => {
-  mask.style.display = "flex";
+  mask.style.display = "";
   imeceİptalModal.style.display = "";
+  dom.adla("iniio").classList.add("disabled");
   const adresGirdisi = dom.adla("iniii");
+  let address = adresGirdisi.value;
   const agirlikGirdisi = dom.adla("iniiw");
   adresGirdisi.classList.remove("inin");
   adresGirdisi.onblur = (e) => girdiDüzelt(e.target);
@@ -75,37 +77,36 @@ const imeceİptalModalGöster = () => {
   agirlikGirdisi.onblur = ağırlıkBlurOlunca;
   agirlikGirdisi.onclick = (e) => e.target.value = "";
   agirlikGirdisi.value = "1";
-  dom.adla("iniip").onclick = birArttır;
+  dom.adla("iniip").onclick = (e) => birArttır(e, 9);;
   dom.adla("iniir").onclick = modalKapat;
-  //TODO MuhammetCoskun tamam düğmesi adres geçersiz oldugu zaman disabled olsun
   dom.adla("iniio").onclick = () => {
     const weight = parseInt(agirlikGirdisi.value);
-    let address = evm.adresDüzelt(adresGirdisi.value).slice(2).toLowerCase();
+    address = evm.adresDüzelt(adresGirdisi.value).slice(2).toLowerCase();
     TCKT.addRevoker(weight, address);
   }
 }
 
 const esikModalGöster = () => {
-  mask.style.display = "flex";
+  mask.style.display = "";
   esikModal.style.display = "";
   dom.adla("inesm").onclick = birAzalt;
-  dom.adla("inesp").onclick = birArttır;
-  dom.adla("inesw").value = "1"; //mevcut threshold gelcek
+  dom.adla("inesp").onclick = (e) => birArttır(e, 99); //99 yerine mevcut threshold gelecek
+  dom.adla("inesw").value = "1"; //mevcut threshold gelecek
   dom.adla("inesw").onclick = (e) => e.target.value = "";
   dom.adla("ineso").onclick = () => console.log(dom.adla("inesw").value); //TCKT.changeThreshold methodu gelecek
   dom.adla("inesr").onclick = modalKapat;
 }
 
 const silModalGöster = () => {
-  mask.style.display = "flex";
+  mask.style.display = "";
   silModal.style.display = "";
   dom.adla("insyr").onclick = modalKapat;
   dom.adla("insyo").onclick = () => console.log("DELETED"); //TCKT.destroyTCKT methodu
 }
 
 Cüzdan.bağlanınca(() => {
-  cüzdanaEkleDüğmesi.onclick = cüzdanaEkle;
-  imeceİptalDüğmesi.onclick = imeceİptalModalGöster;
+  CüzdanaEkleDüğmesi.onclick = cüzdanaEkle;
+  İmeceİptalDüğmesi.onclick = imeceİptalModalGöster;
   esikAzaltmaDüğmesi.onclick = esikModalGöster;
   silDüğmesi.onclick = silModalGöster;
 });
@@ -117,11 +118,10 @@ const yapıştır = (event) => {
   let a = event.target.nodeName === 'A'
     ? event.target : event.target.parentElement;
   const girdi = a.previousElementSibling;
-  navigator.clipboard.readText().then(
-    (değer) => {
-      girdi.value = değer;
-      girdiDüzelt(girdi);
-    })
+  navigator.clipboard.readText().then((değer) => {
+    girdi.value = değer;
+    girdiDüzelt(girdi);
+  })
 }
 
 /**
@@ -130,11 +130,15 @@ const yapıştır = (event) => {
 const girdiDüzelt = (girdi) => {
   const değer = girdi.value;
   const düz = evm.adresDüzelt(değer);
-  if (düz) girdi.value = düz
+  if (düz) {
+    girdi.value = düz;
+    dom.adla("iniio").classList.remove("disabled");
+  }
   /** @const {boolean} */
   const hataVar = değer &&
     (!düz || değer.toLowerCase() === Cüzdan.adres().toLowerCase());
-  hataVar ? girdi.classList.add("inin") : girdi.classList.remove("inin");
+  girdi.classList.toggle("inin", hataVar);
+  dom.adla("iniio").classList.toggle("disabled", hataVar);
 }
 
 const birAzalt = (event) => {
@@ -143,10 +147,9 @@ const birAzalt = (event) => {
   node.value = parseInt(node.value) - 1;
 }
 
-const birArttır = (event) => {
+const birArttır = (event, max) => {
   const node = event.target.previousElementSibling;
-  if (node.value == 9) return;
-  node.value = parseInt(node.value) + 1;
+  node.value = Math.min(parseInt(node.value) + 1, max);
 }
 
 const ağırlıkBlurOlunca = (event) => {

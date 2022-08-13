@@ -1,4 +1,4 @@
-import '/birim/tckt/birim';
+import Tckt from '/birim/tckt/birim';
 import dom from '/lib/dom';
 
 /** @const {Element} */
@@ -33,71 +33,38 @@ const kutuKapat = () => {
 }
 
 /**
+ * @param {boolean} kutudaGöster NFT tek başına kutuda gösterilsin mi.
  * Ana sayfa Telefon görselinin içinde temsili nft'yi gösterir
  */
-const nftGöster = () => {
-  nft.style.display = "";
-  nftButton.style.display = "";
-  nftButton.onclick ||= nftÇevir;
-  nft.classList.remove("moveintowallet");
-  nft.classList.add("flipped");
-  nftButton.classList.add("show");
-}
+const nftGöster = (kutudaGöster) => {
+  if (kutudaGöster) {
+    nft.style.display = "";
+    nftButton.style.display = "";
+    nftButton.onclick ||= Tckt.çevir;
+  }
 
-const nftÇevir = () => nft.classList.toggle("flipped");
-
-/**
- * Ana sayfa Telefon görselinin içinde temsili nft'yi kilitli olarak gösterir
- */
-const nftKilitle = () => {
-  nft.classList.remove("moveintowallet");
-  nft.classList.remove("flipped");
-  nftButton.classList.add("show");
-}
-
-/**
- * Temsili nft'yi nftler kısmına yollar
- */
-const nftCüzdanaYolla = () => {
-  nft.classList.add("moveintowallet");
-  nftButton.classList.remove("show");
+  nft.classList.toggle("moveintowallet", !kutudaGöster);
+  nftButton.classList.toggle("show", kutudaGöster);
 }
 
 /**
  * Temsili nft'yi Al sayfasında daha yukarıda gösterir
  */
 const nftYukarıGönder = () => {
-  nft.classList.remove("flipped");
   dom.adla("te").previousElementSibling.appendChild(nft);
   nft.style.display = "";
 }
 
-/**
- * Temsili nft'nin Al sayfasında bilgi içeren yüzünü gösterir
- */
-const nftYukarıdaGöster = () => {
-  nft.classList.add("flipped");
-}
-
-/**
- * Temsili nft'yi Al sayfasında tekrar telefon görseline içine alır
- */
-const nftTeleGeriAl = () => {
-  nft.classList.add("movedown");
-  nftButton.style.display = "";
-  nftButton.onclick = nftÇevir;
-  nftButton.classList.add("show");
+const nftGeriAl = () => {
+  nft.classList.add('movedown');
+  nftGöster(true);
 }
 
 export default {
   adresGir,
   kutuGöster,
   kutuKapat,
-  nftÇevir,
-  nftCüzdanaYolla,
   nftGöster,
-  nftKilitle,
-  nftTeleGeriAl,
-  nftYukarıdaGöster,
   nftYukarıGönder,
+  nftGeriAl,
 };
