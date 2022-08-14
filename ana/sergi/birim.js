@@ -3,6 +3,9 @@ import Telefon from "/birim/telefon/birim";
 import Tckt from "/birim/tckt/birim";
 import dom from '/lib/dom';
 
+Tckt.yüzGöster(true);
+Telefon.nftGöster(true);
+
 /** @const {Element} */
 const SolDüğme = dom.adla("seso");
 /** @const {Element} */
@@ -32,7 +35,7 @@ const kartDeğiştir = (yeniKart) => {
     : Telefon.kutuKapat();
   Boncuklar.children[Kart].classList.remove("current");
   Boncuklar.children[yeniKart].classList.add("current");
-  Kartlar.style.transform = `translate3d(-${yeniKart * width}px, 0, 0)`;
+  Kartlar.style.transform = `translate3d(-${yeniKart * width}px,0,0)`;
   Kart = yeniKart;
 }
 
@@ -58,6 +61,4 @@ const sergiSaatiKur = () => {
 Cüzdan.bağlanınca((adres) =>
   Telefon.adresGir(Cüzdan.hızlıArabirimAdı(adres)));
 
-Tckt.yüzGöster(true);
-Telefon.nftGöster(true);
 sergiSaatiKur();

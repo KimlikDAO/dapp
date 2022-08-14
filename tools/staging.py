@@ -17,10 +17,11 @@ REVERSE = {
 }
 
 PAGES = {
-    "/": "/ana-tr.html",
-    "/al": "/al-tr.html",
-    "/get": "/al-en.html",
-    "/incele": "/incele-en.html"
+    "/": "ana-tr.html",
+    "/al": "al-tr.html",
+    "/get": "al-en.html",
+    "/incele": "incele-tr.html",
+    "/view": "incele-en.html",
 }
 
 MIMES = {
@@ -38,7 +39,7 @@ class TestServer(BaseHTTPRequestHandler):
     def do_GET(self):
         fname = PAGES.get(urlparse(self.path).path, None)
         if fname:
-            fname = 'build' + fname
+            fname = 'build/' + fname
             ctype = "text/html;charset=utf-8"
         else:
             fname = 'build' + self.path

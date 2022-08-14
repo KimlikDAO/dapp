@@ -13,39 +13,39 @@ const CüzdanaEkleDüğmesi = dom.adla("inbtn0");
 /** @const {Element} */
 const İmeceİptalDüğmesi = dom.adla("inbtn1");
 /** @const {Element} */
-const esikAzaltmaDüğmesi = dom.adla("inbtn2");
+const EşikAzaltmaDüğmesi = dom.adla("inbtn2");
 /** @const {Element} */
-const silDüğmesi = dom.adla("inbtn3");
+const SilDüğmesi = dom.adla("inbtn3");
 /** @const {Element} */
 const ÇevirDüğmesi = dom.adla("intcktb");
 /** @const {Element} */
-const mask = dom.adla("inbd");
+const Mask = dom.adla("inbd");
 /** @const {Element} */
-const imeceİptalModal = dom.adla("inmii");
+const İmeceİptalModal = dom.adla("inmii");
 /** @const {Element} */
-const esikModal = dom.adla("inmes");
+const EşikModal = dom.adla("inmes");
 /** @const {Element} */
-const silModal = dom.adla("inmsy");
+const SilModal = dom.adla("inmsy");
 
-dom.adla("tc").style.display = "";
+dom.adla("tc").style.opacity = "";
 ÇevirDüğmesi.onclick = Tckt.çevir;
 
 const modalKapat = () => {
-  mask.style.display = "none";
-  imeceİptalModal.style.display = "none";
-  esikModal.style.display = "none";
-  silModal.style.display = "none";
+  Mask.style.display = "none";
+  İmeceİptalModal.style.display = "none";
+  EşikModal.style.display = "none";
+  SilModal.style.display = "none";
 }
 
-mask.onmousedown = (e) => {
-  if (e.target != mask) return;
+Mask.onmousedown = (e) => {
+  if (e.target != Mask) return;
   modalKapat();
 };
 
 dom.adla("inx").onclick = modalKapat;
 
 const cüzdanaEkle = () => {
-  ethereum.request({
+  ethereum.request(/** @type {RequestParams} */({
     method: 'wallet_watchAsset',
     params: /** @type {WatchAssetParams} */({
       type: 'ERC721',
@@ -55,7 +55,7 @@ const cüzdanaEkle = () => {
         decimals: "0",
       }
     }),
-  }).then((resolved) => {
+  })).then((resolved) => {
     if (!resolved) return;
     CüzdanaEkleDüğmesi.innerText = dom.TR ? "Eklendi ✓" : "Added to wallet ✓";
     dom.butonDurdur(CüzdanaEkleDüğmesi);
@@ -63,8 +63,8 @@ const cüzdanaEkle = () => {
 }
 
 const imeceİptalModalGöster = () => {
-  mask.style.display = "";
-  imeceİptalModal.style.display = "";
+  Mask.style.display = "";
+  İmeceİptalModal.style.display = "";
   dom.adla("iniio").classList.add("disabled");
   const adresGirdisi = dom.adla("iniii");
   let address = adresGirdisi.value;
@@ -86,9 +86,9 @@ const imeceİptalModalGöster = () => {
   }
 }
 
-const esikModalGöster = () => {
-  mask.style.display = "";
-  esikModal.style.display = "";
+const EşikModalGöster = () => {
+  Mask.style.display = "";
+  EşikModal.style.display = "";
   dom.adla("inesm").onclick = birAzalt;
   dom.adla("inesp").onclick = (e) => birArttır(e, 99); //99 yerine mevcut threshold gelecek
   dom.adla("inesw").value = "1"; //mevcut threshold gelecek
@@ -97,9 +97,9 @@ const esikModalGöster = () => {
   dom.adla("inesr").onclick = modalKapat;
 }
 
-const silModalGöster = () => {
-  mask.style.display = "";
-  silModal.style.display = "";
+const SilModalGöster = () => {
+  Mask.style.display = "";
+  SilModal.style.display = "";
   dom.adla("insyr").onclick = modalKapat;
   dom.adla("insyo").onclick = () => console.log("DELETED"); //TCKT.destroyTCKT methodu
 }
@@ -107,8 +107,8 @@ const silModalGöster = () => {
 Cüzdan.bağlanınca(() => {
   CüzdanaEkleDüğmesi.onclick = cüzdanaEkle;
   İmeceİptalDüğmesi.onclick = imeceİptalModalGöster;
-  esikAzaltmaDüğmesi.onclick = esikModalGöster;
-  silDüğmesi.onclick = silModalGöster;
+  EşikAzaltmaDüğmesi.onclick = EşikModalGöster;
+  SilDüğmesi.onclick = SilModalGöster;
 });
 
 /**
@@ -128,17 +128,19 @@ const yapıştır = (event) => {
  * @param {Element} girdi
  */
 const girdiDüzelt = (girdi) => {
+  /** @const {string} */
   const değer = girdi.value;
+  /** @const {?string} */
   const düz = evm.adresDüzelt(değer);
   if (düz) {
     girdi.value = düz;
-    dom.adla("iniio").classList.remove("disabled");
+    dom.adla("iniio").classList.remove("dis");
   }
   /** @const {boolean} */
-  const hataVar = değer &&
+  const hataVar = değer != "" &&
     (!düz || değer.toLowerCase() === Cüzdan.adres().toLowerCase());
   girdi.classList.toggle("inin", hataVar);
-  dom.adla("iniio").classList.toggle("disabled", hataVar);
+  dom.adla("iniio").classList.toggle("dis", hataVar);
 }
 
 const birAzalt = (event) => {

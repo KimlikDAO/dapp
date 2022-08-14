@@ -17,7 +17,9 @@
     <div id="inmc">
       <div id="inx">X</div>
       <div id="inmii" class="inm" style="display:none">
-        Yeni bir imece iptal adresi eklemek için adres ve ağırlık giriniz.
+        <span data-phantom data-en="Add an address and a weight to add a revoker to your TCKT.">
+          TCKT'nize yeni bir iptalci eklemek için adres ve ağırlık girin.
+        </span>
         <div id="iniilbl">
           <b data-en="Address">Adres</b>
           <b data-en="Weight">Ağırlık</b>
@@ -31,26 +33,30 @@
           <a href="javascript:" id="iniip" class="iniibtn plus">+</a>
         </div>
         <div class="inorc">
-          <a href="javascript:" id="iniio" class="act btn lft" data-en="OK">Tamam</a>
+          <a href="javascript:" id="iniio" class="act btn lft dis" data-en="Confirm in wallet">Cüzdana istek yolla</a>
           <a href="javascript:" id="iniir" class="btn" data-en="Cancel">İptal</a>
         </div>
       </div>
-      <div id="inmes" class="inm" style="display:none">Eşik değerini belirleyiniz.
+      <div id="inmes" class="inm" style="display:none"><span data-phantom
+        data-en="Set the new revoke threshold for your TCKT. Note: you may only decrease this threshold due to security reasons.">TCKT'nizin yeni iptal eşik değerini belirleyin.
+        Güvenlik sebebiyle eşik sadece azaltılabilmektedir.
+      </span>
         <div id="inmesc" class="inmic">
           <a href="javascript:" id="inesm" class="iniibtn minus">-</a>
           <input id="inesw" class="inmwi" type="number" value="1">
           <a href="javascript:" id="inesp" class="iniibtn plus">+</a>
         </div>
         <div class="inorc">
-          <a href="javascript:" id="ineso" class="act btn lft">Tamam</a>
-          <a href="javascript:" id="inesr" class="btn">İptal</a>
+          <a href="javascript:" id="ineso" class="act btn lft" data-en="Confirm in wallet">Cüzdana istek yolla</a>
+          <a href="javascript:" id="inesr" class="btn" data-en="Cancel">İptal</a>
         </div>
       </div>
       <div id="inmsy" class="inm" style="display:none">
-        TCKT'nizi silmek istiyor musunuz ?
+        <span data-phantom data-en="Are you sure you would like to destruct your TCKT? This cannot be undone.">TCKT'nizi yok etmek istiyor musunuz?
+          Bu işlem geri alınamaz. Yeni bir TCKT almak için tekrar alım akışını tamamlamanız gerekir.</span>
         <div class="inorc">
-          <a href="javascript:" id="insyo" class="btn lft danger">Tamam</a>
-          <a href="javascript:" id="insyr" class="btn">İptal</a>
+          <a href="javascript:" id="insyo" class="btn lft danger" data-en="Confirm in wallet">Cüzdana istek yolla</a>
+          <a href="javascript:" id="insyr" class="btn" data-en="Cancel">İptal</a>
         </div>
       </div>
     </div>
@@ -64,13 +70,13 @@
   <div id="in">
     <div id="intckt">
       <birim:tckt />
-      <div id="intcktb">Gizle / Aç</div>
+      <div id="intcktb" data-en="Flip">Çevir</div>
     </div>
     <div id="inbtn">
       <a href="javascript:" id="inbtn0" class="btn" data-en="Add to wallet">Cüzdanına ekle</a>
       <a href="javascript:" id="inbtn1" class="btn" data-en="Add social revoker">İmece iptal adresi ekle</a>
       <a href="javascript:" id="inbtn2" class="btn" data-en="Decrease revoke threshold">Eşik azalt</a>
-      <a href=" javascript:" id="inbtn3" class="btn danger" data-en="Destruct TCKT">TCKT yoket</a>
+      <a href=" javascript:" id="inbtn3" class="btn danger" data-en="Destruct TCKT">TCKT yok et</a>
     </div>
   </div>
   <script async type="module" src="/incele/sayfa.js" data-remove-type></script>

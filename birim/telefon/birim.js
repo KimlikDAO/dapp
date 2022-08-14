@@ -17,6 +17,7 @@ const adresGir = (adres) => dom.adla("tetr").innerText = adres;
 const kutuGöster = (metin) => {
   /** @const {Element} */
   const kutu = dom.adla("tefirw");
+  kutu.style.opacity = "";
   kutu.firstElementChild.innerText = metin;
   kutu.classList.add("show");
   dom.adla("tebg").classList.add("whenmsg");
@@ -38,7 +39,7 @@ const kutuKapat = () => {
  */
 const nftGöster = (kutudaGöster) => {
   if (kutudaGöster) {
-    nft.style.display = "";
+    nft.style.opacity = "";
     nftButton.style.display = "";
     nftButton.onclick ||= Tckt.çevir;
   }
@@ -52,7 +53,7 @@ const nftGöster = (kutudaGöster) => {
  */
 const nftYukarıGönder = () => {
   dom.adla("te").previousElementSibling.appendChild(nft);
-  nft.style.display = "";
+  nft.style.opacity = "";
 }
 
 const nftGeriAl = () => {

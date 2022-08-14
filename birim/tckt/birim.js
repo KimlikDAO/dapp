@@ -10,7 +10,7 @@ let Kart = 0;
 const kartDeğiştir = (yeniKart) => {
   /** @const {number} */
   const width = Kartlar.children[0].getBoundingClientRect().width;
-  Kartlar.style.transform = `translate3d(-${yeniKart * width}px, 0, 0)`;
+  Kartlar.style.transform = `translate3d(-${yeniKart * width}px,0,0)`;
   Kart = yeniKart;
 }
 

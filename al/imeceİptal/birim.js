@@ -162,11 +162,13 @@ const eşikDeğeriBlurOlunca = (event) => {
  * @param {Element} girdi
  */
 const girdiDüzelt = (girdi) => {
+  /** @const {string} */
   const değer = girdi.value;
+  /** @const {?string} */
   const düz = evm.adresDüzelt(değer);
   if (düz) girdi.value = düz
   /** @const {boolean} */
-  const hataVar = değer &&
+  const hataVar = değer != "" &&
     (!düz || değer.toLowerCase() === Cüzdan.adres().toLowerCase())
   girdi.classList.toggle("imin", hataVar);
 }
