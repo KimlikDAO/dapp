@@ -9,20 +9,20 @@ input {
 }
 
 button {
+  color: #555;
   font-family: 'f', sans-serif;
   font-size: 11pt;
   font-weight: 700;
-  color: #555;
 }
 
 html {
   -webkit-text-size-adjust: 100%;
   background-size: 8px 8px;
   background: #fff;
+  color: #333;
   margin: 0;
   min-height: 100%;
   overflow-y: scroll;
-  color: #333;
 }
 
 body {
@@ -34,10 +34,10 @@ b {
 }
 
 h2 {
-  font-weight: 700;
   font-size: 21pt;
-  padding: 3px;
+  font-weight: 700;
   margin: 10px;
+  padding: 3px;
 }
 
 .btn.lft {
@@ -163,23 +163,23 @@ button:hover {
 }
 
 #n {
+  align-items: center;
+  background-color: #fff;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
   display: flex;
   height: 80px;
   justify-content: space-between;
-  align-items: center;
-  box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
   position: sticky;
   top: 0;
-  background-color: #fff;
   z-index: 20;
 }
 
 #nal {
   display: flex;
-  width: 100%;
-  margin: 0 auto;
   justify-content: space-between;
+  margin: 0 auto;
   max-width: 1200px;
+  width: 100%;
 }
 
 #nk {
@@ -192,26 +192,26 @@ button:hover {
 }
 
 #nd {
-  text-align: center;
-  margin: 0 10px;
-  padding: 0 1em;
-  display: flex;
   align-items: center;
+  display: flex;
+  margin: 0 10px;
   min-width: 10ex;
+  padding: 0 1em;
+  text-align: center;
 }
 
 /* Banner */
 #b {
   display: flex;
-  justify-content: center;
   flex-wrap: wrap;
+  justify-content: center;
   margin-bottom: 10em;
 }
 
 #ba {
-  max-width: 50%;
-  margin: 3em 2em;
   font-size: 13pt;
+  margin: 3em 2em;
+  max-width: 50%;
 }
 
 #ba li {
@@ -244,20 +244,20 @@ button:hover {
 
 #bt {
   display: flex;
-  width: 100%;
   max-width: 1200px;
+  width: 100%;
 }
 
 h1 {
-  padding-top: 50px;
+  background: rgb(244, 244, 244);
+  color: #3c4043;
   font-size: 38pt;
-  text-align: center;
   font-weight: 800;
   height: 200px;
-  width: 100%;
-  color: #3c4043;
-  background: rgb(244, 244, 244);
   margin: 0;
+  padding-top: 50px;
+  text-align: center;
+  width: 100%;
 }
 
 #bz {

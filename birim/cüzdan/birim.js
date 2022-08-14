@@ -65,7 +65,7 @@ const ağDeğişti = (yeniAğ) => {
     ethereum.request(/** @type {RequestParams} */({
       method: "wallet_switchEthereumChain",
       params: [{ "chainId": Ağ }],
-    })).catch((e) => console.log(e));
+    })).catch(console.log);
   } else if (yeniAğ != Ağ) {
     dom.adla("nc" + Ağ).classList.remove("sel");
     dom.adla("nc" + yeniAğ).classList.add("sel");
@@ -130,7 +130,7 @@ const bağla = () => {
     .request(
       /** @type {RequestParams} */({ method: "eth_requestAccounts" }))
     .then(adresDeğişti)
-    .catch((e) => console.log(e));
+    .catch(console.log);
 
   ethereum
     .request(
@@ -192,12 +192,12 @@ if (window["ethereum"]) {
     navigator.clipboard.writeText(/** @type {string} */(Adres));
 
   dom.adla("nad2").onclick = () => {
-    const url = "https://debank.com/profile/" + Adres;
+    const url = "//debank.com/profile/" + Adres;
     window.open(url, "_blank");
   }
 
   dom.adla("nad3").onclick = () => {
-    const url = "https://" + AdresLinki[Ağ] + "/address/" + Adres;
+    const url = `//${AdresLinki[Ağ]}/address/${Adres}`;
     window.open(url, "_blank");
   }
 

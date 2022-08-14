@@ -37,17 +37,14 @@ const kartDeğiştir = (yeniKart) => {
   Boncuklar.children[yeniKart].classList.add("current");
   Kartlar.style.transform = `translate3d(-${yeniKart * width}px,0,0)`;
   Kart = yeniKart;
-}
 
-SağDüğme.onclick = () => {
-  kartDeğiştir((Kart + 1) % 4);
+  // Saati sıfırla ki kullanıcı yeni geldiği sayfaya 4sn bakabilsin.
   sergiSaatiKur();
 }
 
-SolDüğme.onclick = () => {
-  kartDeğiştir((Kart + 3) % 4);
-  sergiSaatiKur();
-}
+SağDüğme.onclick = () => kartDeğiştir((Kart + 1) % 4);
+
+SolDüğme.onclick = () => kartDeğiştir((Kart + 3) % 4);
 
 for (let /** number */ i = 0; i < Boncuklar.childElementCount; ++i) {
   Boncuklar.children[i].onclick = () => kartDeğiştir(i);

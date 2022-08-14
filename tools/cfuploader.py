@@ -13,10 +13,6 @@ DIL = {
     'en', 'tr'
 }
 
-SAYFALAR = {
-    'al', 'ana',
-}
-
 NAMED_ASSET = {
     'sitemap.txt',
     # 'favicon.ico',
@@ -35,6 +31,16 @@ CF_UPLOADER_TOKEN = toml.load('.gizli')['CF_UPLOADER_TOKEN']
 URL = "https://api.cloudflare.com/client/v4"
 ACCOUNTS_URL = f"{URL}/accounts/{ACCOUNT_ID}/storage/kv/namespaces/{NAMESPACE_ID}/"
 ZONES_URL = f"{URL}/zones/{ZONE_ID}/"
+
+
+def read_pages() -> str:
+    for line in open('Makefile'):
+        if line.startswith('PAGES :='):
+            return line[8:].split()
+    assert False, "Sayfalar bulunamadı"
+
+
+SAYFALAR = read_pages()
 
 
 def get_existing(namespace_id: str) -> set[str]:
