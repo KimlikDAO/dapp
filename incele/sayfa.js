@@ -7,6 +7,9 @@ import Tckt from '/birim/tckt/birim';
 import dom from '/lib/dom';
 import evm from "/lib/evm";
 import TCKT from '/lib/TCKT';
+import { keccak256 } from '/lib/sha3';
+
+console.log(keccak256("addRevoker(uint256)").slice(0, 8));
 
 /** @const {Element} */
 const CüzdanaEkleDüğmesi = dom.adla("inbtn0");
@@ -65,24 +68,33 @@ const cüzdanaEkle = () => {
 const imeceİptalModalGöster = () => {
   Mask.style.display = "";
   İmeceİptalModal.style.display = "";
-  dom.adla("iniio").classList.add("disabled");
+  /** @type {Element} */
   const adresGirdisi = dom.adla("iniii");
-  let address = adresGirdisi.value;
-  const agirlikGirdisi = dom.adla("iniiw");
+  /** @type {Element} */
+  const ağırlıkGirdisi = dom.adla("iniiw");
   adresGirdisi.classList.remove("inin");
+  /** @param {Event} e*/
   adresGirdisi.onblur = (e) => girdiDüzelt(e.target);
   adresGirdisi.value = "";
   dom.adla("iniiy").onclick = yapıştır;
   dom.adla("iniim").onclick = birAzalt;
-  agirlikGirdisi.onblur = ağırlıkBlurOlunca;
-  agirlikGirdisi.onclick = (e) => e.target.value = "";
-  agirlikGirdisi.value = "1";
-  dom.adla("iniip").onclick = (e) => birArttır(e, 9);;
+  ağırlıkGirdisi.onblur = ağırlıkBlurOlunca;
+  /** @param {Event} e*/
+  ağırlıkGirdisi.onclick = (e) => e.target.value = "";
+  ağırlıkGirdisi.value = "1";
+  /** @param {Event} e*/
+  dom.adla("iniip").onclick = (e) => birArttır(e, 9);
   dom.adla("iniir").onclick = modalKapat;
   dom.adla("iniio").onclick = () => {
-    const weight = parseInt(agirlikGirdisi.value);
-    address = evm.adresDüzelt(adresGirdisi.value).slice(2).toLowerCase();
-    TCKT.addRevoker(weight, address);
+    /** @type {string} */
+    const adres = adresGirdisi.value;
+    if(!evm.adresGeçerli(adres) || adres.toLowerCase() === Cüzdan.adres()) {
+      adresGirdisi.classList.add("inin");
+      return
+    }
+    /** @type {number} */
+    const ağırlık = parseInt(ağırlıkGirdisi.value);
+    TCKT.addRevoker(ağırlık, adres);
   }
 }
 
@@ -132,15 +144,11 @@ const girdiDüzelt = (girdi) => {
   const değer = girdi.value;
   /** @const {?string} */
   const düz = evm.adresDüzelt(değer);
-  if (düz) {
-    girdi.value = düz;
-    dom.adla("iniio").classList.remove("dis");
-  }
+  if (düz) girdi.value = düz;
   /** @const {boolean} */
   const hataVar = değer != "" &&
     (!düz || değer.toLowerCase() === Cüzdan.adres().toLowerCase());
   girdi.classList.toggle("inin", hataVar);
-  dom.adla("iniio").classList.toggle("dis", hataVar);
 }
 
 const birAzalt = (event) => {
