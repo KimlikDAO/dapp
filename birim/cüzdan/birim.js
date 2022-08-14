@@ -188,6 +188,9 @@ if (window["ethereum"]) {
   }
 
   AdresButonu.onclick = bağla;
+  dom.adla("nad0").onclick = () =>
+    window.location.href = dom.TR ? "/incele" : "/view";
+
   dom.adla("nad1").onclick = () =>
     navigator.clipboard.writeText(/** @type {string} */(Adres));
 
