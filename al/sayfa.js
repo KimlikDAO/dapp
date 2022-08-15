@@ -23,6 +23,8 @@ const TCKTYarat = () => {
     ? "App cüzdanınızın açık anahtarına ulaşmak istiyor. İzin veriyor musunuz?"
     : "This website would like your public encryption key."
   );
+  dom.adla("te").style.opacity = 1;
+
   const s3a = dom.adla("s3a");
   dom.adla("s3").classList.remove("disabled");
   s3a.classList.remove("disabled");

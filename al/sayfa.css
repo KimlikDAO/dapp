@@ -51,3 +51,7 @@ h4 {
   perspective: 1000px;
   z-index: 1;
 }
+
+#te {
+  transition: opacity 1s;
+}

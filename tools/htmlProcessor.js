@@ -21,7 +21,7 @@ const readInline = (name, lang) => {
   return file.trim();
 }
 
-const readModule = (moduleName, lang) => {
+const readModule = (moduleName, lang, addAttr) => {
   const EN = lang == "en";
   let output = ""
   let depth = 0;
@@ -36,7 +36,7 @@ const readModule = (moduleName, lang) => {
       if ("data-remove" in attr) return;
 
       if (tag.startsWith("birim:")) {
-        output += readModule(`birim/${tag.slice(6)}/birim.html`, lang);
+        output += readModule(`birim/${tag.slice(6)}/birim.html`, lang, attr);
         return;
       }
 
@@ -86,6 +86,9 @@ const readModule = (moduleName, lang) => {
       if ("data-phantom" in attr) {
         phantom[depth] = true;
       } else {
+        if (depth == 1)
+          Object.assign(attr, addAttr);
+
         output += serializeTag(tag, attr);
       }
 
@@ -130,7 +133,7 @@ const readModule = (moduleName, lang) => {
 const args = process.argv;
 
 /** @const {string} */
-const out = readModule(args[2], args[3]);
+const out = readModule(args[2], args[3], {});
 
 /** @const {Array<string>} */
 const parts = args[2].split('.');

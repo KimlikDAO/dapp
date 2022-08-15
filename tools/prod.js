@@ -4,7 +4,7 @@ const HOST_URL = 'https://kimlikdao.org/';
 /** @const {string} */
 const PAGE_CACHE_CONTROL = 'max-age=90,public';
 /** @const {string} */
-const STATIC_CACHE_CONTROL = 'max-age=29030400,public';
+const STATIC_CACHE_CONTROL = 'max-age=29030400,public,immutable';
 /** @const {Object<string, string>} */
 const MIMES = {
   "css": "text/css",
