@@ -73,7 +73,7 @@ h2 {
   border-radius: 5px;
   cursor: pointer;
   margin: 0;
-  /*text-align: center;*/
+  text-align: center;
 }
 
 .btn.danger {
