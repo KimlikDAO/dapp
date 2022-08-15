@@ -10,6 +10,7 @@ include ana/Makefile
 include birim/cüzdan/Makefile
 include incele/Makefile
 include iptal/Makefile
+include lib/test/Makefile
 
 clean:
 	rm -rf build
