@@ -23,6 +23,7 @@ build/prod.js: tools/prod.js tools/workers.js
 
 al-en := get
 incele-en := view
+oyla-en := vote
 
 build/sitemap.txt:
 	mkdir -p $(dir $@)
@@ -71,6 +72,7 @@ build/%-en.js: %.js $$(JsDeps_%)
                              --js $^ \
                              --js_output_file $@
 	yarn uglifyjs $@ -m -o $@
+	node tools/jsPostprocessor $@
 
 build/%-tr.js: %.js $$(JsDeps_%)
 	mkdir -p $(dir $@)
@@ -84,3 +86,4 @@ build/%-tr.js: %.js $$(JsDeps_%)
                              --js $^ \
                              --js_output_file $@
 	yarn uglifyjs $@ -m -o $@
+	node tools/jsPostprocessor $@
