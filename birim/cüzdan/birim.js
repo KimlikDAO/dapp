@@ -98,7 +98,7 @@ const adresDeğişti = (adresler) => {
       if (ad) AdresButonu.innerText = ad;
     });
     if (!eskiAdres) {
-      Bağlanınca(Adres);
+      if (Bağlanınca) Bağlanınca(Adres);
     } else if (AdresDeğişince) {
       AdresDeğişince(Adres);
     }

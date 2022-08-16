@@ -22,7 +22,9 @@ const PAGES = {
   "/al": "al-tr.html",
   "/get": "al-en.html",
   "/incele": "incele-tr.html",
-  "/view": "incele-en.html"
+  "/view": "incele-en.html",
+  "/oyla": "oyla-tr.html",
+  "/vote": "oyla-en.html",
 };
 
 addEventListener('fetch', async (event) => {

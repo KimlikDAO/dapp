@@ -1,5 +1,5 @@
 MAKEFLAGS := -j 8
-PAGES := al ana incele
+PAGES := al ana incele oyla
 
 all: build
 
@@ -10,6 +10,7 @@ include ana/Makefile
 include birim/cüzdan/Makefile
 include incele/Makefile
 include iptal/Makefile
+include oyla/Makefile
 include lib/test/Makefile
 
 clean:

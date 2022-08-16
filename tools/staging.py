@@ -22,6 +22,8 @@ PAGES = {
     "/get": "al-en.html",
     "/incele": "incele-tr.html",
     "/view": "incele-en.html",
+    "/oyla": "oyla-tr.html",
+    "/vote": "oyla-en.html",
 }
 
 MIMES = {
