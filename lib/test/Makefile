@@ -11,8 +11,8 @@ build/lib/test/sha3.compiled-test.js: lib/test/sha3.compiled-test.js \
                              --js $^ \
                              --js_output_file $@
 	yarn uglifyjs $@ -m -o $@
+	node $@
 
 lib/test.test: build/lib/test/sha3.compiled-test.js
-	node $^
 
 .PHONY: lib/test.test
