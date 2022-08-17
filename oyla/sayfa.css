@@ -16,21 +16,37 @@
 }
 
 .oycb {
-  padding: 1em 1em 1em 2em;
+  padding: 1em;
   font-weight: 700;
   font-size: 11pt;
   color: #888;
+  border-bottom: 1px solid rgba(0 0 0 / 10%);
 }
 
 .oyok {
-  padding: 2em;
+  max-height: 150px;
+  padding: 1em;
   cursor: pointer;
-  border-top: 1px solid rgba(0 0 0 / 10%);
+  overflow: hidden;
+  transition-property: max-height;
+  transition-duration: 1s;
+  transition-timing-function: ease-in;
+}
+
+@media (max-width: 425px) {
+  .oyok {
+    max-height: 310px;
+  }
+}
+
+.oyok.expand {
+  max-height: 1000px;
 }
 
 .oyaotop {
   display: flex;
   justify-content: space-between;
+  width: 100%;
 }
 
 .oyaotitle {
@@ -68,6 +84,7 @@
 
 .oyaobody {
   display: flex;
+  width: 100%;
 }
 
 @media (max-width: 425px) {
@@ -93,7 +110,8 @@
 .oyaorem {
   color: rgb(0 0 0 / 60%);
   font-size: 10pt;
-  margin-top: 2em;
+  margin-top: 1em;
+  margin-bottom: 1em;
   display: flex;
 }
 
@@ -151,13 +169,15 @@
   background-color: #FF8B8B;
 }
 
-.column.yn {
+.column.abstain {
   height: 45px;
   background-color: #D3CEDF;
 }
 
 .chartbtns {
   display: flex;
+  justify-content: center;
+  margin-bottom: 1em;
 }
 
 .chartbtn {
@@ -167,7 +187,7 @@
   opacity: 0.3;
   border-radius: 50%;
   margin: 0.5em 0.5em 0 0;
-  transition: opacity 1s;
+  transition: opacity 0.5s;
 }
 
 .chartbtn.yes {
@@ -178,7 +198,7 @@
   background-color: #FF8B8B;
 }
 
-.chartbtn.yn {
+.chartbtn.abstain {
   background-color: #D3CEDF;
 }
 
@@ -215,4 +235,9 @@
 
 .code_function {
   color: #6D42C7;
+}
+
+#oyaofoot {
+  width: 100%;
+  margin-top: 3em;
 }
