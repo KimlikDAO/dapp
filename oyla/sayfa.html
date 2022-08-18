@@ -18,47 +18,62 @@
     <birim:cüzdan />
   </div>
   <div id="oy">
+    <div id="oyy">
+      <div id="oyytitle" data-en="Propose">Yeni Oylama Öner</div>
+      <div id="oyyf">
+        <div id="oyyffr">
+          <div id=oyydb data-en="Choose Proposal Type"><span>Oylama Türü Seçiniz</span>
+            <div id=oytri></div>
+          </div>
+          <ul id=oyydd style="display:none">
+            <li id=oyydd0 data-en="TCKT Price Change">TCKT Ücret Değişikliği</li>
+            <li id=oyydd1 data-en="Trade Proposal">Takas Önerisi</li>
+            <li id=oyydd2 data-en="Custom">Kendin Oluştur</li>
+          </ul>
+        </div>
+      </div>
+    </div>
     <div id="oyac" class="oyc">
       <div class="oycb">Devam eden oylamalar</div>
-      <div id="oya0" class="oyok">
-        <div class="oyaotop">
-          <div id="oya0title" class="oyaotitle">TCKT Fiyat Değişikliği</div>
-          <div id="oya0tb" class="oyaotb" style="display:none"></div>
+      <div class="oyok" style="display:none">
+        <div class="oyao_top">
+          <div class="oyaotitle">TCKT Fiyat Değişikliği</div>
+          <div class="oyaotb" style="display:none"></div>
         </div>
-        <div class="oyaobody">
+        <div class="oyao_middle">
           <div class="oyaodac">
-            <div id="oya0description" class="oyaod">TCKT fiyatı $1,5 olarak belirlensin.</div>
+            <div class="oyaod">TCKT fiyatı $1,5 olarak belirlensin.</div>
             <div class="oyaoac">
-              <div id="oya0address">Address: <span class="code_adr">TCKT</span> on <span
-                  class="code_network">Avalanche</span>(<span class="code_network">Raw</span>: <span
-                  class="code_adr">"0xa86a, 0xcCc23478203948cCc"</span>)</div>
-              <div id="oya0calldata">Calldata: <span class="code_function">updatePrice</span>(USDC, $1.5) (<span
+              <div>Address: <span class="code_adr">TCKT</span> on <span class="code_network">Avalanche</span>(<span
+                  class="code_network">Raw</span>:
+                <span class="code_adr">"0xa86a, 0xcCc23478203948cCc"</span>)
+              </div>
+              <div>Calldata: <span class="code_function">updatePrice</span>(USDC, $1.5) (<span
                   class="code_network">Raw</span>: "0x94934811238773733")</div>
             </div>
             <div class="oyaorem">
-              <div class="oyaoclock"></div><span id="oya0remaining">13D 21H REMAINING</span>
+              <div class="oyaoclock"></div><span>13D 21H REMAINING</span>
             </div>
           </div>
           <div class="oyaochart">
             <div class="columns">
-              <div id="oya0col0" class="column yes"></div>
-              <div id="oya0col1" class="column no"></div>
-              <div id="oya0col2" class="column abstain"></div>
+              <div class="column yes"></div>
+              <div class="column no"></div>
+              <div class="column abstain"></div>
             </div>
             <div class="chartbtns">
-              <a href="javascript:" id="oya0cbtn0" class="chartbtn yes"></a>
-              <a href="javascript:" id="oya0cbtn1" class="chartbtn no"></a>
-              <a href="javascript:" id="oya0cbtn2" class="chartbtn abstain"></a>
+              <a href="javascript:" class="chartbtn yes"></a>
+              <a href="javascript:" class="chartbtn no"></a>
+              <a href="javascript:" class="chartbtn abstain"></a>
             </div>
           </div>
         </div>
-        <div id="oyaofoot">
-          lorem ipsum Lorem Ipsum is simply dummy text of the
-          printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the
-          1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.lorem ipsum
-          Lorem Ipsum is simply dummy text of the
-          printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the
-          1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+        <div class="oyao_bottom">
+          <div class="oybt">lorem ipsum Lorem Ipsum is simply dummy text of the
+            printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the
+            1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+          </div>
+          <div class="oybdis">Discussion</div>
         </div>
       </div>
     </div>
