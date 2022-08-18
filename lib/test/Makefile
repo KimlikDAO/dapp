@@ -1,5 +1,4 @@
-build/lib/test/sha3.compiled-test.js: lib/test/sha3.compiled-test.js \
-                                      lib/test/sha3_old.js \
+build/lib/test/sha3.compiled-test.js: lib/test/sha3.compiled-test.js lib/test/*.js \
                                       lib/sha3.js lib/çevir.js
 	mkdir -p $(dir $@)
 	yarn google-closure-compiler -W VERBOSE -O ADVANCED --charset UTF-8 \
