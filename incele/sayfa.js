@@ -56,7 +56,6 @@ const cüzdanaEkle = () => {
 const imeceİptalModalGöster = () => {
   Mask.style.display = "";
   İmeceİptalModal.style.display = "";
-  dom.adla("iniio").classList.add("disabled");
   const adresGirdisi = dom.adla("iniii");
   let address = adresGirdisi.value;
   const agirlikGirdisi = dom.adla("iniiw");
