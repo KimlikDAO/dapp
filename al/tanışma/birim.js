@@ -16,11 +16,11 @@ const KIMLIK_AS_URL = "https://mock-api.kimlikas.com";
  */
 const taahhütOluştur = (hesap, rasgele) => {
   /** @type {!Uint8Array} */
-  let concat = new Uint8Array(32 + 20);
+  let concat = new Uint8Array(64 + 20);
   concat.set(rasgele, 0);
 
   for (let /** number */ i = 1; i <= 20; ++i)
-    concat[i + 31] = parseInt(hesap.substring(2 * i, 2 * i + 2), 16);
+    concat[i + 63] = parseInt(hesap.substring(2 * i, 2 * i + 2), 16);
 
   return crypto.subtle.digest("SHA-256", concat).then(base64);
 }
@@ -31,8 +31,8 @@ const tanı = () => {
    * Pedersen taahhüdü için rasgele bitdizisi.
    * @type {!Uint8Array}
    */
-  let Rasgele = new Uint8Array(32);
-  crypto.getRandomValues(Rasgele);
+  let rasgele = new Uint8Array(64);
+  crypto.getRandomValues(rasgele);
 
   /** @type {URLSearchParams} */
   const params = new URLSearchParams(location.search);
@@ -40,13 +40,16 @@ const tanı = () => {
   const code = params.get("code");
   history.replaceState(null, "", location.pathname);
 
-  return taahhütOluştur(/** @type {string} */(Cüzdan.adres()), Rasgele)
+  return taahhütOluştur(/** @type {string} */(Cüzdan.adres()), rasgele)
     .then((taahhüt) =>
       fetch(KIMLIK_AS_URL + "?" + new URLSearchParams({ "oauth_code": code, "taahhüt": taahhüt })))
     .then((res) => res.json())
-    .then((AçıkTCKT) => {
+    .then((açıkTCKT) => {
+      /** @const {TCKTTemelBilgileri} */
+      const temizTCKT = {};
       for (let ad of "TCKN ad soyad dt annead babaad".split(" ")) {
-        dom.adla("tc" + ad).innerText = AçıkTCKT[ad];
+        dom.adla("tc" + ad).innerText = açıkTCKT[ad];
+        temizTCKT[ad] = açıkTCKT[ad];
       }
       Tckt.yüzGöster(true);
       /** @const {Element} */
@@ -56,10 +59,11 @@ const tanı = () => {
       OAuthDüğmesi.href = "javascript:";
       dom.butonDurdur(OAuthDüğmesi);
       dom.adla("ta").classList.add("done");
-      AçıkTCKT.rasgele = base64(Rasgele);
+      temizTCKT.taahhüt = açıkTCKT["taahhüt"];
+      temizTCKT.rasgele = base64(rasgele);
       // TODO(KimlikDAO-bot): Kullanıcı tarafında gelen TCKT'nin fazladan veri
       // içermediğini denetle. Fazla verileri işaretleme riski yüzünden sil.
-      return JSON.stringify(AçıkTCKT);
+      return JSON.stringify(temizTCKT, null, 2);
     });
 }
 

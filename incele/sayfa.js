@@ -6,7 +6,9 @@ import Cüzdan from '/birim/cüzdan/birim';
 import Tckt from '/birim/tckt/birim';
 import dom from '/lib/dom';
 import evm from "/lib/evm";
+import ipfs from '/lib/ipfs';
 import TCKT from '/lib/TCKT';
+import { hex, hexten } from '/lib/çevir';
 
 /** @const {Element} */
 const CüzdanaEkleDüğmesi = dom.adla("inbtn0");
@@ -17,7 +19,7 @@ const EşikAzaltmaDüğmesi = dom.adla("inbtn2");
 /** @const {Element} */
 const SilDüğmesi = dom.adla("inbtn3");
 /** @const {Element} */
-const ÇevirDüğmesi = dom.adla("intcktb");
+const AçDüğmesi = dom.adla("intcktb");
 /** @const {Element} */
 const Mask = dom.adla("inbd");
 /** @const {Element} */
@@ -28,7 +30,6 @@ const EşikModal = dom.adla("inmes");
 const SilModal = dom.adla("inmsy");
 
 dom.adla("tc").style.opacity = "";
-ÇevirDüğmesi.onclick = Tckt.çevir;
 
 const modalKapat = () => {
   Mask.style.display = "none";
@@ -45,18 +46,8 @@ Mask.onmousedown = (e) => {
 dom.adla("inx").onclick = modalKapat;
 
 const cüzdanaEkle = () => {
-  ethereum.request(/** @type {RequestParams} */({
-    method: 'wallet_watchAsset',
-    params: /** @type {WatchAssetParams} */({
-      type: 'ERC721',
-      options: {
-        address: TCKT.TCKT_ADDR,
-        symbol: 'TCKT',
-        decimals: "0",
-      }
-    }),
-  })).then((resolved) => {
-    if (!resolved) return;
+  TCKT.addToWallet().then((eklendi) => {
+    if (!eklendi) return;
     CüzdanaEkleDüğmesi.innerText = dom.TR ? "Eklendi ✓" : "Added to wallet ✓";
     dom.butonDurdur(CüzdanaEkleDüğmesi);
   }).catch(console.log);
@@ -86,7 +77,7 @@ const imeceİptalModalGöster = () => {
   }
 }
 
-const EşikModalGöster = () => {
+const eşikModalGöster = () => {
   Mask.style.display = "";
   EşikModal.style.display = "";
   dom.adla("inesm").onclick = birAzalt;
@@ -97,19 +88,85 @@ const EşikModalGöster = () => {
   dom.adla("inesr").onclick = modalKapat;
 }
 
-const SilModalGöster = () => {
+const silModalGöster = () => {
   Mask.style.display = "";
   SilModal.style.display = "";
   dom.adla("insyr").onclick = modalKapat;
   dom.adla("insyo").onclick = () => console.log("DELETED"); //TCKT.destroyTCKT methodu
 }
 
-Cüzdan.bağlanınca(() => {
+const açıkYüz = (açıkTCKT) => {
+  for (let ad of "TCKN ad soyad dt annead babaad".split(" ")) {
+    dom.adla("tc" + ad).innerText = açıkTCKT[ad];
+  }
+  Tckt.yüzGöster(true);
+  AçDüğmesi.innerText = dom.TR ? "Gizle" : "Hide";
+  AçDüğmesi.onclick = () => kapalıYüz(Cüzdan.adres());
+}
+
+/** @const {Object<string, TCKTTemelBilgileri>} */
+const Hatırla = {};
+
+const kapalıYüz = (adres) => {
+  Tckt.yüzGöster(false);
+  AçDüğmesi.onclick = null;
+
+  const açıkTCKTMi = Hatırla[Cüzdan.ağ() + adres];
+  if (açıkTCKTMi) {
+    AçDüğmesi.innerText = dom.TR ? "Aç" : "Unlock";
+    AçDüğmesi.onclick = () => açıkYüz(açıkTCKTMi);
+  } else {
+    TCKT.handleOf(adres).then((cidHex) => {
+      if (cidHex.startsWith("0x")) cidHex = cidHex.slice(2);
+      if (cidHex == "0".repeat(64)) {
+        AçDüğmesi.innerText = dom.TR ? "TCKT al" : "Get TCKT";
+        AçDüğmesi.onclick = () => window.location.href = dom.TR ? "/al" : "/get";
+      } else {
+        AçDüğmesi.innerText = dom.TR ? "Aç" : "Unlock";
+        AçDüğmesi.onclick = () => {
+          ipfs.cidBytetanOku(hexten(cidHex))
+            .then((dosya) => {
+              /** @const {TCKTData} */
+              const tcktData = /** @const {TCKTData} */(JSON.parse(dosya));
+              /** @const {EthEncryptedData} */
+              const encryptedData = /** @type {EthEncryptedData} */({
+                version: tcktData.unlockable.algorithm,
+                nonce: tcktData.unlockable.nonce,
+                ephemPublicKey: tcktData.unlockable.ephem_pub_key,
+                ciphertext: tcktData.unlockable.ciphertext
+              });
+              const asciiEncoder = new TextEncoder();
+              /** @const {string} */
+              const hexEncoded = "0x" + hex(asciiEncoder.encode(JSON.stringify(encryptedData)));
+              return ethereum.request(/** @type {RequestParams} */({
+                method: "eth_decrypt",
+                params: [hexEncoded, Cüzdan.adres()]
+              }));
+            })
+            .then((açıkTCKT) => {
+              açıkTCKT = açıkTCKT.slice(43, açıkTCKT.indexOf("\0"));
+              açıkTCKT = /** @type {TCKTTemelBilgileri} */(JSON.parse(açıkTCKT));
+              Hatırla[Cüzdan.ağ() + adres] = açıkTCKT;
+              açıkYüz(açıkTCKT);
+            })
+            .catch(console.log);
+        }
+      }
+    });
+  }
+}
+
+Cüzdan.bağlanınca((adres) => {
   CüzdanaEkleDüğmesi.onclick = cüzdanaEkle;
   İmeceİptalDüğmesi.onclick = imeceİptalModalGöster;
-  EşikAzaltmaDüğmesi.onclick = EşikModalGöster;
-  SilDüğmesi.onclick = SilModalGöster;
+  EşikAzaltmaDüğmesi.onclick = eşikModalGöster;
+  SilDüğmesi.onclick = silModalGöster;
+  kapalıYüz(adres);
 });
+Cüzdan.ağDeğişince(() => kapalıYüz(Cüzdan.adres()));
+Cüzdan.adresDeğişince(() => kapalıYüz(Cüzdan.adres()));
+
+AçDüğmesi.onclick = Cüzdan.bağla;
 
 /**
  * @param {Event} event

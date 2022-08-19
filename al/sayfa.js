@@ -10,6 +10,7 @@ import Telefon from '/birim/telefon/birim';
 import dom from '/lib/dom';
 import { encrypt } from '/lib/encrypt';
 import ipfs from '/lib/ipfs';
+import { TCKT_ADDR } from '/lib/TCKT';
 import { hex } from '/lib/çevir';
 
 /**
@@ -56,11 +57,11 @@ const TCKTYarat = () => {
   /** @type {Promise<string>} */
   const cidSözü = Promise.all([açıkTCKTSözü, açıkAnahtarSözü])
     .then(([açıkTCKT, açıkAnahtar]) => {
-      let gizle = new Uint8Array(1000);
-      let { written } = new TextEncoder().encodeInto(açıkTCKT, gizle);
-      let dolgu = new Uint8Array(1000 - written);
-      crypto.getRandomValues(dolgu);
-      gizle.set(dolgu, written);
+      const encoder = new TextEncoder();
+      const gizle = new Uint8Array(1000);
+      encoder.encodeInto(TCKT_ADDR, gizle);
+      gizle[42] = 10;
+      encoder.encodeInto(açıkTCKT, gizle.subarray(43));
 
       const [nonce, ephemPubKey, ciphertext] = encrypt(açıkAnahtar, gizle);
 

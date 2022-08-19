@@ -2,8 +2,8 @@ JsDeps_incele/sayfa := incele/sayfa.js \
                        birim/cüzdan/birim.js \
                        birim/tckt/birim.js \
                        lib/dom.js lib/evm.js lib/sha3.js \
-                       lib/çevir.js \
-                       lib/TCKT.js lib/ethereum.js
+                       lib/çevir.js lib/ipfs.js \
+                       lib/TCKT.js lib/TCKTData.js lib/ethereum.js
 
 build/incele/sayfa.css: incele/sayfa.css incele/*/*.css
 	mkdir -p $(dir $@)
