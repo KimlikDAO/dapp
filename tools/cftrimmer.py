@@ -4,6 +4,7 @@ import base64
 import json
 import os
 import os.path
+import subprocess
 import sys
 
 import requests
@@ -44,6 +45,7 @@ def read_pages() -> str:
 
 
 SAYFALAR = read_pages()
+subprocess.run(["make", "cf-deployment"])
 
 
 def get_existing(namespace_id: str) -> set[str]:
