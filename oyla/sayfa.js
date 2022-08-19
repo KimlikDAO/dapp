@@ -9,25 +9,14 @@ dom.adla("oyy").onclick = () => {
   dom.adla("oyy").classList.add("open_form");
 }
 
-dom.adla("oyyfr").onclick = (event) => {
-  dom.adla("oyy").classList.remove("open_form");
-  event.stopPropagation();
-}
-
-dom.adla("oyydb").onclick = (event) => {
-  const kapat = (event) => {
-    dom.adla("oyydd").style.display = "none";
-    dom.adla("oytri").classList.remove("up");
-    if (event.target.parentElement == dom.adla("oyydd"))
-      dom.adla("oyydb").firstElementChild.innerText = event.target.innerText;
-    window.onclick = null;
+dom.adla("oyyfs").onclick = () => {
+  let token = null;
+  console.log(dom.adla("oyyprice").value);
+  const inputs = dom.adla("oyytc").children;
+  for (let i = 0; i < 9; i += 2) {
+    if (inputs[i].checked) token = inputs[i].id.slice(3).toUpperCase();
   }
-  dom.adla("oyydd").style.display = "";
-  dom.adla("oytri").classList.add("up");
-  let f = window.onclick;
-  if (f) f(event);
-  if (f !== kapat) window.onclick = kapat;
-  event.stopPropagation();
+  console.log(token)
 }
 
 const aktifOyKartıOluştur = (data) => {

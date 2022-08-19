@@ -20,28 +20,39 @@
   <div id="oy">
     <div id="oyy">
       <div id="oyytitle" data-en="Propose">Yeni Oylama Öner</div>
-      <div id="oyyfc">
-        <div id="oyyft">
-          <div id=oyydb data-en="Choose Proposal Type"><span>Oylama Türü Seçiniz</span>
-            <div id=oytri></div>
+      <div id="oyytabs">
+        <input type="radio" id="oyytab0" name="tabs" checked="checked">
+        <label for="oyytab0" class="oyy_tablabel" data-en="TCKT Price Change">TCKT Ücret Değişikliği</label>
+        <div class="oyytab">
+          <div id="oyypc">
+            <input type="number" id=oyyprice class="oyyfi" placeholder="Fiyat Giriniz">
           </div>
-          <ul id=oyydd style="display:none">
-            <li id=oyydd0 data-en="TCKT Price Change">TCKT Ücret Değişikliği</li>
-            <li id=oyydd1 data-en="Trade Proposal">Takas Önerisi</li>
-            <li id=oyydd2 data-en="Custom">Kendin Oluştur</li>
-          </ul>
+          <div id="oyytc">
+            <input type="radio" id=oyyusdc name="tokens">
+            <label for="oyyusdc" class="oyy_toklabel"><img src="/al/ödeme/USDC.svg" height=24 width=24> USDC</label>
+            <input type="radio" id=oyyusdt name="tokens">
+            <label for="oyyusdt" class="oyy_toklabel"><img src="/al/ödeme/USDT.svg" height=24 width=24> USDT</label>
+            <input type="radio" id=oyytryb name="tokens" checked="checked">
+            <label for="oyytryb" class="oyy_toklabel"><img src="/al/ödeme/TRYB.svg" height=24 width=24> TRYB</label>
+            <input type="radio" id=oyyeth name="tokens">
+            <label for="oyyeth" class="oyy_toklabel"><img src="/al/ödeme/ETH.svg" height=24 width=24> ETH</label>
+            <input type="radio" id=oyyavax name="tokens">
+            <label for="oyyavax" class="oyy_toklabel"><img src="/al/ödeme/AVAX.svg" height=24 width=24> AVAX</label>
+          </div>
+          <div id="oyyfsc">
+            <a href="javascript:" id="oyyfs" class="act btn lft" data-en="Submit Proposal">Öneri Gönder</a>
+            <a href="javascript:" id="oyyfc" class="btn" data-en="Cancel">İptal</a>
+          </div>
         </div>
-        <div id=oyyform>
-          <div id="tradeform">
-            <input class="oyyfi" placeholder="INPUT0" />
-            <input class="oyyfi" placeholder="INPUT1" />
-            <input class="oyyfi" placeholder="INPUT2" />
-            <input class="oyyfi" placeholder="INPUT3" />
-          </div>
-          <div class="oyyfsc">
-            <a href="javascript:" id="oyyfo" class="act btn lft" data-en="Submit">Gönder</a>
-            <a href="javascript:" id="oyyfr" class="btn" data-en="Cancel">İptal</a>
-          </div>
+        <input type="radio" id="oyytab1" name="tabs">
+        <label for="oyytab1" class="oyy_tablabel" data-en="Trade Proposal">Takas Önerisi</label>
+        <div class="oyytab">
+          WIP
+        </div>
+        <input type="radio" id="oyytab2" name="tabs">
+        <label for="oyytab2" class="oyy_tablabel" data-en="Custom Proposal">Kendin Belirle</label>
+        <div class="oyytab">
+          WIP
         </div>
       </div>
     </div>
