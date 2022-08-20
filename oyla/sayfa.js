@@ -5,31 +5,42 @@
 import Cüzdan from '/birim/cüzdan/birim';
 import dom from '/lib/dom';
 
-
-
 Cüzdan.bağlanınca(() => {
   let ağ = Cüzdan.ağ();
-  console.log(ağ);
+  fiyatDeğişikliğiFormuHazırla(ağ)
+  Cüzdan.ağDeğişince(() => {
+    fiyatDeğişikliğiFormuHazırla(Cüzdan.ağ())
+  })
 })
-Cüzdan.ağDeğişince(() => console.log(Cüzdan.ağ()))
+
 dom.adla("oyy").onclick = () => {
   dom.adla("oyy").classList.add("open_form");
 }
 
-for ( let i = 1; i < dom.adla("oyytcsol").childElementCount; i += 2) {  //Cüzdan Bağlanınca
-  const element = dom.adla("oyytcsol").children[i];
-  element.onclick = () => {
-    seçilmişTokenGöster(element)
+/**@param {string} yeniAğ  Ağ değişince UI'da gösterir*/
+const fiyatDeğişikliğiFormuHazırla = (yeniAğ) => {
+  dom.adla("oyy" + yeniAğ).nextElementSibling.style.display = "";
+  //Diğer Ağ tokenlarını UI'dan cıkar
+  for (const diğerAğ in Cüzdan.Paralar) {
+    if (diğerAğ != yeniAğ) dom.adla("oyy" + diğerAğ).nextElementSibling.style.display = "none";
   }
-}
+  //Labellara click Handler ekle
+  for (let/** number */ i = 1; i < dom.adla("oyytcsol").childElementCount; i += 2) {
+    const element = dom.adla("oyytcsol").children[i];
+    element.onclick = () => {
+      seçilmişTokenGöster(element)
+    }
+  }
 
-let id = 2;
-
-const seçilmişTokenGöster = (element) => {
-  const newId = element.previousElementSibling.id.slice(3);
-  dom.adla("oyys" + id).style.display = "none";
-  dom.adla("oyys" + newId).style.display = "";
-  id = newId;
+  const seçilmişTokenGöster = (element) => {
+    const id = element.previousElementSibling.id.slice(3);
+    dom.adla("oyys" + id).style.display = "";
+    //Diğer Ağ tokenlarını UI'dan cıkar
+    for (let i = 0; i < dom.adla("oyytcsag").childElementCount; ++i) {
+      if (dom.adla("oyytcsag").children[i] != dom.adla("oyys" + id))
+        dom.adla("oyytcsag").children[i].style.display = "none";
+    }
+  }
 }
 
 const aktifOyKartıOluştur = (data) => {

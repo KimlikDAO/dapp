@@ -132,12 +132,12 @@
   justify-content: space-between;
 }
 
-.oyytcsol {
+#oyytcsol {
   display: flex;
   flex-direction: column;
 }
 
-.oyytcsag {
+#oyytcsag {
   display: flex;
   flex-direction: column;
   justify-content: center;
