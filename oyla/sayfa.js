@@ -2,21 +2,34 @@
  * @fileoverview Oyla sayfası giriş noktası
  *
  */
-import '/birim/cüzdan/birim';
+import Cüzdan from '/birim/cüzdan/birim';
 import dom from '/lib/dom';
 
+
+
+Cüzdan.bağlanınca(() => {
+  let ağ = Cüzdan.ağ();
+  console.log(ağ);
+})
+Cüzdan.ağDeğişince(() => console.log(Cüzdan.ağ()))
 dom.adla("oyy").onclick = () => {
   dom.adla("oyy").classList.add("open_form");
 }
 
-dom.adla("oyyfs").onclick = () => {
-  let token = null;
-  console.log(dom.adla("oyyprice").value);
-  const inputs = dom.adla("oyytc").children;
-  for (let i = 0; i < 9; i += 2) {
-    if (inputs[i].checked) token = inputs[i].id.slice(3).toUpperCase();
+for ( let i = 1; i < dom.adla("oyytcsol").childElementCount; i += 2) {  //Cüzdan Bağlanınca
+  const element = dom.adla("oyytcsol").children[i];
+  element.onclick = () => {
+    seçilmişTokenGöster(element)
   }
-  console.log(token)
+}
+
+let id = 2;
+
+const seçilmişTokenGöster = (element) => {
+  const newId = element.previousElementSibling.id.slice(3);
+  dom.adla("oyys" + id).style.display = "none";
+  dom.adla("oyys" + newId).style.display = "";
+  id = newId;
 }
 
 const aktifOyKartıOluştur = (data) => {
