@@ -43,6 +43,7 @@ const SAYFALAR = {
   "/al": "al/sayfa.html",
   "/get": "al/sayfa.html",
   "/incele": "incele/sayfa.html",
+  "/view": "incele/sayfa.html",
   "/oyla": "oyla/sayfa.html",
   "/vote": "oyla/sayfa.html",
 };
