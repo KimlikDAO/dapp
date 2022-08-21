@@ -2,9 +2,9 @@
 /** @const {string} */
 const HOST_URL = 'https://kimlikdao.org/';
 /** @const {string} */
-const PAGE_CACHE_CONTROL = 'max-age=90,public';
+const PAGE_CACHE_CONTROL = 'no-transform,max-age=90,public';
 /** @const {string} */
-const STATIC_CACHE_CONTROL = 'max-age=29030400,public,immutable';
+const STATIC_CACHE_CONTROL = 'no-transform,max-age=29030400,public,immutable';
 /** @const {Object<string, string>} */
 const MIMES = {
   "css": "text/css",
@@ -18,7 +18,7 @@ const MIMES = {
 /** @const {Object<string, string>} */
 const PAGES = {
   "?tr": "ana-tr.html",
-  "?en" : "ana-en.html",
+  "?en": "ana-en.html",
   "/al": "al-tr.html",
   "/get": "al-en.html",
   "/incele": "incele-tr.html",
@@ -27,7 +27,7 @@ const PAGES = {
   "/vote": "oyla-en.html",
 };
 
-addEventListener('fetch', async (event) => {
+addEventListener('fetch', (event) => {
   /** @const {URL} */
   const url = new URL(event.request.url)
   /** @const {string} */
@@ -49,12 +49,19 @@ addEventListener('fetch', async (event) => {
   /** @const {string} */
   const cacheKey = HOST_URL + kvKey;
 
+  /** @type {boolean} */
+  let inCache = false;
+
   // Asset'i CF cache'ten almaya çalışıyoruz.
   /** @const {Promise<Response>} */
   const fromCache = caches.default.match(cacheKey).then((response) => {
     if (!response) return Promise.reject();
+    inCache = true;
     if (idx == -1) {
-      response = new Response(response.body, response);
+      response = new Response(response.body, {
+        headers: response.headers,
+        "encodeBody": "manual"
+      });
       response.headers.set('cache-control', PAGE_CACHE_CONTROL);
     }
     return response;
@@ -89,6 +96,9 @@ addEventListener('fetch', async (event) => {
     if (idx == -1)
       response.headers.set('x-frame-options', 'DENY')
 
+    // Cache'te bulundu. Tekrar cache'e yazmadan işlemi bitir.
+    if (inCache) return Promise.reject();
+
     // KV'den çektiğimiz asset'i cache'e yaz.
     event.waitUntil(caches.default.put(cacheKey, response.clone()))
 
@@ -107,7 +117,7 @@ addEventListener('fetch', async (event) => {
  * @return {Response}
  */
 function bulunamadı(err) {
-  return new Response('NAPİM? Hata oluştu ' + err, {
+  return new Response('NAPİM?', {
     status: 404,
     headers: { 'content-type': 'text/plain;charset=utf-8' }
   })
