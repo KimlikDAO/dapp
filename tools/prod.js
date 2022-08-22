@@ -2,7 +2,7 @@
 /** @const {string} */
 const HOST_URL = 'https://kimlikdao.org/';
 /** @const {string} */
-const PAGE_CACHE_CONTROL = 'no-transform,max-age=90,public';
+const PAGE_CACHE_CONTROL = 'max-age=90,public';
 /** @const {string} */
 const STATIC_CACHE_CONTROL = 'no-transform,max-age=29030400,public,immutable';
 /** @const {Object<string, string>} */
@@ -57,12 +57,16 @@ addEventListener('fetch', (event) => {
   const fromCache = caches.default.match(cacheKey).then((response) => {
     if (!response) return Promise.reject();
     inCache = true;
-    if (idx == -1) {
+    if (idx == -1 || ext === '.gz') {
       response = new Response(response.body, {
         headers: response.headers,
         "encodeBody": "manual"
       });
-      response.headers.set('cache-control', PAGE_CACHE_CONTROL);
+      if (idx == -1)
+        response.headers.set('cache-control', PAGE_CACHE_CONTROL);
+      // Transform 'GEEZEEP' back to gzip.
+      if (ext === '.gz')
+        response.headers.set('content-encoding', 'gzip');
     }
     return response;
   });
@@ -81,15 +85,19 @@ addEventListener('fetch', (event) => {
       status: 200,
       headers: {
         'accept-ranges': 'bytes',
-        'cache-control': STATIC_CACHE_CONTROL,
+        'cache-control': idx == -1 ? PAGE_CACHE_CONTROL : STATIC_CACHE_CONTROL,
         'content-length': body.byteLength,
         'content-type': idx == -1 ? "text/html;charset=utf-8" : MIMES[url.pathname.slice(idx + 1)],
         'expires': 'Sun, 01 Jan 2034 00:00:00 GMT',
+        'vary': 'accept-encoding'
       },
       'encodeBody': 'manual'
     });
 
     // Sıkıştırılmış assetse 'content-encoding' yaz.
+    // If the content-encoding is gzip, we record it as PIZG before writing it
+    // to CF cache so it won't be decompressed.
+    // We transform PIZG to gzip just before serving the `Response` to the user-agent.
     if (ext)
       response.headers.set('content-encoding', ext === '.br' ? 'br' : 'gzip');
 
@@ -100,12 +108,13 @@ addEventListener('fetch', (event) => {
     if (inCache) return Promise.reject();
 
     // KV'den çektiğimiz asset'i cache'e yaz.
-    event.waitUntil(caches.default.put(cacheKey, response.clone()))
-
-    // Sayfaları CF cache'inde sonsuz dek ama kullanıcı cache'inde belli bir süre tutmak istiyoruz.
-    // Bunun sebebi CF cachi'ni purge gerektiğinde purge edebilmemiz.
-    if (idx == -1)
-      response.headers.set('cache-control', PAGE_CACHE_CONTROL);
+    event.waitUntil(Promise.resolve().then(() => {
+      let toCache = response.clone();
+      if (ext === '.gz')
+        toCache.headers.set('content-encoding', 'GEEZEEP');
+      toCache.headers.set('cache-control', STATIC_CACHE_CONTROL);
+      return caches.default.put(cacheKey, toCache);
+    }));
 
     return response;
   })
@@ -116,9 +125,7 @@ addEventListener('fetch', (event) => {
 /**
  * @return {Response}
  */
-function bulunamadı(err) {
-  return new Response('NAPİM?', {
-    status: 404,
-    headers: { 'content-type': 'text/plain;charset=utf-8' }
-  })
-}
+const bulunamadı = (err) => new Response('NAPİM?', {
+  status: 404,
+  headers: { 'content-type': 'text/plain;charset=utf-8' }
+})
