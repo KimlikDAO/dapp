@@ -81,8 +81,6 @@ const göster = () => {
   }
 
   dom.adla("ta_input").onchange = () => {
-    console.log(dom.adla("ta_input").files[0]);
-    console.log(dom.adla("ta_input").files);
     dom.adla("ta_da_text").innerText = dom.adla("ta_input").files[0].name;
     dosyaBırakmaBölgesi.classList.add("isdragover");
   }
@@ -91,7 +89,6 @@ const göster = () => {
     e.preventDefault();
     const bırakılanDosya = e.dataTransfer.files[0];
     dom.adla("ta_da_text").innerText = bırakılanDosya.name;
-    console.log(bırakılanDosya);
   };
 
   dosyaBırakmaBölgesi.ondragover = (e) => {
