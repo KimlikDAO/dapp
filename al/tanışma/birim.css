@@ -1,0 +1,52 @@
+#ta_dnd_container {
+  margin-top: 2em;
+}
+
+#ta_drop_area {
+  outline: 2px dashed #c2c2c2;
+  outline-offset: -10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 200px;
+  transition-property: outline-offset, background;
+  transition-duration: 0.1s;
+  transition-timing-function: ease-in;
+  border-radius: 10px;
+  text-align: center;
+}
+
+#ta_drop_area.isdragover {
+  outline-offset: -20px;
+  background: #f2f5f6;
+  cursor: default;
+}
+
+#ta_input {
+  display: none;
+}
+
+.ta_udsc {
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
+}
+
+.ta_da_btn {
+  color: #fff;
+  background: #3d67ab;
+  opacity: 0.9;
+  height: 30px;
+  width: 40%;
+  border-radius: 4px;
+  margin-top: 2em;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.ta_da_btn:hover {
+  opacity: 1;
+}

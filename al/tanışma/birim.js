@@ -73,6 +73,41 @@ const göster = () => {
 
   dom.adla("ta").classList.remove("disabled");
 
+  /**@const {Element} */
+  const dosyaBırakmaBölgesi = dom.adla("ta_drop_area");
+
+  dom.adla("tadsbtn").onclick = () => {
+    dom.adla("ta_input").click(); 
+  }
+
+  dom.adla("ta_input").onchange = () => {
+    console.log(dom.adla("ta_input").files[0]);
+    console.log(dom.adla("ta_input").files);
+    dom.adla("ta_da_text").innerText = dom.adla("ta_input").files[0].name;
+    dosyaBırakmaBölgesi.classList.add("isdragover");
+  }
+
+  dosyaBırakmaBölgesi.ondrop = (e) => {
+    e.preventDefault();
+    const bırakılanDosya = e.dataTransfer.files[0];
+    dom.adla("ta_da_text").innerText = bırakılanDosya.name;
+    console.log(bırakılanDosya);
+  };
+
+  dosyaBırakmaBölgesi.ondragover = (e) => {
+    e.preventDefault();
+    dosyaBırakmaBölgesi.classList.add("isdragover");
+  }
+
+  dosyaBırakmaBölgesi.ondragleave = (e) => {
+    e.preventDefault();
+    dosyaBırakmaBölgesi.classList.remove("isdragover");
+  }
+
+
+  PDFDüğmesi.onclick = () => {
+    dom.adla("ta_dnd_container").style.display = "";
+  }
   if (!location.search) {
     EDevletDüğmesi.classList.add("act");
     PDFDüğmesi.style.display = "";
