@@ -99,7 +99,7 @@ const göster = () => {
 
     /**@const {Element} */
     const dosyaBırakmaBölgesi = dom.adla("tada");
-    dom.adla("taibrazno") = IbrazNumarası;
+    dom.adla("taibrazno").innerText = IbrazNumarası;
     dom.adla("tadsbtn").onclick = () => {
       dom.adla("tain").click();
     }
