@@ -1,4 +1,4 @@
-// Sonda bölü işareti olması lazım.
+// Has to end with a slash
 /** @const {string} */
 const HOST_URL = 'https://kimlikdao.org/';
 /** @const {string} */
@@ -52,7 +52,7 @@ addEventListener('fetch', (event) => {
   /** @type {boolean} */
   let inCache = false;
 
-  // Asset'i CF cache'ten almaya çalışıyoruz.
+  // We search the CF cache for the asset.
   /** @const {Promise<Response>} */
   const fromCache = caches.default.match(cacheKey).then((response) => {
     if (!response) return Promise.reject();
@@ -71,11 +71,18 @@ addEventListener('fetch', (event) => {
     return response;
   });
 
-  // Paralel olarak asset'i KV'de de arıyoruz. Normal şartlar altında asset
-  // cache'te varsa, `fromCache`'in yarışı kazanması lazım.
-  // Asset cache'te değilse (veya cache'te beklenmedik bir yoğunluk varsa)
-  // KV'den gelen sonucu cache'e yazılmak üzere sıraya alıp KV sonucunu
-  // döndürüyoruz
+  // In parallel, we also query the CF KV. Under normal circumstances, if
+  // the asset is present in the CF cache, `fromCache` promise should always
+  // win the race.
+  // If the asset has been evicted from CF cache, this promise will get it
+  // from KV and write it to CF cache (after a small header modification).
+  // If the asset is present in CF cache and the cache returns in a timely
+  // manner, this promise will not re-write to CF cache, as the `fromCache`
+  // promise will set the `inCache` flag, which prevents this promise from
+  // recaching the response.
+  // In all other cases (either the response is not present in CF cache or
+  // CF cache is taking unusually long), the response will be served from the
+  // KV.
   /** @const {Promise<Response>} */
   const fromKV = KV.get(kvKey, 'arrayBuffer').then((body) => {
     if (!body) return Promise.reject();
@@ -94,21 +101,29 @@ addEventListener('fetch', (event) => {
       'encodeBody': 'manual'
     });
 
-    // Sıkıştırılmış assetse 'content-encoding' yaz.
-    // If the content-encoding is gzip, we record it as PIZG before writing it
-    // to CF cache so it won't be decompressed.
-    // We transform PIZG to gzip just before serving the `Response` to the user-agent.
+    // If we are serving a precompressed asset, set the 'content-encoding'
+    // header. Note we serve a precompressed asset iff ext != '';
     if (ext)
       response.headers.set('content-encoding', ext === '.br' ? 'br' : 'gzip');
 
     if (idx == -1)
       response.headers.set('x-frame-options', 'DENY')
 
-    // Cache'te bulundu. Tekrar cache'e yazmadan işlemi bitir.
-    if (inCache) return Promise.reject();
-
-    // KV'den çektiğimiz asset'i cache'e yaz.
+    // Remember to cache the response, but only after we finish serving the
+    // request.
     event.waitUntil(Promise.resolve().then(() => {
+      if (inCache) return;
+      // We modify the response in two ways before we place it in CloudFlare
+      // cache:
+      //
+      // (1) We remove the 'content-encoding: gzip' to prevent CF cache doing
+      // decompression / header modification, which currently only happens for
+      // 'content-encoding: gzip' responses.
+      //
+      // (2) We set cache control to indefinite caching so that the response
+      // stays in CF cache for as long as possible, even for non-content-hashed
+      // assets. We always purge the CF cache after non-content-hashed assets
+      // change, which ensures the CF cache never goes stale.
       let toCache = response.clone();
       if (ext === '.gz')
         toCache.headers.set('content-encoding', 'GEEZEEP');

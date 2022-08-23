@@ -16,6 +16,7 @@ Lang-tr := true
 build/prod.js: tools/prod.js lib/cf-worker.js
 	mkdir -p build
 	yarn google-closure-compiler -W VERBOSE -O ADVANCED --charset UTF-8 \
+                             --env BROWSER \
                              --assume_function_wrapper \
                              --js $^ \
                              --js_output_file $@
