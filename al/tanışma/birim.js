@@ -73,38 +73,80 @@ const göster = () => {
 
   dom.adla("ta").classList.remove("disabled");
 
-  /**@const {Element} */
-  const dosyaBırakmaBölgesi = dom.adla("ta_drop_area");
-
-  dom.adla("tadsbtn").onclick = () => {
-    dom.adla("ta_input").click(); 
-  }
-
-  dom.adla("ta_input").onchange = () => {
-    dom.adla("ta_da_text").innerText = dom.adla("ta_input").files[0].name;
-    dosyaBırakmaBölgesi.classList.add("isdragover");
-  }
-
-  dosyaBırakmaBölgesi.ondrop = (e) => {
-    e.preventDefault();
-    const bırakılanDosya = e.dataTransfer.files[0];
-    dom.adla("ta_da_text").innerText = bırakılanDosya.name;
-  };
-
-  dosyaBırakmaBölgesi.ondragover = (e) => {
-    e.preventDefault();
-    dosyaBırakmaBölgesi.classList.add("isdragover");
-  }
-
-  dosyaBırakmaBölgesi.ondragleave = (e) => {
-    e.preventDefault();
-    dosyaBırakmaBölgesi.classList.remove("isdragover");
-  }
-
-
   PDFDüğmesi.onclick = () => {
-    dom.adla("ta_dnd_container").style.display = "";
+    dom.adla("tadc").style.display = "";
+    EDevletDüğmesi.style.display = "none";
+    PDFDüğmesi.style.display = "none";
+    let IbrazNumarası = 0;
+
+    const powWorker = new Worker("/al/tanışma/pow-worker.js");
+    let rasgele = new Uint8Array(64);
+    crypto.getRandomValues(rasgele);
+
+    taahhütOluştur(Cüzdan.adres(), rasgele)
+      .then((taahhüt) => {
+        let pow = "";
+        powWorker.postMessage(taahhüt);
+        powWorker.onmessage = (e) => {
+          pow = base64(e.data);
+        }
+        taahhüt = base64(taahhüt);
+      })
+      .then((taahhüt, pow) => {
+        fetch(`https://api.kimlikdao.org/numara-al?tht=${taahhüt}&pow=${pow}`)
+      })
+      .then(res => IbrazNumarası = res);
+
+    /**@const {Element} */
+    const dosyaBırakmaBölgesi = dom.adla("tada");
+    dom.adla("taibrazno") = IbrazNumarası;
+    dom.adla("tadsbtn").onclick = () => {
+      dom.adla("tain").click();
+    }
+
+    const dosyaYükle = (dosya) => {
+      fetch('https://api.kimlikdao.org/pdf-yukle?tht=base64(taahhut)&pow=base(pow)', {
+        method: 'POST',
+        body: dosya,
+      })
+      .then(res => res.json())
+      .then(ok => console.log(ok))
+      .catch(e => console.log(e))
+    }
+
+    dom.adla("tain").onchange = () => {
+      dom.adla("tadat").innerText = dom.adla("tain").files[0].name;
+      dosyaBırakmaBölgesi.classList.add("dragison");
+      dosyaYükle(dom.adla("tain").files[0]);
+    }
+
+    dosyaBırakmaBölgesi.ondrop = (e) => {
+      e.preventDefault();
+      const bırakılanDosya = e.dataTransfer.files[0];
+      dom.adla("tadat").innerText = bırakılanDosya.name;
+      dosyaYükle(dom.adla("tain").files[0]);
+    };
+
+    dosyaBırakmaBölgesi.ondragover = (e) => {
+      e.preventDefault();
+      dosyaBırakmaBölgesi.classList.add("dragison");
+    }
+
+    dosyaBırakmaBölgesi.ondragleave = (e) => {
+      e.preventDefault();
+      dosyaBırakmaBölgesi.classList.remove("dragison");
+    }
+
+    dom.adla("taip").onclick = () => {
+      dom.adla("tadc").style.display = "none";
+      EDevletDüğmesi.style.display = "";
+      PDFDüğmesi.style.display = "";
+      powWorker.terminate();
+    }
   }
+
+
+
   if (!location.search) {
     EDevletDüğmesi.classList.add("act");
     PDFDüğmesi.style.display = "";
