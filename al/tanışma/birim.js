@@ -70,36 +70,32 @@ const tanı = () => {
 const göster = () => {
   const EDevletDüğmesi = dom.adla("taa");
   const PDFDüğmesi = dom.adla("tab");
-
   dom.adla("ta").classList.remove("disabled");
+  
+  /** @const {Promise<Array<string>>} */
+  const taahhütPowSözü = taahhütOluştur(Cüzdan.adres(), rasgele)
+    .then((taahhüt) => new Promise((resolve) => {
+      powWorker.postMessage(taahhüt);
+      powWorker.onmessage = (e) => resolve([taahhüt, base64(e.data)])
+    }));
+
+  /** @const {Promise<string>} */
+  const numaraSözü = taahhütPowSözü
+    .then(([taahhüt, pow]) => fetch(`https://api.kimlikdao.org/numara-al?tht=${base64(taahhüt)}&pow=${pow}`))
 
   PDFDüğmesi.onclick = () => {
     dom.adla("tadc").style.display = "";
     EDevletDüğmesi.style.display = "none";
     PDFDüğmesi.style.display = "none";
-    let IbrazNumarası = 0;
+
 
     const powWorker = new Worker("/al/tanışma/pow-worker.js");
     let rasgele = new Uint8Array(64);
     crypto.getRandomValues(rasgele);
 
-    taahhütOluştur(Cüzdan.adres(), rasgele)
-      .then((taahhüt) => {
-        let pow = "";
-        powWorker.postMessage(taahhüt);
-        powWorker.onmessage = (e) => {
-          pow = base64(e.data);
-        }
-        taahhüt = base64(taahhüt);
-      })
-      .then((taahhüt, pow) => {
-        fetch(`https://api.kimlikdao.org/numara-al?tht=${taahhüt}&pow=${pow}`)
-      })
-      .then(res => IbrazNumarası = res);
-
-    /**@const {Element} */
+    /** @const {Element} */
     const dosyaBırakmaBölgesi = dom.adla("tada");
-    dom.adla("taibrazno").innerText = IbrazNumarası;
+    // numaraSözü.then(numara => dom.adla("taibrazno").innerText = numara);
     dom.adla("tadsbtn").onclick = () => {
       dom.adla("tain").click();
     }
@@ -109,9 +105,9 @@ const göster = () => {
         method: 'POST',
         body: dosya,
       })
-      .then(res => res.json())
-      .then(ok => console.log(ok))
-      .catch(e => console.log(e))
+        .then(res => res.json())
+        .then(ok => console.log(ok))
+        .catch(e => console.log(e))
     }
 
     dom.adla("tain").onchange = () => {
@@ -144,8 +140,6 @@ const göster = () => {
       powWorker.terminate();
     }
   }
-
-
 
   if (!location.search) {
     EDevletDüğmesi.classList.add("act");
