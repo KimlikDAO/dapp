@@ -29,8 +29,6 @@ const EşikModal = dom.adla("inmes");
 /** @const {Element} */
 const SilModal = dom.adla("inmsy");
 
-dom.adla("tc").style.opacity = "";
-
 const modalKapat = () => {
   Mask.style.display = "none";
   İmeceİptalModal.style.display = "none";
@@ -39,8 +37,7 @@ const modalKapat = () => {
 }
 
 Mask.onmousedown = (e) => {
-  if (e.target != Mask) return;
-  modalKapat();
+  if (e.target == Mask) modalKapat();
 };
 
 dom.adla("inx").onclick = modalKapat;
