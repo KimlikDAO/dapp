@@ -206,7 +206,6 @@
   font-size: 11pt;
   color: #888;
   border-bottom: 1px solid rgba(0 0 0 / 10%);
-  border-bottom: 1px solid rgba(0 0 0 / 10%);
 }
 
 .oyok {
@@ -240,7 +239,6 @@
   display: flex;
   justify-content: space-between;
   width: 100%;
-  width: 100%;
 }
 
 .oyaotitle {
@@ -251,7 +249,6 @@
 
 .oyaotb {
   position: relative;
-  cursor: pointer;
   cursor: pointer;
   width: 25px;
   height: 20px;
@@ -280,7 +277,6 @@
 
 .oyao_middle {
   display: flex;
-  width: 100%;
   width: 100%;
 }
 
@@ -375,8 +371,6 @@
   display: flex;
   justify-content: center;
   margin-bottom: 1em;
-  justify-content: center;
-  margin-bottom: 1em;
 }
 
 .chartbtn {
@@ -434,18 +428,6 @@
 
 .code_function {
   color: #6D42C7;
-}
-
-.oyao_bottom {
-  width: 100%;
-  margin-top: 3em;
-}
-
-.oybdis {
-  margin: 1em 0;
-  cursor: pointer;
-  color: #2ec479;
-
 }
 
 .oyao_bottom {

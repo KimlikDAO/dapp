@@ -24,6 +24,10 @@ const fiyatDeğişikliğiFormuHazırla = (yeniAğ) => {
   for (const diğerAğ in Cüzdan.Paralar) {
     if (diğerAğ != yeniAğ) dom.adla("oyy" + diğerAğ).nextElementSibling.style.display = "none";
   }
+  //Ağ değişince sağ containerda gösterilen token'ı kaldır
+  for (let i = 0; i < dom.adla("oyytcsag").childElementCount; ++i) {
+    dom.adla("oyytcsag").children[i].style.display = "none";
+  }
   //Labellara click Handler ekle
   for (let/** number */ i = 1; i < dom.adla("oyytcsol").childElementCount; i += 2) {
     const element = dom.adla("oyytcsol").children[i];
@@ -33,13 +37,11 @@ const fiyatDeğişikliğiFormuHazırla = (yeniAğ) => {
   }
 
   const seçilmişTokenGöster = (element) => {
+    for (let i = 0; i < dom.adla("oyytcsag").childElementCount; ++i) {
+      dom.adla("oyytcsag").children[i].style.display = "none";
+    }
     const id = element.previousElementSibling.id.slice(3);
     dom.adla("oyys" + id).style.display = "";
-    //Diğer Ağ tokenlarını UI'dan cıkar
-    for (let i = 0; i < dom.adla("oyytcsag").childElementCount; ++i) {
-      if (dom.adla("oyytcsag").children[i] != dom.adla("oyys" + id))
-        dom.adla("oyytcsag").children[i].style.display = "none";
-    }
   }
 }
 
