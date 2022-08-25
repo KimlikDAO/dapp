@@ -70,8 +70,76 @@ const tanı = () => {
 const göster = () => {
   const EDevletDüğmesi = dom.adla("taa");
   const PDFDüğmesi = dom.adla("tab");
-
   dom.adla("ta").classList.remove("disabled");
+  
+  /** @const {Promise<Array<string>>} */
+  const taahhütPowSözü = taahhütOluştur(Cüzdan.adres(), rasgele)
+    .then((taahhüt) => new Promise((resolve) => {
+      powWorker.postMessage(taahhüt);
+      powWorker.onmessage = (e) => resolve([taahhüt, base64(e.data)])
+    }));
+
+  /** @const {Promise<string>} */
+  const numaraSözü = taahhütPowSözü
+    .then(([taahhüt, pow]) => fetch(`https://api.kimlikdao.org/numara-al?tht=${base64(taahhüt)}&pow=${pow}`))
+
+  PDFDüğmesi.onclick = () => {
+    dom.adla("tadc").style.display = "";
+    EDevletDüğmesi.style.display = "none";
+    PDFDüğmesi.style.display = "none";
+
+
+    const powWorker = new Worker("/al/tanışma/pow-worker.js");
+    let rasgele = new Uint8Array(64);
+    crypto.getRandomValues(rasgele);
+
+    /** @const {Element} */
+    const dosyaBırakmaBölgesi = dom.adla("tada");
+    // numaraSözü.then(numara => dom.adla("taibrazno").innerText = numara);
+    dom.adla("tadsbtn").onclick = () => {
+      dom.adla("tain").click();
+    }
+
+    const dosyaYükle = (dosya) => {
+      fetch('https://api.kimlikdao.org/pdf-yukle?tht=base64(taahhut)&pow=base(pow)', {
+        method: 'POST',
+        body: dosya,
+      })
+        .then(res => res.json())
+        .then(ok => console.log(ok))
+        .catch(e => console.log(e))
+    }
+
+    dom.adla("tain").onchange = () => {
+      dom.adla("tadat").innerText = dom.adla("tain").files[0].name;
+      dosyaBırakmaBölgesi.classList.add("dragison");
+      dosyaYükle(dom.adla("tain").files[0]);
+    }
+
+    dosyaBırakmaBölgesi.ondrop = (e) => {
+      e.preventDefault();
+      const bırakılanDosya = e.dataTransfer.files[0];
+      dom.adla("tadat").innerText = bırakılanDosya.name;
+      dosyaYükle(dom.adla("tain").files[0]);
+    };
+
+    dosyaBırakmaBölgesi.ondragover = (e) => {
+      e.preventDefault();
+      dosyaBırakmaBölgesi.classList.add("dragison");
+    }
+
+    dosyaBırakmaBölgesi.ondragleave = (e) => {
+      e.preventDefault();
+      dosyaBırakmaBölgesi.classList.remove("dragison");
+    }
+
+    dom.adla("taip").onclick = () => {
+      dom.adla("tadc").style.display = "none";
+      EDevletDüğmesi.style.display = "";
+      PDFDüğmesi.style.display = "";
+      powWorker.terminate();
+    }
+  }
 
   if (!location.search) {
     EDevletDüğmesi.classList.add("act");

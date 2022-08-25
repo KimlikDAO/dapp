@@ -1,10 +1,23 @@
 <div id=ta class="step disabled">
   <b data-en="2. Introduce yourself.">2. Kendinizi tanıtın.</b>
-  <span data-phantom data-en="Authenticate using e-devlet login or by uploading a verifiable e-devlet PDF.">Kendinizi e-devlet girişi ile veya PDF yükleyerek tanıtabilirsiniz.</span>
+  <span data-phantom data-en="Authenticate using e-devlet login or by uploading a verifiable e-devlet PDF.">Kendinizi
+    e-devlet girişi ile veya PDF yükleyerek tanıtabilirsiniz.</span>
   <br>
   <br>
   <a data-en-href="https://mock-oauth2.kimlikdao.net/auth?response_type=code&client_id=F5CAA82F-E2CF-4F21-A745-471ABE3CE7F8&redirect_uri=http://localhost:8787/get&scope=Temel-Bilgileri"
-     href="https://mock-oauth2.kimlikdao.net/auth?response_type=code&client_id=F5CAA82F-E2CF-4F21-A745-471ABE3CE7F8&redirect_uri=http://localhost:8787/al&scope=Temel-Bilgileri"
+    href="https://mock-oauth2.kimlikdao.net/auth?response_type=code&client_id=F5CAA82F-E2CF-4F21-A745-471ABE3CE7F8&redirect_uri=http://localhost:8787/al&scope=Temel-Bilgileri"
     class="btn lft" id="taa" data-en="Login with e-devlet">E-devlet ile giriş yap</a>
-  <a href="javascript:" class="act btn" id="tab" style="display:none" data-en="PDF authentication">PDF yükleyerek tanıt</a>
+  <a href="javascript:" class="act btn" id="tab" style="display:none" data-en="PDF authentication">PDF yükleyerek
+    tanıt</a>
+  <div id="tadc" style="display:none">
+    <div id="taip" class="taiptal">x</div>
+    <div id="tada">
+      <input type="file" id=tain>
+      <span id=tadat data-en="Drop your files here!">Dosya seçin ya da <br> Yüklemek istediğiniz dosyayı buraya
+        sürükleyiniz.</span>
+      <span id=taibrazno></span>
+      <img src="/al/tanışma/upload.svg" alt="" width=48 height=48>
+        <div id=tadsbtn class="tabtn" data-en="Select File">Dosya Seç</div>
+    </div>
+  </div>
 </div>
