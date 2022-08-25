@@ -99,10 +99,11 @@
   padding: 4ex 40px;
 }
 
-.tcp0>label {
+.tcp0 label {
   font-size: 7px;
 }
 
-.tcp1 {
+.tcpc {
   display: flex;
+  justify-content: space-between;
 }
