@@ -6,6 +6,13 @@ import { base64 } from '/lib/çevir';
 /** @const {string} */
 const KIMLIK_AS_URL = "https://mock-api.kimlikas.com";
 
+ /**
+   * Pedersen taahhüdü için rasgele bitdizisi.
+   * @type {!Uint8Array}
+   */
+  let rasgele = new Uint8Array(64);
+  crypto.getRandomValues(rasgele);
+
 /**
  * Verilen bir `hesap` için `rasgele` bitdizisi ile kriptografik taahhüt
  * oluşturur.
@@ -27,13 +34,6 @@ const taahhütOluştur = (hesap, rasgele) => {
 
 /** @return {Promise<string>} */
 const tanı = () => {
-  /**
-   * Pedersen taahhüdü için rasgele bitdizisi.
-   * @type {!Uint8Array}
-   */
-  let rasgele = new Uint8Array(64);
-  crypto.getRandomValues(rasgele);
-
   /** @type {URLSearchParams} */
   const params = new URLSearchParams(location.search);
   /** @type {?string} */
@@ -71,7 +71,10 @@ const göster = () => {
   const EDevletDüğmesi = dom.adla("taa");
   const PDFDüğmesi = dom.adla("tab");
   dom.adla("ta").classList.remove("disabled");
-  
+
+  /** @const {Worker} */
+  const powWorker = new Worker("/al/tanışma/pow-worker.js");
+
   /** @const {Promise<Array<string>>} */
   const taahhütPowSözü = taahhütOluştur(Cüzdan.adres(), rasgele)
     .then((taahhüt) => new Promise((resolve) => {
@@ -87,11 +90,6 @@ const göster = () => {
     dom.adla("tadc").style.display = "";
     EDevletDüğmesi.style.display = "none";
     PDFDüğmesi.style.display = "none";
-
-
-    const powWorker = new Worker("/al/tanışma/pow-worker.js");
-    let rasgele = new Uint8Array(64);
-    crypto.getRandomValues(rasgele);
 
     /** @const {Element} */
     const dosyaBırakmaBölgesi = dom.adla("tada");
