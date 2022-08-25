@@ -102,3 +102,7 @@
 .tcp0>label {
   font-size: 7px;
 }
+
+.tcp1 {
+  display: flex;
+}
