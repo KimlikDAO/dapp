@@ -1,5 +1,5 @@
 #oy {
-  margin: 5em auto;
+  margin: 2em auto;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -8,7 +8,7 @@
 
 #oyy {
   width: 300px;
-  max-height: 40px;
+  max-height: 70px;
   cursor: pointer;
   box-shadow: 2px 2px 10px rgb(0 0 0 / 15%);
   border-radius: 2px;
@@ -31,125 +31,164 @@
   max-width: 800px;
   width: 80%;
   max-height: 1000px;
-  height: 400px;
   cursor: default;
   transition-property: width, max-height;
-  transition-duration: 0.5s, 0.2s;
-  transition-delay: 0s, 0.5s;
+  transition-duration: 0.1s, 0.1s;
+  transition-delay: 0, 0.1s;
   transition-timing-function: ease-in;
 }
 
 #oyytitle {
   width: 100%;
-  height: 40px;
+  height: 70px;
   display: flex;
   justify-content: center;
   align-items: center;
-  border-bottom: 1px solid rgb(0 0 0 / 15%);
 }
 
-#oyyfc {
+#oyytabs {
   display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+#oyytabs input[type="radio"] {
+  display: none;
+}
+
+.oyy_tablabel {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  width: 33%;
+  height: 40px;
+  opacity: 0.5;
+  border-bottom: 1px solid rgb(0 0 0 / 15%);
+  transition-property: opacity, background-color;
+  transition-duration: 0.3s;
+  transition-timing-function: ease-in;
+}
+
+.oyy_tablabel.sol {
+  border-left: none;
+}
+
+@media (max-width: 320px) {
+  .oyy_tablabel {
+    font-size: 10pt;
+  }
+}
+
+.oyytab {
+  width: 100%;
+  padding: 2em;
+  display: none;
+  order: 1;
   justify-content: center;
   flex-wrap: wrap;
-  margin: 1em 0;
-}
-
-#oyyft {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  width: 100%;
-}
-
-#oyydb {
-  display: flex;
-  cursor: pointer;
-  justify-content: space-around;
-  border: 1px solid rgb(0 0 0 / 15%);
-  border-radius: 5px;
-  padding: 0.5em;
-  width: 170px;
-  background-color: rgb(255 255 255);
-}
-
-#oyydb:hover {
-  background-color: rgb(255 255 255 / 30%);
-}
-
-#oytri {
-  width: 0;
-  height: 0;
-  margin-left: 5px;
-  border-top: 5px solid rgb(0 0 0);
-  opacity: 0.5;
-  border-left: 5px solid transparent;
-  border-right: 5px solid transparent;
-  cursor: pointer;
-  transform: translateY(7.5px);
-}
-
-#oytri.up {
-  transform: translateY(7.5px) rotate(180deg);
-}
-
-#oyydd {
-  position: absolute;
-  top: 30px;
-  cursor: pointer;
-  margin: 10px 0;
-  padding: 0;
-  background-color: #fff;
-  border: 1px solid #f8f8f8;
-  border-radius: 5px;
-  box-shadow: 0px 1px 20px rgba(0, 0, 0, 0.2);
-  display: block;
-  animation: growDown 300ms ease-in-out forwards;
-  transform-origin: top center;
-  list-style: none;
-  z-index: 20;
-}
-
-#oyydd li {
-  height: 35px;
-  margin: 1px;
-  padding: 3px 10px;
-  display: flex;
   align-items: center;
-  justify-content: left;
 }
 
-#oyydd li:hover {
-  background-color: #f2f2f2;
+#oyytabs input[type="radio"]:checked + .oyy_tablabel {
+  opacity: 1;
+  border: 1px solid rgb(0 0 0 / 15%);
+  border-bottom: none; 
 }
 
-#oyyform {
-  width: 100%;
-  padding: 0 1em;
+#oyytabs input[type="radio"]:checked + .oyy_tablabel.sol {
+  border-left: none;
+  border-top-right-radius: 10px;
+}
+
+#oyytabs input[type="radio"]:checked + .oyy_tablabel.orta {
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+#oyytabs input[type="radio"]:checked + .oyy_tablabel.sag {
+  border-right: none;
+  border-top-left-radius: 10px;
+}
+
+#oyytabs input[type="radio"]:checked + label + .oyytab {
+  display: flex;
+}
+
+#oyypc {
+  width: 50%;
+  display: flex;
+}
+
+#oyypc input::-webkit-outer-spin-button,
+#oyypc input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+#oyytc {
+  width: 50%;
+  display: flex;
+  justify-content: space-between;
+}
+
+#oyytcsol {
+  display: flex;
+  flex-direction: column;
+}
+
+#oyytcsag {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+#oyytcsol input[type="radio"]:checked + label {
+  border: 1px solid rgb(0 0 0 / 15%);
+  background-color: rgb(0 0 0 / 15%);
 }
 
 .oyyfi {
-  width: 100%;
-  height: 35px;
+  width: 50%;
+  height: 25px;
   font-size: 13pt;
-  border: 1px solid rgb(0 0 0 / 15%);
-  border-radius: 5px;
-  margin: 0.5em 0;
+  margin: 0.5em;
+  border: none;
   outline: none;
 }
 
-.oyyfi:hover,
-.oyyfi:focus {
-  box-shadow: 2px 2px 10px rgb(0 0 0 / 15%);
-}
-
 .oyyfi::placeholder {
-  opacity: 0.3;
-  font-family: monospace;
+  opacity: 0.4;
 }
 
-.oyyfsc {
-  margin: 2em 0;
+.oyy_toklabel {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  cursor: pointer;
+  height: 30px;
+  margin: 0.3em 0.3em 0.3em 1em;
+  border-radius: 16px;
+  padding: 0 1em;
+  width: 80px;
+  font-weight: 600;
+  background-color: #fff;
+  border: 1px solid rgb(0 0 0 / 5%);
+}
+
+.oyy_toklabel:hover {
+  border: 1px solid rgb(0 0 0 / 15%);
+  background-color: rgb(0 0 0 / 15%);
+}
+
+.oyy_tsel {
+  display: flex;
+  align-items: center;
+  font-size: 13pt;
+}
+
+#oyyfsc {
+  margin: 1em 0;
 }
 
 .oyc {
@@ -167,6 +206,7 @@
   font-size: 11pt;
   color: #888;
   border-bottom: 1px solid rgba(0 0 0 / 10%);
+  border-bottom: 1px solid rgba(0 0 0 / 10%);
 }
 
 .oyok {
@@ -175,7 +215,7 @@
   cursor: pointer;
   overflow: hidden;
   transition-property: max-height;
-  transition-duration: 1s;
+  transition-duration: 0.3s;
   transition-timing-function: ease-in;
   border-bottom: 1px solid rgba(0 0 0 / 10%);
   border-radius: 2px;
@@ -200,6 +240,7 @@
   display: flex;
   justify-content: space-between;
   width: 100%;
+  width: 100%;
 }
 
 .oyaotitle {
@@ -210,6 +251,7 @@
 
 .oyaotb {
   position: relative;
+  cursor: pointer;
   cursor: pointer;
   width: 25px;
   height: 20px;
@@ -238,6 +280,7 @@
 
 .oyao_middle {
   display: flex;
+  width: 100%;
   width: 100%;
 }
 
@@ -332,6 +375,8 @@
   display: flex;
   justify-content: center;
   margin-bottom: 1em;
+  justify-content: center;
+  margin-bottom: 1em;
 }
 
 .chartbtn {
@@ -389,6 +434,18 @@
 
 .code_function {
   color: #6D42C7;
+}
+
+.oyao_bottom {
+  width: 100%;
+  margin-top: 3em;
+}
+
+.oybdis {
+  margin: 1em 0;
+  cursor: pointer;
+  color: #2ec479;
+
 }
 
 .oyao_bottom {

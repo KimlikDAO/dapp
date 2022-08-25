@@ -20,37 +20,66 @@
   <div id="oy">
     <div id="oyy">
       <div id="oyytitle" data-en="Propose">Yeni Oylama Öner</div>
-      <div id="oyyfc">
-        <div id="oyyft">
-          <div id=oyydb data-en="Choose Proposal Type"><span>Oylama Türü Seçiniz</span>
-            <div id=oytri></div>
+      <div id="oyytabs">
+        <input type="radio" id="oyytab0" name="tabs" checked="checked">
+        <label for="oyytab0" class="oyy_tablabel sol" data-en="TCKT Price Change">TCKT Ücret Değişikliği</label>
+        <div class="oyytab">
+          <div id="oyytc">
+            <div id=oyytcsol>
+              <input type="radio" id=oyy2 name="tokens" checked="checked">
+              <label for="oyy2" class="oyy_toklabel"><img src="/al/ödeme/USDC.svg" height=24 width=24> USDC</label>
+              <input type="radio" id=oyy1 name="tokens">
+              <label for="oyy1" class="oyy_toklabel"><img src="/al/ödeme/USDT.svg" height=24 width=24> USDT</label>
+              <input type="radio" id=oyy3 name="tokens">
+              <label for="oyy3" class="oyy_toklabel"><img src="/al/ödeme/TRYB.svg" height=24 width=24> TRYB</label>
+              <input type="radio" id=oyy0x1 name="tokens">
+              <label for="oyy0x1" class="oyy_toklabel" style="display:none"><img src="/al/ödeme/ETH.svg" height=24 width=24> ETH</label>
+              <input type="radio" id=oyy0xa86a name="tokens">
+              <label for="oyy0xa86a" class="oyy_toklabel" style="display:none"><img src="/al/ödeme/AVAX.svg" height=24 width=24> AVAX</label>
+              <input type="radio" id=oyy0x89 name="tokens">
+              <label for="oyy0x89" class="oyy_toklabel" style="display:none"><img src="/al/ödeme/MATIC.svg" height=24 width=24> MATIC</label>
+              <input type="radio" id=oyy0xfa name="tokens">
+              <label for="oyy0xfa" class="oyy_toklabel" style="display:none"><img src="/al/ödeme/FTM.svg" height=24 width=24> FTM</label>
+              <input type="radio" id=oyy0xa4b1 name="tokens">
+              <label for="oyy0xa4b1" class="oyy_toklabel" style="display:none"><img src="/al/ödeme/ETH.svg" height=24 width=24> ETH</label>
+            </div>
+            <div id=oyytcsag>
+              <div id=oyys2 class="oyy_tsel" ><img src="/al/ödeme/USDC.svg" height=32 width=32> USDC</div>
+              <div id=oyys1 class="oyy_tsel" style="display:none"><img src="/al/ödeme/USDT.svg" height=32 width=32> USDT</div>
+              <div id=oyys3 class="oyy_tsel" style="display:none"><img src="/al/ödeme/TRYB.svg" height=32 width=32> TRYB</div>
+              <div id=oyys0x1 class="oyy_tsel" style="display:none"><img src="/al/ödeme/ETH.svg" height=32 width=32> ETH</div>
+              <div id=oyys0xa86a class="oyy_tsel" style="display:none"><img src="/al/ödeme/AVAX.svg" height=32 width=32> AVAX</div>
+              <div id=oyys0x89 class="oyy_tsel" style="display:none"><img src="/al/ödeme/MATIC.svg" height=32 width=32> MATIC</div>
+              <div id=oyys0xfa class="oyy_tsel" style="display:none"><img src="/al/ödeme/FTM.svg" height=32 width=32> FTM</div>
+              <div id=oyys0xa4b1 class="oyy_tsel" style="display:none"><img src="/al/ödeme/ETH.svg" height=32 width=32> ETH</div>
+            </div>
           </div>
-          <ul id=oyydd style="display:none">
-            <li id=oyydd0 data-en="TCKT Price Change">TCKT Ücret Değişikliği</li>
-            <li id=oyydd1 data-en="Trade Proposal">Takas Önerisi</li>
-            <li id=oyydd2 data-en="Custom">Kendin Oluştur</li>
-          </ul>
+          <div id="oyypc">
+            <input type="number" id=oyyprice class="oyyfi" placeholder="Fiyat Giriniz">
+          </div>
+          <div id="oyyfsc">
+            <a href="javascript:" id="oyyfs" class="act btn lft" data-en="Submit Proposal">Öneri Gönder</a>
+            <a href="javascript:" id="oyyfc" class="btn" data-en="Cancel">İptal</a>
+          </div>
         </div>
-        <div id=oyyform>
-          <div id="tradeform">
-            <input class="oyyfi" placeholder="INPUT0" />
-            <input class="oyyfi" placeholder="INPUT1" />
-            <input class="oyyfi" placeholder="INPUT2" />
-            <input class="oyyfi" placeholder="INPUT3" />
-          </div>
-          <div class="oyyfsc">
-            <a href="javascript:" id="oyyfo" class="act btn lft" data-en="Submit">Gönder</a>
-            <a href="javascript:" id="oyyfr" class="btn" data-en="Cancel">İptal</a>
-          </div>
+        <input type="radio" id="oyytab1" name="tabs">
+        <label for="oyytab1" class="oyy_tablabel orta" data-en="Trade Proposal">Takas Önerisi</label>
+        <div class="oyytab">
+          WIP
+        </div>
+        <input type="radio" id="oyytab2" name="tabs">
+        <label for="oyytab2" class="oyy_tablabel sag" data-en="Custom Proposal">Kendin Belirle</label>
+        <div class="oyytab">
+          WIP
         </div>
       </div>
     </div>
     <div id="oyac" class="oyc">
       <div class="oycb">Devam eden oylamalar</div>
-      <div class="oyok" style="display:none">
-        <div class="oyao_top">
+      <div class="oyok" style="display:none" style="display:none">
+        <div class="oyao__top">
           <div class="oyaotitle">TCKT Fiyat Değişikliği</div>
-          <div class="oyaotb" style="display:none"></div>
+          <div class="oyaotb" style="display:none" style="display:none"></div>
         </div>
         <div class="oyao_middle">
           <div class="oyaodac">
@@ -58,7 +87,9 @@
             <div class="oyaoac">
               <div>Address: <span class="code_adr">TCKT</span> on <span class="code_network">Avalanche</span>(<span
                   class="code_network">Raw</span>:
+               
                 <span class="code_adr">"0xa86a, 0xcCc23478203948cCc"</span>)
+              
               </div>
               <div>Calldata: <span class="code_function">updatePrice</span>(USDC, $1.5) (<span
                   class="code_network">Raw</span>: "0x94934811238773733")</div>
@@ -79,6 +110,13 @@
               <a href="javascript:" class="chartbtn abstain"></a>
             </div>
           </div>
+        </div>
+        <div class="oyao_bottom">
+          <div class="oybt">lorem ipsum Lorem Ipsum is simply dummy text of the
+            printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the
+            1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+          </div>
+          <div class="oybdis">Discussion</div>
         </div>
         <div class="oyao_bottom">
           <div class="oybt">lorem ipsum Lorem Ipsum is simply dummy text of the

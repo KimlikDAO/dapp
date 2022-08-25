@@ -2,32 +2,45 @@
  * @fileoverview Oyla sayfası giriş noktası
  *
  */
-import '/birim/cüzdan/birim';
+import Cüzdan from '/birim/cüzdan/birim';
 import dom from '/lib/dom';
+
+Cüzdan.bağlanınca(() => {
+  let ağ = Cüzdan.ağ();
+  fiyatDeğişikliğiFormuHazırla(ağ)
+  Cüzdan.ağDeğişince(() => {
+    fiyatDeğişikliğiFormuHazırla(Cüzdan.ağ())
+  })
+})
 
 dom.adla("oyy").onclick = () => {
   dom.adla("oyy").classList.add("open_form");
 }
 
-dom.adla("oyyfr").onclick = (event) => {
-  dom.adla("oyy").classList.remove("open_form");
-  event.stopPropagation();
-}
-
-dom.adla("oyydb").onclick = (event) => {
-  const kapat = (event) => {
-    dom.adla("oyydd").style.display = "none";
-    dom.adla("oytri").classList.remove("up");
-    if (event.target.parentElement == dom.adla("oyydd"))
-      dom.adla("oyydb").firstElementChild.innerText = event.target.innerText;
-    window.onclick = null;
+/**@param {string} yeniAğ  Ağ değişince UI'da gösterir*/
+const fiyatDeğişikliğiFormuHazırla = (yeniAğ) => {
+  dom.adla("oyy" + yeniAğ).nextElementSibling.style.display = "";
+  //Diğer Ağ tokenlarını UI'dan cıkar
+  for (const diğerAğ in Cüzdan.Paralar) {
+    if (diğerAğ != yeniAğ) dom.adla("oyy" + diğerAğ).nextElementSibling.style.display = "none";
   }
-  dom.adla("oyydd").style.display = "";
-  dom.adla("oytri").classList.add("up");
-  let f = window.onclick;
-  if (f) f(event);
-  if (f !== kapat) window.onclick = kapat;
-  event.stopPropagation();
+  //Labellara click Handler ekle
+  for (let/** number */ i = 1; i < dom.adla("oyytcsol").childElementCount; i += 2) {
+    const element = dom.adla("oyytcsol").children[i];
+    element.onclick = () => {
+      seçilmişTokenGöster(element)
+    }
+  }
+
+  const seçilmişTokenGöster = (element) => {
+    const id = element.previousElementSibling.id.slice(3);
+    dom.adla("oyys" + id).style.display = "";
+    //Diğer Ağ tokenlarını UI'dan cıkar
+    for (let i = 0; i < dom.adla("oyytcsag").childElementCount; ++i) {
+      if (dom.adla("oyytcsag").children[i] != dom.adla("oyys" + id))
+        dom.adla("oyytcsag").children[i].style.display = "none";
+    }
+  }
 }
 
 const aktifOyKartıOluştur = (data) => {
