@@ -22,12 +22,8 @@
 }
 
 #taip {
-  position: absolute;
-  cursor: pointer;
-  font-weight: 600;
-  top: -5px;
-  right: -5px;
-  padding: 1em;
+  top: 0;
+  right: 0;
 }
 
 #tabi {

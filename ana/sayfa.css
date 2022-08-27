@@ -309,3 +309,34 @@ h1 {
     margin-right: 10px;
   }
 }
+
+.xbtn {
+  position: absolute;
+  opacity: 0.3;
+  cursor: pointer;
+  padding: 1em;
+}
+
+.xbtn:hover {
+  opacity: 1;
+}
+
+.xbtn::before, 
+.xbtn::after {
+  position: absolute;
+  left: 13.5px;
+  top: 9.5px;
+  width: 2px;
+  height: 10px;
+  border-radius: 1px;
+  background-color: #333;
+  content: "";
+}
+
+.xbtn::before {
+  transform: rotate(45deg);
+}
+
+.xbtn::after {
+  transform: rotate(-45deg);
+}

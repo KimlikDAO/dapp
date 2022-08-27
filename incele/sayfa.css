@@ -70,12 +70,8 @@
 }
 
 #inx {
-  position: absolute;
   right: 10px;
   top: 10px;
-  font-weight: 700;
-  cursor: pointer;
-  padding: 1em;
 }
 
 .inm {
@@ -166,3 +162,19 @@
   color: #959DA5;
   cursor: default;
 }
+
+.instar_rotate {
+  transform: rotate(-18deg) translateX(10px);
+}
+
+.inex {
+  position: relative;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  margin: 50px;
+  cursor: pointer;
+  opacity: 0.3;
+}
+
+
