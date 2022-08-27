@@ -24,16 +24,19 @@
   backface-visibility: hidden;
 }
 
+/* Kapak yüzü */
 #tca {
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
+/* Bilgi yüzü */
 #tci {
   transform: rotateY(180deg);
 }
 
+/* Clipper */
 #tcc {
   overflow: hidden;
   width: 100%;
@@ -99,6 +102,22 @@
   padding: 4ex 40px;
 }
 
-.tcp0>label {
+.tcp0 label {
   font-size: 7px;
+}
+
+.tcpc {
+  display: flex;
+  justify-content: space-between;
+}
+
+#tcam {
+  min-width: 4em;
+}
+
+h7 {
+  font-size: 9pt;
+  color: #999;
+  font-weight: 400;
+  display:block;
 }

@@ -14,9 +14,9 @@ const kartDeğiştir = (yeniKart) => {
   Kart = yeniKart;
 }
 
-dom.adla("tcso").onclick = () => kartDeğiştir((Kart + 1) % 2);
+dom.adla("tcso").onclick = () => kartDeğiştir((Kart + 2) % 3);
 
-dom.adla("tcsa").onclick = () => kartDeğiştir((Kart + 1) % 2);
+dom.adla("tcsa").onclick = () => kartDeğiştir((Kart + 1) % 3);
 
 const yüzGöster = (bilgiYüzü) => tckt.classList.toggle("flipped", bilgiYüzü);
 
