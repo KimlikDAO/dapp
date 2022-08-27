@@ -1,6 +1,18 @@
-JsDeps_oyla/sayfa := oyla/sayfa.js \
-                     birim/cüzdan/birim.js \
-                     lib/dom.js lib/ethereum.js lib/TCKT.js
+build/oyla/sayfa-%.js: oyla/sayfa.js \
+                       birim/cüzdan/birim.js \
+                       lib/dom.js lib/ethereum.js lib/TCKT.js
+	mkdir -p $(dir $@)
+	yarn google-closure-compiler -W VERBOSE -O ADVANCED --charset UTF-8 \
+                             --define TR=$(Lang-$*) \
+                             --emit_use_strict \
+                             --module_resolution NODE \
+                             --assume_function_wrapper \
+                             --dependency_mode PRUNE \
+                             --entry_point $< \
+                             --js $^ \
+                             --js_output_file $@
+	yarn uglifyjs $@ -m -o $@
+	node tools/jsPostprocessor $@
 
 build/oyla/sayfa.css: oyla/sayfa.css oyla/*/*.css
 	mkdir -p $(dir $@)

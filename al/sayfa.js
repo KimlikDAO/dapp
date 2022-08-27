@@ -54,7 +54,7 @@ const açıkAnahtarAlVe = (sonra) => {
 }
 
 /**
- * @param {Promise<TCKTTemelBilgileri>} açıkTCKT
+ * @param {Promise<string>} açıkTCKTSözü
  */
 const tcktYarat = (açıkTCKTSözü) => {
   açıkAnahtarAlVe((açıkAnahtar) => {
@@ -103,6 +103,8 @@ if (window["ethereum"]) {
     /** @const {Element} */
     const s1a = dom.adla("s1a");
     s1a.innerText = dom.TR ? "Cüzdan bağlandı ✓" : "Wallet connected ✓";
+    s1a.href = "javascript:";
+    s1a.target = "";
     dom.butonDurdur(s1a);
     s1b.style.display = "none";
     dom.adla("s1").classList.add("done");

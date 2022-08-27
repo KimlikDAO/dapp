@@ -12,24 +12,47 @@
     <div id="taip" class="taiptal">x</div>
     <div id="tada">
       <input type="file" id=tain>
-      <span>E-devlet’ten <b>Kurum Talebi</b> için nüfus kayıt örneği almanız gerekiyor:</span>
+      <span data-phantom
+        data-en="We need a registry certificate from e-devlet, to be presented to KimlikDAO.">E-devlet’ten <b>Kurum
+          Talebi</b> için nüfus kayıt örneği almanız gerekiyor:</span>
       <table id="tabi">
         <tr>
-          <td>Nüfus Kayıt Örneği Tipi</td><td>Kişi</td>
+          <td data-en="Certificate type">Nüfus Kayıt Örneği Tipi</td>
+          <td data-en="Self">Kişi</td>
         </tr>
-        <tr><td>Eski Eş Listelesi</td><td>Hayır</td></tr>
-        <tr><td>Vukuatlı Belge (Olayları Göster)</td><td>Hayır</td></tr>
-        <tr><td>Belgenin Neden Verileceği</td><td>Kurum Talebi</td></tr>
-        <tr><td>Kurum adı</td><td><b>KimlikDAO</b></td></tr>
-        <tr><td>Sayı</td><td><b id="tano"></b></td></tr>
+        <tr>
+          <td data-en="Include former spouse list">Eski Eş Listelesi</td>
+          <td data-en="No">Hayır</td>
+        </tr>
+        <tr>
+          <td data-en="Include background check">Vukuatlı Belge (Olayları Göster)</td>
+          <td data-en="No">Hayır</td>
+        </tr>
+        <tr>
+          <td data-en="Purpose">Belgenin Neden Verileceği</td>
+          <td data-en="Institution request">Kurum Talebi</td>
+        </tr>
+        <tr>
+          <td data-en="Institution name">Kurum adı</td>
+          <td><b>KimlikDAO</b></td>
+        </tr>
+        <tr>
+          <td data-en="Request number">Sayı</td>
+          <td><b id="tano" data-en="Calculating...">Hesaplanıyor...</b></td>
+        </tr>
       </table>
-      <a class=lnk target="_blank" href="//www.turkiye.gov.tr/nvi-nufus-kayit-ornegi-belgesi-sorgulama">
-        E-devlet Nüfus Kayıt Örnegi <img src='/birim/cüzdan/img/external-link.svg' height=10 width=10 data-inline> </a> sayfasından
-        yukarıdaki bilgileri girerek bir PDF dosyası alın. Aldığınız dosyayı bu kutuya sürükleyin.
-        <div id="taimg"><img src="/al/tanışma/upload.svg" alt="" width=48 height=48>
-        </div>
-        <a href="javascript:" id=tadsbtn class="btn act lft" data-en="Select file">Dosya seç</a>
-        <a href="javascript:" id=tabip class="btn" data-en="Cancel">İptal</a>
+      <span data-phantom data-en="Please enter the information above at"></span>
+      <a class=lnk target="_blank" href="//www.turkiye.gov.tr/nvi-nufus-kayit-ornegi-belgesi-sorgulama"
+        data-en=" e-devlet registry ">
+        E-devlet Nüfus Kayıt Örnegi <img src='/al/tanışma/external-link.svg' data-inline></a>
+      <span data-phantom
+        data-en=" to obtain a verifiable PDF. Once you have the file, drag and drop it here.">sayfasından yukarıdaki
+        bilgileri girerek bir PDF dosyası alın. Aldığınız dosyayı bu kutuya
+        sürükleyin.</span>
+      <div id="taimg"><img src="/al/tanışma/upload.svg" alt="" width=48 height=48>
+      </div>
+      <a href="javascript:" id=tadsbtn class="btn act lft" data-en="Select file">Dosya seç</a>
+      <a href="javascript:" id=tabip class="btn" data-en="Cancel">İptal</a>
     </div>
   </div>
 </div>

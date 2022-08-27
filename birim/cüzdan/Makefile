@@ -1,13 +1,13 @@
-INLINE_SVG := avalanche.svg copy.svg external-link.svg
+CÜZDAN_INLINE_SVG := avalanche.svg copy.svg external-link.svg
 
-INLINE_SVG_OUT := $(foreach item,$(INLINE_SVG),build/birim/cüzdan/img/$(item).inl)
+CÜZDAN_INLINE_SVG_OUT := $(foreach item,$(CÜZDAN_INLINE_SVG),build/birim/cüzdan/img/$(item).inl)
 
-REQUEST_SVG := $(filter-out $(INLINE_SVG), $(notdir $(wildcard birim/cüzdan/img/*.svg)))
+CÜZDAN_REQUEST_SVG := $(filter-out $(CÜZDAN_INLINE_SVG), $(notdir $(wildcard birim/cüzdan/img/*.svg)))
 
-REQUEST_SVG_OUT := $(addprefix build/birim/cüzdan/img/, $(REQUEST_SVG))
+CÜZDAN_REQUEST_SVG_OUT := $(addprefix build/birim/cüzdan/img/, $(CÜZDAN_REQUEST_SVG))
 
-build/birim/cüzdan/birim.keymap: $(call compressions, $(REQUEST_SVG_OUT))
+build/birim/cüzdan/birim.keymap: $(call compressions, $(CÜZDAN_REQUEST_SVG_OUT))
 	mkdir -p $(dir $@) && rm -rf $@
-	tools/keyhasher.py $@ $(REQUEST_SVG_OUT)
+	tools/keyhasher.py $@ $(CÜZDAN_REQUEST_SVG_OUT)
 
-birim/cüzdan.birim: birim/cüzdan/birim.html $(INLINE_SVG_OUT)
+birim/cüzdan.birim: birim/cüzdan/birim.html $(CÜZDAN_INLINE_SVG_OUT)

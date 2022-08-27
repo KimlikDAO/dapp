@@ -1,4 +1,4 @@
-#tadc{
+#tadc {
   margin-top: 2em;
   position: relative;
 }
@@ -32,7 +32,7 @@
 
 #tabi {
   color: #555;
-  padding: 2em;
+  padding: 2em 1em;
 }
 
 #tabi td:first-child {
@@ -40,11 +40,12 @@
 }
 
 .lnk {
- text-decoration: none; border-bottom:1px dotted;
+  text-decoration: none;
+  border-bottom: 1px dotted;
 }
 
 #taimg {
-  margin: 2em auto;
+  margin: 3em auto;
   display: flex;
   justify-content: center;
   align-items: center;

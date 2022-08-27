@@ -58,33 +58,3 @@ build/%.svg.inl: %.svg
 	touch $@
 
 .SECONDARY:
-
-.SECONDEXPANSION:
-
-build/%-en.js: %.js $$(JsDeps_%)
-	mkdir -p $(dir $@)
-	yarn google-closure-compiler -W VERBOSE -O ADVANCED --charset UTF-8 \
-                             --define TR=false \
-                             --emit_use_strict \
-                             --module_resolution NODE \
-                             --assume_function_wrapper \
-                             --dependency_mode PRUNE \
-                             --entry_point $< \
-                             --js $^ \
-                             --js_output_file $@
-	yarn uglifyjs $@ -m -o $@
-	node tools/jsPostprocessor $@
-
-build/%-tr.js: %.js $$(JsDeps_%)
-	mkdir -p $(dir $@)
-	yarn google-closure-compiler -W VERBOSE -O ADVANCED --charset UTF-8 \
-                             --define TR=true \
-                             --emit_use_strict \
-                             --module_resolution NODE \
-                             --assume_function_wrapper \
-                             --dependency_mode PRUNE \
-                             --entry_point $< \
-                             --js $^ \
-                             --js_output_file $@
-	yarn uglifyjs $@ -m -o $@
-	node tools/jsPostprocessor $@

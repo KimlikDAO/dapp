@@ -1,7 +1,7 @@
 import Cüzdan from '/birim/cüzdan/birim';
 import Tckt from '/birim/tckt/birim';
 import dom from '/lib/dom';
-import { uint8ArrayeBase64ten, base64 } from '/lib/çevir';
+import { base64, uint8ArrayeBase64ten } from '/lib/çevir';
 
 /** @const {string} */
 const KIMLIK_AS_URL = "https://mock-api.kimlikas.com";
@@ -10,7 +10,7 @@ const KIMLIK_AS_URL = "https://mock-api.kimlikas.com";
  * Verilen bir `hesap` için `rasgele` bitdizisi ile kriptografik taahhüt
  * oluşturur.
  *
- * @param {string} hesap EVM adresi.
+ * @param {string} adres EVM adresi.
  * @param {!Uint8Array} rasgele bitdizisi.
  * @return {Promise<ArrayBuffer>} Kriptografik taahhüt.
  */
@@ -26,7 +26,7 @@ const taahhütOluştur = (adres, rasgele) => {
 }
 
 /**
- * @param {function(Promise<TCKTTemelBilgileri>)} sonra
+ * @param {function(Promise<string>)} sonra
  */
 const açıkTcktAlVe = (sonra) => {
   /** @const {Worker} */
@@ -51,20 +51,25 @@ const açıkTcktAlVe = (sonra) => {
     }
   }
   /** @const {Promise<!Uint8Array>} */
-  const taahhütPowSözü = taahhütOluştur(Cüzdan.adres(), pdfRasgele)
+  const taahhütPowSözü = taahhütOluştur(/** @type {string} */(Cüzdan.adres()), pdfRasgele)
     .then((taahhüt) => new Promise((resolve) => {
-      /** @const {!Uint8Array} */
-      const taahhütPow = new Uint8Array(64);
-      powWorker.postMessage(taahhüt);
-      taahhütPow.set(new Uint8Array(taahhüt));
-      powWorker.onmessage = (e) => {
-        taahhütPow.set(e.data, 32);
-        resolve(taahhütPow);
+      const taahhütB64 = base64(new Uint8Array(taahhüt));
+      const yazılıTaahhütPow = window.localStorage[taahhütB64];
+      if (yazılıTaahhütPow) {
+        powWorker.terminate();
+        resolve(yazılıTaahhütPow)
+      } else {
+        powWorker.postMessage(taahhüt, [taahhüt]);
+        powWorker.onmessage = (msg) => {
+          const taahhütPow = base64(new Uint8Array(msg.data))
+          window.localStorage[taahhütB64] = taahhütPow;
+          resolve(taahhütPow);
+        }
       }
     }));
   /** @const {Promise<string>} */
   const numaraSözü = taahhütPowSözü
-    .then((taahhütPow) => fetch("//api.kimlikdao.org/numara-al?" + base64(taahhütPow)))
+    .then((taahhütPow) => fetch("//api.kimlikdao.org/numara-al?" + taahhütPow))
     .then((res) => res.text())
     .catch(console.log);
 
@@ -74,7 +79,10 @@ const açıkTcktAlVe = (sonra) => {
   const pdfDüğmesi = dom.adla("tab");
   /** @const {Element} */
   const kutu = dom.adla("ta");
-  /** @const {function(TCKTTemelBilgileri, string)} */
+  /**
+   * @param {TCKTTemelBilgileri} gelenTckt
+   * @param {!Uint8Array} rasgele
+   */
   const kapat = (gelenTckt, rasgele) => {
     /** @const {TCKTTemelBilgileri} */
     const temizTckt = {};
@@ -104,14 +112,13 @@ const açıkTcktAlVe = (sonra) => {
     pdfDüğmesi.classList.remove("act");
     pdfDüğmesi.innerText = dom.TR ? "E-devlet’ten bilgileriniz alındı ✓" : "We got your info ✓";
     dom.butonDurdur(pdfDüğmesi);
-    taahhütOluştur(Cüzdan.adres(), eDevletRasgele)
+    taahhütOluştur(/** @type {string} */(Cüzdan.adres()), eDevletRasgele)
       .then((taahhüt) =>
-        fetch(KIMLIK_AS_URL + "?" + new URLSearchParams({ "oauth_code": code, "taahhut": taahhüt })))
+        fetch(KIMLIK_AS_URL + "?" + new URLSearchParams({ "oauth_code": code, "taahhut": base64(new Uint8Array(taahhüt)) })))
       .then(res => res.json())
       .then((açıkTckt) => kapat(açıkTckt, eDevletRasgele));
   } else {
     pdfDüğmesi.onclick = () => {
-      dom.adla("tadc").style.display = "";
       eDevletDüğmesi.style.display = "none";
       pdfDüğmesi.style.display = "none";
 
@@ -119,17 +126,18 @@ const açıkTcktAlVe = (sonra) => {
       const dosyaBırakmaBölgesi = dom.adla("tada");
       numaraSözü.then((numara) => dom.adla("tano").innerText = numara);
       dom.adla("tadsbtn").onclick = () => dom.adla("tain").click();
+      dom.adla("tadc").style.display = "";
 
       /** @const {function(File)} */
       const dosyaYükle = (dosya) => {
         taahhütPowSözü.then((taahhütPow) =>
-          fetch('https://api.kimlikdao.org/pdften-tckt?' + taahhütPow, {
+          fetch('//api.kimlikdao.org/pdften-tckt?' + taahhütPow, {
             method: 'POST',
             body: dosya,
           }))
           .then(res => res.json())
           .then((açıkTckt) => {
-            localStorage.removeItem(Cüzdan.adres().toLowerCase + "r");
+            window.localStorage.removeItem(Cüzdan.adres().toLowerCase + "r");
             kapat(açıkTckt, pdfRasgele);
           })
           .catch(console.log)
