@@ -1,7 +1,7 @@
 import Cüzdan from '/birim/cüzdan/birim';
 import Tckt from '/birim/tckt/birim';
 import dom from '/lib/dom';
-import { base64 } from '/lib/çevir';
+import { uint8ArrayeBase64ten, base64 } from '/lib/çevir';
 
 /** @const {string} */
 const KIMLIK_AS_URL = "https://mock-api.kimlikas.com";
@@ -12,142 +12,160 @@ const KIMLIK_AS_URL = "https://mock-api.kimlikas.com";
  *
  * @param {string} hesap EVM adresi.
  * @param {!Uint8Array} rasgele bitdizisi.
- * @return {Promise<string>} Kriptografik taahhüt.
+ * @return {Promise<ArrayBuffer>} Kriptografik taahhüt.
  */
-const taahhütOluştur = (hesap, rasgele) => {
+const taahhütOluştur = (adres, rasgele) => {
   /** @type {!Uint8Array} */
-  let concat = new Uint8Array(64 + 20);
+  const concat = new Uint8Array(64 + 20);
   concat.set(rasgele, 0);
 
   for (let /** number */ i = 1; i <= 20; ++i)
-    concat[i + 63] = parseInt(hesap.substring(2 * i, 2 * i + 2), 16);
+    concat[i + 63] = parseInt(adres.substring(2 * i, 2 * i + 2), 16);
 
-  return crypto.subtle.digest("SHA-256", concat).then(base64);
+  return crypto.subtle.digest("SHA-256", concat);
 }
 
-/** @return {Promise<string>} */
-const tanı = () => {
+/**
+ * @param {function(Promise<TCKTTemelBilgileri>)} sonra
+ */
+const açıkTcktAlVe = (sonra) => {
+  /** @const {Worker} */
+  const powWorker = new Worker("/al/tanışma/pow-worker.js");
+
   /**
    * Pedersen taahhüdü için rasgele bitdizisi.
+   *
+   * TCKT'nin kişi bilgilerinden tahmin edilememesini de bu şekilde sağlıyoruz.
+   * Bu sebeple, 32 byte yetmesine karşın, bitdizisini 64 byte uzunluğunda
+   * seçiyoruz.
    * @type {!Uint8Array}
    */
-  let rasgele = new Uint8Array(64);
-  crypto.getRandomValues(rasgele);
+  const pdfRasgele = new Uint8Array(64);
+  {
+    const b64 = window.localStorage[Cüzdan.adres().toLowerCase() + "r"];
+    if (b64) {
+      uint8ArrayeBase64ten(pdfRasgele, b64)
+    } else {
+      crypto.getRandomValues(pdfRasgele);
+      window.localStorage[Cüzdan.adres().toLowerCase() + "r"] = base64(pdfRasgele);
+    }
+  }
+  /** @const {Promise<!Uint8Array>} */
+  const taahhütPowSözü = taahhütOluştur(Cüzdan.adres(), pdfRasgele)
+    .then((taahhüt) => new Promise((resolve) => {
+      /** @const {!Uint8Array} */
+      const taahhütPow = new Uint8Array(64);
+      powWorker.postMessage(taahhüt);
+      taahhütPow.set(new Uint8Array(taahhüt));
+      powWorker.onmessage = (e) => {
+        taahhütPow.set(e.data, 32);
+        resolve(taahhütPow);
+      }
+    }));
+  /** @const {Promise<string>} */
+  const numaraSözü = taahhütPowSözü
+    .then((taahhütPow) => fetch("//api.kimlikdao.org/numara-al?" + base64(taahhütPow)))
+    .then((res) => res.text())
+    .catch(console.log);
+
+  /** @const {Element} */
+  const eDevletDüğmesi = dom.adla("taa");
+  /** @const {Element} */
+  const pdfDüğmesi = dom.adla("tab");
+  /** @const {Element} */
+  const kutu = dom.adla("ta");
+  /** @const {function(TCKTTemelBilgileri, string)} */
+  const kapat = (gelenTckt, rasgele) => {
+    /** @const {TCKTTemelBilgileri} */
+    const temizTckt = {};
+    for (let /** @type {string} */ ad of "TCKN ad soyad dt annead babaad".split(" ")) {
+      dom.adla("tc" + ad).innerText = gelenTckt[ad];
+      temizTckt[ad] = gelenTckt[ad];
+    }
+    Tckt.yüzGöster(true);
+    kutu.classList.add("done");
+    temizTckt.rasgele = base64(rasgele);
+    sonra(Promise.resolve(JSON.stringify(temizTckt, null, 2)));
+  }
+  kutu.classList.remove("disabled");
 
   /** @type {URLSearchParams} */
   const params = new URLSearchParams(location.search);
   /** @type {?string} */
   const code = params.get("code");
   history.replaceState(null, "", location.pathname);
+  if (code) {
+    powWorker.terminate();
+    /** @const {!Uint8Array} */
+    const eDevletRasgele = new Uint8Array(64);
+    crypto.getRandomValues(eDevletRasgele);
+    eDevletDüğmesi.style.display = "none";
+    pdfDüğmesi.href = "javascript:";
+    pdfDüğmesi.classList.remove("act");
+    pdfDüğmesi.innerText = dom.TR ? "E-devlet’ten bilgileriniz alındı ✓" : "We got your info ✓";
+    dom.butonDurdur(pdfDüğmesi);
+    taahhütOluştur(Cüzdan.adres(), eDevletRasgele)
+      .then((taahhüt) =>
+        fetch(KIMLIK_AS_URL + "?" + new URLSearchParams({ "oauth_code": code, "taahhut": taahhüt })))
+      .then(res => res.json())
+      .then((açıkTckt) => kapat(açıkTckt, eDevletRasgele));
+  } else {
+    pdfDüğmesi.onclick = () => {
+      dom.adla("tadc").style.display = "";
+      eDevletDüğmesi.style.display = "none";
+      pdfDüğmesi.style.display = "none";
 
-  return taahhütOluştur(/** @type {string} */(Cüzdan.adres()), rasgele)
-    .then((taahhüt) =>
-      fetch(KIMLIK_AS_URL + "?" + new URLSearchParams({ "oauth_code": code, "taahhüt": taahhüt })))
-    .then((res) => res.json())
-    .then((açıkTCKT) => {
-      /** @const {TCKTTemelBilgileri} */
-      const temizTCKT = {};
-      for (let ad of "TCKN ad soyad dt annead babaad".split(" ")) {
-        dom.adla("tc" + ad).innerText = açıkTCKT[ad];
-        temizTCKT[ad] = açıkTCKT[ad];
-      }
-      Tckt.yüzGöster(true);
       /** @const {Element} */
-      const OAuthDüğmesi = dom.adla("taa");
-      OAuthDüğmesi.innerText = dom.TR ? "E-devlet’ten bilgileriniz alındı ✓" : "We got your info ✓";
-      OAuthDüğmesi.classList.remove("act");
-      OAuthDüğmesi.href = "javascript:";
-      dom.butonDurdur(OAuthDüğmesi);
-      dom.adla("ta").classList.add("done");
-      temizTCKT.taahhüt = açıkTCKT["taahhüt"];
-      temizTCKT.rasgele = base64(rasgele);
-      // TODO(KimlikDAO-bot): Kullanıcı tarafında gelen TCKT'nin fazladan veri
-      // içermediğini denetle. Fazla verileri işaretleme riski yüzünden sil.
-      return JSON.stringify(temizTCKT, null, 2);
-    });
-}
+      const dosyaBırakmaBölgesi = dom.adla("tada");
+      numaraSözü.then((numara) => dom.adla("tano").innerText = numara);
+      dom.adla("tadsbtn").onclick = () => dom.adla("tain").click();
 
-const göster = () => {
-  const EDevletDüğmesi = dom.adla("taa");
-  const PDFDüğmesi = dom.adla("tab");
-  dom.adla("ta").classList.remove("disabled");
-  
-  /** @const {Promise<Array<string>>} */
-  const taahhütPowSözü = taahhütOluştur(Cüzdan.adres(), rasgele)
-    .then((taahhüt) => new Promise((resolve) => {
-      powWorker.postMessage(taahhüt);
-      powWorker.onmessage = (e) => resolve([taahhüt, base64(e.data)])
-    }));
+      /** @const {function(File)} */
+      const dosyaYükle = (dosya) => {
+        taahhütPowSözü.then((taahhütPow) =>
+          fetch('https://api.kimlikdao.org/pdften-tckt?' + taahhütPow, {
+            method: 'POST',
+            body: dosya,
+          }))
+          .then(res => res.json())
+          .then((açıkTckt) => {
+            localStorage.removeItem(Cüzdan.adres().toLowerCase + "r");
+            kapat(açıkTckt, pdfRasgele);
+          })
+          .catch(console.log)
+      }
 
-  /** @const {Promise<string>} */
-  const numaraSözü = taahhütPowSözü
-    .then(([taahhüt, pow]) => fetch(`https://api.kimlikdao.org/numara-al?tht=${base64(taahhüt)}&pow=${pow}`))
+      dom.adla("tain").onchange = () => {
+        // dom.adla("tadat").innerText = dom.adla("tain").files[0].name;
+        dosyaBırakmaBölgesi.classList.add("dragison");
+        dosyaYükle(dom.adla("tain").files[0]);
+      }
 
-  PDFDüğmesi.onclick = () => {
-    dom.adla("tadc").style.display = "";
-    EDevletDüğmesi.style.display = "none";
-    PDFDüğmesi.style.display = "none";
+      dosyaBırakmaBölgesi.ondrop = (e) => {
+        e.preventDefault();
+        /** @const {File} */
+        const bırakılanDosya = e.dataTransfer.files[0];
+        // dom.adla("tadat").innerText = bırakılanDosya.name;
+        dosyaYükle(dom.adla("tain").files[0]);
+      };
 
+      dosyaBırakmaBölgesi.ondragover = (e) => {
+        e.preventDefault();
+        dosyaBırakmaBölgesi.classList.add("dragison");
+      }
 
-    const powWorker = new Worker("/al/tanışma/pow-worker.js");
-    let rasgele = new Uint8Array(64);
-    crypto.getRandomValues(rasgele);
+      dosyaBırakmaBölgesi.ondragleave = (e) => {
+        e.preventDefault();
+        dosyaBırakmaBölgesi.classList.remove("dragison");
+      }
 
-    /** @const {Element} */
-    const dosyaBırakmaBölgesi = dom.adla("tada");
-    // numaraSözü.then(numara => dom.adla("taibrazno").innerText = numara);
-    dom.adla("tadsbtn").onclick = () => {
-      dom.adla("tain").click();
+      dom.adla("tabip").onclick = dom.adla("taip").onclick = () => {
+        dom.adla("tadc").style.display = "none";
+        eDevletDüğmesi.style.display = "";
+        pdfDüğmesi.style.display = "";
+      }
     }
-
-    const dosyaYükle = (dosya) => {
-      fetch('https://api.kimlikdao.org/pdf-yukle?tht=base64(taahhut)&pow=base(pow)', {
-        method: 'POST',
-        body: dosya,
-      })
-        .then(res => res.json())
-        .then(ok => console.log(ok))
-        .catch(e => console.log(e))
-    }
-
-    dom.adla("tain").onchange = () => {
-      dom.adla("tadat").innerText = dom.adla("tain").files[0].name;
-      dosyaBırakmaBölgesi.classList.add("dragison");
-      dosyaYükle(dom.adla("tain").files[0]);
-    }
-
-    dosyaBırakmaBölgesi.ondrop = (e) => {
-      e.preventDefault();
-      const bırakılanDosya = e.dataTransfer.files[0];
-      dom.adla("tadat").innerText = bırakılanDosya.name;
-      dosyaYükle(dom.adla("tain").files[0]);
-    };
-
-    dosyaBırakmaBölgesi.ondragover = (e) => {
-      e.preventDefault();
-      dosyaBırakmaBölgesi.classList.add("dragison");
-    }
-
-    dosyaBırakmaBölgesi.ondragleave = (e) => {
-      e.preventDefault();
-      dosyaBırakmaBölgesi.classList.remove("dragison");
-    }
-
-    dom.adla("taip").onclick = () => {
-      dom.adla("tadc").style.display = "none";
-      EDevletDüğmesi.style.display = "";
-      PDFDüğmesi.style.display = "";
-      powWorker.terminate();
-    }
-  }
-
-  if (!location.search) {
-    EDevletDüğmesi.classList.add("act");
-    PDFDüğmesi.style.display = "";
   }
 }
 
-export default {
-  göster,
-  tanı,
-};
+export default { açıkTcktAlVe };

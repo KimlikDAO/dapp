@@ -4,20 +4,32 @@
     e-devlet girişi ile veya PDF yükleyerek tanıtabilirsiniz.</span>
   <br>
   <br>
+  <a href="javascript:" class="act btn lft" id="tab" data-en="PDF authentication">PDF yükleyerek tanıt</a>
   <a data-en-href="https://mock-oauth2.kimlikdao.net/auth?response_type=code&client_id=F5CAA82F-E2CF-4F21-A745-471ABE3CE7F8&redirect_uri=http://localhost:8787/get&scope=Temel-Bilgileri"
     href="https://mock-oauth2.kimlikdao.net/auth?response_type=code&client_id=F5CAA82F-E2CF-4F21-A745-471ABE3CE7F8&redirect_uri=http://localhost:8787/al&scope=Temel-Bilgileri"
-    class="btn lft" id="taa" data-en="Login with e-devlet">E-devlet ile giriş yap</a>
-  <a href="javascript:" class="act btn" id="tab" style="display:none" data-en="PDF authentication">PDF yükleyerek
-    tanıt</a>
+    class="btn act" id="taa" data-en="Login with e-devlet">E-devlet ile giriş yap</a>
   <div id="tadc" style="display:none">
     <div id="taip" class="taiptal">x</div>
     <div id="tada">
       <input type="file" id=tain>
-      <span id=tadat data-en="Drop your files here!">Dosya seçin ya da <br> Yüklemek istediğiniz dosyayı buraya
-        sürükleyiniz.</span>
-      <span id=taibrazno></span>
-      <img src="/al/tanışma/upload.svg" alt="" width=48 height=48>
-        <div id=tadsbtn class="tabtn" data-en="Select File">Dosya Seç</div>
+      <span>E-devlet’ten <b>Kurum Talebi</b> için nüfus kayıt örneği almanız gerekiyor:</span>
+      <table id="tabi">
+        <tr>
+          <td>Nüfus Kayıt Örneği Tipi</td><td>Kişi</td>
+        </tr>
+        <tr><td>Eski Eş Listelesi</td><td>Hayır</td></tr>
+        <tr><td>Vukuatlı Belge (Olayları Göster)</td><td>Hayır</td></tr>
+        <tr><td>Belgenin Neden Verileceği</td><td>Kurum Talebi</td></tr>
+        <tr><td>Kurum adı</td><td><b>KimlikDAO</b></td></tr>
+        <tr><td>Sayı</td><td><b id="tano"></b></td></tr>
+      </table>
+      <a class=lnk target="_blank" href="//www.turkiye.gov.tr/nvi-nufus-kayit-ornegi-belgesi-sorgulama">
+        E-devlet Nüfus Kayıt Örnegi <img src='/birim/cüzdan/img/external-link.svg' height=10 width=10 data-inline> </a> sayfasından
+        yukarıdaki bilgileri girerek bir PDF dosyası alın. Aldığınız dosyayı bu kutuya sürükleyin.
+        <div id="taimg"><img src="/al/tanışma/upload.svg" alt="" width=48 height=48>
+        </div>
+        <a href="javascript:" id=tadsbtn class="btn act lft" data-en="Select file">Dosya seç</a>
+        <a href="javascript:" id=tabip class="btn" data-en="Cancel">İptal</a>
     </div>
   </div>
 </div>
