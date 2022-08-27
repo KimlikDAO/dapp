@@ -119,5 +119,6 @@ h7 {
   font-size: 9pt;
   color: #999;
   font-weight: 400;
-  display:block;
+  display: block;
+  margin: 1em 0;
 }

@@ -102,11 +102,12 @@ if (window["ethereum"]) {
   Cüzdan.bağlanınca((adres) => {
     /** @const {Element} */
     const s1a = dom.adla("s1a");
-    s1a.innerText = dom.TR ? "Cüzdan bağlandı ✓" : "Wallet connected ✓";
-    s1a.href = "javascript:";
-    s1a.target = "";
-    dom.butonDurdur(s1a);
-    s1b.style.display = "none";
+    s1b.innerText = dom.TR ? "Cüzdan bağlandı ✓" : "Wallet connected ✓";
+    s1b.href = "javascript:";
+    s1b.target = "";
+    s1b.classList.remove("act");
+    dom.butonDurdur(s1b);
+    s1a.style.display = "none";
     dom.adla("s1").classList.add("done");
     Telefon.adresGir(Cüzdan.hızlıArabirimAdı(adres));
     Tanışma.açıkTcktAlVe(tcktYarat);

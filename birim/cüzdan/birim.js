@@ -175,10 +175,10 @@ if (window["ethereum"]) {
     avax.firstElementChild);
   dom.menüYarat(AğButonu, ağMenüsü);
   ağMenüsü.onclick = (event) => {
-    /** @const {Element} */
-    const li = event.target.nodeName == "LI"
-      ? event.target : event.target.parentElement;
-    if (!li.id.startsWith("nc0x")) return;
+    /** @type {Element} */
+    let li = event.target;
+    for (; li.nodeName != 'LI'; li = li.parentElement)
+      if (li.nodeName == 'DIV') return;
     /** @const {string} */
     const ağ = li.id.slice(2);
     ethereum.request(/** @type {RequestParams} */({

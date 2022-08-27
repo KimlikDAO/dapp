@@ -69,7 +69,7 @@ const imeceİptalModalGöster = () => {
   dom.adla("iniio").onclick = () => {
     const weight = parseInt(agirlikGirdisi.value);
     address = evm.adresDüzelt(adresGirdisi.value).slice(2).toLowerCase();
-    TCKT.addRevoker(weight, address);
+    TCKT.addRevoker(Cüzdan.ağ(), /** @type {string} */(Cüzdan.adres()), weight, address);
   }
 }
 
