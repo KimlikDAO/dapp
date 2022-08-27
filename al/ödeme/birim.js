@@ -67,7 +67,7 @@ export const öde = (cidSözü, adresAğırlığı, eşik) => {
       const tokenYok = (i > 0) && !TCKT.isTokenAvailable(yeniAğ, i);
       tokenLi.style.display = tokenYok ? "none" : "";
       if (!tokenYok)
-        TCKT.priceIn(i).then((fiyat) => {
+        TCKT.priceIn(yeniAğ, i).then((fiyat) => {
           tokenLi.firstElementChild.innerText = dom.paradanMetne(fiyat[+iptalli]);
         });
     }
@@ -99,10 +99,11 @@ export const öde = (cidSözü, adresAğırlığı, eşik) => {
     // Eğer 'native token'da ödemiyorsak, ağ ücretini ayrıca göster
     toplamKutusu.lastElementChild.style.display = para == 0 ? "none" : "inline-block";
 
+    const ağ = Cüzdan.ağ();
     /** @const {Promise<number>} */
-    const ağÜcretiSözü = TCKT.estimateNetworkFee();
+    const ağÜcretiSözü = TCKT.estimateNetworkFee(ağ);
     /** @const {Promise<Array<number>>} */
-    const fiyatSözü = TCKT.priceIn(para).then((fiyat) => {
+    const fiyatSözü = TCKT.priceIn(ağ, para).then((fiyat) => {
       kesirGir(fiyat[1], döküm.children[0]);
       if (!iptalli)
         kesirGir(fiyat[0] - fiyat[1], döküm.children[1]);
@@ -137,16 +138,18 @@ export const öde = (cidSözü, adresAğırlığı, eşik) => {
     paraDeğişti(parseInt(li.id[3]), li.lastElementChild);
   };
 
-  ağDeğişti(Cüzdan.ağ());
+  const ağ = Cüzdan.ağ();
+  const adres = /** @type {string} */(Cüzdan.adres());
+  ağDeğişti(ağ);
   Cüzdan.ağDeğişince(ağDeğişti);
 
   dom.adla("od").classList.remove("disabled");
   dom.adla("oda").onclick = () => {
     let sonuç = para == 0
       ? cidSözü.then((cid) =>
-        TCKT.createWithRevokers(cid, eşik, adresAğırlığı))
-      : Promise.all([cidSözü, TCKT.getPermissionFor(para, iptalli)]).then(([cid, imza]) =>
-        TCKT.createWithRevokersWithTokenPermit(cid, eşik, adresAğırlığı, imza));
+        TCKT.createWithRevokers(ağ, adres, cid, eşik, adresAğırlığı))
+      : Promise.all([cidSözü, TCKT.getPermissionFor(ağ, adres, para, iptalli)]).then(([cid, imza]) =>
+        TCKT.createWithRevokersWithTokenPermit(ağ, adres, cid, eşik, adresAğırlığı, imza));
     sonuç
       .then(Telefon.nftGeriAl)
       .catch(Telefon.nftGeriAl);
