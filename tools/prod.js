@@ -2,9 +2,9 @@
 /** @const {string} */
 const HOST_URL = 'https://kimlikdao.org/';
 /** @const {string} */
-const PAGE_CACHE_CONTROL = 'no-transform,max-age=90,public';
+const PAGE_CACHE_CONTROL = 'max-age=90,public';
 /** @const {string} */
-const STATIC_CACHE_CONTROL = 'no-transform,no-transform,max-age=29030400,public,immutable';
+const STATIC_CACHE_CONTROL = 'max-age=29030400,public,immutable';
 /** @const {Object<string, string>} */
 const MIMES = {
   "css": "text/css",
@@ -31,7 +31,7 @@ addEventListener('fetch', (event) => {
   /** @const {URL} */
   const url = new URL(event.request.url)
   /** @const {string} */
-  const enc = event.request['cf']['clientAcceptEncoding'];
+  const enc = event.request['cf']['clientAcceptEncoding'] || "";
   /** @const {string} */
   const ext = url.pathname.endsWith('.woff2') ? ''
     : enc.includes('br') ? '.br' : enc.includes('gz') ? '.gz' : '';
@@ -57,16 +57,9 @@ addEventListener('fetch', (event) => {
   const fromCache = caches.default.match(cacheKey).then((response) => {
     if (!response) return Promise.reject();
     inCache = true;
-    if (idx == -1 || ext === '.gz') {
-      response = new Response(response.body, {
-        headers: response.headers,
-        "encodeBody": "manual"
-      });
-      if (idx == -1)
-        response.headers.set('cache-control', PAGE_CACHE_CONTROL);
-      // Transform 'GEEZEEP' back to gzip.
-      if (ext === '.gz')
-        response.headers.set('content-encoding', 'gzip');
+    if (idx == -1) {
+      response = new Response(response.body, { headers: response.headers });
+      response.headers.set('cache-control', PAGE_CACHE_CONTROL);
     }
     return response;
   });
@@ -89,22 +82,16 @@ addEventListener('fetch', (event) => {
 
     /** @type {Response} */
     let response = new Response(body, {
-      status: 200,
       headers: {
-        'accept-ranges': 'bytes',
         'cache-control': idx == -1 ? PAGE_CACHE_CONTROL : STATIC_CACHE_CONTROL,
+        'content-encoding': ext === '.br' ? 'br' : ext === '.gz' ? 'gzip' : '',
         'content-length': body.byteLength,
         'content-type': idx == -1 ? "text/html;charset=utf-8" : MIMES[url.pathname.slice(idx + 1)],
         'expires': 'Sun, 01 Jan 2034 00:00:00 GMT',
-        'vary': 'accept-encoding'
+        'vary': 'accept-encoding',
       },
       'encodeBody': 'manual'
     });
-
-    // If we are serving a precompressed asset, set the 'content-encoding'
-    // header. Note we serve a precompressed asset iff ext != '';
-    if (ext)
-      response.headers.set('content-encoding', ext === '.br' ? 'br' : 'gzip');
 
     if (idx == -1)
       response.headers.set('x-frame-options', 'DENY')
@@ -124,10 +111,17 @@ addEventListener('fetch', (event) => {
       // stays in CF cache for as long as possible, even for non-content-hashed
       // assets. We always purge the CF cache after non-content-hashed assets
       // change, which ensures the CF cache never goes stale.
-      let toCache = response.clone();
-      if (ext === '.gz')
-        toCache.headers.set('content-encoding', 'GEEZEEP');
-      toCache.headers.set('cache-control', STATIC_CACHE_CONTROL);
+      let toCache = new Response(body, {
+        headers: {
+          'cache-control': STATIC_CACHE_CONTROL,
+          'content-encoding': ext === '.br' ? 'br' : ext === '.gz' ? 'gzip' : '',
+          'content-length': body.byteLength,
+          'content-type': idx == -1 ? "text/html;charset=utf-8" : MIMES[url.pathname.slice(idx + 1)],
+          'expires': 'Sun, 01 Jan 2034 00:00:00 GMT',
+          'vary': 'accept-encoding'
+        },
+        'encodeBody': 'manual'
+      });
       return caches.default.put(cacheKey, toCache);
     }));
 
