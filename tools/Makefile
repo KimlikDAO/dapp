@@ -36,13 +36,13 @@ build/sitemap: $(call compressions, build/sitemap.txt)
 
 .PHONY: build/sitemap
 
-build/%.svg: %.svg
+build/%.svg: %.svg tools/svgo-config.js
 	mkdir -p $(dir $@)
-	yarn svgo --config tools/svgo-config.js $^ --output $@
+	yarn svgo --config tools/svgo-config.js $< --output $@
 
-build/%.svg.inl: %.svg
+build/%.svg.inl: %.svg tools/svgo-inline-config.js
 	mkdir -p $(dir $@)
-	yarn svgo --config tools/svgo-inline-config.js $^ --output $@
+	yarn svgo --config tools/svgo-inline-config.js $< --output $@
 
 %.gz: %
 	cp $< $@.tmp

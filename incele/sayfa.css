@@ -70,12 +70,8 @@
 }
 
 #inx {
-  position: absolute;
   right: 10px;
   top: 10px;
-  font-weight: 700;
-  cursor: pointer;
-  padding: 1em;
 }
 
 .inm {

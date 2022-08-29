@@ -9,6 +9,7 @@ include font/Makefile
 include al/Makefile
 include ana/Makefile
 include birim/cüzdan/Makefile
+include birim/tckt/Makefile
 include incele/Makefile
 include iptal/Makefile
 include oyla/Makefile

@@ -64,6 +64,7 @@
   width: 33%;
   height: 40px;
   opacity: 0.5;
+  border: 1px solid transparent;
   border-bottom: 1px solid rgb(0 0 0 / 15%);
   transition-property: opacity, background-color;
   transition-duration: 0.3s;
@@ -93,7 +94,7 @@
 #oyytabs input[type="radio"]:checked + .oyy_tablabel {
   opacity: 1;
   border: 1px solid rgb(0 0 0 / 15%);
-  border-bottom: none; 
+  border-bottom: 1px solid transparent; 
 }
 
 #oyytabs input[type="radio"]:checked + .oyy_tablabel.sol {

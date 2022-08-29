@@ -3,8 +3,19 @@ export default {
   plugins: [
     "cleanupAttrs",
     "cleanupEnableBackground",
-    { name: "cleanupIDs", params: {"floatPrecision": 1 }},
-    "cleanupNumericValues",
+    "cleanupIDs",
+    {
+      name: "cleanupNumericValues",
+      params: {
+        "floatPrecision": 2
+      }
+    },
+    {
+      "name": "convertPathData",
+      "params": {
+        "floatPrecision": 2
+      }
+    },
     "collapseGroups",
     "convertColors",
     "convertEllipseToCircle",
