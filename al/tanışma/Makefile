@@ -16,6 +16,7 @@ build/al/tanışma/pow-worker.js: al/tanışma/pow-worker.js lib/worker.js
 	mkdir -p $(dir $@)
 	yarn google-closure-compiler -W VERBOSE -O ADVANCED --charset UTF-8 \
                              --language_in ECMASCRIPT_2021 \
+                             --define POW_EŞİĞİ=$(POW_EŞİĞİ) \
                              --assume_function_wrapper \
                              --js $^ \
                              --js_output_file $@

@@ -1,5 +1,5 @@
 /** @define {number} */
-const POW_THRESHOLD = 20000;
+const POW_EŞİĞİ = 20000;
 
 onmessage = async (e) => {
   console.time('pow');
@@ -9,7 +9,7 @@ onmessage = async (e) => {
   for (let n = 0; ; ++n) {
     /** @const {!Uint32Array} */
     const res = new Uint32Array(await crypto.subtle.digest('SHA-256', buff));
-    if (res[0] <= POW_THRESHOLD) {
+    if (res[0] <= POW_EŞİĞİ) {
       postMessage(buff.buffer, [buff.buffer]);
       console.timeEnd('pow')
       console.log('Hashes', n);

@@ -1,5 +1,6 @@
 MAKEFLAGS := -j 8
 PAGES := al ana incele oyla
+POW_EŞİĞİ := 20000
 
 all: build
 
