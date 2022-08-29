@@ -212,36 +212,3 @@ const ağırlıkBlurOlunca = (event) => {
   if (val > 9) event.target.value = 9;
   if (val < 1 || val === "") event.target.value = 1;
 }
-
-/** @param {number} n*/
-/** @param {string} fillColor*/
-/** @param {string} strokeColor*/
-const yıldızOluştur = (n, fillColor, strokeColor) => {          //n yıldızın kenar uzunluğu
-  const sin = (degree) =>  Math.sin(degree * Math.PI / 180);
-  const cos = (degree) =>  Math.cos(degree * Math.PI / 180);
-  const pathD = ` 
-  M 0, ${n * cos(18)} 
-  h ${n} 
-  l ${n * sin(18)}, -${n * cos(18)} 
-  l ${n * sin(18)}, ${n * cos(18)} 
-  h ${n} 
-  l -${n * cos(36)}, ${n * sin(36)} 
-  l ${n * sin(18)}, ${n * cos(18)} 
-  l -${n * cos(36)}, -${n * sin(36)} 
-  l -${n * cos(36)}, ${n * sin(36)} 
-  l ${n * sin(18)}, -${n * cos(18)} 
-  z `;
-  const width = 2 * (n + n * sin(18));
-  const height = width * cos(18);
-  const starSvg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-  starSvg.setAttribute("width", width);
-  starSvg.setAttribute("height", height);
-  const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
-  path.setAttribute("d", pathD);
-  path.setAttribute("stroke", strokeColor);
-  path.setAttribute("fill", fillColor);
-  starSvg.appendChild(path);
-  starSvg.classList.add("instar_rotate");
-  dom.adla("instar").appendChild(starSvg);
-}
-yıldızOluştur(15.64, "white", "red")
