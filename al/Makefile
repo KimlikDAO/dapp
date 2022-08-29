@@ -8,7 +8,7 @@ build/al/sayfa-%.js: al/sayfa.js \
                      birim/telefon/birim.js \
                      birim/tckt/birim.js \
                      lib/dom.js lib/çevir.js lib/evm.js \
-                     lib/encrypt.js lib/ipfs.js lib/sha3.js \
+                     lib/ed25519.js lib/ipfs.js lib/sha3.js \
                      lib/ethereum.js lib/TCKT.js lib/TCKTData.js \
                      build/al/tanışma/birim.keymap
 	mkdir -p $(dir $@)

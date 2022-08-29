@@ -7,7 +7,7 @@ import { öde } from '/al/ödeme/birim';
 import Cüzdan from '/birim/cüzdan/birim';
 import Telefon from '/birim/telefon/birim';
 import dom from '/lib/dom';
-import { encrypt } from '/lib/encrypt';
+import { kutula } from '/lib/ed25519';
 import ipfs from '/lib/ipfs';
 import { TCKT_ADDR } from '/lib/TCKT';
 import { hex } from '/lib/çevir';
@@ -62,11 +62,11 @@ const tcktYarat = (açıkTCKTSözü) => {
     /** @const {Promise<string>} */
     const cidSözü = açıkTCKTSözü.then((açıkTCKT) => {
       const encoder = new TextEncoder();
-      const gizle = new Uint8Array(1000);
-      encoder.encodeInto(TCKT_ADDR, gizle);
-      gizle[42] = 10;
-      encoder.encodeInto(açıkTCKT, gizle.subarray(43));
-      const [nonce, ephemPubKey, ciphertext] = encrypt(açıkAnahtar, gizle);
+      const gizlenecek = new Uint8Array(1000);
+      encoder.encodeInto(TCKT_ADDR, gizlenecek);
+      gizlenecek[42] = 10;
+      encoder.encodeInto(açıkTCKT, gizlenecek.subarray(43));
+      const [nonce, ephemPubKey, ciphertext] = kutula(açıkAnahtar, gizlenecek);
 
       const TCKTData = {
         name: "TCKT",
