@@ -91,10 +91,19 @@ const silModalGöster = () => {
   dom.adla("insyo").onclick = () => console.log("DELETED"); //TCKT.destroyTCKT methodu
 }
 
+/**
+ * @param {TCKTTemelBilgileri} açıkTCKT
+ */
 const açıkYüz = (açıkTCKT) => {
-  for (let ad of "TCKN ad soyad dt annead babaad".split(" ")) {
-    dom.adla("tc" + ad).innerText = açıkTCKT[ad];
-  }
+  for (let hane of "ad soyad TCKN dt dyeri".split(" "))
+    if (açıkTCKT.kişi[hane]) dom.adla("tc" + hane).innerText = açıkTCKT.kişi[hane];
+
+  for (let hane of "annead babaad BSN cilt hane mhali".split(" "))
+    if (açıkTCKT.aile[hane]) dom.adla("tc" + hane).innerText = açıkTCKT.aile[hane];
+
+  for (let hane of "il ilçe mahalle tescil".split(" "))
+    if (açıkTCKT.kütük[hane]) dom.adla("tc" + hane).innerText = açıkTCKT.kütük[hane];
+
   Tckt.yüzGöster(true);
   AçDüğmesi.innerText = dom.TR ? "Gizle" : "Hide";
   AçDüğmesi.onclick = () => kapalıYüz(Cüzdan.adres());

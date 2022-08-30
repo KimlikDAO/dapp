@@ -80,20 +80,23 @@ const açıkTcktAlVe = (sonra) => {
   /** @const {Element} */
   const kutu = dom.adla("ta");
   /**
-   * @param {TCKTTemelBilgileri} gelenTckt
+   * @param {TCKTTemelBilgileri} açıkTCKT
    * @param {!Uint8Array} rasgele
    */
-  const kapat = (gelenTckt, rasgele) => {
-    /** @const {TCKTTemelBilgileri} */
-    const temizTckt = {};
-    for (let /** @type {string} */ ad of "TCKN ad soyad dt annead babaad".split(" ")) {
-      dom.adla("tc" + ad).innerText = gelenTckt[ad];
-      temizTckt[ad] = gelenTckt[ad];
-    }
+  const kapat = (açıkTCKT, rasgele) => {
+    for (let hane of "ad soyad TCKN dt dyeri".split(" "))
+      if (açıkTCKT.kişi[hane]) dom.adla("tc" + hane).innerText = açıkTCKT.kişi[hane];
+
+    for (let hane of "annead babaad BSN cilt hane mhali".split(" "))
+      if (açıkTCKT.aile[hane]) dom.adla("tc" + hane).innerText = açıkTCKT.aile[hane];
+
+    for (let hane of "il ilce mahalle tescil".split(" "))
+      if (açıkTCKT.kütük[hane]) dom.adla("tc" + hane).innerText = açıkTCKT.kütük[hane];
+
     Tckt.yüzGöster(true);
     kutu.classList.add("done");
-    temizTckt.rasgele = base64(rasgele);
-    sonra(Promise.resolve(JSON.stringify(temizTckt, null, 2)));
+    açıkTCKT.rasgele = base64(rasgele);
+    sonra(Promise.resolve(JSON.stringify(açıkTCKT, null, 2)));
   }
   kutu.classList.remove("disabled");
 
@@ -121,40 +124,47 @@ const açıkTcktAlVe = (sonra) => {
     pdfDüğmesi.onclick = () => {
       eDevletDüğmesi.style.display = "none";
       pdfDüğmesi.style.display = "none";
-
       /** @const {Element} */
       const dosyaBırakmaBölgesi = dom.adla("tada");
+      /** @const {Element} */
+      const dosyaSeçici = dom.adla("tain");
       numaraSözü.then((numara) => dom.adla("tano").innerText = numara);
-      dom.adla("tadsbtn").onclick = () => dom.adla("tain").click();
+      dom.adla("tadsbtn").onclick = () => dosyaSeçici.click();
       dom.adla("tadc").style.display = "";
 
-      /** @const {function(File)} */
+      /** @const {function(!File)} */
       const dosyaYükle = (dosya) => {
+        const formData = new FormData();
+        formData.set('f', dosya);
         taahhütPowSözü.then((taahhütPow) =>
           fetch('//api.kimlikdao.org/pdften-tckt?' + taahhütPow, {
             method: 'POST',
-            body: dosya,
+            body: formData,
           }))
           .then(res => res.json())
           .then((açıkTckt) => {
+            dom.adla("tadc").style.display = "none";
+            pdfDüğmesi.href = "javascript:";
+            pdfDüğmesi.classList.remove("act");
+            pdfDüğmesi.style.display = "";
+            pdfDüğmesi.innerText = dom.TR ? "Bilgileriniz onaylandı ✓" : "We confirmed your info ✓";
+            dom.butonDurdur(pdfDüğmesi);
             window.localStorage.removeItem(Cüzdan.adres().toLowerCase + "r");
             kapat(açıkTckt, pdfRasgele);
           })
           .catch(console.log)
       }
 
-      dom.adla("tain").onchange = () => {
-        // dom.adla("tadat").innerText = dom.adla("tain").files[0].name;
+      dosyaSeçici.onchange = () => {
+        console.log("onchange", dosyaSeçici.files.length);
         dosyaBırakmaBölgesi.classList.add("dragison");
-        dosyaYükle(dom.adla("tain").files[0]);
+        if (dosyaSeçici.files.length > 0)
+          dosyaYükle(dosyaSeçici.files[0]);
       }
 
       dosyaBırakmaBölgesi.ondrop = (e) => {
         e.preventDefault();
-        /** @const {File} */
-        const bırakılanDosya = e.dataTransfer.files[0];
-        // dom.adla("tadat").innerText = bırakılanDosya.name;
-        dosyaYükle(dom.adla("tain").files[0]);
+        dosyaYükle(e.dataTransfer.files[0]);
       };
 
       dosyaBırakmaBölgesi.ondragover = (e) => {
