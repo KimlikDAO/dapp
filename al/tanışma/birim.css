@@ -3,13 +3,17 @@
   position: relative;
 }
 
+#taa {
+  cursor: default;
+}
+
 #tada {
-  outline: 2px dashed #c2c2c2;
-  border-radius: 10px;
+  outline: 1px dashed #c2c2c2;
+  border-radius: 5px;
   padding: 2em;
 }
 
-#tada.dragison {
+#tada.tasrk {
   outline-style: solid;
 }
 
@@ -35,14 +39,98 @@
   padding-right: 2em;
 }
 
+#tacopy {
+  transition: opacity 0.3s;
+  opacity: 0.7;
+  margin-left: 0.5em;
+}
+
+#tacopy:hover {
+  opacity: 1;
+}
+
+#tacopy:active {
+  top: 1px;
+  position: relative;
+}
+
 .lnk {
   text-decoration: none;
   border-bottom: 1px dotted;
 }
 
-#taimg {
-  margin: 3em auto;
+.tastt {
+  margin: 3em auto 1em;
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 48px;
+  height: 48px;
+}
+
+#tal {
+  width: 48px;
+  height: 48px;
+  border: 8px solid #f7f7f7;
+  border-top: 8px solid #70a4dc;
+  border-radius: 50%;
+  animation: spin 2s linear infinite;
+  box-sizing: border-box;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+#tafail {
+  position: relative;
+  border: 4px solid #cc0033;
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  box-sizing: border-box;
+  opacity: 0.5;
+  transition: opacity 1s;
+}
+
+#tafail:hover {
+  opacity: 1;
+}
+
+#tafail::before,
+#tafail::after {
+  position: absolute;
+  content: "";
+  top: 5px;
+  left: 17px;
+  width: 6px;
+  height: 30px;
+  border-radius: 3px;
+  background-color: #cc0033;
+}
+
+#tafail::before {
+  transform: rotate(45deg)
+}
+
+#tafail::after {
+  transform: rotate(-45deg)
+}
+
+#tafb {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2em;
+  text-align: center;
+}
+
+#tafb.inv {
+  color: #cc0033;
 }

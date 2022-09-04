@@ -122,6 +122,7 @@ const açıkTcktAlVe = (sonra) => {
       .then(res => res.json())
       .then((açıkTckt) => kapat(açıkTckt, eDevletRasgele));
   } else {
+    const hataBildirimi = dom.adla("tafb");
     pdfDüğmesi.onclick = () => {
       eDevletDüğmesi.style.display = "none";
       pdfDüğmesi.style.display = "none";
@@ -129,53 +130,101 @@ const açıkTcktAlVe = (sonra) => {
       const dosyaBırakmaBölgesi = dom.adla("tada");
       /** @const {Element} */
       const dosyaSeçici = dom.adla("tain");
-      numaraSözü.then((numara) => dom.adla("tano").innerText = numara);
+      numaraSözü.then((numara) => {
+        /** @const {Element} */
+        const kopyala = dom.adla("tacopy");
+        dom.adla("tano").innerText = numara
+        kopyala.style.display = "";
+        kopyala.onclick = () => navigator.clipboard.writeText(numara);
+      });
       dom.adla("tadsbtn").onclick = () => dosyaSeçici.click();
       dom.adla("tadc").style.display = "";
 
       /** @const {function(!File)} */
       const dosyaYükle = (dosya) => {
+        hataKaldır();
+        dom.adla("tafb").innerText = dom.TR ? "Belge yükleniyor" : "Uploading document";
+        dom.adla("taimg").style.display = "none";
+        dom.adla("tal").style.display = "";
         const formData = new FormData();
         formData.set('f', dosya);
-        taahhütPowSözü.then((taahhütPow) =>
-          fetch('//api.kimlikdao.org/pdften-tckt?' + taahhütPow, {
+        taahhütPowSözü
+          .then((taahhütPow) => fetch('//api.kimlikdao.org/pdften-tckt?' + taahhütPow, {
             method: 'POST',
             body: formData,
           }))
-          .then(res => res.json())
-          .then((açıkTckt) => {
-            dom.adla("tadc").style.display = "none";
-            pdfDüğmesi.href = "javascript:";
-            pdfDüğmesi.classList.remove("act");
-            pdfDüğmesi.style.display = "";
-            pdfDüğmesi.innerText = dom.TR ? "Bilgileriniz onaylandı ✓" : "We confirmed your info ✓";
-            dom.butonDurdur(pdfDüğmesi);
-            window.localStorage.removeItem(Cüzdan.adres().toLowerCase + "r");
-            kapat(açıkTckt, pdfRasgele);
-          })
-          .catch(console.log)
+          .then(res => res.ok
+            ? res.json().then((açıkTckt) => {
+              dom.adla("tadc").style.display = "none";
+              pdfDüğmesi.href = "javascript:";
+              pdfDüğmesi.classList.remove("act");
+              pdfDüğmesi.style.display = "";
+              pdfDüğmesi.innerText = dom.TR ? "Bilgileriniz onaylandı ✓" : "We confirmed your info ✓";
+              dom.butonDurdur(pdfDüğmesi);
+              window.localStorage.removeItem(Cüzdan.adres().toLowerCase + "r");
+              kapat(açıkTckt, pdfRasgele);
+            })
+            : res.json().then(hataGöster)
+          )
       }
 
       dosyaSeçici.onchange = () => {
-        console.log("onchange", dosyaSeçici.files.length);
-        dosyaBırakmaBölgesi.classList.add("dragison");
-        if (dosyaSeçici.files.length > 0)
+        dosyaBırakmaBölgesi.classList.add("tasrk");
+        if (dosyaSeçici.files.length > 0) {
           dosyaYükle(dosyaSeçici.files[0]);
+        }
       }
 
       dosyaBırakmaBölgesi.ondrop = (e) => {
         e.preventDefault();
-        dosyaYükle(e.dataTransfer.files[0]);
+        if (e.dataTransfer.files[0].type.includes("pdf"))
+          dosyaYükle(e.dataTransfer.files[0]);
       };
 
       dosyaBırakmaBölgesi.ondragover = (e) => {
         e.preventDefault();
-        dosyaBırakmaBölgesi.classList.add("dragison");
+        dosyaBırakmaBölgesi.classList.add("tasrk");
       }
 
       dosyaBırakmaBölgesi.ondragleave = (e) => {
         e.preventDefault();
-        dosyaBırakmaBölgesi.classList.remove("dragison");
+        dosyaBırakmaBölgesi.classList.remove("tasrk");
+      }
+
+      const HataMetinleri = dom.TR ? [
+        "Belgenin son 24 saat içinde alınmış olması gerekli. Yüklediğiniz belge {} saat önce alınmış.",
+        "Yüklediğiniz belgedeki nüfus kaydı geçersiz.",
+        "Kurum adı KimlikDAO olmalı",
+        "Kişi sağ değil",
+        "Belgeyi alırken \"Sayı\" {} olarak girilmeli. 9 basamağı da doğru girdiniz mi? Farklı bir cüzdana mı geçtiniz?",
+        "Belge e-devletten onaylanamadı.",
+        "PoW hatalı.",
+        "Geçerli bir PDF dosyası yükleyin."
+      ] : [
+        "The document is {} hours old. Please get a new document and upload here within 24 hours.",
+        "The registry is invalid",
+        "The institution name has to be filled in as exactly KimlikDAO.",
+        "Person is not alive",
+        "The  \"Request Number\" needs to be filled in as {}. Make sure you use the same wallet address.",
+        "Unable the authenticate the document with e-devlet.",
+        "Incorrect PoW.",
+        "Invalid PDF file"
+      ];
+
+      /** @param {HataBildirimi} hata */
+      const hataGöster = (/** HataBildirimi */ hata) => {
+        let metin = HataMetinleri[hata.kod];
+        hataBildirimi.innerText = hata.ek && hata.ek.length
+          ? metin.replace("{}", hata.ek[0]) : metin;
+        hataBildirimi.classList.add("inv");
+        dom.adla("tal").style.display = "none";
+        dom.adla("taimg").style.display = "none";
+        dom.adla("tafail").style.display = "";
+      }
+
+      const hataKaldır = () => {
+        hataBildirimi.classList.remove("inv");
+        dom.adla("tafail").style.display = "none";
       }
 
       dom.adla("tabip").onclick = dom.adla("taip").onclick = () => {

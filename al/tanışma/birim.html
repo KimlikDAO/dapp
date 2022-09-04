@@ -4,10 +4,11 @@
     e-devlet girişi ile veya PDF yükleyerek tanıtabilirsiniz.</span>
   <br>
   <br>
-  <a href="javascript:" class="act btn lft" id="tab" data-en="PDF authentication">PDF yükleyerek tanıt</a>
+  <a href="javascript:" class="act btn lft" id="tab" data-en="PDF authentication">PDF ile tanıt</a>
   <a data-en-href="https://mock-oauth2.kimlikdao.net/auth?response_type=code&client_id=F5CAA82F-E2CF-4F21-A745-471ABE3CE7F8&redirect_uri=http://localhost:8787/get&scope=Temel-Bilgileri"
     href="https://mock-oauth2.kimlikdao.net/auth?response_type=code&client_id=F5CAA82F-E2CF-4F21-A745-471ABE3CE7F8&redirect_uri=http://localhost:8787/al&scope=Temel-Bilgileri"
-    class="btn act" id="taa" data-en="Login with e-devlet">E-devlet ile giriş yap</a>
+    class="btn" id="taa" data-en="Login with e-devlet" title="Çok Yakında!" data-en-title="Soon!">E-devlet ile giriş
+    yap</a>
   <div id="tadc" style="display:none">
     <div id="taip" class="xbtn"></div>
     <div id="tada">
@@ -38,7 +39,9 @@
         </tr>
         <tr>
           <td data-en="Request number">Sayı</td>
-          <td><b id="tano" data-en="Calculating...">Hesaplanıyor...</b></td>
+          <td><b id="tano" data-en="Calculating...">Hesaplanıyor...</b><a href="javascript:" id=tacopy
+              data-en-title="Copy" title="Kopyala" style="display:none"><img src="/al/paste.svg"
+                data-inline></a></td>
         </tr>
       </table>
       <span data-phantom data-en="Please enter the information above at"></span>
@@ -49,8 +52,12 @@
         data-en=" to obtain a verifiable PDF. Once you have the file, drag and drop it here."> sayfasından yukarıdaki
         bilgileri girerek bir PDF dosyası alın. Aldığınız dosyayı bu kutuya
         sürükleyin.</span>
-      <div id="taimg"><img src="/al/tanışma/upload.svg" alt="" width=48 height=48>
+      <div class="tastt">
+        <div id="taimg"><img src="/al/tanışma/upload.svg" alt="" width=48 height=48></div>
+        <div id="tal" style="display:none"></div>
+        <div id="tafail" style="display:none"></div>
       </div>
+      <div id=tafb> </div>
       <a href="javascript:" id=tadsbtn class="btn act lft" data-en="Select file">Dosya seç</a>
       <a href="javascript:" id=tabip class="btn" data-en="Cancel">İptal</a>
     </div>

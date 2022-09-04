@@ -9,7 +9,7 @@ build/al/sayfa-%.js: al/sayfa.js \
                      birim/tckt/birim.js \
                      lib/dom.js lib/çevir.js lib/evm.js \
                      lib/ed25519.js lib/ipfs.js lib/sha3.js \
-                     lib/ethereum.js lib/TCKT.js lib/TCKTData.js \
+                     lib/ethereum.js lib/TCKT.js lib/TCKTData.js lib/hataBildirimi.js \
                      build/al/tanışma/birim.keymap
 	mkdir -p $(dir $@)
 	yarn google-closure-compiler -W VERBOSE -O ADVANCED --charset UTF-8 \
@@ -53,7 +53,7 @@ build/al-%.html: al/sayfa.html \
                  birim/telefon/birim.html \
                  birim/cüzdan.birim \
                  build/al/bağla-%.js.inl \
-                 build/al/imeceİptal/paste.svg.inl \
+                 build/al/paste.svg.inl \
                  build/al/tanışma/external-link.svg.inl \
                  build/al/ödeme/birim.keymap \
                  build/al/sayfa-%.keymap \

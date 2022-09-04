@@ -30,6 +30,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  transform: rotateY(0deg);
 }
 
 /* Bilgi yüzü */

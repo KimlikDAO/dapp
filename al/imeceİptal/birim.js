@@ -177,8 +177,10 @@ const girdiDüzelt = (girdi) => {
  * @param {Event} event
  */
 const yapıştır = (event) => {
-  let a = event.target.nodeName === 'A'
-    ? event.target : event.target.parentElement;
+  /** @type {Element} */
+  let a = /** @type {Element} */(event.target);
+  for (; a.nodeName !== 'A'; a = a.parentElement)
+    if (a.nodeName === 'DIV') return;
   const girdi = a.previousElementSibling;
   navigator.clipboard.readText().then(
     (değer) => {

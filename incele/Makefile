@@ -32,7 +32,7 @@ build/incele/sayfa-%.keymap: $(call compressions, build/incele/sayfa-%.js)
 build/incele-%.html: incele/sayfa.html \
                      birim/cüzdan.birim \
                      birim/tckt/birim.html \
-                     build/al/imeceİptal/paste.svg.inl \
+                     build/al/paste.svg.inl \
                      build/incele/sayfa-%.keymap \
                      build/incele/sayfa.keymap \
                      build/ana/sayfa-%.keymap \
