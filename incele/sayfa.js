@@ -29,6 +29,9 @@ const EşikModal = dom.adla("inmes");
 /** @const {Element} */
 const SilModal = dom.adla("inmsy");
 
+/** @const {Object<string, TCKTTemelBilgileri>} */
+const Hatırla = {};
+
 const modalKapat = () => {
   Mask.style.display = "none";
   İmeceİptalModal.style.display = "none";
@@ -88,7 +91,16 @@ const silModalGöster = () => {
   Mask.style.display = "";
   SilModal.style.display = "";
   dom.adla("insyr").onclick = modalKapat;
-  dom.adla("insyo").onclick = () => console.log("DELETED"); //TCKT.destroyTCKT methodu
+  dom.adla("insyo").onclick = () => {
+    /** @const {string} */
+    const ağ = Cüzdan.ağ();
+    /** @const {string} */
+    const adres = /** @type {string} */(Cüzdan.adres());
+    TCKT.revoke(ağ, adres).then(() => {
+      Hatırla[ağ + adres] = null;
+      kapalıYüz(adres);
+    })
+  }
 }
 
 /**
@@ -109,9 +121,6 @@ const açıkYüz = (açıkTCKT) => {
   AçDüğmesi.innerText = dom.TR ? "Gizle" : "Hide";
   AçDüğmesi.onclick = () => kapalıYüz(Cüzdan.adres());
 }
-
-/** @const {Object<string, TCKTTemelBilgileri>} */
-const Hatırla = {};
 
 const kapalıYüz = (adres) => {
   Tckt.yüzGöster(false);
@@ -162,6 +171,7 @@ const kapalıYüz = (adres) => {
   }
 }
 
+AçDüğmesi.onclick = Cüzdan.bağla;
 Cüzdan.bağlanınca((adres) => {
   CüzdanaEkleDüğmesi.onclick = cüzdanaEkle;
   İmeceİptalDüğmesi.onclick = imeceİptalModalGöster;
@@ -171,8 +181,6 @@ Cüzdan.bağlanınca((adres) => {
 });
 Cüzdan.ağDeğişince(() => kapalıYüz(Cüzdan.adres()));
 Cüzdan.adresDeğişince(() => kapalıYüz(Cüzdan.adres()));
-
-AçDüğmesi.onclick = Cüzdan.bağla;
 
 /**
  * @param {Event} event

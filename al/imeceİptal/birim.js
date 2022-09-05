@@ -114,7 +114,6 @@ const kutularıAç = (sonra) => {
       İptalButonu.onclick = null;
       dom.adla("imc").style.display = "none";
       dom.adla("im").classList.add("done");
-      adresAğırlığı["length"] = İptalciler.childElementCount;
       sonra(adresAğırlığı, eşikDeğeri);
     }
   };

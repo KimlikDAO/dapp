@@ -17,7 +17,7 @@
     <div id="inmc">
       <div id="inx" class="xbtn"></div>
       <div id="inmii" class="inm" style="display:none">
-        <span data-phantom data-en="Add an address and a weight to add a revoker to your TCKT.">
+        <span data-phantom data-en="Enter an address and a weight to add a revoker to your TCKT.">
           TCKT'nize yeni bir iptalci eklemek için adres ve ağırlık girin.
         </span>
         <div id="iniilbl">
@@ -53,9 +53,11 @@
         </div>
       </div>
       <div id="inmsy" class="inm" style="display:none">
-        <span data-phantom data-en="Are you sure you would like to destroy your TCKT? This cannot be undone.">TCKT'nizi
-          yok etmek istiyor musunuz?
-          Bu işlem geri alınamaz. Yeni bir TCKT almak için tekrar alım akışını tamamlamanız gerekir.</span>
+        <span data-phantom data-en="You don't need to revoke your TCKT to get a new one.&lt;br>&lt;br>Only revoke your TCKT if you think your private key was exposed.&lt;br>&lt;br>Confirm below to proceed.">
+          Yeni bir TCKT almak için eskisini yok etmeye gerek yok.<br><br>Sadece cüzdanınızın gizli anahtarını
+          başkasına verdiğinizi düşünuyorsanız TCKT’nizi yok etmeniz gerekir.
+          <br><br>Devam etmek için onay verin.
+        </span>
         <div class="inorc">
           <a href="javascript:" id="insyo" class="btn lft danger" data-en="Confirm in wallet">Cüzdana istek yolla</a>
           <a href="javascript:" id="insyr" class="btn" data-en="Cancel">İptal</a>
@@ -76,7 +78,7 @@
       <a href="javascript:" id="inbtn0" class="btn" data-en="Add to wallet">Cüzdanına ekle</a>
       <a href="javascript:" id="inbtn1" class="btn" data-en="Add social revoker">İmece iptal adresi ekle</a>
       <a href="javascript:" id="inbtn2" class="btn" data-en="Decrease revoke threshold">Eşik azalt</a>
-      <a href=" javascript:" id="inbtn3" class="btn danger" data-en="Destroy TCKT">TCKT yok et</a>
+      <a href=" javascript:" id="inbtn3" class="btn danger" data-en="Revoke TCKT">TCKT yok et</a>
     </div>
   </div>
   <script async type="module" src="/incele/sayfa.js" data-remove-type></script>

@@ -11,13 +11,13 @@ const KIMLIK_AS_URL = "https://mock-api.kimlikas.com";
  * oluşturur.
  *
  * @param {string} adres EVM adresi.
- * @param {!Uint8Array} rasgele bitdizisi.
+ * @param {!Uint8Array} rastgele bitdizisi.
  * @return {Promise<ArrayBuffer>} Kriptografik taahhüt.
  */
-const taahhütOluştur = (adres, rasgele) => {
+const taahhütOluştur = (adres, rastgele) => {
   /** @type {!Uint8Array} */
   const concat = new Uint8Array(64 + 20);
-  concat.set(rasgele, 0);
+  concat.set(rastgele, 0);
 
   for (let /** number */ i = 1; i <= 20; ++i)
     concat[i + 63] = parseInt(adres.substring(2 * i, 2 * i + 2), 16);
@@ -81,9 +81,9 @@ const açıkTcktAlVe = (sonra) => {
   const kutu = dom.adla("ta");
   /**
    * @param {TCKTTemelBilgileri} açıkTCKT
-   * @param {!Uint8Array} rasgele
+   * @param {!Uint8Array} rastgele
    */
-  const kapat = (açıkTCKT, rasgele) => {
+  const kapat = (açıkTCKT, rastgele) => {
     for (let hane of "ad soyad TCKN dt dyeri".split(" "))
       if (açıkTCKT.kişi[hane]) dom.adla("tc" + hane).innerText = açıkTCKT.kişi[hane];
     dom.adla("tccinsiyet").innerText = açıkTCKT.kişi.c;
@@ -96,7 +96,7 @@ const açıkTcktAlVe = (sonra) => {
 
     Tckt.yüzGöster(true);
     kutu.classList.add("done");
-    açıkTCKT.rasgele = base64(rasgele);
+    açıkTCKT.rastgele = base64(rastgele);
     sonra(Promise.resolve(JSON.stringify(açıkTCKT, null, 2)));
   }
   kutu.classList.remove("disabled");
