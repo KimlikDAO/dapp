@@ -44,8 +44,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background: rgb(0 0 0 / 15%);
-  backdrop-filter: blur(1px);
+  background: rgb(255 255 255 / 60%);
   z-index: 5;
 }
 

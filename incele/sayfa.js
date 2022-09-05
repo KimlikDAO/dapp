@@ -37,7 +37,7 @@ const kutuKapat = () => {
   İmeceİptalKutusu.style.display = "none";
   EşikKutusu.style.display = "none";
   SilKutusu.style.display = "none";
-}
+};
 
 Mask.onmousedown = (e) => {
   if (e.target == Mask) kutuKapat();
@@ -77,14 +77,31 @@ const imeceİptalKutusuGöster = () => {
 }
 
 const eşikKutusuGöster = () => {
+  /** @const {string} */
+  const ağ = Cüzdan.ağ();
+  /** @const {string} */
+  const adres = /** @type {string} */(Cüzdan.adres());
+  /** @const {Element} */
+  const girdi = dom.adla("inesw");
+
   Mask.style.display = "";
   EşikKutusu.style.display = "";
-  dom.adla("inesm").onclick = birAzalt;
-  dom.adla("inesp").onclick = (e) => birArttır(e, 99); //99 yerine mevcut threshold gelecek
-  dom.adla("inesw").value = "1"; //mevcut threshold gelecek
-  dom.adla("inesw").onclick = (e) => e.target.value = "";
-  dom.adla("ineso").onclick = () => console.log(dom.adla("inesw").value); //TCKT.changeThreshold methodu gelecek
   dom.adla("inesr").onclick = kutuKapat;
+
+  TCKT.revokesRemaining(adres).then((eşik) => {
+    dom.adla("inesm").onclick = birAzalt;
+    dom.adla("inesp").onclick = (e) => birArttır(e, eşik);
+    girdi.value = eşik;
+    girdi.onclick = (e) => e.target.value = "";
+    dom.adla("ineso").onclick = () => {
+      /** @const {number} */
+      const delta = eşik - Number(girdi.value);
+      delta ? TCKT
+        .reduceRevokeThreshold(ağ, adres, delta)
+        .then(() => kutuKapat())
+        .catch(console.log) : kutuKapat();
+    }
+  });
 }
 
 const silKutusuGöster = () => {
@@ -96,10 +113,13 @@ const silKutusuGöster = () => {
     const ağ = Cüzdan.ağ();
     /** @const {string} */
     const adres = /** @type {string} */(Cüzdan.adres());
-    TCKT.revoke(ağ, adres).then(() => {
-      Hatırla[ağ + adres] = null;
-      kapalıYüz(adres);
-    })
+    kutuKapat();
+    TCKT.revoke(ağ, adres)
+      .then(() => {
+        Hatırla[ağ + adres] = null;
+        kapalıYüz(adres);
+      })
+      .catch(console.log);
   }
 }
 

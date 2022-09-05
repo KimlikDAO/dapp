@@ -7,7 +7,7 @@ import { base64, uint8ArrayeBase64ten } from '/lib/çevir';
 const KIMLIK_AS_URL = "https://mock-api.kimlikas.com";
 
 /**
- * Verilen bir `hesap` için `rasgele` bitdizisi ile kriptografik taahhüt
+ * Verilen bir `hesap` için `rastgele` bitdizisi ile kriptografik taahhüt
  * oluşturur.
  *
  * @param {string} adres EVM adresi.
@@ -33,7 +33,7 @@ const açıkTcktAlVe = (sonra) => {
   const powWorker = new Worker("/al/tanışma/pow-worker.js");
 
   /**
-   * Pedersen taahhüdü için rasgele bitdizisi.
+   * Pedersen taahhüdü için rastgele bitdizisi.
    *
    * TCKT'nin kişi bilgilerinden tahmin edilememesini de bu şekilde sağlıyoruz.
    * Bu sebeple, 32 byte yetmesine karşın, bitdizisini 64 byte uzunluğunda
