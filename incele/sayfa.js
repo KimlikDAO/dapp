@@ -1,7 +1,7 @@
 /**
  * @fileoverview İncele sayfası giriş noktası
  *
-  */
+ */
 import Cüzdan from '/birim/cüzdan/birim';
 import Tckt from '/birim/tckt/birim';
 import dom from '/lib/dom';
@@ -23,27 +23,27 @@ const AçDüğmesi = dom.adla("intcktb");
 /** @const {Element} */
 const Mask = dom.adla("inbd");
 /** @const {Element} */
-const İmeceİptalModal = dom.adla("inmii");
+const İmeceİptalKutusu = dom.adla("inmii");
 /** @const {Element} */
-const EşikModal = dom.adla("inmes");
+const EşikKutusu = dom.adla("inmes");
 /** @const {Element} */
-const SilModal = dom.adla("inmsy");
+const SilKutusu = dom.adla("inmsy");
 
 /** @const {Object<string, TCKTTemelBilgileri>} */
 const Hatırla = {};
 
-const modalKapat = () => {
+const kutuKapat = () => {
   Mask.style.display = "none";
-  İmeceİptalModal.style.display = "none";
-  EşikModal.style.display = "none";
-  SilModal.style.display = "none";
+  İmeceİptalKutusu.style.display = "none";
+  EşikKutusu.style.display = "none";
+  SilKutusu.style.display = "none";
 }
 
 Mask.onmousedown = (e) => {
-  if (e.target == Mask) modalKapat();
+  if (e.target == Mask) kutuKapat();
 };
 
-dom.adla("inx").onclick = modalKapat;
+dom.adla("inx").onclick = kutuKapat;
 
 const cüzdanaEkle = () => {
   TCKT.addToWallet().then((eklendi) => {
@@ -53,9 +53,9 @@ const cüzdanaEkle = () => {
   }).catch(console.log);
 }
 
-const imeceİptalModalGöster = () => {
+const imeceİptalKutusuGöster = () => {
   Mask.style.display = "";
-  İmeceİptalModal.style.display = "";
+  İmeceİptalKutusu.style.display = "";
   const adresGirdisi = dom.adla("iniii");
   let address = adresGirdisi.value;
   const agirlikGirdisi = dom.adla("iniiw");
@@ -68,7 +68,7 @@ const imeceİptalModalGöster = () => {
   agirlikGirdisi.onclick = (e) => e.target.value = "";
   agirlikGirdisi.value = "1";
   dom.adla("iniip").onclick = (e) => birArttır(e, 9);;
-  dom.adla("iniir").onclick = modalKapat;
+  dom.adla("iniir").onclick = kutuKapat;
   dom.adla("iniio").onclick = () => {
     const weight = parseInt(agirlikGirdisi.value);
     address = evm.adresDüzelt(adresGirdisi.value).slice(2).toLowerCase();
@@ -76,21 +76,21 @@ const imeceİptalModalGöster = () => {
   }
 }
 
-const eşikModalGöster = () => {
+const eşikKutusuGöster = () => {
   Mask.style.display = "";
-  EşikModal.style.display = "";
+  EşikKutusu.style.display = "";
   dom.adla("inesm").onclick = birAzalt;
   dom.adla("inesp").onclick = (e) => birArttır(e, 99); //99 yerine mevcut threshold gelecek
   dom.adla("inesw").value = "1"; //mevcut threshold gelecek
   dom.adla("inesw").onclick = (e) => e.target.value = "";
   dom.adla("ineso").onclick = () => console.log(dom.adla("inesw").value); //TCKT.changeThreshold methodu gelecek
-  dom.adla("inesr").onclick = modalKapat;
+  dom.adla("inesr").onclick = kutuKapat;
 }
 
-const silModalGöster = () => {
+const silKutusuGöster = () => {
   Mask.style.display = "";
-  SilModal.style.display = "";
-  dom.adla("insyr").onclick = modalKapat;
+  SilKutusu.style.display = "";
+  dom.adla("insyr").onclick = kutuKapat;
   dom.adla("insyo").onclick = () => {
     /** @const {string} */
     const ağ = Cüzdan.ağ();
@@ -174,9 +174,9 @@ const kapalıYüz = (adres) => {
 AçDüğmesi.onclick = Cüzdan.bağla;
 Cüzdan.bağlanınca((adres) => {
   CüzdanaEkleDüğmesi.onclick = cüzdanaEkle;
-  İmeceİptalDüğmesi.onclick = imeceİptalModalGöster;
-  EşikAzaltmaDüğmesi.onclick = eşikModalGöster;
-  SilDüğmesi.onclick = silModalGöster;
+  İmeceİptalDüğmesi.onclick = imeceİptalKutusuGöster;
+  EşikAzaltmaDüğmesi.onclick = eşikKutusuGöster;
+  SilDüğmesi.onclick = silKutusuGöster;
   kapalıYüz(adres);
 });
 Cüzdan.ağDeğişince(() => kapalıYüz(Cüzdan.adres()));
