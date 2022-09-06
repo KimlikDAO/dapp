@@ -148,10 +148,13 @@ export const öde = (cidSözü, adresAğırlığı, eşik) => {
     let sonuç = para == 0
       ? cidSözü.then((cid) =>
         TCKT.createWithRevokers(ağ, adres, cid, eşik, adresAğırlığı))
-      : Promise.all([cidSözü, TCKT.getPermitFor(ağ, adres, para, iptalli)]).then(([cid, imza]) =>
-        TCKT.createWithRevokersWithTokenPermit(ağ, adres, cid, eşik, adresAğırlığı, imza));
+      : Promise.all([cidSözü, TCKT.getPermitFor(ağ, adres, para, iptalli)])
+        .then((cevap) => new Promise((resolve) => setTimeout(() => resolve(cevap), 100)))
+        .then(([cid, imza]) =>
+          TCKT.createWithRevokersWithTokenPermit(ağ, adres, cid, eşik, adresAğırlığı, imza)
+        );
     sonuç
       .then(Telefon.nftGeriAl)
-      .catch(Telefon.nftGeriAl);
+      .catch(console.log);
   };
 }
