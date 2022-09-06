@@ -99,7 +99,12 @@ export const öde = (cidSözü, adresAğırlığı, eşik) => {
     // Eğer 'native token'da ödemiyorsak, ağ ücretini ayrıca göster
     toplamKutusu.lastElementChild.style.display = para == 0 ? "none" : "inline-block";
 
+    /** @const {string} */
     const ağ = Cüzdan.ağ();
+    /** @const {string} */
+    const adres = /** @type {string} */(Cüzdan.adres());
+    // Nonce'ın cachelenmesi için şimdiden çağır
+    if (para) TCKT.getNonce(ağ, adres, para);
     /** @const {Promise<number>} */
     const ağÜcretiSözü = TCKT.estimateNetworkFee(ağ);
     /** @const {Promise<Array<number>>} */
@@ -141,7 +146,8 @@ export const öde = (cidSözü, adresAğırlığı, eşik) => {
   ağDeğişti(Cüzdan.ağ());
   Cüzdan.ağDeğişince(ağDeğişti);
 
-  const azBekle = (cevap) => new Promise((resolve) => setTimeout(() => resolve(cevap), 100))
+  const birazBekle = (cevap) => new Promise((resolve) => setTimeout(() => resolve(cevap), 100))
+
   dom.adla("od").classList.remove("disabled");
   dom.adla("oda").onclick = () => {
     const ağ = Cüzdan.ağ();
@@ -151,12 +157,12 @@ export const öde = (cidSözü, adresAğırlığı, eşik) => {
         TCKT.createWithRevokers(ağ, adres, cid, eşik, adresAğırlığı))
       : TCKT.isTokenERC20Permit(ağ, para)
         ? Promise.all([cidSözü, TCKT.getPermitFor(ağ, adres, para, iptalli)])
-          .then(azBekle)
+          .then(birazBekle)
           .then(([cid, imza]) =>
             TCKT.createWithRevokersWithTokenPermit(adres, cid, eşik, adresAğırlığı, imza)
           )
         : Promise.all([cidSözü, TCKT.getApprovalFor(ağ, adres, para)])
-          .then(azBekle)
+          .then(birazBekle)
           .then(([cid, _]) =>
             TCKT.createWithRevokersWithTokenPayment(ağ, adres, cid, eşik, adresAğırlığı, para));
     sonuç
