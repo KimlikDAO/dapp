@@ -152,7 +152,7 @@ dom.adla("nld").onclick = (event) => {
         "/": "/?en",
         "/al": "/get",
         "/incele": "/view",
-      }
+      };
       document.cookie = "l=en; path=/; max-age=" + 1e6;
       window.location.href = sayfalar[window.location.pathname];
     }
@@ -162,7 +162,8 @@ dom.adla("nld").onclick = (event) => {
         "/": "/?tr",
         "/get": "/al",
         "/view": "/incele",
-      }; document.cookie = "l=tr; path=/; max-age=" + 1e6;
+      };
+      document.cookie = "l=tr; path=/; max-age=" + 1e6;
       window.location.href = sayfalar[window.location.pathname];
     }
   }
