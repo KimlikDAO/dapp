@@ -250,7 +250,6 @@ const ekBilgiBiriminiGöster = () => {
   /** @param {Element}  element*/
   /** @param {number}  kod Maile yada telefona gönderilen verification kod.*/
   const onayGirdisiKontrolEt = (element, kod) => {
-    if (element.value.length < 6) return;
     if (element.value.length >= 6) element.value = element.value.slice(0, 6);
     return element.value == kod
   }
@@ -258,6 +257,10 @@ const ekBilgiBiriminiGöster = () => {
   ePostaGirdisi.onblur = () => {
     ePostaGirdisi.classList.remove("invalid");
     if (!ePostaGirdisi.value.includes('@')) ePostaGirdisi.classList.add("invalid");
+  }
+
+  ePostaGirdisi.onkeydown = (e) => {
+    if (e.key == "Enter") dom.adla("taemo").onclick();
   }
 
   dom.adla("taemo").onclick = () => console.log("Kullanıcının e-postasına kod gönderilecek");
@@ -268,12 +271,15 @@ const ekBilgiBiriminiGöster = () => {
     mailOnayGirdisi.classList.remove("invalid");
     if (mailOnayGirdisi.value.length < 6) return;
     mailOnayGirdisi.classList.add(onayGirdisiKontrolEt(mailOnayGirdisi, 123456) ? "valid" : "invalid");
+    dom.adla("taemat").style.display = onayGirdisiKontrolEt(mailOnayGirdisi, 123456) ? "" : "none";
   };
 
   telefonOnayGirdisi.oninput = () => {
-    mailOnayGirdisi.classList.remove("valid");
-    mailOnayGirdisi.classList.remove("invalid");
+    telefonOnayGirdisi.classList.remove("valid");
+    telefonOnayGirdisi.classList.remove("invalid");
+    if (telefonOnayGirdisi.value.length < 6) return;
     telefonOnayGirdisi.classList.add(onayGirdisiKontrolEt(telefonOnayGirdisi, 123456) ? "valid" : "invalid");
+    dom.adla("tatelt").style.display = onayGirdisiKontrolEt(telefonOnayGirdisi, 123456) ? "" : "none";
   };
 }
 

@@ -198,24 +198,25 @@
   position: relative;
   width: 10%;
   background: #fff;
-  opacity: 0.9;
+  opacity: 0.8;
   cursor: pointer;
   height: 40px;
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 1px solid #8fcf8f;
-  ;
+  border: 1px solid rgba(0 0 0 /0.1);
   border-radius: 4px;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
   box-sizing: border-box;
-  margin-left: 0.5em;
+  margin-left: 0.1em;
 }
 
 .taio::before {
   position: absolute;
   content: "";
-  border: 7px solid transparent;
-  border-left-color: #8fcf8f;
+  border: 6px solid transparent;
+  border-left-color: #333;
   left: 40%;
 }
 
@@ -229,7 +230,7 @@
 
 #tamo,
 #tato {
-  width: 100%;
+  width: 80%;
 }
 
 #taadi {
@@ -250,4 +251,10 @@
 #tateli.valid,
 #taemi.valid {
   border-color: #8fcf8f;
+}
+
+.tatick {
+  color: #8fcf8f;
+  width: 20%;
+  font-weight: 700;
 }
