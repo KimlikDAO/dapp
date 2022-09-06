@@ -138,21 +138,27 @@ export const öde = (cidSözü, adresAğırlığı, eşik) => {
     paraDeğişti(parseInt(li.id[3]), li.lastElementChild);
   };
 
-  const ağ = Cüzdan.ağ();
-  const adres = /** @type {string} */(Cüzdan.adres());
-  ağDeğişti(ağ);
+  ağDeğişti(Cüzdan.ağ());
   Cüzdan.ağDeğişince(ağDeğişti);
 
+  const azBekle = (cevap) => new Promise((resolve) => setTimeout(() => resolve(cevap), 100))
   dom.adla("od").classList.remove("disabled");
   dom.adla("oda").onclick = () => {
+    const ağ = Cüzdan.ağ();
+    const adres = /** @type {string} */(Cüzdan.adres());
     let sonuç = para == 0
       ? cidSözü.then((cid) =>
         TCKT.createWithRevokers(ağ, adres, cid, eşik, adresAğırlığı))
-      : Promise.all([cidSözü, TCKT.getPermitFor(ağ, adres, para, iptalli)])
-        .then((cevap) => new Promise((resolve) => setTimeout(() => resolve(cevap), 100)))
-        .then(([cid, imza]) =>
-          TCKT.createWithRevokersWithTokenPermit(ağ, adres, cid, eşik, adresAğırlığı, imza)
-        );
+      : TCKT.isTokenERC20Permit(ağ, para)
+        ? Promise.all([cidSözü, TCKT.getPermitFor(ağ, adres, para, iptalli)])
+          .then(azBekle)
+          .then(([cid, imza]) =>
+            TCKT.createWithRevokersWithTokenPermit(adres, cid, eşik, adresAğırlığı, imza)
+          )
+        : Promise.all([cidSözü, TCKT.getApprovalFor(ağ, adres, para)])
+          .then(azBekle)
+          .then(([cid, _]) =>
+            TCKT.createWithRevokersWithTokenPayment(ağ, adres, cid, eşik, adresAğırlığı, para));
     sonuç
       .then(Telefon.nftGeriAl)
       .catch(console.log);
