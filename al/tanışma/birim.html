@@ -61,17 +61,15 @@
       <a href="javascript:" id=tabip class="btn" data-en="Cancel">İptal</a>
     </div>
   </div>
-  <div id=taebc>
+  <div id=taebc style="display:none">
     <div class="tailc">
       <label for="taemi" class="taplab" data-en="E-mail">E-posta</label>
-      <label for="tamo" class="taslab" data-en="Confirmation No">Onay No</label>
+      <label for="tamo" class="taslab" data-en="Confirmation No">Onay Kodu</label>
     </div>
     <div class="tailc">
-      <div class="tapic">
-        <input type="email" id=taemi class="taebi">
-        <div href="javascript:" id=taemo class="taio"
-          title="Onayladığınızda posta kutunuza bir doğrulama kodu gönderilecek.">
-        </div>
+      <input type="email" id=taemi class="taebi">
+      <div class="tabtnc">
+        <div href="javascript:" id=taemo class="taio"><img src="/al/tanışma/ok.svg" alt=""></div>
       </div>
       <div class="tasic">
         <input type="number" id=tamo class="taebi">
@@ -80,14 +78,12 @@
     </div>
     <div class="tailc">
       <label for="tateli" class="taplab" data-en="Phone Number">Telefon Numarası</label>
-      <label for="tato" class="taslab" data-en="Confirmation No">Onay No</label>
+      <label for="tato" class="taslab" data-en="Confirmation No">Onay Kodu</label>
     </div>
     <div class="tailc">
-      <div class="tapic">
-        <input type="tel" id=tateli class="taebi" placeholder="05__ ___ __ __" maxlength="11">
-        <div href="javascript:" id=tatelo class="taio"
-          title="Onayladığınızda telefonunuza bir doğrulama kodu gönderilecek.">
-        </div>
+      <input type="tel" id=tateli class="taebi" placeholder="05__ ___ __ __" maxlength="11">
+      <div class="tabtnc">
+        <div href="javascript:" id=tatelo class="taio"><img src="/al/tanışma/ok.svg" alt=""></div>
       </div>
       <div class="tasic">
         <input type="number" id=tato class="taebi">
@@ -98,7 +94,7 @@
       <label for="taadi" class="taplab" data-en="Address">Adres</label>
       <textarea id=taadi name=taadi class="taebi" rows="4"></textarea>
     </div>
-      <a href="javascript:" id=taebo class="btn act lft" data-en="Confirm">Tamam</a>
-      <a href="javascript:" id=taeba class="btn" data-en="Skip">Atla</a>
+    <a href="javascript:" id=taebo class="btn act lft" data-en="Confirm">Tamam</a>
+    <a href="javascript:" id=taeba class="btn" data-en="Skip">Atla</a>
   </div>
 </div>

@@ -236,22 +236,32 @@ const açıkTcktAlVe = (sonra) => {
   }
 }
 
-const ekBilgiBiriminiGöster = () => {
+const ekBilgiKutusunuGöster = () => {
   dom.adla("taebc").style.display = "";
+  dom.adla("taa").style.display = "none";
+  dom.adla("tab").style.display = "none";
   /** @const {Element} */
   const ePostaGirdisi = dom.adla("taemi");
   /** @const {Element} */
   const telGirdisi = dom.adla("tateli");
   /** @const {Element} */
+  const adresGirdisi = dom.adla("taadi");
+  /** @const {Element} */
   const mailOnayGirdisi = dom.adla("tamo");
   /** @const {Element} */
-  const telefonOnayGirdisi = dom.adla("tato");
+  const telOnayGirdisi = dom.adla("tato");
+  /** @const {Element} */
+  const onaylaDüğmesi = dom.adla("taebo");
+  /** @const {Element} */
+  const atlaDüğmesi = dom.adla("taeba");
 
-  /** @param {Element}  element*/
-  /** @param {number}  kod Maile yada telefona gönderilen verification kod.*/
+  /**
+   * @param {Element} element
+   * @param {number} kod
+   */
   const onayGirdisiKontrolEt = (element, kod) => {
-    if (element.value.length >= 6) element.value = element.value.slice(0, 6);
-    return element.value == kod
+    if (element.value.length > 6) element.value = element.value.slice(0, 6);
+    return element.value == kod;
   }
 
   ePostaGirdisi.onblur = () => {
@@ -264,24 +274,51 @@ const ekBilgiBiriminiGöster = () => {
   }
 
   dom.adla("taemo").onclick = () => console.log("Kullanıcının e-postasına kod gönderilecek");
+
+  telGirdisi.onkeydown = (e) => {
+    if (e.key == "Enter") dom.adla("tatelo").onclick();
+  }
+
   dom.adla("tatelo").onclick = () => console.log("Kullanıcının telefonuna kod gönderilecek");
 
+  /**
+   * @param {Element} element
+   * @param {string} id
+   * @param {number} kod
+   */
+  const onayKoduKontrolEt = (element, id, kod) => {
+    element.classList.remove("valid");
+    element.classList.remove("invalid");
+    if (element.value.length < 6) {
+      dom.adla(id).style.display = "none";
+      return
+    }
+    element.classList.add(onayGirdisiKontrolEt(element, kod) ? "valid" : "invalid");
+    dom.adla(id).style.display = onayGirdisiKontrolEt(element, kod) ? "" : "none";
+  }
+
   mailOnayGirdisi.oninput = () => {
-    mailOnayGirdisi.classList.remove("valid");
-    mailOnayGirdisi.classList.remove("invalid");
-    if (mailOnayGirdisi.value.length < 6) return;
-    mailOnayGirdisi.classList.add(onayGirdisiKontrolEt(mailOnayGirdisi, 123456) ? "valid" : "invalid");
-    dom.adla("taemat").style.display = onayGirdisiKontrolEt(mailOnayGirdisi, 123456) ? "" : "none";
+    onayKoduKontrolEt(mailOnayGirdisi, "taemat", 123456); //123456 örnek kod, değişecek.
   };
 
-  telefonOnayGirdisi.oninput = () => {
-    telefonOnayGirdisi.classList.remove("valid");
-    telefonOnayGirdisi.classList.remove("invalid");
-    if (telefonOnayGirdisi.value.length < 6) return;
-    telefonOnayGirdisi.classList.add(onayGirdisiKontrolEt(telefonOnayGirdisi, 123456) ? "valid" : "invalid");
-    dom.adla("tatelt").style.display = onayGirdisiKontrolEt(telefonOnayGirdisi, 123456) ? "" : "none";
+  telOnayGirdisi.oninput = () => {
+    onayKoduKontrolEt(telOnayGirdisi, "tatelt", 123456); //123456 örnek kod, değişecek.
   };
+
+  onaylaDüğmesi.onclick = () => {
+    const ePostaAdresi = ePostaGirdisi.value;
+    const telefonNumarası = telGirdisi.value;
+    const adresBilgileri = adresGirdisi.value;
+    console.log(ePostaAdresi, telefonNumarası, adresBilgileri);
+  }
+
+  atlaDüğmesi.onclick = () => {
+    dom.adla("taebc").style.display = "none";
+    dom.adla("taa").style.display = "";
+    dom.adla("tab").style.display = "";
+    //3. adıma geçilecek
+  }
 }
 
-ekBilgiBiriminiGöster();
+ekBilgiKutusunuGöster();
 export default { açıkTcktAlVe };
