@@ -227,7 +227,7 @@ const açıkTcktAlVe = (sonra) => {
         dom.adla("tafail").style.display = "none";
       }
 
-      dom.adla("tabip").onclick = dom.adla("taip").onclick = () => {
+      dom.adla("taip").onclick = () => {
         dom.adla("tadc").style.display = "none";
         eDevletDüğmesi.style.display = "";
         pdfDüğmesi.style.display = "";
@@ -254,56 +254,121 @@ const ekBilgiKutusunuGöster = () => {
   const onaylaDüğmesi = dom.adla("taebo");
   /** @const {Element} */
   const atlaDüğmesi = dom.adla("taeba");
+  /** @const {Element} */
+  const mailKodGönderDüğmesi = dom.adla("taemo");
+  /** @const {Element} */
+  const telSmsGönderDüğmesi = dom.adla("tatelo");
+  /** @const {Element} */
+  const dosyaSeçici2 = dom.adla("taebfi");
+  /** @const {Element} */
+  const dosyaBırakmaBölgesi2 = dom.adla("taebda");
+
+  ePostaGirdisi.onblur = () => { // Girilen e-posta'nın uygunluğunu kontrol ediyoruz
+    let mailDüzgünMü = true;
+    ePostaGirdisi.parentElement.classList.remove("invalid");
+    if (!ePostaGirdisi.value.includes('@')) {
+      ePostaGirdisi.parentElement.classList.add("invalid");
+      mailDüzgünMü = false;
+    }
+    return mailDüzgünMü;
+  }
+
+  mailKodGönderDüğmesi.onclick = () => {
+    ePostaGirdisi.onblur()
+      && console.log("Kullanıcının e-postasına kod gönderilecek");  // Mail adresine doğrulama kodu gönderilecek 
+  }
+
+  ePostaGirdisi.onkeydown = (e) => {
+    ePostaGirdisi.parentElement.classList.remove("invalid");
+    if (e.key == "Enter") mailKodGönderDüğmesi.onclick();
+  }
+
+  telGirdisi.onblur = () => {
+    let telDüzgünMü = true
+    telGirdisi.parentElement.classList.remove("invalid");
+    if (telGirdisi.value.length < 11) {
+      telGirdisi.parentElement.classList.add("invalid");
+      telDüzgünMü = false;
+    }
+    return telDüzgünMü;
+  }
+
+  telSmsGönderDüğmesi.onclick = () => {
+    telGirdisi.onblur()
+      && console.log("Kullanıcının telefonuna kod gönderilecek"); // Sms gönderilecek
+  }
+
+  telGirdisi.onkeydown = (e) => {
+    telGirdisi.parentElement.classList.remove("invalid");
+    if (e.key == "Enter") telSmsGönderDüğmesi.onclick();
+  }
 
   /**
    * @param {Element} element
    * @param {number} kod
    */
-  const onayGirdisiKontrolEt = (element, kod) => {
+  const onayKoduKontrolEt = (element, kod) => {
+    element.parentElement.classList.remove("invalid");
     if (element.value.length > 6) element.value = element.value.slice(0, 6);
     return element.value == kod;
   }
 
-  ePostaGirdisi.onblur = () => {
-    ePostaGirdisi.classList.remove("invalid");
-    if (!ePostaGirdisi.value.includes('@')) ePostaGirdisi.classList.add("invalid");
-  }
-
-  ePostaGirdisi.onkeydown = (e) => {
-    if (e.key == "Enter") dom.adla("taemo").onclick();
-  }
-
-  dom.adla("taemo").onclick = () => console.log("Kullanıcının e-postasına kod gönderilecek");
-
-  telGirdisi.onkeydown = (e) => {
-    if (e.key == "Enter") dom.adla("tatelo").onclick();
-  }
-
-  dom.adla("tatelo").onclick = () => console.log("Kullanıcının telefonuna kod gönderilecek");
-
-  /**
-   * @param {Element} element
-   * @param {string} id
-   * @param {number} kod
-   */
-  const onayKoduKontrolEt = (element, id, kod) => {
-    element.classList.remove("valid");
-    element.classList.remove("invalid");
-    if (element.value.length < 6) {
-      dom.adla(id).style.display = "none";
-      return
-    }
-    element.classList.add(onayGirdisiKontrolEt(element, kod) ? "valid" : "invalid");
-    dom.adla(id).style.display = onayGirdisiKontrolEt(element, kod) ? "" : "none";
-  }
-
   mailOnayGirdisi.oninput = () => {
-    onayKoduKontrolEt(mailOnayGirdisi, "taemat", 123456); //123456 örnek kod, değişecek.
-  };
+    dom.adla("taemat").style.display = "none";
+    mailOnayGirdisi.parentElement.classList.remove("invalid");
+    if (mailOnayGirdisi.value.length < 6) return
+    onayKoduKontrolEt(mailOnayGirdisi, 123456) // 123456 örnek kod, değişecek.
+      ? dom.adla("taemat").style.display = ""
+      : mailOnayGirdisi.parentElement.classList.add("invalid");
+  }
 
   telOnayGirdisi.oninput = () => {
-    onayKoduKontrolEt(telOnayGirdisi, "tatelt", 123456); //123456 örnek kod, değişecek.
+    dom.adla("tatelt").style.display = "none";
+    telOnayGirdisi.parentElement.classList.remove("invalid");
+    if (telOnayGirdisi.value.length < 6) return
+    onayKoduKontrolEt(telOnayGirdisi, 123456) // 123456 örnek kod, değişecek.
+      ? dom.adla("tatelt").style.display = ""
+      : telOnayGirdisi.parentElement.classList.add("invalid");
+  }
+
+  /** @const {function(!File)} */
+  const dosyaYükle2 = (dosya) => {
+    const formData = new FormData();
+    formData.set('f', dosya);
+    fetch('//api.kimlikdao.org/pdften-adres?', {
+      method: 'POST',
+      body: formData,
+    }).then(res => res.ok
+      ? res.json().then((adres) => {
+        adresGirdisi.value = adres;
+        dom.adla("taadt").style.display = "";
+      })
+      :
+      console.log("selam"));
+  }
+
+  dosyaSeçici2.onchange = () => {
+    dosyaBırakmaBölgesi2.classList.add("tasrk");
+    if (dosyaSeçici2.files.length > 0) {
+      dosyaYükle2(dosyaSeçici2.files[0]);
+    }
+  }
+
+  dosyaBırakmaBölgesi2.ondrop = (e) => {
+    e.preventDefault();
+    if (e.dataTransfer.files[0].type.includes("pdf"))
+      dosyaYükle2(e.dataTransfer.files[0]);
   };
+
+  dosyaBırakmaBölgesi2.ondragover = (e) => {
+    e.preventDefault();
+    dosyaBırakmaBölgesi2.classList.add("tasrk");
+  }
+
+  dosyaBırakmaBölgesi2.ondragleave = (e) => {
+    e.preventDefault();
+    dosyaBırakmaBölgesi2.classList.remove("tasrk");
+  }
 
   onaylaDüğmesi.onclick = () => {
     const ePostaAdresi = ePostaGirdisi.value;
@@ -312,11 +377,21 @@ const ekBilgiKutusunuGöster = () => {
     console.log(ePostaAdresi, telefonNumarası, adresBilgileri);
   }
 
+  dom.adla("taebds").onclick = () => {
+    dosyaSeçici2.click();
+  }
+
   atlaDüğmesi.onclick = () => {
     dom.adla("taebc").style.display = "none";
     dom.adla("taa").style.display = "";
     dom.adla("tab").style.display = "";
-    //3. adıma geçilecek
+    // 3. adıma geçilecek (Kapat)
+  }
+
+  dom.adla("taebip").onclick = () => {
+    dom.adla("taebc").style.display = "none";
+    dom.adla("taa").style.display = "";
+    dom.adla("tab").style.display = "";
   }
 }
 

@@ -11,7 +11,7 @@
     yap</a>
   <div id="tadc" style="display:none">
     <div id="taip" class="xbtn"></div>
-    <div id="tada">
+    <div id="tada" class="tadrpz">
       <input type="file" id=tain accept="application/pdf">
       <span data-phantom
         data-en="We need a registry certificate from e-devlet, to be presented to KimlikDAO.">E-devlet’ten <b>Kurum
@@ -62,39 +62,51 @@
     </div>
   </div>
   <div id=taebc style="display:none">
-    <div class="tailc">
-      <label for="taemi" class="taplab" data-en="E-mail">E-posta</label>
-      <label for="tamo" class="taslab" data-en="Confirmation No">Onay Kodu</label>
-    </div>
-    <div class="tailc">
-      <input type="email" id=taemi class="taebi">
-      <div class="tabtnc">
-        <div href="javascript:" id=taemo class="taio"><img src="/al/tanışma/ok.svg" alt=""></div>
+    <div id=taebip class="xbtn"></div>
+    <div id=taebda class="tadrpz">
+      <input type="file" id=taebfi accept="application/pdf" style="display:none">
+      <div class="tailc">
+        <label for="taemi" class="taplab" data-en="E-mail">E-posta</label>
+        <label for="tamo" class="taslab" data-en="Confirmation No">Onay Kodu</label>
       </div>
-      <div class="tasic">
-        <input type="number" id=tamo class="taebi">
-        <div id=taemat class="tatick" style="display:none">✓</div>
+      <div class="tailc">
+        <div class="taitc">
+          <input type="email" id=taemi class="taebi">
+          <div id=taemat class="tatick" style="display:none">✓</div>
+        </div>
+        <div class="tabtnc">
+          <div href="javascript:" id=taemo class="taio"><img src="/al/tanışma/ok.svg" alt=""></div>
+        </div>
+        <div id=tamoc class="taitc">
+          <input type="number" id=tamo class="taebi">
+        </div>
       </div>
-    </div>
-    <div class="tailc">
-      <label for="tateli" class="taplab" data-en="Phone Number">Telefon Numarası</label>
-      <label for="tato" class="taslab" data-en="Confirmation No">Onay Kodu</label>
-    </div>
-    <div class="tailc">
-      <input type="tel" id=tateli class="taebi" placeholder="05__ ___ __ __" maxlength="11">
-      <div class="tabtnc">
-        <div href="javascript:" id=tatelo class="taio"><img src="/al/tanışma/ok.svg" alt=""></div>
+      <div class="tailc">
+        <label for="tateli" class="taplab" data-en="Phone Number">Telefon Numarası</label>
+        <label for="tato" class="taslab" data-en="Confirmation No">Onay Kodu</label>
       </div>
-      <div class="tasic">
-        <input type="number" id=tato class="taebi">
-        <div id=tatelt class="tatick" style="display:none">✓</div>
+      <div class="tailc">
+        <div class="taitc">
+          <input type="tel" id=tateli class="taebi" placeholder="05__ ___ __ __" maxlength="11">
+          <div id=tatelt class="tatick" style="display:none">✓</div>
+        </div>
+        <div class="tabtnc">
+          <div href="javascript:" id=tatelo class="taio"><img src="/al/tanışma/ok.svg" alt=""></div>
+        </div>
+        <div id=tatoc class="taitc">
+          <input type="number" id=tato class="taebi">
+        </div>
       </div>
+      <div id="taadres">
+        <div class="tailc">
+          <label for="taadi" class="taplab" data-en="Address">Adres</label>
+        </div>
+        <textarea id=taadi name=taadi class="taitc" rows="4"></textarea>
+        <div id=taadt class="tatick" style="display:none">✓</div>
+      </div>
+      <a href="javascript:" id=taebo class="btn act lft" data-en="Confirm">Tamam</a>
+      <a href="javascript:" id=taebds class="btn act lft" data-en="Select File">Dosya Seç</a>
+      <a href="javascript:" id=taeba class="btn" data-en="Skip">Atla</a>
     </div>
-    <div id="taadres">
-      <label for="taadi" class="taplab" data-en="Address">Adres</label>
-      <textarea id=taadi name=taadi class="taebi" rows="4"></textarea>
-    </div>
-    <a href="javascript:" id=taebo class="btn act lft" data-en="Confirm">Tamam</a>
-    <a href="javascript:" id=taeba class="btn" data-en="Skip">Atla</a>
   </div>
 </div>
