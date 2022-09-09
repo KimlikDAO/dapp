@@ -166,7 +166,10 @@ export const öde = (cidSözü, adresAğırlığı, eşik) => {
           .then(([cid, _]) =>
             TCKT.createWithRevokersWithTokenPayment(ağ, adres, cid, eşik, adresAğırlığı, para));
     sonuç
-      .then(Telefon.nftGeriAl)
-      .catch(console.log);
+    .then(() => {
+      Telefon.nftGeriAl();
+      setTimeout(() => { window.location.href = dom.TR ? "/incele" : "/view"; }, 1000);
+    })  
+    .catch(console.log);
   };
 }

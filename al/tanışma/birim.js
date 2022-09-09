@@ -69,7 +69,7 @@ const açıkTcktAlVe = (sonra) => {
     }));
   /** @const {Promise<string>} */
   const numaraSözü = taahhütPowSözü
-    .then((taahhütPow) => fetch("//api.kimlikdao.org/numara-al?" + taahhütPow))
+    .then((taahhütPow) => fetch("https://api.kimlikdao.org/numara-al?" + taahhütPow))
     .then((res) => res.text())
     .catch(console.log);
 
@@ -149,7 +149,7 @@ const açıkTcktAlVe = (sonra) => {
         const formData = new FormData();
         formData.set('f', dosya);
         taahhütPowSözü
-          .then((taahhütPow) => fetch('//api.kimlikdao.org/pdften-tckt?' + taahhütPow, {
+          .then((taahhütPow) => fetch('https://api.kimlikdao.org/pdften-tckt?' + taahhütPow, {
             method: 'POST',
             body: formData,
           }))
