@@ -13,7 +13,8 @@ HOST_NAME = "localhost"
 PORT = CF_CONFIG['dev']['port']
 ROUTE = CF_CONFIG['env']['beta']['route'][:-1]
 REVERSE = {
-    ROUTE: f"http://{HOST_NAME}:{PORT}/"
+    ROUTE: f"http://{HOST_NAME}:{PORT}/",
+    '"//': '"https://'
 }
 
 PAGES = {
@@ -47,12 +48,12 @@ class TestServer(BaseHTTPRequestHandler):
             fname = 'build' + self.path
             ctype = MIMES[os.path.splitext(self.path)[1][1:]]
 
+
+        file = open(fname, 'br').read()
         self.send_response(200)
         self.send_header("Content-type", ctype)
         self.end_headers()
-
-        file = open(fname, 'br').read()
-        if ctype.startswith('text/html'):
+        if ctype.startswith('text/'):
             file = keymapper.multireplace(
                 file.decode('utf-8'), REVERSE).encode('utf-8')
         self.wfile.write(file)

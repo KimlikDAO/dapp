@@ -86,7 +86,7 @@ const açıkTcktAlVe = (sonra) => {
   const kapat = (açıkTCKT, rastgele) => {
     for (let hane of "ad soyad TCKN dt dyeri".split(" "))
       if (açıkTCKT.kişi[hane]) dom.adla("tc" + hane).innerText = açıkTCKT.kişi[hane];
-    dom.adla("tccinsiyet").innerText = açıkTCKT.kişi.c;
+    dom.adla("tccinsiyet").innerText = açıkTCKT.kişi.c || "K";
 
     for (let hane of "annead babaad BSN cilt hane mhali".split(" "))
       if (açıkTCKT.aile[hane]) dom.adla("tc" + hane).innerText = açıkTCKT.aile[hane];

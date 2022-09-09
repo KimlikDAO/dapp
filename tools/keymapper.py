@@ -36,10 +36,12 @@ if __name__ == "__main__":
     CF_CONFIG = toml.load('wrangler.toml')
     HOST_NAME = "localhost"
     PORT = CF_CONFIG['dev']['port']
-    ROUTE = CF_CONFIG['env']['beta']['route'][:-1]
+    KIMLIKDAO_URL = CF_CONFIG['env']['beta']['route'][:-1]
 
     replace = {
-        f"http://{HOST_NAME}:{PORT}/": ROUTE
+        f"http://{HOST_NAME}:{PORT}/": KIMLIKDAO_URL,
+        "https://": "//",
+        "KIMLIKDAO_URL": KIMLIKDAO_URL
     }
     of_name = None
     if len(sys.argv) >= 3 and sys.argv[-2] == '-o':
