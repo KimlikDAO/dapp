@@ -259,9 +259,9 @@ const ekBilgiKutusunuGöster = () => {
   /** @const {Element} */
   const telSmsGönderDüğmesi = dom.adla("tatelo");
   /** @const {Element} */
-  const dosyaSeçici2 = dom.adla("taebfi");
+  const adresDosyaSeçici = dom.adla("taebfi");
   /** @const {Element} */
-  const dosyaBırakmaBölgesi2 = dom.adla("taebda");
+  const adresDosyaBırakmaBölgesi = dom.adla("taebda");
 
   ePostaGirdisi.onblur = () => { // Girilen e-posta'nın uygunluğunu kontrol ediyoruz
     let mailDüzgünMü = true;
@@ -286,7 +286,7 @@ const ekBilgiKutusunuGöster = () => {
   telGirdisi.onblur = () => {
     let telDüzgünMü = true
     telGirdisi.parentElement.classList.remove("invalid");
-    if (telGirdisi.value.length < 11) {
+    if (telGirdisi.value.length < 11) {              // TODO(MuhammetCoskun): Tel validation daha kapsamlı hale getir.
       telGirdisi.parentElement.classList.add("invalid");
       telDüzgünMü = false;
     }
@@ -317,7 +317,7 @@ const ekBilgiKutusunuGöster = () => {
     dom.adla("taemat").style.display = "none";
     mailOnayGirdisi.parentElement.classList.remove("invalid");
     if (mailOnayGirdisi.value.length < 6) return
-    onayKoduKontrolEt(mailOnayGirdisi, 123456) // 123456 örnek kod, değişecek.
+    onayKoduKontrolEt(mailOnayGirdisi, 123456) // 123456 dummy kod, değişecek.
       ? dom.adla("taemat").style.display = ""
       : mailOnayGirdisi.parentElement.classList.add("invalid");
   }
@@ -326,13 +326,13 @@ const ekBilgiKutusunuGöster = () => {
     dom.adla("tatelt").style.display = "none";
     telOnayGirdisi.parentElement.classList.remove("invalid");
     if (telOnayGirdisi.value.length < 6) return
-    onayKoduKontrolEt(telOnayGirdisi, 123456) // 123456 örnek kod, değişecek.
+    onayKoduKontrolEt(telOnayGirdisi, 123456) // 123456 dummy kod, değişecek.
       ? dom.adla("tatelt").style.display = ""
       : telOnayGirdisi.parentElement.classList.add("invalid");
   }
 
   /** @const {function(!File)} */
-  const dosyaYükle2 = (dosya) => {
+  const adresİçinDosyaYükle = (dosya) => {
     const formData = new FormData();
     formData.set('f', dosya);
     fetch('//api.kimlikdao.org/pdften-adres?', {
@@ -343,31 +343,30 @@ const ekBilgiKutusunuGöster = () => {
         adresGirdisi.value = adres;
         dom.adla("taadt").style.display = "";
       })
-      :
-      console.log("selam"));
+      : res.json().then(e => console.log(e)));
   }
 
-  dosyaSeçici2.onchange = () => {
-    dosyaBırakmaBölgesi2.classList.add("tasrk");
-    if (dosyaSeçici2.files.length > 0) {
-      dosyaYükle2(dosyaSeçici2.files[0]);
+  adresDosyaSeçici.onchange = () => {
+    adresDosyaBırakmaBölgesi.classList.add("tasrk");
+    if (adresDosyaSeçici.files.length > 0) {
+      adresİçinDosyaYükle(adresDosyaSeçici.files[0]);
     }
   }
 
-  dosyaBırakmaBölgesi2.ondrop = (e) => {
+  adresDosyaBırakmaBölgesi.ondrop = (e) => {
     e.preventDefault();
     if (e.dataTransfer.files[0].type.includes("pdf"))
-      dosyaYükle2(e.dataTransfer.files[0]);
+      adresİçinDosyaYükle(e.dataTransfer.files[0]);
   };
 
-  dosyaBırakmaBölgesi2.ondragover = (e) => {
+  adresDosyaBırakmaBölgesi.ondragover = (e) => {
     e.preventDefault();
-    dosyaBırakmaBölgesi2.classList.add("tasrk");
+    adresDosyaBırakmaBölgesi.classList.add("tasrk");
   }
 
-  dosyaBırakmaBölgesi2.ondragleave = (e) => {
+  adresDosyaBırakmaBölgesi.ondragleave = (e) => {
     e.preventDefault();
-    dosyaBırakmaBölgesi2.classList.remove("tasrk");
+    adresDosyaBırakmaBölgesi.classList.remove("tasrk");
   }
 
   onaylaDüğmesi.onclick = () => {
@@ -378,7 +377,7 @@ const ekBilgiKutusunuGöster = () => {
   }
 
   dom.adla("taebds").onclick = () => {
-    dosyaSeçici2.click();
+    adresDosyaSeçici.click();
   }
 
   atlaDüğmesi.onclick = () => {
