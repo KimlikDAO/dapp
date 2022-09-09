@@ -168,7 +168,7 @@ export const öde = (cidSözü, adresAğırlığı, eşik) => {
     sonuç
     .then(() => {
       Telefon.nftGeriAl();
-      setTimeout(() => { window.location.href = dom.TR ? "/incele" : "/view"; })
+      setTimeout(() => { window.location.href = dom.TR ? "/incele" : "/view"; }, 1000);
     })  
     .catch(console.log);
   };
