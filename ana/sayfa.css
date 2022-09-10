@@ -67,7 +67,7 @@ h2 {
   border: 1px solid rgba(27, 31, 35, 0.15);
   touch-action: manipulation;
   display: inline-block;
-  padding: 12px 12px 13px;
+  padding: 12px;
   line-height: 1;
   user-select: none;
   border-radius: 5px;
