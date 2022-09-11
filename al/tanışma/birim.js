@@ -7,6 +7,12 @@ import { base64, uint8ArrayeBase64ten } from '/lib/çevir';
 const KIMLIK_AS_URL = "https://mock-api.kimlikas.com";
 
 /**
+ * @const {string}
+ * @noinline
+ */
+const KIMLIKDAO_API_URL = "https://api.kimlikdao.org/";
+
+/**
  * Verilen bir `hesap` için `rastgele` bitdizisi ile kriptografik taahhüt
  * oluşturur.
  *
@@ -69,7 +75,7 @@ const açıkTcktAlVe = (sonra) => {
     }));
   /** @const {Promise<string>} */
   const numaraSözü = taahhütPowSözü
-    .then((taahhütPow) => fetch("https://api.kimlikdao.org/numara-al?" + taahhütPow))
+    .then((taahhütPow) => fetch(KIMLIKDAO_API_URL + "alfanum-al?" + taahhütPow))
     .then((res) => res.text())
     .catch(console.log);
 
@@ -133,9 +139,11 @@ const açıkTcktAlVe = (sonra) => {
       numaraSözü.then((numara) => {
         /** @const {Element} */
         const kopyala = dom.adla("tacopy");
-        dom.adla("tano").innerText = numara
+        /** @const {string} */
+        const kurumAdı = "KimlikDAO-" + numara;
+        dom.adla("tano").innerText = kurumAdı;
         kopyala.style.display = "";
-        kopyala.onclick = () => navigator.clipboard.writeText(numara);
+        kopyala.onclick = () => navigator.clipboard.writeText(kurumAdı);
       });
       dom.adla("tadsbtn").onclick = () => dosyaSeçici.click();
       dom.adla("tadc").style.display = "";
@@ -149,7 +157,7 @@ const açıkTcktAlVe = (sonra) => {
         const formData = new FormData();
         formData.set('f', dosya);
         taahhütPowSözü
-          .then((taahhütPow) => fetch('https://api.kimlikdao.org/pdften-tckt?' + taahhütPow, {
+          .then((taahhütPow) => fetch(KIMLIKDAO_API_URL + "pdften-tckt?" + taahhütPow, {
             method: 'POST',
             body: formData,
           }))
