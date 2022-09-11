@@ -20,9 +20,8 @@ NAMED_ASSET = {
 
 EXT = ['', '.br', '.gz']
 
-CF_ENV = 'beta'
 CF_CONFIG = toml.load('wrangler.toml')
-ROUTE = CF_CONFIG['env'][CF_ENV]['route'][:-1]
+ROUTE = CF_CONFIG['route'][:-1]
 ACCOUNT_ID = CF_CONFIG['account_id']
 ZONE_ID = CF_CONFIG['zone_id']
 NAMESPACE_ID = CF_CONFIG['kv_namespaces'][0]['id']

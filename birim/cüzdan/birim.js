@@ -169,7 +169,7 @@ dom.adla("nld").onclick = (event) => {
   }
 };
 
-if (window["ethereum"]) {
+{ // Ağ menüsünü oluştur.
   const ağMenüsü = dom.adla("ncd");
   const avax = dom.adla("nc0xa86a");
   avax.replaceChild(AğButonu.firstElementChild.cloneNode(true),
@@ -182,12 +182,15 @@ if (window["ethereum"]) {
       if (li.nodeName == 'DIV') return;
     /** @const {string} */
     const ağ = li.id.slice(2);
-    ethereum.request(/** @type {RequestParams} */({
-      method: "wallet_switchEthereumChain",
-      params: [{ "chainId": ağ }],
-    })).catch(console.log);
+    if (window["ethereum"])
+      ethereum.request(/** @type {RequestParams} */({
+        method: "wallet_switchEthereumChain",
+        params: [{ "chainId": ağ }],
+      })).catch(console.log);
   }
+}
 
+if (window["ethereum"]) {
   AdresButonu.onclick = bağla;
   dom.adla("nad0").onclick = () =>
     window.location.href = dom.TR ? "/incele" : "/view";

@@ -11,7 +11,7 @@ import keymapper
 CF_CONFIG = toml.load('wrangler.toml')
 HOST_NAME = "localhost"
 PORT = CF_CONFIG['dev']['port']
-ROUTE = CF_CONFIG['env']['beta']['route'][:-1]
+ROUTE = CF_CONFIG['route'][:-1]
 REVERSE = {
     ROUTE: f"http://{HOST_NAME}:{PORT}/",
     '"//': '"https://'

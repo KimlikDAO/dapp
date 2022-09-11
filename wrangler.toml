@@ -1,26 +1,20 @@
-type = "javascript"
 account_id = "8f0c2f2271ff857947d9a5b2c38595a0"
 zone_id = "cb31764917040dd0b9a7b79e1ec099df"
-compatibility_date = "2022-04-02"
 
-name = "test"
-workers_dev = true
-route = "localhost"
-kv_namespaces = [
-  { binding = "KV", id = "836c46196848459ba8b3348e383bddf2", preview_id = "836c46196848459ba8b3348e383bddf2" },
-]
+main = "build/prod.js"
+name = "dapp"
+workers_dev = false
+route = "https://kimlikdao.org/*"
+compatibility_date = "2022-09-09"
+usage_model = "bundled"
+
+[[kv_namespaces]]
+binding = "KV"
+id = "836c46196848459ba8b3348e383bddf2"
 
 [dev]
-ip = "0.0.0.0"
 port = 8787
 local_protocol = "http"
 
-[env.beta]
-name = "beta"
-workers_dev = false
-route = "https://kimlikdao.org/*"
-kv_namespaces = [{ binding = "KV", id = "836c46196848459ba8b3348e383bddf2" }]
-
 [build]
 command = "make cf-deployment"
-upload = { format = "service-worker" }
