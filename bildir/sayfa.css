@@ -1,4 +1,3 @@
-
 #bipc {
   margin: 2em;
 }
@@ -12,4 +11,30 @@
   padding: 1.5em;
   opacity: 1;
   transition: opacity 0.3s;
+}
+
+#biiic {
+  margin-top: 1em;
+}
+
+.biiia {
+  display: flex;
+  align-items: center;
+  font-family: monospace;
+  word-break: break-all;
+  cursor: pointer;
+  margin: 1em 0;
+  box-sizing: border-box;
+  border: 1px solid transparent;
+  border-radius: 5px;
+  height: 30px;
+}
+
+/* .biiia:hover,
+.biiia:focus {
+  border: 1px solid #70a4dc;
+} */
+
+#biiic input[type="radio"]:checked+.biiia {
+  border: 1px solid red;
 }
