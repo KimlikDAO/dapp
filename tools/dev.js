@@ -47,7 +47,7 @@ const SAYFALAR = {
   "/oyla": "oyla/sayfa.html",
   "/vote": "oyla/sayfa.html",
   "/bildir": "bildir/sayfa.html",
-  "lost": "bildir/sayfa.html",
+  "/lost": "bildir/sayfa.html",
 };
 
 createServer({

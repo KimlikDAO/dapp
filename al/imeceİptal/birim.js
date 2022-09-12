@@ -113,7 +113,7 @@ const kutularıAç = (sonra) => {
       İptalButonu.innerText = dom.TR ? "İmece iptal kuruldu ✓" : "Social revoke setup is complete ✓";
       İptalButonu.onclick = null;
       dom.gizle(dom.adla("imc"));
-      dom.gizle(dom.adla("im"));
+      dom.adla("im").classList.add("done");
       sonra(adresAğırlığı, eşikDeğeri);
     }
   };
