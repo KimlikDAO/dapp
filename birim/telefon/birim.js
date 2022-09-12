@@ -40,7 +40,7 @@ const kutuKapat = () => {
 const nftGöster = (kutudaGöster) => {
   if (kutudaGöster) {
     nft.style.opacity = "";
-    nftButton.style.display = "";
+    dom.göster(nftButton);
     nftButton.onclick ||= Tckt.çevir;
   }
 

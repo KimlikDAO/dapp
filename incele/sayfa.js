@@ -33,10 +33,10 @@ const SilKutusu = dom.adla("inmsy");
 const Hatırla = {};
 
 const kutuKapat = () => {
-  Mask.style.display = "none";
-  İmeceİptalKutusu.style.display = "none";
-  EşikKutusu.style.display = "none";
-  SilKutusu.style.display = "none";
+  dom.gizle(Mask);
+  dom.gizle(İmeceİptalKutusu);
+  dom.gizle(EşikKutusu);
+  dom.gizle(SilKutusu);
 };
 
 Mask.onmousedown = (e) => {
@@ -54,8 +54,8 @@ const cüzdanaEkle = () => {
 }
 
 const imeceİptalKutusuGöster = () => {
-  Mask.style.display = "";
-  İmeceİptalKutusu.style.display = "";
+  dom.göster(Mask);
+  dom.göster(İmeceİptalKutusu);
   const adresGirdisi = dom.adla("iniii");
   let address = adresGirdisi.value;
   const agirlikGirdisi = dom.adla("iniiw");
@@ -84,8 +84,8 @@ const eşikKutusuGöster = () => {
   /** @const {Element} */
   const girdi = dom.adla("inesw");
 
-  Mask.style.display = "";
-  EşikKutusu.style.display = "";
+  dom.göster(Mask);
+  dom.göster(EşikKutusu);
   dom.adla("inesr").onclick = kutuKapat;
 
   TCKT.revokesRemaining(adres).then((eşik) => {
@@ -105,8 +105,8 @@ const eşikKutusuGöster = () => {
 }
 
 const silKutusuGöster = () => {
-  Mask.style.display = "";
-  SilKutusu.style.display = "";
+  dom.göster(Mask);
+  dom.göster(SilKutusu);
   dom.adla("insyr").onclick = kutuKapat;
   dom.adla("insyo").onclick = () => {
     /** @const {string} */
