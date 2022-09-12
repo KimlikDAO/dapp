@@ -18,12 +18,21 @@
     <birim:cüzdan />
   </div>
   <div id=bipc>
-    <div class="bistep"><b data-en="Lorem Ipsum">1.Lorem Ipsum </b><span data-phantom
-        data-en="Lorem Ipsum.">Lorem Ipsum.</span>
+    <div class="bistep"><b data-en="Lost TCKT">1.Kayıp TCKT </b><span data-phantom
+        data-en="Who does the TCKT you want to cancel belong to?">iptal etmek istediğiniz TCKT kime ait?</span>
       <br>
       <br>
-      <a href="javascript:" id=bibtna class="act btn lft" data-en="Lorem">Lorem</a>
-      <a href="javascript:" id=bibtnb class="act btn" data-en="Ipsum">Ipsum</a>
+      <a href="javascript:" id=bibtna class="act btn lft" data-en="Belongs to me">Bana ait</a>
+      <a href="javascript:" id=bibtnb class="act btn" data-en="Belongs to other">Başkasına ait</a>
+      <div id=biiic style="display:none">
+        <span data-en="Select the TCKT address you want to cancel.">İptal etmek istediğiniz adresi seçiniz.</span>
+        <div id=bisi style="display:none">
+          <input type="radio" name="addresses" style="display:none">
+          <label class="biiia">0x6ec04644bd36cd36d3569093078aba4c78297ef1</label>
+        </div>
+        <a href="javascript:" id=biiio class="act btn lft" data-en="Confirm">Onayla</a>
+        <a href="javascript:" id=biiir class="btn" data-en="Cance">İptal</a>
+      </div>
     </div>
   </div>
   <script async type="module" src="/bildir/sayfa.js" data-remove-type></script>
