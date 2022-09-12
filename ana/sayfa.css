@@ -181,7 +181,7 @@ hr {
   z-index: 20;
 }
 
-#nal {
+.nav {
   display: flex;
   justify-content: space-between;
   margin: 0 auto;
@@ -212,7 +212,7 @@ hr {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  margin-bottom: 10em;
+  margin-bottom: 1em;
 }
 
 #ba {

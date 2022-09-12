@@ -117,7 +117,7 @@ const açıkTcktAlVe = (sonra) => {
     /** @const {!Uint8Array} */
     const eDevletRasgele = new Uint8Array(64);
     crypto.getRandomValues(eDevletRasgele);
-    eDevletDüğmesi.style.display = "none";
+    dom.gizle(eDevletDüğmesi);
     pdfDüğmesi.href = "javascript:";
     pdfDüğmesi.classList.remove("act");
     pdfDüğmesi.innerText = dom.TR ? "E-devlet’ten bilgileriniz alındı ✓" : "We got your info ✓";
@@ -130,8 +130,8 @@ const açıkTcktAlVe = (sonra) => {
   } else {
     const hataBildirimi = dom.adla("tafb");
     pdfDüğmesi.onclick = () => {
-      eDevletDüğmesi.style.display = "none";
-      pdfDüğmesi.style.display = "none";
+      dom.gizle(eDevletDüğmesi);
+      dom.gizle(pdfDüğmesi);
       /** @const {Element} */
       const dosyaBırakmaBölgesi = dom.adla("tada");
       /** @const {Element} */
@@ -142,18 +142,18 @@ const açıkTcktAlVe = (sonra) => {
         /** @const {string} */
         const kurumAdı = "KimlikDAO-" + numara;
         dom.adla("tano").innerText = kurumAdı;
-        kopyala.style.display = "";
+        dom.göster(kopyala);
         kopyala.onclick = () => navigator.clipboard.writeText(kurumAdı);
       });
       dom.adla("tadsbtn").onclick = () => dosyaSeçici.click();
-      dom.adla("tadc").style.display = "";
+      dom.göster(dom.adla("tadc"));
 
       /** @const {function(!File)} */
       const dosyaYükle = (dosya) => {
         hataKaldır();
         dom.adla("tafb").innerText = dom.TR ? "Belge yükleniyor" : "Uploading document";
-        dom.adla("taimg").style.display = "none";
-        dom.adla("tal").style.display = "";
+        dom.gizle(dom.adla("taimg"));
+        dom.göster(dom.adla("tal"));
         const formData = new FormData();
         formData.set('f', dosya);
         taahhütPowSözü
@@ -163,10 +163,10 @@ const açıkTcktAlVe = (sonra) => {
           }))
           .then(res => res.ok
             ? res.json().then((açıkTckt) => {
-              dom.adla("tadc").style.display = "none";
+              dom.gizle(dom.adla("tadc"));
               pdfDüğmesi.href = "javascript:";
               pdfDüğmesi.classList.remove("act");
-              pdfDüğmesi.style.display = "";
+              dom.göster(pdfDüğmesi);
               pdfDüğmesi.innerText = dom.TR ? "Bilgileriniz onaylandı ✓" : "We confirmed your info ✓";
               dom.butonDurdur(pdfDüğmesi);
               window.localStorage.removeItem(Cüzdan.adres().toLowerCase + "r");
@@ -225,20 +225,20 @@ const açıkTcktAlVe = (sonra) => {
         hataBildirimi.innerText = hata.ek && hata.ek.length
           ? metin.replace("{}", hata.ek[0]) : metin;
         hataBildirimi.classList.add("inv");
-        dom.adla("tal").style.display = "none";
-        dom.adla("taimg").style.display = "none";
-        dom.adla("tafail").style.display = "";
+        dom.gizle(dom.adla("tal"));
+        dom.gizle(dom.adla("taimg"));
+        dom.göster(dom.adla("tafail"));
       }
 
       const hataKaldır = () => {
         hataBildirimi.classList.remove("inv");
-        dom.adla("tafail").style.display = "none";
+        dom.gizle(dom.adla("tafail"));
       }
 
       dom.adla("tabip").onclick = dom.adla("taip").onclick = () => {
-        dom.adla("tadc").style.display = "none";
-        eDevletDüğmesi.style.display = "";
-        pdfDüğmesi.style.display = "";
+        dom.gizle(dom.adla("tadc"));
+        dom.göster(eDevletDüğmesi);
+        dom.göster(pdfDüğmesi);
       }
     }
   }

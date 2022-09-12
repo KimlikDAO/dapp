@@ -107,7 +107,7 @@ if (window["ethereum"]) {
     s1b.target = "";
     s1b.classList.remove("act");
     dom.butonDurdur(s1b);
-    s1a.style.display = "none";
+    dom.gizle(s1a);
     dom.adla("s1").classList.add("done");
     Telefon.adresGir(Cüzdan.hızlıArabirimAdı(adres));
     Tanışma.açıkTcktAlVe(tcktYarat);
