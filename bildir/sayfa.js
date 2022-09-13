@@ -2,6 +2,7 @@
  * @fileoverview Bildir sayfası giriş noktası
  */
 import Cüzdan from '/birim/cüzdan/birim';
+import TCKT from '/lib/TCKT';
 import dom from '/lib/dom';
 
 /** @type {?Array<string>} */
@@ -13,6 +14,8 @@ dom.adla("bibtnb").onclick = () => {
   dom.adlaGizle("bibtna");
   dom.adlaGizle("bibtnb");
   dom.adlaGöster("biiic");
+  dom.adlaGizle("biwo");
+
 
   if (!ADRESLER) {
     // Kullanıcın revoke edebileceği adresler cekilecek 
@@ -46,4 +49,34 @@ dom.adla("bibtnb").onclick = () => {
     dom.adlaGöster("bibtnb");
     dom.adlaGizle("biiic");
   }
+}
+
+dom.adla("bibtna").onclick = () => {
+  dom.adlaGöster("biwo")
+}
+
+dom.adla("bi1a").onclick = () => {
+  dom.adlaGöster("bipa");
+}
+
+dom.adla("bibtn3").onclick = () => {
+  dom.adlaGöster("bibd");
+}
+
+dom.adla("bsyo").onclick = () => {
+  const adres = /** @type {string} */(Cüzdan.adres());
+  TCKT.revoke(adres)
+    .catch(console.log);
+}
+
+dom.adla("bsyr").onclick = () => {
+  dom.adlaGizle("bibd");
+}
+
+dom.adla("bix").onclick = () => {
+  dom.adlaGizle("bibd");
+}
+
+dom.adla("bi1b").onclick = () => {
+  window.location.href = dom.TR ? "/iptal" : "/revoke";
 }

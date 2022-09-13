@@ -13,12 +13,30 @@
 </head>
 
 <body>
+  <div id=bibd style="display:none">
+    <div id="bimc">
+      <div id="bix" class="xbtn"></div>
+      <div id="bikts" class="bim">
+        <span data-phantom
+          data-en="Only revoke your TCKT if you think your private key was exposed.&lt;br>&lt;br>Confirm below to proceed.">Sadece
+          cüzdanınızın gizli anahtarını
+          başkasına verdiğinizi düşünüyorsanız TCKT’nizi yok etmeniz gerekir.<br><br>Devam etmek için onay verin.
+        </span>
+        <div class="inorc">
+          <br>
+          <br>
+          <a href="javascript:" id="bsyo" class="btn lft danger" data-en="Confirm in wallet">Cüzdana istek yolla</a>
+          <a href="javascript:" id="bsyr" class="btn" data-en="Cancel">İptal</a>
+        </div>
+      </div>
+    </div>
+  </div>
   <div id="binav" class="nav">
     <h2><a href="/">KimlikDAO</a></h2>
     <birim:cüzdan />
   </div>
   <div id=bipc>
-    <div class="bistep"><b data-en="Lost TCKT">1.Kayıp TCKT </b><span data-phantom
+    <div class="bistep"><b data-en="Lost TCKT">Kayıp TCKT </b><span data-phantom
         data-en="Who does the TCKT you want to cancel belong to?">İptal etmek istediğiniz TCKT kime ait?</span>
       <br>
       <br>
@@ -29,6 +47,19 @@
         <ul id=biiil></ul>
         <a href="javascript:" id=biiio class="btn lft dis" data-en="Confirm">Onayla</a>
         <a href="javascript:" id=biiir class="btn" data-en="Cancel">İptal</a>
+      </div>
+    </div>
+    <div id=biwo class="bistep" style="display:none"><b
+        data-en="Do you want to revoke the TCKT in your connected wallet?">Bağlı cüzdanınızdaki TCKT'yi mi iptal etmek
+        istiyorsunuz?</b>
+      <br>
+      <br>
+      <a href="javascript:" id=bi1a class="act btn lft" data-en="Yes">Evet</a>
+      <a href="javascript:" id=bi1b class="btn" data-en="No">Hayır</a>
+      <br>
+      <br>
+      <div id=bipa style="display:none">
+        <a href=" javascript:" id="bibtn3" class="btn danger" data-en="Revoke TCKT">TCKT yok et</a>
       </div>
     </div>
   </div>
