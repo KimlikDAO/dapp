@@ -60,12 +60,16 @@ dom.adla("ipbtna").onclick = () => {
   dom.adlaGöster("iptac");
 }
 
-// dom.adla("bsyo").onclick = () => {
-//   const adres = /** @type {string} */(Cüzdan.adres());
-//   TCKT.revoke(adres)
-//     .catch(console.log);
-// }
+dom.adla("ip1a").onclick = () => {
+  dom.adlaGizle("ip1b");
+  dom.adlaGizle("ip1a");
+  document.getElementById("ipb").innerHTML = "";
+  document.getElementById("ipsp").innerHTML = `Sadece cüzdanınızın gizli anahtarını başkasına verdiğinizi düşünüyorsanız TCKT’nizi yok etmeniz gerekir.<br><br>Devam etmek için onay verin.`;
+  dom.adlaGöster("1p1c");
+}
 
-dom.adla("ip1b").onclick = () => {
-  window.location.href = dom.TR ? "/bildir" : "/report";
+dom.adla("1p1c").onclick = () => {
+  const adres = /** @type {string} */(Cüzdan.adres());
+  TCKT.revoke(adres)
+    .catch(console.log);
 }

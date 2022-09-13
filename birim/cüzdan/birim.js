@@ -208,6 +208,9 @@ if (window["ethereum"]) {
     window.open(url, "_blank");
   }
 
+  dom.adla("nad4").onclick = () =>
+    window.location.href = dom.TR ? "/iptal" : "/revoke";
+
   ethereum.on("accountsChanged", adresDeğişti);
   ethereum.on("chainChanged", ağDeğişti);
 
