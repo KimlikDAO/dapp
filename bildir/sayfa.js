@@ -5,35 +5,43 @@ import Cüzdan from '/birim/cüzdan/birim';
 import TCKT from '/lib/TCKT';
 import dom from '/lib/dom';
 
-/** @const {Array<string>} */
-const ADRESLER = [
-  "0x6ec04644bd36cd36d3569093078aba4c78297ef1",
-  "0x6ec04644bd36cd36d3569093078aba4c78297ef2",
-  "0x6ec04644bd36cd36d3569093078aba4c78297ef3",
-]
+/** @type {?Array<string>} */
+let ADRESLER = null;
 
 dom.adla("bibtnb").onclick = () => {
+  /** @type {?Element} */
+  let seçilmişAdres = null;
   dom.adlaGizle("bibtna");
   dom.adlaGizle("bibtnb");
   dom.adlaGöster("biiic");
   dom.adlaGizle("biwo");
 
 
-  for (let i = 0; i < ADRESLER.length; ++i) {
-    const adresInputu = dom.adla("bisi").cloneNode(true);
-    dom.göster(adresInputu);
-    adresInputu.id = "bisi" + i;
-    adresInputu.firstElementChild.id = "biiia" + i;
-    adresInputu.children[1].htmlFor = "biiia" + i;
-    adresInputu.children[1].innerText = ADRESLER[i];
-    dom.adla("biiic").insertBefore(adresInputu, dom.adla("biiio"));
+  if (!ADRESLER) {
+    // Kullanıcın revoke edebileceği adresler cekilecek 
+    ADRESLER = [
+      "0x6ec04644bd36cd36d3569093078aba4c78297ef1",
+      "0x6ec04644bd36cd36d3569093078aba4c78297ef2",
+      "0x6ec04644bd36cd36d3569093078aba4c78297ef3",
+    ];
+    let innerHTML = "";
+    const ul = dom.adla("biiil");
+    ul.onclick = (e) => {
+      let li = e.target;
+      if (seçilmişAdres) seçilmişAdres.classList.remove("sel");
+      li.classList.add("sel");
+      seçilmişAdres = li;
+      dom.adla("biiio").classList.remove("dis")
+      dom.adla("biiio").classList.add("act");
+    }
+    for (let i = 0; i < ADRESLER.length; ++i) {
+      innerHTML += `<li id=biiia${i} class="biiia">${ADRESLER[i]}</li>`
+    }
+    ul.innerHTML = innerHTML;
   }
 
-  dom.adla("biiio").onclick = () => {  //revoke oyu kullanılacak
-    let seçilenAdres;
-    for (let i = 0; i < ADRESLER.length; ++i) {
-      if (dom.adla("biiia" + i).checked) seçilenAdres = dom.adla("biiia" + i).nextElementSibling.innerText;
-    }
+  dom.adla("biiio").onclick = () => {
+    if (seçilmişAdres) console.log(seçilmişAdres.innerText); //revoke onayı verilecek
   }
 
   dom.adla("biiir").onclick = () => {

@@ -17,6 +17,12 @@
   margin-top: 1em;
 }
 
+#biiil {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
 #bimc {
   position: absolute;
   max-width: 500px;
@@ -62,20 +68,22 @@
   display: flex;
   align-items: center;
   font-family: monospace;
-  word-break: break-all;
+  height: 40px;
   cursor: pointer;
   margin: 1em 0;
-  box-sizing: border-box;
   border: 1px solid transparent;
   border-radius: 5px;
-  height: 30px;
+  box-sizing: border-box;
+  word-break: break-all;
+  padding: 1em;
 }
 
-/* .biiia:hover,
+.biiia:hover,
 .biiia:focus {
   border: 1px solid #70a4dc;
-} */
+}
 
-#biiic input[type="radio"]:checked+.biiia {
-  border: 1px solid red;
+.biiia.sel {
+  background-color: #70a4dc;
+  color: #fff;
 }
