@@ -16,7 +16,7 @@ dom.adla("bibtnb").onclick = () => {
   dom.adlaGizle("bibtna");
   dom.adlaGizle("bibtnb");
   dom.adlaGöster("biiic");
-  dom.adlaGizle("wo");
+  dom.adlaGizle("biwo");
 
 
   for (let i = 0; i < ADRESLER.length; ++i) {
@@ -44,11 +44,11 @@ dom.adla("bibtnb").onclick = () => {
 }
 
 dom.adla("bibtna").onclick = () => {
-  dom.adlaGöster("wo")
+  dom.adlaGöster("biwo")
 }
 
 dom.adla("bi1a").onclick = () => {
-  dom.adlaGöster("pa");
+  dom.adlaGöster("bipa");
 }
 
 dom.adla("bibtn3").onclick = () => {
@@ -70,5 +70,5 @@ dom.adla("bix").onclick = () => {
 }
 
 dom.adla("bi1b").onclick = () => {
-  window.location.href = "/iptal";
+  window.location.href = dom.TR ? "/iptal" : "/revoke";
 }
