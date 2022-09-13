@@ -47,11 +47,11 @@ dom.adla("bibtna").onclick = () => {
   dom.adlaGöster("wo")
 }
 
-dom.adla("s1a").onclick = () => {
+dom.adla("bi1a").onclick = () => {
   dom.adlaGöster("pa");
 }
 
-dom.adla("inbtn3").onclick = () => {
+dom.adla("bibtn3").onclick = () => {
   dom.adlaGöster("bibd");
 }
 
@@ -69,6 +69,6 @@ dom.adla("bix").onclick = () => {
   dom.adlaGizle("bibd");
 }
 
-dom.adla("s1b").onclick = () => {
+dom.adla("bi1b").onclick = () => {
   window.location.href = "/iptal";
 }
