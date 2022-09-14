@@ -86,10 +86,10 @@ dom.adla("ipbtna").onclick = () => {
     }
 
     dom.adla("ip1d").onclick = () => {
-      document.getElementById("ipb").innerHTML = dom.TR
+      dom.adla("ipb").innerHTML = dom.TR
         ? "2. TCKT adresi seçin."
         : "2. Select TCKT address";
-      document.getElementById("ipsp").innerHTML = dom.TR
+      dom.adla("ipsp").innerHTML = dom.TR
         ? "Bağlı cüzdanınızdaki TCKT'yi mi iptal etmek istiyorsunuz?"
         : "Do you want to revoke the TCKT in your connected wallet?";
       dom.adlaGöster("ip1b");
