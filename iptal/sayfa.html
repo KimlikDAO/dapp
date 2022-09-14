@@ -33,14 +33,17 @@
       <a href="javascript:" id=ipiio class="act btn lft" data-en="Confirm">Onayla</a>
       <a href="javascript:" id=ipiir class="btn" data-en="Cancel">İptal</a>
     </div>
-    <div id=iptac class="ipstep" style="display:none"><b data-en="TCKT address.">2. TCKT adresi seç.</b>
-      <span data-phantom data-en="Do you want to revoke the TCKT in your connected wallet?">Bağlı cüzdanınızdaki TCKT'yi
+    <div id=iptac class="ipstep" style="display:none"><b id="ipb" data-en="2. Select TCKT address.">2. TCKT adresi
+        seçin.</b>
+      <span id="ipsp" data-phantom data-en="Do you want to revoke the TCKT in your connected wallet?">Bağlı
+        cüzdanınızdaki TCKT'yi
         mi iptal etmek
         istiyorsunuz?</span>
       <br>
       <br>
       <a href="javascript:" id=ip1a class="act btn lft" data-en="Yes">Evet</a>
-      <a href="javascript:" id=ip1b class="btn" data-en="No">Hayır</a>
+      <a href="/bildir" data-en-href="/report" id=ip1b class="btn" data-en="No">Hayır</a>
+      <a href="javascript:" id=ip1c class="btn danger" data-en="Revoke TCKT" style="display:none">TCKT yok et</a>
     </div>
   </div>
   <script async type="module" src="/iptal/sayfa.js" data-remove-type></script>
