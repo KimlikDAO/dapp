@@ -46,9 +46,18 @@
   }
 }
 
-#ipiil {
+#ipiilc {
   margin: 1em 0;
-  padding: 1em 1em;
+  padding: 1em 0 0;
+  border: 1px solid rgb(234, 235, 239);
+  border-radius: 5px;
+  width: fit-content;
+}
+
+#ipiil {
+  margin: 0;
+  margin-top: 1em;
+  padding: 0;
   list-style: none;
 }
 
@@ -57,23 +66,28 @@
   align-items: center;
   font-family: monospace;
   height: 40px;
-  width: fit-content;
-  background: #f5f5f5;
+  background: #fff;
   border: 1px solid transparent;
+  border-top-color: rgb(234, 235, 239);
   cursor: pointer;
   margin: 0;
-  /* border-radius: 5px; */
   box-sizing: border-box;
   word-break: break-all;
   padding: 1em;
 }
 
+.ipiia:last-child {
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
 .ipiia:hover,
 .ipiia:focus {
   background: #f5f5f5;
-
 }
 
 .ipiia.sel {
-  border: 1px solid #c2c2c2;
+  color: #70a4dc;
+  border-color: #70a4dc;
+  background: #fff;
 }

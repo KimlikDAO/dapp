@@ -37,15 +37,13 @@ dom.adla("ipbtnb").onclick = () => {
       if (seçilmişAdres) seçilmişAdres.classList.remove("sel");
       li.classList.add("sel");
       seçilmişAdres = li;
-      dom.adla("ipiio").classList.remove("dis")
-      dom.adla("ipiio").classList.add("act");
     }
     for (let i = 0; i < ADRESLER.length; ++i) {
       innerHTML += `<li id=ipiia${i} class="ipiia">${ADRESLER[i]}</li>`
     }
     ul.innerHTML = innerHTML;
-    setTimeout(() => {         // Fake timer
-      dom.göster(ul);
+    setTimeout(() => {
+      dom.adlaGöster("ipiilc");
       dom.adlaGizle("iplc");
     }, 1000);
   }
