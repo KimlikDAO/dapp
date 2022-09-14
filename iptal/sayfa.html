@@ -27,23 +27,23 @@
       <a href="javascript:" id=ipbtnb class="act btn" data-en="Belongs to other">Başkasına ait</a>
     </div>
     <div id=ipiic class="ipstep" style="display:none">
-      <b data-en="2. Select TCKT address.">2. TCKT adresi seç.</b>
+      <b data-en="2. Select TCKT address.">2. TCKT adresi seçin.</b>
       <span data-en="Select the TCKT address you want to cancel.">İptal etmek istediğiniz adresi seçiniz.</span>
-      <ul id=ipiil></ul>
+      <div id="iplc" style="display:none"><div class="ipl"></div><span data-phantom data-en="Loading">Yükleniyor</span></div>
+      <ul id=ipiil style="display:none"></ul>
       <a href="javascript:" id=ipiio class="act btn lft" data-en="Confirm">Onayla</a>
       <a href="javascript:" id=ipiir class="btn" data-en="Cancel">İptal</a>
     </div>
     <div id=iptac class="ipstep" style="display:none"><b id="ipb" data-en="2. Select TCKT address.">2. TCKT adresi
         seçin.</b>
       <span id="ipsp" data-phantom data-en="Do you want to revoke the TCKT in your connected wallet?">Bağlı
-        cüzdanınızdaki TCKT'yi
-        mi iptal etmek
-        istiyorsunuz?</span>
+        cüzdanınızdaki TCKT'yi mi iptal etmek istiyorsunuz?</span>
       <br>
       <br>
       <a href="javascript:" id=ip1a class="act btn lft" data-en="Yes">Evet</a>
       <a href="/bildir" data-en-href="/report" id=ip1b class="btn" data-en="No">Hayır</a>
-      <a href="javascript:" id=ip1c class="btn danger" data-en="Revoke TCKT" style="display:none">TCKT yok et</a>
+      <a href="javascript:" id=ip1c class="btn danger lft" data-en="Revoke TCKT" style="display:none">TCKT yok et</a>
+      <a href="javascript:" id=ip1d class="btn" data-en="Cancel" style="display:none">İptal</a>
     </div>
   </div>
   <script async type="module" src="/iptal/sayfa.js" data-remove-type></script>

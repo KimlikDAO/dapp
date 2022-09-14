@@ -14,18 +14,24 @@ dom.adla("ipbtnb").onclick = () => {
   dom.adla("ipssc").classList.add("done");
   dom.adla("ipbtna").classList.remove("act");
   dom.adla("ipbtnb").classList.remove("act");
-  dom.adlaGöster("ipiic");
   dom.adlaGizle("iptac");
+  dom.adlaGöster("ipiic");
 
   if (!ADRESLER) {
+    let innerHTML = "";
+    const ul = dom.adla("ipiil");
+    dom.adlaGöster("iplc"); //Yükleniyor animasyonu
     // Kullanıcın revoke edebileceği adresler cekilecek 
     ADRESLER = [
       "0x6ec04644bd36cd36d3569093078aba4c78297ef1",
       "0x6ec04644bd36cd36d3569093078aba4c78297ef2",
       "0x6ec04644bd36cd36d3569093078aba4c78297ef3",
     ];
-    let innerHTML = "";
-    const ul = dom.adla("ipiil");
+    if (ADRESLER.length == 0) {
+      innerHTML = dom.TR
+        ? "İptal edebileceğiniz bir adres bulunmamaktadır."
+        : "There is no revoke address."
+    }
     ul.onclick = (e) => {
       let li = e.target;
       if (seçilmişAdres) seçilmişAdres.classList.remove("sel");
@@ -38,6 +44,10 @@ dom.adla("ipbtnb").onclick = () => {
       innerHTML += `<li id=ipiia${i} class="ipiia">${ADRESLER[i]}</li>`
     }
     ul.innerHTML = innerHTML;
+    setTimeout(() => {         // Fake timer
+      dom.göster(ul);
+      dom.adlaGizle("iplc");
+    }, 1000);
   }
 
   dom.adla("ipiio").onclick = () => {
@@ -58,18 +68,37 @@ dom.adla("ipbtna").onclick = () => {
   dom.adla("ipbtnb").classList.remove("act");
   dom.adlaGizle("ipiic");
   dom.adlaGöster("iptac");
+
+  dom.adla("ip1a").onclick = () => {
+    dom.adlaGizle("ip1b");
+    dom.adlaGizle("ip1a");
+    document.getElementById("ipb").innerHTML = "";
+    document.getElementById("ipsp").innerHTML = dom.TR
+      ? `Sadece cüzdanınızın gizli anahtarını başkasına verdiğinizi düşünüyorsanız TCKT’nizi yok etmeniz gerekir.<br><br>Devam etmek için onay veriniz.`
+      : "Only revoke your TCKT if you think your private key was exposed.<br><br>Confirm below to proceed.";
+    dom.adlaGöster("ip1c");
+    dom.adlaGöster("ip1d");
+
+    dom.adla("ip1c").onclick = () => {
+      const adres = /** @type {string} */(Cüzdan.adres());
+      TCKT.revoke(adres)
+        .catch(console.log);
+    }
+
+    dom.adla("ip1d").onclick = () => {
+      document.getElementById("ipb").innerHTML = dom.TR
+        ? "2. TCKT adresi seçin."
+        : "2. Select TCKT address";
+      document.getElementById("ipsp").innerHTML = dom.TR
+        ? "Bağlı cüzdanınızdaki TCKT'yi mi iptal etmek istiyorsunuz?"
+        : "Do you want to revoke the TCKT in your connected wallet?";
+      dom.adlaGöster("ip1b");
+      dom.adlaGöster("ip1a");
+      dom.adlaGizle("ip1c");
+      dom.adlaGizle("ip1d");
+    }
+  }
 }
 
-dom.adla("ip1a").onclick = () => {
-  dom.adlaGizle("ip1b");
-  dom.adlaGizle("ip1a");
-  document.getElementById("ipb").innerHTML = "";
-  document.getElementById("ipsp").innerHTML = `Sadece cüzdanınızın gizli anahtarını başkasına verdiğinizi düşünüyorsanız TCKT’nizi yok etmeniz gerekir.<br><br>Devam etmek için onay verin.`;
-  dom.adlaGöster("ip1c");
-}
 
-dom.adla("ip1c").onclick = () => {
-  const adres = /** @type {string} */(Cüzdan.adres());
-  TCKT.revoke(adres)
-    .catch(console.log);
-}
+
