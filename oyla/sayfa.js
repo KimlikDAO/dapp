@@ -45,7 +45,7 @@ const fiyatDeğişikliğiFormuHazırla = (yeniAğ) => {
   }
 }
 
-const aktifOyKartıOluştur = (data) => {
+const aktifOyKartıOluştur = (data, dummyVeri) => {
   const element = dom.adla("oyac").children[1].cloneNode(true);
   const topDiv = element.children[0];
   const middleDiv = element.children[1];
@@ -69,7 +69,18 @@ const aktifOyKartıOluştur = (data) => {
   const callData = middleDiv.children[0].children[1].children[1];
   callData.innerText = data.callData;
   const remainingTime = middleDiv.children[0].children[2].children[1];
-  remainingTime.innerText = data.remainingTime + " REMAINING";
+
+  const yes = bottomDiv.children[0]
+  const no = bottomDiv.children[1]
+  const abstain = bottomDiv.children[2]
+
+  birazBekle().then(() => {
+    remainingTime.innerText = dummyVeri.remainingTime + " REMAINING";
+    yes.innerText = "YES: " + dummyVeri.countYes;
+    no.innerText = "NO: " + dummyVeri.countNo;
+    abstain.innerText = "ABSTAIN: " + dummyVeri.countAbstain;
+  })
+
   const oyKullanmaDüğmeleri = middleDiv.children[1].children[1];
   for (let i = 0; i < 3; ++i) {
     oyKullanmaDüğmeleri.children[i].onclick = (e) => {
@@ -97,7 +108,16 @@ const data1 = {
   remainingTime: "12D 42H"
 }
 
-const yeniOy = aktifOyKartıOluştur(data);
-const yeniOy1 = aktifOyKartıOluştur(data1);
+const dummyVeri = {
+  remainingTime: "90D 12H",
+  countYes: "9000",
+  countNo: "1000",
+  countAbstain: "3"
+}
+
+const birazBekle = (cevap) => new Promise((resolve) => setTimeout(() => resolve(cevap), 1000))
+
+const yeniOy = aktifOyKartıOluştur(data, dummyVeri);
+const yeniOy1 = aktifOyKartıOluştur(data1, dummyVeri);
 dom.adla("oyac").appendChild(yeniOy);
 dom.adla("oyac").appendChild(yeniOy1);
