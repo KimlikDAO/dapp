@@ -19,7 +19,6 @@
 
 #iplc {
   display: flex;
-  justify-content: center;
   align-items: center;
   flex-direction: column;
   margin: 2em;
@@ -47,25 +46,26 @@
 }
 
 #ipiilc {
-  margin: 1em 0;
-  padding: 1em 0 0;
+  margin: 2em 0;
   border: 1px solid rgb(234, 235, 239);
   border-radius: 5px;
   width: fit-content;
 }
 
+#ipiilh {
+  margin: 1em;
+  display: block;
+}
+
 #ipiil {
   margin: 0;
-  margin-top: 1em;
   padding: 0;
-  list-style: none;
 }
 
 .ipiia {
   display: flex;
   align-items: center;
   font-family: monospace;
-  height: 40px;
   background: #fff;
   border: 1px solid transparent;
   border-top-color: rgb(234, 235, 239);
@@ -73,7 +73,7 @@
   margin: 0;
   box-sizing: border-box;
   word-break: break-all;
-  padding: 1em;
+  padding: 0.7em;
 }
 
 .ipiia:last-child {

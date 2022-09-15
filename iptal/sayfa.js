@@ -68,14 +68,8 @@ dom.adla("ipbtna").onclick = () => {
   dom.adlaGöster("iptac");
 
   dom.adla("ip1a").onclick = () => {
-    dom.adlaGizle("ip1b");
-    dom.adlaGizle("ip1a");
-    dom.adla("ipb").innerHTML = "";
-    dom.adla("ipsp").innerHTML = dom.TR
-      ? `Sadece cüzdanınızın gizli anahtarını başkasına verdiğinizi düşünüyorsanız TCKT’nizi yok etmeniz gerekir.<br><br>Devam etmek için onay veriniz.`
-      : "Only revoke your TCKT if you think your private key was exposed.<br><br>Confirm below to proceed.";
-    dom.adlaGöster("ip1c");
-    dom.adlaGöster("ip1d");
+    dom.adlaGizle("iptac");
+    dom.adlaGöster("iptaic");
 
     dom.adla("ip1c").onclick = () => {
       const adres = /** @type {string} */(Cüzdan.adres());
@@ -84,16 +78,8 @@ dom.adla("ipbtna").onclick = () => {
     }
 
     dom.adla("ip1d").onclick = () => {
-      dom.adla("ipb").innerHTML = dom.TR
-        ? "2. TCKT adresi seçin."
-        : "2. Select TCKT address";
-      dom.adla("ipsp").innerHTML = dom.TR
-        ? "Bağlı cüzdanınızdaki TCKT'yi mi iptal etmek istiyorsunuz?"
-        : "Do you want to revoke the TCKT in your connected wallet?";
-      dom.adlaGöster("ip1b");
-      dom.adlaGöster("ip1a");
-      dom.adlaGizle("ip1c");
-      dom.adlaGizle("ip1d");
+      dom.adlaGizle("iptaic");
+      dom.adlaGöster("iptac");
     }
   }
 }
