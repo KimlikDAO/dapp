@@ -72,7 +72,7 @@ dom.adla("ipbtna").onclick = () => {
     dom.adlaGizle("ip1a");
     dom.adla("ipb").innerHTML = "";
     dom.adla("ipsp").innerHTML = dom.TR
-      ? `Sadece cüzdanınızın gizli anahtarını başkasına verdiğinizi düşünüyorsanız TCKT’nizi yok etmeniz gerekir.<br><br>Devam etmek için onay veriniz.`
+      ? `<b>2. Bağlı TCKT iptali.</b> Yeni TCKT almak için mevcut TCKT’nizi iptal etmeye gerek yok.<br><br>Sadece cüzdanınızın gizli anahtarını başkasına verdiğinizi düşünüyorsanız TCKT’nizi iptal etmeniz gerekir.<br><br>Devam etmek için onay verin.`
       : "Only revoke your TCKT if you think your private key was exposed.<br><br>Confirm below to proceed.";
     dom.adlaGöster("ip1c");
     dom.adlaGöster("ip1d");
