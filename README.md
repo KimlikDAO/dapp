@@ -8,9 +8,19 @@ bir klasörde toplanıyor.
 Buna istisna `/` pathindeki ana sayfa; bu sayfaya `ana` klasörünü
 ayırıyoruz.
 
+Sayfaların bazı `altbirim`leri olabilir; bunlar sayfa içindeki sınırları belli
+bileşenler ve bu bileşenlere ait her dosya altbirimle aynı adda bir klasörde
+duruyor. Örneğin `al/` sayfasının `tanışma` ve `ödeme` gibi altbirimleri
+`al/tanışma` ve `al/ödeme` klasöründe duruyor.
+
+Birden çok yerde kullanılabilen bileşenlere ise `birim` adını
+veriyoruz ve bunlari `birim/` klasörüne koyuyoruz.
+
 ## Kullanım
 Yazılımcıların dApp'i test etmesi için gereken adımlar:
-- `yarn install` gerekli build toollarını ve dev sunucusunu yükler
+- `git clone --recursive git@github.com:KimlikDAO/dapp`
+
+- `yarn` gerekli build toollarını ve dev sunucusunu yükler
 
 - `make dev` dev sunucuyu çalıştırır.
     - http://localhost:8787/al
