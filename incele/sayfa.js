@@ -29,7 +29,7 @@ const EşikKutusu = dom.adla("inmes");
 /** @const {Element} */
 const SilKutusu = dom.adla("inmsy");
 
-/** @const {Object<string, TCKTTemelBilgileri>} */
+/** @const {Object<string, AçıkTCKT>} */
 const Hatırla = {};
 
 const kutuKapat = () => {
@@ -124,7 +124,7 @@ const silKutusuGöster = () => {
 }
 
 /**
- * @param {TCKTTemelBilgileri} açıkTCKT
+ * @param {AçıkTCKT} açıkTCKT
  */
 const açıkYüz = (açıkTCKT) => {
   for (let hane of "ad soyad TCKN dt dyeri".split(" "))
@@ -180,7 +180,7 @@ const kapalıYüz = (adres) => {
             })
             .then((açıkTCKT) => {
               açıkTCKT = açıkTCKT.slice(43, açıkTCKT.indexOf("\0"));
-              açıkTCKT = /** @type {TCKTTemelBilgileri} */(JSON.parse(açıkTCKT));
+              açıkTCKT = /** @type {AçıkTCKT} */(JSON.parse(açıkTCKT));
               Hatırla[Cüzdan.ağ() + adres] = açıkTCKT;
               açıkYüz(açıkTCKT);
             })

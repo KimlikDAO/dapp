@@ -7,7 +7,7 @@ const TCKT_LENGTH = 1864;
 
 let unixfs = new UnixFS({
   type: 'file',
-  data: new TextEncoder().encode("a".repeat(1864))
+  data: new TextEncoder().encode("a".repeat(2649))
 });
 
 let buffer = prepare({ Data: unixfs.marshal() });
