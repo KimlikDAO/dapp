@@ -1,4 +1,4 @@
-CÜZDAN_INLINE_SVG := avalanche.svg copy.svg external-link.svg
+CÜZDAN_INLINE_SVG := avalanche.svg copy.svg external-link.svg iptal.svg
 
 CÜZDAN_INLINE_SVG_OUT := $(foreach item,$(CÜZDAN_INLINE_SVG),build/birim/cüzdan/img/$(item).inl)
 

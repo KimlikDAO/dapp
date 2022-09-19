@@ -71,6 +71,7 @@ def purge_cache(assets):
         'files': [ROUTE + asset for asset in assets]
     }
     to_upload = json.dumps(to_upload, separators=(',', ':'))
+    print(to_upload)
     return requests.post(ZONES_URL + 'purge_cache', data=to_upload, headers={
         'content-type': 'application/json',
         'authorization': 'Bearer ' + CF_UPLOADER_TOKEN
