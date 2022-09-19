@@ -1,5 +1,6 @@
 build/oyla/sayfa-%.js: oyla/sayfa.js \
                        birim/cüzdan/birim.js \
+                       lib/sha3.js lib/çevir.js lib/evm.js \
                        lib/dom.js lib/ethereum.js lib/TCKT.js
 	mkdir -p $(dir $@)
 	yarn google-closure-compiler -W VERBOSE -O ADVANCED --charset UTF-8 \
