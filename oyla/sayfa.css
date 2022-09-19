@@ -23,19 +23,11 @@
   }
 }
 
-#oyy:hover {
-  box-shadow: 2px 10px 50px rgb(0 0 0 / 15%);
-}
-
 #oyy.open_form {
   max-width: 800px;
   width: 80%;
   max-height: 1000px;
   cursor: default;
-  transition-property: width, max-height;
-  transition-duration: 0.1s, 0.1s;
-  transition-delay: 0, 0.1s;
-  transition-timing-function: ease-in;
 }
 
 #oyytitle {
@@ -75,6 +67,7 @@
 
 .oyy_tablabel.sol {
   border-left: none;
+  width: 34%;
 }
 
 @media (max-width: 320px) {
@@ -185,12 +178,14 @@
   justify-content: center;
   align-items: center;
   width: 90px;
-  border: 1px solid rgb(0 0 0 / 15%);
-  box-sizing: border-box;
   border-radius: 10px;
   margin: 5px;
   cursor: pointer;
   padding: 0.5em 0;
+}
+
+.oyytli.sel {
+  background: rgb(0 0 0 / 5%);
 }
 
 .oyynp {
@@ -226,7 +221,7 @@
   width: 80%;
   background-color: #fff;
   box-shadow: 2px 2px 10px rgb(0 0 0 / 15%);
-  border-radius: 2px;
+  border-radius: 10px;
   margin-bottom: 3em;
 }
 
@@ -247,12 +242,11 @@
   transition-duration: 0.3s;
   transition-timing-function: ease-in;
   border-bottom: 1px solid rgba(0 0 0 / 10%);
-  border-radius: 2px;
 }
 
 @media (max-width: 425px) {
   .oyok {
-    max-height: 310px;
+    max-height: 280px;
   }
 }
 
@@ -261,8 +255,8 @@
   cursor: default;
 }
 
-.oyok:hover {
-  box-shadow: 2px 10px 50px rgb(0 0 0 / 15%);
+.oyok:last-child {
+  border-radius: 10px;
 }
 
 .oyao_top {
