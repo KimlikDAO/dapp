@@ -200,7 +200,7 @@ if (window["ethereum"]) {
     window.location.href = dom.TR ? "/incele" : "/view";
 
   dom.adla("nad1").onclick = () =>
-    navigator.clipboard.writeText(/** @type {string} */(Adres));
+    window.location.href = dom.TR ? "/oyla" : "/vote";
 
   dom.adla("nad2").onclick = () => {
     const url = "//debank.com/profile/" + Adres;
