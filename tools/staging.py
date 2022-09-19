@@ -25,6 +25,8 @@ PAGES = {
     "/view": "incele-en.html",
     "/oyla": "oyla-tr.html",
     "/vote": "oyla-en.html",
+    "/iptal": "iptal-tr.html",
+    "/revoke": "iptal-en.html",
 }
 
 MIMES = {
@@ -47,7 +49,6 @@ class TestServer(BaseHTTPRequestHandler):
         else:
             fname = 'build' + self.path
             ctype = MIMES[os.path.splitext(self.path)[1][1:]]
-
 
         file = open(fname, 'br').read()
         self.send_response(200)

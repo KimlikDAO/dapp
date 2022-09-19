@@ -1,5 +1,5 @@
 MAKEFLAGS := -j 8
-PAGES := al ana incele oyla
+PAGES := al ana incele iptal oyla
 POW_EŞİĞİ := 20000
 
 all: build
@@ -13,7 +13,6 @@ include birim/tckt/Makefile
 include incele/Makefile
 include iptal/Makefile
 include oyla/Makefile
-include lib/test/Makefile
 
 clean:
 	rm -rf build

@@ -2,10 +2,10 @@
  * @fileoverview İptal sayfası giriş noktası
  */
 import Cüzdan from '/birim/cüzdan/birim';
-import TCKT from '/lib/TCKT';
 import dom from '/lib/dom';
+import TCKT from '/lib/TCKT';
 
-/** @type {?Array<string>} */
+/** @type {Array<string>} */
 let ADRESLER = null;
 
 dom.adla("ipbtnb").onclick = () => {
@@ -29,7 +29,7 @@ dom.adla("ipbtnb").onclick = () => {
     ];
     if (ADRESLER.length == 0) {
       innerHTML = dom.TR
-        ? "İptal edebileceğiniz bir adres bulunmamaktadır."
+        ? "İptal edebileceğiniz bir adres yok."
         : "There is no revoke address."
     }
     ul.onclick = (e) => {
@@ -73,8 +73,7 @@ dom.adla("ipbtna").onclick = () => {
 
     dom.adla("ip1c").onclick = () => {
       const adres = /** @type {string} */(Cüzdan.adres());
-      TCKT.revoke(adres)
-        .catch(console.log);
+      TCKT.revoke(adres).catch(console.log);
     }
 
     dom.adla("ip1d").onclick = () => {
@@ -83,6 +82,3 @@ dom.adla("ipbtna").onclick = () => {
     }
   }
 }
-
-
-

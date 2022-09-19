@@ -25,6 +25,8 @@ const PAGES = {
   "/view": "incele-en.html",
   "/oyla": "oyla-tr.html",
   "/vote": "oyla-en.html",
+  "/iptal": "iptal-tr.html",
+  "/revoke": "iptal-en.html"
 };
 
 addEventListener('fetch', (event) => {
