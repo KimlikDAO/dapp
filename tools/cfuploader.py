@@ -42,6 +42,10 @@ def read_pages() -> str:
 SAYFALAR = read_pages()
 
 
+def chunks(xs, n):
+    return (xs[i:i+n] for i in range(0, len(xs), n))
+
+
 def get_existing(namespace_id: str) -> set[str]:
     res = requests.get(
         ACCOUNTS_URL + 'keys', headers={'authorization': 'Bearer ' + CF_UPLOADER_TOKEN})
@@ -67,15 +71,17 @@ def batch_upload(names: list[str]):
 
 
 def purge_cache(assets):
-    to_upload = {
-        'files': [ROUTE + asset for asset in assets]
-    }
-    to_upload = json.dumps(to_upload, separators=(',', ':'))
-    print(to_upload)
-    return requests.post(ZONES_URL + 'purge_cache', data=to_upload, headers={
-        'content-type': 'application/json',
-        'authorization': 'Bearer ' + CF_UPLOADER_TOKEN
-    })
+    batches = chunks(assets, 20)
+    for i, batch in enumerate(batches):
+        to_purge = {
+            'files': [ROUTE + asset for asset in batch]
+        }
+        to_purge = json.dumps(to_purge, separators=(',', ':'))
+        res = requests.post(ZONES_URL + 'purge_cache', data=to_purge, headers={
+            'content-type': 'application/json',
+            'authorization': 'Bearer ' + CF_UPLOADER_TOKEN
+        })
+        print(f"Batch {i} result: {res.status_code}")
 
 
 def is_static_upload(name: str) -> bool:
