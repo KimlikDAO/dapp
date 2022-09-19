@@ -21,6 +21,9 @@ dom.adla("oyy").onclick = () => {
 /** @param {string} yeniAğ  Ağ değişince UI'da gösterir*/
 const fiyatDeğişikliğiFormuHazırla = (yeniAğ) => {
   let seçilmişToken;
+  for (let i = 0; i < dom.adla("oyytul").childElementCount; ++i) {
+    dom.adla("oyytul").children[i].classList.remove("sel")
+  }
   dom.göster(dom.adla("oyy" + yeniAğ));
   // Diğer Ağ tokenlarını UI'dan cıkar
   for (const diğerAğ in Cüzdan.Paralar) {
@@ -39,6 +42,7 @@ const fiyatDeğişikliğiFormuHazırla = (yeniAğ) => {
   // Li'lere click Handler ekle
   dom.adla("oyytul").onclick = (e) => {
     if (e.target.nodeName == "UL") return;
+    if (seçilmişToken) dom.adla("oyy" + seçilmişToken).classList.remove("sel");
     const id = e.target.nodeName == "LI"
       ? e.target.id.slice(3)
       : e.target.parentElement.id.slice(3);
@@ -46,9 +50,10 @@ const fiyatDeğişikliğiFormuHazırla = (yeniAğ) => {
       dom.gizle(dom.adla("oyystoc").children[i])
     }
     dom.adlaGöster("oyys" + id);
+    dom.adla("oyy" + id).classList.add("sel");
     seçilmişToken = id;
   }
-  // Onayla iptal click handler
+  // Onayla iptal click handler ekle
   dom.adla("oyyo").onclick = () => {
     const fiyat = dom.adla("oyyyf").value;
     if (fiyat == null || fiyat == undefined || fiyat == "") return;
