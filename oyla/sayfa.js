@@ -4,6 +4,7 @@
  */
 import Cüzdan from '/birim/cüzdan/birim';
 import dom from '/lib/dom';
+import TCKT from '/lib/TCKT';
 
 Cüzdan.bağlanınca(() => {
   let ağ = Cüzdan.ağ();
@@ -17,31 +18,47 @@ dom.adla("oyy").onclick = () => {
   dom.adla("oyy").classList.add("open_form");
 }
 
-/**@param {string} yeniAğ  Ağ değişince UI'da gösterir*/
+/** @param {string} yeniAğ  Ağ değişince UI'da gösterir*/
 const fiyatDeğişikliğiFormuHazırla = (yeniAğ) => {
-  dom.göster(dom.adla("oyy" + yeniAğ).nextElementSibling);
-  //Diğer Ağ tokenlarını UI'dan cıkar
+  let seçilmişToken;
+  dom.göster(dom.adla("oyy" + yeniAğ));
+  // Diğer Ağ tokenlarını UI'dan cıkar
   for (const diğerAğ in Cüzdan.Paralar) {
-    if (diğerAğ != yeniAğ) dom.gizle(dom.adla("oyy" + diğerAğ).nextElementSibling);
+    if (diğerAğ != yeniAğ) dom.gizle(dom.adla("oyy" + diğerAğ));
   }
-  //Ağ değişince sağ containerda gösterilen token'ı kaldır
-  for (let i = 0; i < dom.adla("oyytcsag").childElementCount; ++i) {
-    dom.gizle(dom.adla("oyytcsag").children[i]);
+  // Seçilen ağa göre USDC USDT TRYB ayarla
+  for (let i = 1; i <= 3; ++i) {
+    dom.adla("oyy" + i).style.display = TCKT.isTokenAvailable(yeniAğ, i)
+      ? ""
+      : "none";
   }
-  //Labellara click Handler ekle
-  for (let/** number */ i = 1; i < dom.adla("oyytcsol").childElementCount; i += 2) {
-    const element = dom.adla("oyytcsol").children[i];
-    element.onclick = () => {
-      seçilmişTokenGöster(element)
+  // Ağ değişince seçilmiş token'ı kaldır
+  for (let i = 0; i < dom.adla("oyystoc").childElementCount; ++i) {
+    dom.gizle(dom.adla("oyystoc").children[i]);
+  }
+  // Li'lere click Handler ekle
+  dom.adla("oyytul").onclick = (e) => {
+    if (e.target.nodeName == "UL") return;
+    const id = e.target.nodeName == "LI"
+      ? e.target.id.slice(3)
+      : e.target.parentElement.id.slice(3);
+    for (let i = 0; i < dom.adla("oyystoc").childElementCount; ++i) {
+      dom.gizle(dom.adla("oyystoc").children[i])
     }
+    dom.adlaGöster("oyys" + id);
+    seçilmişToken = id;
+  }
+  // Onayla iptal click handler
+  dom.adla("oyyo").onclick = () => {
+    const fiyat = dom.adla("oyyyf").value;
+    if (fiyat == null || fiyat == undefined || fiyat == "") return;
+    if (seçilmişToken == null || seçilmişToken == undefined || seçilmişToken == "") return;
+    console.log(fiyat, seçilmişToken);
   }
 
-  const seçilmişTokenGöster = (element) => {
-    for (let i = 0; i < dom.adla("oyytcsag").childElementCount; ++i) {
-      dom.gizle(dom.adla("oyytcsag").children[i]);
-    }
-    const id = element.previousElementSibling.id.slice(3);
-    dom.göster(dom.adla("oyys" + id));
+  dom.adla("oyyr").onclick = (e) => {
+    e.stopPropagation();
+    dom.adla("oyy").classList.remove("open_form");
   }
 }
 
@@ -86,7 +103,7 @@ const data = {
   description: "Description",
   address: "Address",
   callData: "Calldata",
-  remainingTime: "13D 42H "
+  remainingTime: "13D 2H "
 }
 
 const data1 = {
@@ -94,7 +111,7 @@ const data1 = {
   description: "Description1",
   address: "Address1",
   callData: "Calldata1",
-  remainingTime: "12D 42H"
+  remainingTime: "12D 11H"
 }
 
 const yeniOy = aktifOyKartıOluştur(data);
