@@ -23,10 +23,6 @@
   }
 }
 
-#oyy:hover {
-  box-shadow: 2px 10px 50px rgb(0 0 0 / 15%);
-}
-
 #oyy.open_form {
   max-width: 800px;
   width: 80%;
@@ -91,28 +87,28 @@
   align-items: center;
 }
 
-#oyytabs input[type="radio"]:checked + .oyy_tablabel {
+#oyytabs input[type="radio"]:checked+.oyy_tablabel {
   opacity: 1;
   border: 1px solid rgb(0 0 0 / 15%);
-  border-bottom: 1px solid transparent; 
+  border-bottom: 1px solid transparent;
 }
 
-#oyytabs input[type="radio"]:checked + .oyy_tablabel.sol {
+#oyytabs input[type="radio"]:checked+.oyy_tablabel.sol {
   border-left: none;
   border-top-right-radius: 10px;
 }
 
-#oyytabs input[type="radio"]:checked + .oyy_tablabel.orta {
+#oyytabs input[type="radio"]:checked+.oyy_tablabel.orta {
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
 }
 
-#oyytabs input[type="radio"]:checked + .oyy_tablabel.sag {
+#oyytabs input[type="radio"]:checked+.oyy_tablabel.sag {
   border-right: none;
   border-top-left-radius: 10px;
 }
 
-#oyytabs input[type="radio"]:checked + label + .oyytab {
+#oyytabs input[type="radio"]:checked+label+.oyytab {
   display: flex;
 }
 
@@ -144,7 +140,7 @@
   justify-content: center;
 }
 
-#oyytcsol input[type="radio"]:checked + label {
+#oyytcsol input[type="radio"]:checked+label {
   border: 1px solid rgb(0 0 0 / 15%);
   background-color: rgb(0 0 0 / 15%);
 }
@@ -197,7 +193,7 @@
   width: 80%;
   background-color: #fff;
   box-shadow: 2px 2px 10px rgb(0 0 0 / 15%);
-  border-radius: 2px;
+  border-radius: 10px;
   margin-bottom: 3em;
 }
 
@@ -210,30 +206,17 @@
 }
 
 .oyok {
-  max-height: 150px;
   padding: 1em;
   cursor: pointer;
-  overflow: hidden;
-  transition-property: max-height;
-  transition-duration: 0.3s;
-  transition-timing-function: ease-in;
   border-bottom: 1px solid rgba(0 0 0 / 10%);
-  border-radius: 2px;
 }
 
-@media (max-width: 425px) {
-  .oyok {
-    max-height: 310px;
-  }
-}
-
-.oyok.expand {
-  max-height: 1000px;
+.oyok.sel {
   cursor: default;
 }
 
-.oyok:hover {
-  box-shadow: 2px 10px 50px rgb(0 0 0 / 15%);
+.oyok:last-child {
+  border-radius: 10px;
 }
 
 .oyao_top {
@@ -276,13 +259,13 @@
   transform: rotate(-45deg);
 }
 
-.oyao_middle {
+.oyaomid {
   display: flex;
   width: 100%;
 }
 
 @media (max-width: 425px) {
-  .oyao_middle {
+  .oyaomid {
     display: block;
   }
 }
@@ -299,6 +282,7 @@
   margin-top: 1em;
   font-family: monospace;
   color: rgb(0 0 0 / 50%);
+  word-break: break-all;
 }
 
 .oyaorem {
@@ -339,66 +323,59 @@
   border-width: 0 0 1.5px 1.5px;
 }
 
-.columns {
+.oyaochrtc {
   display: flex;
   justify-content: center;
-  align-items: flex-end;
+  align-items: baseline;
+  margin: 0.5em;
 }
 
-.column {
+.oyaochrt {
   margin-right: 0.5em;
-  box-shadow: 2px 2px 10px rgb(0 0 0 / 15%);
-  border-radius: 2px;
-  width: 25px;
-  height: 80px;
-}
-
-.column.yes {
-  height: 80px;
-  background-color: #90C8AC;
-}
-
-.column.no {
-  height: 30px;
-  background-color: #FF8B8B;
-}
-
-.column.abstain {
-  height: 45px;
-  background-color: #D3CEDF;
-}
-
-.chartbtns {
   display: flex;
-  justify-content: center;
-  margin-bottom: 1em;
+  flex-direction: column-reverse;
 }
 
-.chartbtn {
-  display: inline-block;
-  width: 25px;
-  height: 25px;
-  opacity: 0.3;
+.oyaocp {
+  text-align: center;
+  font-family: monospace;
+  font-size: 10pt;
+}
+
+.oyaocc {
+  width: 30px;
+  margin-top: 5px;
+  border-radius: 2px;
+  box-shadow: 2px 2px 10px rgb(0 0 0 / 15%);
+}
+
+.oyaocb {
   border-radius: 50%;
-  margin: 0.5em 0.5em 0 0;
-  transition: opacity 0.5s;
+  width: 30px;
+  height: 30px;
+  margin-top: 5px;
+  cursor: pointer;
+  opacity: 0.3;
+  transition: opacity 0.3s;
 }
 
-.chartbtn.yes {
-  background-color: #90C8AC;
+.oyaocb:hover {
+  opacity: 0.7;
 }
 
-.chartbtn.no {
-  background-color: #FF8B8B;
+.oyaocc.y,
+.oyaocb.y {
+  background: #90C8AC;
 }
 
-.chartbtn.abstain {
-  background-color: #D3CEDF;
+.oyaocc.n,
+.oyaocb.n {
+  background: #FF8B8B;
 }
 
-.chartbtn:hover,
-.chartbtn:focus {
-  opacity: 0.9;
+.oyaocc.a,
+.oyaocb.a {
+  background: #D3CEDF;
 }
 
 .oyiac {
@@ -419,26 +396,14 @@
   margin-top: 0.5em;
 }
 
-.code_network {
-  color: #b85144;
-}
-
-.code_adr {
-  color: #6d78d8;
-}
-
-.code_function {
-  color: #6D42C7;
-}
-
-.oyao_bottom {
+.oyaobtm {
   width: 100%;
   margin-top: 3em;
 }
 
 .oybdis {
+  display: inline-block;
   margin: 1em 0;
   cursor: pointer;
   color: #2ec479;
-
 }
