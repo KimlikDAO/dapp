@@ -14,13 +14,15 @@ Cüzdan.bağlanınca(() => {
   })
 })
 
-dom.adla("oyy").onclick = () => {
-  dom.adla("oyy").classList.add("open_form");
-}
-
 /** @param {string} yeniAğ  Ağ değişince UI'da gösterir*/
 const fiyatDeğişikliğiFormuHazırla = (yeniAğ) => {
   let seçilmişToken;
+  dom.adla("oyytitle").innerText = dom.TR
+    ? "Yeni Oylama Öner"
+    : "Connect wallet";
+  dom.adla("oyy").onclick = () => {
+    dom.adla("oyy").classList.add("open_form");
+  }
   for (let i = 0; i < dom.adla("oyytul").childElementCount; ++i) {
     dom.adla("oyytul").children[i].classList.remove("sel")
   }
@@ -163,7 +165,7 @@ const data1 = {
 const mockData = {
   network: "0x43114", // Avalanche == 43114
   countYes: 700,
-  countNo: 100,
+  countNo: 1000,
   countAbstain: 250,
   remainingTime: "9D",
 }
