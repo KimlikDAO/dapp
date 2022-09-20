@@ -33,10 +33,10 @@ const SilKutusu = dom.adla("inmsy");
 const Hatırla = {};
 
 const kutuKapat = () => {
-  Mask.style.display = "none";
-  İmeceİptalKutusu.style.display = "none";
-  EşikKutusu.style.display = "none";
-  SilKutusu.style.display = "none";
+  dom.gizle(Mask);
+  dom.gizle(İmeceİptalKutusu);
+  dom.gizle(EşikKutusu);
+  dom.gizle(SilKutusu);
 };
 
 Mask.onmousedown = (e) => {

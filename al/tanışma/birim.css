@@ -1,19 +1,17 @@
-#tadc {
-  margin-top: 2em;
-  position: relative;
-}
 
 #taa {
   cursor: default;
 }
 
-#tada {
+.tadrpz {
+  margin-top: 2em;
+  position: relative;
   outline: 1px dashed #c2c2c2;
   border-radius: 5px;
-  padding: 2em;
+  padding: 2em 1em 1em;
 }
 
-#tada.tasrk {
+.tadrpz.tasrk {
   outline-style: solid;
 }
 
@@ -133,4 +131,153 @@
 
 #tafb.inv {
   color: #cc0033;
+}
+
+#taec {
+  margin: 1em auto;
+  position: relative;
+}
+
+#taec input,
+#taec textarea {
+  box-sizing: border-box;
+  outline: none;
+  padding-left: 5px;
+}
+
+#taec input::-webkit-outer-spin-button,
+#taec input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+#taebip {
+  right: 0;
+  top: 0;
+}
+
+.taebic {
+  display: flex;
+  align-items: center;
+  height: 40px;
+  margin-bottom: 1em;
+}
+
+.taeblc {
+  display: flex;
+  align-items: center;
+  font-size: 10pt;
+}
+
+.taitc {
+  display: flex;
+  align-items: center;
+  width: 55%;
+  height: 100%;
+  border-radius: 4px;
+  border: 1px solid rgba(0 0 0 /0.1);
+  box-sizing: border-box;
+  font-size: 1rem;
+}
+
+.taitc:hover,
+.taitc:focus {
+  border: 1px solid #70a4dc;
+}
+
+#tamoc,
+#tatoc {
+  width: 30%;
+}
+
+.tabtnc {
+  display: flex;
+  align-items: center;
+  width: 15%;
+}
+
+.taplab {
+  width: 70%;
+}
+
+.taebi {
+  outline: none;
+  border: none;
+  font-size: 1rem;
+  width: 90%;
+  height: 100%;
+  border-radius: 5px;
+}
+
+.taio {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+  height: 40px;
+  opacity: 0.6;
+  cursor: pointer;
+}
+
+.taio:hover {
+  opacity: 1;
+}
+
+#tateli::placeholder {
+  opacity: 0.5;
+}
+
+#taadi {
+  font-family: inherit;
+  height: 100%;
+  max-width: 100%;
+  min-height: 3em;
+  min-width: 100%;
+  width: 100%;
+}
+
+#tamoc.invalid,
+#tatoc.invalid,
+.taitc.invalid {
+  border-color: #cc0033;
+}
+
+.tatick {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #8fcf8f;
+  color: #fff;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  font-weight: 700;
+}
+
+#taadres {
+  position: relative;
+  margin-bottom: 1em;
+}
+
+#taadt {
+  position: absolute;
+  bottom: 20px;
+  right: 5px;
+}
+
+.taebds {
+  font-size: 10pt;
+  text-align: end;
+}
+
+#taebds {
+  opacity: 0.7;
+  outline: none;
+}
+
+#taebds:hover,  
+#taebds:focus {
+  opacity: 1;
+  text-decoration: underline;
+  color: #70a4dc;
 }

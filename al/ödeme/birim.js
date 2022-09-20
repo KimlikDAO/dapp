@@ -56,7 +56,7 @@ export const öde = (cidSözü, adresAğırlığı, eşik) => {
 
     // Menü 'native token'i ayarla.
     for (const diğerAğ in Cüzdan.Paralar) {
-      if (diğerAğ != yeniAğ) dom.adla("odd" + diğerAğ).style.display = "none";
+      if (diğerAğ != yeniAğ) dom.adlaGizle("odd" + diğerAğ);
     }
 
     // Yeni ağdaki fiyatları çek ve göster.

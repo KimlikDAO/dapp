@@ -9,53 +9,97 @@
     href="https://mock-oauth2.kimlikdao.net/auth?response_type=code&client_id=F5CAA82F-E2CF-4F21-A745-471ABE3CE7F8&redirect_uri=http://localhost:8787/al&scope=Temel-Bilgileri"
     class="btn" id="taa" data-en="Login with e-devlet" title="Çok Yakında!" data-en-title="Soon!">E-devlet ile giriş
     yap</a>
-  <div id="tadc" style="display:none">
+  <div id="tadc" class=tadrpz style="display:none">
     <div id="taip" class="xbtn"></div>
-    <div id="tada">
-      <input type="file" id=tain accept="application/pdf">
-      <span data-phantom
-        data-en="We need a registry certificate from e-devlet, to be presented to KimlikDAO.">E-devlet’ten
-          <b>Kuruma İbraz</b> için nüfus kayıt örneği almanız gerekiyor.</span>
-      <table id="tabi">
-        <tr>
-          <td data-en="Certificate type">Nüfus Kayıt Örneği Tipi</td>
-          <td data-en="Self">Kişi</td>
-        </tr>
-        <tr>
-          <td data-en="Include former spouse list">Eski Eş Listesi</td>
-          <td data-en="No">Hayır</td>
-        </tr>
-        <tr>
-          <td data-en="Include background check">Vukuatlı Belge (Olayları Göster)</td>
-          <td data-en="No">Hayır</td>
-        </tr>
-        <tr>
-          <td data-en="Purpose">Belgenin Neden Verileceği</td>
-          <td data-en="Reproduce to institution">Kuruma İbraz</td>
-        </tr>
-        <tr>
-          <td data-en="Institution name">Kurum adı</td>
-          <td><b id="tano" data-en="Calculating...">Hesaplanıyor...</b><a href="javascript:" id=tacopy
-            data-en-title="Copy" title="Kopyala" style="display:none"><img src="/al/paste.svg"
-              data-inline></a></td>
-        </tr>
-      </table>
-      <span data-phantom data-en="Please enter the information above at"></span>
-      <a class=lnk target="_blank" href="//www.turkiye.gov.tr/nvi-nufus-kayit-ornegi-belgesi-sorgulama"
-        data-en=" e-devlet registry ">
-        E-devlet Nüfus Kayıt Örneği <img src='/al/tanışma/external-link.svg' data-inline></a>
-      <span data-phantom
-        data-en=" to obtain a verifiable PDF. Once you have the file, drag and drop it here."> sayfasından yukarıdaki
-        bilgileri girerek bir PDF dosyası alın. Aldığınız dosyayı bu kutuya
-        sürükleyin.</span>
-      <div class="tastt">
-        <div id="taimg"><img src="/al/tanışma/upload.svg" alt="" width=48 height=48></div>
-        <div id="tal" style="display:none"></div>
-        <div id="tafail" style="display:none"></div>
-      </div>
-      <div id=tafb> </div>
-      <a href="javascript:" id=tadsbtn class="btn act lft" data-en="Select file">Dosya seç</a>
-      <a href="javascript:" id=tabip class="btn" data-en="Cancel">İptal</a>
+    <input type="file" id=tain accept="application/pdf">
+    <span data-phantom
+      data-en="We need a registry certificate from e-devlet, to be presented to KimlikDAO.">E-devlet’ten
+      <b>Kuruma İbraz</b> için nüfus kayıt örneği almanız gerekiyor.</span>
+    <table id="tabi">
+      <tr>
+        <td data-en="Certificate type">Nüfus Kayıt Örneği Tipi</td>
+        <td data-en="Self">Kişi</td>
+      </tr>
+      <tr>
+        <td data-en="Include former spouse list">Eski Eş Listesi</td>
+        <td data-en="No">Hayır</td>
+      </tr>
+      <tr>
+        <td data-en="Include background check">Vukuatlı Belge (Olayları Göster)</td>
+        <td data-en="No">Hayır</td>
+      </tr>
+      <tr>
+        <td data-en="Purpose">Belgenin Neden Verileceği</td>
+        <td data-en="Reproduce to institution">Kuruma İbraz</td>
+      </tr>
+      <tr>
+        <td data-en="Institution name">Kurum adı</td>
+        <td><b id="tano" data-en="Calculating...">Hesaplanıyor...</b><a href="javascript:" id=tacopy
+            data-en-title="Copy" title="Kopyala" style="display:none"><img src="/al/paste.svg" data-inline></a></td>
+      </tr>
+    </table>
+    <span data-phantom data-en="Please enter the information above at"></span>
+    <a class=lnk target="_blank" href="//www.turkiye.gov.tr/nvi-nufus-kayit-ornegi-belgesi-sorgulama"
+      data-en=" e-devlet registry ">
+      E-devlet Nüfus Kayıt Örneği <img src='/al/tanışma/external-link.svg' data-inline></a>
+    <span data-phantom
+      data-en=" to obtain a verifiable PDF. Once you have the file, drag and drop it here."> sayfasından yukarıdaki
+      bilgileri girerek bir PDF dosyası alın. Aldığınız dosyayı bu kutuya
+      sürükleyin.</span>
+    <div class="tastt">
+      <div id="taimg"><img src="/al/tanışma/upload.svg" alt="" width=48 height=48></div>
+      <div id="tal" style="display:none"></div>
+      <div id="tafail" style="display:none"></div>
     </div>
+    <div id=tafb> </div>
+    <a href="javascript:" id=tadsbtn class="btn act lft" data-en="Select file">Dosya seç</a>
+    <a href="javascript:" id=tabip class="btn" data-en="Cancel">İptal</a>
+  </div>
+  <div id=taec class=tadrpz style="display:none">
+    <div id=taebip class="xbtn"></div>
+    <input type="file" id=taebfi accept="application/pdf" style="display:none">
+    <div class="taeblc">
+      <label for="taemi" class="taplab" data-en="E-mail">E-posta</label>
+      <label for="tamo" data-en="Code">Onay Kodu</label>
+    </div>
+    <div class="taebic">
+      <div class="taitc">
+        <input type="email" id=taemi class="taebi">
+        <div id=taemat class="tatick" style="display:none">✓</div>
+      </div>
+      <div class="tabtnc">
+        <div id=taemo class="taio"><img src="/al/tanışma/ok.svg" alt=""></div>
+      </div>
+      <div id=tamoc class="taitc">
+        <input type="number" id=tamo class="taebi">
+      </div>
+    </div>
+    <div class="taeblc">
+      <label for="tateli" class="taplab" data-en="Phone Number">Telefon Numarası</label>
+      <label for="tato" data-en="Code">Onay Kodu</label>
+    </div>
+    <div class="taebic">
+      <div class="taitc">
+        <input type="tel" id=tateli class="taebi" placeholder="05__ ___ __ __" maxlength="11">
+        <div id=tatelt class="tatick" style="display:none">✓</div>
+      </div>
+      <div class="tabtnc">
+        <div id=tatelo class="taio"><img src="/al/tanışma/ok.svg" alt=""></div>
+      </div>
+      <div id=tatoc class="taitc">
+        <input type="number" id=tato class="taebi">
+      </div>
+    </div>
+    <div id="taadres">
+      <div class="taeblc">
+        <label for="taadi" class="taplab" data-en="Address">Adres</label>
+      </div>
+      <textarea id=taadi name=taadi class="taitc" rows="4"></textarea>
+      <div id=taadt class="tatick" style="display:none">✓</div>
+      <div class=taebds><a href="javascript:" id=taebds data-en="Upload address PDF">PDF yükleyerek adres
+          gir</a></div>
+    </div>
+    <a href="javascript:" id=taebo class="btn act lft" data-en="Confirm">Tamam</a>
+    <a href="javascript:" id=taeba class="btn" data-en="Skip">Atla</a>
   </div>
 </div>

@@ -32,6 +32,24 @@ const taahhütOluştur = (adres, rastgele) => {
 }
 
 /**
+ * @param {TCKTTemelBilgileri} açıkTCKT
+ * @param {!Uint8Array} rastgele
+ */
+const bilgiGir = (açıkTCKT) => {
+  for (let hane of "ad soyad TCKN dt dyeri".split(" "))
+    if (açıkTCKT.kişi[hane]) dom.adla("tc" + hane).innerText = açıkTCKT.kişi[hane];
+  dom.adla("tccinsiyet").innerText = açıkTCKT.kişi.c || "K";
+
+  for (let hane of "annead babaad BSN cilt hane mhali".split(" "))
+    if (açıkTCKT.aile[hane]) dom.adla("tc" + hane).innerText = açıkTCKT.aile[hane];
+
+  for (let hane of "il ilçe mahalle tescil".split(" "))
+    if (açıkTCKT.kütük[hane]) dom.adla("tc" + hane).innerText = açıkTCKT.kütük[hane];
+
+  Tckt.yüzGöster(true);
+}
+
+/**
  * @param {function(Promise<string>)} sonra
  */
 const açıkTcktAlVe = (sonra) => {
@@ -85,26 +103,7 @@ const açıkTcktAlVe = (sonra) => {
   const pdfDüğmesi = dom.adla("tab");
   /** @const {Element} */
   const kutu = dom.adla("ta");
-  /**
-   * @param {TCKTTemelBilgileri} açıkTCKT
-   * @param {!Uint8Array} rastgele
-   */
-  const kapat = (açıkTCKT, rastgele) => {
-    for (let hane of "ad soyad TCKN dt dyeri".split(" "))
-      if (açıkTCKT.kişi[hane]) dom.adla("tc" + hane).innerText = açıkTCKT.kişi[hane];
-    dom.adla("tccinsiyet").innerText = açıkTCKT.kişi.c || "K";
 
-    for (let hane of "annead babaad BSN cilt hane mhali".split(" "))
-      if (açıkTCKT.aile[hane]) dom.adla("tc" + hane).innerText = açıkTCKT.aile[hane];
-
-    for (let hane of "il ilçe mahalle tescil".split(" "))
-      if (açıkTCKT.kütük[hane]) dom.adla("tc" + hane).innerText = açıkTCKT.kütük[hane];
-
-    Tckt.yüzGöster(true);
-    kutu.classList.add("done");
-    açıkTCKT.rastgele = base64(rastgele);
-    sonra(Promise.resolve(JSON.stringify(açıkTCKT, null, 2)));
-  }
   kutu.classList.remove("disabled");
 
   /** @type {URLSearchParams} */
@@ -117,7 +116,7 @@ const açıkTcktAlVe = (sonra) => {
     /** @const {!Uint8Array} */
     const eDevletRasgele = new Uint8Array(64);
     crypto.getRandomValues(eDevletRasgele);
-    eDevletDüğmesi.style.display = "none";
+    dom.gizle(eDevletDüğmesi);
     pdfDüğmesi.href = "javascript:";
     pdfDüğmesi.classList.remove("act");
     pdfDüğmesi.innerText = dom.TR ? "E-devlet’ten bilgileriniz alındı ✓" : "We got your info ✓";
@@ -126,14 +125,19 @@ const açıkTcktAlVe = (sonra) => {
       .then((taahhüt) =>
         fetch(KIMLIK_AS_URL + "?" + new URLSearchParams({ "oauth_code": code, "taahhut": base64(new Uint8Array(taahhüt)) })))
       .then(res => res.json())
-      .then((açıkTckt) => kapat(açıkTckt, eDevletRasgele));
+      .then((açıkTCKT) => {
+        bilgiGir(açıkTCKT);
+        açıkTCKT.rastgele = base64(rastgele);
+        kutu.classList.add("done");
+        sonra(Promise.resolve(JSON.stringify(açıkTCKT, null, 2)));
+      });
   } else {
     const hataBildirimi = dom.adla("tafb");
     pdfDüğmesi.onclick = () => {
-      eDevletDüğmesi.style.display = "none";
-      pdfDüğmesi.style.display = "none";
+      dom.gizle(eDevletDüğmesi);
+      dom.gizle(pdfDüğmesi);
       /** @const {Element} */
-      const dosyaBırakmaBölgesi = dom.adla("tada");
+      const dosyaBırakmaBölgesi = dom.adla("tadc");
       /** @const {Element} */
       const dosyaSeçici = dom.adla("tain");
       numaraSözü.then((numara) => {
@@ -152,7 +156,7 @@ const açıkTcktAlVe = (sonra) => {
       const dosyaYükle = (dosya) => {
         hataKaldır();
         dom.adla("tafb").innerText = dom.TR ? "Belge yükleniyor" : "Uploading document";
-        dom.adla("taimg").style.display = "none";
+        dom.adlaGizle("taimg");
         dom.adla("tal").style.display = "";
         const formData = new FormData();
         formData.set('f', dosya);
@@ -162,15 +166,11 @@ const açıkTcktAlVe = (sonra) => {
             body: formData,
           }))
           .then(res => res.ok
-            ? res.json().then((açıkTckt) => {
-              dom.adla("tadc").style.display = "none";
-              pdfDüğmesi.href = "javascript:";
-              pdfDüğmesi.classList.remove("act");
-              pdfDüğmesi.style.display = "";
-              pdfDüğmesi.innerText = dom.TR ? "Bilgileriniz onaylandı ✓" : "We confirmed your info ✓";
-              dom.butonDurdur(pdfDüğmesi);
+            ? res.json().then((açıkTCKT) => {
+              bilgiGir(açıkTCKT);
               window.localStorage.removeItem(Cüzdan.adres().toLowerCase + "r");
-              kapat(açıkTckt, pdfRasgele);
+              dom.adlaGizle("tadc");
+              ekBilgiAlVe(açıkTCKT, sonra);
             })
             : res.json().then(hataGöster)
           )
@@ -202,45 +202,202 @@ const açıkTcktAlVe = (sonra) => {
       const HataMetinleri = dom.TR ? [
         "Belgenin son 24 saat içinde alınmış olması gerekli. Yüklediğiniz belge {} saat önce alınmış.",
         "Yüklediğiniz belgedeki nüfus kaydı geçersiz.",
-        "Kurum adı KimlikDAO olmalı",
+        "Kurum adı KimlikDAO ile başlamalı",
         "Kişi sağ değil",
-        "Belgeyi alırken \"Sayı\" {} olarak girilmeli. 9 basamağı da doğru girdiniz mi? Farklı bir cüzdana mı geçtiniz?",
+        "Belgeyi alırken \"Kurum adı\" KimlikDAO-{} olarak girilmeli. 6 harfi de doğru girdiniz mi? Farklı bir cüzdana mı geçtiniz?",
         "Belge e-devletten onaylanamadı.",
         "PoW hatalı.",
         "Geçerli bir PDF dosyası yükleyin."
       ] : [
         "The document is {} hours old. Please get a new document and upload here within 24 hours.",
         "The registry is invalid",
-        "The institution name has to be filled in as exactly KimlikDAO.",
+        "The institution name has to start with KimlikDAO.",
         "Person is not alive",
-        "The  \"Request Number\" needs to be filled in as {}. Make sure you use the same wallet address.",
+        "The  \"Institution name\" needs to be filled in as KimlikDAO-{}. Make sure you use the same wallet as before.",
         "Unable the authenticate the document with e-devlet.",
         "Incorrect PoW.",
         "Invalid PDF file"
       ];
 
       /** @param {HataBildirimi} hata */
-      const hataGöster = (/** HataBildirimi */ hata) => {
+      const hataGöster = (hata) => {
         let metin = HataMetinleri[hata.kod];
         hataBildirimi.innerText = hata.ek && hata.ek.length
           ? metin.replace("{}", hata.ek[0]) : metin;
         hataBildirimi.classList.add("inv");
-        dom.adla("tal").style.display = "none";
-        dom.adla("taimg").style.display = "none";
+        dom.gizle(dom.adla("tal"));
+        dom.gizle(dom.adla("taimg"));
         dom.adla("tafail").style.display = "";
       }
 
       const hataKaldır = () => {
         hataBildirimi.classList.remove("inv");
-        dom.adla("tafail").style.display = "none";
+        dom.adlaGizle("tafail");
       }
 
-      dom.adla("tabip").onclick = dom.adla("taip").onclick = () => {
-        dom.adla("tadc").style.display = "none";
+      dom.adla("taip").onclick = dom.adla("tabip").onclick = () => {
+        dom.adlaGizle("tadc");
         eDevletDüğmesi.style.display = "";
         pdfDüğmesi.style.display = "";
       }
     }
+  }
+}
+
+const ekBilgiAlVe = (açıkTCKT, sonra) => {
+  dom.adlaGizle("taa");
+  dom.adlaGizle("tab");
+  /** @const {Element} */
+  const ePostaGirdisi = dom.adla("taemi");
+  /** @const {Element} */
+  const telGirdisi = dom.adla("tateli");
+  /** @const {Element} */
+  const adresGirdisi = dom.adla("taadi");
+  /** @const {Element} */
+  const mailOnayGirdisi = dom.adla("tamo");
+  /** @const {Element} */
+  const telOnayGirdisi = dom.adla("tato");
+  /** @const {Element} */
+  const onaylaDüğmesi = dom.adla("taebo");
+  /** @const {Element} */
+  const atlaDüğmesi = dom.adla("taeba");
+  /** @const {Element} */
+  const mailKodGönderDüğmesi = dom.adla("taemo");
+  /** @const {Element} */
+  const telSmsGönderDüğmesi = dom.adla("tatelo");
+  /** @const {Element} */
+  const adresDosyaSeçici = dom.adla("taebfi");
+  /** @const {Element} */
+  const ekBilgiKutusu = dom.adla("taec");
+  dom.göster(ekBilgiKutusu);
+
+  ePostaGirdisi.onblur = () => { // Girilen e-posta'nın uygunluğunu kontrol ediyoruz
+    let mailDüzgünMü = true;
+    ePostaGirdisi.parentElement.classList.remove("invalid");
+    if (!ePostaGirdisi.value.includes('@') && ep) {
+      ePostaGirdisi.parentElement.classList.add("invalid");
+      mailDüzgünMü = false;
+    }
+    return mailDüzgünMü;
+  }
+
+  mailKodGönderDüğmesi.onclick = () => {
+    ePostaGirdisi.onblur()
+      && console.log("Kullanıcının e-postasına kod gönderilecek");  // Mail adresine doğrulama kodu gönderilecek 
+  }
+
+  ePostaGirdisi.onkeydown = (e) => {
+    ePostaGirdisi.parentElement.classList.remove("invalid");
+    if (e.key == "Enter") mailKodGönderDüğmesi.onclick();
+  }
+
+  telGirdisi.onblur = () => {
+    let telDüzgünMü = true
+    telGirdisi.parentElement.classList.remove("invalid");
+    if (telGirdisi.value.length < 11) {              // TODO(MuhammetCoskun): Tel validation daha kapsamlı hale getir.
+      telGirdisi.parentElement.classList.add("invalid");
+      telDüzgünMü = false;
+    }
+    return telDüzgünMü;
+  }
+
+  telSmsGönderDüğmesi.onclick = () => {
+    telGirdisi.onblur()
+      && console.log("Kullanıcının telefonuna kod gönderilecek"); // Sms gönderilecek
+  }
+
+  telGirdisi.onkeydown = (e) => {
+    telGirdisi.parentElement.classList.remove("invalid");
+    if (e.key == "Enter") telSmsGönderDüğmesi.onclick();
+  }
+
+  /**
+   * @param {Element} element
+   * @param {number} kod
+   */
+  const onayKoduKontrolEt = (element, kod) => {
+    element.parentElement.classList.remove("invalid");
+    if (element.value.length > 6) element.value = element.value.slice(0, 6);
+    return element.value == kod;
+  }
+
+  mailOnayGirdisi.oninput = () => {
+    dom.adlaGizle("taemat");
+    mailOnayGirdisi.parentElement.classList.remove("invalid");
+    if (mailOnayGirdisi.value.length < 6) return
+    onayKoduKontrolEt(mailOnayGirdisi, 123456) // 123456 dummy kod, değişecek.
+      ? dom.adla("taemat").style.display = ""
+      : mailOnayGirdisi.parentElement.classList.add("invalid");
+  }
+
+  telOnayGirdisi.oninput = () => {
+    dom.adlaGizle("tatelt");
+    telOnayGirdisi.parentElement.classList.remove("invalid");
+    if (telOnayGirdisi.value.length < 6) return
+    onayKoduKontrolEt(telOnayGirdisi, 123456) // 123456 dummy kod, değişecek.
+      ? dom.adla("tatelt").style.display = ""
+      : telOnayGirdisi.parentElement.classList.add("invalid");
+  }
+
+  /** @const {function(!File)} */
+  const adresİçinDosyaYükle = (dosya) => {
+    const formData = new FormData();
+    formData.set('f', dosya);
+    fetch(KIMLIKDAO_API_URL + "pdften-adres?", {
+      method: 'POST',
+      body: formData,
+    }).then(res => res.ok
+      ? res.json().then((adres) => {
+        adresGirdisi.value = adres;
+        dom.adla("taadt").style.display = "";
+      })
+      : res.json().then(e => console.log(e)));
+  }
+
+  adresDosyaSeçici.onchange = () => {
+    adresDosyaBırakmaBölgesi.classList.add("tasrk");
+    if (adresDosyaSeçici.files.length > 0) {
+      adresİçinDosyaYükle(adresDosyaSeçici.files[0]);
+    }
+  }
+
+  adresDosyaBırakmaBölgesi.ondrop = (e) => {
+    e.preventDefault();
+    if (e.dataTransfer.files[0].type.includes("pdf"))
+      adresİçinDosyaYükle(e.dataTransfer.files[0]);
+  };
+
+  adresDosyaBırakmaBölgesi.ondragover = (e) => {
+    e.preventDefault();
+    adresDosyaBırakmaBölgesi.classList.add("tasrk");
+  }
+
+  adresDosyaBırakmaBölgesi.ondragleave = (e) => {
+    e.preventDefault();
+    adresDosyaBırakmaBölgesi.classList.remove("tasrk");
+  }
+
+  onaylaDüğmesi.onclick = () => {
+    const ePostaAdresi = ePostaGirdisi.value;
+    const telefonNumarası = telGirdisi.value;
+    const adresBilgileri = adresGirdisi.value;
+    console.log(ePostaAdresi, telefonNumarası, adresBilgileri);
+  }
+
+  dom.adla("taebds").onclick = () => {
+    adresDosyaSeçici.click();
+  }
+
+  atlaDüğmesi.onclick = dom.adla("taebip").onclick = () => {
+    dom.gizle(ekBilgiKutusu);
+    /** @const {Element} */
+    const düğme = dom.adla("tab");
+    düğme.href = "javascript:";
+    düğme.classList.remove("act");
+    düğme.style.display = "";
+    düğme.innerText = dom.TR ? "Bilgileriniz onaylandı ✓" : "We confirmed your info ✓";
+    dom.butonDurdur(düğme);
+    sonra(Promise.resolve(JSON.stringify(açıkTCKT, null, 2)));
   }
 }
 

@@ -22,11 +22,11 @@ const fiyatDeğişikliğiFormuHazırla = (yeniAğ) => {
   dom.adla("oyy" + yeniAğ).nextElementSibling.style.display = "";
   //Diğer Ağ tokenlarını UI'dan cıkar
   for (const diğerAğ in Cüzdan.Paralar) {
-    if (diğerAğ != yeniAğ) dom.adla("oyy" + diğerAğ).nextElementSibling.style.display = "none";
+    if (diğerAğ != yeniAğ) dom.gizle(dom.adla("oyy" + diğerAğ).nextElementSibling);
   }
   //Ağ değişince sağ containerda gösterilen token'ı kaldır
   for (let i = 0; i < dom.adla("oyytcsag").childElementCount; ++i) {
-    dom.adla("oyytcsag").children[i].style.display = "none";
+    dom.gizle(dom.adla("oyytcsag").children[i]);
   }
   //Labellara click Handler ekle
   for (let/** number */ i = 1; i < dom.adla("oyytcsol").childElementCount; i += 2) {
@@ -38,7 +38,7 @@ const fiyatDeğişikliğiFormuHazırla = (yeniAğ) => {
 
   const seçilmişTokenGöster = (element) => {
     for (let i = 0; i < dom.adla("oyytcsag").childElementCount; ++i) {
-      dom.adla("oyytcsag").children[i].style.display = "none";
+      dom.gizle(dom.adla("oyytcsag").children[i]);
     }
     const id = element.previousElementSibling.id.slice(3);
     dom.adla("oyys" + id).style.display = "";
@@ -59,7 +59,7 @@ const aktifOyKartıOluştur = (data) => {
   }
   oyKartıKüçültmeDüğmesi.onclick = (e) => {
     element.classList.remove("expand");
-    oyKartıKüçültmeDüğmesi.style.display = "none";
+    dom.gizle(oyKartıKüçültmeDüğmesi);
     e.stopPropagation();
   }
   const description = middleDiv.children[0].children[0];
