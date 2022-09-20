@@ -29,7 +29,7 @@ const EşikKutusu = dom.adla("inmes");
 /** @const {Element} */
 const SilKutusu = dom.adla("inmsy");
 
-/** @const {Object<string, TCKTTemelBilgileri>} */
+/** @const {Object<string, AçıkTCKT>} */
 const Hatırla = {};
 
 const kutuKapat = () => {
@@ -54,8 +54,8 @@ const cüzdanaEkle = () => {
 }
 
 const imeceİptalKutusuGöster = () => {
-  Mask.style.display = "";
-  İmeceİptalKutusu.style.display = "";
+  dom.göster(Mask);
+  dom.göster(İmeceİptalKutusu);
   const adresGirdisi = dom.adla("iniii");
   let address = adresGirdisi.value;
   const agirlikGirdisi = dom.adla("iniiw");
@@ -84,8 +84,8 @@ const eşikKutusuGöster = () => {
   /** @const {Element} */
   const girdi = dom.adla("inesw");
 
-  Mask.style.display = "";
-  EşikKutusu.style.display = "";
+  dom.göster(Mask);
+  dom.göster(EşikKutusu);
   dom.adla("inesr").onclick = kutuKapat;
 
   TCKT.revokesRemaining(adres).then((eşik) => {
@@ -105,8 +105,8 @@ const eşikKutusuGöster = () => {
 }
 
 const silKutusuGöster = () => {
-  Mask.style.display = "";
-  SilKutusu.style.display = "";
+  dom.göster(Mask);
+  dom.göster(SilKutusu);
   dom.adla("insyr").onclick = kutuKapat;
   dom.adla("insyo").onclick = () => {
     /** @const {string} */
@@ -124,7 +124,7 @@ const silKutusuGöster = () => {
 }
 
 /**
- * @param {TCKTTemelBilgileri} açıkTCKT
+ * @param {AçıkTCKT} açıkTCKT
  */
 const açıkYüz = (açıkTCKT) => {
   for (let hane of "ad soyad TCKN dt dyeri".split(" "))
@@ -180,7 +180,7 @@ const kapalıYüz = (adres) => {
             })
             .then((açıkTCKT) => {
               açıkTCKT = açıkTCKT.slice(43, açıkTCKT.indexOf("\0"));
-              açıkTCKT = /** @type {TCKTTemelBilgileri} */(JSON.parse(açıkTCKT));
+              açıkTCKT = /** @type {AçıkTCKT} */(JSON.parse(açıkTCKT));
               Hatırla[Cüzdan.ağ() + adres] = açıkTCKT;
               açıkYüz(açıkTCKT);
             })

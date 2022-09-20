@@ -103,7 +103,6 @@ const açıkTcktAlVe = (sonra) => {
   const pdfDüğmesi = dom.adla("tab");
   /** @const {Element} */
   const kutu = dom.adla("ta");
-
   kutu.classList.remove("disabled");
 
   /** @type {URLSearchParams} */
@@ -146,18 +145,18 @@ const açıkTcktAlVe = (sonra) => {
         /** @const {string} */
         const kurumAdı = "KimlikDAO-" + numara;
         dom.adla("tano").innerText = kurumAdı;
-        kopyala.style.display = "";
+        dom.göster(kopyala);
         kopyala.onclick = () => navigator.clipboard.writeText(kurumAdı);
       });
       dom.adla("tadsbtn").onclick = () => dosyaSeçici.click();
-      dom.adla("tadc").style.display = "";
+      dom.göster(dom.adla("tadc"));
 
       /** @const {function(!File)} */
       const dosyaYükle = (dosya) => {
         hataKaldır();
         dom.adla("tafb").innerText = dom.TR ? "Belge yükleniyor" : "Uploading document";
         dom.adlaGizle("taimg");
-        dom.adla("tal").style.display = "";
+        dom.adlaGöster("tal");
         const formData = new FormData();
         formData.set('f', dosya);
         taahhütPowSözü
@@ -227,7 +226,7 @@ const açıkTcktAlVe = (sonra) => {
         hataBildirimi.classList.add("inv");
         dom.gizle(dom.adla("tal"));
         dom.gizle(dom.adla("taimg"));
-        dom.adla("tafail").style.display = "";
+        dom.göster(dom.adla("tafail"));
       }
 
       const hataKaldır = () => {
@@ -235,10 +234,10 @@ const açıkTcktAlVe = (sonra) => {
         dom.adlaGizle("tafail");
       }
 
-      dom.adla("taip").onclick = dom.adla("tabip").onclick = () => {
-        dom.adlaGizle("tadc");
-        eDevletDüğmesi.style.display = "";
-        pdfDüğmesi.style.display = "";
+      dom.adla("tabip").onclick = dom.adla("taip").onclick = () => {
+        dom.gizle(dom.adla("tadc"));
+        dom.göster(eDevletDüğmesi);
+        dom.göster(pdfDüğmesi);
       }
     }
   }

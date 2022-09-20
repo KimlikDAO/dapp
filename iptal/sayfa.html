@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html data-en-lang="en" lang=tr>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title data-en="KimlikDAO | Revoke TCKT">KimlikDAO | İptal İşlemleri</title>
+  <link rel="preload" crossorigin href="/font/f400.woff2" as="font" />
+  <link rel="preload" crossorigin href="/font/f700.woff2" as="font" />
+  <link href="/font/lato-ttf.css" rel="stylesheet" type="text/css" data-remove />
+  <link href="/ana/sayfa.css" rel="stylesheet" type="text/css" />
+  <link href="/iptal/sayfa.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+  <div id="ipnav" class="nav">
+    <h2><a href="/">KimlikDAO</a></h2>
+    <birim:cüzdan />
+  </div>
+  <div id=ippc>
+    <div id=ipssc class="ipstep"><b data-en="1. Select TCKT owner.">1. TCKT sahibini seçin.</b>
+      <span data-phantom data-en="Whose TCKT would you like to revoke?">İptal etmek istediğiniz TCKT kime
+        ait?</span>
+      <br>
+      <br>
+      <a href="javascript:" id=ipbtna class="act btn lft" data-en="Mine">Bana ait</a>
+      <a href="javascript:" id=ipbtnb class="act btn" data-en="Someone else’s">Başkasına ait</a>
+    </div>
+    <div id=ipiic class="ipstep" style="display:none">
+      <b data-en="2. Select TCKT address.">2. TCKT adresi seçin.</b>
+      <span data-en="The following addresses nominated you as a revoker. Select the one you would like to revoke.">
+        Aşağıdaki adresler size iptal yetkisi vermiş. İptal etmek istediğiniz adresi seçin.</span>
+      <div id="iplc" style="display:none">
+        <div class="ipl"></div><span data-phantom data-en="Loading">Yükleniyor</span>
+      </div>
+      <div id=ipiilc style="display:none">
+        <b id=ipiilh data-en="Addresses">Adresler</b>
+        <ul id=ipiil></ul>
+      </div>
+      <a href="javascript:" id=ipiio class="act btn lft" data-en="Confirm">Onayla</a>
+      <a href="javascript:" id=ipiir class="btn" data-en="Cancel">İptal</a>
+    </div>
+    <div id=iptac class="ipstep" style="display:none"><b data-en="2. Select TCKT address.">2. TCKT
+        adresi seçin.</b>
+      <span data-phantom data-en="Do you want to revoke the TCKT in your connected wallet?">Bağlı
+        cüzdanınızdaki TCKT’yi mi iptal etmek istiyorsunuz?</span>
+      <br>
+      <br>
+      <a href="javascript:" id=ip1a class="act btn lft" data-en="Yes">Evet</a>
+      <a href="/bildir" data-en-href="/report" id=ip1b class="btn" data-en="No">Hayır</a>
+    </div>
+    <div id=iptaic class="ipstep" style="display:none"><b data-en="2. Revoke connected TCKT.">2. Bağlı TCKT iptali.</b>
+      <span data-phantom
+        data-en="Now you’ll revoke the TCKT in your connected wallet. You don’t need to revoke your TCKT to get a new one.&lt;br>&lt;br>Only revoke your TCKT if you think your private key was exposed.&lt;br>&lt;br>Confirm below to proceed.">
+        Devam ederseniz bağlı cüzdanınızdaki TCKT’yi iptal edeceksiniz.
+        Yeni bir TCKT almak için eskisini iptal etmeye gerek yok.<br><br>Sadece cüzdanınızın gizli anahtarını
+        başkasına verdiğinizi düşünüyorsanız TCKT’nizi iptal etmeniz gerekir.<br><br>Devam etmek için onaylayın.
+      </span>
+      <br>
+      <br>
+      <a href="javascript:" id=ip1c class="btn danger lft" data-en="Revoke TCKT">TCKT iptal et</a>
+      <a href="javascript:" id=ip1d class="btn" data-en="Cancel">İptal</a>
+    </div>
+  </div>
+  <script async type="module" src="/iptal/sayfa.js" data-remove-type></script>
+</body>
+
+</html>

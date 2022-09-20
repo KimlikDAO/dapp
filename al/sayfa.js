@@ -54,7 +54,7 @@ const açıkAnahtarAlVe = (sonra) => {
 }
 
 /**
- * @param {Promise<string>} açıkTCKTSözü
+ * @param {Promise<AçıkTCKT>} açıkTCKTSözü
  */
 const tcktYarat = (açıkTCKTSözü) => {
   açıkAnahtarAlVe((açıkAnahtar) => {
@@ -62,11 +62,21 @@ const tcktYarat = (açıkTCKTSözü) => {
     /** @const {Promise<string>} */
     const cidSözü = açıkTCKTSözü.then((açıkTCKT) => {
       const encoder = new TextEncoder();
-      const gizlenecek = new Uint8Array(1000);
-      encoder.encodeInto(TCKT_ADDR, gizlenecek);
-      gizlenecek[42] = 10;
-      encoder.encodeInto(açıkTCKT, gizlenecek.subarray(43));
-      const [nonce, ephemPubKey, ciphertext] = kutula(açıkAnahtar, gizlenecek);
+      const açıkKimlik = new Uint8Array(1024);
+      const açıkHumanID = new Uint8Array(256);
+      encoder.encodeInto(TCKT_ADDR, açıkKimlik);
+      açıkKimlik[42] = 10;
+      açıkHumanID.set(açıkKimlik.subarray(0, 43))
+
+      encoder.encodeInto(
+        JSON.stringify(açıkTCKT["HumanID('public')"], null, 2),
+        açıkKimlik.subarray(43));
+      delete açıkTCKT["HumanID('public')"];
+      encoder.encodeInto(
+        JSON.stringify(açıkTCKT, null, 2),
+        açıkHumanID.subarray(43));
+      const [gizliKimlikN, gizliKimlikK, gizliKimlik] = kutula(açıkAnahtar, açıkKimlik);
+      const [gizliHumanIDN, gizliHumanIDK, gizliHumanID] = kutula(açıkAnahtar, açıkHumanID);
 
       const TCKTData = {
         name: "TCKT",
@@ -74,15 +84,27 @@ const tcktYarat = (açıkTCKTSözü) => {
         image: KIMLIKDAO_URL + "/TCKT.svg",
         external_url: KIMLIKDAO_URL,
         animation_url: KIMLIKDAO_URL + "/TCKT.mp4",
-        unlockable: {
+        unlockables: {
+          "ID Card": {
+            user_prompt: {
+              "en-US": ["{1} wants to view your TCKT.", "Provide", "Reject"],
+              "tr-TR": ["{1} TCKT’nize erişmek istiyor. İzin veriyor musunuz?", "Evet", "Hayır"]
+            },
+            algorithm: "x25519-xsalsa20-poly1305",
+            nonce: gizliKimlikN,
+            ephem_pub_key: gizliKimlikK,
+            ciphertext: gizliKimlik
+          }
+        },
+        "HumanID('public')": {
           user_prompt: {
-            "en-US": ["{1} wants to view your TCKT.", "OK", "Reject"],
-            "tr-TR": ["{1} TCKT'nizi istiyor. İzin veriyor musunuz?", "Evet", "Hayır"]
+            "en-US": ["{1} wants to view your KimlikDAO HumanID.", "Provide", "Reject"],
+            "tr-TR": ["{1} KimlikDAO HumanID’nize erişmek istiyor. İzin veriyor musunuz?", "Evet", "Hayır"]
           },
           algorithm: "x25519-xsalsa20-poly1305",
-          nonce: nonce,
-          ephem_pub_key: ephemPubKey,
-          ciphertext: ciphertext
+          nonce: gizliHumanIDN,
+          ephem_pub_key: gizliHumanIDK,
+          ciphertext: gizliHumanID
         }
       }
       return ipfs.yaz(JSON.stringify(TCKTData)).then(hex);

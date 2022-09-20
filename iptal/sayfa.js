@@ -1,0 +1,84 @@
+/**
+ * @fileoverview İptal sayfası giriş noktası
+ */
+import Cüzdan from '/birim/cüzdan/birim';
+import dom from '/lib/dom';
+import TCKT from '/lib/TCKT';
+
+/** @type {Array<string>} */
+let ADRESLER = null;
+
+dom.adla("ipbtnb").onclick = () => {
+  /** @type {?Element} */
+  let seçilmişAdres = null;
+  dom.adla("ipssc").classList.add("done");
+  dom.adla("ipbtna").classList.remove("act");
+  dom.adla("ipbtnb").classList.remove("act");
+  dom.adlaGizle("iptac");
+  dom.adlaGöster("ipiic");
+
+  if (!ADRESLER) {
+    let innerHTML = "";
+    const ul = dom.adla("ipiil");
+    dom.adlaGöster("iplc"); //Yükleniyor animasyonu
+    // Kullanıcın revoke edebileceği adresler cekilecek 
+    ADRESLER = [
+      "0x6ec04644bd36cd36d3569093078aba4c78297ef1",
+      "0x6ec04644bd36cd36d3569093078aba4c78297ef2",
+      "0x6ec04644bd36cd36d3569093078aba4c78297ef3",
+    ];
+    if (ADRESLER.length == 0) {
+      innerHTML = dom.TR
+        ? "İptal edebileceğiniz bir adres yok."
+        : "There is no revoke address."
+    }
+    ul.onclick = (e) => {
+      let li = e.target;
+      if (seçilmişAdres) seçilmişAdres.classList.remove("sel");
+      li.classList.add("sel");
+      seçilmişAdres = li;
+    }
+    for (let i = 0; i < ADRESLER.length; ++i) {
+      innerHTML += `<li id=ipiia${i} class="ipiia">${ADRESLER[i]}</li>`
+    }
+    ul.innerHTML = innerHTML;
+    setTimeout(() => {
+      dom.adlaGöster("ipiilc");
+      dom.adlaGizle("iplc");
+    }, 1000);
+  }
+
+  dom.adla("ipiio").onclick = () => {
+    if (seçilmişAdres) console.log(seçilmişAdres.innerText); //revoke onayı verilecek
+  }
+
+  dom.adla("ipiir").onclick = () => {
+    dom.adla("ipssc").classList.remove("done");
+    dom.adlaGizle("ipiic");
+    dom.adla("ipbtna").classList.add("act");
+    dom.adla("ipbtnb").classList.add("act");
+  }
+}
+
+dom.adla("ipbtna").onclick = () => {
+  dom.adla("ipssc").classList.add("done");
+  dom.adla("ipbtna").classList.remove("act");
+  dom.adla("ipbtnb").classList.remove("act");
+  dom.adlaGizle("ipiic");
+  dom.adlaGöster("iptac");
+
+  dom.adla("ip1a").onclick = () => {
+    dom.adlaGizle("iptac");
+    dom.adlaGöster("iptaic");
+
+    dom.adla("ip1c").onclick = () => {
+      const adres = /** @type {string} */(Cüzdan.adres());
+      TCKT.revoke(adres).catch(console.log);
+    }
+
+    dom.adla("ip1d").onclick = () => {
+      dom.adlaGizle("iptaic");
+      dom.adlaGöster("iptac");
+    }
+  }
+}

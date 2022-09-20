@@ -47,9 +47,9 @@ const kurVe = (sonra) => {
  * @param {function(Object<string,number>,number)} sonra
  */
 const atla = (sonra) => {
-  GösterButonu.style.display = "";
+  dom.göster(GösterButonu);
   GösterButonu.innerText = dom.TR ? "Yine de kur" : "Setup social revoke";
-  İptalButonu.style.display = "";
+  dom.göster(İptalButonu);
   İptalButonu.innerText = dom.TR ? "İmece iptal kurulmadı 🤌" : "Skipped 🤌";
   İptalButonu.classList.add("done");
   dom.butonDurdur(İptalButonu);
@@ -63,7 +63,7 @@ const atla = (sonra) => {
  */
 const kutularıAç = (sonra) => {
   dom.adla("im").classList.remove("done");
-  dom.adla("imc").style.display = "";
+  dom.göster(dom.adla("imc"));
   dom.gizle(GösterButonu);
   dom.gizle(İptalButonu);
   dom.adla("imbi").onclick = () => atla(sonra);
@@ -109,7 +109,7 @@ const kutularıAç = (sonra) => {
       dom.adla("imt").classList.add("imin");
     }
     if (geçerli) {
-      İptalButonu.style.display = "";
+      dom.göster(İptalButonu);
       İptalButonu.innerText = dom.TR ? "İmece iptal kuruldu ✓" : "Social revoke setup is complete ✓";
       İptalButonu.onclick = null;
       dom.adlaGizle("imc");
