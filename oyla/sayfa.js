@@ -98,9 +98,9 @@ const aktifOyKartıOluştur = (data, mockDataInput) => {
 
   birazBekle().then(() => {
     var totalVotings = mockDataInput.countYes + mockDataInput.countNo + mockDataInput.countAbstain;
-    const yesAsPercentage = percentage(mockDataInput.countYes, totalVotings);
-    const noAsPercentage = percentage(mockDataInput.countNo, totalVotings);
-    const abstainAsPercentage = percentage(mockDataInput.countAbstain, totalVotings);
+    const oranlanmışEvetOyları = oranla(mockDataInput.countYes, totalVotings);
+    const oranlanmışHayırOyları = oranla(mockDataInput.countNo, totalVotings);
+    const oranlanmışÇekimserOylar = oranla(mockDataInput.countAbstain, totalVotings);
 
     const remainingTime = middleDiv.children[0].children[1].children[2].children[1];
     remainingTime.innerText = dom.TR
@@ -108,9 +108,9 @@ const aktifOyKartıOluştur = (data, mockDataInput) => {
       : `${mockData.remainingTime} REMAINING`;
 
     const evetYüzdesi = middleDiv.children[1].children[0].children[2];
-    evetYüzdesi.innerText = yesAsPercentage + "%";
+    evetYüzdesi.innerText = oranlanmışEvetOyları + "%";
     const evetKolonu = middleDiv.children[1].children[0].children[1];
-    evetKolonu.style.height = yesAsPercentage + "px";
+    evetKolonu.style.height = oranlanmışEvetOyları + "px";
     const evetDüğmesi = middleDiv.children[1].children[0].children[0];
     evetDüğmesi.onclick = (e) => {
       console.log("clicked Evet");
@@ -118,9 +118,9 @@ const aktifOyKartıOluştur = (data, mockDataInput) => {
     }
 
     const hayırYüzdesi = middleDiv.children[1].children[1].children[2];
-    hayırYüzdesi.innerText = noAsPercentage + "%";
+    hayırYüzdesi.innerText = oranlanmışHayırOyları + "%";
     const hayırKolonu = middleDiv.children[1].children[1].children[1];
-    hayırKolonu.style.height = noAsPercentage + "px";
+    hayırKolonu.style.height = oranlanmışHayırOyları + "px";
     const hayırDüğmesi = middleDiv.children[1].children[1].children[0];
     hayırDüğmesi.onclick = (e) => {
       console.log("clicked Hayır");
@@ -128,18 +128,14 @@ const aktifOyKartıOluştur = (data, mockDataInput) => {
     }
 
     const çekimserYüzdesi = middleDiv.children[1].children[2].children[2];
-    çekimserYüzdesi.innerText = abstainAsPercentage + "%";
+    çekimserYüzdesi.innerText = oranlanmışÇekimserOylar + "%";
     const çekimserKolonu = middleDiv.children[1].children[2].children[1];
-    çekimserKolonu.style.height = abstainAsPercentage + "px";
+    çekimserKolonu.style.height = oranlanmışÇekimserOylar + "px";
     const çekimserDüğmesi = middleDiv.children[1].children[2].children[0];
     çekimserDüğmesi.onclick = (e) => {
       console.log("clicked Çekimser");
       e.stopPropagation();
     }
-  })
-
-  getChainId().then(data => {
-    console.log(data);
   })
 
   dom.göster(element);
@@ -151,24 +147,22 @@ const data = {
   description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum has been the",
   address: "0x85ccdB8F444F08D678E5317cA0510FC29Fd3969A",
   callData: "Calldata",
-  remainingTime: "13D 2H "
-}
-
-const data1 = {
-  title: "Title1",
-  description: "Description1",
-  address: "Address1",
-  callData: "Calldata1",
-  remainingTime: "12D 11H"
 }
 
 const mockData = {
-  network: "0x43114", // Avalanche == 43114
   countYes: 700,
   countNo: 1000,
   countAbstain: 250,
   remainingTime: "9D",
 }
+
+// const data1 = {
+//   title: "Title1",
+//   description: "Description1",
+//   address: "Address1",
+//   callData: "Calldata1",
+//   remainingTime: "12D 11H"
+// }
 
 // const mockData1 = {
 //   network: "Ethereum", // Ethereum == ?, which eth network does kimlikdao contract deployed?
@@ -179,25 +173,7 @@ const mockData = {
 
 // }
 
-
-const getChainId = async () => {
-  const chainId = Cüzdan.ağ();
-  if (!chainId) {
-    throw new Error(
-      "chain id mevcut degil"
-    );
-  }
-  return NETWORKS[chainId];
-};
-
-
-const NETWORKS = {
-  1: "Ethereum Main Network",
-  43114: "Avalanche Network",
-};
-
-
-function percentage(partialValue, totalValue) {
+function oranla(partialValue, totalValue) {
   return (100 * partialValue / totalValue).toFixed(1)
 }
 
@@ -206,4 +182,4 @@ const birazBekle = (cevap) => new Promise((resolve) => setTimeout(() => resolve(
 const yeniOy = aktifOyKartıOluştur(data, mockData);
 //const yeniOy1 = aktifOyKartıOluştur(data1, mockData1);
 dom.adla("oyac").appendChild(yeniOy);
- //dom.adla("oyac").appendChild(yeniOy1);
+ //dom.adla("oyac").acüzdan
