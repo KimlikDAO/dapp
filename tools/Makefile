@@ -25,6 +25,7 @@ build/prod.js: tools/prod.js lib/cf-worker.js
 al-en := get
 incele-en := view
 oyla-en := vote
+iptal-en := revoke
 
 build/sitemap.txt:
 	mkdir -p $(dir $@)

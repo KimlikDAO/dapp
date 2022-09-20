@@ -32,7 +32,7 @@ const taahhütOluştur = (adres, rastgele) => {
 }
 
 /**
- * @param {function(Promise<string>)} sonra
+ * @param {function(Promise<AçıkTCKT>)} sonra
  */
 const açıkTcktAlVe = (sonra) => {
   /** @const {Worker} */
@@ -86,7 +86,7 @@ const açıkTcktAlVe = (sonra) => {
   /** @const {Element} */
   const kutu = dom.adla("ta");
   /**
-   * @param {TCKTTemelBilgileri} açıkTCKT
+   * @param {AçıkTCKT} açıkTCKT
    * @param {!Uint8Array} rastgele
    */
   const kapat = (açıkTCKT, rastgele) => {
@@ -103,7 +103,9 @@ const açıkTcktAlVe = (sonra) => {
     Tckt.yüzGöster(true);
     kutu.classList.add("done");
     açıkTCKT.rastgele = base64(rastgele);
-    sonra(Promise.resolve(JSON.stringify(açıkTCKT, null, 2)));
+    // İleride devam eden bir hesaplama döndürebiliriz. Bu yüzden arabirimi
+    // promise olarak sabitliyoruz.
+    sonra(Promise.resolve(açıkTCKT));
   }
   kutu.classList.remove("disabled");
 
