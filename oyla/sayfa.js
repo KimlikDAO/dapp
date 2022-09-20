@@ -95,7 +95,7 @@ const aktifOyKartıOluştur = (data, mockDataInput) => {
   callData.innerText = data.callData;
 
   birazBekle().then(() => {
-    var totalVotings = Number(mockDataInput.countYes) + Number(mockDataInput.countNo) + Number(mockDataInput.countAbstain);
+    var totalVotings = mockDataInput.countYes + mockDataInput.countNo + mockDataInput.countAbstain;
     const yesAsPercentage = percentage(mockDataInput.countYes, totalVotings);
     const noAsPercentage = percentage(mockDataInput.countNo, totalVotings);
     const abstainAsPercentage = percentage(mockDataInput.countAbstain, totalVotings);
@@ -196,7 +196,7 @@ const NETWORKS = {
 
 
 function percentage(partialValue, totalValue) {
-  return (100 * partialValue) / totalValue | 0;
+  return (100 * partialValue / totalValue).toFixed(1)
 }
 
 const birazBekle = (cevap) => new Promise((resolve) => setTimeout(() => resolve(cevap), 1000))
