@@ -18,62 +18,70 @@
     <birim:cüzdan />
   </div>
   <div id="oy">
-    <div id="oyy">
-      <div id=oyyb data-en="Create Proposal">Yeni Oylama Öner</div>
+    <div id=oyyb data-en="Create Proposal">Yeni Oylama Öner</div>
+    <div id="oyy" style="display:none">
+      <div id=oyytitle data-en="Create Proposal">Yeni Oylama Öner</div>
       <div id=oyyddc>
-        <button id=oyyddb>Fiyat Değişikliği</button>
+        <button id=oyyddb>
+          <div id="oyysö0" data-en="Price Change">Fiyat Değişikliği</div>
+          <div id="oyysö1" data-en="Trade Proposal" style="display:none">Takas Önerisi</div>
+          <div id="oyysö2" data-en="Custom Proposal" style="display:none">Kendin Belirle</div>
+          <img id=oyyddok src="/oyla/dropdownok.svg" alt="" width="10" height="10">
+        </button>
         <ul id=oyyul style="display:none">
-          <li class="oyyli">Fiyat Değişikliği</li>
-          <li class="oyyli">Takas Önerisi</li>
-          <li class="oyyli">Kendin Öner</li>
+          <li id=oyyö0 class="oyyli" data-en="Price Change">Fiyat Değişikliği</li>
+          <li id=oyyö1 class="oyyli" data-en="Trade Proposal">Takas Önerisi</li>
+          <li id=oyyö2 class="oyyli" data-en="Custom Proposal">Kendin Belirle</li>
         </ul>
       </div>
       <div id="oyyc">
-        <div id=oyyfc>
+        <div id=oyy0>
           <div id=oyyfb data-en="Enter new price for TCKT.">TCKT’nin yeni fiyatını girin.</div>
           <div id=oyyfddc>
             <input type="number" id=oyyfi placeholder="0.0">
             <button id=oyytb>
-              <div id=oyst2 class="oyst"><img src="/al/ödeme/USDC.svg" height=24 width=24> USDC</div>
-              <div id=oyst1 class="oyst" style="display:none"><img src="/al/ödeme/USDT.svg" height=24 width=24> USDT
+              <div id=oyyst2 class="oyyst"><img src="/al/ödeme/USDC.svg" height=24 width=24> USDC</div>
+              <div id=oyyst1 class="oyyst" style="display:none"><img src="/al/ödeme/USDT.svg" height=24 width=24> USDT
               </div>
-              <div id=oyst3 class="oyst" style="display:none"><img src="/al/ödeme/TRYB.svg" height=24 width=24> TRYB
+              <div id=oyyst3 class="oyyst" style="display:none"><img src="/al/ödeme/TRYB.svg" height=24 width=24> TRYB
               </div>
-              <div id=oyst0x1 class="oyst" style="display:none"><img src="/al/ödeme/ETH.svg" height=24 width=24> ETH
+              <div id=oyyst0x1 class="oyyst" style="display:none"><img src="/al/ödeme/ETH.svg" height=24 width=24> ETH
               </div>
-              <div id=oyst0xa86a class="oyst" style="display:none"><img src="/al/ödeme/AVAX.svg" height=24
+              <div id=oyyst0xa86a class="oyyst" style="display:none"><img src="/al/ödeme/AVAX.svg" height=24
                   width=24> AVAX
               </div>
-              <div id=oyst0x89 class="oyst" style="display:none"><img src="/al/ödeme/MATIC.svg" height=24
+              <div id=oyyst0x89 class="oyyst" style="display:none"><img src="/al/ödeme/MATIC.svg" height=24
                   width=24> MATIC
               </div>
-              <div id=oyst0xfa class="oyst" style="display:none"><img src="/al/ödeme/FTM.svg" height=24 width=24> FTM
+              <div id=oyyst0xfa class="oyyst" style="display:none"><img src="/al/ödeme/FTM.svg" height=24 width=24> FTM
               </div>
-              <div id=oyst0xa4b1 class="oyst" style="display:none"><img src="/al/ödeme/ETH.svg" height=24 width=24> ETH
+              <div id=oyyst0xa4b1 class="oyyst" style="display:none"><img src="/al/ödeme/ETH.svg" height=24
+                  width=24> ETH
               </div>
             </button>
             <ul id=oyddul style="display:none">
-              <li id=oytok2 class="oyddli"><img src="/al/ödeme/USDC.svg" height=24 width=24> USDC</li>
-              <li id=oytok1 class="oyddli"><img src="/al/ödeme/USDT.svg" height=24 width=24> USDT</li>
-              <li id=oytok3 class="oyddli"><img src="/al/ödeme/TRYB.svg" height=24 width=24> TRYB</li>
-              <li id=oytok0x1 class="oyddli" style="display:none"><img src="/al/ödeme/ETH.svg" height=24 width=24> ETH
+              <li id=oyyt2 class="oyddli"><img src="/al/ödeme/USDC.svg" height=24 width=24> USDC</li>
+              <li id=oyyt1 class="oyddli"><img src="/al/ödeme/USDT.svg" height=24 width=24> USDT</li>
+              <li id=oyyt3 class="oyddli"><img src="/al/ödeme/TRYB.svg" height=24 width=24> TRYB</li>
+              <li id=oyyt0x1 class="oyddli" style="display:none"><img src="/al/ödeme/ETH.svg" height=24 width=24> ETH
               </li>
-              <li id=oytok0xa86a class="oyddli" style="display:none"><img src="/al/ödeme/AVAX.svg" height=24
+              <li id=oyyt0xa86a class="oyddli" style="display:none"><img src="/al/ödeme/AVAX.svg" height=24
                   width=24> AVAX</li>
-              <li id=oytok0x89 class="oyddli" style="display:none"><img src="/al/ödeme/MATIC.svg" height=24
+              <li id=oyyt0x89 class="oyddli" style="display:none"><img src="/al/ödeme/MATIC.svg" height=24
                   width=24> MATIC</li>
-              <li id=oytok0xfa class="oyddli" style="display:none"><img src="/al/ödeme/FTM.svg" height=24 width=24> FTM
+              <li id=oyyt0xfa class="oyddli" style="display:none"><img src="/al/ödeme/FTM.svg" height=24 width=24> FTM
               </li>
-              <li id=oytok0xa4b1 class="oyddli" style="display:none"><img src="/al/ödeme/ETH.svg" height=24
-                  width=24> ETH
+              <li id=oyyt0xa4b1 class="oyddli" style="display:none"><img src="/al/ödeme/ETH.svg" height=24 width=24> ETH
               </li>
             </ul>
           </div>
           <div class="oyyor">
-            <a href="javascript:" id=oyyo class="act btn lft" data-en="Confirm">Onayla</a>
-            <a href="javascript:" id=oyyr class="btn" data-en="Cancel">İptal</a>
+            <a href="javascript:" id=oyyfo class="act btn lft" data-en="Confirm">Onayla</a>
+            <a href="javascript:" id=oyyfr class="btn" data-en="Cancel">İptal</a>
           </div>
         </div>
+        <div id="oyy1" style="display:none">WIP</div>
+        <div id="oyy2" style="display:none">WIP</div>
       </div>
     </div>
     <div id=oyac class="oyc">

@@ -6,32 +6,56 @@ import Cüzdan from '/birim/cüzdan/birim';
 import dom from '/lib/dom';
 import TCKT from '/lib/TCKT';
 
+let seçilmişÖneriId;
+
 Cüzdan.bağlanınca(() => {
   let ağ = Cüzdan.ağ();
-  fiyatDeğişikliğiFormuHazırla(ağ)
+  fiyatDeğişikliğiFormuHazırla(ağ);
   Cüzdan.ağDeğişince(() => {
-    fiyatDeğişikliğiFormuHazırla(Cüzdan.ağ())
+    fiyatDeğişikliğiFormuHazırla(Cüzdan.ağ());
   })
 })
 
-dom.adla("oyy").onclick = () => {
-  dom.adla("oyy").classList.add("open_form");
-  dom.menüYarat(dom.adla("oyyddb"), dom.adla("oyyul"));
+dom.adla("oyyb").onclick = () => {
+  dom.adlaGizle("oyyb");
+  dom.adlaGöster("oyy");
+  if (!seçilmişÖneriId) seçilmişÖneriId = "0";
+  /** @const {Element} */
+  const önergeDüğmesi = dom.adla("oyyddb");
+  /** @const {Element} */
+  const önergeMenusu = dom.adla("oyyul");
+  dom.menüYarat(önergeDüğmesi, önergeMenusu);
+  önergeMenusu.onclick = (e) => {
+    const li = e.target;
+    if (li.nodeName != "LI") return;
+    dom.adlaGizle("oyy" + seçilmişÖneriId);
+    dom.adlaGizle("oyysö" + seçilmişÖneriId);
+    seçilmişÖneriId = li.id.slice(4);
+    dom.adlaGöster("oyy" + seçilmişÖneriId);
+    dom.adlaGöster("oyysö" + seçilmişÖneriId);
+  }
 }
 
 /** @param {string} yeniAğ Ağ değişince UI'da gösterir*/
 const fiyatDeğişikliğiFormuHazırla = (yeniAğ) => {
+  /** @const {Element} */
+  const tokenMenusu = dom.adla("oyddul");
+  // Dropdown'dan yeniAğ token'ı hariç diğer native tokenları kaldır 
+  // Seçilen ağ native tokenına sel class'ınnı ekle
+  for (let i = 0; i < tokenMenusu.childElementCount; ++i) {
+    const token = tokenMenusu.children[i];
+    token.classList.remove("sel");
+    dom.gizle(token);
+    if (token.id.slice(4) == yeniAğ) {
+      dom.göster(token);
+      token.classList.add("sel");
+    }
+  }
   /** @type {string} */
   let seçilmişTokenId = yeniAğ;
-  // Diğer Ağ tokenlarını UI'dan cıkar
-  for (const diğerAğ in Cüzdan.Paralar) {
-    if (diğerAğ != yeniAğ) dom.gizle(dom.adla("oytok" + diğerAğ));
-    dom.adlaGöster("oytok" + seçilmişTokenId);
-  }
-  dom.adla("oytok" + seçilmişTokenId).classList.add("sel");
   // Seçilen ağa göre USDC USDT TRYB ayarla
   for (let i = 1; i <= 3; ++i) {
-    dom.adla("oytok" + i).style.display = TCKT.isTokenAvailable(yeniAğ, i)
+    dom.adla("oyyt" + i).style.display = TCKT.isTokenAvailable(yeniAğ, i)
       ? ""
       : "none";
   }
@@ -39,10 +63,8 @@ const fiyatDeğişikliğiFormuHazırla = (yeniAğ) => {
   for (let i = 0; i < dom.adla("oyytb").childElementCount; ++i) {
     dom.gizle(dom.adla("oyytb").children[i]);
   }
-  dom.adlaGöster("oyst" + seçilmişTokenId);
+  dom.adlaGöster("oyyst" + seçilmişTokenId);
   // Dropdown menüsü yarat ve clickhandler ekle
-  /** @const {Element} */
-  const tokenMenusu = dom.adla("oyddul");
   /** @const {Element} */
   const tokenDüğmesi = dom.adla("oyytb");
   dom.menüYarat(tokenDüğmesi, tokenMenusu);
@@ -51,24 +73,25 @@ const fiyatDeğişikliğiFormuHazırla = (yeniAğ) => {
     let li = e.target;
     for (; li.nodeName != 'LI'; li = li.parentElement)
       if (li.nodeName == 'DIV') return;
-    dom.adlaGizle("oyst" + seçilmişTokenId);
-    dom.adla("oytok" + seçilmişTokenId).classList.remove("sel");
-    seçilmişTokenId = li.id.slice(5);
-    dom.adla("oytok" + seçilmişTokenId).classList.add("sel");
-    dom.adlaGöster("oyst" + seçilmişTokenId);
+    dom.adlaGizle("oyyst" + seçilmişTokenId);
+    dom.adla("oyyt" + seçilmişTokenId).classList.remove("sel");
+    seçilmişTokenId = li.id.slice(4);
+    dom.adla("oyyt" + seçilmişTokenId).classList.add("sel");
+    dom.adlaGöster("oyyst" + seçilmişTokenId);
   }
 
   // Onayla iptal click handler ekle
-  dom.adla("oyyo").onclick = () => {
+  dom.adla("oyyfo").onclick = () => {
     const fiyat = dom.adla("oyyfi").value;
     if (fiyat == null || fiyat == undefined || fiyat == "") return;
     if (seçilmişTokenId == null || seçilmişTokenId == undefined || seçilmişTokenId == "") return;
     console.log(fiyat, seçilmişTokenId);
   }
 
-  dom.adla("oyyr").onclick = (e) => {
+  dom.adla("oyyfr").onclick = (e) => {
     e.stopPropagation();
-    dom.adla("oyy").classList.remove("open_form");
+    dom.adlaGizle("oyy");
+    dom.adlaGöster("oyyb");
   }
 }
 
