@@ -97,6 +97,25 @@ const aktifOyKartıOluştur = (data, mockDataInput) => {
   callData.innerText = data.callData;
 
   birazBekle().then(() => {
+    var aktifHesap;
+    ethereum.request(/** @type {RequestParams} */({ method: "eth_accounts" }))
+      .then((accounts) => {
+        aktifHesap = accounts[0];
+        if (accounts.length == 0 || aktifHesap == undefined) {
+          throw "bagli cuzdan yok";
+        }
+        if (accounts.length > 0) Cüzdan.adresDeğişti(/** Array<string> */(accounts));
+
+        var sonOylama = mockData.lastVoting.get(aktifHesap);
+
+        if (data.votingNum == sonOylama) {
+          console.log("kullanici bu oylamada oy kullanmis")
+        } else if (data.votingNum != sonOylama) {
+          console.log("kullanici bu oylamada oy kullanmamis")
+        }
+      });
+
+
     var totalVotings = mockDataInput.countYes + mockDataInput.countNo + mockDataInput.countAbstain;
     const oranlanmışEvetOyları = oranla(mockDataInput.countYes, totalVotings);
     const oranlanmışHayırOyları = oranla(mockDataInput.countNo, totalVotings);
@@ -147,6 +166,7 @@ const data = {
   description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum has been the",
   address: "0x85ccdB8F444F08D678E5317cA0510FC29Fd3969A",
   callData: "Calldata",
+  votingNum: 12,
 }
 
 const mockData = {
@@ -154,6 +174,9 @@ const mockData = {
   countNo: 1000,
   countAbstain: 250,
   remainingTime: "9D",
+  lastVoting: new Map([
+    ["0xb75511a03d747e128deefb97832d4604350bf18e", 12],
+  ])
 }
 
 // const data1 = {
@@ -182,4 +205,4 @@ const birazBekle = (cevap) => new Promise((resolve) => setTimeout(() => resolve(
 const yeniOy = aktifOyKartıOluştur(data, mockData);
 //const yeniOy1 = aktifOyKartıOluştur(data1, mockData1);
 dom.adla("oyac").appendChild(yeniOy);
- //dom.adla("oyac").acüzdan
+ //dom.adla("oyac").appendChild(yeniOy1);

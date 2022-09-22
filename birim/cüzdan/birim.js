@@ -253,5 +253,6 @@ export default {
   bağlanınca,
   hızlıArabirimAdı,
   kopunca,
+  adresDeğişti,
   Paralar
 };
