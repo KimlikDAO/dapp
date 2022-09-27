@@ -29,11 +29,15 @@ const PAGES = {
   "/revoke": "iptal-en.html"
 };
 
-addEventListener('fetch', (event) => {
+/**
+ * 
+ * @return {Promise<Response>}
+ */
+const fetch = (request, env, ctx) => {
   /** @const {URL} */
-  const url = new URL(event.request.url)
+  const url = new URL(request.url);
   /** @const {string} */
-  const enc = event.request['cf']['clientAcceptEncoding'] || "";
+  const enc = request['cf']['clientAcceptEncoding'] || "";
   /** @const {string} */
   const ext = url.pathname.endsWith('.woff2') ? ''
     : enc.includes('br') ? '.br' : enc.includes('gz') ? '.gz' : '';
@@ -42,10 +46,10 @@ addEventListener('fetch', (event) => {
   /** @const {string} */
   const kvKey = url.pathname == '/' ? (() => {
     if (url.search) return PAGES[url.search];
-    const cookie = event.request.headers.get('cookie');
+    const cookie = request.headers.get('cookie');
     if (cookie)
       return cookie.startsWith('l=en') ? "ana-en.html" : "ana-tr.html";
-    const acceptLang = event.request.headers.get('accept-language');
+    const acceptLang = request.headers.get('accept-language');
     return acceptLang && acceptLang.includes('tr') ? "ana-tr.html" : "ana-en.html";
   })() + ext : (idx == -1 ? PAGES[url.pathname] : url.pathname.substring(1)) + ext;
   /** @const {string} */
@@ -79,7 +83,7 @@ addEventListener('fetch', (event) => {
   // CF cache is taking unusually long), the response will be served from the
   // KV.
   /** @const {Promise<Response>} */
-  const fromKV = KV.get(kvKey, 'arrayBuffer').then((body) => {
+  const fromKV = env.KV.get(kvKey, 'arrayBuffer').then((body) => {
     if (!body) return Promise.reject();
 
     /** @type {Response} */
@@ -100,7 +104,7 @@ addEventListener('fetch', (event) => {
 
     // Remember to cache the response, but only after we finish serving the
     // request.
-    event.waitUntil(Promise.resolve().then(() => {
+    ctx.waitUntil(Promise.resolve().then(() => {
       if (inCache) return;
       // We modify the response in two ways before we place it in CloudFlare
       // cache:
@@ -130,8 +134,9 @@ addEventListener('fetch', (event) => {
     return response;
   })
 
-  event.respondWith(Promise.any([fromCache, fromKV]).catch(bulunamadı));
-});
+  return Promise.any([fromCache, fromKV]).catch(bulunamadı);
+}
+
 
 /**
  * @return {Response}
@@ -140,3 +145,5 @@ const bulunamadı = (err) => new Response('NAPİM?', {
   status: 404,
   headers: { 'content-type': 'text/plain;charset=utf-8' }
 })
+
+export default { fetch };
