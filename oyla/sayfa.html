@@ -18,70 +18,73 @@
     <birim:cüzdan />
   </div>
   <div id="oy">
-    <div id="oyy">
-      <div id="oyytitle" data-en="Create Proposal">Yeni Oylama Öner</div>
-      <div id="oyytabs">
-        <input type="radio" id="oyytab0" name="tabs" checked="checked">
-        <label for="oyytab0" class="oyy_tablabel sol" data-en="TCKT Price Change">TCKT Ücret Değişikliği</label>
-        <div class="oyytab">
-          <div class="oyypcc">
-            <div class="oyytoc">
-              <ul id=oyytul>
-                <li id=oyy2 class="oyytli"><img src="/al/ödeme/USDC.svg" height=24 width=24> USDC</li>
-                <li id=oyy1 class="oyytli"><img src="/al/ödeme/USDT.svg" height=24 width=24> USDT</li>
-                <li id=oyy3 class="oyytli"><img src="/al/ödeme/TRYB.svg" height=24 width=24> TRYB</li>
-                <li id=oyy0x1 class="oyytli" style="display:none"><img src="/al/ödeme/ETH.svg" height=24 width=24> ETH
-                </li>
-                <li id=oyy0xa86a class="oyytli" style="display:none"><img src="/al/ödeme/AVAX.svg" height=24
-                    width=24> AVAX
-                </li>
-                <li id=oyy0x89 class="oyytli" style="display:none"><img src="/al/ödeme/MATIC.svg" height=24
-                    width=24> MATIC
-                </li>
-                <li id=oyy0xfa class="oyytli" style="display:none"><img src="/al/ödeme/FTM.svg" height=24 width=24> FTM
-                </li>
-                <li id=oyy0xa4b1 class="oyytli" style="display:none"><img src="/al/ödeme/ETH.svg" height=24
-                    width=24> ETH
-                </li>
-              </ul>
-            </div>
-            <div class="oyynpc">
-              <div class="oyynp">
-                <input type="number" id=oyyyf placeholder="0.0">
+    <div id=oyyb data-en="Create Proposal">Yeni Oylama Öner</div>
+    <div id="oyy" style="display:none">
+      <div id=oyytitle data-en="Create Proposal">Yeni Oylama Öner</div>
+      <div id=oyyddc>
+        <button id=oyyddb>
+          <div id="oyysö0" data-en="Price Change">Fiyat Değişikliği</div>
+          <div id="oyysö1" data-en="Trade Proposal" style="display:none">Takas Önerisi</div>
+          <div id="oyysö2" data-en="Custom Proposal" style="display:none">Kendin Belirle</div>
+          <img id=oyyddok src="/oyla/dropdownok.svg" alt="" width="10" height="10">
+        </button>
+        <ul id=oyyul style="display:none">
+          <li id=oyyö0 class="oyyli" data-en="Price Change">Fiyat Değişikliği</li>
+          <li id=oyyö1 class="oyyli" data-en="Trade Proposal">Takas Önerisi</li>
+          <li id=oyyö2 class="oyyli" data-en="Custom Proposal">Kendin Belirle</li>
+        </ul>
+      </div>
+      <div id="oyyc">
+        <div id=oyy0>
+          <div id=oyyfb data-en="Enter new price for TCKT.">TCKT’nin yeni fiyatını girin.</div>
+          <div id=oyyfddc>
+            <input type="number" id=oyyfi placeholder="0.0">
+            <button id=oyytb>
+              <div id=oyyst2 class="oyyst"><img src="/al/ödeme/USDC.svg" height=24 width=24> USDC</div>
+              <div id=oyyst1 class="oyyst" style="display:none"><img src="/al/ödeme/USDT.svg" height=24 width=24> USDT
               </div>
-              <div id=oyystoc>
-                <div id=oyys2 class="oyysto">USDC <img src="/al/ödeme/USDC.svg" height=24 width=24></div>
-                <div id=oyys1 class="oyysto">USDT <img src="/al/ödeme/USDT.svg" height=24 width=24>
-                </div>
-                <div id=oyys3 class="oyysto">TRYB <img src="/al/ödeme/TRYB.svg" height=24 width=24>
-                </div>
-                <div id=oyys0x1 class="oyysto">ETH <img src="/al/ödeme/ETH.svg" height=24 width=24>
-                </div>
-                <div id=oyys0xa86a class="oyysto">AVAX <img src="/al/ödeme/AVAX.svg" height=24 width=24></div>
-                <div id=oyys0x89 class="oyysto">MATIC <img src="/al/ödeme/MATIC.svg" height=24 width=24></div>
-                <div id=oyys0xfa class="oyysto">FTM <img src="/al/ödeme/FTM.svg" height=24 width=24></div>
-                <div id=oyys0xa4b1 class="oyysto">ETH <img src="/al/ödeme/ETH.svg" height=24 width=24></div>
+              <div id=oyyst3 class="oyyst" style="display:none"><img src="/al/ödeme/TRYB.svg" height=24 width=24> TRYB
               </div>
-            </div>
+              <div id=oyyst0x1 class="oyyst" style="display:none"><img src="/al/ödeme/ETH.svg" height=24 width=24> ETH
+              </div>
+              <div id=oyyst0xa86a class="oyyst" style="display:none"><img src="/al/ödeme/AVAX.svg" height=24
+                  width=24> AVAX
+              </div>
+              <div id=oyyst0x89 class="oyyst" style="display:none"><img src="/al/ödeme/MATIC.svg" height=24
+                  width=24> MATIC
+              </div>
+              <div id=oyyst0xfa class="oyyst" style="display:none"><img src="/al/ödeme/FTM.svg" height=24 width=24> FTM
+              </div>
+              <div id=oyyst0xa4b1 class="oyyst" style="display:none"><img src="/al/ödeme/ETH.svg" height=24
+                  width=24> ETH
+              </div>
+            </button>
+            <ul id=oyddul style="display:none">
+              <li id=oyyt2 class="oyddli"><img src="/al/ödeme/USDC.svg" height=24 width=24> USDC</li>
+              <li id=oyyt1 class="oyddli"><img src="/al/ödeme/USDT.svg" height=24 width=24> USDT</li>
+              <li id=oyyt3 class="oyddli"><img src="/al/ödeme/TRYB.svg" height=24 width=24> TRYB</li>
+              <li id=oyyt0x1 class="oyddli" style="display:none"><img src="/al/ödeme/ETH.svg" height=24 width=24> ETH
+              </li>
+              <li id=oyyt0xa86a class="oyddli" style="display:none"><img src="/al/ödeme/AVAX.svg" height=24
+                  width=24> AVAX</li>
+              <li id=oyyt0x89 class="oyddli" style="display:none"><img src="/al/ödeme/MATIC.svg" height=24
+                  width=24> MATIC</li>
+              <li id=oyyt0xfa class="oyddli" style="display:none"><img src="/al/ödeme/FTM.svg" height=24 width=24> FTM
+              </li>
+              <li id=oyyt0xa4b1 class="oyddli" style="display:none"><img src="/al/ödeme/ETH.svg" height=24 width=24> ETH
+              </li>
+            </ul>
           </div>
           <div class="oyyor">
-            <a href="javascript:" id=oyyo class="act btn lft" data-en="Confirm">Onayla</a>
-            <a href="javascript:" id=oyyr class="btn" data-en="Cancel">İptal</a>
+            <a href="javascript:" id=oyyfo class="act btn lft" data-en="Confirm">Onayla</a>
+            <a href="javascript:" id=oyyfr class="btn" data-en="Cancel">İptal</a>
           </div>
         </div>
-        <input type="radio" id="oyytab1" name="tabs">
-        <label for="oyytab1" class="oyy_tablabel orta" data-en="Trade Proposal">Takas Önerisi</label>
-        <div class="oyytab">
-          WIP
-        </div>
-        <input type="radio" id="oyytab2" name="tabs">
-        <label for="oyytab2" class="oyy_tablabel sag" data-en="Custom Proposal">Kendin Belirle</label>
-        <div class="oyytab">
-          WIP
-        </div>
+        <div id="oyy1" style="display:none">WIP</div>
+        <div id="oyy2" style="display:none">WIP</div>
       </div>
     </div>
-    <div id="oyac" class="oyc">
+    <div id=oyac class="oyc">
       <div class="oycb">Devam eden oylamalar</div>
       <div class="oyok" style="display:none">
         <div class="oyao_top">
@@ -125,7 +128,7 @@
         </div>
       </div>
     </div>
-    <div id="oyiac" class="oyc">
+    <div id=oyiac class="oyc">
       <div class="oycb">Eski oylamalar</div>
       <div class="oyok">
         <div class="oyiaob">TCKT Fiyat Değişikliği</div>

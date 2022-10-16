@@ -6,64 +6,92 @@ import Cüzdan from '/birim/cüzdan/birim';
 import dom from '/lib/dom';
 import TCKT from '/lib/TCKT';
 
+let seçilmişÖneriId;
+
 Cüzdan.bağlanınca(() => {
   let ağ = Cüzdan.ağ();
-  fiyatDeğişikliğiFormuHazırla(ağ)
+  fiyatDeğişikliğiFormuHazırla(ağ);
   Cüzdan.ağDeğişince(() => {
-    fiyatDeğişikliğiFormuHazırla(Cüzdan.ağ())
+    fiyatDeğişikliğiFormuHazırla(Cüzdan.ağ());
   })
 })
 
-dom.adla("oyy").onclick = () => {
-  dom.adla("oyy").classList.add("open_form");
+dom.adla("oyyb").onclick = () => {
+  dom.adlaGizle("oyyb");
+  dom.adlaGöster("oyy");
+  if (!seçilmişÖneriId) seçilmişÖneriId = "0";
+  /** @const {Element} */
+  const önergeDüğmesi = dom.adla("oyyddb");
+  /** @const {Element} */
+  const önergeMenusu = dom.adla("oyyul");
+  dom.menüYarat(önergeDüğmesi, önergeMenusu);
+  önergeMenusu.onclick = (e) => {
+    const li = e.target;
+    if (li.nodeName != "LI") return;
+    dom.adlaGizle("oyy" + seçilmişÖneriId);
+    dom.adlaGizle("oyysö" + seçilmişÖneriId);
+    seçilmişÖneriId = li.id.slice(4);
+    dom.adlaGöster("oyy" + seçilmişÖneriId);
+    dom.adlaGöster("oyysö" + seçilmişÖneriId);
+  }
 }
 
-/** @param {string} yeniAğ  Ağ değişince UI'da gösterir*/
+/** @param {string} yeniAğ Ağ değişince UI'da gösterir*/
 const fiyatDeğişikliğiFormuHazırla = (yeniAğ) => {
-  let seçilmişToken;
-  for (let i = 0; i < dom.adla("oyytul").childElementCount; ++i) {
-    dom.adla("oyytul").children[i].classList.remove("sel")
+  /** @const {Element} */
+  const tokenMenusu = dom.adla("oyddul");
+  // Dropdown'dan yeniAğ token'ı hariç diğer native tokenları kaldır 
+  // Seçilen ağ native tokenına sel class'ınnı ekle
+  for (let i = 0; i < tokenMenusu.childElementCount; ++i) {
+    const token = tokenMenusu.children[i];
+    token.classList.remove("sel");
+    dom.gizle(token);
+    if (token.id.slice(4) == yeniAğ) {
+      dom.göster(token);
+      token.classList.add("sel");
+    }
   }
-  dom.göster(dom.adla("oyy" + yeniAğ));
-  // Diğer Ağ tokenlarını UI'dan cıkar
-  for (const diğerAğ in Cüzdan.Paralar) {
-    if (diğerAğ != yeniAğ) dom.gizle(dom.adla("oyy" + diğerAğ));
-  }
+  /** @type {string} */
+  let seçilmişTokenId = yeniAğ;
   // Seçilen ağa göre USDC USDT TRYB ayarla
   for (let i = 1; i <= 3; ++i) {
-    dom.adla("oyy" + i).style.display = TCKT.isTokenAvailable(yeniAğ, i)
+    dom.adla("oyyt" + i).style.display = TCKT.isTokenAvailable(yeniAğ, i)
       ? ""
       : "none";
   }
-  // Ağ değişince seçilmiş token'ı kaldır
-  for (let i = 0; i < dom.adla("oyystoc").childElementCount; ++i) {
-    dom.gizle(dom.adla("oyystoc").children[i]);
+  // Ağ değişince seçilmiş token'ı native olarak ayarla
+  for (let i = 0; i < dom.adla("oyytb").childElementCount; ++i) {
+    dom.gizle(dom.adla("oyytb").children[i]);
   }
-  // Li'lere click Handler ekle
-  dom.adla("oyytul").onclick = (e) => {
-    if (e.target.nodeName == "UL") return;
-    if (seçilmişToken) dom.adla("oyy" + seçilmişToken).classList.remove("sel");
-    const id = e.target.nodeName == "LI"
-      ? e.target.id.slice(3)
-      : e.target.parentElement.id.slice(3);
-    for (let i = 0; i < dom.adla("oyystoc").childElementCount; ++i) {
-      dom.gizle(dom.adla("oyystoc").children[i])
-    }
-    dom.adlaGöster("oyys" + id);
-    dom.adla("oyy" + id).classList.add("sel");
-    seçilmişToken = id;
-  }
-  // Onayla iptal click handler ekle
-  dom.adla("oyyo").onclick = () => {
-    const fiyat = dom.adla("oyyyf").value;
-    if (fiyat == null || fiyat == undefined || fiyat == "") return;
-    if (seçilmişToken == null || seçilmişToken == undefined || seçilmişToken == "") return;
-    console.log(fiyat, seçilmişToken);
+  dom.adlaGöster("oyyst" + seçilmişTokenId);
+  // Dropdown menüsü yarat ve clickhandler ekle
+  /** @const {Element} */
+  const tokenDüğmesi = dom.adla("oyytb");
+  dom.menüYarat(tokenDüğmesi, tokenMenusu);
+  tokenMenusu.onclick = (e) => {
+    /** @type {Element} */
+    let li = e.target;
+    for (; li.nodeName != 'LI'; li = li.parentElement)
+      if (li.nodeName == 'DIV') return;
+    dom.adlaGizle("oyyst" + seçilmişTokenId);
+    dom.adla("oyyt" + seçilmişTokenId).classList.remove("sel");
+    seçilmişTokenId = li.id.slice(4);
+    dom.adla("oyyt" + seçilmişTokenId).classList.add("sel");
+    dom.adlaGöster("oyyst" + seçilmişTokenId);
   }
 
-  dom.adla("oyyr").onclick = (e) => {
+  // Onayla iptal click handler ekle
+  dom.adla("oyyfo").onclick = () => {
+    const fiyat = dom.adla("oyyfi").value;
+    if (fiyat == null || fiyat == undefined || fiyat == "") return;
+    if (seçilmişTokenId == null || seçilmişTokenId == undefined || seçilmişTokenId == "") return;
+    console.log(fiyat, seçilmişTokenId);
+  }
+
+  dom.adla("oyyfr").onclick = (e) => {
     e.stopPropagation();
-    dom.adla("oyy").classList.remove("open_form");
+    dom.adlaGizle("oyy");
+    dom.adlaGöster("oyyb");
   }
 }
 
