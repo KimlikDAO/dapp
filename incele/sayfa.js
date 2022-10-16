@@ -11,8 +11,6 @@ import TCKT from '/lib/TCKT';
 import { hex, hexten } from '/lib/çevir';
 
 /** @const {Element} */
-//const CüzdanaEkleDüğmesi = dom.adla("inbtn0");
-/** @const {Element} */
 const İmeceİptalDüğmesi = dom.adla("inbtn1");
 /** @const {Element} */
 const EşikAzaltmaDüğmesi = dom.adla("inbtn2");
@@ -44,14 +42,6 @@ Mask.onmousedown = (e) => {
 };
 
 dom.adla("inx").onclick = kutuKapat;
-
-// const cüzdanaEkle = () => {
-//   TCKT.addToWallet().then((eklendi) => {
-//     if (!eklendi) return;
-//     CüzdanaEkleDüğmesi.innerText = dom.TR ? "Eklendi ✓" : "Added to wallet ✓";
-//     dom.butonDurdur(CüzdanaEkleDüğmesi);
-//   }).catch(console.log);
-// }
 
 const imeceİptalKutusuGöster = () => {
   dom.göster(Mask);
@@ -193,7 +183,6 @@ const kapalıYüz = (adres) => {
 
 AçDüğmesi.onclick = Cüzdan.bağla;
 Cüzdan.bağlanınca((adres) => {
-  //CüzdanaEkleDüğmesi.onclick = cüzdanaEkle;
   İmeceİptalDüğmesi.onclick = imeceİptalKutusuGöster;
   EşikAzaltmaDüğmesi.onclick = eşikKutusuGöster;
   SilDüğmesi.onclick = silKutusuGöster;
