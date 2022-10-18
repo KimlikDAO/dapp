@@ -34,6 +34,7 @@ const AdresLinki = {
   "0x89": "polygonscan.com",
   "0xa4b1": "arbiscan.io",
   "0xfa": "ftmscan.com",
+  "0x38": "bscscan.com",
 }
 
 /**
@@ -235,13 +236,15 @@ const Paralar = dom.TR ? {
   "0xa86a": ["AVAX", "’tan", "’a"],
   "0x89": ["MATIC", "’ten", "’e"],
   "0xa4b1": ["ether", "'den", "’e"],
-  "0xfa": ["FTM", "’dan", "’a"]
+  "0xfa": ["FTM", "’dan", "’a"],
+  "0x38": ["BNB", "’den", "’ye"],
 } : {
   "0x1": ["ether"],
   "0xa86a": ["AVAX"],
   "0x89": ["MATIC"],
   "0xa4b1": ["ether"],
   "0xfa": ["FTM"],
+  "0x38": ["BNB"],
 };
 
 export default {
