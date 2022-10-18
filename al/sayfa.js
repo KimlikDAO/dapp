@@ -48,7 +48,10 @@ const açıkAnahtarAlVe = (sonra) => {
         window.localStorage[Cüzdan.adres().toLowerCase() + "pk"] = açıkAnahtar;
         Telefon.kutuKapat();
         kapat(açıkAnahtar);
-      }).catch(console.log);
+      }).catch((e) => {
+        if (e.code == -32603) dom.adlaGöster("s3er");
+        console.log(e);
+      });
     }
   }
 }
