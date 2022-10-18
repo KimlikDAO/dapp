@@ -55,3 +55,14 @@ h4 {
 #te {
   transition: opacity 1s;
 }
+
+#s3er {
+  margin-top: 1em;
+  display: flex;
+  color: #dc3545;
+}
+
+.s3l {
+  margin-left: 1em;
+  color: #3d67ab
+}
