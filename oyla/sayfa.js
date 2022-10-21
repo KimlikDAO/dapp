@@ -11,6 +11,7 @@ let seçilmişÖneriId;
 Cüzdan.bağlanınca(() => {
   let ağ = Cüzdan.ağ();
   fiyatDeğişikliğiFormuHazırla(ağ);
+  komuniteÖnergesiHazırla();
   Cüzdan.ağDeğişince(() => {
     fiyatDeğişikliğiFormuHazırla(Cüzdan.ağ());
   })
@@ -29,10 +30,10 @@ dom.adla("oyyb").onclick = () => {
     const li = e.target;
     if (li.nodeName != "LI") return;
     dom.adlaGizle("oyy" + seçilmişÖneriId);
-    dom.adlaGizle("oyysö" + seçilmişÖneriId);
+    dom.adlaGizle("oyyso" + seçilmişÖneriId);
     seçilmişÖneriId = li.id.slice(4);
     dom.adlaGöster("oyy" + seçilmişÖneriId);
-    dom.adlaGöster("oyysö" + seçilmişÖneriId);
+    dom.adlaGöster("oyyso" + seçilmişÖneriId);
   }
 }
 
@@ -89,7 +90,65 @@ const fiyatDeğişikliğiFormuHazırla = (yeniAğ) => {
   }
 
   dom.adla("oyyfr").onclick = (e) => {
-    e.stopPropagation();
+    dom.adlaGizle("oyy");
+    dom.adlaGöster("oyyb");
+  }
+}
+
+const komuniteÖnergesiHazırla = () => {
+  /** @const {Element} */
+  const metinGirdisi = dom.adla("oyycva");
+  /** @const {Element} */
+  const secenekEkleDüğmesi = dom.adla("oyycvse");
+  /** @const {Element} */
+  const secenekler = dom.adla("oyycvscc");
+  /** @const {Element} */
+  const onaylaDüğmesi = dom.adla("oyycvo");
+  /** @const {Element} */
+  const iptalDüğmesi = dom.adla("oyycvr");
+  /** @const {Element} */
+  const tarihGirdisi = dom.adla("oyycvti");
+  /**
+  * Verilen text ile secenek oluşturur
+  *
+  * @param {string} text
+  */
+  const secenekEkle = (text) => {
+    const secenek = secenekler.children[0].cloneNode(true);
+    dom.göster(secenek);
+    secenek.firstElementChild.value = text;
+    secenek.children[1].onclick = () => secenek.remove();
+    secenekler.appendChild(secenek);
+  }
+  secenekEkle(dom.TR ? "Evet" : "Yes");
+  secenekEkle(dom.TR ? "Hayır" : "No");
+  secenekEkleDüğmesi.onclick = () => {
+    secenekEkle(dom.TR ? "Yeni Seçenek" : "New Response");
+  }
+  onaylaDüğmesi.onclick = () => {
+    /** @type {Array<string>} */
+    let secenekListesi = [];
+    /** @const {string} */
+    const metin = metinGirdisi.value;
+    /** @const {string} */
+    const tarih = tarihGirdisi.value;
+    for (let i = 1; i < secenekler.children.length; ++i) {
+      const secenek = secenekler.children[i].firstElementChild.value;
+      if (!secenek) return;
+      secenekListesi.push(secenek);
+    }
+    if (!tarih) return;
+    if (!metin) return;
+    const öneriBilgileri = {
+      "metin": {[dom.TR ? "tr_TR": "en_EN"]: metin.trim()},
+      "secenekler": secenekListesi.map(secenek => {
+        return {[dom.TR ? "tr_TR": "en_EN"]: secenek};
+      }),
+      "tarih": tarih,
+    }
+    console.log(öneriBilgileri);
+  }
+  iptalDüğmesi.onclick = () => {
     dom.adlaGizle("oyy");
     dom.adlaGöster("oyyb");
   }

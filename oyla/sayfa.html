@@ -23,20 +23,22 @@
       <div id=oyytitle data-en="Create Proposal">Yeni Oylama Öner</div>
       <div id=oyyddc>
         <button id=oyyddb>
-          <div id="oyysö0" data-en="Price Change">Fiyat Değişikliği</div>
-          <div id="oyysö1" data-en="Trade Proposal" style="display:none">Takas Önerisi</div>
-          <div id="oyysö2" data-en="Custom Proposal" style="display:none">Kendin Belirle</div>
+          <div id="oyyso0" data-en="Price Change">Fiyat Değişikliği</div>
+          <div id="oyyso1" data-en="Trade Proposal" style="display:none">Takas Önerisi</div>
+          <div id="oyyso2" data-en="Community Vote" style="display:none">Topluluk Önerisi</div>
+          <div id="oyyso3" data-en="Custom Proposal" style="display:none">Kendin Belirle</div>
           <img id=oyyddok src="/oyla/dropdownok.svg" alt="" width="10" height="10">
         </button>
         <ul id=oyyul style="display:none">
-          <li id=oyyö0 class="oyyli" data-en="Price Change">Fiyat Değişikliği</li>
-          <li id=oyyö1 class="oyyli" data-en="Trade Proposal">Takas Önerisi</li>
-          <li id=oyyö2 class="oyyli" data-en="Custom Proposal">Kendin Belirle</li>
+          <li id=oyyo0 class="oyyli" data-en="Price Change">Fiyat Değişikliği</li>
+          <li id=oyyo1 class="oyyli" data-en="Trade Proposal">Takas Önerisi</li>
+          <li id=oyyo2 class="oyyli" data-en="Community Vote">Topluluk Önerisi</li>
+          <li id=oyyo3 class="oyyli" data-en="Custom Proposal">Kendin Belirle</li>
         </ul>
       </div>
       <div id="oyyc">
         <div id=oyy0>
-          <div id=oyyfb data-en="Enter new price for TCKT.">TCKT’nin yeni fiyatını girin.</div>
+          <div id=oyyfb class="oyyb" data-en="Enter new price for TCKT.">TCKT’nin yeni fiyatını girin.</div>
           <div id=oyyfddc>
             <input type="number" id=oyyfi placeholder="0.0">
             <button id=oyytb>
@@ -57,6 +59,8 @@
               </div>
               <div id=oyyst0xa4b1 class="oyyst" style="display:none"><img src="/al/ödeme/ETH.svg" height=24
                   width=24> ETH
+              </div>
+              <div id=oyyst0x38 class="oyyst" style="display:none"><img src="/al/ödeme/BNB.svg" height=24 width=24> BNB
               </div>
             </button>
             <ul id=oyddul style="display:none">
@@ -81,7 +85,30 @@
           </div>
         </div>
         <div id="oyy1" style="display:none">WIP</div>
-        <div id="oyy2" style="display:none">WIP</div>
+        <div id="oyy2" style="display:none">
+          <div class="oyyb" data-en="Type proposal.">
+            Önergenizi yazın.
+          </div>
+          <textarea id=oyycva class="oyyta"></textarea>
+          <div class="oyyb" data-en="Responses">
+            Seçenekler
+          </div>
+          <div id=oyycvscc>
+            <div class="oyycvsc" style="display:none">
+              <input type="text" value="Evet" class="oyycvs">
+              <a href="javascript:" class="oyycvsk" data-en-title="Remove" title="Kaldır"></a>
+            </div>
+          </div>
+          <a href="javascript:" id=oyycvse class="btn" data-en-title="Add Respond" title="Seçenek Ekle">+</a>
+          <div class="oyycvtc"><span data-en="Deadline" data-phantom>Son Tarih</span>
+            <input type="date" id=oyycvti>
+          </div>
+          <div class="oyyor">
+            <a href="javascript:" id=oyycvo class="act btn lft" data-en="Confirm">Onayla</a>
+            <a href="javascript:" id=oyycvr class="btn" data-en="Cancel">İptal</a>
+          </div>
+        </div>
+        <div id="oyy3" style="display:none">WIP</div>
       </div>
     </div>
     <div id=oyac class="oyc">
