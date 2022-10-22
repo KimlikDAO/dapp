@@ -13,14 +13,14 @@ removeLang = $(subst -tr,,$(subst -en,,$(1)))
 Lang-en := false
 Lang-tr := true
 
-build/prod.js: tools/prod.js lib/cf-worker.js
+build/prod.js: tools/prod.js lib/cf-worker.js tools/prod-env.js
 	mkdir -p build
 	yarn google-closure-compiler -W VERBOSE -O ADVANCED --charset UTF-8 \
                              --env BROWSER \
                              --assume_function_wrapper \
                              --js $^ \
-                             --js_output_file $@
-	yarn uglifyjs $@ -m -o $@
+                             --checks_only
+	yarn uglifyjs $< -m -o $@
 
 al-en := get
 incele-en := view

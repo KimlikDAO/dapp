@@ -30,14 +30,16 @@ const PAGES = {
 };
 
 /**
- * 
+ * @param {CFWorkersRequest} request
+ * @param {ProdEnvironment} env
+ * @param {RequestContext} ctx
  * @return {Promise<Response>}
  */
-const fetch = (request, env, ctx) => {
+const handleRequest = (request, env, ctx) => {
   /** @const {URL} */
   const url = new URL(request.url);
   /** @const {string} */
-  const enc = request['cf']['clientAcceptEncoding'] || "";
+  const enc = request.cf.clientAcceptEncoding || "";
   /** @const {string} */
   const ext = url.pathname.endsWith('.woff2') ? ''
     : enc.includes('br') ? '.br' : enc.includes('gz') ? '.gz' : '';
@@ -137,7 +139,6 @@ const fetch = (request, env, ctx) => {
   return Promise.any([fromCache, fromKV]).catch(bulunamadı);
 }
 
-
 /**
  * @return {Response}
  */
@@ -146,4 +147,4 @@ const bulunamadı = (err) => new Response('NAPİM?', {
   headers: { 'content-type': 'text/plain;charset=utf-8' }
 })
 
-export default { fetch };
+export default { fetch: handleRequest };
