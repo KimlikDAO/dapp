@@ -5,9 +5,6 @@ import Cüzdan from '/birim/cüzdan/birim';
 import dom from '/lib/dom';
 import TCKT from '/lib/TCKT';
 
-/** @type {Array<string>} */
-let ADRESLER = null;
-
 dom.adla("ipbtnb").onclick = () => {
   /** @type {?Element} */
   let seçilmişAdres = null;
@@ -17,17 +14,12 @@ dom.adla("ipbtnb").onclick = () => {
   dom.adlaGizle("iptac");
   dom.adlaGöster("ipiic");
 
-  if (!ADRESLER) {
-    let innerHTML = "";
-    const ul = dom.adla("ipiil");
-    dom.adlaGöster("iplc"); //Yükleniyor animasyonu
-    // Kullanıcın revoke edebileceği adresler cekilecek 
-    ADRESLER = [
-      "0x6ec04644bd36cd36d3569093078aba4c78297ef1",
-      "0x6ec04644bd36cd36d3569093078aba4c78297ef2",
-      "0x6ec04644bd36cd36d3569093078aba4c78297ef3",
-    ];
-    if (ADRESLER.length == 0) {
+  let innerHTML = "";
+  const ul = dom.adla("ipiil");
+  dom.adlaGöster("iplc"); // Yükleniyor animasyonu
+  TCKT.getRevokeAddresses().then((data) => {
+    const filtered = data.map((element) => "0x" + element.topics[1].slice(26));
+    if (filtered.length == 0) {
       innerHTML = dom.TR
         ? "İptal edebileceğiniz bir adres yok."
         : "There is no revoke address."
@@ -38,18 +30,16 @@ dom.adla("ipbtnb").onclick = () => {
       li.classList.add("sel");
       seçilmişAdres = li;
     }
-    for (let i = 0; i < ADRESLER.length; ++i) {
-      innerHTML += `<li id=ipiia${i} class="ipiia">${ADRESLER[i]}</li>`
+    for (let i = 0; i < filtered.length; ++i) {
+      innerHTML += `<li id=ipiia${i} class="ipiia">${filtered[i]}</li>`
     }
     ul.innerHTML = innerHTML;
-    setTimeout(() => {
-      dom.adlaGöster("ipiilc");
-      dom.adlaGizle("iplc");
-    }, 1000);
-  }
+    dom.adlaGöster("ipiilc");
+    dom.adlaGizle("iplc");
+  })
 
   dom.adla("ipiio").onclick = () => {
-    if (seçilmişAdres) console.log(seçilmişAdres.innerText); //revoke onayı verilecek
+    if (seçilmişAdres) console.log(seçilmişAdres.innerText); // revoke onayı verilecek
   }
 
   dom.adla("ipiir").onclick = () => {
@@ -58,6 +48,7 @@ dom.adla("ipbtnb").onclick = () => {
     dom.adla("ipbtna").classList.add("act");
     dom.adla("ipbtnb").classList.add("act");
   }
+  TCKT.getRevokeAddresses().then(console.log)
 }
 
 dom.adla("ipbtna").onclick = () => {
