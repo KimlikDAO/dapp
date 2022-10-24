@@ -20,7 +20,7 @@ Cüzdan.bağlanınca(() => {
 dom.adla("oyyb").onclick = () => {
   dom.adlaGizle("oyyb");
   dom.adlaGöster("oyy");
-  if (!seçilmişÖneriId) seçilmişÖneriId = "0";
+  if (!seçilmişÖneriId) seçilmişÖneriId = "2";
   /** @const {Element} */
   const önergeDüğmesi = dom.adla("oyyddb");
   /** @const {Element} */
@@ -118,7 +118,7 @@ const komuniteÖnergesiHazırla = () => {
     dom.göster(secenek);
     secenek.firstElementChild.value = text;
     secenek.children[1].onclick = () => secenek.remove();
-    secenekler.appendChild(secenek);
+    secenekler.insertBefore(secenek, secenekEkleDüğmesi);
   }
   secenekEkle(dom.TR ? "Evet" : "Yes");
   secenekEkle(dom.TR ? "Hayır" : "No");
