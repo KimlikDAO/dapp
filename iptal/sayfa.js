@@ -13,7 +13,10 @@ dom.adla("ipbtnb").onclick = () => {
   dom.adla("ipbtnb").classList.remove("act");
   dom.adlaGizle("iptac");
   dom.adlaGöster("ipiic");
-
+  const onaylaDüğmesi = dom.adla("ipiio");
+  onaylaDüğmesi.classList.add("act");
+  onaylaDüğmesi.classList.remove("dis");
+  onaylaDüğmesi.innerText = dom.TR ? "Onayla": "Confirm";
   let innerHTML = "";
   const ul = dom.adla("ipiil");
   dom.adlaGöster("iplc"); // Yükleniyor animasyonu
@@ -24,22 +27,28 @@ dom.adla("ipbtnb").onclick = () => {
         ? "İptal edebileceğiniz bir adres yok."
         : "There is no revoke address."
     }
+    for (let i = 0; i < filtered.length; ++i) {
+      innerHTML += `<li id=ipiia${i} class="ipiia">${filtered[i]}</li>`
+    }
     ul.onclick = (e) => {
       let li = e.target;
       if (seçilmişAdres) seçilmişAdres.classList.remove("sel");
       li.classList.add("sel");
       seçilmişAdres = li;
     }
-    for (let i = 0; i < filtered.length; ++i) {
-      innerHTML += `<li id=ipiia${i} class="ipiia">${filtered[i]}</li>`
-    }
     ul.innerHTML = innerHTML;
     dom.adlaGöster("ipiilc");
     dom.adlaGizle("iplc");
   })
 
-  dom.adla("ipiio").onclick = () => {
-    if (seçilmişAdres) console.log(seçilmişAdres.innerText); // revoke onayı verilecek
+  onaylaDüğmesi.onclick = () => {
+    if (seçilmişAdres) {
+      TCKT.revokeFriend(Cüzdan.adres(), seçilmişAdres.innerText);
+      onaylaDüğmesi.innerText = dom.TR ? "Adres İptal Edildi ✓": "Address revoked ✓";
+      dom.adla("ipiir").innerText = dom.TR ? "Geri": "Back";
+      dom.butonDurdur(onaylaDüğmesi);
+      onaylaDüğmesi.classList.remove("act");
+    }
   }
 
   dom.adla("ipiir").onclick = () => {
