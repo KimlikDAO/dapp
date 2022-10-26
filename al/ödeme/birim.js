@@ -1,7 +1,7 @@
 import Cüzdan from "/birim/cüzdan/birim";
 import Telefon from '/birim/telefon/birim';
-import dom from '/lib/dom';
-import TCKT from '/lib/TCKT';
+import TCKT from '/lib/ethereum/TCKT';
+import dom from '/lib/util/dom';
 
 /**
  * @param {Element} imge

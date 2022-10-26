@@ -4,12 +4,12 @@
  */
 import Cüzdan from '/birim/cüzdan/birim';
 import Tckt from '/birim/tckt/birim';
-import dom from '/lib/dom';
-import evm from "/lib/evm";
+import evm from "/lib/ethereum/evm";
+import TCKT from '/lib/ethereum/TCKT';
 import ipfs from '/lib/ipfs';
-import TCKT from '/lib/TCKT';
-import { unlockableSeç } from '/lib/TCKTVerisi';
-import { hex, hexten } from '/lib/çevir';
+import { unlockableSeç } from '/lib/tckt/TCKTVerisi';
+import dom from '/lib/util/dom';
+import { hex, hexten } from '/lib/util/çevir';
 
 /** @const {Element} */
 const İmeceİptalDüğmesi = dom.adla("inbtn1");

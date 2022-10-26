@@ -2,8 +2,8 @@
  * @fileoverview İptal sayfası giriş noktası
  */
 import Cüzdan from '/birim/cüzdan/birim';
-import dom from '/lib/dom';
-import TCKT from '/lib/TCKT';
+import TCKT from '/lib/ethereum/TCKT';
+import dom from '/lib/util/dom';
 
 dom.adla("ipbtnb").onclick = () => {
   /** @type {?Element} */
@@ -16,11 +16,11 @@ dom.adla("ipbtnb").onclick = () => {
   const onaylaDüğmesi = dom.adla("ipiio");
   onaylaDüğmesi.classList.add("act");
   onaylaDüğmesi.classList.remove("dis");
-  onaylaDüğmesi.innerText = dom.TR ? "Onayla": "Confirm";
+  onaylaDüğmesi.innerText = dom.TR ? "Onayla" : "Confirm";
   let innerHTML = "";
   const ul = dom.adla("ipiil");
   dom.adlaGöster("iplc"); // Yükleniyor animasyonu
-  TCKT.getRevokeAddresses().then((data) => {
+  TCKT.getRevokeeAddresses(/** @type {string} */(Cüzdan.adres())).then((data) => {
     const filtered = data.map((element) => "0x" + element.topics[1].slice(26));
     if (filtered.length == 0) {
       innerHTML = dom.TR
@@ -43,9 +43,9 @@ dom.adla("ipbtnb").onclick = () => {
 
   onaylaDüğmesi.onclick = () => {
     if (seçilmişAdres) {
-      TCKT.revokeFriend(Cüzdan.adres(), seçilmişAdres.innerText);
-      onaylaDüğmesi.innerText = dom.TR ? "Adres İptal Edildi ✓": "Address revoked ✓";
-      dom.adla("ipiir").innerText = dom.TR ? "Geri": "Back";
+      TCKT.revokeFriend(/** @type {string} */(Cüzdan.adres()), seçilmişAdres.innerText);
+      onaylaDüğmesi.innerText = dom.TR ? "Adres İptal Edildi ✓" : "Address revoked ✓";
+      dom.adla("ipiir").innerText = dom.TR ? "Geri" : "Back";
       dom.butonDurdur(onaylaDüğmesi);
       onaylaDüğmesi.classList.remove("act");
     }
@@ -57,7 +57,6 @@ dom.adla("ipbtnb").onclick = () => {
     dom.adla("ipbtna").classList.add("act");
     dom.adla("ipbtnb").classList.add("act");
   }
-  TCKT.getRevokeAddresses().then(console.log)
 }
 
 dom.adla("ipbtna").onclick = () => {

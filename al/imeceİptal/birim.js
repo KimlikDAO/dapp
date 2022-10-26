@@ -3,9 +3,9 @@
  */
 
 import Cüzdan from "/birim/cüzdan/birim";
-import dom from "/lib/dom";
-import evm from "/lib/evm";
-import TCKT from "/lib/TCKT";
+import evm from "/lib/ethereum/evm";
+import TCKT from "/lib/ethereum/TCKT";
+import dom from "/lib/util/dom";
 
 /** @const {Element} */
 const GösterButonu = dom.adla("imbe");

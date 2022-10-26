@@ -7,10 +7,12 @@ build/al/sayfa-%.js: al/sayfa.js \
                      birim/cüzdan/birim.js \
                      birim/telefon/birim.js \
                      birim/tckt/birim.js \
-                     lib/dom.js lib/çevir.js lib/evm.js \
-                     lib/ed25519.js lib/ipfs.js lib/sha3.js \
-                     lib/ethereum.js lib/api.js lib/ERC721Unlockable.js \
-                     lib/TCKT.js lib/TCKTVerisi.js lib/TCKTBilgileri.js \
+                     lib/util/dom.js lib/util/çevir.js \
+                     lib/ethereum/provider.js lib/ethereum/evm.js lib/ethereum/TCKT.js \
+                     lib/crypto/ed25519.js lib/crypto/sha3.js \
+                     lib/ipfs.js \
+                     lib/api/api.js lib/api/edevletApi.js \
+                     lib/tckt/ERC721Unlockable.js lib/tckt/TCKTVerisi.js lib/tckt/TCKTBilgileri.js \
                      build/al/tanışma/birim.keymap
 	mkdir -p $(dir $@)
 	yarn google-closure-compiler -W VERBOSE -O ADVANCED --charset UTF-8 \
@@ -26,7 +28,7 @@ build/al/sayfa-%.js: al/sayfa.js \
 	yarn uglifyjs $@ -m -o $@
 	node tools/jsPostprocessor $@
 
-build/al/bağla-%.js.inl: al/bağla.js lib/ethereum.js
+build/al/bağla-%.js.inl: al/bağla.js lib/ethereum/provider.js
 	mkdir -p $(dir $@)
 	yarn google-closure-compiler -W VERBOSE -O ADVANCED --charset UTF-8 \
                              --define TR=$(Lang-$*) \

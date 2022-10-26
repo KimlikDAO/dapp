@@ -1,11 +1,12 @@
 build/incele/sayfa-%.js: incele/sayfa.js \
                          birim/cüzdan/birim.js \
                          birim/tckt/birim.js \
-                         lib/dom.js lib/evm.js lib/sha3.js \
-                         lib/çevir.js lib/ipfs.js lib/ed25519.js \
-                         lib/TCKT.js lib/TCKTBilgileri.js lib/TCKTVerisi.js \
-                         lib/ERC721Unlockable.js \
-                         lib/ethereum.js
+                         lib/util/dom.js lib/util/çevir.js \
+                         lib/ethereum/provider.js lib/ethereum/evm.js lib/ethereum/TCKT.js \
+                         lib/crypto/sha3.js lib/crypto/ed25519.js \
+                         lib/ipfs.js \
+                         lib/api/edevletApi.js \
+                         lib/tckt/ERC721Unlockable.js lib/tckt/TCKTBilgileri.js lib/tckt/TCKTVerisi.js
 	mkdir -p $(dir $@)
 	yarn google-closure-compiler -W VERBOSE -O ADVANCED --charset UTF-8 \
                              --define TR=$(Lang-$*) \

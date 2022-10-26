@@ -1,4 +1,4 @@
-import dom from "/lib/dom";
+import dom from "/lib/util/dom";
 
 /** @type {?string} */
 let Adres = null;

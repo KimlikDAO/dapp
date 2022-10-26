@@ -1,7 +1,7 @@
 import Cüzdan from '/birim/cüzdan/birim';
 import Tckt from '/birim/tckt/birim';
-import dom from '/lib/dom';
-import { base64, uint8ArrayeBase64ten } from '/lib/çevir';
+import dom from '/lib/util/dom';
+import { base64, uint8ArrayeBase64ten } from '/lib/util/çevir';
 
 /** @const {string} */
 const KIMLIK_AS_URL = "https://mock-api.kimlikas.com";

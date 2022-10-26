@@ -1,7 +1,7 @@
 import Cüzdan from "/birim/cüzdan/birim";
-import Telefon from "/birim/telefon/birim";
 import Tckt from "/birim/tckt/birim";
-import dom from '/lib/dom';
+import Telefon from "/birim/telefon/birim";
+import dom from '/lib/util/dom';
 
 Tckt.yüzGöster(true);
 Telefon.nftGöster(true);

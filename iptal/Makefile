@@ -1,7 +1,8 @@
 build/iptal/sayfa-%.js: iptal/sayfa.js \
                         birim/cüzdan/birim.js \
-                        lib/dom.js lib/TCKT.js lib/sha3.js lib/çevir.js \
-                        lib/evm.js lib/ethereum.js
+                        lib/util/dom.js lib/util/çevir.js \
+                        lib/crypto/sha3.js \
+                        lib/ethereum/provider.js lib/ethereum/evm.js lib/ethereum/TCKT.js
 	mkdir -p $(dir $@)
 	yarn google-closure-compiler -W VERBOSE -O ADVANCED --charset UTF-8 \
                              --define TR=$(Lang-$*) \

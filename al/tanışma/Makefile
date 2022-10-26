@@ -12,7 +12,7 @@ build/al/tanışma/birim.keymap: $(call compressions, $(AL_TANIŞMA_REQUEST_SVG_
 
 al/tanışma.birim: al/tanışma/birim.html $(AL_TANIŞMA_INLINE_SVG_OUT)
 
-build/al/tanışma/pow-worker.js: al/tanışma/pow-worker.js lib/worker.js
+build/al/tanışma/pow-worker.js: al/tanışma/pow-worker.js lib/util/worker.js
 	mkdir -p $(dir $@)
 	yarn google-closure-compiler -W VERBOSE -O ADVANCED --charset UTF-8 \
                              --language_in ECMASCRIPT_2021 \

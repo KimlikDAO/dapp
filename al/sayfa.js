@@ -6,10 +6,10 @@ import Tanışma from '/al/tanışma/birim';
 import { öde } from '/al/ödeme/birim';
 import Cüzdan from '/birim/cüzdan/birim';
 import Telefon from '/birim/telefon/birim';
-import dom from '/lib/dom';
 import ipfs from '/lib/ipfs';
-import { hazırla } from '/lib/TCKTVerisi';
-import { hex } from '/lib/çevir';
+import { hazırla } from '/lib/tckt/TCKTVerisi';
+import dom from '/lib/util/dom';
+import { hex } from '/lib/util/çevir';
 
 /**
  * @param {function(string)} sonra

@@ -1,4 +1,4 @@
-import dom from '/lib/dom';
+import dom from '/lib/util/dom';
 
 /** @const {Element} */
 const Kartlar = dom.adla("tck");
@@ -35,6 +35,8 @@ const açıkTcktGöster = (açıkTckt) => {
     /** @type {!Object<string, string>} */(açıkTckt["personInfo"]));
   for (let satır of kişiBilgileri)
     if (satır[1]) dom.adla("tc" + satır[0]).innerText = satır[1];
+
+  dom.adla('tclocalIdNumber').innerText = açıkTckt["personInfo"].localIdNumber.slice(2);
 
   if (dom.TR)
     dom.adla("tcgender").innerText = dom.adla("tcgender").innerText == 'M' ? 'E' : 'K';
