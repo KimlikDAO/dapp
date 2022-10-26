@@ -46,18 +46,18 @@ const açıkTcktAlVe = (sonra) => {
    * seçiyoruz.
    * @type {!Uint8Array}
    */
-  const pdfRasgele = new Uint8Array(64);
+  const pdfRastgele = new Uint8Array(64);
   {
     const b64 = window.localStorage[Cüzdan.adres().toLowerCase() + "r"];
     if (b64) {
-      uint8ArrayeBase64ten(pdfRasgele, b64)
+      uint8ArrayeBase64ten(pdfRastgele, b64)
     } else {
-      crypto.getRandomValues(pdfRasgele);
-      window.localStorage[Cüzdan.adres().toLowerCase() + "r"] = base64(pdfRasgele);
+      crypto.getRandomValues(pdfRastgele);
+      window.localStorage[Cüzdan.adres().toLowerCase() + "r"] = base64(pdfRastgele);
     }
   }
   /** @const {Promise<!Uint8Array>} */
-  const taahhütPowSözü = taahhütOluştur(/** @type {string} */(Cüzdan.adres()), pdfRasgele)
+  const taahhütPowSözü = taahhütOluştur(/** @type {string} */(Cüzdan.adres()), pdfRastgele)
     .then((taahhüt) => new Promise((resolve) => {
       const taahhütB64 = base64(new Uint8Array(taahhüt));
       const yazılıTaahhütPow = window.localStorage[taahhütB64];
@@ -86,26 +86,16 @@ const açıkTcktAlVe = (sonra) => {
   /** @const {Element} */
   const kutu = dom.adla("ta");
   /**
-   * @param {AçıkTCKT} açıkTCKT
+   * @param {AçıkTCKT} açıkTckt
    * @param {!Uint8Array} rastgele
    */
-  const kapat = (açıkTCKT, rastgele) => {
-    for (let hane of "ad soyad TCKN dt dyeri".split(" "))
-      if (açıkTCKT.kişi[hane]) dom.adla("tc" + hane).innerText = açıkTCKT.kişi[hane];
-    dom.adla("tccinsiyet").innerText = açıkTCKT.kişi.c || "K";
-
-    for (let hane of "annead babaad BSN cilt hane mhali".split(" "))
-      if (açıkTCKT.aile[hane]) dom.adla("tc" + hane).innerText = açıkTCKT.aile[hane];
-
-    for (let hane of "il ilçe mahalle tescil".split(" "))
-      if (açıkTCKT.kütük[hane]) dom.adla("tc" + hane).innerText = açıkTCKT.kütük[hane];
-
-    Tckt.yüzGöster(true);
+  const kapat = (açıkTckt, rastgele) => {
+    Tckt.açıkTcktGöster(açıkTckt);
     kutu.classList.add("done");
-    açıkTCKT.rastgele = base64(rastgele);
+    açıkTckt.rastgele = base64(rastgele);
     // İleride devam eden bir hesaplama döndürebiliriz. Bu yüzden arabirimi
     // promise olarak sabitliyoruz.
-    sonra(Promise.resolve(açıkTCKT));
+    sonra(Promise.resolve(açıkTckt));
   }
   kutu.classList.remove("disabled");
 
@@ -117,18 +107,21 @@ const açıkTcktAlVe = (sonra) => {
   if (code) {
     powWorker.terminate();
     /** @const {!Uint8Array} */
-    const eDevletRasgele = new Uint8Array(64);
-    crypto.getRandomValues(eDevletRasgele);
+    const eDevletRastgele = new Uint8Array(64);
+    crypto.getRandomValues(eDevletRastgele);
     dom.gizle(eDevletDüğmesi);
     pdfDüğmesi.href = "javascript:";
     pdfDüğmesi.classList.remove("act");
     pdfDüğmesi.innerText = dom.TR ? "E-devlet’ten bilgileriniz alındı ✓" : "We got your info ✓";
     dom.butonDurdur(pdfDüğmesi);
-    taahhütOluştur(/** @type {string} */(Cüzdan.adres()), eDevletRasgele)
+    taahhütOluştur(/** @type {string} */(Cüzdan.adres()), eDevletRastgele)
       .then((taahhüt) =>
-        fetch(KIMLIK_AS_URL + "?" + new URLSearchParams({ "oauth_code": code, "taahhut": base64(new Uint8Array(taahhüt)) })))
-      .then(res => res.json())
-      .then((açıkTckt) => kapat(açıkTckt, eDevletRasgele));
+        fetch(KIMLIK_AS_URL + "?" + new URLSearchParams({
+          "oauth_code": code,
+          "taahhut": base64(new Uint8Array(taahhüt))
+        })))
+      .then(res => /** @type {AçıkTCKT} */(res.json()))
+      .then((açıkTckt) => kapat(açıkTckt, eDevletRastgele));
   } else {
     const hataBildirimi = dom.adla("tafb");
     pdfDüğmesi.onclick = () => {
@@ -164,7 +157,7 @@ const açıkTcktAlVe = (sonra) => {
             body: formData,
           }))
           .then(res => res.ok
-            ? res.json().then((açıkTckt) => {
+            ? res.json().then((/** @type {AçıkTCKT} */açıkTckt) => {
               dom.gizle(dom.adla("tadc"));
               pdfDüğmesi.href = "javascript:";
               pdfDüğmesi.classList.remove("act");
@@ -172,7 +165,7 @@ const açıkTcktAlVe = (sonra) => {
               pdfDüğmesi.innerText = dom.TR ? "Bilgileriniz onaylandı ✓" : "We confirmed your info ✓";
               dom.butonDurdur(pdfDüğmesi);
               window.localStorage.removeItem(Cüzdan.adres().toLowerCase + "r");
-              kapat(açıkTckt, pdfRasgele);
+              kapat(açıkTckt, pdfRastgele);
             })
             : res.json().then(hataGöster)
           )

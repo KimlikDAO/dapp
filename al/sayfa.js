@@ -7,16 +7,9 @@ import { öde } from '/al/ödeme/birim';
 import Cüzdan from '/birim/cüzdan/birim';
 import Telefon from '/birim/telefon/birim';
 import dom from '/lib/dom';
-import { kutula } from '/lib/ed25519';
 import ipfs from '/lib/ipfs';
-import { TCKT_ADDR } from '/lib/TCKT';
+import { hazırla } from '/lib/TCKTVerisi';
 import { hex } from '/lib/çevir';
-
-/**
- * @const {string}
- * @noinline
- */
-const KIMLIKDAO_URL = "https://kimlikdao.org";
 
 /**
  * @param {function(string)} sonra
@@ -63,55 +56,17 @@ const tcktYarat = (açıkTCKTSözü) => {
   açıkAnahtarAlVe((açıkAnahtar) => {
     İmeceİptal.göster();
     /** @const {Promise<string>} */
-    const cidSözü = açıkTCKTSözü.then((açıkTCKT) => {
-      const encoder = new TextEncoder();
-      const açıkKimlik = new Uint8Array(1024);
-      const açıkHumanID = new Uint8Array(256);
-      encoder.encodeInto(TCKT_ADDR, açıkKimlik);
-      açıkKimlik[42] = 10;
-      açıkHumanID.set(açıkKimlik.subarray(0, 43))
-
-      encoder.encodeInto(
-        JSON.stringify(açıkTCKT["HumanID('public')"], null, 2),
-        açıkKimlik.subarray(43));
-      delete açıkTCKT["HumanID('public')"];
-      encoder.encodeInto(
-        JSON.stringify(açıkTCKT, null, 2),
-        açıkHumanID.subarray(43));
-      const [gizliKimlikN, gizliKimlikK, gizliKimlik] = kutula(açıkAnahtar, açıkKimlik);
-      const [gizliHumanIDN, gizliHumanIDK, gizliHumanID] = kutula(açıkAnahtar, açıkHumanID);
-
-      const TCKTData = {
-        name: "TCKT",
-        description: "KimlikDAO TC Kimlik Tokeni",
-        image: KIMLIKDAO_URL + "/TCKT.svg",
-        external_url: KIMLIKDAO_URL,
-        animation_url: KIMLIKDAO_URL + "/TCKT.mp4",
-        unlockables: {
-          "ID Card": {
-            user_prompt: {
-              "en-US": ["{1} wants to view your TCKT.", "Provide", "Reject"],
-              "tr-TR": ["{1} TCKT’nize erişmek istiyor. İzin veriyor musunuz?", "Evet", "Hayır"]
-            },
-            algorithm: "x25519-xsalsa20-poly1305",
-            nonce: gizliKimlikN,
-            ephem_pub_key: gizliKimlikK,
-            ciphertext: gizliKimlik
-          }
-        },
-        "HumanID('public')": {
-          user_prompt: {
-            "en-US": ["{1} wants to view your KimlikDAO HumanID.", "Provide", "Reject"],
-            "tr-TR": ["{1} KimlikDAO HumanID’nize erişmek istiyor. İzin veriyor musunuz?", "Evet", "Hayır"]
-          },
-          algorithm: "x25519-xsalsa20-poly1305",
-          nonce: gizliHumanIDN,
-          ephem_pub_key: gizliHumanIDK,
-          ciphertext: gizliHumanID
-        }
-      }
-      return ipfs.yaz(JSON.stringify(TCKTData)).then(hex);
-    }).catch(console.log);
+    const cidSözü = açıkTCKTSözü
+      .then((açıkTckt) => ipfs.yaz(JSON.stringify(hazırla(
+        açıkAnahtar, açıkTckt, [
+        ["personInfo", "contactInfo", "kütükBilgileri", "adres"],
+        ["humanID"]
+      ]))))
+      .then(hex)
+      .catch((e) => {
+        console.log(e);
+        return "";
+      });
 
     İmeceİptal.kurVe(
       (adresAğırlığı, eşik) => öde(cidSözü, adresAğırlığı, eşik));

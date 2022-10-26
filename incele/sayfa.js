@@ -8,6 +8,7 @@ import dom from '/lib/dom';
 import evm from "/lib/evm";
 import ipfs from '/lib/ipfs';
 import TCKT from '/lib/TCKT';
+import { unlockableSeç } from '/lib/TCKTVerisi';
 import { hex, hexten } from '/lib/çevir';
 
 /** @const {Element} */
@@ -28,7 +29,7 @@ const EşikKutusu = dom.adla("inmes");
 const SilKutusu = dom.adla("inmsy");
 
 /** @const {Object<string, AçıkTCKT>} */
-const Hatırla = {};
+const Bellek = {};
 
 const kutuKapat = () => {
   dom.gizle(Mask);
@@ -106,7 +107,7 @@ const silKutusuGöster = () => {
     kutuKapat();
     TCKT.revoke(adres)
       .then(() => {
-        Hatırla[ağ + adres] = null;
+        delete Bellek[ağ + adres];
         kapalıYüz(adres);
       })
       .catch(console.log);
@@ -117,29 +118,22 @@ const silKutusuGöster = () => {
  * @param {AçıkTCKT} açıkTCKT
  */
 const açıkYüz = (açıkTCKT) => {
-  for (let hane of "ad soyad TCKN dt dyeri".split(" "))
-    if (açıkTCKT.kişi[hane]) dom.adla("tc" + hane).innerText = açıkTCKT.kişi[hane];
-  dom.adla("tccinsiyet").innerText = açıkTCKT.kişi.c;
-
-  for (let hane of "annead babaad BSN cilt hane mhali".split(" "))
-    if (açıkTCKT.aile[hane]) dom.adla("tc" + hane).innerText = açıkTCKT.aile[hane];
-
-  for (let hane of "il ilçe mahalle tescil".split(" "))
-    if (açıkTCKT.kütük[hane]) dom.adla("tc" + hane).innerText = açıkTCKT.kütük[hane];
-
-  Tckt.yüzGöster(true);
+  Tckt.açıkTcktGöster(açıkTCKT);
   AçDüğmesi.innerText = dom.TR ? "Gizle" : "Hide";
-  AçDüğmesi.onclick = () => kapalıYüz(Cüzdan.adres());
+  AçDüğmesi.onclick = () => kapalıYüz(/** @type {string} */(Cüzdan.adres()));
 }
 
+/**
+ * @param {string} adres
+ */
 const kapalıYüz = (adres) => {
   Tckt.yüzGöster(false);
   AçDüğmesi.onclick = null;
 
-  const açıkTCKTMi = Hatırla[Cüzdan.ağ() + adres];
-  if (açıkTCKTMi) {
+  const bellektenAçıkTckt = Bellek[Cüzdan.ağ() + adres];
+  if (bellektenAçıkTckt) {
     AçDüğmesi.innerText = dom.TR ? "Aç" : "Unlock";
-    AçDüğmesi.onclick = () => açıkYüz(açıkTCKTMi);
+    AçDüğmesi.onclick = () => açıkYüz(bellektenAçıkTckt);
   } else {
     TCKT.handleOf(adres).then((cidHex) => {
       if (cidHex.startsWith("0x")) cidHex = cidHex.slice(2);
@@ -151,28 +145,25 @@ const kapalıYüz = (adres) => {
         AçDüğmesi.onclick = () => {
           ipfs.cidBytetanOku(hexten(cidHex))
             .then((dosya) => {
-              /** @const {TCKTData} */
-              const tcktData = /** @const {TCKTData} */(JSON.parse(dosya));
-              /** @const {EthEncryptedData} */
-              const encryptedData = /** @type {EthEncryptedData} */({
-                version: tcktData.unlockable.algorithm,
-                nonce: tcktData.unlockable.nonce,
-                ephemPublicKey: tcktData.unlockable.ephem_pub_key,
-                ciphertext: tcktData.unlockable.ciphertext
-              });
+              /** @const {!ERC721Unlockable} */
+              const tcktVerisi = /** @const {!ERC721Unlockable} */(JSON.parse(dosya));
+              /** @const {Unlockable} */
+              const unlockable = unlockableSeç(tcktVerisi, ["personInfo"]);
+              delete unlockable.userPrompt;
+              console.log(unlockable);
               const asciiEncoder = new TextEncoder();
               /** @const {string} */
-              const hexEncoded = "0x" + hex(asciiEncoder.encode(JSON.stringify(encryptedData)));
+              const hexEncoded = "0x" + hex(asciiEncoder.encode(JSON.stringify(unlockable)));
               return ethereum.request(/** @type {RequestParams} */({
                 method: "eth_decrypt",
                 params: [hexEncoded, Cüzdan.adres()]
               }));
             })
-            .then((açıkTCKT) => {
-              açıkTCKT = açıkTCKT.slice(43, açıkTCKT.indexOf("\0"));
-              açıkTCKT = /** @type {AçıkTCKT} */(JSON.parse(açıkTCKT));
-              Hatırla[Cüzdan.ağ() + adres] = açıkTCKT;
-              açıkYüz(açıkTCKT);
+            .then((açıkTckt) => {
+              açıkTckt = açıkTckt.slice(43, açıkTckt.indexOf("\0"));
+              açıkTckt = /** @type {AçıkTCKT} */(JSON.parse(açıkTckt));
+              Bellek[Cüzdan.ağ() + adres] = açıkTckt;
+              açıkYüz(açıkTckt);
             })
             .catch(console.log);
         }
@@ -188,8 +179,8 @@ Cüzdan.bağlanınca((adres) => {
   SilDüğmesi.onclick = silKutusuGöster;
   kapalıYüz(adres);
 });
-Cüzdan.ağDeğişince(() => kapalıYüz(Cüzdan.adres()));
-Cüzdan.adresDeğişince(() => kapalıYüz(Cüzdan.adres()));
+Cüzdan.ağDeğişince(() => kapalıYüz(/** @type {string} */(Cüzdan.adres())));
+Cüzdan.adresDeğişince(() => kapalıYüz(/** @type {string} */(Cüzdan.adres())));
 
 /**
  * @param {Event} event

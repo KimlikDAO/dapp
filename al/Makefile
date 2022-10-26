@@ -9,7 +9,8 @@ build/al/sayfa-%.js: al/sayfa.js \
                      birim/tckt/birim.js \
                      lib/dom.js lib/çevir.js lib/evm.js \
                      lib/ed25519.js lib/ipfs.js lib/sha3.js \
-                     lib/ethereum.js lib/TCKT.js lib/TCKTData.js lib/hataBildirimi.js \
+                     lib/ethereum.js lib/api.js lib/ERC721Unlockable.js \
+                     lib/TCKT.js lib/TCKTVerisi.js lib/TCKTBilgileri.js \
                      build/al/tanışma/birim.keymap
 	mkdir -p $(dir $@)
 	yarn google-closure-compiler -W VERBOSE -O ADVANCED --charset UTF-8 \
