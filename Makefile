@@ -25,5 +25,6 @@ staging: build
 
 cf-deployment: build build/prod.js build/sitemap
 	tools/cfuploader.py
+	wrangler publish
 
 .PHONY: cf-deployment clean dev staging

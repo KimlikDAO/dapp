@@ -15,6 +15,3 @@ id = "836c46196848459ba8b3348e383bddf2"
 [dev]
 port = 8787
 local_protocol = "http"
-
-[build]
-command = "make cf-deployment"
