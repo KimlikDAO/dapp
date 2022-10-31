@@ -40,6 +40,21 @@ const contactInfoEkle = (contactInfo) => {
 }
 
 /**
+ * @param {AddressInfo} addressInfo
+ */
+const addressInfoEkle = (addressInfo) => {
+  if (!addressInfo) return;
+  KartSayısı += 1;
+  let mahalle = addressInfo["mahalle"];
+  let sokak = addressInfo["CSBM"];
+  mahalle = mahalle.endsWith("ahallesi") ? mahalle.slice(0, -6) + "." : mahalle;
+  dom.adla("tcam").innerText = mahalle;
+  dom.adla("tcasnd").innerText = sokak + " " + addressInfo["dışKapı"] + (addressInfo["içKapı"] && `/${addressInfo["içKapı"]}`);
+  dom.adla("tcaii").innerText = addressInfo["ilçe"] + " / " + addressInfo["il"];
+  dom.adla("tcau").innerText = addressInfo["country"];
+}
+
+/**
  * @param {AçıkTCKT} açıkTckt
  */
 const açıkTcktGöster = (açıkTckt) => {
@@ -54,6 +69,7 @@ const açıkTcktGöster = (açıkTckt) => {
     dom.adla("tcgender").innerText = dom.adla("tcgender").innerText == 'M' ? 'E' : 'K';
 
   contactInfoEkle(/** @type {ContactInfo} */(açıkTckt["contactInfo"]));
+  addressInfoEkle(/** @type {AddressInfo} */(açıkTckt["addressInfo"]));
 
   const kütükBilgileri = /** @type {KütükBilgileri} */(açıkTckt["kütükBilgileri"]);
   for (let satır of Object.entries(/** @type {!Object<string, string>} */(kütükBilgileri)))
