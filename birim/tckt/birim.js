@@ -6,6 +6,8 @@ const Kartlar = dom.adla("tck");
 const Tckt = dom.adla("tc");
 /** @type {number} */
 let Kart = 0;
+/** @type {number} */
+let KartSayısı = 3;
 
 /**
  * @param {number} yeniKart
@@ -17,8 +19,8 @@ const kartDeğiştir = (yeniKart) => {
   Kart = yeniKart;
 }
 
-dom.adla("tcso").onclick = () => kartDeğiştir((Kart + 2) % 3);
-dom.adla("tcsa").onclick = () => kartDeğiştir((Kart + 1) % 3);
+dom.adla("tcso").onclick = () => kartDeğiştir((Kart + (KartSayısı - 1)) % KartSayısı);
+dom.adla("tcsa").onclick = () => kartDeğiştir((Kart + 1) % KartSayısı);
 
 /**
  * @param {boolean} bilgiYüzü
@@ -40,6 +42,15 @@ const açıkTcktGöster = (açıkTckt) => {
 
   if (dom.TR)
     dom.adla("tcgender").innerText = dom.adla("tcgender").innerText == 'M' ? 'E' : 'K';
+
+  if (açıkTckt["contactInfo"]) {
+    KartSayısı += 1;
+    const iletişimBilgileri = Object.entries(
+      /** @type {!Object<string, string} */(açıkTckt["contactInfo"])
+    );
+    for (let satır of iletişimBilgileri)
+      if (satır[1]) dom.adla("tc" + satır[0]).innerText = satır[1];
+  }
 
   const kütükBilgileri = Object.entries(
     /** @type {!Object<string, string>} */(açıkTckt["kütükBilgileri"]));
