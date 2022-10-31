@@ -47,7 +47,7 @@
 
 /* Kartlar */
 #tck {
-  width: 400%;
+  width: 500%;
   height: 100%;
   display: flex;
   transition: transform 1s;
@@ -123,4 +123,8 @@ h7 {
   font-weight: 400;
   display: block;
   margin: 1em 0;
+}
+
+.tcal {
+  line-height: 1.5;
 }
