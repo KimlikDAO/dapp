@@ -35,6 +35,7 @@ const çevir = () => Tckt.classList.toggle("flipped");
 const contactInfoEkle = (contactInfo) => {
   if (!contactInfo) return;
   KartSayısı += 1;
+  dom.adlaGöster("tcibp");
   for (let satır of Object.entries(/** @type {!Object<string, string>} */(contactInfo)))
     if (satır[1]) dom.adla("tc" + satır[0]).innerText = satır[1];
 }
@@ -48,6 +49,7 @@ const addressInfoEkle = (addressInfo) => {
   const adres = /** @type {TürkiyeAdresi} */(addressInfo);
 
   KartSayısı += 1;
+  dom.adlaGöster("tcabp");
   let mahalle = adres.mahalle;
   if (mahalle.endsWith("ahallesi"))
     mahalle = mahalle.slice(0, -6) + ".";
