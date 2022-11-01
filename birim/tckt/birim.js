@@ -43,15 +43,19 @@ const contactInfoEkle = (contactInfo) => {
  * @param {AddressInfo} addressInfo
  */
 const addressInfoEkle = (addressInfo) => {
-  if (!addressInfo) return;
+  // Şimdilik sadece `TürkiyeAdresi` gösterebiliyoruz.
+  if (!addressInfo || addressInfo.country != "Türkiye") return;
+  const adres = /** @type {TürkiyeAdresi} */(addressInfo);
+
   KartSayısı += 1;
-  let mahalle = addressInfo["mahalle"];
-  let sokak = addressInfo["CSBM"];
-  mahalle = mahalle.endsWith("ahallesi") ? mahalle.slice(0, -6) + "." : mahalle;
+  let mahalle = adres.mahalle;
+  if (mahalle.endsWith("ahallesi"))
+    mahalle = mahalle.slice(0, -6) + ".";
   dom.adla("tcam").innerText = mahalle;
-  dom.adla("tcasnd").innerText = sokak + " " + addressInfo["dışKapı"] + (addressInfo["içKapı"] && `/${addressInfo["içKapı"]}`);
-  dom.adla("tcaii").innerText = addressInfo["ilçe"] + " / " + addressInfo["il"];
-  dom.adla("tcau").innerText = addressInfo["country"];
+  dom.adla("tcasnd").innerText = adres.CSBM + " " + adres.dışKapı +
+    (adres.içKapı && `/${adres.içKapı}`);
+  dom.adla("tcaii").innerText = adres.ilçe + " / " + adres.il;
+  dom.adla("tcau").innerText = adres.country;
 }
 
 /**
