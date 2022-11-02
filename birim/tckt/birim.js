@@ -37,7 +37,8 @@ const contactInfoEkle = (contactInfo) => {
   KartSayısı += 1;
   dom.adlaGöster("tcibp");
   for (let satır of Object.entries(/** @type {!Object<string, string>} */(contactInfo)))
-    if (satır[1]) dom.adla("tc" + satır[0]).innerText = satır[1];
+    if (satır[1]) dom.adla("tc" + satır[0]).innerText = satır[0] == "phone" ?
+      dom.telefondanMetne(satır[1]) : satır[1];
 }
 
 /**
