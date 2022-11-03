@@ -52,6 +52,14 @@
   width: fit-content;
 }
 
+#ipmc {
+  margin: 2em 0;
+}
+
+#iphm {
+  color: #dc3545;
+}
+
 #ipiilh {
   margin: 1em;
   display: block;
