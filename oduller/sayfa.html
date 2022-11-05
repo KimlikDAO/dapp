@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html data-en-lang="en" lang=tr>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title data-en="KimlikDAO | Rewards">KimlikDAO | Ödüller</title>
+  <link rel="preload" crossorigin href="/font/f400.woff2" as="font" />
+  <link rel="preload" crossorigin href="/font/f700.woff2" as="font" />
+  <link href="/font/lato-ttf.css" rel="stylesheet" type="text/css" data-remove />
+  <link href="/ana/sayfa.css" rel="stylesheet" type="text/css" />
+  <link href="/oduller/sayfa.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+  <div id="onav" class="nav">
+    <h2><a href="/">KimlikDAO</a></h2>
+    <birim:cüzdan />
+  </div>
+  <div id="odpc">
+    <div id="ods0c" class="odstep">
+      <b data-en="Connect Wallet">Cüzdan Bağla</b>
+      <span>Cüzdan bağla</span>
+      <br>
+      <br>
+      <a href="javascript:" id="ods0o" class="act btn" data-en="Connect Wallet">Cüzdan Bağla</a>
+    </div>
+    <div id="ods1c" class="odstep" style="display:none">
+      <b data-en="">1.Human ID</b>
+      <span data-en="" data-phantom>Human ID</span>
+      <div class="odic">
+        <input id=odhidi type="text" class="odinput">
+      </div>
+      <a href="javascript:" id=ods1o class="act btn lft" data-en="Confirm">Onayla</a>
+    </div>
+    <div id="ods2c" class="odstep" style="display:none">
+      <b data-en="">2.Contact Info</b>
+      <span data-en="" data-phantom>Contact</span>
+      <div class="odic">
+        <label for="odemi" data-en="E-mail">E-posta</label>
+        <input id=odemi type="text" class="odinput">
+        <label for="odti" data-en="Phone Number">Telefon (555 555 5555)</label>
+        <input id=odti type="tel" class="odinput" maxlength="12">
+      </div>
+      <a href="javascript:" id=ods2o class="act btn lft">Onayla</a>
+      <a href="javascript:" id=ods2r class="btn">İptal</a>
+    </div>
+  </div>
+  <script async type="module" src="/oduller/sayfa.js" data-remove-type></script>
+</body>
+
+</html>

@@ -26,13 +26,14 @@ const revokeeAdımınıGöster = () => {
     onaylaDüğmesi.innerText = dom.TR ? "Onayla" : "Confirm";
   }
 
-  onaylaDüğmesiDüzelt();
-
   const hataMesajınıKapat = () => {
     dom.adlaGizle("ipmc");
     dom.adlaGizle("iphm");
     dom.adlaGizle("ipaym");
   }
+
+  onaylaDüğmesiDüzelt();
+  hataMesajınıKapat();
 
   const revokeeAdresAra = () => {
     dom.adlaGizle("ipiilc");
@@ -52,7 +53,7 @@ const revokeeAdımınıGöster = () => {
         clearTimeout(timer);
         revokeeAdımınıGöster();
       }
-    }, 2000)
+    }, 10000)
     TCKT.getRevokeeAddresses(/** @type {string} */(Cüzdan.adres())).then((data) => {
       const filtered = data.map((element) => "0x" + element.topics[1].slice(26));
       clearTimeout(timer);
@@ -76,8 +77,6 @@ const revokeeAdımınıGöster = () => {
         ul.innerHTML = innerHTML;
         dom.adlaGöster("ipiilc");
         dom.adlaGizle("iplc");
-        hataMesajınıKapat();
-        onaylaDüğmesiDüzelt();
       }
     }).catch((e) => {
       clearTimeout(timer);
