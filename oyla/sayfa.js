@@ -84,8 +84,8 @@ const fiyatDeğişikliğiFormuHazırla = (yeniAğ) => {
   // Onayla iptal click handler ekle
   dom.adla("oyyfo").onclick = () => {
     const fiyat = dom.adla("oyyfi").value;
-    if (fiyat == null || fiyat == undefined || fiyat == "") return;
-    if (seçilmişTokenId == null || seçilmişTokenId == undefined || seçilmişTokenId == "") return;
+    if (!fiyat) return;
+    if (!seçilmişTokenId) return;
     console.log(fiyat, seçilmişTokenId);
   }
 
@@ -140,9 +140,9 @@ const komuniteÖnergesiHazırla = () => {
     if (!tarih) return;
     if (!metin) return;
     const öneriBilgileri = {
-      "metin": {[dom.TR ? "tr_TR": "en_EN"]: metin.trim()},
+      "metin": { [dom.TR ? "tr_TR" : "en_EN"]: metin.trim() },
       "secenekler": secenekListesi.map(secenek => {
-        return {[dom.TR ? "tr_TR": "en_EN"]: secenek};
+        return { [dom.TR ? "tr_TR" : "en_EN"]: secenek };
       }),
       "tarih": tarih,
     }
@@ -171,40 +171,62 @@ const aktifOyKartıOluştur = (data) => {
     dom.gizle(oyKartıKüçültmeDüğmesi);
     e.stopPropagation();
   }
-  const description = middleDiv.children[0].children[0];
-  description.innerText = data.description;
-  const address = middleDiv.children[0].children[1].children[0];
-  address.innerText = data.address;
-  const callData = middleDiv.children[0].children[1].children[1];
-  callData.innerText = data.callData;
-  const remainingTime = middleDiv.children[0].children[2].children[1];
-  remainingTime.innerText = data.remainingTime + " REMAINING";
-  const oyKullanmaDüğmeleri = middleDiv.children[1].children[1];
-  for (let i = 0; i < 3; ++i) {
-    oyKullanmaDüğmeleri.children[i].onclick = (e) => {
-      console.log(`Clicked ${i} oy tuşu`);
-      e.stopPropagation();
+  birazBekle().then(() => {
+    const description = middleDiv.children[0].children[0];
+    description.innerText = data.description;
+    const address = middleDiv.children[0].children[1].children[0];
+    address.innerText = data.address;
+    const callData = middleDiv.children[0].children[1].children[1];
+    callData.innerText = data.callData;
+    const remainingTime = middleDiv.children[0].children[2].children[1];
+    remainingTime.innerText = data.remainingTime + " REMAINING";
+    /** @type {number} */
+    let totalVotes = data.votes.reduce((a, b) => a + b, 0);
+    for (let i = 0; i < data.votes.length; ++i) {  //FIXME CloneNode oy çeşitliliğine göre
+      const chartElements = middleDiv.children[1].children[i];
+      chartElements.children[0].onclick = (e) => {
+        if (data.chain != ethereum.chainId) {
+          e.stopPropagation();
+          ethereum.request(/** @type {RequestParams} */({
+            method: "wallet_switchEthereumChain",
+            params: [{ "chainId": data.chain }],
+          })).catch(console.log);
+        }
+        e.stopPropagation();
+      }
+      const percentage = yüzdele(data.votes[i], totalVotes);
+      chartElements.children[1].style.height = `${percentage}px`;
+      chartElements.children[2].innerText = `%${percentage}`;
     }
-  }
+  })
+
   dom.göster(element);
   return element
 }
 
 const data = {
-  title: "Title",
-  description: "Description",
-  address: "Address",
-  callData: "Calldata",
-  remainingTime: "13D 2H "
-}
+  title: "Fiyat Değişikliği",
+  description: "TCKT fiyati $4 olarak belirlensin.",
+  address: "0xc9039C5A5311bFeA959CFe744df8A010fe36EA36",
+  callData: "0xb5b831e2",
+  remainingTime: "13D 2H ",
+  chain: "0xa86a",
+  votes: [2, 9, 11],
+};
 
 const data1 = {
-  title: "Title1",
-  description: "Description1",
-  address: "Address1",
-  callData: "Calldata1",
-  remainingTime: "12D 11H"
-}
+  title: "Topluluk Önerisi",
+  description: "Solana ağı desteği gelsin.",
+  address: "0x75B4f62728c499087838E705989EC5F7eB479E4b",
+  callData: "0xp9c586d4",
+  remainingTime: "27D 3H",
+  chain: "0x1",
+  votes: [24, 3, 7],
+};
+
+const birazBekle = (cevap) => new Promise((resolve) => setTimeout(() => resolve(cevap), 100));
+
+const yüzdele = (partialValue, totalValue) => (100 * partialValue / totalValue).toFixed(1);
 
 const yeniOy = aktifOyKartıOluştur(data);
 const yeniOy1 = aktifOyKartıOluştur(data1);
