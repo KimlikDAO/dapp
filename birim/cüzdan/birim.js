@@ -257,5 +257,4 @@ export default {
   hızlıArabirimAdı,
   kopunca,
   Paralar,
-  ağDeğişti
 };
