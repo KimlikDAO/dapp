@@ -28,13 +28,13 @@ const ağ = () => Ağ;
 const adres = () => Adres;
 
 /** @const {Object<string, string>} */
-const AdresLinki = {
-  "0x1": "etherscan.io",
-  "0xa86a": "snowtrace.io",
-  "0x89": "polygonscan.com",
-  "0xa4b1": "arbiscan.io",
-  "0xfa": "ftmscan.com",
-  "0x38": "bscscan.com",
+const AğBilgileri = {
+  "0xa86a": ["snowtrace.io", "Avalanche"],
+  "0x1": ["etherscan.io", "Ethereum"],
+  "0x89": ["polygonscan.com", "Polygon"], 
+  "0xa4b1": ["arbiscan.io", "Arbitrum"],
+  "0xfa": ["ftmscan.com", "Fantom"],
+  "0x38": ["bscscan.com", "BNB Chain"],
 }
 
 /**
@@ -60,7 +60,7 @@ const nihaiArabirimAdı = (hesap) =>
  * @param {string} yeniAğ harf dizisi olarak yeni ağ adı.
  */
 const ağDeğişti = (yeniAğ) => {
-  if (!(yeniAğ in AdresLinki)) {
+  if (!(yeniAğ in AğBilgileri)) {
     // Kullanıcı desteklemediğimiz bir ağa geçerse (uzantı cüzdanı
     // arabiriminden), en son seçili ağa geri geçme isteği yolluyoruz.
     ethereum.request(/** @type {RequestParams} */({
@@ -209,7 +209,7 @@ if (window["ethereum"]) {
   }
 
   dom.adla("nad3").onclick = () => {
-    const url = `//${AdresLinki[Ağ]}/address/${Adres}`;
+    const url = `//${AğBilgileri[Ağ][0]}/address/${Adres}`;
     window.open(url, "_blank");
   }
 
@@ -256,5 +256,6 @@ export default {
   bağlanınca,
   hızlıArabirimAdı,
   kopunca,
-  Paralar
+  Paralar,
+  ağDeğişti
 };

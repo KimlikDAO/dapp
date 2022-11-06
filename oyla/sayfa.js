@@ -140,9 +140,9 @@ const komuniteÖnergesiHazırla = () => {
     if (!tarih) return;
     if (!metin) return;
     const öneriBilgileri = {
-      "metin": {[dom.TR ? "tr_TR": "en_EN"]: metin.trim()},
+      "metin": { [dom.TR ? "tr_TR" : "en_EN"]: metin.trim() },
       "secenekler": secenekListesi.map(secenek => {
-        return {[dom.TR ? "tr_TR": "en_EN"]: secenek};
+        return { [dom.TR ? "tr_TR" : "en_EN"]: secenek };
       }),
       "tarih": tarih,
     }
@@ -154,7 +154,7 @@ const komuniteÖnergesiHazırla = () => {
   }
 }
 
-const aktifOyKartıOluştur = (data) => {
+const aktifOyKartıOluştur = (data, votes) => {
   const element = dom.adla("oyac").children[1].cloneNode(true);
   const topDiv = element.children[0];
   const middleDiv = element.children[1];
@@ -171,42 +171,77 @@ const aktifOyKartıOluştur = (data) => {
     dom.gizle(oyKartıKüçültmeDüğmesi);
     e.stopPropagation();
   }
-  const description = middleDiv.children[0].children[0];
-  description.innerText = data.description;
-  const address = middleDiv.children[0].children[1].children[0];
-  address.innerText = data.address;
-  const callData = middleDiv.children[0].children[1].children[1];
-  callData.innerText = data.callData;
-  const remainingTime = middleDiv.children[0].children[2].children[1];
-  remainingTime.innerText = data.remainingTime + " REMAINING";
-  const oyKullanmaDüğmeleri = middleDiv.children[1].children[1];
-  for (let i = 0; i < 3; ++i) {
-    oyKullanmaDüğmeleri.children[i].onclick = (e) => {
-      console.log(`Clicked ${i} oy tuşu`);
-      e.stopPropagation();
+  birazBekle().then(() => {
+    const description = middleDiv.children[0].children[0];
+    description.innerText = data.description;
+    const address = middleDiv.children[0].children[1].children[0];
+    address.innerText = data.address;
+    const callData = middleDiv.children[0].children[1].children[1];
+    callData.innerText = data.callData;
+    const remainingTime = middleDiv.children[0].children[2].children[1];
+    remainingTime.innerText = data.remainingTime + " REMAINING";
+    const oyKullanmaDüğmeleri = middleDiv.children[1].children[1];
+    for (let i = 0; i < 3; ++i) {
+      oyKullanmaDüğmeleri.children[i].onclick = (e) => {
+        if (data.chain != ethereum.chainId) {
+          e.stopPropagation();
+          ethereum.request(/** @type {RequestParams} */({
+            method: "wallet_switchEthereumChain",
+            params: [{ "chainId": data.chain }],
+          })).catch(console.log);
+          Cüzdan.ağDeğişti(data.chain);
+          console.log(`Clicked ${i} oy tuşu`);
+        }
+        e.stopPropagation();
+      }
     }
-  }
+
+    for (let i = 0; i < votes.length; i++) {
+      var toplamOylar = votes[i].yes + votes[i].no + votes[i].abstain;
+      var yes = yüzdele(votes[i].yes, toplamOylar)
+      var no = yüzdele(votes[i].no, toplamOylar)
+      var abstain = yüzdele(votes[i].abstain, toplamOylar)
+
+      document.getElementsByClassName("column yes")[i].style.height = `${yes}px`
+      document.getElementsByClassName("column no")[i].style.height = `${no}px`
+      document.getElementsByClassName("column abstain")[i].style.height = `${abstain}px`
+    }
+  })
+
   dom.göster(element);
   return element
 }
 
 const data = {
-  title: "Title",
-  description: "Description",
-  address: "Address",
-  callData: "Calldata",
-  remainingTime: "13D 2H "
+  title: "Fiyat Değişikliği",
+  description: "TCKT fiyati $4 olarak belirlensin.",
+  address: "0xc9039C5A5311bFeA959CFe744df8A010fe36EA36",
+  callData: "0xb5b831e2",
+  remainingTime: "13D 2H ",
+  chain: "0xa86a"
 }
 
 const data1 = {
-  title: "Title1",
-  description: "Description1",
-  address: "Address1",
-  callData: "Calldata1",
-  remainingTime: "12D 11H"
+  title: "Topluluk Önerisi",
+  description: "Solana ağı desteği gelsin.",
+  address: "0x75B4f62728c499087838E705989EC5F7eB479E4b",
+  callData: "0xp9c586d4",
+  remainingTime: "27D 3H",
+  chain: "0x1"
 }
 
-const yeniOy = aktifOyKartıOluştur(data);
-const yeniOy1 = aktifOyKartıOluştur(data1);
+var oylamalar = [
+  { yes: 0, no: 0, abstain: 0 },
+  { yes: 35, no: 8, abstain: 7 },
+  { yes: 14, no: 27, abstain: 9 }
+]
+
+const birazBekle = (cevap) => new Promise((resolve) => setTimeout(() => resolve(cevap), 100))
+function yüzdele(partialValue, totalValue) {
+  return (100 * partialValue / totalValue).toFixed(1)
+}
+
+const yeniOy = aktifOyKartıOluştur(data, oylamalar);
+const yeniOy1 = aktifOyKartıOluştur(data1, oylamalar);
 dom.adla("oyac").appendChild(yeniOy);
 dom.adla("oyac").appendChild(yeniOy1);
