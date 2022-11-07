@@ -185,8 +185,7 @@ const aktifOyKartıOluştur = (data) => {
     for (let i = 0; i < data.votes.length; ++i) {  //FIXME CloneNode oy çeşitliliğine göre
       const chartElements = middleDiv.children[1].children[i];
       chartElements.children[0].onclick = (e) => {
-        if (data.chain != ethereum.chainId) {
-          e.stopPropagation();
+        if (data.chain != Cüzdan.ağ()) {
           ethereum.request(/** @type {RequestParams} */({
             method: "wallet_switchEthereumChain",
             params: [{ "chainId": data.chain }],
@@ -194,7 +193,7 @@ const aktifOyKartıOluştur = (data) => {
         }
         e.stopPropagation();
       }
-      const percentage = yüzdele(data.votes[i], totalVotes);
+      const percentage = orandanMetne(data.votes[i], totalVotes);
       chartElements.children[1].style.height = `${percentage}px`;
       chartElements.children[2].innerText = `%${percentage}`;
     }
@@ -226,7 +225,7 @@ const data1 = {
 
 const birazBekle = (cevap) => new Promise((resolve) => setTimeout(() => resolve(cevap), 100));
 
-const yüzdele = (partialValue, totalValue) => (100 * partialValue / totalValue).toFixed(1);
+const orandanMetne = (partialValue, totalValue) => (100 * partialValue / totalValue).toFixed(1);
 
 const yeniOy = aktifOyKartıOluştur(data);
 const yeniOy1 = aktifOyKartıOluştur(data1);
