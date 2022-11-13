@@ -3,11 +3,11 @@ import { UnixFS } from 'ipfs-unixfs';
 import { CID } from 'multiformats/cid';
 import { sha256 } from 'multiformats/hashes/sha2';
 
-const TCKT_LENGTH = 1864;
+const TCKT_LENGTH = 2680;
 
 let unixfs = new UnixFS({
   type: 'file',
-  data: new TextEncoder().encode("a".repeat(2649))
+  data: new TextEncoder().encode("a".repeat(TCKT_LENGTH))
 });
 
 let buffer = prepare({ Data: unixfs.marshal() });
