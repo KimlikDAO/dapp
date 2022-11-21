@@ -23,26 +23,6 @@ input::-webkit-inner-spin-button {
   opacity: 0.8;
 }
 
-.odic {
-  display: flex;
-  flex-direction: column;
-  margin: 2em 0 1.5em;
-}
-
-.odic>label {
-  margin-bottom: 5px;
-}
-
-.odinput {
-  border-radius: 4px;
-  border: 1px solid #c2c2c2;
-  font-size: inherit;
-  height: 28px;
-  outline: none;
-  width: 250px;
-  margin-bottom: 0.5em;
-}
-
-.odinput.odin {
-  border: 1px solid #dc3545;
+#odtx {
+  margin: 1em 0;
 }
