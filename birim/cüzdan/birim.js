@@ -35,6 +35,7 @@ const AğBilgileri = {
   "0xa4b1": ["arbiscan.io", "Arbitrum"],
   "0xfa": ["ftmscan.com", "Fantom"],
   "0x38": ["bscscan.com", "BNB Chain"],
+  "0x47": ["confluxscan.io", "Conflux eSpace"],
 }
 
 /**
@@ -238,6 +239,7 @@ const Paralar = dom.TR ? {
   "0xa4b1": ["ether", "'den", "’e"],
   "0xfa": ["FTM", "’dan", "’a"],
   "0x38": ["BNB", "’den", "’ye"],
+  "0x47": ["CFX", "’den", "’e"],
 } : {
   "0x1": ["ether"],
   "0xa86a": ["AVAX"],
@@ -245,6 +247,7 @@ const Paralar = dom.TR ? {
   "0xa4b1": ["ether"],
   "0xfa": ["FTM"],
   "0x38": ["BNB"],
+  "0x47": ["CFX"],
 };
 
 export default {

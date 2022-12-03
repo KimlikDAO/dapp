@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="120px" height="120px" viewBox="0 0 120 120" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>CFX TOKEN</title>
+    <defs>
+        <linearGradient x1="15.84925%" y1="-9.15166667%" x2="84.1508333%" y2="109.148333%" id="linearGradient-1">
+            <stop stop-color="#2E3EC1" offset="0%"></stop>
+            <stop stop-color="#2B4CBA" offset="9%"></stop>
+            <stop stop-color="#17B38A" offset="72%"></stop>
+            <stop stop-color="#0FDC77" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="Token-List/Project-Info" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="CFX-TOKEN" fill-rule="nonzero">
+            <circle id="椭圆形" fill="url(#linearGradient-1)" cx="60" cy="60" r="60"></circle>
+            <polygon id="路径" fill="#FFFFFF" points="78.7798 51.8824 60.1002 70.7604 49.7045 60.2545 68.3841 41.3765 60.0781 33 33 60.3647 60.0032 87.6501 87.0769 60.2898"></polygon>
+        </g>
+    </g>
+</svg>
