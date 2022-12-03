@@ -31,11 +31,11 @@ const adres = () => Adres;
 const AğBilgileri = {
   "0xa86a": ["snowtrace.io", "Avalanche"],
   "0x1": ["etherscan.io", "Ethereum"],
-  "0x89": ["polygonscan.com", "Polygon"], 
+  "0x89": ["polygonscan.com", "Polygon"],
   "0xa4b1": ["arbiscan.io", "Arbitrum"],
-  "0xfa": ["ftmscan.com", "Fantom"],
   "0x38": ["bscscan.com", "BNB Chain"],
-  "0x47": ["confluxscan.io", "Conflux eSpace"],
+  "0x406": ["confluxscan.io", "Conflux eSpace"],
+  "0xfa": ["ftmscan.com", "Fantom"],
 }
 
 /**
@@ -64,7 +64,7 @@ const ağDeğişti = (yeniAğ) => {
   if (!(yeniAğ in AğBilgileri)) {
     // Kullanıcı desteklemediğimiz bir ağa geçerse (uzantı cüzdanı
     // arabiriminden), en son seçili ağa geri geçme isteği yolluyoruz.
-    ethereum.request(/** @type {RequestParams} */({
+    ethereum.request(/** @type {ethereum.Request} */({
       method: "wallet_switchEthereumChain",
       params: [{ "chainId": Ağ }],
     })).catch(console.log);
@@ -129,14 +129,12 @@ const adresDeğişince = (f) => {
 
 const bağla = () => {
   ethereum
-    .request(
-      /** @type {RequestParams} */({ method: "eth_requestAccounts" }))
+    .request(/** @type {ethereum.Request} */({ method: "eth_requestAccounts" }))
     .then(adresDeğişti)
     .catch(console.log);
 
   ethereum
-    .request(
-      /** @type {RequestParams} */({ method: "eth_chainId" }))
+    .request(/** @type {ethereum.Request} */({ method: "eth_chainId" }))
     .then(ağDeğişti)
     .catch(console.log);
 }
@@ -189,7 +187,7 @@ dom.adla("nld").onclick = (event) => {
     /** @const {string} */
     const ağ = li.id.slice(2);
     if (window["ethereum"])
-      ethereum.request(/** @type {RequestParams} */({
+      ethereum.request(/** @type {ethereum.Request} */({
         method: "wallet_switchEthereumChain",
         params: [{ "chainId": ağ }],
       })).catch(console.log);
@@ -220,12 +218,13 @@ if (window["ethereum"]) {
   ethereum.on("accountsChanged", adresDeğişti);
   ethereum.on("chainChanged", ağDeğişti);
 
-  ethereum
-    .request(/** @type {RequestParams} */({ method: "eth_chainId" }))
+  ethereum.request(
+    /** @type {ethereum.Request} */({ method: "eth_chainId" }))
     .then(ağDeğişti)
     .catch(console.log);
 
-  ethereum.request(/** @type {RequestParams} */({ method: "eth_accounts" }))
+  ethereum.request(
+    /** @type {ethereum.Request} */({ method: "eth_accounts" }))
     .then((accounts) => {
       if (accounts.length > 0) adresDeğişti(/** Array<string> */(accounts));
     });
@@ -237,17 +236,17 @@ const Paralar = dom.TR ? {
   "0xa86a": ["AVAX", "’tan", "’a"],
   "0x89": ["MATIC", "’ten", "’e"],
   "0xa4b1": ["ether", "'den", "’e"],
-  "0xfa": ["FTM", "’dan", "’a"],
   "0x38": ["BNB", "’den", "’ye"],
-  "0x47": ["CFX", "’den", "’e"],
+  "0x406": ["CFX", "’ten", "’e"],
+  "0xfa": ["FTM", "’dan", "’a"],
 } : {
   "0x1": ["ether"],
   "0xa86a": ["AVAX"],
   "0x89": ["MATIC"],
   "0xa4b1": ["ether"],
-  "0xfa": ["FTM"],
   "0x38": ["BNB"],
-  "0x47": ["CFX"],
+  "0x406": ["CFX"],
+  "0xfa": ["FTM"],
 };
 
 export default {

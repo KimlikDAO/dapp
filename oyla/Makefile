@@ -1,8 +1,9 @@
 build/oyla/sayfa-%.js: oyla/sayfa.js \
                        birim/cüzdan/birim.js \
-                       lib/util/dom.js lib/util/çevir.js \
                        lib/crypto/sha3.js \
-                       lib/ethereum/provider.js lib/ethereum/evm.js lib/ethereum/TCKT.js
+                       lib/ethereum/provider.js lib/ethereum/jsonrpc.js \
+                       lib/ethereum/evm.js lib/ethereum/TCKT.js \
+                       lib/util/dom.js lib/util/çevir.js
 	mkdir -p $(dir $@)
 	yarn google-closure-compiler -W VERBOSE -O ADVANCED --charset UTF-8 \
                              --define TR=$(Lang-$*) \

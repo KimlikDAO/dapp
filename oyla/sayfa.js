@@ -6,7 +6,7 @@ import Cüzdan from '/birim/cüzdan/birim';
 import TCKT from '/lib/ethereum/TCKT';
 import dom from '/lib/util/dom';
 
-let seçilmişÖneriId;
+let SeçilmişÖneriId;
 
 Cüzdan.bağlanınca(() => {
   let ağ = Cüzdan.ağ();
@@ -20,7 +20,7 @@ Cüzdan.bağlanınca(() => {
 dom.adla("oyyb").onclick = () => {
   dom.adlaGizle("oyyb");
   dom.adlaGöster("oyy");
-  if (!seçilmişÖneriId) seçilmişÖneriId = "2";
+  if (!SeçilmişÖneriId) SeçilmişÖneriId = "2";
   /** @const {Element} */
   const önergeDüğmesi = dom.adla("oyyddb");
   /** @const {Element} */
@@ -29,11 +29,11 @@ dom.adla("oyyb").onclick = () => {
   önergeMenusu.onclick = (e) => {
     const li = e.target;
     if (li.nodeName != "LI") return;
-    dom.adlaGizle("oyy" + seçilmişÖneriId);
-    dom.adlaGizle("oyyso" + seçilmişÖneriId);
-    seçilmişÖneriId = li.id.slice(4);
-    dom.adlaGöster("oyy" + seçilmişÖneriId);
-    dom.adlaGöster("oyyso" + seçilmişÖneriId);
+    dom.adlaGizle("oyy" + SeçilmişÖneriId);
+    dom.adlaGizle("oyyso" + SeçilmişÖneriId);
+    SeçilmişÖneriId = li.id.slice(4);
+    dom.adlaGöster("oyy" + SeçilmişÖneriId);
+    dom.adlaGöster("oyyso" + SeçilmişÖneriId);
   }
 }
 
@@ -186,7 +186,7 @@ const aktifOyKartıOluştur = (data) => {
       const chartElements = middleDiv.children[1].children[i];
       chartElements.children[0].onclick = (e) => {
         if (data.chain != Cüzdan.ağ()) {
-          ethereum.request(/** @type {RequestParams} */({
+          ethereum.request(/** @type {ethereum.Request} */({
             method: "wallet_switchEthereumChain",
             params: [{ "chainId": data.chain }],
           })).catch(console.log);

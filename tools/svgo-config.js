@@ -3,7 +3,7 @@ export default {
   plugins: [
     "cleanupAttrs",
     "cleanupEnableBackground",
-    "cleanupIDs",
+    "cleanupIds",
     {
       name: "cleanupNumericValues",
       params: {

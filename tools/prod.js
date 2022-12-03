@@ -5,7 +5,7 @@ const HOST_URL = 'https://kimlikdao.org/';
 const PAGE_CACHE_CONTROL = 'max-age=90,public';
 /** @const {string} */
 const STATIC_CACHE_CONTROL = 'max-age=29030400,public,immutable';
-/** @const {Object<string, string>} */
+/** @const {!Object<string, string>} */
 const MIMES = {
   "css": "text/css",
   "js": "application/javascript;charset=utf-8",
@@ -15,7 +15,7 @@ const MIMES = {
   "ico": "image/x-icon",
   "txt": "text/plain",
 };
-/** @const {Object<string, string>} */
+/** @const {!Object<string, string>} */
 const PAGES = {
   "?tr": "ana-tr.html",
   "?en": "ana-en.html",
@@ -30,10 +30,10 @@ const PAGES = {
 };
 
 /**
- * @param {CFWorkersRequest} request
- * @param {ProdEnvironment} env
- * @param {RequestContext} ctx
- * @return {Promise<Response>}
+ * @param {!cloudflare.Request} request
+ * @param {!ProdEnvironment} env
+ * @param {!cloudflare.Context} ctx
+ * @return {!Promise<Response>}
  */
 const handleRequest = (request, env, ctx) => {
   /** @const {URL} */

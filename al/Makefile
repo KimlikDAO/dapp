@@ -7,12 +7,13 @@ build/al/sayfa-%.js: al/sayfa.js \
                      birim/cüzdan/birim.js \
                      birim/telefon/birim.js \
                      birim/tckt/birim.js \
-                     lib/util/dom.js lib/util/çevir.js \
-                     lib/ethereum/provider.js lib/ethereum/evm.js lib/ethereum/TCKT.js \
-                     lib/crypto/ed25519.js lib/crypto/sha3.js \
-                     lib/ipfs.js \
                      lib/api/api.js lib/api/edevletApi.js \
+                     lib/crypto/ed25519.js lib/crypto/sha3.js \
+                     lib/ethereum/provider.js lib/ethereum/jsonrpc.js \
+                     lib/ethereum/evm.js lib/ethereum/TCKT.js \
+                     lib/ipfs.js \
                      lib/tckt/ERC721Unlockable.js lib/tckt/TCKTVerisi.js lib/tckt/TCKTBilgileri.js \
+                     lib/util/dom.js lib/util/çevir.js \
                      build/al/tanışma/birim.keymap
 	mkdir -p $(dir $@)
 	yarn google-closure-compiler -W VERBOSE -O ADVANCED --charset UTF-8 \

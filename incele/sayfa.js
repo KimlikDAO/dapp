@@ -154,7 +154,7 @@ const kapalıYüz = (adres) => {
               const asciiEncoder = new TextEncoder();
               /** @const {string} */
               const hexEncoded = "0x" + hex(asciiEncoder.encode(JSON.stringify(unlockable)));
-              return ethereum.request(/** @type {RequestParams} */({
+              return ethereum.request(/** @type {ethereum.Request} */({
                 method: "eth_decrypt",
                 params: [hexEncoded, Cüzdan.adres()]
               }));

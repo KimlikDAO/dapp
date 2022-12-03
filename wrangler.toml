@@ -5,7 +5,7 @@ main = "build/prod.js"
 name = "dapp"
 workers_dev = false
 route = "https://kimlikdao.org/*"
-compatibility_date = "2022-09-09"
+compatibility_date = "2022-12-03"
 usage_model = "bundled"
 
 [[kv_namespaces]]

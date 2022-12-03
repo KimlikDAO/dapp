@@ -7,8 +7,9 @@
 /**
  * @interface
  * @struct
+ * @extends {cloudflare.Environment}
  */
 function ProdEnvironment() { }
 
-/** @type {!KeyValue} */
+/** @type {!cloudflare.KeyValue} */
 ProdEnvironment.prototype.KV;

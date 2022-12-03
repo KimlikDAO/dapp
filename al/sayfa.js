@@ -34,7 +34,7 @@ const açıkAnahtarAlVe = (sonra) => {
       : "This website would like your public encryption key."
     );
     s3a.onclick = () => {
-      ethereum.request(/** @type {RequestParams} */({
+      ethereum.request(/** @type {ethereum.Request} */({
         method: "eth_getEncryptionPublicKey",
         params: [Cüzdan.adres()],
       })).then((açıkAnahtar) => {
