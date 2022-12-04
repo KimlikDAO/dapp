@@ -4,12 +4,12 @@
  */
 import Cüzdan from '/birim/cüzdan/birim';
 import Tckt from '/birim/tckt/birim';
-import { selectUnlockables } from '/lib/did/infoSection';
+import { decryptInfoSections } from '/lib/did/infoSection';
 import evm from "/lib/ethereum/evm";
 import TCKT from '/lib/ethereum/TCKT';
 import ipfs from '/lib/ipfs';
 import dom from '/lib/util/dom';
-import { hex, hexten } from '/lib/util/çevir';
+import { hexten } from '/lib/util/çevir';
 
 /** @const {Element} */
 const İmeceİptalDüğmesi = dom.adla("inbtn1");
@@ -108,79 +108,80 @@ const silKutusuGöster = () => {
     TCKT.revoke(adres)
       .then(() => {
         delete Bellek[ağ + adres];
-        kapalıYüz(adres);
+        kapalıYüzGöster(adres);
       })
       .catch(console.log);
   }
 }
 
+/** @type {string} */
+let CidHex = "";
+
 /**
- * @param {did.DecryptedDID} açıkTCKT
+ * @param {!did.DecryptedDID} açıkTckt
  */
-const açıkYüz = (açıkTCKT) => {
-  Tckt.açıkTcktGöster(açıkTCKT);
+const açıkYüzGöster = (açıkTckt) => {
+  Tckt.açıkTcktGöster(açıkTckt);
   AçDüğmesi.innerText = dom.TR ? "Gizle" : "Hide";
-  AçDüğmesi.onclick = () => kapalıYüz(/** @type {string} */(Cüzdan.adres()));
+  AçDüğmesi.onclick = () => kapalıYüzGöster(/** @type {string} */(Cüzdan.adres()));
 }
 
 /**
  * @param {string} adres
  */
-const kapalıYüz = (adres) => {
+const kapalıYüzGöster = (adres) => {
   Tckt.yüzGöster(false);
   AçDüğmesi.onclick = null;
+  AçDüğmesi.innerText = dom.TR ? "Aç" : "Unlock";
+  const bellektenTckt = Bellek[Cüzdan.ağ() + adres];
+  if (bellektenTckt)
+    AçDüğmesi.onclick = () => açıkYüzGöster(bellektenTckt);
+  else
+    AçDüğmesi.onclick = () => ipfs.cidBytetanOku(hexten(CidHex))
+      .then((dosya) => decryptInfoSections(
+        /** @const {!ERC721Unlockable} */(JSON.parse(dosya)),
+        ["personInfo", "contactInfo", "addressInfo", "kütükBilgileri"],
+        /** @type {!ethereum.Provider} */(ethereum),
+        adres
+      ))
+      .then((açıkTckt) => {
+        Bellek[Cüzdan.ağ() + adres] = açıkTckt;
+        açıkYüzGöster(açıkTckt);
+      })
+      .catch(console.log);
+}
 
-  const bellektenAçıkTckt = Bellek[Cüzdan.ağ() + adres];
-  if (bellektenAçıkTckt) {
-    AçDüğmesi.innerText = dom.TR ? "Aç" : "Unlock";
-    AçDüğmesi.onclick = () => açıkYüz(bellektenAçıkTckt);
-  } else {
-    TCKT.handleOf(adres).then((cidHex) => {
-      if (cidHex.startsWith("0x")) cidHex = cidHex.slice(2);
-      if (cidHex == "0".repeat(64)) {
-        AçDüğmesi.innerText = dom.TR ? "TCKT al" : "Get TCKT";
-        AçDüğmesi.onclick = () => window.location.href = dom.TR ? "/al" : "/get";
-      } else {
-        AçDüğmesi.innerText = dom.TR ? "Aç" : "Unlock";
-        AçDüğmesi.onclick = () => {
-          ipfs.cidBytetanOku(hexten(cidHex))
-            .then((dosya) => {
-              /** @const {!ERC721Unlockable} */
-              const tcktVerisi = /** @const {!ERC721Unlockable} */(JSON.parse(dosya));
-              /** @const {Unlockable} */
-              const unlockable = selectUnlockables(tcktVerisi, ["personInfo"])[0];
-              delete unlockable.userPrompt;
-              console.log(unlockable);
-              const asciiEncoder = new TextEncoder();
-              /** @const {string} */
-              const hexEncoded = "0x" + hex(asciiEncoder.encode(JSON.stringify(unlockable)));
-              return ethereum.request(/** @type {ethereum.Request} */({
-                method: "eth_decrypt",
-                params: [hexEncoded, Cüzdan.adres()]
-              }));
-            })
-            .then((açıkTckt) => {
-              açıkTckt = açıkTckt.slice(43, açıkTckt.indexOf("\0"));
-              açıkTckt = /** @type {did.DecryptedDID} */(JSON.parse(açıkTckt));
-              Bellek[Cüzdan.ağ() + adres] = açıkTckt;
-              açıkYüz(açıkTckt);
-            })
-            .catch(console.log);
-        }
-      }
-    });
-  }
+/**
+ * @param {string} adres Bağlı cüzdan adresi
+ */
+const tcktGöster = (adres) => {
+  /** @const {Element} */
+  const tckt = dom.adla("tc");
+  /** @const {Element} */
+  const tcktYok = dom.adla("innotckt");
+
+  dom.gizle(tckt);
+
+  TCKT.handleOf(adres).then((cidHex) => {
+    cidHex = cidHex.slice(2);
+    if (cidHex && !cidHex.replaceAll("0", "")) {
+      dom.göster(tcktYok.firstElementChild);
+    } else {
+      İmeceİptalDüğmesi.onclick = imeceİptalKutusuGöster;
+      EşikAzaltmaDüğmesi.onclick = eşikKutusuGöster;
+      SilDüğmesi.onclick = silKutusuGöster;
+      CidHex = cidHex;
+      dom.gizle(tcktYok)
+      dom.göster(tckt);
+      kapalıYüzGöster(adres);
+    }
+  });
 }
 
 AçDüğmesi.onclick = Cüzdan.bağla;
-Cüzdan.bağlanınca((adres) => {
-  İmeceİptalDüğmesi.onclick = imeceİptalKutusuGöster;
-  EşikAzaltmaDüğmesi.onclick = eşikKutusuGöster;
-  SilDüğmesi.onclick = silKutusuGöster;
-  kapalıYüz(adres);
-});
-Cüzdan.ağDeğişince(() => kapalıYüz(/** @type {string} */(Cüzdan.adres())));
-Cüzdan.adresDeğişince(() => kapalıYüz(/** @type {string} */(Cüzdan.adres())));
+Cüzdan.bağlanınca(tcktGöster);
+Cüzdan.ağDeğişince(() => tcktGöster(/** @type {string} */(Cüzdan.adres())));
+Cüzdan.adresDeğişince(tcktGöster);
 
 /**
  * @param {Event} event

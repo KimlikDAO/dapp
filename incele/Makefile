@@ -6,7 +6,8 @@ build/incele/sayfa-%.js: incele/sayfa.js \
                          lib/did/types.js lib/did/TCKTBölümleri.js \
                          lib/did/TCKTVerisi.js lib/did/infoSection.js \
                          lib/ethereum/provider.js lib/ethereum/jsonrpc.js \
-                         lib/ethereum/evm.js lib/ethereum/TCKT.js lib/ethereum/ERC721Unlockable.js \
+                         lib/ethereum/evm.js lib/ethereum/TCKT.js \
+                         lib/ethereum/ERC721Unlockable.js lib/ethereum/unlockables.js \
                          lib/ipfs.js \
                          lib/util/dom.js lib/util/çevir.js
 	mkdir -p $(dir $@)
