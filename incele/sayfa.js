@@ -28,7 +28,7 @@ const EşikKutusu = dom.adla("inmes");
 /** @const {Element} */
 const SilKutusu = dom.adla("inmsy");
 
-/** @const {Object<string, did.DecryptedDID>} */
+/** @const {Object<string, !did.DecryptedDID>} */
 const Bellek = {};
 
 const kutuKapat = () => {
@@ -89,7 +89,7 @@ const eşikKutusuGöster = () => {
       const delta = eşik - Number(girdi.value);
       delta ? TCKT
         .reduceRevokeThreshold(adres, delta)
-        .then(() => kutuKapat())
+        .then(kutuKapat)
         .catch(console.log) : kutuKapat();
     }
   });
@@ -136,8 +136,9 @@ const kapalıYüzGöster = (adres) => {
   const bellektenTckt = Bellek[Cüzdan.ağ() + adres];
   if (bellektenTckt)
     AçDüğmesi.onclick = () => açıkYüzGöster(bellektenTckt);
-  else
-    AçDüğmesi.onclick = () => ipfs.cidBytetanOku(hexten(CidHex))
+  else {
+    const dosyaSözü = ipfs.cidBytetanOku(hexten(CidHex));
+    AçDüğmesi.onclick = () => dosyaSözü
       .then((dosya) => decryptInfoSections(
         /** @const {!ERC721Unlockable} */(JSON.parse(dosya)),
         ["personInfo", "contactInfo", "addressInfo", "kütükBilgileri"],
@@ -149,30 +150,35 @@ const kapalıYüzGöster = (adres) => {
         açıkYüzGöster(açıkTckt);
       })
       .catch(console.log);
+  }
 }
 
 /**
  * @param {string} adres Bağlı cüzdan adresi
  */
 const tcktGöster = (adres) => {
+  if (!adres) return;
   /** @const {Element} */
   const tckt = dom.adla("tc");
   /** @const {Element} */
   const tcktYok = dom.adla("innotckt");
 
   dom.gizle(tckt);
+  dom.gizle(AçDüğmesi);
+  dom.göster(tcktYok);
 
   TCKT.handleOf(adres).then((cidHex) => {
     cidHex = cidHex.slice(2);
-    if (cidHex && !cidHex.replaceAll("0", "")) {
+    if (!cidHex || !cidHex.replaceAll("0", "")) {
       dom.göster(tcktYok.firstElementChild);
     } else {
+      dom.gizle(tcktYok);
+      dom.göster(AçDüğmesi);
+      dom.göster(tckt);
       İmeceİptalDüğmesi.onclick = imeceİptalKutusuGöster;
       EşikAzaltmaDüğmesi.onclick = eşikKutusuGöster;
       SilDüğmesi.onclick = silKutusuGöster;
       CidHex = cidHex;
-      dom.gizle(tcktYok)
-      dom.göster(tckt);
       kapalıYüzGöster(adres);
     }
   });

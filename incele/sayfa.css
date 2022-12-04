@@ -12,16 +12,20 @@
   perspective: 1000px;
 }
 
+.lnk {
+  text-decoration: none;
+  border-bottom: 1px dotted;
+}
+
 #innotckt {
   width: 280px;
   height: 280px;
   outline: 2px dashed #c2c2c2;
   border-radius: 10px;
   display: flex;
-  align-items: center;
+  text-align: center;
   justify-content: center;
   flex-direction: column;
-  gap: 20px;
 }
 
 #intcktb {
