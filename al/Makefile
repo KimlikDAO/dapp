@@ -9,10 +9,10 @@ build/al/sayfa-%.js: al/sayfa.js \
                      birim/tckt/birim.js \
                      lib/api/api.js lib/api/edevletApi.js \
                      lib/crypto/ed25519.js lib/crypto/sha3.js \
+                     lib/did/types.js lib/did/TCKTVerisi.js lib/did/TCKTBölümleri.js \
                      lib/ethereum/provider.js lib/ethereum/jsonrpc.js \
-                     lib/ethereum/evm.js lib/ethereum/TCKT.js \
+                     lib/ethereum/evm.js lib/ethereum/TCKT.js lib/ethereum/ERC721Unlockable.js \
                      lib/ipfs.js \
-                     lib/tckt/ERC721Unlockable.js lib/tckt/TCKTVerisi.js lib/tckt/TCKTBilgileri.js \
                      lib/util/dom.js lib/util/çevir.js \
                      build/al/tanışma/birim.keymap
 	mkdir -p $(dir $@)

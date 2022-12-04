@@ -30,7 +30,7 @@ const yüzGöster = (bilgiYüzü) => Tckt.classList.toggle("flipped", bilgiYüz�
 const çevir = () => Tckt.classList.toggle("flipped");
 
 /**
- * @param {ContactInfo} contactInfo
+ * @param {did.ContactInfo} contactInfo
  */
 const contactInfoEkle = (contactInfo) => {
   if (!contactInfo) return;
@@ -42,12 +42,12 @@ const contactInfoEkle = (contactInfo) => {
 }
 
 /**
- * @param {AddressInfo} addressInfo
+ * @param {did.AddressInfo} addressInfo
  */
 const addressInfoEkle = (addressInfo) => {
   // Şimdilik sadece `TürkiyeAdresi` gösterebiliyoruz.
   if (!addressInfo || addressInfo.country != "Türkiye") return;
-  const adres = /** @type {TürkiyeAdresi} */(addressInfo);
+  const adres = /** @type {did.TürkiyeAdresi} */(addressInfo);
 
   KartSayısı += 1;
   dom.adlaGöster("tcabp");
@@ -62,11 +62,11 @@ const addressInfoEkle = (addressInfo) => {
 }
 
 /**
- * @param {AçıkTCKT} açıkTckt
+ * @param {did.DecryptedDID} açıkTckt
  */
 const açıkTcktGöster = (açıkTckt) => {
-  /** @const {PersonInfo} */
-  const personInfo = /** @type {PersonInfo} */(açıkTckt["personInfo"]);
+  /** @const {did.PersonInfo} */
+  const personInfo = /** @type {did.PersonInfo} */(açıkTckt["personInfo"]);
   for (let satır of Object.entries(/** @type {!Object<string, string>} */(personInfo)))
     if (satır[1]) dom.adla("tc" + satır[0]).innerText = satır[1];
 
@@ -75,10 +75,10 @@ const açıkTcktGöster = (açıkTckt) => {
   if (dom.TR)
     dom.adla("tcgender").innerText = dom.adla("tcgender").innerText == 'M' ? 'E' : 'K';
 
-  contactInfoEkle(/** @type {ContactInfo} */(açıkTckt["contactInfo"]));
-  addressInfoEkle(/** @type {AddressInfo} */(açıkTckt["addressInfo"]));
+  contactInfoEkle(/** @type {did.ContactInfo} */(açıkTckt["contactInfo"]));
+  addressInfoEkle(/** @type {did.AddressInfo} */(açıkTckt["addressInfo"]));
 
-  const kütükBilgileri = /** @type {KütükBilgileri} */(açıkTckt["kütükBilgileri"]);
+  const kütükBilgileri = /** @type {did.KütükBilgileri} */(açıkTckt["kütükBilgileri"]);
   for (let satır of Object.entries(/** @type {!Object<string, string>} */(kütükBilgileri)))
     if (satır[1]) dom.adla("tc" + satır[0]).innerText = satır[1];
 

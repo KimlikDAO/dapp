@@ -4,10 +4,10 @@
  */
 import Cüzdan from '/birim/cüzdan/birim';
 import Tckt from '/birim/tckt/birim';
+import { selectUnlockables } from '/lib/did/infoSection';
 import evm from "/lib/ethereum/evm";
 import TCKT from '/lib/ethereum/TCKT';
 import ipfs from '/lib/ipfs';
-import { unlockableSeç } from '/lib/tckt/TCKTVerisi';
 import dom from '/lib/util/dom';
 import { hex, hexten } from '/lib/util/çevir';
 
@@ -28,7 +28,7 @@ const EşikKutusu = dom.adla("inmes");
 /** @const {Element} */
 const SilKutusu = dom.adla("inmsy");
 
-/** @const {Object<string, AçıkTCKT>} */
+/** @const {Object<string, did.DecryptedDID>} */
 const Bellek = {};
 
 const kutuKapat = () => {
@@ -115,7 +115,7 @@ const silKutusuGöster = () => {
 }
 
 /**
- * @param {AçıkTCKT} açıkTCKT
+ * @param {did.DecryptedDID} açıkTCKT
  */
 const açıkYüz = (açıkTCKT) => {
   Tckt.açıkTcktGöster(açıkTCKT);
@@ -148,7 +148,7 @@ const kapalıYüz = (adres) => {
               /** @const {!ERC721Unlockable} */
               const tcktVerisi = /** @const {!ERC721Unlockable} */(JSON.parse(dosya));
               /** @const {Unlockable} */
-              const unlockable = unlockableSeç(tcktVerisi, ["personInfo"]);
+              const unlockable = selectUnlockables(tcktVerisi, ["personInfo"])[0];
               delete unlockable.userPrompt;
               console.log(unlockable);
               const asciiEncoder = new TextEncoder();
@@ -161,7 +161,7 @@ const kapalıYüz = (adres) => {
             })
             .then((açıkTckt) => {
               açıkTckt = açıkTckt.slice(43, açıkTckt.indexOf("\0"));
-              açıkTckt = /** @type {AçıkTCKT} */(JSON.parse(açıkTckt));
+              açıkTckt = /** @type {did.DecryptedDID} */(JSON.parse(açıkTckt));
               Bellek[Cüzdan.ağ() + adres] = açıkTckt;
               açıkYüz(açıkTckt);
             })

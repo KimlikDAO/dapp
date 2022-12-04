@@ -6,8 +6,8 @@ import Tanışma from '/al/tanışma/birim';
 import { öde } from '/al/ödeme/birim';
 import Cüzdan from '/birim/cüzdan/birim';
 import Telefon from '/birim/telefon/birim';
+import { hazırla } from '/lib/did/TCKTVerisi';
 import ipfs from '/lib/ipfs';
-import { hazırla } from '/lib/tckt/TCKTVerisi';
 import dom from '/lib/util/dom';
 import { hex } from '/lib/util/çevir';
 
@@ -50,7 +50,7 @@ const açıkAnahtarAlVe = (sonra) => {
 }
 
 /**
- * @param {Promise<AçıkTCKT>} açıkTCKTSözü
+ * @param {Promise<did.DecryptedDID>} açıkTCKTSözü
  */
 const tcktYarat = (açıkTCKTSözü) => {
   açıkAnahtarAlVe((açıkAnahtar) => {
@@ -59,7 +59,8 @@ const tcktYarat = (açıkTCKTSözü) => {
     const cidSözü = açıkTCKTSözü
       .then((açıkTckt) => ipfs.yaz(JSON.stringify(hazırla(
         açıkAnahtar, açıkTckt, [
-        ["personInfo", "contactInfo", "kütükBilgileri", "adres"],
+        ["personInfo", "contactInfo", "kütükBilgileri", "adresBilgileri"],
+        [""],
         ["humanID"]
       ]))))
       .then(hex)

@@ -32,7 +32,7 @@ const taahhütOluştur = (adres, rastgele) => {
 }
 
 /**
- * @param {function(Promise<AçıkTCKT>)} sonra
+ * @param {function(Promise<did.DecryptedDID>)} sonra
  */
 const açıkTcktAlVe = (sonra) => {
   /** @const {Worker} */
@@ -86,7 +86,7 @@ const açıkTcktAlVe = (sonra) => {
   /** @const {Element} */
   const kutu = dom.adla("ta");
   /**
-   * @param {AçıkTCKT} açıkTckt
+   * @param {did.DecryptedDID} açıkTckt
    * @param {!Uint8Array} rastgele
    */
   const kapat = (açıkTckt, rastgele) => {
@@ -120,7 +120,7 @@ const açıkTcktAlVe = (sonra) => {
           "oauth_code": code,
           "taahhut": base64(new Uint8Array(taahhüt))
         })))
-      .then(res => /** @type {AçıkTCKT} */(res.json()))
+      .then(res => /** @type {did.DecryptedDID} */(res.json()))
       .then((açıkTckt) => kapat(açıkTckt, eDevletRastgele));
   } else {
     const hataBildirimi = dom.adla("tafb");
@@ -157,7 +157,7 @@ const açıkTcktAlVe = (sonra) => {
             body: formData,
           }))
           .then(res => res.ok
-            ? res.json().then((/** @type {AçıkTCKT} */açıkTckt) => {
+            ? res.json().then((/** @type {did.DecryptedDID} */ açıkTckt) => {
               dom.gizle(dom.adla("tadc"));
               pdfDüğmesi.href = "javascript:";
               pdfDüğmesi.classList.remove("act");

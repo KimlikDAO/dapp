@@ -4,9 +4,10 @@ build/ana/sayfa-%.js: ana/sayfa.js \
                       birim/telefon/birim.js \
                       birim/tckt/birim.js \
                       lib/api/edevletApi.js \
+                      lib/did/types.js lib/did/TCKTBölümleri.js \
                       lib/ethereum/provider.js lib/ethereum/jsonrpc.js \
-                      lib/util/dom.js \
-                      lib/tckt/ERC721Unlockable.js lib/tckt/TCKTBilgileri.js
+                      lib/ethereum/ERC721Unlockable.js \
+                      lib/util/dom.js
 	mkdir -p $(dir $@)
 	yarn google-closure-compiler -W VERBOSE -O ADVANCED --charset UTF-8 \
                              --define TR=$(Lang-$*) \
