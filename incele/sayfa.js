@@ -185,7 +185,7 @@ const tcktGöster = (adres) => {
 }
 
 AçDüğmesi.onclick = Cüzdan.bağla;
-Cüzdan.bağlanınca(tcktGöster);
+Cüzdan.bağlanınca(() => tcktGöster(/** @type {string} */(Cüzdan.adres())));
 Cüzdan.ağDeğişince(() => tcktGöster(/** @type {string} */(Cüzdan.adres())));
 Cüzdan.adresDeğişince(tcktGöster);
 

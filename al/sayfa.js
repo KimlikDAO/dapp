@@ -11,6 +11,23 @@ import ipfs from '/lib/ipfs';
 import dom from '/lib/util/dom';
 import { hex } from '/lib/util/çevir';
 
+
+const İmzaİsteğiTR = `TCKT Erişim İsteği:
+-------------------------------------------------
+Bu mesajı imzaladığınızda, bağlı uygulama TCKT’nizin
+
+{}
+
+bölümlerine erişebilecek. Bu mesajı sadece bu bilgileri paylaşmak istiyorsanız imzalayın.
+`
+const İmzaİsteğiEN = `TCKT Access Request:
+-------------------------------------------------
+When you sign this message, the connected app will have access to
+
+{}
+
+sections of your TCKT. Only sign this message if you would like to share this information.`
+
 /**
  * @param {function(string)} sonra
  */
@@ -34,6 +51,17 @@ const açıkAnahtarAlVe = (sonra) => {
       : "This website would like your public encryption key."
     );
     s3a.onclick = () => {
+      const bölümler = ["personInfo", "contactInfo"];
+      const satırlar = "    " + bölümler.join(",\n    ");
+      const mesaj = (dom.TR
+        ? İmzaİsteğiTR + "\n\n" + İmzaİsteğiEN
+        : İmzaİsteğiEN + "\n\n" + İmzaİsteğiTR).replaceAll("{}", satırlar);
+
+      ethereum.request(/** @type {!eth.Request} */({
+        method: "personal_sign",
+        params: [mesaj, Cüzdan.adres()]
+      }));
+      return;
       ethereum.request(/** @type {eth.Request} */({
         method: "eth_getEncryptionPublicKey",
         params: [Cüzdan.adres()],
