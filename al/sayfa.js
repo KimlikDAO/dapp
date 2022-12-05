@@ -34,7 +34,7 @@ const açıkAnahtarAlVe = (sonra) => {
       : "This website would like your public encryption key."
     );
     s3a.onclick = () => {
-      ethereum.request(/** @type {ethereum.Request} */({
+      ethereum.request(/** @type {eth.Request} */({
         method: "eth_getEncryptionPublicKey",
         params: [Cüzdan.adres()],
       })).then((açıkAnahtar) => {
@@ -50,25 +50,42 @@ const açıkAnahtarAlVe = (sonra) => {
 }
 
 /**
- * @param {Promise<did.DecryptedDID>} açıkTCKTSözü
+ * @param {Promise<did.DecryptedDID>} açıkTcktSözü
  */
-const tcktYarat = (açıkTCKTSözü) => {
+const tcktYarat = (açıkTcktSözü) => {
   açıkAnahtarAlVe((açıkAnahtar) => {
     İmeceİptal.göster();
     /** @const {Promise<string>} */
-    const cidSözü = açıkTCKTSözü
+    const cidSözü = açıkTcktSözü
       .then((açıkTckt) => ipfs.yaz(JSON.stringify(hazırla(
-        açıkAnahtar, açıkTckt, [
-        ["personInfo", "contactInfo", "kütükBilgileri", "adresBilgileri"],
-        [""],
-        ["humanID"]
+        açıkAnahtar, açıkTckt, [{
+          sections: ["personInfo", "contactInfo", "addressInfo", "kütükBilgileri"],
+          userPrompt: {
+            "en-US": ["{1} wants to view your TCKT.", "Provide", "Reject"],
+            "tr-TR": ["{1} TCKT’nize erişmek istiyor. İzin veriyor musunuz?", "Evet", "Hayır"]
+          },
+          signPrompt: "",
+        }, {
+          sections: ["contactInfo", "humanID"],
+          userPrompt: {
+            "en-US": ["{1} wants to view your KimlikDAO HumanID, email and phone number.", "Provide", "Reject"],
+            "tr-TR": ["{1} KimlikDAO HumanID, email ve telefon numaranıza erişmek istiyor. İzin veriyor musunuz?", "Evet", "Hayır"]
+          },
+          signPrompt: "",
+        }, {
+          sections: ["humanID"],
+          userPrompt: {
+            "en-US": ["{1} wants to view your KimlikDAO HumanID.", "Provide", "Reject"],
+            "tr-TR": ["{1} KimlikDAO HumanID’nize erişmek istiyor. İzin veriyor musunuz?", "Evet", "Hayır"]
+          },
+          signPrompt: ""
+        }
       ]))))
       .then(hex)
       .catch((e) => {
         console.log(e);
         return "";
       });
-
     İmeceİptal.kurVe(
       (adresAğırlığı, eşik) => öde(cidSözü, adresAğırlığı, eşik));
   });

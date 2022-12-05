@@ -29,7 +29,7 @@ build/al/sayfa-%.js: al/sayfa.js \
 	yarn uglifyjs $@ -m -o $@
 	node tools/jsPostprocessor $@
 
-build/al/bağla-%.js.inl: al/bağla.js lib/ethereum/provider.js
+build/al/bağla-%.js.inl: al/bağla.js
 	mkdir -p $(dir $@)
 	yarn google-closure-compiler -W VERBOSE -O ADVANCED --charset UTF-8 \
                              --define TR=$(Lang-$*) \

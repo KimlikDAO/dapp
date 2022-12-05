@@ -39,7 +39,7 @@ const açıkTcktAlVe = (sonra) => {
   const powWorker = new Worker("/al/tanışma/pow-worker.js");
 
   /**
-   * Pedersen taahhüdü için rastgele bitdizisi.
+   * Kriptografik taahhüt için rastgele bitdizisi.
    *
    * TCKT'nin kişi bilgilerinden tahmin edilememesini de bu şekilde sağlıyoruz.
    * Bu sebeple, 32 byte yetmesine karşın, bitdizisini 64 byte uzunluğunda
@@ -103,12 +103,12 @@ const açıkTcktAlVe = (sonra) => {
   const params = new URLSearchParams(location.search);
   /** @type {?string} */
   const code = params.get("code");
-  history.replaceState(null, "", location.pathname);
   if (code) {
+    history.replaceState(null, "", location.pathname);
     powWorker.terminate();
     /** @const {!Uint8Array} */
-    const eDevletRastgele = new Uint8Array(64);
-    crypto.getRandomValues(eDevletRastgele);
+    const eDevletRastgele = /** @type {!Uint8Array} */(
+      crypto.getRandomValues(new Uint8Array(64)));
     dom.gizle(eDevletDüğmesi);
     pdfDüğmesi.href = "javascript:";
     pdfDüğmesi.classList.remove("act");
@@ -120,8 +120,8 @@ const açıkTcktAlVe = (sonra) => {
           "oauth_code": code,
           "taahhut": base64(new Uint8Array(taahhüt))
         })))
-      .then(res => /** @type {did.DecryptedDID} */(res.json()))
-      .then((açıkTckt) => kapat(açıkTckt, eDevletRastgele));
+      .then(res => res.json())
+      .then((/** @type {did.DecryptedDID} */ açıkTckt) => kapat(açıkTckt, eDevletRastgele));
   } else {
     const hataBildirimi = dom.adla("tafb");
     pdfDüğmesi.onclick = () => {

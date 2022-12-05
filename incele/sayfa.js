@@ -140,9 +140,9 @@ const kapalıYüzGöster = (adres) => {
     const dosyaSözü = ipfs.cidBytetanOku(hexten(CidHex));
     AçDüğmesi.onclick = () => dosyaSözü
       .then((dosya) => decryptInfoSections(
-        /** @const {!ERC721Unlockable} */(JSON.parse(dosya)),
+        /** @const {!eth.ERC721Unlockable} */(JSON.parse(dosya)),
         ["personInfo", "contactInfo", "addressInfo", "kütükBilgileri"],
-        /** @type {!ethereum.Provider} */(ethereum),
+        ethereum,
         adres
       ))
       .then((açıkTckt) => {
