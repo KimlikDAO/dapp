@@ -250,10 +250,11 @@ const Paralar = dom.TR ? {
 };
 
 export default {
-  ağ,
-  ağDeğişince,
   adres,
   adresDeğişince,
+  ağ,
+  AğBilgileri,
+  ağDeğişince,
   bağla,
   bağlanınca,
   hızlıArabirimAdı,
