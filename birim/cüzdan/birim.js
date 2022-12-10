@@ -27,7 +27,7 @@ const ağ = () => Ağ;
 /** @const {function():?string} */
 const adres = () => Adres;
 
-/** @const {Object<string, Array< string>>} */
+/** @const {Object<string, Array<string>>} */
 const AğBilgileri = {
   "0xa86a": ["snowtrace.io", "Avalanche"],
   "0x1": ["etherscan.io", "Ethereum"],
@@ -83,7 +83,7 @@ const ağDeğişti = (yeniAğ) => {
  * @param {!Array<string>} adresler cüzdandan gelen adresler dizisi.
  */
 const adresDeğişti = (adresler) => {
-  if (adresler.length === 0) {
+  if (!adresler.length) {
     Adres = null;
     AdresButonu.innerText = BağlaMetni;
     AdresButonu.onclick = bağla;
@@ -173,7 +173,7 @@ dom.adla("nld").onclick = (event) => {
   }
 };
 
-{ // Ağ menüsünü oluştur.
+const ağDüğmesiKur = () => {
   const ağMenüsü = dom.adla("ncd");
   const avax = dom.adla("nc0xa86a");
   avax.replaceChild(AğButonu.firstElementChild.cloneNode(true),
@@ -193,8 +193,9 @@ dom.adla("nld").onclick = (event) => {
       })).catch(console.log);
   }
 }
+ağDüğmesiKur();
 
-if (window["ethereum"]) {
+const adresDüğmesiKur = () => {
   AdresButonu.onclick = bağla;
   dom.adla("nad0").onclick = () =>
     window.location.href = dom.TR ? "/incele" : "/view";
@@ -228,6 +229,14 @@ if (window["ethereum"]) {
     .then((accounts) => {
       if (accounts.length > 0) adresDeğişti(/** Array<string> */(accounts));
     });
+}
+
+if (window["ethereum"])
+  adresDüğmesiKur();
+else {
+  setTimeout(() => {
+    if (window["ethereum"]) adresDüğmesiKur();
+  }, 200);
 }
 
 /** @const {Object<string, !Array<string>>} */
