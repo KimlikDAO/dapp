@@ -1,47 +1,73 @@
 <!DOCTYPE html>
 <html data-en-lang="en" lang="tr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title data-en="KimlikDAO | Self-custody digital IDs">
+      KimlikDAO | Blokzincirdeki kimlik kartınız
+    </title>
+    <link rel="canonical" href="https://kimlikdao.org" />
+    <link rel="preload" crossorigin href="/font/f400.woff2" as="font" />
+    <link rel="preload" crossorigin href="/font/f700.woff2" as="font" />
+    <link rel="preload" crossorigin href="/font/f800.woff2" as="font" />
+    <link
+      href="/font/lato-ttf.css"
+      rel="stylesheet"
+      type="text/css"
+      data-remove
+    />
+    <link href="/ana/sayfa.css" rel="stylesheet" type="text/css" />
+  </head>
 
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title data-en="KimlikDAO | Self-custody digital IDs">KimlikDAO | Blokzincirdeki kimlik kartınız</title>
-  <link rel="canonical" href="https://kimlikdao.org" />
-  <link rel="preload" crossorigin href="/font/f400.woff2" as="font" />
-  <link rel="preload" crossorigin href="/font/f700.woff2" as="font" />
-  <link rel="preload" crossorigin href="/font/f800.woff2" as="font" />
-  <link href="/font/lato-ttf.css" rel="stylesheet" type="text/css" data-remove />
-  <link href="/ana/sayfa.css" rel="stylesheet" type="text/css" />
-</head>
-
-<body>
-  <!-- n harfi navigation'ın kısaltması -->
-  <div id="n">
-    <div id="nk">
-      <h2><a href="/">KimlikDAO</a></h2>
-      <a id=nkd href="//discord.gg/H2wg6pcWXG" target="_blank" rel="noreferrer"><img src="/ana/discord.svg" data-inline></a>
-    </div>
-    <div class="nf">
-      <birim:cüzdan />
-      <a id="nd" data-en-href="/get" href="/al" class="btn act" data-en="Get TCKT">TCKT al
-        <img src="/ana/ok.svg" data-inline>
-      </a>
-    </div>
-  </div>
-  <!-- b harfi banner'ın kısaltması -->
-  <div id="b">
-    <h1 data-en="TCKT: Your ID token for web3">
-      TCKT: Blokzincirdeki kimlik kartın
-      <div id="bz" data-en="Self-custody ID token for KYC’ed wallet logins">Bir NFT ile birçok app’e KYC’li oturum aç</div>
-    </h1>
-    <div id="bt">
-      <div id="bu">
-        <altbirim:sergi />
-        <birim:telefon />
+  <body>
+    <!-- n harfi navigation'ın kısaltması -->
+    <div id="n">
+      <div id="nk">
+        <h2><a href="/">KimlikDAO</a></h2>
+        <a
+          id="nkd"
+          href="//discord.gg/H2wg6pcWXG"
+          target="_blank"
+          rel="noreferrer"
+          ><img src="/ana/discord.svg" data-inline
+        /></a>
+        <a
+          id="nkg"
+          href="https://github.com/KimlikDAO"
+          target="_blank"
+          rel="noreferrer"
+          ><img src="/ana/github.svg" alt="Github Linki" data-inline
+        /></a>
+      </div>
+      <div class="nf">
+        <birim:cüzdan />
+        <a
+          id="nd"
+          data-en-href="/get"
+          href="/al"
+          class="btn act"
+          data-en="Get TCKT"
+          >TCKT al
+          <img src="/ana/ok.svg" data-inline />
+        </a>
       </div>
     </div>
-  </div>
+    <!-- b harfi banner'ın kısaltması -->
+    <div id="b">
+      <h1 data-en="TCKT: Your ID token for web3">
+        TCKT: Blokzincirdeki kimlik kartın
+        <div id="bz" data-en="Self-custody ID token for KYC’ed wallet logins">
+          Bir NFT ile birçok app’e KYC’li oturum aç
+        </div>
+      </h1>
+      <div id="bt">
+        <div id="bu">
+          <altbirim:sergi />
+          <birim:telefon />
+        </div>
+      </div>
+    </div>
 
-  <script async type="module" src="/ana/sayfa.js" data-remove-type></script>
-</body>
-
+    <script async type="module" src="/ana/sayfa.js" data-remove-type></script>
+  </body>
 </html>
