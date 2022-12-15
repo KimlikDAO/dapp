@@ -28,7 +28,7 @@ const EşikKutusu = dom.adla("inmes");
 /** @const {Element} */
 const SilKutusu = dom.adla("inmsy");
 
-/** @const {Object<string, !did.DecryptedDID>} */
+/** @const {Object<string, !did.DecryptedInfos>} */
 const Bellek = {};
 
 const kutuKapat = () => {
@@ -118,7 +118,7 @@ const silKutusuGöster = () => {
 let CidHex = "";
 
 /**
- * @param {!did.DecryptedDID} açıkTckt
+ * @param {!did.DecryptedInfos} açıkTckt
  */
 const açıkYüzGöster = (açıkTckt) => {
   Tckt.açıkTcktGöster(açıkTckt);
@@ -223,17 +223,16 @@ const girdiDüzelt = (girdi) => {
 
 const birAzalt = (event) => {
   const node = event.target.nextElementSibling;
-  if (node.value == 1) return;
-  node.value = parseInt(node.value) - 1;
+  node.value = Math.min(+node.value - 1, 1);
 }
 
 const birArttır = (event, max) => {
   const node = event.target.previousElementSibling;
-  node.value = Math.min(parseInt(node.value) + 1, max);
+  node.value = Math.min(+node.value + 1, max);
 }
 
 const ağırlıkBlurOlunca = (event) => {
-  let val = event.target.value;
+  const val = event.target.value;
   if (val > 9) event.target.value = 9;
   if (val < 1 || val === "") event.target.value = 1;
 }

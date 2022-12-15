@@ -27,7 +27,7 @@ const kartDeğiştir = (yeniKart) => {
   const width = Kartlar.firstElementChild.getBoundingClientRect().width;
 
   Telefon.nftGöster(yeniKart <= 1);
-  Tckt.yüzGöster(yeniKart == 0);
+  Tckt.yüzGöster(!yeniKart);
   yeniKart === 3
     ? Telefon.kutuGöster(dom.TR
       ? "Bağlı app TCKT'nizin açık haline erişmek istiyor. İzin veriyor musunuz?"

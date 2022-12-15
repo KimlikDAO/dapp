@@ -4,6 +4,7 @@ build/ana/sayfa-%.js: ana/sayfa.js \
                       birim/telefon/birim.js \
                       birim/tckt/birim.js \
                       lib/api/edevletApi.js \
+                      lib/crypto/secp256k1.js lib/crypto/modular.js \
                       lib/did/types.js lib/did/TCKTBölümleri.js \
                       lib/ethereum/provider.js lib/ethereum/jsonrpc.js \
                       lib/ethereum/ERC721Unlockable.js \

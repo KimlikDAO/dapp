@@ -62,7 +62,7 @@ const addressInfoEkle = (addressInfo) => {
 }
 
 /**
- * @param {did.DecryptedDID} açıkTckt
+ * @param {did.DecryptedInfos} açıkTckt
  */
 const açıkTcktGöster = (açıkTckt) => {
   /** @const {did.PersonInfo} */

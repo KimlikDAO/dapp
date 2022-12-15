@@ -12,8 +12,8 @@ Cüzdan.bağlanınca(() => {
   let ağ = Cüzdan.ağ();
   fiyatDeğişikliğiFormuHazırla(ağ);
   komuniteÖnergesiHazırla();
-  Cüzdan.ağDeğişince(() => {
-    fiyatDeğişikliğiFormuHazırla(Cüzdan.ağ());
+  Cüzdan.ağDeğişince((yeniAğ) => {
+    fiyatDeğişikliğiFormuHazırla(yeniAğ);
   })
 })
 

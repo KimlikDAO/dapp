@@ -37,7 +37,7 @@ const kesirGir = (sayı, satır) => {
  * @param {Object<string, number>} adresAğırlığı (adres, ağırlık) ikilileri.
  * @param {number} eşik imece iptal için gereken oy eşiği.
  */
-export const öde = (cidSözü, adresAğırlığı, eşik) => {
+const öde = (cidSözü, adresAğırlığı, eşik) => {
   /** @const {Element} */
   const paraDüğmesi = dom.adla("odb");
   /** @const {Element} */
@@ -173,3 +173,5 @@ export const öde = (cidSözü, adresAğırlığı, eşik) => {
       .catch(console.log);
   };
 }
+
+export { öde };
