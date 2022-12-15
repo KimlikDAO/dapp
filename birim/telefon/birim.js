@@ -2,9 +2,9 @@ import Tckt from '/birim/tckt/birim';
 import dom from '/lib/util/dom';
 
 /** @const {Element} */
-const nft = dom.adla("tc");
+const Nft = dom.adla("tc");
 /** @const {Element} */
-const nftButton = dom.adla("tenft-button");
+const NftButton = dom.adla("tenft-button");
 
 /**
  * @param {string} adres Telefonda gösterilecek adres.
@@ -39,25 +39,25 @@ const kutuKapat = () => {
  */
 const nftGöster = (kutudaGöster) => {
   if (kutudaGöster) {
-    nft.style.opacity = "";
-    dom.göster(nftButton);
-    nftButton.onclick ||= Tckt.çevir;
+    Nft.style.opacity = "";
+    dom.göster(NftButton);
+    NftButton.onclick ||= Tckt.çevir;
   }
 
-  nft.classList.toggle("moveintowallet", !kutudaGöster);
-  nftButton.classList.toggle("show", kutudaGöster);
+  Nft.classList.toggle("moveintowallet", !kutudaGöster);
+  NftButton.classList.toggle("show", kutudaGöster);
 }
 
 /**
  * Temsili nft'yi Al sayfasında daha yukarıda gösterir
  */
 const nftYukarıGönder = () => {
-  dom.adla("te").previousElementSibling.appendChild(nft);
-  nft.style.opacity = "";
+  dom.adla("te").previousElementSibling.appendChild(Nft);
+  Nft.style.opacity = "";
 }
 
 const nftGeriAl = () => {
-  nft.classList.add('movedown');
+  Nft.classList.add('movedown');
   nftGöster(true);
 }
 

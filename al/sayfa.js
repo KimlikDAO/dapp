@@ -78,7 +78,7 @@ const açıkAnahtarAlVe = (sonra) => {
 }
 
 /**
- * @param {Promise<did.DecryptedDID>} açıkTcktSözü
+ * @param {Promise<did.DecryptedInfos>} açıkTcktSözü
  */
 const tcktYarat = (açıkTcktSözü) => {
   açıkAnahtarAlVe((açıkAnahtar) => {

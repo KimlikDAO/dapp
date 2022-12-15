@@ -1,5 +1,6 @@
 build/iptal/sayfa-%.js: iptal/sayfa.js \
                         birim/cüzdan/birim.js \
+                        lib/crypto/secp256k1.js lib/crypto/modular.js \
                         lib/ethereum/provider.js lib/ethereum/jsonrpc.js \
                         lib/ethereum/evm.js lib/ethereum/TCKT.js \
                         lib/crypto/sha3.js \

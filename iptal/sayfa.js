@@ -10,6 +10,7 @@ dom.adla("ipbtnb").onclick = () => {
   revokeeAdımınıGöster();
   Cüzdan.ağDeğişince(revokeeAdımınıGöster);
 }
+
 const revokeeAdımınıGöster = () => {
   /** @type {?Element} */
   let seçilmişAdres = null;
