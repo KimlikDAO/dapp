@@ -295,7 +295,7 @@ h1 {
   }
 }
 
-@media (max-width: 650px) {
+@media (max-width: 670px) {
   #nd {
     display: none;
   }
@@ -307,6 +307,10 @@ h1 {
   }
 
   #nkd {
+    display: none;
+  }
+
+  #nkg {
     display: none;
   }
 

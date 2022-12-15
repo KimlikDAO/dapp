@@ -40,6 +40,7 @@ build/ana-%.html: ana/sayfa.html \
                   birim/cüzdan.birim \
                   build/ana/ok.svg.inl \
                   build/ana/discord.svg.inl \
+                  build/ana/github.svg.inl \
                   build/ana/sayfa-%.keymap \
                   build/font/fonts-%.keymap \
                   build/birim/cüzdan/birim.keymap \
