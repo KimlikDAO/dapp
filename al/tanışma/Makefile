@@ -12,12 +12,17 @@ build/al/tanışma/birim.keymap: $(call compressions, $(AL_TANIŞMA_REQUEST_SVG_
 
 al/tanışma.birim: al/tanışma/birim.html $(AL_TANIŞMA_INLINE_SVG_OUT)
 
-build/al/tanışma/pow-worker.js: al/tanışma/pow-worker.js lib/util/worker.js
+build/al/tanışma/pow-worker.js: al/tanışma/pow-worker.js lib/util/worker.d.js \
+    lib/crypto/sha3.js \
+    lib/util/çevir.js
 	mkdir -p $(dir $@)
 	yarn google-closure-compiler -W VERBOSE -O ADVANCED --charset UTF-8 \
-                             --language_in ECMASCRIPT_2021 \
-                             --define POW_EŞİĞİ=$(POW_EŞİĞİ) \
+                             --language_in ECMASCRIPT_NEXT \
+                             --emit_use_strict \
+                             --module_resolution NODE \
                              --assume_function_wrapper \
+                             --dependency_mode PRUNE \
+                             --entry_point $< \
                              --js $^ \
                              --js_output_file $@
 	yarn uglifyjs $@ -m -o $@
