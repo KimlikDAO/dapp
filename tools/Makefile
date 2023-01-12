@@ -13,8 +13,8 @@ removeLang = $(subst -tr,,$(subst -en,,$(1)))
 Lang-en := false
 Lang-tr := true
 
-build/prod.js: tools/prod.js tools/prod-env.js \
-               lib/cloudflare/moduleWorker.js lib/cloudflare/types.js
+build/prod.js: tools/prod.js tools/prod.d.js \
+    lib/cloudflare/moduleWorker.d.js lib/cloudflare/types.d.js
 	mkdir -p build
 	yarn google-closure-compiler -W VERBOSE -O ADVANCED --charset UTF-8 \
                              --env BROWSER \

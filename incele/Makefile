@@ -5,7 +5,7 @@ build/incele/sayfa-%.js: incele/sayfa.js \
                          lib/crypto/sha3.js lib/crypto/ed25519.js \
                          lib/crypto/secp256k1.js lib/crypto/modular.js \
                          lib/did/types.js lib/did/TCKTBölümleri.js \
-                         lib/did/TCKTVerisi.js lib/did/infoSection.js \
+                         lib/did/TCKTVerisi.js lib/did/section.js \
                          lib/ethereum/provider.js lib/ethereum/jsonrpc.js \
                          lib/ethereum/evm.js lib/ethereum/TCKT.js \
                          lib/ethereum/ERC721Unlockable.js lib/ethereum/unlockables.js \

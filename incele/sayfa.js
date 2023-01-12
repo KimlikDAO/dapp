@@ -4,7 +4,7 @@
  */
 import Cüzdan from '/birim/cüzdan/birim';
 import Tckt from '/birim/tckt/birim';
-import { decryptInfoSections } from '/lib/did/infoSection';
+import { decryptSections } from '/lib/did/section';
 import evm from "/lib/ethereum/evm";
 import TCKT from '/lib/ethereum/TCKT';
 import ipfs from '/lib/ipfs';
@@ -28,7 +28,7 @@ const EşikKutusu = dom.adla("inmes");
 /** @const {Element} */
 const SilKutusu = dom.adla("inmsy");
 
-/** @const {Object<string, !did.DecryptedInfos>} */
+/** @const {Object<string, !did.DecryptedSections>} */
 const Bellek = {};
 
 const kutuKapat = () => {
@@ -118,7 +118,7 @@ const silKutusuGöster = () => {
 let CidHex = "";
 
 /**
- * @param {!did.DecryptedInfos} açıkTckt
+ * @param {!did.DecryptedSections} açıkTckt
  */
 const açıkYüzGöster = (açıkTckt) => {
   Tckt.açıkTcktGöster(açıkTckt);
@@ -139,7 +139,7 @@ const kapalıYüzGöster = (adres) => {
   else {
     const dosyaSözü = ipfs.cidBytetanOku(hexten(CidHex));
     AçDüğmesi.onclick = () => dosyaSözü
-      .then((dosya) => decryptInfoSections(
+      .then((dosya) => decryptSections(
         /** @const {!eth.ERC721Unlockable} */(JSON.parse(dosya)),
         ["personInfo", "contactInfo", "addressInfo", "kütükBilgileri"],
         ethereum,

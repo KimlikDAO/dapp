@@ -1,8 +1,16 @@
 import dom from '/lib/util/dom';
 
-/** @const {Element} */
+/** @const {!Set<string>} */
+const Gösterme = new Set([
+  "bls12_381",
+  "commitment",
+  "commitRand",
+  "secp256k1",
+  "signatureTs",
+]);
+/** @const {!Element} */
 const Kartlar = dom.adla("tck");
-/** @const {Element} */
+/** @const {!Element} */
 const Tckt = dom.adla("tc");
 /** @type {number} */
 let Kart = 0;
@@ -29,25 +37,43 @@ const yüzGöster = (bilgiYüzü) => Tckt.classList.toggle("flipped", bilgiYüz�
 
 const çevir = () => Tckt.classList.toggle("flipped");
 
+/** @param {!did.PersonInfo} */
+const personInfoGöster = (personInfo) => {
+  for (let satır of Object.entries(/** @type {!Object<string, string>} */(personInfo)))
+    if (satır[1] && !Gösterme.has(satır[0])) {
+      const birim = dom.adla("tc" + satır[0]);
+      if (birim) birim.innerText = satır[1];
+    }
+
+  dom.adla('tclocalIdNumber').innerText = personInfo.localIdNumber.slice(2);
+
+  if (dom.TR)
+    dom.adla("tcgender").innerText = dom.adla("tcgender").innerText == 'M'
+      ? 'E'
+      : 'K';
+}
+
 /**
- * @param {did.ContactInfo} contactInfo
+ * @param {?did.ContactInfo} contactInfo
  */
-const contactInfoEkle = (contactInfo) => {
+const contactInfoGöster = (contactInfo) => {
   if (!contactInfo) return;
   KartSayısı += 1;
   dom.adlaGöster("tcibp");
   for (let satır of Object.entries(/** @type {!Object<string, string>} */(contactInfo)))
-    if (satır[1]) dom.adla("tc" + satır[0]).innerText = satır[0] == "phone" ?
-      dom.telefondanMetne(satır[1]) : satır[1];
+    if (satır[1] && !Gösterme.has(satır[0]))
+      dom.adla("tc" + satır[0]).innerText = satır[0] == "phone"
+        ? dom.telefondanMetne(satır[1])
+        : satır[1];
 }
 
 /**
- * @param {did.AddressInfo} addressInfo
+ * @param {?did.AddressInfo} addressInfo
  */
-const addressInfoEkle = (addressInfo) => {
+const addressInfoGöster = (addressInfo) => {
   // Şimdilik sadece `TürkiyeAdresi` gösterebiliyoruz.
   if (!addressInfo || addressInfo.country != "Türkiye") return;
-  const adres = /** @type {did.TürkiyeAdresi} */(addressInfo);
+  const adres = /** @type {!did.TürkiyeAdresi} */(addressInfo);
 
   KartSayısı += 1;
   dom.adlaGöster("tcabp");
@@ -62,26 +88,22 @@ const addressInfoEkle = (addressInfo) => {
 }
 
 /**
- * @param {did.DecryptedInfos} açıkTckt
+ * @param {?did.kütükBilgileri} kütükBilgileri
+ */
+const kütükBilgileriGöster = (kütükBilgileri) => {
+  for (let satır of Object.entries(/** @type {!Object<string, string>} */(kütükBilgileri)))
+    if (satır[1] && !Gösterme.has(satır[0]))
+      dom.adla("tc" + satır[0]).innerText = satır[1];
+}
+
+/**
+ * @param {!did.DecryptedSections} açıkTckt
  */
 const açıkTcktGöster = (açıkTckt) => {
-  /** @const {did.PersonInfo} */
-  const personInfo = /** @type {did.PersonInfo} */(açıkTckt["personInfo"]);
-  for (let satır of Object.entries(/** @type {!Object<string, string>} */(personInfo)))
-    if (satır[1]) dom.adla("tc" + satır[0]).innerText = satır[1];
-
-  dom.adla('tclocalIdNumber').innerText = personInfo.localIdNumber.slice(2);
-
-  if (dom.TR)
-    dom.adla("tcgender").innerText = dom.adla("tcgender").innerText == 'M' ? 'E' : 'K';
-
-  contactInfoEkle(/** @type {did.ContactInfo} */(açıkTckt["contactInfo"]));
-  addressInfoEkle(/** @type {did.AddressInfo} */(açıkTckt["addressInfo"]));
-
-  const kütükBilgileri = /** @type {did.KütükBilgileri} */(açıkTckt["kütükBilgileri"]);
-  for (let satır of Object.entries(/** @type {!Object<string, string>} */(kütükBilgileri)))
-    if (satır[1]) dom.adla("tc" + satır[0]).innerText = satır[1];
-
+  personInfoGöster(/** @type {!did.PersonInfo} */(açıkTckt["personInfo"]));
+  contactInfoGöster(/** @type {?did.ContactInfo} */(açıkTckt["contactInfo"]));
+  addressInfoGöster(/** @type {?did.AddressInfo} */(açıkTckt["addressInfo"]));
+  kütükBilgileriGöster(/** @type {?did.KütükBilgileri} */(açıkTckt["kütükBilgileri"]));
   Tckt.classList.add("flipped");
 }
 

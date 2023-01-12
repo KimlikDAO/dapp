@@ -3,14 +3,11 @@ import Tckt from '/birim/tckt/birim';
 import dom from '/lib/util/dom';
 import { base64, uint8ArrayeBase64ten } from '/lib/util/çevir';
 
-/** @const {string} */
-const KIMLIK_AS_URL = "https://mock-api.kimlikas.com";
-
 /**
  * @const {string}
  * @noinline
  */
-const KIMLIKDAO_API_URL = "https://api.kimlikdao.org/";
+const KIMLIKDAO_NODE_URL = "https://node5.kimlikdao.org/";
 
 /**
  * Verilen bir `hesap` için `rastgele` bitdizisi ile kriptografik taahhüt
@@ -18,7 +15,7 @@ const KIMLIKDAO_API_URL = "https://api.kimlikdao.org/";
  *
  * @param {string} adres EVM adresi.
  * @param {!Uint8Array} rastgele bitdizisi.
- * @return {Promise<ArrayBuffer>} Kriptografik taahhüt.
+ * @return {!Promise<!ArrayBuffer>} Kriptografik taahhüt.
  */
 const taahhütOluştur = (adres, rastgele) => {
   /** @type {!Uint8Array} */
@@ -32,11 +29,11 @@ const taahhütOluştur = (adres, rastgele) => {
 }
 
 /**
- * @param {function(Promise<did.DecryptedInfos>)} sonra
+ * @param {function(!Promise<!did.DecryptedSections>)} sonra
  */
 const açıkTcktAlVe = (sonra) => {
-  /** @const {Worker} */
-  const powWorker = new Worker("/al/tanışma/pow-worker.js");
+  /** @const {!Worker} */
+  const powWorker = new Worker("/al/tanışma/pow-worker.js", { type: "module" });
 
   /**
    * Kriptografik taahhüt için rastgele bitdizisi.
@@ -67,7 +64,7 @@ const açıkTcktAlVe = (sonra) => {
       } else {
         powWorker.postMessage(taahhüt, [taahhüt]);
         powWorker.onmessage = (msg) => {
-          const taahhütPow = base64(new Uint8Array(msg.data))
+          const taahhütPow = base64(new Uint8Array(msg.data)).slice(0, -2)
           window.localStorage[taahhütB64] = taahhütPow;
           resolve(taahhütPow);
         }
@@ -75,7 +72,7 @@ const açıkTcktAlVe = (sonra) => {
     }));
   /** @const {Promise<string>} */
   const numaraSözü = taahhütPowSözü
-    .then((taahhütPow) => fetch(KIMLIKDAO_API_URL + "alfanum-al?" + taahhütPow))
+    .then((taahhütPow) => fetch(KIMLIKDAO_NODE_URL + "edevlet/nko/commit?" + taahhütPow))
     .then((res) => res.text())
     .catch(console.log);
 
@@ -86,7 +83,7 @@ const açıkTcktAlVe = (sonra) => {
   /** @const {Element} */
   const kutu = dom.adla("ta");
   /**
-   * @param {did.DecryptedInfos} açıkTckt
+   * @param {!did.DecryptedSections} açıkTckt
    * @param {!Uint8Array} rastgele
    */
   const kapat = (açıkTckt, rastgele) => {
@@ -114,14 +111,14 @@ const açıkTcktAlVe = (sonra) => {
     pdfDüğmesi.classList.remove("act");
     pdfDüğmesi.innerText = dom.TR ? "E-devlet’ten bilgileriniz alındı ✓" : "We got your info ✓";
     dom.butonDurdur(pdfDüğmesi);
+    /** @const {number} */
+    const istemciAn = Date.now() / 1000 | 0;
     taahhütOluştur(/** @type {string} */(Cüzdan.adres()), eDevletRastgele)
-      .then((taahhüt) =>
-        fetch(KIMLIK_AS_URL + "?" + new URLSearchParams({
-          "oauth_code": code,
-          "taahhut": base64(new Uint8Array(taahhüt))
-        })))
+      .then((taahhüt) => fetch(KIMLIKDAO_NODE_URL
+        + "edevlet/oauth2?" + base64(new Uint8Array(taahhüt)).slice(0, -1)
+        + `&ts=${istemciAn}&oauth_code=${code}`))
       .then(res => res.json())
-      .then((/** @type {did.DecryptedInfos} */ açıkTckt) => kapat(açıkTckt, eDevletRastgele));
+      .then((/** @type {!did.DecryptedSections} */ açıkTckt) => kapat(açıkTckt, eDevletRastgele));
   } else {
     const hataBildirimi = dom.adla("tafb");
     pdfDüğmesi.onclick = () => {
@@ -145,19 +142,21 @@ const açıkTcktAlVe = (sonra) => {
 
       /** @const {function(!File)} */
       const dosyaYükle = (dosya) => {
+        /** @const {number} */
+        const istemciAnı = Date.now() / 1000 | 0;
         hataKaldır();
         dom.adla("tafb").innerText = dom.TR ? "Belge yükleniyor" : "Uploading document";
-        dom.gizle(dom.adla("taimg"));
-        dom.göster(dom.adla("tal"));
+        dom.adlaGizle("taimg");
+        dom.adlaGöster("tal");
         const formData = new FormData();
         formData.set('f', dosya);
         taahhütPowSözü
-          .then((taahhütPow) => fetch(KIMLIKDAO_API_URL + "pdften-tckt?" + taahhütPow, {
+          .then((taahhütPow) => fetch(KIMLIKDAO_NODE_URL + `edevlet/nko?${taahhütPow}&ts=${istemciAnı}`, {
             method: 'POST',
             body: formData,
           }))
           .then(res => res.ok
-            ? res.json().then((/** @type {did.DecryptedInfos} */ açıkTckt) => {
+            ? res.json().then((/** @type {!did.DecryptedSections} */ açıkTckt) => {
               dom.gizle(dom.adla("tadc"));
               pdfDüğmesi.href = "javascript:";
               pdfDüğmesi.classList.remove("act");
@@ -214,8 +213,8 @@ const açıkTcktAlVe = (sonra) => {
         "Invalid PDF file"
       ];
 
-      /** @param {HataBildirimi} hata */
-      const hataGöster = (/** HataBildirimi */ hata) => {
+      /** @param {!HataBildirimi} hata */
+      const hataGöster = (/** @type {!HataBildirimi} */ hata) => {
         let metin = HataMetinleri[hata.kod];
         hataBildirimi.innerText = hata.ek && hata.ek.length
           ? metin.replace("{}", hata.ek[0]) : metin;
