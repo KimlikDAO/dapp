@@ -213,8 +213,8 @@ const açıkTcktAlVe = (sonra) => {
         "Invalid PDF file"
       ];
 
-      /** @param {!HataBildirimi} hata */
-      const hataGöster = (/** @type {!HataBildirimi} */ hata) => {
+      /** @param {!node.HataBildirimi} hata */
+      const hataGöster = (/** @type {!node.HataBildirimi} */ hata) => {
         let metin = HataMetinleri[hata.kod];
         hataBildirimi.innerText = hata.ek && hata.ek.length
           ? metin.replace("{}", hata.ek[0]) : metin;

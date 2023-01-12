@@ -1,13 +1,14 @@
 build/iptal/sayfa-%.js: iptal/sayfa.js \
                         birim/cüzdan/birim.js \
-                        lib/crypto/secp256k1.js lib/crypto/modular.js \
-                        lib/ethereum/provider.js lib/ethereum/jsonrpc.js \
-                        lib/ethereum/evm.js lib/ethereum/TCKT.js \
                         lib/crypto/sha3.js \
+                        lib/crypto/secp256k1.js lib/crypto/modular.js \
+                        lib/ethereum/provider.d.js lib/ethereum/jsonrpc.d.js \
+                        lib/ethereum/evm.js lib/ethereum/TCKT.js \
                         lib/util/dom.js lib/util/çevir.js
 	mkdir -p $(dir $@)
 	yarn google-closure-compiler -W VERBOSE -O ADVANCED --charset UTF-8 \
-                             --define TR=$(Lang-$*) \
+                             --jscomp_error=unusedLocalVariables \
+                             --define "TR\$$\$$module\$$lib\$$util\$$dom=$(Lang-$*)" \
                              --emit_use_strict \
                              --module_resolution NODE \
                              --assume_function_wrapper \
@@ -16,7 +17,6 @@ build/iptal/sayfa-%.js: iptal/sayfa.js \
                              --js $^ \
                              --js_output_file $@
 	yarn uglifyjs $@ -m -o $@
-	node tools/jsPostprocessor $@
 
 build/iptal/sayfa.css: iptal/sayfa.css
 	mkdir -p $(dir $@)

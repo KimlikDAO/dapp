@@ -223,7 +223,7 @@ const data1 = {
   votes: [24, 3, 7],
 };
 
-const birazBekle = (cevap) => new Promise((resolve) => setTimeout(() => resolve(cevap), 100));
+const birazBekle = () => new Promise((resolve) => setTimeout(() => resolve(), 100));
 
 const orandanMetne = (partialValue, totalValue) => (100 * partialValue / totalValue).toFixed(1);
 

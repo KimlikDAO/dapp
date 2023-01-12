@@ -8,9 +8,9 @@ const Gösterme = new Set([
   "secp256k1",
   "signatureTs",
 ]);
-/** @const {!Element} */
+/** @const {Element} */
 const Kartlar = dom.adla("tck");
-/** @const {!Element} */
+/** @const {Element} */
 const Tckt = dom.adla("tc");
 /** @type {number} */
 let Kart = 0;
@@ -37,7 +37,9 @@ const yüzGöster = (bilgiYüzü) => Tckt.classList.toggle("flipped", bilgiYüz�
 
 const çevir = () => Tckt.classList.toggle("flipped");
 
-/** @param {!did.PersonInfo} */
+/**
+ * @param {!did.PersonInfo} personInfo
+ */
 const personInfoGöster = (personInfo) => {
   for (let satır of Object.entries(/** @type {!Object<string, string>} */(personInfo)))
     if (satır[1] && !Gösterme.has(satır[0])) {
@@ -88,7 +90,7 @@ const addressInfoGöster = (addressInfo) => {
 }
 
 /**
- * @param {?did.kütükBilgileri} kütükBilgileri
+ * @param {?did.KütükBilgileri} kütükBilgileri
  */
 const kütükBilgileriGöster = (kütükBilgileri) => {
   for (let satır of Object.entries(/** @type {!Object<string, string>} */(kütükBilgileri)))

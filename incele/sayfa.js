@@ -7,9 +7,12 @@ import Tckt from '/birim/tckt/birim';
 import { decryptSections } from '/lib/did/section';
 import evm from "/lib/ethereum/evm";
 import TCKT from '/lib/ethereum/TCKT';
-import ipfs from '/lib/ipfs';
+import ipfs from '/lib/node/ipfs';
 import dom from '/lib/util/dom';
 import { hexten } from '/lib/util/çevir';
+
+/** @const {string} */
+const KIMLIKDAO_IPFS_URL = "https://ipfs.kimlikdao.org/";
 
 /** @const {Element} */
 const İmeceİptalDüğmesi = dom.adla("inbtn1");
@@ -28,7 +31,7 @@ const EşikKutusu = dom.adla("inmes");
 /** @const {Element} */
 const SilKutusu = dom.adla("inmsy");
 
-/** @const {Object<string, !did.DecryptedSections>} */
+/** @const {!Object<string, !did.DecryptedSections>} */
 const Bellek = {};
 
 const kutuKapat = () => {
@@ -61,7 +64,7 @@ const imeceİptalKutusuGöster = () => {
   dom.adla("iniip").onclick = (e) => birArttır(e, 9);;
   dom.adla("iniir").onclick = kutuKapat;
   dom.adla("iniio").onclick = () => {
-    const weight = parseInt(agirlikGirdisi.value);
+    const weight = +agirlikGirdisi.value;
     address = evm.adresDüzelt(adresGirdisi.value).slice(2).toLowerCase();
     TCKT.addRevoker(/** @type {string} */(Cüzdan.adres()), weight, address);
   }
@@ -137,7 +140,7 @@ const kapalıYüzGöster = (adres) => {
   if (bellektenTckt)
     AçDüğmesi.onclick = () => açıkYüzGöster(bellektenTckt);
   else {
-    const dosyaSözü = ipfs.cidBytetanOku(hexten(CidHex));
+    const dosyaSözü = ipfs.cidBytetanOku(KIMLIKDAO_IPFS_URL, hexten(CidHex));
     AçDüğmesi.onclick = () => dosyaSözü
       .then((dosya) => decryptSections(
         /** @const {!eth.ERC721Unlockable} */(JSON.parse(dosya)),

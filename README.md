@@ -18,7 +18,7 @@ veriyoruz ve bunlari `birim/` klasörüne koyuyoruz.
 
 ## Kullanım
 Yazılımcıların dApp'i test etmesi için gereken adımlar:
-- `git clone --recursive git@github.com:KimlikDAO/dapp`
+- `git clone --recursive https://github.com/KimlikDAO/dapp`
 
 - `yarn` gerekli build toollarını ve dev sunucusunu yükler
 

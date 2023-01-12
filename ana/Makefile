@@ -3,15 +3,13 @@ build/ana/sayfa-%.js: ana/sayfa.js \
                       birim/cüzdan/birim.js \
                       birim/telefon/birim.js \
                       birim/tckt/birim.js \
-                      lib/api/edevletApi.js \
-                      lib/crypto/secp256k1.js lib/crypto/modular.js \
-                      lib/did/types.js lib/did/TCKTBölümleri.js \
-                      lib/ethereum/provider.js lib/ethereum/jsonrpc.js \
-                      lib/ethereum/ERC721Unlockable.js \
+                      lib/did/*.d.js \
+                      lib/ethereum/*.d.js \
+                      lib/node/nvi.d.js \
                       lib/util/dom.js
 	mkdir -p $(dir $@)
 	yarn google-closure-compiler -W VERBOSE -O ADVANCED --charset UTF-8 \
-                             --define TR=$(Lang-$*) \
+                             --define "TR\$$\$$module\$$lib\$$util\$$dom=$(Lang-$*)" \
                              --emit_use_strict \
                              --module_resolution NODE \
                              --assume_function_wrapper \
@@ -20,7 +18,6 @@ build/ana/sayfa-%.js: ana/sayfa.js \
                              --js $^ \
                              --js_output_file $@
 	yarn uglifyjs $@ -m -o $@
-	node tools/jsPostprocessor $@
 
 build/ana/sayfa-%.css: build/font/lato-%.css ana/sayfa.css \
                        ana/sergi/birim.css \

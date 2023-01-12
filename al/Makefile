@@ -9,15 +9,14 @@ build/al/sayfa-%.js: al/sayfa.js \
                      birim/tckt/birim.js \
                      lib/crypto/ed25519.js lib/crypto/sha3.js \
                      lib/crypto/secp256k1.js lib/crypto/modular.js \
-                     lib/did/section.js lib/did/TCKTVerisi.js lib/did/TCKTBölümleri.js \
-                     lib/ethereum/provider.js lib/ethereum/jsonrpc.js \
-                     lib/ethereum/evm.js lib/ethereum/TCKT.js lib/ethereum/ERC721Unlockable.js \
-                     lib/node/ipfs.js \
+                     lib/did/*.d.js lib/did/TCKTVerisi.js \
+                     lib/ethereum/*.js \
+                     lib/node/ipfs.js lib/node/nvi.d.js lib/node/error.d.js \
                      lib/util/dom.js lib/util/çevir.js \
                      build/al/tanışma/birim.keymap
 	mkdir -p $(dir $@)
 	yarn google-closure-compiler -W VERBOSE -O ADVANCED --charset UTF-8 \
-                             --define TR=$(Lang-$*) \
+                             --define "TR\$$\$$module\$$lib\$$util\$$dom=$(Lang-$*)" \
                              --emit_use_strict \
                              --module_resolution NODE \
                              --assume_function_wrapper \
@@ -27,7 +26,6 @@ build/al/sayfa-%.js: al/sayfa.js \
                              --js_output_file $@
 	tools/keymapper.py $@ $(filter %.keymap,$^)
 	yarn uglifyjs $@ -m -o $@
-	node tools/jsPostprocessor $@
 
 build/al/bağla-%.js.inl: al/bağla.js
 	mkdir -p $(dir $@)

@@ -98,12 +98,12 @@ const kutularıAç = (sonra) => {
         satır[i].firstElementChild.classList.add("imin");
       }
       /** @type {number} */
-      const ağırlık = parseInt(satır[i].children[3].value);
+      const ağırlık = +satır[i].children[3].value;
       adresAğırlığı[adres] = ağırlık;
       toplamAğırlık += ağırlık;
     }
     /** @type {number} */
-    const eşikDeğeri = parseInt(dom.adla("imt").value);
+    const eşikDeğeri = +dom.adla("imt").value;
     if (toplamAğırlık < eşikDeğeri) {
       geçerli = false;
       dom.adla("imt").classList.add("imin");
@@ -152,8 +152,7 @@ const girdiAlanıEkle = () => {
 
 const eşikDeğeriBlurOlunca = (event) => {
   /** @const {boolean} */
-  const geçerli =
-    parseInt(event.target.value) <= parseInt(dom.adla("ims").value);
+  const geçerli = +event.target.value <= +dom.adla("ims").value;
   dom.adla("imt").classList.toggle("imin", geçerli);
 }
 
@@ -202,14 +201,14 @@ const satırSil = (event) => {
 const birAzalt = (event) => {
   const node = event.target.nextElementSibling;
   if (node.value == 1) return;
-  node.value = parseInt(node.value) - 1;
+  node.value = +node.value - 1;
   ağırlıkHesapla();
 }
 
 const birArttır = (event) => {
   const node = event.target.previousElementSibling;
   if (node.value == 9) return;
-  node.value = parseInt(node.value) + 1;
+  node.value = +node.value + 1;
   ağırlıkHesapla();
 }
 
@@ -221,9 +220,10 @@ const ağırlıkBlurOlunca = (event) => {
 }
 
 const eşikBirDeğiştir = (artır) => {
+  /** @const {Element} */
   const eşik = dom.adla("imt");
-  const değer = parseInt(eşik.value);
-  const toplam = parseInt(dom.adla("ims").value);
+  const değer = +eşik.value;
+  const toplam = +dom.adla("ims").value;
   eşik.value = artır
     ? Math.min(değer + 1, 99, toplam) : Math.max(değer - 1, 1);
 }
@@ -234,7 +234,7 @@ const ağırlıkHesapla = () => {
   /** @const {NodeList<!Element>} */
   const satır = İptalciler.children;
   for (let /** number */ i = 0; i < satır.length; ++i) {
-    total += parseInt(satır[i].children[3].value);
+    total += +satır[i].children[3].value;
   }
   dom.adla("ims").value = total;
   const eşik = dom.adla("imt");

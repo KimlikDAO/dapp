@@ -41,16 +41,6 @@ const açıkAnahtarAlVe = (sonra) => {
       : "This website would like your public encryption key."
     );
     s3a.onclick = () => {
-      const bölümler = ["personInfo", "contactInfo"];
-      const satırlar = "    " + bölümler.join(",\n    ");
-      const mesaj = (dom.TR
-        ? İmzaİsteğiTR + "\n\n" + İmzaİsteğiEN
-        : İmzaİsteğiEN + "\n\n" + İmzaİsteğiTR).replaceAll("{}", satırlar);
-
-      ethereum.request(/** @type {!eth.Request} */({
-        method: "personal_sign",
-        params: [mesaj, Cüzdan.adres()]
-      }));
       return;
       ethereum.request(/** @type {eth.Request} */({
         method: "eth_getEncryptionPublicKey",

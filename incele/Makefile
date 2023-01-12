@@ -1,19 +1,14 @@
 build/incele/sayfa-%.js: incele/sayfa.js \
                          birim/cüzdan/birim.js \
                          birim/tckt/birim.js \
-                         lib/api/edevletApi.js \
-                         lib/crypto/sha3.js lib/crypto/ed25519.js \
-                         lib/crypto/secp256k1.js lib/crypto/modular.js \
-                         lib/did/types.js lib/did/TCKTBölümleri.js \
-                         lib/did/TCKTVerisi.js lib/did/section.js \
-                         lib/ethereum/provider.js lib/ethereum/jsonrpc.js \
-                         lib/ethereum/evm.js lib/ethereum/TCKT.js \
-                         lib/ethereum/ERC721Unlockable.js lib/ethereum/unlockables.js \
-                         lib/ipfs.js \
+                         lib/crypto/*.js \
+                         lib/did/*.js \
+                         lib/ethereum/*.js \
+                         lib/node/ipfs.js lib/node/nvi.d.js \
                          lib/util/dom.js lib/util/çevir.js
 	mkdir -p $(dir $@)
 	yarn google-closure-compiler -W VERBOSE -O ADVANCED --charset UTF-8 \
-                             --define TR=$(Lang-$*) \
+                             --define "TR\$$\$$module\$$lib\$$util\$$dom=$(Lang-$*)" \
                              --emit_use_strict \
                              --module_resolution NODE \
                              --assume_function_wrapper \
@@ -22,7 +17,6 @@ build/incele/sayfa-%.js: incele/sayfa.js \
                              --js $^ \
                              --js_output_file $@
 	yarn uglifyjs $@ -m -o $@
-	node tools/jsPostprocessor $@
 
 build/incele/sayfa.css: incele/sayfa.css incele/*/*.css
 	mkdir -p $(dir $@)

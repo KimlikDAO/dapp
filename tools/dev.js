@@ -73,8 +73,7 @@ createServer({
       })
     }
   })
-  const cfConfig = parse(readFileSync('wrangler.toml'));
-  const port = cfConfig.dev.port;
+  const port = 8787;
   console.log(`Ana sayfaya şu adreste çalışıyor: http://localhost:${port}`)
   app.listen(port);
 })

@@ -34,7 +34,7 @@ const kesirGir = (sayı, satır) => {
  * Ödeme adımını gösterir, ödeme onayını alıp evm provider'a yollar.
  *
  * @param {Promise<string>} cidSözü gelmekte olan ipfs CID'i.
- * @param {Object<string, number>} adresAğırlığı (adres, ağırlık) ikilileri.
+ * @param {!Object<string, number>} adresAğırlığı (adres, ağırlık) ikilileri.
  * @param {number} eşik imece iptal için gereken oy eşiği.
  */
 const öde = (cidSözü, adresAğırlığı, eşik) => {
@@ -140,7 +140,7 @@ const öde = (cidSözü, adresAğırlığı, eşik) => {
     const li = event.target.nodeName == "LI"
       ? event.target : event.target.parentElement;
     if (!li.id.startsWith("odd")) return;
-    paraDeğişti(parseInt(li.id[3]), li.lastElementChild);
+    paraDeğişti(+li.id[3], li.lastElementChild);
   };
 
   ağDeğişti(Cüzdan.ağ());
