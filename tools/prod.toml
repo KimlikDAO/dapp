@@ -1,12 +1,17 @@
 account_id = "8f0c2f2271ff857947d9a5b2c38595a0"
 zone_id = "cb31764917040dd0b9a7b79e1ec099df"
 
-main = "build/prod.js"
+main = "../build/prod.js"
 name = "dapp"
-workers_dev = false
-route = "https://kimlikdao.org/*"
-compatibility_date = "2022-12-03"
+route = { pattern = "kimlikdao.org", custom_domain = true }
 usage_model = "bundled"
+
+compatibility_date = "2023-01-01"
+workers_dev = false
+no_bundle = true
+minify = false
+send_metrics = false
+node_compat = false
 
 [[kv_namespaces]]
 binding = "KV"

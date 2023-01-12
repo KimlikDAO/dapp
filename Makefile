@@ -1,6 +1,5 @@
 MAKEFLAGS := -j 8
 PAGES := al ana incele iptal oyla
-POW_EŞİĞİ := 20000
 
 all: build
 
@@ -23,8 +22,8 @@ dev:
 staging: build
 	tools/staging.py
 
-cf-deployment: build build/prod.js build/sitemap
+cf-deployment: build build/prod.js build/sitemap tools/prod.toml
 	tools/cfuploader.py
-	wrangler publish
+	wrangler publish -c tools/prod.toml
 
 .PHONY: cf-deployment clean dev staging

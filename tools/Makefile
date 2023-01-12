@@ -15,13 +15,18 @@ Lang-tr := true
 
 build/prod.js: tools/prod.js tools/prod.d.js \
     lib/cloudflare/moduleWorker.d.js lib/cloudflare/types.d.js
-	mkdir -p build
+	mkdir -p $(dir $@)
 	yarn google-closure-compiler -W VERBOSE -O ADVANCED --charset UTF-8 \
-                             --env BROWSER \
+                             --emit_use_strict \
+                             --language_in ECMASCRIPT_NEXT \
+                             --module_resolution NODE \
+                             --dependency_mode PRUNE \
                              --assume_function_wrapper \
+                             --entry_point $< \
                              --js $^ \
-                             --checks_only
-	yarn uglifyjs $< -m -o $@
+                             --js_output_file $@
+	yarn uglifyjs $@ -m -o $@
+	sed -i.bak 's/globalThis.Worker=/export default/g' $@
 
 al-en := get
 incele-en := view

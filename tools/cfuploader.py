@@ -20,7 +20,7 @@ NAMED_ASSET = {
 
 EXT = ['', '.br', '.gz']
 
-CF_CONFIG = toml.load('wrangler.toml')
+CF_CONFIG = toml.load('tools/prod.toml')
 ROUTE = CF_CONFIG['route'][:-1]
 ACCOUNT_ID = CF_CONFIG['account_id']
 ZONE_ID = CF_CONFIG['zone_id']

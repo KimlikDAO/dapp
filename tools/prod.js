@@ -147,4 +147,4 @@ const bulunamadı = (err) => new Response('NAPİM?', {
   headers: { 'content-type': 'text/plain;charset=utf-8' }
 })
 
-export default { fetch: handleRequest };
+globalThis["Worker"] = { fetch: handleRequest };
