@@ -7,7 +7,7 @@ build/al/sayfa-%.js: al/sayfa.js \
                      birim/cüzdan/birim.js \
                      birim/telefon/birim.js \
                      birim/tckt/birim.js \
-                     lib/crypto/ed25519.js lib/crypto/sha3.js \
+                     lib/crypto/sha3.js \
                      lib/crypto/secp256k1.js lib/crypto/modular.js \
                      lib/did/*.d.js lib/did/TCKTVerisi.js \
                      lib/ethereum/*.js \

@@ -17,6 +17,9 @@ build/prod.js: tools/prod.js tools/prod.d.js \
     lib/cloudflare/moduleWorker.d.js lib/cloudflare/types.d.js
 	mkdir -p $(dir $@)
 	yarn google-closure-compiler -W VERBOSE -O ADVANCED --charset UTF-8 \
+                             --jscomp_error=strictCheckTypes \
+                             --jscomp_error=unusedLocalVariables \
+                             --jscomp_error=reportUnknownTypes \
                              --emit_use_strict \
                              --language_in ECMASCRIPT_NEXT \
                              --module_resolution NODE \

@@ -6,7 +6,7 @@ import Tanışma from '/al/tanışma/birim';
 import { öde } from '/al/ödeme/birim';
 import Cüzdan from '/birim/cüzdan/birim';
 import Telefon from '/birim/telefon/birim';
-import { tcktVerisiHazırla } from '/lib/did/TCKTVerisi';
+import { hazırla } from '/lib/did/TCKTVerisi';
 import ipfs from '/lib/node/ipfs';
 import dom from '/lib/util/dom';
 import { hex } from '/lib/util/çevir';
@@ -66,7 +66,7 @@ const tcktYarat = (açıkTcktSözü) => {
     /** @const {Promise<string>} */
     const cidSözü = açıkTcktSözü
       .then((açıkTckt) => ipfs.yaz(KIMLIKDAO_NODE_URL,
-        JSON.stringify(tcktVerisiHazırla(açıkAnahtar, açıkTckt))))
+        JSON.stringify(hazırla(açıkAnahtar, açıkTckt))))
       .then(hex);
     İmeceİptal.kurVe(
       (adresAğırlığı, eşik) => öde(cidSözü, adresAğırlığı, eşik));
