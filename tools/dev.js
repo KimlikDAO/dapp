@@ -73,7 +73,7 @@ createServer({
       })
     }
   })
-  const port = 8787;
-  console.log(`Ana sayfaya şu adreste çalışıyor: http://localhost:${port}`)
-  app.listen(port);
+  const config = parse(readFileSync('tools/dev.toml'));
+  console.log(`Ana sayfaya şu adreste çalışıyor: http://localhost:${config.port}`)
+  app.listen(config.port);
 })

@@ -8,12 +8,12 @@ import toml
 
 import keymapper
 
-CF_CONFIG = toml.load('wrangler.toml')
-HOST_NAME = "localhost"
-PORT = CF_CONFIG['dev']['port']
-ROUTE = CF_CONFIG['route'][:-1]
+DEV_CONFIG = toml.load("tools/dev.toml")
+HOST_NAME = DEV_CONFIG['hostname']
+PORT = DEV_CONFIG['port']
+ROUTE = toml.load("tools/prod.toml")['route']['pattern']
 REVERSE = {
-    ROUTE: f"http://{HOST_NAME}:{PORT}/",
+    f"//{ROUTE}": f"{HOST_NAME}:{PORT}/",
     '"//': '"https://'
 }
 
@@ -60,5 +60,5 @@ class TestServer(BaseHTTPRequestHandler):
         self.wfile.write(file)
 
 
-with HTTPServer((HOST_NAME, PORT), TestServer) as server:
+with HTTPServer(("localhost", PORT), TestServer) as server:
     server.serve_forever()

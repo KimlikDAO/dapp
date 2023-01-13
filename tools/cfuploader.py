@@ -21,7 +21,7 @@ NAMED_ASSET = {
 EXT = ['', '.br', '.gz']
 
 CF_CONFIG = toml.load('tools/prod.toml')
-ROUTE = CF_CONFIG['route'][:-1]
+ROUTE = f"https://{CF_CONFIG['route']['pattern']}/"
 ACCOUNT_ID = CF_CONFIG['account_id']
 ZONE_ID = CF_CONFIG['zone_id']
 NAMESPACE_ID = CF_CONFIG['kv_namespaces'][0]['id']

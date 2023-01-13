@@ -33,9 +33,11 @@ def keymap(file):
 
 
 if __name__ == "__main__":
+    PORT = toml.load("tools/dev.toml")['port']
+    HOST = toml.load("tools/prod.toml")['route']['pattern']
     replace = {
-        f"http://localhost:8787/": "//kimlikdao.org",
-        "https://ipfs.kimlikdao.org": "//ipfs.kimlikdao.org",
+        f"http://localhost:{PORT}/": f"//{HOST}",
+        f"https://ipfs.{HOST}": f"//ipfs.{HOST}",
     }
     of_name = None
     if len(sys.argv) >= 3 and sys.argv[-2] == '-o':
