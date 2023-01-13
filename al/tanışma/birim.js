@@ -7,7 +7,7 @@ import { base64, uint8ArrayeBase64ten } from '/lib/util/çevir';
  * @const {string}
  * @noinline
  */
-const KIMLIKDAO_NODE_URL = "https://node5.kimlikdao.org/";
+const KIMLIKDAO_NODE_URL = "https://node2.kimlikdao.org/";
 
 /**
  * Verilen bir `hesap` için `rastgele` bitdizisi ile kriptografik taahhüt
@@ -213,8 +213,10 @@ const açıkTcktAlVe = (sonra) => {
         "Invalid PDF file"
       ];
 
-      /** @param {!node.HataBildirimi} hata */
-      const hataGöster = (/** @type {!node.HataBildirimi} */ hata) => {
+      /**
+       * @param {!node.HataBildirimi} hata
+       */
+      const hataGöster = (hata) => {
         let metin = HataMetinleri[hata.kod];
         hataBildirimi.innerText = hata.ek && hata.ek.length
           ? metin.replace("{}", hata.ek[0]) : metin;

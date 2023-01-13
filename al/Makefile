@@ -11,7 +11,8 @@ build/al/sayfa-%.js: al/sayfa.js \
                      lib/crypto/secp256k1.js lib/crypto/modular.js \
                      lib/did/*.d.js lib/did/TCKTVerisi.js \
                      lib/ethereum/*.js \
-                     lib/node/ipfs.js lib/node/nvi.d.js lib/node/error.d.js \
+                     lib/node/ipfs.d.js lib/node/ipfs.js \
+                     lib/node/nvi.d.js lib/node/error.d.js \
                      lib/util/dom.js lib/util/çevir.js \
                      build/al/tanışma/birim.keymap
 	mkdir -p $(dir $@)

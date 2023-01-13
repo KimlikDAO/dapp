@@ -4,7 +4,8 @@ build/incele/sayfa-%.js: incele/sayfa.js \
                          lib/crypto/*.js \
                          lib/did/*.js \
                          lib/ethereum/*.js \
-                         lib/node/ipfs.js lib/node/nvi.d.js \
+                         lib/node/ipfs.d.js lib/node/ipfs.js \
+                         lib/node/nvi.d.js lib/node/error.d.js \
                          lib/util/dom.js lib/util/çevir.js
 	mkdir -p $(dir $@)
 	yarn google-closure-compiler -W VERBOSE -O ADVANCED --charset UTF-8 \

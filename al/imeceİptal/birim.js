@@ -36,7 +36,7 @@ const göster = () => {
 /**
  * İmece iptal kurulumunu yapar ve verilmiş callback fonksiyonunu çağırır.
  * 
- * @param {function(Object<string,number>,number)} sonra
+ * @param {function(!Object<string, number>, number)} sonra
  */
 const kurVe = (sonra) => {
   GösterButonu.onclick = () => kutularıAç(sonra);
@@ -44,7 +44,7 @@ const kurVe = (sonra) => {
 }
 
 /**
- * @param {function(Object<string,number>,number)} sonra
+ * @param {function(!Object<string, number>, number)} sonra
  */
 const atla = (sonra) => {
   dom.göster(GösterButonu);
@@ -59,7 +59,7 @@ const atla = (sonra) => {
 }
 
 /**
- * @param {function(Object<string,number>,number)} sonra
+ * @param {function(!Object<string, number>, number)} sonra
  */
 const kutularıAç = (sonra) => {
   dom.adla("im").classList.remove("done");
