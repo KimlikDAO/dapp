@@ -13,10 +13,12 @@ const adresGir = (adres) => dom.adla("tetr").innerText = adres;
 
 /**
  * @param {string} metin İletişim kutusunda gösterilecek metin.
+ * @param {string=} sağDüğme
  */
-const kutuGöster = (metin) => {
+const kutuGöster = (metin, sağDüğme) => {
   /** @const {Element} */
   const kutu = dom.adla("tefirw");
+  if (sağDüğme) dom.adla("tefirwy").innerText = sağDüğme;
   kutu.style.opacity = "";
   kutu.firstElementChild.innerText = metin;
   kutu.classList.add("show");

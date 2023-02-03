@@ -4,7 +4,7 @@ import dom from '/lib/util/dom';
 const Gösterme = new Set([
   "bls12_381",
   "commitment",
-  "commitRand",
+  "commitmentR",
   "secp256k1",
   "signatureTs",
 ]);

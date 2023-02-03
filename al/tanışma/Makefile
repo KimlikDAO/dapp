@@ -6,18 +6,22 @@ AL_TANIŞMA_REQUEST_SVG := $(filter-out $(AL_TANIŞMA_INLINE_SVG), $(notdir $(wi
 
 AL_TANIŞMA_REQUEST_SVG_OUT := $(addprefix build/al/tanışma/, $(AL_TANIŞMA_REQUEST_SVG))
 
-build/al/tanışma/birim.keymap: $(call compressions, $(AL_TANIŞMA_REQUEST_SVG_OUT) build/al/tanışma/pow-worker.js)
+build/al/tanışma/birim.keymap: $(call compressions, $(AL_TANIŞMA_REQUEST_SVG_OUT) build/al/tanışma/powWorker.js)
 	mkdir -p $(dir $@) && rm -rf $@
-	tools/keyhasher.py $@ $(AL_TANIŞMA_REQUEST_SVG_OUT) build/al/tanışma/pow-worker.js
+	tools/keyhasher.py $@ $(AL_TANIŞMA_REQUEST_SVG_OUT) build/al/tanışma/powWorker.js
 
 al/tanışma.birim: al/tanışma/birim.html $(AL_TANIŞMA_INLINE_SVG_OUT)
 
-build/al/tanışma/pow-worker.js: al/tanışma/pow-worker.js lib/util/worker.d.js \
+build/al/tanışma/powWorker.js: al/tanışma/powWorker.js \
+    al/tanışma/powWorker.d.js lib/util/worker.d.js \
     lib/crypto/sha3.js \
     lib/util/çevir.js
 	mkdir -p $(dir $@)
 	yarn google-closure-compiler -W VERBOSE -O ADVANCED --charset UTF-8 \
+                             --jscomp_error=unusedLocalVariables \
+                             --jscomp_error=strictCheckTypes \
                              --language_in ECMASCRIPT_NEXT \
+                             --rewrite_polyfills=false \
                              --emit_use_strict \
                              --module_resolution NODE \
                              --assume_function_wrapper \
@@ -25,4 +29,5 @@ build/al/tanışma/pow-worker.js: al/tanışma/pow-worker.js lib/util/worker.d.j
                              --entry_point $< \
                              --js $^ \
                              --js_output_file $@
-	yarn uglifyjs $@ -m -o $@
+	yarn uglifyjs $@ -m -c toplevel,unsafe -o $@
+	wc $@

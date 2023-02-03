@@ -38,6 +38,7 @@ if __name__ == "__main__":
     replace = {
         f"http://localhost:{PORT}/": f"//{HOST}",
         f"https://ipfs.{HOST}": f"//ipfs.{HOST}",
+        ',{type:"module"}': '',
     }
     of_name = None
     if len(sys.argv) >= 3 and sys.argv[-2] == '-o':

@@ -10,8 +10,9 @@ build/al/sayfa-%.js: al/sayfa.js \
                      lib/crypto/sha3.js \
                      lib/crypto/secp256k1.js lib/crypto/modular.js \
                      lib/did/*.d.js lib/did/TCKTVerisi.js \
+                     lib/did/section.js lib/did/decryptedSections.js \
                      lib/ethereum/*.js \
-                     lib/node/ipfs.d.js lib/node/ipfs.js \
+                     lib/node/ipfs.d.js lib/node/ipfs.js lib/node/network.js \
                      lib/node/nvi.d.js lib/node/error.d.js \
                      lib/util/dom.js lib/util/çevir.js \
                      build/al/tanışma/birim.keymap
@@ -26,16 +27,8 @@ build/al/sayfa-%.js: al/sayfa.js \
                              --js $(filter %.js,$^) \
                              --js_output_file $@
 	tools/keymapper.py $@ $(filter %.keymap,$^)
-	yarn uglifyjs $@ -m -o $@
-
-build/al/bağla-%.js.inl: al/bağla.js
-	mkdir -p $(dir $@)
-	yarn google-closure-compiler -W VERBOSE -O ADVANCED --charset UTF-8 \
-                             --define TR=$(Lang-$*) \
-                             --assume_function_wrapper \
-                             --js $^ \
-                             --js_output_file $@
-	yarn uglifyjs $@ -m -o $@
+	yarn uglifyjs $@ -m -c toplevel,unsafe -o $@
+	wc $@
 
 build/al/sayfa.css: al/sayfa.css al/*/*.css
 	mkdir -p $(dir $@)
@@ -55,7 +48,6 @@ build/al-%.html: al/sayfa.html \
                  al/tanışma.birim \
                  birim/telefon/birim.html \
                  birim/cüzdan.birim \
-                 build/al/bağla-%.js.inl \
                  build/al/paste.svg.inl \
                  build/al/tanışma/external-link.svg.inl \
                  build/al/ödeme/birim.keymap \

@@ -4,7 +4,7 @@
  */
 import Cüzdan from '/birim/cüzdan/birim';
 import Tckt from '/birim/tckt/birim';
-import { decryptSections } from '/lib/did/section';
+import { fromUnlockableNFT } from '/lib/did/decryptedSections';
 import evm from "/lib/ethereum/evm";
 import TCKT from '/lib/ethereum/TCKT';
 import ipfs from '/lib/node/ipfs';
@@ -140,9 +140,10 @@ const kapalıYüzGöster = (adres) => {
   if (bellektenTckt)
     AçDüğmesi.onclick = () => açıkYüzGöster(bellektenTckt);
   else {
+    /** @const {!Promise<string>} */
     const dosyaSözü = ipfs.cidBytetanOku(KIMLIKDAO_IPFS_URL, hexten(CidHex));
     AçDüğmesi.onclick = () => dosyaSözü
-      .then((dosya) => decryptSections(
+      .then((dosya) => fromUnlockableNFT(
         /** @const {!eth.ERC721Unlockable} */(JSON.parse(dosya)),
         ["personInfo", "contactInfo", "addressInfo", "kütükBilgileri"],
         ethereum,

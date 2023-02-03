@@ -1,6 +1,6 @@
 // Has to end with a slash
 /** @define {string} */
-const HOST_URL = 'https://kimlikdao.org/';
+const HOST_URL = 'https://staging.kimlikdao.org/';
 /** @const {string} */
 const PAGE_CACHE_CONTROL = 'max-age=90,public';
 /** @const {string} */
@@ -30,75 +30,62 @@ const PAGES = {
 };
 
 /**
- * @param {!cloudflare.Request} request
- * @param {!ProdEnvironment} env
- * @param {!cloudflare.Context} ctx
- * @return {!Promise<Response>}
+ * @implements {cloudflare.ModuleWorker}
  */
-const handleRequest = (request, env, ctx) => {
-  /** @const {!URL} */
-  const url = new URL(request.url);
-  /** @const {string} */
-  const enc = request.cf.clientAcceptEncoding || "";
-  /** @const {string} */
-  const ext = url.pathname.endsWith('.woff2') ? ''
-    : enc.includes('br') ? '.br' : enc.includes('gz') ? '.gz' : '';
-  /** @const {number} */
-  const idx = url.pathname.lastIndexOf('.');
-  /** @const {string} */
-  const kvKey = url.pathname == '/' ? /** @type {function():string} */(() => {
-    if (url.search) return PAGES[url.search];
-    /** @const {?string} */
-    const cookie = request.headers.get('cookie');
-    if (cookie)
-      return cookie.startsWith('l=en') ? "ana-en.html" : "ana-tr.html";
-    const acceptLang = request.headers.get('accept-language');
-    return acceptLang && acceptLang.includes('tr') ? "ana-tr.html" : "ana-en.html";
-  })() + ext : (idx == -1 ? PAGES[url.pathname] : url.pathname.substring(1)) + ext;
-  /** @const {string} */
-  const cacheKey = HOST_URL + kvKey;
-
-  /** @type {boolean} */
-  let inCache = false;
-
+const ProdWorker = {
   /**
-   * We search the CF cache for the asset.
+   * @override
    *
-   * @const {!Promise<!Response>}
+   * @param {!cloudflare.Request} request
+   * @param {!ProdEnvironment} env
+   * @param {!cloudflare.Context} ctx
+   * @return {!Promise<!Response>}
    */
-  const fromCache = caches.default.match(cacheKey).then((response) => {
-    if (!response) return Promise.reject();
-    inCache = true;
-    if (idx == -1) {
-      response = new Response(response.body, { headers: response.headers });
-      response.headers.set('cache-control', PAGE_CACHE_CONTROL);
-    }
-    return response;
-  });
+  fetch(request, env, ctx) {
+    /** @const {!URL} */
+    const url = new URL(request.url);
+    /** @const {string} */
+    const enc = request.cf.clientAcceptEncoding || "";
+    /** @const {string} */
+    const ext = url.pathname.endsWith('.woff2') ? ''
+      : enc.includes('br') ? '.br' : enc.includes('gz') ? '.gz' : '';
+    /** @const {number} */
+    const idx = url.pathname.lastIndexOf('.');
+    /** @const {string} */
+    const kvKey = url.pathname == '/' ? /** @type {function():string} */(() => {
+      if (url.search) return PAGES[url.search];
+      /** @const {?string} */
+      const cookie = request.headers.get('cookie');
+      if (cookie)
+        return cookie.startsWith('l=en') ? "ana-en.html" : "ana-tr.html";
+      const acceptLang = request.headers.get('accept-language');
+      return acceptLang && acceptLang.includes('tr') ? "ana-tr.html" : "ana-en.html";
+    })() + ext : (idx == -1 ? PAGES[url.pathname] : url.pathname.substring(1)) + ext;
+    /** @const {string} */
+    const cacheKey = HOST_URL + kvKey;
 
-  /**
-   * In parallel, we also query the CF KV. Under normal circumstances, if
-   * the asset is present in the CF cache, `fromCache` promise should always
-   * win the race.
-   * If the asset has been evicted from CF cache, this promise will get it
-   * from KV and write it to CF cache (after a small header modification).
-   * If the asset is present in CF cache and the cache returns in a timely
-   * manner, this promise will not re-write to CF cache, as the `fromCache`
-   * promise will set the `inCache` flag, which prevents this promise from
-   * recaching the response.
-   * In all other cases (either the response is not present in CF cache or
-   * CF cache is taking unusually long), the response will be served from the
-   * KV.
-   *
-   * @const {!Promise<!Response>}
-   */
-  const fromKV = env.KV.get(kvKey, 'arrayBuffer').then((body) => {
-    if (!body) return Promise.reject();
+    /** @type {boolean} */
+    let inCache = false;
 
-    /** @type {!Response} */
-    let response = new Response(body, {
+    /**
+     * We search the CF cache for the asset.
+     *
+     * @const {!Promise<!Response>}
+     */
+    const fromCache = caches.default.match(cacheKey).then((response) => {
+      if (!response) return Promise.reject();
+      inCache = true;
+      return response;
+    });
+
+    /**
+     * @param {!ArrayBuffer} body
+     * @return {!Response}
+     */
+    const makeResponse = (body) => new Response(body, {
       headers: {
         'cache-control': idx == -1 ? PAGE_CACHE_CONTROL : STATIC_CACHE_CONTROL,
+        'cdn-cache-control': STATIC_CACHE_CONTROL,
         'content-encoding': ext === '.br' ? 'br' : ext === '.gz' ? 'gzip' : '',
         'content-length': body.byteLength,
         'content-type': idx == -1 ? "text/html;charset=utf-8" : MIMES[url.pathname.slice(idx + 1)],
@@ -108,46 +95,38 @@ const handleRequest = (request, env, ctx) => {
       'encodeBody': 'manual'
     });
 
-    if (idx == -1)
-      response.headers.set('x-frame-options', 'DENY')
+    /**
+     * In parallel, we also query the CF KV. Under normal circumstances, if
+     * the asset is present in the CF cache, `fromCache` promise should always
+     * win the race.
+     * If the asset has been evicted from CF cache, this promise will get it
+     * from KV and write it to CF cache (after a small header modification).
+     * If the asset is present in CF cache and the cache returns in a timely
+     * manner, this promise will not re-write to CF cache, as the `fromCache`
+     * promise will set the `inCache` flag, which prevents this promise from
+     * recaching the response.
+     * In all other cases (either the response is not present in CF cache or
+     * CF cache is taking unusually long), the response will be served from the
+     * KV.
+     *
+     * @const {!Promise<!Response>}
+     */
+    const fromKV = env.KV.get(kvKey, 'arrayBuffer').then((body) => {
+      if (!body) return Promise.reject();
 
-    // Remember to cache the response, but only after we finish serving the
-    // request.
-    ctx.waitUntil(Promise.resolve().then(() => {
-      if (inCache) return;
-      /**
-       * We modify the response in two ways before we place it in CloudFlare
-       * cache:
-       *
-       * (1) We remove the 'content-encoding: gzip' to prevent CF cache doing
-       * decompression / header modification, which currently only happens for
-       * 'content-encoding: gzip' responses.
-       *
-       * (2) We set cache control to indefinite caching so that the response
-       * stays in CF cache for as long as possible, even for non-content-hashed
-       * assets. We always purge the CF cache after non-content-hashed assets
-       * change, which ensures the CF cache never goes stale.
-       *
-       * @const {!Response}
-       */
-      const toCache = new Response(body, {
-        headers: {
-          'cache-control': STATIC_CACHE_CONTROL,
-          'content-encoding': ext === '.br' ? 'br' : ext === '.gz' ? 'gzip' : '',
-          'content-length': body.byteLength,
-          'content-type': idx == -1 ? "text/html;charset=utf-8" : MIMES[url.pathname.slice(idx + 1)],
-          'expires': 'Sun, 01 Jan 2034 00:00:00 GMT',
-          'vary': 'accept-encoding'
-        },
-        'encodeBody': 'manual'
-      });
-      return caches.default.put(cacheKey, toCache);
-    }));
+      // Remember to cache the response, but only after we finish serving the
+      // request.
+      ctx.waitUntil(new Promise((resolve) => {
+        if (inCache) return;
+        caches.default.put(cacheKey, makeResponse(body));
+        resolve();
+      }));
 
-    return response;
-  })
+      return makeResponse(body);
+    })
 
-  return Promise.any([fromCache, fromKV]).catch(bulunamadı);
+    return Promise.any([fromCache, fromKV]).catch(bulunamadı);
+  }
 }
 
 /**
@@ -158,5 +137,5 @@ const bulunamadı = () => new Response('NAPİM?', {
   headers: { 'content-type': 'text/plain;charset=utf-8' }
 })
 
-globalThis["Worker"] = { fetch: handleRequest };
-export default { fetch: handleRequest };
+globalThis["ProdWorker"] = ProdWorker;
+export default ProdWorker;

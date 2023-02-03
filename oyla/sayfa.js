@@ -186,7 +186,7 @@ const aktifOyKartıOluştur = (data) => {
       const chartElements = middleDiv.children[1].children[i];
       chartElements.children[0].onclick = (e) => {
         if (data.chain != Cüzdan.ağ()) {
-          ethereum.request(/** @type {eth.Request} */({
+          ethereum.request(/** @type {!eth.Request} */({
             method: "wallet_switchEthereumChain",
             params: [{ "chainId": data.chain }],
           })).catch(console.log);

@@ -64,7 +64,7 @@ const ağDeğişti = (yeniAğ) => {
   if (!(yeniAğ in AğBilgileri)) {
     // Kullanıcı desteklemediğimiz bir ağa geçerse (uzantı cüzdanı
     // arabiriminden), en son seçili ağa geri geçme isteği yolluyoruz.
-    ethereum.request(/** @type {eth.Request} */({
+    ethereum.request(/** @type {!eth.Request} */({
       method: "wallet_switchEthereumChain",
       params: [{ "chainId": Ağ }],
     })).catch(console.log);
@@ -129,12 +129,12 @@ const adresDeğişince = (f) => {
 
 const bağla = () => {
   ethereum
-    .request(/** @type {eth.Request} */({ method: "eth_requestAccounts" }))
+    .request(/** @type {!eth.Request} */({ method: "eth_requestAccounts" }))
     .then(adresDeğişti)
     .catch(console.log);
 
   ethereum
-    .request(/** @type {eth.Request} */({ method: "eth_chainId" }))
+    .request(/** @type {!eth.Request} */({ method: "eth_chainId" }))
     .then(ağDeğişti)
     .catch(console.log);
 }
@@ -187,7 +187,7 @@ const ağDüğmesiKur = () => {
     /** @const {string} */
     const ağ = li.id.slice(2);
     if (window["ethereum"])
-      ethereum.request(/** @type {eth.Request} */({
+      ethereum.request(/** @type {!eth.Request} */({
         method: "wallet_switchEthereumChain",
         params: [{ "chainId": ağ }],
       })).catch(console.log);
@@ -220,12 +220,12 @@ const adresDüğmesiKur = () => {
   ethereum.on("chainChanged", ağDeğişti);
 
   ethereum.request(
-    /** @type {eth.Request} */({ method: "eth_chainId" }))
+    /** @type {!eth.Request} */({ method: "eth_chainId" }))
     .then(ağDeğişti)
     .catch(console.log);
 
   ethereum.request(
-    /** @type {eth.Request} */({ method: "eth_accounts" }))
+    /** @type {!eth.Request} */({ method: "eth_accounts" }))
     .then((accounts) => {
       if (accounts.length > 0) adresDeğişti(/** Array<string> */(accounts));
     });

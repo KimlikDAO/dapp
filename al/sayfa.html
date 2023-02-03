@@ -20,31 +20,23 @@
   </div>
   <div id=b>
     <div id="bs">
-      <div id=s1 class=step>
-        <!--
+      <div id=s1 class=step><!--
         --><b data-en="1. Connect your wallet.">1. Cüzdanınızı bağlayın.</b>
-        <span data-phantom data-en="MetaMask, Rabby or Brave Browser wallet.">MetaMask, Rabby veya Brave tarayıcı
-          cüzdanı.</span>
+        <span data-phantom data-en="Proceed with an extension wallet.">Tarayıcı
+          cüzdanı bağlayarak devam edin.</span>
         <br>
         <br>
-        <a href="//metamask.io" target="_blank" id=s1a class="btn lft" data-en="Install MetaMask">MetaMask kur</a>
-        <a href="//rabby.io" target="_blank" id=s1b class="btn" data-en="Install Rabby">Rabby kur</a>
-        <script data-inline src="/al/bağla.js"></script>
+        <a href="//rabby.io" target="_blank" id=s1b class="act btn" data-en="Install an extension wallet">Tarayıcı
+          cüzdanı yükle</a>
       </div>
       <altbirim:tanışma />
       <div id=s3 class="step disabled">
         <b data-en="3. Let’s encrypt your TCKT.">3. TCKT’nizi şifreleyelim.</b>
-        <span data-phantom
-          data-en="Now we'll encrypt your TCKT. Accept the request to provide your public encryption key. This operation is off-chain, free and secure.">TCKT’ni
-          şifrelememiz için cüzdan açık anahtarına ihtiyacımız var.
+        <span data-phantom data-en="We need 4 signatures from you to encrypt your TCKT.">TCKT’ni
+          şifrelememiz için sizden <span id="s3c">4</span> adet imzaya ihtiyacımız var.
           Bu işlem off-chain, tamamen ücretsiz ve güvenli.</span>
         <br><br>
-        <a href="javascript:" id="s3a" class="act btn" data-en="Request public key">Cüzdanıma istek yolla</a>
-        <div id="s3er" style="display:none">
-          <span data-phantom data-en="Your wallet does not support encryption.">Cüzdanınızın şifreleme desteği yok.</span>
-          <a href="https://rabby.io" target="_blank" rel="noreferrer noopener" class="s3l">Rabby Kur</a>
-          <a href="https://brave.com/wallet" target="_blank" rel="noreferrer noopener" class="s3l">Brave Kur</a>
-        </div>
+        <a href="javascript:" id="s3a" class="act btn" data-en="Request 4 signatures">4 imza isteği yolla</a>
       </div>
       <altbirim:imeceİptal />
       <altbirim:ödeme />
