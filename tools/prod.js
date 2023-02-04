@@ -1,6 +1,6 @@
 // Has to end with a slash
 /** @define {string} */
-const HOST_URL = 'https://staging.kimlikdao.org/';
+const HOST_URL = 'https://kimlikdao.org/';
 /** @const {string} */
 const PAGE_CACHE_CONTROL = 'max-age=90,public';
 /** @const {string} */
@@ -19,15 +19,23 @@ const MIMES = {
 const PAGES = {
   "?tr": "ana-tr.html",
   "?en": "ana-en.html",
-  "/al": "al-tr.html",
-  "/get": "al-en.html",
-  "/incele": "incele-tr.html",
-  "/view": "incele-en.html",
-  "/oyla": "oyla-tr.html",
-  "/vote": "oyla-en.html",
-  "/iptal": "iptal-tr.html",
-  "/revoke": "iptal-en.html"
+  "al": "al-tr.html",
+  "get": "al-en.html",
+  "incele": "incele-tr.html",
+  "view": "incele-en.html",
+  "oyla": "oyla-tr.html",
+  "vote": "oyla-en.html",
+  "iptal": "iptal-tr.html",
+  "revoke": "iptal-en.html"
 };
+
+/**
+ * @return {!Response}
+ */
+const err = () => new Response('NAPİM?', {
+  status: 404,
+  headers: { 'content-type': 'text/plain;charset=utf-8' }
+})
 
 /**
  * @implements {cloudflare.ModuleWorker}
@@ -36,37 +44,41 @@ const ProdWorker = {
   /**
    * @override
    *
-   * @param {!cloudflare.Request} request
+   * @param {!cloudflare.Request} req
    * @param {!ProdEnvironment} env
    * @param {!cloudflare.Context} ctx
    * @return {!Promise<!Response>}
    */
-  fetch(request, env, ctx) {
-    /** @const {!URL} */
-    const url = new URL(request.url);
+  fetch(req, env, ctx) {
     /** @const {string} */
-    const enc = request.cf.clientAcceptEncoding || "";
+    const url = req.url;
     /** @const {string} */
-    const ext = url.pathname.endsWith('.woff2') ? ''
+    const enc = req.cf.clientAcceptEncoding || "";
+    /** @const {string} */
+    const ext = url.endsWith('.woff2') ? ''
       : enc.includes('br') ? '.br' : enc.includes('gz') ? '.gz' : '';
     /** @const {number} */
-    const idx = url.pathname.lastIndexOf('.');
-    /** @const {string} */
-    const kvKey = url.pathname == '/' ? /** @type {function():string} */(() => {
-      if (url.search) return PAGES[url.search];
-      /** @const {?string} */
-      const cookie = request.headers.get('cookie');
-      if (cookie)
-        return cookie.startsWith('l=en') ? "ana-en.html" : "ana-tr.html";
-      const acceptLang = request.headers.get('accept-language');
-      return acceptLang && acceptLang.includes('tr') ? "ana-tr.html" : "ana-en.html";
-    })() + ext : (idx == -1 ? PAGES[url.pathname] : url.pathname.substring(1)) + ext;
-    /** @const {string} */
-    const cacheKey = HOST_URL + kvKey;
+    const idx = url.lastIndexOf('.');
+
+    /** @type {?string} */
+    let kvKey = url.slice(HOST_URL.length);
+    /** @type {?string} */
+    let cacheKey;
+    if (kvKey && idx != HOST_URL.lastIndexOf("."))
+      cacheKey = url;
+    else {
+      kvKey = kvKey
+        ? PAGES[kvKey]
+        : req.headers.get('cookie')?.startsWith('l=tr')
+          || req.headers.get('accept-language')?.includes('tr')
+          ? "ana-tr.html" : "ana-en.html";
+      cacheKey = HOST_URL + kvKey
+    }
+    kvKey += ext;
+    cacheKey += ext;
 
     /** @type {boolean} */
     let inCache = false;
-
     /**
      * We search the CF cache for the asset.
      *
@@ -84,11 +96,15 @@ const ProdWorker = {
      */
     const makeResponse = (body) => new Response(body, {
       headers: {
-        'cache-control': idx == -1 ? PAGE_CACHE_CONTROL : STATIC_CACHE_CONTROL,
+        'cache-control': idx == HOST_URL.lastIndexOf(".")
+          ? PAGE_CACHE_CONTROL
+          : STATIC_CACHE_CONTROL,
         'cdn-cache-control': STATIC_CACHE_CONTROL,
         'content-encoding': ext === '.br' ? 'br' : ext === '.gz' ? 'gzip' : '',
         'content-length': body.byteLength,
-        'content-type': idx == -1 ? "text/html;charset=utf-8" : MIMES[url.pathname.slice(idx + 1)],
+        'content-type': idx == HOST_URL.lastIndexOf(".")
+          ? "text/html;charset=utf-8"
+          : MIMES[url.slice(idx + 1)],
         'expires': 'Sun, 01 Jan 2034 00:00:00 GMT',
         'vary': 'accept-encoding',
       },
@@ -113,29 +129,18 @@ const ProdWorker = {
      */
     const fromKV = env.KV.get(kvKey, 'arrayBuffer').then((body) => {
       if (!body) return Promise.reject();
-
       // Remember to cache the response, but only after we finish serving the
       // request.
-      ctx.waitUntil(new Promise((resolve) => {
-        if (inCache) return;
-        caches.default.put(cacheKey, makeResponse(body));
-        resolve();
-      }));
-
+      ctx.waitUntil(new Promise((/** function(?):void */ resolve) =>
+        resolve(inCache ? null : caches.default.put(/** @type {string} */(cacheKey),
+          makeResponse(/** @type {!ArrayBuffer} */(body))))
+      ));
       return makeResponse(body);
     })
 
-    return Promise.any([fromCache, fromKV]).catch(bulunamadı);
+    return Promise.any([fromCache, fromKV]).catch(err);
   }
 }
-
-/**
- * @return {!Response}
- */
-const bulunamadı = () => new Response('NAPİM?', {
-  status: 404,
-  headers: { 'content-type': 'text/plain;charset=utf-8' }
-})
 
 globalThis["ProdWorker"] = ProdWorker;
 export default ProdWorker;

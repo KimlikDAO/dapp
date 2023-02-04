@@ -13,6 +13,8 @@ removeLang = $(subst -tr,,$(subst -en,,$(1)))
 Lang-en := false
 Lang-tr := true
 
+include tools/test/Makefile
+
 build/prod.js: tools/prod.js tools/prod.d.js \
     lib/cloudflare/moduleWorker.d.js lib/cloudflare/types.d.js
 	mkdir -p $(dir $@)

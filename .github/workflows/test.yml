@@ -1,0 +1,28 @@
+name: All tests
+
+on:
+  push:
+    branches: ["ana", "prod"]
+  pull_request:
+    branches: ["ana", "prod"]
+
+jobs:
+  check:
+    name: Unit tests
+    strategy:
+      fail-fast: true
+
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          submodules: true
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: ProdWorker tests
+        run: |
+          yarn
+          make build/test/prod.compiled-test.js

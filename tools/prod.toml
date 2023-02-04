@@ -3,7 +3,7 @@ zone_id = "cb31764917040dd0b9a7b79e1ec099df"
 
 main = "../build/prod.js"
 name = "dapp"
-route = { pattern = "staging.kimlikdao.org", custom_domain = true }
+route = { pattern = "kimlikdao.org", custom_domain = true }
 usage_model = "bundled"
 
 compatibility_date = "2023-02-02"
