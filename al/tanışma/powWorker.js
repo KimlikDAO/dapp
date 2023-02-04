@@ -1,7 +1,7 @@
 import { f } from "/lib/crypto/sha3";
 
 /** @define {number} */
-const POW_EŞİĞİ = 20000;
+const POW_EŞİĞİ = 20_000;
 
 onmessage = (/** @type {!MessageEvent} */ e) => {
   console.time('pow');

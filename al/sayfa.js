@@ -1,22 +1,22 @@
 /**
  * @fileoverview Al sayfası giriş noktası
  */
-import { toUnlockableNFT } from "../lib/did/decryptedSections";
 import İmeceİptal from "/al/imeceİptal/birim";
 import Tanışma from "/al/tanışma/birim";
 import { öde } from "/al/ödeme/birim";
 import Cüzdan from "/birim/cüzdan/birim";
 import Telefon from "/birim/telefon/birim";
-import { imzaMetni, metadataVeBölümler } from "/lib/did/TCKTVerisi";
+import { toUnlockableNFT, verifyProofs } from "/lib/did/decryptedSections";
+import { imzaMetni, metadataVeBölümler, OnaylamaAnahtarları } from "/lib/did/TCKTVerisi";
 import ipfs from "/lib/node/ipfs";
 import network from "/lib/node/network";
 import dom from "/lib/util/dom";
 import { hex } from "/lib/util/çevir";
 
 /**
- * @param {!Promise<!did.DecryptedSections>} açıkTcktSözü
+ * @param {!did.DecryptedSections} açıkTckt
  */
-const tcktYarat = (açıkTcktSözü) => {
+const tcktYarat = (açıkTckt) => {
   /** @const {Element} */
   const s3a = dom.adla("s3a");
   dom.adla("te").style.opacity = 1;
@@ -28,6 +28,9 @@ const tcktYarat = (açıkTcktSözü) => {
   Telefon.kutuGöster(telefonMetni.slice(0, 20) + telefonMetni.slice(30, 170),
     dom.TR ? "İmzala" : "Sign"
   );
+
+  /** @const {!Promise<!did.DecryptedSections>} */
+  const açıkTcktSözü = verifyProofs(açıkTckt, OnaylamaAnahtarları);
 
   s3a.onclick = () => {
     /** @const {!Promise<!eth.ERC721Unlockable>} */

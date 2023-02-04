@@ -9,8 +9,10 @@ build/al/sayfa-%.js: al/sayfa.js \
                      birim/tckt/birim.js \
                      lib/crypto/sha3.js \
                      lib/crypto/secp256k1.js lib/crypto/modular.js \
+                     lib/crypto/primes.js lib/crypto/wesolowski.js \
                      lib/did/*.d.js lib/did/TCKTVerisi.js \
                      lib/did/section.js lib/did/decryptedSections.js \
+                     lib/did/verifiableID.js \
                      lib/ethereum/*.js \
                      lib/node/ipfs.d.js lib/node/ipfs.js lib/node/network.js \
                      lib/node/nvi.d.js lib/node/error.d.js \

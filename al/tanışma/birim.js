@@ -31,7 +31,7 @@ const taahhütOluştur = (adres, rastgele) => {
 /**
  * AçıkTCKT alır ve `sonra`'ya aktarır.
  *
- * @param {function(!Promise<!did.DecryptedSections>)} sonra AçıkTCKT'yi
+ * @param {function(!did.DecryptedSections)} sonra AçıkTCKT'yi
  * vereceğimiz yordam.
  */
 const açıkTcktAlVe = (sonra) => {
@@ -129,7 +129,7 @@ const açıkTcktAlVe = (sonra) => {
       .then((/** @type {!did.DecryptedSections} */ açıkTckt) => {
         Tckt.açıkTcktGöster(açıkTckt);
         kutu.classList.add("done");
-        sonra(Promise.resolve(açıkTckt));
+        sonra(açıkTckt);
       });
   } else {
     /** @const {Element} */
@@ -204,7 +204,7 @@ const açıkTcktAlVe = (sonra) => {
             kutu.classList.add("done");
             // İleride devam eden bir hesaplama döndürebiliriz. Bu yüzden arabirimi
             // promise olarak sabitliyoruz.
-            sonra(Promise.resolve(açıkTckt));
+            sonra(açıkTckt);
           } else {
             /** @const {!node.HataBildirimi} */
             const hata = results.find((result) => result.status == 'rejected'
