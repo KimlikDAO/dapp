@@ -115,14 +115,25 @@ const bağlanınca = (f) => {
   else Bağlanınca = f;
 }
 
+/**
+ * @param {function()} f
+ */
 const kopunca = (f) => {
   Kopunca = f;
 }
 
+/**
+ * @param {function(string)} f Ağ değişince yeni ağın adıyla çağırılacak
+ *                             fonksiyon.
+ */
 const ağDeğişince = (f) => {
   AğDeğişince.push(f);
 }
 
+/**
+ * @param {function(string)} f Adres değişince yeni adresle beraber çağırılacak
+ *                             fonksiyon.
+ */
 const adresDeğişince = (f) => {
   AdresDeğişince = f;
 }
@@ -140,7 +151,7 @@ const bağla = () => {
 }
 
 dom.menüYarat(DilButonu, dom.adla("nld"));
-dom.adla("nld").onclick = (event) => {
+dom.adla("nld").onclick = (/** @type {Event} */ event) => {
   /** @const {Element} */
   const li = event.target.nodeName == "LI"
     ? event.target : event.target.parentElement;
@@ -226,8 +237,8 @@ const adresDüğmesiKur = () => {
 
   ethereum.request(
     /** @type {!eth.Request} */({ method: "eth_accounts" }))
-    .then((accounts) => {
-      if (accounts.length > 0) adresDeğişti(/** Array<string> */(accounts));
+    .then((/** @type {!Array<string>} */ accounts) => {
+      if (accounts.length > 0) adresDeğişti(accounts);
     });
 }
 
@@ -239,7 +250,7 @@ else {
   }, 200);
 }
 
-/** @const {Object<string, !Array<string>>} */
+/** @const {!Object<string, !Array<string>>} */
 const Paralar = dom.TR ? {
   "0x1": ["ether", "’den", "’e"],
   "0xa86a": ["AVAX", "’tan", "’a"],

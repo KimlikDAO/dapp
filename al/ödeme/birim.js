@@ -105,24 +105,28 @@ const öde = (cidSözü, adresAğırlığı, eşik) => {
     const adres = /** @type {string} */(Cüzdan.adres());
     // Nonce'ın cachelenmesi için şimdiden çağır
     if (para) TCKT.getNonce(ağ, adres, para);
-    /** @const {Promise<number>} */
+    /** @const {!Promise<number>} */
     const ağÜcretiSözü = TCKT.estimateNetworkFee(ağ);
-    /** @const {Promise<Array<number>>} */
-    const fiyatSözü = TCKT.priceIn(ağ, para).then((fiyat) => {
-      kesirGir(fiyat[1], döküm.children[0]);
-      if (!iptalli)
-        kesirGir(fiyat[0] - fiyat[1], döküm.children[1]);
-      if (para != 0)
-        kesirGir(fiyat[+iptalli], döküm.children[3]);
-      /** @const {string} */
-      const paraMetni = dom.paradanMetne(fiyat[+iptalli]);
-      dom.adla("odf").innerText = para == 0
-        ? paraMetni + " " + Cüzdan.Paralar[Cüzdan.ağ()][0]
-        : (para == 3 ? "₺" : "$") + paraMetni;
-      return fiyat;
-    });
+    /** @const {!Promise<!Array<number>>} */
+    const fiyatSözü = TCKT.priceIn(ağ, para)
+      .then((/** @type {!Array<number>} */ fiyat) => {
+        kesirGir(fiyat[1], döküm.children[0]);
+        if (!iptalli)
+          kesirGir(fiyat[0] - fiyat[1], döküm.children[1]);
+        if (para != 0)
+          kesirGir(fiyat[+iptalli], döküm.children[3]);
+        /** @const {string} */
+        const paraMetni = dom.paradanMetne(fiyat[+iptalli]);
+        dom.adla("odf").innerText = para == 0
+          ? paraMetni + " " + Cüzdan.Paralar[Cüzdan.ağ()][0]
+          : (para == 3 ? "₺" : "$") + paraMetni;
+        return fiyat;
+      });
 
-    Promise.all([fiyatSözü, ağÜcretiSözü]).then(([fiyat, ağÜcreti]) => {
+    Promise.all([fiyatSözü, ağÜcretiSözü]).then(([
+      /** @type {!Array<number>} */ fiyat,
+      /** @type {number} */ ağÜcreti
+    ]) => {
       kesirGir(ağÜcreti, döküm.children[2]);
       if (para == 0) {
         kesirGir(fiyat[+iptalli] + ağÜcreti, döküm.children[3]);
@@ -146,24 +150,33 @@ const öde = (cidSözü, adresAğırlığı, eşik) => {
   ağDeğişti(Cüzdan.ağ());
   Cüzdan.ağDeğişince(ağDeğişti);
 
-  const birazBekle = (cevap) => new Promise((resolve) => setTimeout(() => resolve(cevap), 100))
+  /**
+   * @template T
+   * @param {T} cevap
+   * @return {!Promise<T>}
+   */
+  const birazBekle = (cevap) => new Promise(
+    (/** @type {function(T):void} */ resolve) => setTimeout(() => resolve(cevap), 100))
 
   dom.adla("od").classList.remove("disabled");
   dom.adla("oda").onclick = () => {
+    /** @const {string} */
     const ağ = Cüzdan.ağ();
+    /** @const {string} */
     const adres = /** @type {string} */(Cüzdan.adres());
-    let sonuç = para == 0
+    /** @const {!Promise<*>} */
+    const sonuç = para == 0
       ? cidSözü.then((cid) =>
         TCKT.createWithRevokers(ağ, adres, cid, eşik, adresAğırlığı))
       : TCKT.isTokenERC20Permit(ağ, para)
         ? Promise.all([cidSözü, TCKT.getPermitFor(ağ, adres, para, iptalli)])
           .then(birazBekle)
-          .then(([cid, imza]) =>
+          .then((/** @type {!Array<string>} */[cid, imza]) =>
             TCKT.createWithRevokersWithTokenPermit(adres, cid, eşik, adresAğırlığı, imza)
           )
         : Promise.all([cidSözü, TCKT.getApprovalFor(ağ, adres, para)])
           .then(birazBekle)
-          .then(([cid, _]) =>
+          .then(([/** @type {string} */ cid, _]) =>
             TCKT.createWithRevokersWithTokenPayment(ağ, adres, cid, eşik, adresAğırlığı, para));
     sonuç
       .then(() => {

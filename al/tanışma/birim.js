@@ -67,7 +67,7 @@ const açıkTcktAlVe = (sonra) => {
       resolve(bellektenTaahhütPow);
     } else {
       powWorker.postMessage(taahhüt.buffer, [taahhüt.buffer]);
-      powWorker.onmessage = (msg) => {
+      powWorker.onmessage = (/** @type {!MessageEvent} */ msg) => {
         /** @const {string} */
         const taahhütPow = base64(new Uint8Array(msg.data, 0, 72));
         window.localStorage[taahhütB64] = taahhütPow;
@@ -84,7 +84,7 @@ const açıkTcktAlVe = (sonra) => {
     /** @type {string} */ taahhütPow,
     /** @type {!Array<string>} */ nodelar
   ]) => fetch(`https://${nodelar[0]}/edevlet/nko/commit?${taahhütPow}`))
-    .then((res) => res.text())
+    .then((/** @type {!Response} */ res) => res.text())
     .catch(console.log);
 
   /** @const {Element} */
@@ -125,7 +125,7 @@ const açıkTcktAlVe = (sonra) => {
       .then((nodelar) => fetch(
         `https://${nodelar[0]}/edevlet/oauth2?` +
         `${base64(new Uint8Array(taahhüt))}&ts=${istemciAn}&oauth_code=${code}`))
-      .then(res => res.json())
+      .then((/** @type {!Response} */res) => res.json())
       .then((/** @type {!did.DecryptedSections} */ açıkTckt) => {
         Tckt.açıkTcktGöster(açıkTckt);
         kutu.classList.add("done");
@@ -192,10 +192,11 @@ const açıkTcktAlVe = (sonra) => {
           fetch(`https://${node}/edevlet/nko?${taahhütPow}&ts=${istemciAnı}`, {
             method: "POST",
             body: formData
-          }).then((res) => res.json()
+          }).then((/** @type {!Response} */ res) => res.json()
             .then((data) => res.ok && data ? data : Promise.reject(data))
           ))
-        )).then((results) => {
+        )).then((/** @type {!Array<!Promise.AllSettledResultElement<!did.DecryptedSections>>} */
+          results) => {
           /** @const {!did.DecryptedSections} */
           const açıkTckt = combineMultiple(
             results
@@ -221,8 +222,9 @@ const açıkTcktAlVe = (sonra) => {
             sonra(açıkTckt);
           } else {
             /** @const {!node.HataBildirimi} */
-            const hata = results.find((result) => result.status == 'rejected'
-              && Object.keys(result.reason).length).reason
+            const hata = /** @type {node.HataBildirimi} */(results.find(
+              (result) => result.status == 'rejected' &&
+                Object.keys(/** @type {!Object} */(result.reason)).length != 0).reason)
               || /** @type {!node.HataBildirimi} */({ kod: 7 });
             hataGöster(hata);
           }
