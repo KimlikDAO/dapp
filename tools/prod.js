@@ -67,11 +67,14 @@ const ProdWorker = {
     if (kvKey && idx != HOST_URL.lastIndexOf("."))
       cacheKey = url;
     else {
-      kvKey = kvKey
-        ? PAGES[kvKey]
-        : req.headers.get('cookie')?.startsWith('l=tr')
-          || req.headers.get('accept-language')?.includes('tr')
+      if (kvKey) kvKey = PAGES[kvKey];
+      else {
+        /** @const {?string} */
+        const cookie = req.headers.get('cookie');
+        kvKey = (cookie ? cookie.startsWith("l=tr")
+          : req.headers.get('accept-language')?.includes('tr'))
           ? "ana-tr.html" : "ana-en.html";
+      }
       cacheKey = HOST_URL + kvKey
     }
     kvKey += ext;
