@@ -24,9 +24,9 @@ const tcktYarat = (açıkTckt) => {
   s3a.classList.remove("disabled");
 
   /** @const {string} */
-  const telefonMetni = imzaMetni(["personInfo"]).slice(0, 400);
-  Telefon.kutuGöster(telefonMetni.slice(0, 20) + telefonMetni.slice(30, 170),
-    dom.TR ? "İmzala" : "Sign"
+  const telefonMetni = imzaMetni(["personInfo"]);
+  Telefon.kutuGöster(telefonMetni.slice(0, 25) +
+    telefonMetni.slice(35, dom.TR ? 161 : 173), dom.TR ? "İmzala" : "Sign"
   );
 
   /** @const {!Promise<!did.DecryptedSections>} */

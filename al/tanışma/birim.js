@@ -125,7 +125,7 @@ const açıkTcktAlVe = (sonra) => {
       .then((nodelar) => fetch(
         `https://${nodelar[0]}/edevlet/oauth2?` +
         `${base64(new Uint8Array(taahhüt))}&ts=${istemciAn}&oauth_code=${code}`))
-      .then((/** @type {!Response} */res) => res.json())
+      .then((/** @type {!Response} */ res) => res.json())
       .then((/** @type {!did.DecryptedSections} */ açıkTckt) => {
         Tckt.açıkTcktGöster(açıkTckt);
         kutu.classList.add("done");
@@ -217,8 +217,6 @@ const açıkTcktAlVe = (sonra) => {
 
             Tckt.açıkTcktGöster(açıkTckt);
             kutu.classList.add("done");
-            // İleride devam eden bir hesaplama döndürebiliriz. Bu yüzden arabirimi
-            // promise olarak sabitliyoruz.
             sonra(açıkTckt);
           } else {
             /** @const {!node.HataBildirimi} */
