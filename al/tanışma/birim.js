@@ -96,7 +96,7 @@ const açıkTcktAlVe = (sonra) => {
 
   kutu.classList.remove("disabled");
 
-  /** @type {URLSearchParams} */
+  /** @type {!URLSearchParams} */
   const params = new URLSearchParams(location.search);
   /** @type {?string} */
   const code = params.get("code");
@@ -134,6 +134,8 @@ const açıkTcktAlVe = (sonra) => {
   } else {
     /** @const {Element} */
     const hataBildirimi = dom.adla("tafb");
+    /** @type {boolean} */
+    let hataOluştu = false;
     nkoDüğmesi.onclick = () => {
       dom.gizle(eDevletDüğmesi);
       dom.gizle(nkoDüğmesi);
@@ -161,7 +163,19 @@ const açıkTcktAlVe = (sonra) => {
         const istemciAnı = Date.now() / 1000 | 0;
 
         hataKaldır();
-        dom.adla("tafb").innerText = dom.TR ? "Belge yükleniyor" : "Uploading document";
+        hataBildirimi.innerText = dom.TR ? "Belge yükleniyor" : "Uploading document";
+        setTimeout(() => {
+          if (!hataOluştu)
+            hataBildirimi.innerText = dom.TR
+              ? "TCKT’niz oluşturuluyor"
+              : "Minting your TCKT"
+        }, 1500);
+        setTimeout(() => {
+          if (!hataOluştu)
+            hataBildirimi.innerText = dom.TR
+              ? "VerifiableID hesaplanıyor"
+              : "Computing VerifiableID"
+        }, 2500);
         dom.adlaGizle("taimg");
         dom.adlaGöster("tal");
         /** @const {!FormData} */
@@ -243,8 +257,8 @@ const açıkTcktAlVe = (sonra) => {
         "Yüklediğiniz belgedeki nüfus kaydı geçersiz.",
         "Kurum adı KimlikDAO olmalı",
         "Kişi sağ değil",
-        "Belgeyi alırken \"Sayı\" {} olarak girilmeli. 9 basamağı da doğru girdiniz mi? Farklı bir cüzdana mı geçtiniz?",
-        "Belge e-devletten onaylanamadı.",
+        "Belgeyi alırken \"Kurum adı\" KimlikDAO-{} olarak girilmeli. Son 6 basamağı da doğru girdiniz mi? Farklı bir cüzdana mı geçtiniz?",
+        "Belge e-devletten onaylanamadı. Belgeyi yeni aldıysanız 30sn sonra tekrar deneyin.",
         "PoW hatalı.",
         "Geçerli bir PDF dosyası yükleyin."
       ] : [
@@ -252,8 +266,8 @@ const açıkTcktAlVe = (sonra) => {
         "The registry is invalid",
         "The institution name has to be filled in as exactly KimlikDAO.",
         "Person is not alive",
-        "The  \"Request Number\" needs to be filled in as {}. Make sure you use the same wallet address.",
-        "Unable the authenticate the document with e-devlet.",
+        "The  \"Institution name\" needs to be filled in as KimlikDAO-{}. Make sure you use the same wallet address.",
+        "Unable the authenticate the document with e-devlet. If you just got the document, wait for 30 seconds and try again.",
         "Incorrect PoW.",
         "Invalid PDF file"
       ];
@@ -262,6 +276,7 @@ const açıkTcktAlVe = (sonra) => {
        * @param {!node.HataBildirimi} hata
        */
       const hataGöster = (hata) => {
+        hataOluştu = true;
         /** @const {string} */
         const metin = HataMetinleri[hata.kod];
         hataBildirimi.innerText = hata.ek && hata.ek.length
@@ -273,6 +288,7 @@ const açıkTcktAlVe = (sonra) => {
       }
 
       const hataKaldır = () => {
+        hataOluştu = false;
         hataBildirimi.classList.remove("inv");
         dom.gizle(dom.adla("tafail"));
       }

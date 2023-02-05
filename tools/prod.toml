@@ -6,12 +6,12 @@ name = "dapp"
 route = { pattern = "kimlikdao.org", custom_domain = true }
 usage_model = "bundled"
 
-compatibility_date = "2023-02-02"
 workers_dev = false
 no_bundle = true
 minify = false
 send_metrics = false
 node_compat = false
+logpush = false
 
 [[kv_namespaces]]
 binding = "KV"

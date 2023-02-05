@@ -24,6 +24,8 @@ staging: build
 
 cf-deployment: build build/prod.js build/sitemap tools/prod.toml
 	tools/cfuploader.py
-	wrangler publish -c tools/prod.toml
+	wrangler publish \
+        --config tools/prod.toml \
+        --compatibility-date $(shell date +%Y-%m-%d)
 
 .PHONY: cf-deployment clean dev staging
