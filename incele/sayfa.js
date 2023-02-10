@@ -82,7 +82,7 @@ const eşikKutusuGöster = () => {
   dom.göster(EşikKutusu);
   dom.adla("inesr").onclick = kutuKapat;
 
-  TCKT.revokesRemaining(adres).then((eşik) => {
+  TCKT.revokesRemaining().then((eşik) => {
     dom.adla("inesm").onclick = birAzalt;
     dom.adla("inesp").onclick = (e) => birArttır(e, eşik);
     girdi.value = eşik;
@@ -227,7 +227,7 @@ const girdiDüzelt = (girdi) => {
 
 const birAzalt = (event) => {
   const node = event.target.nextElementSibling;
-  node.value = Math.min(+node.value - 1, 1);
+  node.value = Math.max(+node.value - 1, 0);
 }
 
 const birArttır = (event, max) => {
