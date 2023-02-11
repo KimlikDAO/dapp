@@ -22,7 +22,7 @@ dev:
 staging: build
 	tools/staging.py
 
-cf-deployment: build build/prod.js build/sitemap tools/prod.toml
+cf-deployment: build build/prod.js build/sitemap build/TCKT.assets tools/prod.toml
 	tools/cfuploader.py
 	wrangler publish \
         --config tools/prod.toml \

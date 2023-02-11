@@ -32,6 +32,13 @@ build/prod.js: tools/prod.js tools/prod.d.js \
 	sed -i.bak 's/globalThis.ProdWorker=/export default/g' $@
 	wc $@
 
+.PHONY: build/TCKT.assets
+build/TCKT.assets: $(call compressions, build/TCKT.svg)
+
+build/TCKT.svg: build/birim/tckt/görsel.svg
+	mkdir -p $(dir $@)
+	cp $< $@
+
 al-en := get
 incele-en := view
 oyla-en := vote

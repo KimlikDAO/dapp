@@ -1,10 +1,10 @@
 // Has to end with a slash
 /** @define {string} */
-const HOST_URL = 'https://kimlikdao.org/';
+const HOST_URL = "https://kimlikdao.org/";
 /** @const {string} */
-const PAGE_CACHE_CONTROL = 'max-age=90,public';
+const PAGE_CACHE_CONTROL = "max-age=90,public";
 /** @const {string} */
-const STATIC_CACHE_CONTROL = 'max-age=29030400,public,immutable';
+const STATIC_CACHE_CONTROL = "max-age=29030400,public,immutable";
 /** @const {!Object<string, string>} */
 const MIMES = {
   "css": "text/css",
@@ -32,9 +32,9 @@ const PAGES = {
 /**
  * @return {!Response}
  */
-const err = () => new Response('NAPİM?', {
+const err = () => new Response("NAPİM?", {
   status: 404,
-  headers: { 'content-type': 'text/plain;charset=utf-8' }
+  headers: { "content-type": "text/plain;charset=utf-8" }
 })
 
 /**
@@ -55,10 +55,10 @@ const ProdWorker = {
     /** @const {string} */
     const enc = req.cf.clientAcceptEncoding || "";
     /** @const {string} */
-    const ext = url.endsWith('.woff2') ? ''
-      : enc.includes('br') ? '.br' : enc.includes('gz') ? '.gz' : '';
+    const ext = url.endsWith(".woff2") ? ""
+      : enc.includes("br") ? ".br" : enc.includes("gz") ? ".gz" : "";
     /** @const {number} */
-    const idx = url.lastIndexOf('.');
+    const idx = url.lastIndexOf(".");
 
     /** @type {?string} */
     let kvKey = url.slice(HOST_URL.length);
@@ -67,12 +67,16 @@ const ProdWorker = {
     if (kvKey && idx != HOST_URL.lastIndexOf("."))
       cacheKey = url;
     else {
+      /** @const {number} */
+      const qmark = kvKey.lastIndexOf("?");
+      if (qmark != -1 && kvKey.length > 3)
+        kvKey = kvKey.slice(0, qmark);
       if (kvKey) kvKey = PAGES[kvKey];
       else {
         /** @const {?string} */
-        const cookie = req.headers.get('cookie');
+        const cookie = req.headers.get("cookie");
         kvKey = (cookie ? cookie.startsWith("l=tr")
-          : req.headers.get('accept-language')?.includes('tr'))
+          : req.headers.get("accept-language")?.includes("tr"))
           ? "ana-tr.html" : "ana-en.html";
       }
       cacheKey = HOST_URL + kvKey
@@ -99,19 +103,19 @@ const ProdWorker = {
      */
     const makeResponse = (body) => new Response(body, {
       headers: {
-        'cache-control': idx == HOST_URL.lastIndexOf(".")
+        "cache-control": idx == HOST_URL.lastIndexOf(".")
           ? PAGE_CACHE_CONTROL
           : STATIC_CACHE_CONTROL,
-        'cdn-cache-control': STATIC_CACHE_CONTROL,
-        'content-encoding': ext === '.br' ? 'br' : ext === '.gz' ? 'gzip' : '',
-        'content-length': body.byteLength,
-        'content-type': idx == HOST_URL.lastIndexOf(".")
+        "cdn-cache-control": STATIC_CACHE_CONTROL,
+        "content-encoding": ext === ".br" ? "br" : ext === ".gz" ? "gzip" : "",
+        "content-length": body.byteLength,
+        "content-type": idx == HOST_URL.lastIndexOf(".")
           ? "text/html;charset=utf-8"
           : MIMES[url.slice(idx + 1)],
-        'expires': 'Sun, 01 Jan 2034 00:00:00 GMT',
-        'vary': 'accept-encoding',
+        "expires": "Sun, 01 Jan 2034 00:00:00 GMT",
+        "vary": "accept-encoding",
       },
-      'encodeBody': 'manual'
+      "encodeBody": "manual"
     });
 
     /**
@@ -130,7 +134,7 @@ const ProdWorker = {
      *
      * @const {!Promise<!Response>}
      */
-    const fromKV = env.KV.get(kvKey, 'arrayBuffer').then((body) => {
+    const fromKV = env.KV.get(kvKey, "arrayBuffer").then((body) => {
       if (!body) return Promise.reject();
       // Remember to cache the response, but only after we finish serving the
       // request.

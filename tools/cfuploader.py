@@ -15,6 +15,7 @@ DIL = {
 
 NAMED_ASSET = {
     'sitemap.txt',
+    'TCKT.svg',
     # 'favicon.ico',
 }
 

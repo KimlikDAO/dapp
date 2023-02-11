@@ -86,6 +86,8 @@ Promise.all([
   testKvName("https://kimlikdao.org/", "br", null, "ana-en.html.br"),
   testKvName("https://kimlikdao.org/?tr", "gzip", "l=en", "ana-tr.html.gz"),
   testKvName("https://kimlikdao.org/?en", "", "l=tr", "ana-en.html"),
+  testKvName("https://kimlikdao.org/?utm_source=Wallet", "br, gzip", null, "ana-en.html.br"),
+  testKvName("https://kimlikdao.org/?utm", "gzip, br", "l=tr", "ana-tr.html.br"),
   testKvName("https://kimlikdao.org/abc.woff2", "br", null, "abc.woff2"),
   testKvName("https://kimlikdao.org/vote", "br", null, "oyla-en.html.br"),
   testKvName("https://kimlikdao.org/vote", "gzip", "l=tr", "oyla-en.html.gz"),
