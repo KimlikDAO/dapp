@@ -15,7 +15,8 @@ build/oyla/sayfa-%.js: oyla/sayfa.js \
                              --entry_point $< \
                              --js $^ \
                              --js_output_file $@
-	yarn uglifyjs $@ -m -o $@
+	yarn uglifyjs $@ -m -c toplevel,unsafe -o $@
+	wc $@
 
 build/oyla/sayfa.css: oyla/sayfa.css oyla/*/*.css
 	mkdir -p $(dir $@)
@@ -34,6 +35,7 @@ build/oyla-%.html: oyla/sayfa.html \
                    build/oyla/sayfa.keymap \
                    build/oyla/sayfa-%.keymap \
                    build/ana/sayfa-%.keymap \
+                   build/al/ödeme/birim.keymap \
                    build/birim/cüzdan/birim.keymap \
                    build/font/fonts-%.keymap
 	node tools/htmlProcessor $< $*

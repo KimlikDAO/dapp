@@ -9,12 +9,9 @@ import dom from '/lib/util/dom';
 let SeçilmişÖneriId;
 
 Cüzdan.bağlanınca(() => {
-  let ağ = Cüzdan.ağ();
-  fiyatDeğişikliğiFormuHazırla(ağ);
+  fiyatDeğişikliğiFormuHazırla(Cüzdan.ağ());
   komuniteÖnergesiHazırla();
-  Cüzdan.ağDeğişince((yeniAğ) => {
-    fiyatDeğişikliğiFormuHazırla(yeniAğ);
-  })
+  Cüzdan.ağDeğişince((yeniAğ) => fiyatDeğişikliğiFormuHazırla(yeniAğ))
 })
 
 dom.adla("oyyb").onclick = () => {
@@ -203,31 +200,6 @@ const aktifOyKartıOluştur = (data) => {
   return element
 }
 
-const data = {
-  title: "Fiyat Değişikliği",
-  description: "TCKT fiyati $4 olarak belirlensin.",
-  address: "0xc9039C5A5311bFeA959CFe744df8A010fe36EA36",
-  callData: "0xb5b831e2",
-  remainingTime: "13D 2H ",
-  chain: "0xa86a",
-  votes: [2, 9, 11],
-};
-
-const data1 = {
-  title: "Topluluk Önerisi",
-  description: "Solana ağı desteği gelsin.",
-  address: "0x75B4f62728c499087838E705989EC5F7eB479E4b",
-  callData: "0xp9c586d4",
-  remainingTime: "27D 3H",
-  chain: "0x1",
-  votes: [24, 3, 7],
-};
-
 const birazBekle = () => new Promise((resolve) => setTimeout(() => resolve(), 100));
 
 const orandanMetne = (partialValue, totalValue) => (100 * partialValue / totalValue).toFixed(1);
-
-const yeniOy = aktifOyKartıOluştur(data);
-const yeniOy1 = aktifOyKartıOluştur(data1);
-dom.adla("oyac").appendChild(yeniOy);
-dom.adla("oyac").appendChild(yeniOy1);
