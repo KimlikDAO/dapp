@@ -1,5 +1,75 @@
 import dom from "/lib/util/dom";
 
+/**
+ * @typedef {{
+ *   ad: string,
+ *   izleyici: string,
+ *   tokenKodu: string,
+ *   token: string,
+ *   tokenEki: !Array<string>,
+ *   rpcUrl: string
+ * }}
+ */
+let AğBilgisi;
+
+/**
+ * @type {!Object<string, !AğBilgisi>}
+ * @const
+ */
+const AğBilgileri = {
+  "0x1": {
+    ad: "Ethereum",
+    izleyici: "etherscan.io",
+    tokenKodu: "ETH",
+    token: "ether",
+    tokenEki: dom.TR ? ["’den", "’e"] : [],
+    rpcUrl: "cloudflare-eth.com",
+  },
+  "0xa86a": {
+    ad: "Avalanche",
+    izleyici: "snowtrace.io",
+    tokenKodu: "AVAX",
+    tokenEki: dom.TR ? ["’tan", "’a"] : [],
+    rpcUrl: "api.avax.network/ext/bc/C/rpc",
+  },
+  "0x89": {
+    ad: "Polygon",
+    izleyici: "polygonscan.com",
+    tokenKodu: "MATIC",
+    tokenEki: dom.TR ? ["’ten", "’e"] : [],
+    rpcUrl: "polygon-rpc.com"
+  },
+  "0xa4b1": {
+    ad: "Arbitrum",
+    izleyici: "arbiscan.io",
+    tokenKodu: "ETH",
+    token: "ether",
+    tokenEki: dom.TR ? ["’den", "’e"] : [],
+    rpcUrl: "arb1.arbitrum.io/rpc",
+  },
+  "0x38": {
+    ad: "BNB Chain",
+    izleyici: "bscscan.com",
+    tokenKodu: "BNB",
+    tokenEki: dom.TR ? ["’den", "’ye"] : [],
+    rpcUrl: "bsc-dataseed3.binance.org"
+  },
+  "0x406": {
+    ad: "Conflux eSpace",
+    izleyici: "confluxscan.io",
+    tokenKodu: "CFX",
+    tokenEki: dom.TR ? ["’ten", "’e"] : [],
+    rpcUrl: "evm.confluxrpc.com"
+  },
+  "0xfa": {
+    ad: "Fantom",
+    izleyici: "ftmscan.com",
+    tokenKodu: "FTM",
+    tokenEki: dom.TR ? ["’dan", "’a"] : [],
+    rpcUrl: "rpc.ankr.com/fantom"
+  }
+}
+
 /** @type {?string} */
 let Adres = null;
 /** @type {string} */
@@ -26,17 +96,6 @@ const DilButonu = dom.adla("nl");
 const ağ = () => Ağ;
 /** @const {function():?string} */
 const adres = () => Adres;
-
-/** @const {Object<string, Array<string>>} */
-const AğBilgileri = {
-  "0xa86a": ["snowtrace.io", "Avalanche"],
-  "0x1": ["etherscan.io", "Ethereum"],
-  "0x89": ["polygonscan.com", "Polygon"],
-  "0xa4b1": ["arbiscan.io", "Arbitrum"],
-  "0x38": ["bscscan.com", "BNB Chain"],
-  "0x406": ["confluxscan.io", "Conflux eSpace"],
-  "0xfa": ["ftmscan.com", "Fantom"],
-}
 
 /**
  * Verilen bir EVM adresini UI'da hızlıca göstermeye uygun hale getirir.
@@ -66,7 +125,9 @@ const ağDeğişti = (yeniAğ) => {
     // arabiriminden), en son seçili ağa geri geçme isteği yolluyoruz.
     ethereum.request(/** @type {!eth.Request} */({
       method: "wallet_switchEthereumChain",
-      params: [{ "chainId": Ağ }],
+      params: [/** @type {!eth.SwitchChainParam} */({
+        chainId: Ağ
+      })],
     })).catch(console.log);
   } else if (yeniAğ != Ağ) {
     dom.adla("nc" + Ağ).classList.remove("sel");
@@ -185,7 +246,9 @@ dom.adla("nld").onclick = (/** @type {Event} */ event) => {
 };
 
 const ağDüğmesiKur = () => {
+  /** @const {Element} */
   const ağMenüsü = dom.adla("ncd");
+  /** @const {Element} */
   const avax = dom.adla("nc0xa86a");
   avax.replaceChild(AğButonu.firstElementChild.cloneNode(true),
     avax.firstElementChild);
@@ -197,11 +260,32 @@ const ağDüğmesiKur = () => {
       if (li.nodeName == 'DIV') return;
     /** @const {string} */
     const ağ = li.id.slice(2);
+
     if (window["ethereum"])
       ethereum.request(/** @type {!eth.Request} */({
         method: "wallet_switchEthereumChain",
-        params: [{ "chainId": ağ }],
-      })).catch(console.log);
+        params: [/** @type {!eth.SwitchChainParam} */({
+          chainId: ağ
+        })],
+      })).catch((e) => {
+        /** @const {AğBilgisi} */
+        const ağBilgisi = AğBilgileri[ağ];
+        if (e.code == 4902)
+          ethereum.request(/** @type {!eth.Request} */({
+            method: "wallet_addEthereumChain",
+            params: [/** @type {!eth.AddChainParam} */({
+              chainId: ağ,
+              chainName: ağBilgisi.ad,
+              nativeCurrency: {
+                name: ağBilgisi.token || ağBilgisi.tokenKodu,
+                symbol: ağBilgisi.tokenKodu,
+                decimals: 18
+              },
+              rpcUrls: ["https://" + ağBilgisi.rpcUrl],
+              blockExplorerUrls: ["https://" + ağBilgisi.izleyici]
+            })]
+          }));
+      });
   }
 }
 ağDüğmesiKur();
@@ -220,7 +304,7 @@ const adresDüğmesiKur = () => {
   }
 
   dom.adla("nad3").onclick = () => {
-    const url = `//${AğBilgileri[Ağ][0]}/address/${Adres}`;
+    const url = `//${AğBilgileri[Ağ].izleyici}/address/${Adres}`;
     window.open(url, "_blank");
   }
 
@@ -250,34 +334,18 @@ else {
   }, 200);
 }
 
-/** @const {!Object<string, !Array<string>>} */
-const Paralar = dom.TR ? {
-  "0x1": ["ether", "’den", "’e"],
-  "0xa86a": ["AVAX", "’tan", "’a"],
-  "0x89": ["MATIC", "’ten", "’e"],
-  "0xa4b1": ["ether", "'den", "’e"],
-  "0x38": ["BNB", "’den", "’ye"],
-  "0x406": ["CFX", "’ten", "’e"],
-  "0xfa": ["FTM", "’dan", "’a"],
-} : {
-  "0x1": ["ether"],
-  "0xa86a": ["AVAX"],
-  "0x89": ["MATIC"],
-  "0xa4b1": ["ether"],
-  "0x38": ["BNB"],
-  "0x406": ["CFX"],
-  "0xfa": ["FTM"],
-};
-
 export default {
   adres,
   adresDeğişince,
   ağ,
-  AğBilgileri,
   ağDeğişince,
   bağla,
   bağlanınca,
   hızlıArabirimAdı,
   kopunca,
-  Paralar,
+};
+
+export {
+  AğBilgisi,
+  AğBilgileri,
 };

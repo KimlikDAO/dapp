@@ -2,7 +2,7 @@
  * @fileoverview İmece iptal parçası. DOM'da `im` öneki bu parçaya ayrılmıştır.
  */
 
-import Cüzdan from "/birim/cüzdan/birim";
+import Cüzdan, { AğBilgileri, AğBilgisi } from "/birim/cüzdan/birim";
 import evm from "/lib/ethereum/evm";
 import TCKT from "/lib/ethereum/TCKT";
 import dom from "/lib/util/dom";
@@ -18,11 +18,18 @@ const İptalciler = dom.adla("imf");
  * @param {string} ağ Native tokeninde TCKT fiyatının gösterileceği ağ.
  */
 const fiyatGöster = (ağ) => {
+  /**
+   * @type {AğBilgisi}
+   * @const
+   */
+  const ağBilgisi = AğBilgileri[ağ];
+  /** @const {string} */
+  const token = ağBilgisi.token || ağBilgisi.tokenKodu;
   /** @const {!Array<string>} */
-  const ekler = Cüzdan.Paralar[ağ];
+  const ek = ağBilgisi.tokenEki;
   TCKT.priceIn(ağ, 0).then(([çok, az]) => {
-    dom.adla("imft").innerText = dom.paradanMetne(çok) + " " + ekler[0] + (dom.TR ? ekler[1] : "");
-    dom.adla("imfs").innerText = dom.paradanMetne(az) + " " + ekler[0] + (dom.TR ? ekler[2] : "");
+    dom.adla("imft").innerText = dom.paradanMetne(çok) + " " + token + (dom.TR ? ek[0] : "");
+    dom.adla("imfs").innerText = dom.paradanMetne(az) + " " + token + (dom.TR ? ek[1] : "");
     dom.adla("imfu").innerText = Math.round(100 * (çok - az) / çok);
   });
 }

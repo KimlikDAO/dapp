@@ -1,4 +1,4 @@
-import Cüzdan from "/birim/cüzdan/birim";
+import Cüzdan, { AğBilgileri, AğBilgisi } from "/birim/cüzdan/birim";
 import Telefon from '/birim/telefon/birim';
 import TCKT from '/lib/ethereum/TCKT';
 import dom from '/lib/util/dom';
@@ -31,6 +31,25 @@ const kesirGir = (sayı, satır) => {
 }
 
 /**
+ * @param {number} para
+ * @param {number} miktar
+ * @return {string}
+ */
+const paraVeMiktar = (para, miktar) => {
+  /** @const {string} */
+  const miktarMetni = dom.paradanMetne(miktar);
+  if (para != 0)
+    return (para == 3 ? "₺" : "$") + miktarMetni;
+
+  /**
+   * @type {AğBilgisi}
+   * @const
+   */
+  const ağBilgisi = AğBilgileri[Cüzdan.ağ()];
+  return miktarMetni + " " + (ağBilgisi.token || ağBilgisi.tokenKodu);
+}
+
+/**
  * Ödeme adımını gösterir, ödeme onayını alıp evm provider'a yollar.
  *
  * @param {Promise<string>} cidSözü gelmekte olan ipfs CID'i.
@@ -55,7 +74,7 @@ const öde = (cidSözü, adresAğırlığı, eşik) => {
     const li = dom.adla("odd" + yeniAğ);
 
     // Menü 'native token'i ayarla.
-    for (const diğerAğ in Cüzdan.Paralar) {
+    for (const diğerAğ in AğBilgileri) {
       if (diğerAğ != yeniAğ) dom.adla("odd" + diğerAğ).style.display = "none";
     }
 
@@ -115,11 +134,7 @@ const öde = (cidSözü, adresAğırlığı, eşik) => {
           kesirGir(fiyat[0] - fiyat[1], döküm.children[1]);
         if (para != 0)
           kesirGir(fiyat[+iptalli], döküm.children[3]);
-        /** @const {string} */
-        const paraMetni = dom.paradanMetne(fiyat[+iptalli]);
-        dom.adla("odf").innerText = para == 0
-          ? paraMetni + " " + Cüzdan.Paralar[Cüzdan.ağ()][0]
-          : (para == 3 ? "₺" : "$") + paraMetni;
+        dom.adla("odf").innerText = paraVeMiktar(para, fiyat[+iptalli]);
         return fiyat;
       });
 
