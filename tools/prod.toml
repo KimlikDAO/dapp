@@ -13,6 +13,8 @@ send_metrics = false
 node_compat = false
 logpush = false
 
+rules = [{ type = "Text", globs = [], fallthrough = false }]
+
 [[kv_namespaces]]
 binding = "KV"
 id = "836c46196848459ba8b3348e383bddf2"
