@@ -1,0 +1,45 @@
+#di {
+  display: flex;
+  position: relative;
+  margin-right: 30px;
+}
+
+#dib {
+  margin: auto;
+}
+
+#did {
+  animation: growDown 300ms ease-in-out forwards;
+  background-color: #fff;
+  border-radius: 5px;
+  border: 1px solid #f8f8f8;
+  box-shadow: 0px 1px 20px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  display: block;
+  left: -10px;
+  list-style: none;
+  margin: 10px 0;
+  padding: 0;
+  position: absolute;
+  top: 45px;
+  transform-origin: top center;
+  width: 125px;
+  z-index: 20;
+}
+
+#did li {
+  height: 45px;
+  margin: 1px;
+  padding: 6px 13px;
+  display: flex;
+  align-items: center;
+  justify-content: left;
+}
+
+#did li:hover {
+  background-color: #f2f2f2;
+}
+
+#did li.sel {
+  background-color: #eee;
+}

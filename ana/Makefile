@@ -1,6 +1,7 @@
 build/ana/sayfa-%.js: ana/sayfa.js \
                       ana/sergi/birim.js \
                       birim/cüzdan/birim.js \
+                      birim/dil/birim.js \
                       birim/telefon/birim.js \
                       birim/tckt/birim.js \
                       lib/did/*.d.js \
@@ -22,6 +23,7 @@ build/ana/sayfa-%.js: ana/sayfa.js \
 build/ana/sayfa-%.css: build/font/lato-%.css ana/sayfa.css \
                        ana/sergi/birim.css \
                        birim/cüzdan/birim.css \
+                       birim/dil/birim.css \
                        birim/telefon/birim.css \
                        birim/tckt/birim.css
 	mkdir -p $(dir $@)
@@ -40,6 +42,7 @@ build/ana-%.html: ana/sayfa.html \
                   build/ana/sayfa-%.keymap \
                   build/font/fonts-%.keymap \
                   build/birim/cüzdan/birim.keymap \
+                  build/birim/dil/birim.keymap \
                   build/birim/tckt/birim.keymap
 	node tools/htmlProcessor $< $*
 	tools/keymapper.py $@ $(filter %.keymap,$^)

@@ -1,10 +1,10 @@
 import dom from "/lib/util/dom";
 
 /** @const {Element} */
-const DilButonu = dom.adla("nl");
+const DilButonu = dom.adla("dib");
 
-dom.menüYarat(DilButonu, dom.adla("nld"));
-dom.adla("nld").onclick = (/** @type {Event} */ event) => {
+dom.menüYarat(DilButonu, dom.adla("did"));
+dom.adla("did").onclick = (/** @type {Event} */ event) => {
   /** @const {Element} */
   const li = event.target.nodeName == "LI"
     ? event.target : event.target.parentElement;
