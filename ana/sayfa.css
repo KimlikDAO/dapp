@@ -193,6 +193,13 @@ hr {
   align-items: center;
 }
 
+#nkd {
+  margin: auto 30px;
+}
+
+#nkd > img {
+  text-align: middle;
+}
 .nf {
   display: flex;
 }
@@ -297,10 +304,6 @@ h1 {
 
 @media (max-width: 550px) {
   #nl {
-    display: none;
-  }
-
-  #nkd {
     display: none;
   }
 

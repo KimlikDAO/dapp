@@ -5,6 +5,7 @@ import İmeceİptal from "/al/imeceİptal/birim";
 import Tanışma from "/al/tanışma/birim";
 import { öde } from "/al/ödeme/birim";
 import Cüzdan from "/birim/cüzdan/birim";
+import "/birim/dil/birim";
 import Telefon from "/birim/telefon/birim";
 import { toUnlockableNFT, verifyProofs } from "/lib/did/decryptedSections";
 import { imzaMetni, metadataVeBölümler, OnaylamaAnahtarları } from "/lib/did/TCKTVerisi";

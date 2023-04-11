@@ -5,6 +5,7 @@ build/al/sayfa-%.js: al/sayfa.js \
                      al/imeceİptal/birim.js al/ödeme/birim.js \
                      al/tanışma/birim.js \
                      birim/cüzdan/birim.js \
+                     birim/dil/birim.js \
                      birim/telefon/birim.js \
                      birim/tckt/birim.js \
                      lib/crypto/sha3.js \
@@ -59,6 +60,7 @@ build/al-%.html: al/sayfa.html \
                  build/ana/sayfa-%.keymap \
                  build/font/fonts-%.keymap \
                  build/birim/cüzdan/birim.keymap \
+                 build/birim/dil/birim.keymap \
                  build/birim/tckt/birim.keymap
 	node tools/htmlProcessor $< $*
 	tools/keymapper.py $@ $(filter %.keymap,$^)
