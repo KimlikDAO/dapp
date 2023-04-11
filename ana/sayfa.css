@@ -172,7 +172,6 @@ hr {
 #n {
   align-items: center;
   background-color: #fff;
-  box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
   display: flex;
   height: 80px;
   justify-content: space-between;
@@ -201,7 +200,7 @@ hr {
 #nd {
   align-items: center;
   display: flex;
-  margin: 0 10px;
+  margin: 0 12px 0 2px;
   min-width: 10ex;
   padding: 0 1em;
   text-align: center;

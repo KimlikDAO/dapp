@@ -58,4 +58,4 @@ const sergiSaatiKur = () => {
 Cüzdan.bağlanınca((adres) =>
   Telefon.adresGir(Cüzdan.hızlıArabirimAdı(adres)));
 
-sergiSaatiKur();
+// sergiSaatiKur();

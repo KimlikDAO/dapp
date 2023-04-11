@@ -86,11 +86,9 @@ let AğDeğişince = [];
 let BağlaMetni;
 
 /** @const {Element} */
-const AdresButonu = dom.adla("na");
+const AdresButonu = dom.adla("cua");
 /** @const {Element} */
-const AğButonu = dom.adla("nc");
-/** @const {Element} */
-const DilButonu = dom.adla("nl");
+const AğButonu = dom.adla("cuc");
 
 /** @const {function():string} */
 const ağ = () => Ağ;
@@ -130,10 +128,10 @@ const ağDeğişti = (yeniAğ) => {
       })],
     })).catch(console.log);
   } else if (yeniAğ != Ağ) {
-    dom.adla("nc" + Ağ).classList.remove("sel");
-    dom.adla("nc" + yeniAğ).classList.add("sel");
+    dom.adla("cud" + Ağ).classList.remove("sel");
+    dom.adla("cud" + yeniAğ).classList.add("sel");
     AğButonu.replaceChild(
-      dom.adla("nc" + yeniAğ).firstElementChild.cloneNode(true),
+      dom.adla("cud" + yeniAğ).firstElementChild.cloneNode(true),
       AğButonu.firstElementChild);
     Ağ = yeniAğ;
     for (const f of AğDeğişince) f(yeniAğ);
@@ -155,7 +153,7 @@ const adresDeğişti = (adresler) => {
     Adres = adresler[0];
     BağlaMetni = AdresButonu.innerText;
     AdresButonu.innerText = hızlıArabirimAdı(Adres);
-    dom.menüYarat(AdresButonu, dom.adla("nad"));
+    dom.menüYarat(AdresButonu, dom.adla("cue"));
 
     nihaiArabirimAdı(Adres).then((ad) => {
       if (ad) AdresButonu.innerText = ad;
@@ -211,45 +209,11 @@ const bağla = () => {
     .catch(console.log);
 }
 
-dom.menüYarat(DilButonu, dom.adla("nld"));
-dom.adla("nld").onclick = (/** @type {Event} */ event) => {
-  /** @const {Element} */
-  const li = event.target.nodeName == "LI"
-    ? event.target : event.target.parentElement;
-  /** @const {string} */
-  const dil = li.id.slice(2);
-  if (dom.TR) {
-    if (dil == "en") {
-      const sayfalar = {
-        "/": "/?en",
-        "/al": "/get",
-        "/incele": "/view",
-        "/oyla": "/vote",
-        "/iptal": "/revoke"
-      };
-      document.cookie = "l=en; path=/; max-age=" + 1e6;
-      window.location.href = sayfalar[window.location.pathname];
-    }
-  } else {
-    if (dil == "tr") {
-      const sayfalar = {
-        "/": "/?tr",
-        "/get": "/al",
-        "/view": "/incele",
-        "/vote": "/oyla",
-        "/revoke": "/iptal"
-      };
-      document.cookie = "l=tr; path=/; max-age=" + 1e6;
-      window.location.href = sayfalar[window.location.pathname];
-    }
-  }
-};
-
 const ağDüğmesiKur = () => {
   /** @const {Element} */
-  const ağMenüsü = dom.adla("ncd");
+  const ağMenüsü = dom.adla("cud");
   /** @const {Element} */
-  const avax = dom.adla("nc0xa86a");
+  const avax = dom.adla("cud0xa86a");
   avax.replaceChild(AğButonu.firstElementChild.cloneNode(true),
     avax.firstElementChild);
   dom.menüYarat(AğButonu, ağMenüsü);
@@ -259,7 +223,7 @@ const ağDüğmesiKur = () => {
     for (; li.nodeName != 'LI'; li = li.parentElement)
       if (li.nodeName == 'DIV') return;
     /** @const {string} */
-    const ağ = li.id.slice(2);
+    const ağ = li.id.slice(3);
 
     if (window["ethereum"])
       ethereum.request(/** @type {!eth.Request} */({
@@ -292,23 +256,23 @@ ağDüğmesiKur();
 
 const adresDüğmesiKur = () => {
   AdresButonu.onclick = bağla;
-  dom.adla("nad0").onclick = () =>
+  dom.adla("cue0").onclick = () =>
     window.location.href = dom.TR ? "/incele" : "/view";
 
-  dom.adla("nad1").onclick = () =>
+  dom.adla("cue1").onclick = () =>
     window.location.href = dom.TR ? "/oyla" : "/vote";
 
-  dom.adla("nad2").onclick = () => {
+  dom.adla("cue2").onclick = () => {
     const url = "//debank.com/profile/" + Adres;
     window.open(url, "_blank");
   }
 
-  dom.adla("nad3").onclick = () => {
+  dom.adla("cue3").onclick = () => {
     const url = `//${AğBilgileri[Ağ].izleyici}/address/${Adres}`;
     window.open(url, "_blank");
   }
 
-  dom.adla("nad4").onclick = () =>
+  dom.adla("cue4").onclick = () =>
     window.location.href = dom.TR ? "/iptal" : "/revoke";
 
   ethereum.on("accountsChanged", adresDeğişti);
