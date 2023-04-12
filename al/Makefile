@@ -50,6 +50,7 @@ build/al-%.html: al/sayfa.html \
                  al/ödeme/birim.html \
                  al/tanışma.birim \
                  birim/telefon/birim.html \
+                 birim/dil/birim.html \
                  birim/cüzdan.birim \
                  build/al/paste.svg.inl \
                  build/al/tanışma/external-link.svg.inl \

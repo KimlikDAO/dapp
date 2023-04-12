@@ -34,7 +34,7 @@ b {
 }
 
 h2 {
-  font-size: 21pt;
+  font-size: 20pt;
   font-weight: 700;
   margin: 10px;
   padding: 3px;
@@ -45,7 +45,7 @@ h2 {
 }
 
 .act.btn {
-  background: #3d67ab;
+  background: #4856b0;
   color: white;
   border: 1px solid #0a46a7;
   opacity: 0.9;
@@ -90,10 +90,6 @@ h2 {
 a {
   text-decoration: none;
   color: #000;
-}
-
-h1 {
-  display: inline-block;
 }
 
 .actbutton {
@@ -171,13 +167,18 @@ hr {
 
 #n {
   align-items: center;
-  background-color: #fff;
+  background-color: rgba(255, 255, 255, 0.95);
   display: flex;
   height: 80px;
   justify-content: space-between;
   position: sticky;
   top: 0;
   z-index: 20;
+}
+
+.ne {
+  padding: 10px;
+  margin: auto 15px;
 }
 
 .nav {
@@ -193,13 +194,6 @@ hr {
   align-items: center;
 }
 
-#nkd {
-  margin: auto 30px;
-}
-
-#nkd > img {
-  text-align: middle;
-}
 .nf {
   display: flex;
 }
@@ -213,32 +207,14 @@ hr {
   text-align: center;
 }
 
-/* Banner */
 #b {
+  background:
+    radial-gradient(circle at right top, rgba(255, 255, 255, 1) 0, rgba(217, 235, 246, 0) 50%),
+    radial-gradient(circle at left top, rgba(255, 192, 203, 1) 0, rgba(217, 225, 246, 1) 50%);
   display: flex;
   flex-wrap: wrap;
+  height: 100%;
   justify-content: center;
-  margin-bottom: 10em;
-}
-
-#ba {
-  font-size: 13pt;
-  margin: 3em 2em;
-  max-width: 50%;
-}
-
-#ba li {
-  margin: 1.2em 0 1.2em -1.2em;
-}
-
-#bab {
-  font-size: 1.2em;
-  display: flex;
-  justify-content: center;
-}
-
-#bac {
-  margin: 1.6em 0.1em;
 }
 
 @keyframes growDown {
@@ -259,16 +235,16 @@ hr {
   display: flex;
   max-width: 1200px;
   width: 100%;
+  padding: 40px 0;
 }
 
 h1 {
-  background: rgb(244, 244, 244);
+  display: inline-block;
   color: #3c4043;
-  font-size: 38pt;
+  font-size: 35pt;
   font-weight: 800;
-  height: 200px;
   margin: 0;
-  padding-top: 50px;
+  padding: 50px 0 10px;
   text-align: center;
   width: 100%;
 }
@@ -285,30 +261,22 @@ h1 {
   width: 100%;
 }
 
-#bu>#te {
-  margin-top: -30px;
-}
-
 @media (max-width: 930px) {
   #bu {
     flex-wrap: wrap-reverse;
-    margin-top: 350px;
+    margin-top: 250px;
   }
 }
 
-@media (max-width: 650px) {
+@media (max-width: 850px) {
   #nd {
     display: none;
   }
 }
 
-@media (max-width: 550px) {
-  #nl {
+@media (max-width: 650px) {
+  .ne {
     display: none;
-  }
-
-  #na {
-    margin-right: 10px;
   }
 }
 

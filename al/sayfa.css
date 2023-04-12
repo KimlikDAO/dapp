@@ -18,6 +18,12 @@ h4 {
   margin-left: 2em;
 }
 
+#al {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
 @media (max-width: 930px) {
   #sa {
     display: none;

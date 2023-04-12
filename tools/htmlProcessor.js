@@ -71,6 +71,11 @@ const readModule = (moduleName, lang, addAttr) => {
         delete attr["data-en-lang"];
       }
 
+      if (attr["data-en-src"]) {
+        if (EN) attr.src = attr["data-en-src"];
+        delete attr["data-en-src"];
+      }
+
       let replaceStr = "";
       if ("data-en" in attr) {
         if (replaceDepth) console.error("Nested replace!");
