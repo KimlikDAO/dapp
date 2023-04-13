@@ -1,7 +1,7 @@
  ,USDC USDT TRYB AVAX ETH FTM MATIC
 KimlikDAO
 Wallet connected
-Get your TCKT | ₺19
+Get your TCKT | $1
 2. Introduce yourself.
 0x123456789...
 Learn more
