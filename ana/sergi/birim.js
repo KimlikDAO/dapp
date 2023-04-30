@@ -1,10 +1,6 @@
 import Cüzdan from "/birim/cüzdan/birim";
-import Tckt from "/birim/tckt/birim";
 import Telefon from "/birim/telefon/birim";
 import dom from '/lib/util/dom';
-
-Tckt.yüzGöster(true);
-Telefon.nftGöster(true);
 
 /** @const {Element} */
 const SolDüğme = dom.adla("seso");
@@ -19,6 +15,8 @@ let Kart = 0;
 /** @type {number} */
 let SergiSaati = 0;
 
+Telefon.nftGöster(true, true);
+
 /**
  * @param {number} yeniKart
  */
@@ -26,8 +24,7 @@ const kartDeğiştir = (yeniKart) => {
   /** @const {number} */
   const width = Kartlar.firstElementChild.getBoundingClientRect().width;
 
-  Telefon.nftGöster(yeniKart <= 1);
-  Tckt.yüzGöster(!yeniKart);
+  Telefon.nftGöster(yeniKart <= 1, !yeniKart);
   yeniKart === 3
     ? Telefon.kutuGöster(dom.TR
       ? "Bağlı app TCKT'nizin açık haline erişmek istiyor. İzin veriyor musunuz?"

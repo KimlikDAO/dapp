@@ -35,6 +35,9 @@ dom.adla("tcsa").onclick = () => kartDeğiştir((Kart + 1) % KartSayısı);
  */
 const yüzGöster = (bilgiYüzü) => Tckt.classList.toggle("flipped", bilgiYüzü);
 
+/**
+ * @return {boolean}
+ */
 const çevir = () => Tckt.classList.toggle("flipped");
 
 /**

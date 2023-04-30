@@ -1,5 +1,5 @@
-import Tckt from '/birim/tckt/birim';
-import dom from '/lib/util/dom';
+import Tckt from "/birim/tckt/birim";
+import dom from "/lib/util/dom";
 
 /** @const {Element} */
 const Nft = dom.adla("tc");
@@ -37,13 +37,27 @@ const kutuKapat = () => {
 
 /**
  * @param {boolean} kutudaGöster NFT tek başına kutuda gösterilsin mi.
- * Ana sayfa Telefon görselinin içinde temsili nft'yi gösterir
+ * @param {boolean} bilgiYüzü NFT'nin bilgi yüzü gösterilsin.
+ *
+ * Ana sayfa Telefon görselinin içinde temsili nft'yi gösterir.
  */
-const nftGöster = (kutudaGöster) => {
+const nftGöster = (kutudaGöster, bilgiYüzü) => {
+  Tckt.yüzGöster(bilgiYüzü);
+
+  const yüzGöster = () => {
+    Tckt.yüzGöster(bilgiYüzü);
+    NftButton.innerText = bilgiYüzü
+      ? dom.TR ? "Gizle" : "Encrypt"
+      : dom.TR ? "Aç" : "Decrypt";
+  }
+  yüzGöster();
   if (kutudaGöster) {
     Nft.style.opacity = "";
     dom.göster(NftButton);
-    NftButton.onclick ||= Tckt.çevir;
+    NftButton.onclick ||= () => {
+      bilgiYüzü = !bilgiYüzü;
+      yüzGöster();
+    }
   }
 
   Nft.classList.toggle("moveintowallet", !kutudaGöster);
@@ -60,7 +74,7 @@ const nftYukarıGönder = () => {
 
 const nftGeriAl = () => {
   Nft.classList.add('movedown');
-  nftGöster(true);
+  nftGöster(true, true);
 }
 
 export default {

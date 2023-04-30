@@ -3,10 +3,11 @@
  *
  */
 import Cüzdan from '/birim/cüzdan/birim';
+import "/birim/dil/birim";
 import Tckt from '/birim/tckt/birim';
 import { fromUnlockableNFT } from '/lib/did/decryptedSections';
-import evm from "/lib/ethereum/evm";
 import TCKT from '/lib/ethereum/TCKT';
+import evm from "/lib/ethereum/evm";
 import ipfs from '/lib/node/ipfs';
 import dom from '/lib/util/dom';
 import { hexten } from '/lib/util/çevir';

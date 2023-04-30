@@ -14,7 +14,7 @@ dom.adla("did").onclick = (/** @type {Event} */ event) => {
     if (dil == "en") {
       const sayfalar = {
         "/": "/?en",
-        "/al": "/get",
+        "/al": "/mint",
         "/incele": "/view",
         "/oyla": "/vote",
         "/iptal": "/revoke"
@@ -26,7 +26,7 @@ dom.adla("did").onclick = (/** @type {Event} */ event) => {
     if (dil == "tr") {
       const sayfalar = {
         "/": "/?tr",
-        "/get": "/al",
+        "/mint": "/al",
         "/view": "/incele",
         "/vote": "/oyla",
         "/revoke": "/iptal"

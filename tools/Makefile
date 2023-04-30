@@ -39,7 +39,7 @@ build/TCKT.svg: build/birim/tckt/görsel.svg
 	mkdir -p $(dir $@)
 	cp $< $@
 
-al-en := get
+al-en := mint
 incele-en := view
 oyla-en := vote
 iptal-en := revoke

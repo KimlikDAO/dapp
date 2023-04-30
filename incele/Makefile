@@ -1,5 +1,6 @@
 build/incele/sayfa-%.js: incele/sayfa.js \
                          birim/cüzdan/birim.js \
+                         birim/dil/birim.js \
                          birim/tckt/birim.js \
                          lib/crypto/*.js \
                          lib/did/*.js \
@@ -33,6 +34,7 @@ build/incele/sayfa-%.keymap: $(call compressions, build/incele/sayfa-%.js)
 
 build/incele-%.html: incele/sayfa.html \
                      birim/cüzdan.birim \
+                     birim/dil/birim.html \
                      birim/tckt/birim.html \
                      build/al/paste.svg.inl \
                      build/incele/sayfa-%.keymap \
@@ -40,6 +42,7 @@ build/incele-%.html: incele/sayfa.html \
                      build/ana/sayfa-%.keymap \
                      build/font/fonts-%.keymap \
                      build/birim/cüzdan/birim.keymap \
+                     build/birim/dil/birim.keymap \
                      build/birim/tckt/birim.keymap
 	node tools/htmlProcessor $< $*
 	tools/keymapper.py $@ $(filter %.keymap,$^)

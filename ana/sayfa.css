@@ -219,11 +219,11 @@ hr {
 
 @keyframes growDown {
   0% {
-    transform: scaleY(0);
+    transform: scaleY(0.2);
   }
 
-  80% {
-    transform: scaleY(1.1);
+  70% {
+    transform: scaleY(1.05);
   }
 
   100% {
@@ -274,7 +274,7 @@ h1 {
   }
 }
 
-@media (max-width: 650px) {
+@media (max-width: 720px) {
   .ne {
     display: none;
   }
