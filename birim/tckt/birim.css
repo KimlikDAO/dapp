@@ -104,8 +104,9 @@
   padding: 4ex 40px;
 }
 
-.tcip label {
+.tcl {
   font-size: 7px;
+  padding: 5px 0 0;
 }
 
 .tcpc {
