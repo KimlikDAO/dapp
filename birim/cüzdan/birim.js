@@ -40,7 +40,7 @@ const AğBilgileri = {
     rpcUrl: "polygon-rpc.com"
   },
   "0xa4b1": {
-    ad: "Arbitrum",
+    ad: "Arbitrum One",
     izleyici: "arbiscan.io",
     tokenKodu: "ETH",
     token: "ether",

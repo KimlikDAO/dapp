@@ -25,7 +25,7 @@ staging: build
 
 cf-deployment: build build/prod.js build/sitemap build/TCKT.assets tools/prod.toml
 	tools/cfuploader.py
-	wrangler publish \
+	wrangler deploy \
         --config tools/prod.toml \
         --compatibility-date $(shell date -v -1d +%Y-%m-%d)
 
