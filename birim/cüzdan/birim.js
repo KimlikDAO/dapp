@@ -160,9 +160,8 @@ const adresDeğişti = (adresler) => {
     });
     if (!eskiAdres) {
       if (Bağlanınca) Bağlanınca(Adres);
-    } else if (AdresDeğişince) {
+    } else if (AdresDeğişince)
       AdresDeğişince(Adres);
-    }
   }
 }
 

@@ -6,6 +6,7 @@ build/ana/sayfa-%.js: ana/sayfa.js \
                       birim/tckt/birim.js \
                       lib/did/*.d.js \
                       lib/ethereum/*.d.js \
+                      lib/ethereum/TCKTLite.js \
                       lib/node/nvi.d.js \
                       lib/util/dom.js
 	mkdir -p $(dir $@)
