@@ -25,5 +25,5 @@ const adresleGüncelle = (adres) => TCKT.hasDID(adres).then(düğmeGüncelle);
 
 Cüzdan.bağlanınca(adresleGüncelle);
 Cüzdan.adresDeğişince(adresleGüncelle);
-Cüzdan.ağDeğişince(() => adresleGüncelle(Cüzdan.adres()));
+Cüzdan.ağDeğişince(() => adresleGüncelle(/** @type {string} */(Cüzdan.adres())));
 Cüzdan.kopunca(() => düğmeGüncelle(false));

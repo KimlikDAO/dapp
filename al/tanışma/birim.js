@@ -110,7 +110,7 @@ const açıkTcktAlVe = (sonra) => {
     nkoDüğmesi.href = "javascript:";
     nkoDüğmesi.classList.remove("act");
     nkoDüğmesi.innerText = dom.TR ? "E-devlet’ten bilgileriniz alındı ✓" : "We got your info ✓";
-    dom.butonDurdur(nkoDüğmesi);
+    dom.düğmeDurdur(nkoDüğmesi);
     /** @const {number} */
     const istemciAn = Date.now() / 1000 | 0;
     /** @const {!Uint8Array} */
@@ -212,7 +212,7 @@ const açıkTcktAlVe = (sonra) => {
             nkoDüğmesi.classList.remove("act");
             nkoDüğmesi.innerText = dom.TR ? "Bilgileriniz onaylandı ✓" : "We confirmed your info ✓";
             dom.göster(nkoDüğmesi);
-            dom.butonDurdur(nkoDüğmesi);
+            dom.düğmeDurdur(nkoDüğmesi);
             window.localStorage.removeItem(Cüzdan.adres().toLowerCase + "nko_r");
 
             Tckt.açıkTcktGöster(açıkTckt);

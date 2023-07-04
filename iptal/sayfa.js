@@ -62,7 +62,7 @@ const revokeeAdımınıGöster = () => {
         dom.adlaGöster("ipaym");
         dom.adlaGizle("iplc");
         dom.adlaGizle("iphm");
-        dom.butonDurdur(onaylaDüğmesi);
+        dom.düğmeDurdur(onaylaDüğmesi);
         onaylaDüğmesi.classList.remove("act");
       } else {
         for (let i = 0; i < filtered.length; ++i) {
@@ -98,7 +98,7 @@ const revokeeAdımınıGöster = () => {
       TCKT.revokeFriend(/** @type {string} */(Cüzdan.adres()), seçilmişAdres.innerText);
       onaylaDüğmesi.innerText = dom.TR ? "Adres İptal Edildi ✓" : "Address revoked ✓";
       dom.adla("ipiir").innerText = dom.TR ? "Geri" : "Back";
-      dom.butonDurdur(onaylaDüğmesi);
+      dom.düğmeDurdur(onaylaDüğmesi);
       onaylaDüğmesi.classList.remove("act");
     }
   }

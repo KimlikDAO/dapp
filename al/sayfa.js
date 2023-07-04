@@ -48,7 +48,7 @@ const tcktYarat = (açıkTckt) => {
       Telefon.kutuKapat();
       s3a.innerText = dom.TR ? "TCKT’nizi şifreledik ✓" : "We encrypted your TCKT ✓";
       s3a.classList.remove("act");
-      dom.butonDurdur(s3a);
+      dom.düğmeDurdur(s3a);
       dom.adla("s3").classList.add("done");
       İmeceİptal.göster();
       return unlockableNFT;
@@ -82,7 +82,7 @@ if (window["ethereum"]) {
     s1b.href = "javascript:";
     s1b.target = "";
     s1b.classList.remove("act");
-    dom.butonDurdur(s1b);
+    dom.düğmeDurdur(s1b);
     dom.adla("s1").classList.add("done");
     Telefon.adresGir(Cüzdan.hızlıArabirimAdı(adres));
     Tanışma.açıkTcktAlVe(tcktYarat);

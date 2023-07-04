@@ -59,7 +59,7 @@ const atla = (sonra) => {
   dom.göster(İptalButonu);
   İptalButonu.innerText = dom.TR ? "İmece iptal kurulmadı 🤌" : "Skipped 🤌";
   İptalButonu.classList.add("done");
-  dom.butonDurdur(İptalButonu);
+  dom.düğmeDurdur(İptalButonu);
   dom.adla("im").classList.add("done");
   dom.gizle(dom.adla("imc"));
   sonra({}, 0);
