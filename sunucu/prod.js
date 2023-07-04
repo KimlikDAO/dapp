@@ -75,7 +75,7 @@ const ProdWorker = {
       else {
         /** @const {?string} */
         const cookie = req.headers.get("cookie");
-        kvKey = (cookie ? cookie.startsWith("l=tr")
+        kvKey = (cookie ? cookie.includes("l=tr")
           : req.headers.get("accept-language")?.includes("tr"))
           ? "ana-tr.html" : "ana-en.html";
       }
