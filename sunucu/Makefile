@@ -1,5 +1,9 @@
 include sunucu/test/Makefile
 
+PAGES := al ana incele iptal oyla
+
+NAMED_ASSETS := sitemap.txt TCKT.svg
+
 PAGE_TARGETS := $(addsuffix .sayfa, $(addprefix build/, $(PAGES)))
 
 $(PAGE_TARGETS): build/%.sayfa: $(call compressions,build/%-en.html build/%-tr.html)
@@ -25,8 +29,8 @@ build/sunucu/prod.js: sunucu/prod.js sunucu/prod.d.js \
 	sed -i.bak 's/globalThis.ProdWorker=/export default/g' $@
 	wc $@
 
-.PHONY: build/TCKT.assets
-build/TCKT.assets: $(call compressions, build/TCKT.svg)
+.PHONY: build/TCKT
+build/TCKT: $(call compressions, build/TCKT.svg)
 
 build/TCKT.svg: build/birim/tckt/görsel.svg
 	mkdir -p $(dir $@)

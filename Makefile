@@ -1,5 +1,4 @@
 MAKEFLAGS := -j 8
-PAGES := al ana incele iptal oyla
 
 all: build
 
@@ -24,8 +23,8 @@ dev:
 staging: build
 	sunucu/staging.py
 
-cf-deployment: build build/sunucu/prod.js build/sitemap build/TCKT.assets sunucu/prod.toml
-	tools/cfuploader.py
+cf-deployment: build build/sunucu/prod.js build/sitemap build/TCKT sunucu/prod.toml
+	tools/cfuploader.py sunucu/prod.toml sunucu/Makefile
 	wrangler deploy \
         --config sunucu/prod.toml \
         --compatibility-date $(shell date -v -1d +%Y-%m-%d)

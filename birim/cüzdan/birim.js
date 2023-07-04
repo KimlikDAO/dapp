@@ -256,10 +256,10 @@ ağDüğmesiKur();
 const adresDüğmesiKur = () => {
   AdresButonu.onclick = bağla;
   dom.adla("cue0").onclick = () =>
-    window.location.href = dom.TR ? "/incele" : "/view";
+    window.location.href = dom.TR ? "//kimlikdao.org/incele" : "//kimlikdao.org/view";
 
   dom.adla("cue1").onclick = () =>
-    window.location.href = dom.TR ? "/oyla" : "/vote";
+    window.location.href = dom.TR ? "//kimlikdao.org/oyla" : "//kimlikdao.org/vote";
 
   dom.adla("cue2").onclick = () => {
     const url = "//debank.com/profile/" + Adres;
@@ -272,7 +272,7 @@ const adresDüğmesiKur = () => {
   }
 
   dom.adla("cue4").onclick = () =>
-    window.location.href = dom.TR ? "/iptal" : "/revoke";
+    window.location.href = dom.TR ? "//kimlikdao.org/iptal" : "//kimlikdao.org/revoke";
 
   ethereum.on("accountsChanged", adresDeğişti);
   ethereum.on("chainChanged", ağDeğişti);

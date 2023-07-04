@@ -13,15 +13,9 @@ DIL = {
     'en', 'tr'
 }
 
-NAMED_ASSET = {
-    'sitemap.txt',
-    'TCKT.svg',
-    # 'favicon.ico',
-}
-
 EXT = ['', '.br', '.gz']
 
-CF_CONFIG = toml.load('sunucu/prod.toml')
+CF_CONFIG = toml.load(sys.argv[-2])
 ROUTE = f"https://{CF_CONFIG['route']['pattern']}/"
 ACCOUNT_ID = CF_CONFIG['account_id']
 ZONE_ID = CF_CONFIG['zone_id']
@@ -33,14 +27,16 @@ ACCOUNTS_URL = f"{URL}/accounts/{ACCOUNT_ID}/storage/kv/namespaces/{NAMESPACE_ID
 ZONES_URL = f"{URL}/zones/{ZONE_ID}/"
 
 
-def read_pages() -> str:
-    for line in open('Makefile'):
-        if line.startswith('PAGES :='):
-            return line[8:].split()
-    assert False, "Sayfalar bulunamadı"
+def read_variable(prefix) -> list[str]:
+    for line in open(sys.argv[-1]):
+        if line.startswith(prefix):
+            return line[len(prefix):].split()
+    assert False, "Bulunamadı"
 
 
-SAYFALAR = read_pages()
+SAYFALAR = read_variable("PAGES :=")
+
+NAMED_ASSETS = read_variable("NAMED_ASSETS :=")
 
 
 def chunks(xs, n):
@@ -94,7 +90,7 @@ def is_static_upload(name: str) -> bool:
 
 existing = get_existing(NAMESPACE_ID)
 named_upload = ([f'{sayfa}-{dil}.html{ext}' for sayfa in SAYFALAR for ext in EXT for dil in DIL] +
-                [named + ext for named in NAMED_ASSET for ext in EXT])
+                [named + ext for named in NAMED_ASSETS for ext in EXT])
 static_upload = list(filter(is_static_upload, next(os.walk('build'))[2]))
 
 # (1) Statik asset'leri yükle
