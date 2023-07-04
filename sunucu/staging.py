@@ -1,20 +1,17 @@
 #!/usr/bin/env python
 
 import os
+import re
 from http.server import BaseHTTPRequestHandler, HTTPServer
 from urllib.parse import urlparse
 
 import toml
 
-import keymapper
-
-DEV_CONFIG = toml.load("tools/dev.toml")
+DEV_CONFIG = toml.load("sunucu/dev.toml")
 HOST_NAME = DEV_CONFIG['hostname']
 PORT = DEV_CONFIG['port']
-ROUTE = toml.load("tools/prod.toml")['route']['pattern']
+ROUTE = toml.load("sunucu/prod.toml")['route']['pattern']
 REVERSE = {
-    f"//{ROUTE}": f"{HOST_NAME}:{PORT}/",
-    '"//': '"https://'
 }
 
 PAGES = {
@@ -41,6 +38,28 @@ MIMES = {
 }
 
 
+def multireplace(string, replacements):
+    """
+    Given a string and a replacement map, it returns the replaced string.
+
+    :param str string: string to execute replacements on
+    :param dict replacements: replacement dictionary {value to find: value to replace}
+    :rtype: str
+
+    """
+    # Place longer ones first to keep shorter substrings from matching
+    # where the longer ones should take place
+    # For instance given the replacements {'ab': 'AB', 'abc': 'ABC'} against
+    # the string 'hey abc', it should produce 'hey ABC' and not 'hey ABc'
+    substrs = sorted(replacements, key=len, reverse=True)
+
+    # Create a big OR regex that matches any of the substrings to replace
+    regexp = re.compile('|'.join(map(re.escape, substrs)))
+
+    # For each match, look up the new string in the replacements
+    return regexp.sub(lambda match: replacements[match.group(0)], string)
+
+
 class TestServer(BaseHTTPRequestHandler):
     def do_GET(self):
         fname = PAGES.get(urlparse(self.path).path, None)
@@ -55,9 +74,6 @@ class TestServer(BaseHTTPRequestHandler):
         self.send_response(200)
         self.send_header("Content-type", ctype)
         self.end_headers()
-        if ctype.startswith('text/'):
-            file = keymapper.multireplace(
-                file.decode('utf-8'), REVERSE).encode('utf-8')
         self.wfile.write(file)
 
 

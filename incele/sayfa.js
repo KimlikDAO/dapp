@@ -13,7 +13,7 @@ import dom from '/lib/util/dom';
 import { hexten } from '/lib/util/çevir';
 
 /** @const {string} */
-const KIMLIKDAO_IPFS_URL = "https://ipfs.kimlikdao.org/";
+const KIMLIKDAO_IPFS_URL = "//ipfs.kimlikdao.org";
 
 /** @const {Element} */
 const İmeceİptalDüğmesi = dom.adla("inbtn1");

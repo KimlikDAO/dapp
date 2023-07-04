@@ -1,5 +1,5 @@
-build/test/prod.compiled-test.js: tools/test/prod.compiled-test.js \
-    tools/prod.js tools/prod.d.js \
+build/sunucu/test/prod.compiled-test.js: sunucu/test/prod.compiled-test.js \
+    sunucu/prod.js sunucu/prod.d.js \
     lib/cloudflare/types.d.js lib/cloudflare/moduleWorker.d.js \
     lib/testing/assert.js lib/testing/nodejs.d.js
 	mkdir -p $(dir $@)

@@ -20,7 +20,6 @@ const PAGES = {
   "?tr": "ana-tr.html",
   "?en": "ana-en.html",
   "al": "al-tr.html",
-  "get": "al-en.html",
   "mint": "al-en.html",
   "incele": "incele-tr.html",
   "view": "incele-en.html",

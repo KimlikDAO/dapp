@@ -1,18 +1,18 @@
 /**
  * @fileoverview Al sayfası giriş noktası
  */
-import "/birim/dil/birim";
-import { hex } from "/lib/util/çevir";
-import { imzaMetni, metadataVeBölümler, OnaylamaAnahtarları } from "/lib/did/TCKTVerisi";
-import { öde } from "/al/ödeme/birim";
-import { toUnlockableNFT, verifyProofs } from "/lib/did/decryptedSections";
-import Cüzdan from "/birim/cüzdan/birim";
-import dom from "/lib/util/dom";
 import İmeceİptal from "/al/imeceİptal/birim";
+import Tanışma from "/al/tanışma/birim";
+import { öde } from "/al/ödeme/birim";
+import Cüzdan from "/birim/cüzdan/birim";
+import "/birim/dil/birim";
+import Telefon from "/birim/telefon/birim";
+import { toUnlockableNFT, verifyProofs } from "/lib/did/decryptedSections";
+import { imzaMetni, metadataVeBölümler, OnaylamaAnahtarları } from "/lib/did/TCKTVerisi";
 import ipfs from "/lib/node/ipfs";
 import network from "/lib/node/network";
-import Tanışma from "/al/tanışma/birim";
-import Telefon from "/birim/telefon/birim";
+import dom from "/lib/util/dom";
+import { hex } from "/lib/util/çevir";
 
 /**
  * @param {!did.DecryptedSections} açıkTckt
@@ -59,8 +59,7 @@ const tcktYarat = (açıkTckt) => {
       .then(([
         /** @type {!Array<string>} */ nodelar,
         /** @type {!eth.ERC721Unlockable} */ unlockableNFT
-      ]) => ipfs.yaz(
-        `https://${nodelar[0]}/`, JSON.stringify(unlockableNFT, null, 2)))
+      ]) => ipfs.yaz("//" + nodelar[0], JSON.stringify(unlockableNFT, null, 2)))
       .then(hex);
 
     İmeceİptal.kurVe(

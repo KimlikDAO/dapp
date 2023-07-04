@@ -3,8 +3,6 @@
 import re
 import sys
 
-import toml
-
 
 def multireplace(string, replacements):
     """
@@ -33,11 +31,7 @@ def keymap(file):
 
 
 if __name__ == "__main__":
-    PORT = toml.load("tools/dev.toml")['port']
-    HOST = toml.load("tools/prod.toml")['route']['pattern']
     replace = {
-        f"http://localhost:{PORT}/": f"//{HOST}",
-        f"https://ipfs.{HOST}": f"//ipfs.{HOST}",
         ',{type:"module"}': '',
     }
     of_name = None

@@ -21,7 +21,7 @@ NAMED_ASSET = {
 
 EXT = ['', '.br', '.gz']
 
-CF_CONFIG = toml.load('tools/prod.toml')
+CF_CONFIG = toml.load('sunucu/prod.toml')
 ROUTE = f"https://{CF_CONFIG['route']['pattern']}/"
 ACCOUNT_ID = CF_CONFIG['account_id']
 ZONE_ID = CF_CONFIG['zone_id']
@@ -89,7 +89,7 @@ def is_static_upload(name: str) -> bool:
     """
     Verilen bir ismin CF'e yüklenmesi gereken bir static olup olmadığını tespit eder.
     """
-    return name != 'prod.js' and name not in existing and name not in named_upload
+    return name not in existing and name not in named_upload
 
 
 existing = get_existing(NAMESPACE_ID)

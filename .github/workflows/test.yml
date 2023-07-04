@@ -25,4 +25,4 @@ jobs:
       - name: ProdWorker tests
         run: |
           yarn
-          make build/test/prod.compiled-test.js
+          make build/sunucu/test/prod.compiled-test.js

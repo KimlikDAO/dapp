@@ -83,7 +83,7 @@ const açıkTcktAlVe = (sonra) => {
   ]).then(([
     /** @type {string} */ taahhütPow,
     /** @type {!Array<string>} */ nodelar
-  ]) => fetch(`https://${nodelar[0]}/edevlet/nko/commit?${taahhütPow}`))
+  ]) => fetch(`//${nodelar[0]}/edevlet/nko/commit?${taahhütPow}`))
     .then((/** @type {!Response} */ res) => res.text())
     .catch(console.log);
 
@@ -123,7 +123,7 @@ const açıkTcktAlVe = (sonra) => {
 
     network.getNodes(1)
       .then((nodelar) => fetch(
-        `https://${nodelar[0]}/edevlet/oauth2?` +
+        `//${nodelar[0]}/edevlet/oauth2?` +
         `${base64(new Uint8Array(taahhüt))}&ts=${istemciAn}&oauth_code=${code}`))
       .then((/** @type {!Response} */ res) => res.json())
       .then((/** @type {!did.DecryptedSections} */ açıkTckt) => {
@@ -189,7 +189,7 @@ const açıkTcktAlVe = (sonra) => {
           /** @type {!Array<string>} */ nodelar,
           /** @type {string} */ taahhütPow
         ]) => Promise.allSettled(nodelar.map((node) =>
-          fetch(`https://${node}/edevlet/nko?${taahhütPow}&ts=${istemciAnı}`, {
+          fetch(`//${node}/edevlet/nko?${taahhütPow}&ts=${istemciAnı}`, {
             method: "POST",
             body: formData
           }).then((/** @type {!Response} */ res) => res.json()
