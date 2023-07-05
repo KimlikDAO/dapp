@@ -31,7 +31,7 @@ dom.adla("did").onclick = (/** @type {Event} */ event) => {
         "/vote": "/oyla",
         "/revoke": "/iptal"
       };
-      document.cookie = "l=tr; domain=kimlikdao.org; path=/; max-age=" + 1e6;
+      document.cookie = "l=tr; path=/; max-age=" + 1e6;
       window.location.href = sayfalar[window.location.pathname];
     }
   }

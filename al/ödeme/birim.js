@@ -1,7 +1,8 @@
 import Cüzdan, { AğBilgileri, AğBilgisi } from "/birim/cüzdan/birim";
-import Telefon from '/birim/telefon/birim';
-import TCKT from '/lib/ethereum/TCKT';
-import dom from '/lib/util/dom';
+import Telefon from "/birim/telefon/birim";
+import TCKT from "/lib/ethereum/TCKT";
+import dom from "/lib/util/dom";
+import { whenMined } from "/lib/ethereum/transaction";
 
 /**
  * @param {Element} imge
@@ -194,7 +195,7 @@ const öde = (cidSözü, adresAğırlığı, eşik) => {
           .then(([/** @type {string} */ cid, _]) =>
             TCKT.createWithRevokersWithTokenPayment(ağ, adres, cid, eşik, adresAğırlığı, para));
     sonuç
-      .then((_) => {
+      .then((txHash) => {
         /** @const {string} */
         const hash = window.location.hash;
         /** @const {string} */
@@ -204,7 +205,7 @@ const öde = (cidSözü, adresAğırlığı, eşik) => {
           : hash.length >= 6
             ? decodeURIComponent(hash.slice(6)) : "/view";
         Telefon.nftGeriAl();
-        setTimeout(() => window.location.href = sonra, 4000);
+        whenMined(txHash, () => window.location.href = sonra);
       })
       .catch(console.log);
   };

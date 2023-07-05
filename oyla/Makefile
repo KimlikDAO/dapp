@@ -2,7 +2,8 @@ build/oyla/sayfa-%.js: oyla/sayfa.js \
                        birim/cüzdan/birim.js \
                        lib/crypto/sha3.js \
                        lib/crypto/secp256k1.js lib/crypto/modular.js \
-                       lib/ethereum/provider.d.js lib/ethereum/jsonrpc.d.js \
+                       lib/ethereum/provider.d.js lib/ethereum/transaction.d.js \
+                       lib/ethereum/logs.d.js \
                        lib/ethereum/evm.js lib/ethereum/TCKT.js \
                        lib/util/dom.js lib/util/çevir.js
 	mkdir -p $(dir $@)
