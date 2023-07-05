@@ -19,7 +19,7 @@ build/ana/sayfa-%.js: ana/sayfa.js \
                              --entry_point $< \
                              --js $^ \
                              --js_output_file $@
-	yarn uglifyjs $@ -m -o $@
+	yarn uglifyjs $@ -m -c toplevel,unsafe -o $@
 
 build/ana/sayfa-%.css: build/font/lato-%.css ana/sayfa.css \
                        ana/sergi/birim.css \

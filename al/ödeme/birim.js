@@ -179,7 +179,7 @@ const öde = (cidSözü, adresAğırlığı, eşik) => {
     const ağ = Cüzdan.ağ();
     /** @const {string} */
     const adres = /** @type {string} */(Cüzdan.adres());
-    /** @const {!Promise<*>} */
+    /** @const {!Promise<string>} */
     const sonuç = para == 0
       ? cidSözü.then((cid) =>
         TCKT.createWithRevokers(ağ, adres, cid, eşik, adresAğırlığı))
@@ -194,9 +194,17 @@ const öde = (cidSözü, adresAğırlığı, eşik) => {
           .then(([/** @type {string} */ cid, _]) =>
             TCKT.createWithRevokersWithTokenPayment(ağ, adres, cid, eşik, adresAğırlığı, para));
     sonuç
-      .then(() => {
+      .then((_) => {
+        /** @const {string} */
+        const hash = window.location.hash;
+        /** @const {string} */
+        const sonra = dom.TR
+          ? hash.length >= 7
+            ? decodeURIComponent(hash.slice(7)) : "/incele"
+          : hash.length >= 6
+            ? decodeURIComponent(hash.slice(6)) : "/view";
         Telefon.nftGeriAl();
-        setTimeout(() => window.location.href = dom.TR ? "/incele" : "/view", 4000);
+        setTimeout(() => window.location.href = sonra, 4000);
       })
       .catch(console.log);
   };
