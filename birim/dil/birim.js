@@ -20,7 +20,7 @@ dom.adla("did").onclick = (/** @type {Event} */ event) => {
         "/iptal": "/revoke"
       };
       document.cookie = "l=en; path=/; max-age=" + 1e6;
-      window.location.href = sayfalar[window.location.pathname];
+      window.location.href = sayfalar[window.location.pathname] + window.location.hash;
     }
   } else {
     if (dil == "tr") {
@@ -32,7 +32,7 @@ dom.adla("did").onclick = (/** @type {Event} */ event) => {
         "/revoke": "/iptal"
       };
       document.cookie = "l=tr; path=/; max-age=" + 1e6;
-      window.location.href = sayfalar[window.location.pathname];
+      window.location.href = sayfalar[window.location.pathname] + window.location.hash;
     }
   }
 };

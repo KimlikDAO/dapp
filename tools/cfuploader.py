@@ -31,7 +31,8 @@ def read_variable(prefix) -> list[str]:
     for line in open(sys.argv[-1]):
         if line.startswith(prefix):
             return line[len(prefix):].split()
-    assert False, "Bulunamadı"
+    print(f"{prefix} bulunamadı")
+    return []
 
 
 SAYFALAR = read_variable("PAGES :=")
