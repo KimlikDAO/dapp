@@ -24,4 +24,6 @@ Daha fazla bilgi
 3. TCKT'nizi şifreleyelim.
 4. 3. TCKT'nizi şifreleyelim.
 5. Ödemeyi yapın TCKT cüzdanınıza gelsin
-wX
+wX()
+PLUI Geliştirici
+Protokol Geliştirici
