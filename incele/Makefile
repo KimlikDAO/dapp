@@ -20,7 +20,7 @@ build/incele/sayfa-%.js: incele/sayfa.js \
                              --js_output_file $@
 	yarn uglifyjs $@ -m -o $@
 
-build/incele/sayfa.css: incele/sayfa.css incele/*/*.css
+build/incele/sayfa.css: incele/sayfa.css incele/*/*.css birim/kutu.css
 	mkdir -p $(dir $@)
 	cat $^ | yarn csso --output $@
 

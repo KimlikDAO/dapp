@@ -34,7 +34,9 @@ dom.adla("oyyb").onclick = () => {
   }
 }
 
-/** @param {string} yeniAğ Ağ değişince UI'da gösterir*/
+/**
+ * @param {string} yeniAğ Ağ değişince UI'da gösterir
+ */
 const fiyatDeğişikliğiFormuHazırla = (yeniAğ) => {
   /** @const {Element} */
   const tokenMenusu = dom.adla("oyddul");
@@ -200,6 +202,13 @@ const aktifOyKartıOluştur = (data) => {
   return element
 }
 
+/**
+ * @return {!Promise<void>}
+ */
 const birazBekle = () => new Promise((resolve) => setTimeout(() => resolve(), 100));
 
-const orandanMetne = (partialValue, totalValue) => (100 * partialValue / totalValue).toFixed(1);
+/**
+ * @param {number} pay
+ * @param {number} payda
+ */
+const orandanMetne = (pay, payda) => (100 * pay / payda).toFixed(1);

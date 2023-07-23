@@ -1,6 +1,5 @@
 #se {
   width: 400px;
-  height: 60%;
   margin-right: 30px;
 }
 
@@ -95,11 +94,6 @@
 
 .seb.current {
   background-color: rgba(0, 0, 0, 0.7);
-}
-
-#sebn {
-  display: flex;
-  justify-content: center;
 }
 
 #seal {

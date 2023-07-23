@@ -1,0 +1,158 @@
+html {
+  font-family: 'f', sans-serif;
+  font-size: 11pt;
+  font-weight: 400;
+}
+
+input {
+  font-family: 'f', sans-serif;
+}
+
+button {
+  color: #555;
+  font-family: 'f', sans-serif;
+  font-size: 11pt;
+  font-weight: 700;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  background-size: 8px 8px;
+  background: #fff;
+  color: #333;
+  margin: 0;
+  min-height: 100%;
+  overflow-y: scroll;
+}
+
+body {
+  margin: 0;
+}
+
+#nlg {
+  display: flex;
+  align-items: center;
+  font-size: 20pt;
+  font-weight: 700;
+  color: #444;
+  margin: 10px;
+  padding: 3px;
+}
+
+.btn.lft {
+  margin-right: 1ex;
+}
+
+.act.btn {
+  background: #4856b0;
+  color: white;
+  border: 1px solid #0a46a7;
+  opacity: 0.9;
+  transition: opacity 0.2s;
+}
+
+.act.btn:hover {
+  opacity: 1;
+}
+
+.btn.dis {
+  cursor: default;
+}
+
+.btn {
+  font-weight: 700;
+  color: #666;
+  background-color: #FAFBFC;
+  border: 1px solid rgba(27, 31, 35, 0.15);
+  touch-action: manipulation;
+  display: inline-block;
+  padding: 12px;
+  line-height: 1;
+  user-select: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 0;
+  text-align: center;
+}
+
+.btn.danger {
+  color: #fff;
+  background-color: #d9534f;
+  border-color: #d43f3a;
+  opacity: 0.9;
+}
+
+.btn.danger:hover {
+  opacity: 1;
+}
+
+a {
+  text-decoration: none;
+  color: #000;
+}
+
+button:hover {
+  background-color: #F3F4F6;
+  text-decoration: none;
+  transition-duration: 0.1s;
+}
+
+button:disabled {
+  background-color: #FAFBFC;
+  border-color: rgba(27, 31, 35, 0.15);
+  color: #959DA5;
+  cursor: default;
+}
+
+button:active {
+  background-color: #EDEFF2;
+  box-shadow: rgba(225, 228, 232, 0.2) 0 1px 0 inset;
+  transition: none 0s;
+}
+
+button:focus {
+  outline: 1px transparent;
+}
+
+button:before {
+  display: none;
+}
+
+button:-webkit-details-marker {
+  display: none;
+}
+
+button {
+  background-color: #FAFBFC;
+  border: 1px solid rgba(27, 31, 35, 0.15);
+  box-shadow: rgba(27, 31, 35, 0.04) 0 1px 0, rgba(255, 255, 255, 0.25) 0 1px 0 inset;
+  transition: background-color 0.2s cubic-bezier(0.3, 0, 0.5, 1);
+  touch-action: manipulation;
+
+  line-height: 1;
+  user-select: none;
+  min-height: 45px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 0;
+}
+
+button:hover {
+  background-color: #F3F4F6;
+  text-decoration: none;
+  transition-duration: 0.1s;
+}
+
+@keyframes growDown {
+  0% {
+    transform: scaleY(0.2);
+  }
+
+  70% {
+    transform: scaleY(1.05);
+  }
+
+  100% {
+    transform: scaleY(1);
+  }
+}

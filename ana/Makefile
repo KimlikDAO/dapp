@@ -23,6 +23,7 @@ build/ana/sayfa-%.js: ana/sayfa.js \
 
 build/ana/sayfa-%.css: build/font/lato-%.css ana/sayfa.css \
                        ana/sergi/birim.css \
+                       birim/ortak.css \
                        birim/cüzdan/birim.css \
                        birim/dil/birim.css \
                        birim/telefon/birim.css \
@@ -39,6 +40,7 @@ build/ana-%.html: ana/sayfa.html \
                   birim/telefon/birim.html \
                   birim/dil/birim.html \
                   birim/cüzdan.birim \
+                  birim/logo.birim \
                   build/ana/ok.svg.inl \
                   build/ana/sayfa-%.keymap \
                   build/font/fonts-%.keymap \

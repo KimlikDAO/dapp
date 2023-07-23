@@ -1,9 +1,8 @@
  ,USDC USDT TRYB AVAX ETH FTM MATIC
 0123456789+
-Rabby kur MetaMask kur
-Tarayıcı cüzdanı bağlandı
+Tarayıcı cüzdanı yükle
+Cüzdan bağlandı
 E-devlet ile giriş yap
-E-devlet'ten bilgileriniz alındı
 Cüzdanıma istek yolla
 Gizle
 Türkçe English Bağlı değil Evet Hayır
@@ -22,8 +21,7 @@ Daha fazla bilgi
 1. Cüzdanınızı bağlayın.
 2. Kendinizi tanıtın.
 3. TCKT'nizi şifreleyelim.
-4. 3. TCKT'nizi şifreleyelim.
+4. TCKT'nizi şifreleyelim.
 5. Ödemeyi yapın TCKT cüzdanınıza gelsin
-wX()
-PLUI Geliştirici
-Protokol Geliştirici
+wX
+TCKT: Blokzincirdeki kimlik kartın

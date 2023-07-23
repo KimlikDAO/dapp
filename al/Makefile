@@ -1,4 +1,3 @@
-include al/ödeme/Makefile
 include al/tanışma/Makefile
 
 build/al/sayfa-%.js: al/sayfa.js \
@@ -33,7 +32,7 @@ build/al/sayfa-%.js: al/sayfa.js \
 	yarn uglifyjs $@ -m -c toplevel,unsafe -o $@
 	wc $@
 
-build/al/sayfa.css: al/sayfa.css al/*/*.css
+build/al/sayfa.css: al/sayfa.css al/*/*.css birim/kutu.css
 	mkdir -p $(dir $@)
 	cat $^ | yarn csso --output $@
 
@@ -47,14 +46,13 @@ build/al/sayfa-%.keymap: $(call compressions, build/al/sayfa-%.js)
 
 build/al-%.html: al/sayfa.html \
                  al/imeceİptal/birim.html \
-                 al/ödeme/birim.html \
                  al/tanışma.birim \
                  birim/telefon/birim.html \
                  birim/dil/birim.html \
                  birim/cüzdan.birim \
+                 birim/logo.birim \
                  build/al/paste.svg.inl \
                  build/al/tanışma/external-link.svg.inl \
-                 build/al/ödeme/birim.keymap \
                  build/al/sayfa-%.keymap \
                  build/al/sayfa.keymap \
                  build/al/tanışma/birim.keymap \
@@ -62,6 +60,7 @@ build/al-%.html: al/sayfa.html \
                  build/font/fonts-%.keymap \
                  build/birim/cüzdan/birim.keymap \
                  build/birim/dil/birim.keymap \
+                 build/birim/paralar/birim.keymap \
                  build/birim/tckt/birim.keymap
 	node tools/htmlProcessor $< $*
 	tools/keymapper.py $@ $(filter %.keymap,$^)

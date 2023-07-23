@@ -33,11 +33,12 @@ build/oyla/sayfa-%.keymap: $(call compressions, build/oyla/sayfa-%.js)
 
 build/oyla-%.html: oyla/sayfa.html \
                    birim/cüzdan.birim \
+                   birim/logo.birim \
                    build/oyla/sayfa.keymap \
                    build/oyla/sayfa-%.keymap \
                    build/ana/sayfa-%.keymap \
-                   build/al/ödeme/birim.keymap \
                    build/birim/cüzdan/birim.keymap \
+                   build/birim/paralar/birim.keymap \
                    build/font/fonts-%.keymap
 	node tools/htmlProcessor $< $*
 	tools/keymapper.py $@ $(filter %.keymap,$^)

@@ -5,9 +5,7 @@ all: build
 include tools/Makefile
 include al/Makefile
 include ana/Makefile
-include birim/cüzdan/Makefile
-include birim/dil/Makefile
-include birim/tckt/Makefile
+include birim/Makefile
 include font/Makefile
 include incele/Makefile
 include iptal/Makefile

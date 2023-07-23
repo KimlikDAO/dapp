@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg height="35" width="49" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 140 100">
+  <defs>
+    <linearGradient id="purple-gradient" x1="50%" x2="57%" y1="0%" y2="100%">
+      <stop offset="0%" stop-color="#8e2de2" />
+      <stop offset="20%" stop-color="#6337ba" />
+      <stop offset="42%" stop-color="#a36dd3" />
+      <stop offset="80%" stop-color="#4a00e0" />
+    </linearGradient>
+    <clipPath id="squircle">
+      <path d="M25,25c25-25,25-25,50,0s25,25,0,50s-25,25-50,0s-25-25,0-50Z" />
+    </clipPath>
+  </defs>
+  <path fill="url(#purple-gradient)"
+    d="M50,6.25C70,6.25,70,6.25,80,15L90,25c21,25,21,25,0,50L80,85C70,93.75,70,93.75,50,93.75Z" />
+  <g clip-path="url(#squircle)">
+    <path fill="#90cdf4" d="M0,50l50,0L50,0Z" />
+    <path fill="#63B3ED" d="M50,0l0,50l50,0Z" />
+    <path fill="#3182CE" d="M100,50L50,50l0,50Z" />
+    <path fill="#4299E1" d="M50,100L50,50L0,50Z" />
+  </g>
+</svg>
