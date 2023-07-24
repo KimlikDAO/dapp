@@ -1,6 +1,6 @@
 #di {
   position: relative;
-  margin-right: 50px;
+  margin: auto 40px auto 15px;
 }
 
 #did {
@@ -11,12 +11,12 @@
   box-shadow: 0px 1px 20px rgba(0, 0, 0, 0.2);
   cursor: pointer;
   display: block;
-  left: -5px;
+  left: 15px;
   list-style: none;
   margin: 0;
   padding: 0;
   position: absolute;
-  top: 45px;
+  top: 40px;
   transform-origin: top center;
   width: 125px;
   z-index: 20;

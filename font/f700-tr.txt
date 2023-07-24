@@ -8,6 +8,7 @@ ana
   Bir NFT al, birçok app’e kimliğinle oturum aç
   TCKT al
   TCKT’ni incele
+  Daha fazla bilgi
 
 cüzdan
   0123456789x
