@@ -36,7 +36,7 @@
   text-align: center;
 }
 
-#b {
+#ba {
   background:
     radial-gradient(circle at 20% 20%, rgb(144, 205, 244, 0.1) 0%, rgba(255, 255, 255, 0) 40%),
     radial-gradient(circle at 70% 10%, rgb(99, 179, 237, 0.1) 0%, rgba(255, 255, 255, 0) 60%),
@@ -51,7 +51,7 @@
   justify-content: center;
 }
 
-#bt {
+#bat {
   display: flex;
   flex-wrap: wrap-reverse;
   justify-content: center;
@@ -61,7 +61,7 @@
   margin-top: 30px;
 }
 
-#bts {
+#bats {
   margin: 0 2em;
 }
 
@@ -82,14 +82,14 @@ h1 {
 }
 
 
-@media (max-width: 930px) {
+@media (max-width: 950px) {
   #nd {
     display: none;
   }
 }
 
-@media (max-width: 770px) {
-  .ne {
+@media (max-width: 800px) {
+  .ne, #di {
     display: none;
   }
 }

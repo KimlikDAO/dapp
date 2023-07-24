@@ -34,10 +34,7 @@ const seçiliDeğiştir = (seçili) => {
   saatKur();
 }
 
-Cüzdan.bağlanınca((adres) => {
-  console.log("asdf");
-  Telefon.adresGir(Cüzdan.hızlıArabirimAdı(adres))
-});
+Cüzdan.bağlanınca((adres) => Telefon.adresGir(Cüzdan.hızlıArabirimAdı(adres)));
 
 for (let /** number */ i = 0; i < Liste.length; ++i)
   Liste[i].onclick = () => seçiliDeğiştir(i);
