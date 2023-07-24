@@ -19,7 +19,7 @@ html {
   -webkit-text-size-adjust: 100%;
   background-size: 8px 8px;
   background: #fff;
-  color: #333;
+  color: #444;
   margin: 0;
   min-height: 100%;
   overflow-y: scroll;
@@ -27,6 +27,7 @@ html {
 
 body {
   margin: 0;
+  color: #444;
 }
 
 #nlg {
@@ -39,12 +40,16 @@ body {
   padding: 3px;
 }
 
+#nf {
+  display: flex;
+}
+
 .btn.lft {
   margin-right: 1ex;
 }
 
 .act.btn {
-  background: #4856b0;
+  background: #484bb0;
   color: white;
   border: 1px solid #0a46a7;
   opacity: 0.9;
@@ -88,7 +93,7 @@ body {
 
 a {
   text-decoration: none;
-  color: #000;
+  color: #444;
 }
 
 button:hover {

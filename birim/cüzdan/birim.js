@@ -74,8 +74,8 @@ const AğBilgileri = {
 let Adres = null;
 /** @type {string} */
 let Ağ = "0xa86a";
-/** @type {?function(string)} */
-let Bağlanınca = null;
+/** @type {!Array<function(string)>} */
+let Bağlanınca = [];
 /** @type {?function()} */
 let Kopunca = null;
 /** @type {?function(string)} */
@@ -159,7 +159,7 @@ const adresDeğişti = (adresler) => {
       if (ad) AdresButonu.innerText = ad;
     });
     if (!eskiAdres) {
-      if (Bağlanınca) Bağlanınca(Adres);
+      for (const f of Bağlanınca) f(Adres);
     } else if (AdresDeğişince)
       AdresDeğişince(Adres);
   }
@@ -170,7 +170,7 @@ const adresDeğişti = (adresler) => {
  */
 const bağlanınca = (f) => {
   if (Adres) f(Adres);
-  else Bağlanınca = f;
+  else Bağlanınca.push(f);
 }
 
 /**

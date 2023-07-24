@@ -1,12 +1,48 @@
- ,USDC USDT TRYB AVAX ETH FTM MATIC
-KimlikDAO
-Wallet connected
-Get your TCKT | $1
+main
+  KimlikDAO
+  TCKT: Your ID token for web3
+  Self-custody ID token for KYC’ed wallet logins
+  Mint your TCKT | $1
+  View TCKT
+
+wallet
+  0123456789x...
+  abcdefABCDEF
+
+1. Connect your wallet. 
+  Wallet connected
+  Connect wallet
+  Install an extension wallet
+
 2. Introduce yourself.
-0x123456789...
-Learn more
-Türkçe
-abcdefghijklmnopqrstuvwxyv
-ABCDEFGHIJKLMNOPQRSTUVWXYZ
+  PDF authentication
+  Login with e-devlet (Soon!)
+  KimlikDAO-ABCDEFGHIJKLMNOPQRSTUVWXYZ
+  e-devlet registry
+  Select file
+  Cancel
+
+3. Let’s encrypt your TCKT.
+  Request 4 signatures
+  We encrypted your TCKT
+
+4. Social revoke addresses.
+  Yes No
+  Setup social revoke
+  Skipped
+  Address
+  Weight
+  Threshold
+  Total weight
+  OK
+  Cancel
+  ₺$
+
 5. Send the payment and receive your TCKT.
-₺
+  0123456789+
+   ,USDC USDT TRYB AVAX ETH FTM MATIC
+  Total
+  .
+  Authoriza payment in wallet
+
+ğış

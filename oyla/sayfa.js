@@ -3,6 +3,7 @@
  *
  */
 import Cüzdan from '/birim/cüzdan/birim';
+import "/birim/dil/birim";
 import TCKT from '/lib/ethereum/TCKT';
 import dom from '/lib/util/dom';
 

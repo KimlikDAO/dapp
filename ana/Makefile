@@ -1,5 +1,5 @@
 build/ana/sayfa-%.js: ana/sayfa.js \
-                      ana/sergi/birim.js \
+                      ana/liste/birim.js \
                       birim/cüzdan/birim.js \
                       birim/dil/birim.js \
                       birim/telefon/birim.js \
@@ -22,7 +22,7 @@ build/ana/sayfa-%.js: ana/sayfa.js \
 	yarn uglifyjs $@ -m -c toplevel,unsafe -o $@
 
 build/ana/sayfa-%.css: build/font/lato-%.css ana/sayfa.css \
-                       ana/sergi/birim.css \
+                       ana/liste/birim.css \
                        birim/ortak.css \
                        birim/cüzdan/birim.css \
                        birim/dil/birim.css \
@@ -36,7 +36,7 @@ build/ana/sayfa-%.keymap: $(call compressions, build/ana/sayfa-%.js build/ana/sa
 	tools/keyhasher.py $@ build/ana/sayfa-$*.js build/ana/sayfa-$*.css
 
 build/ana-%.html: ana/sayfa.html \
-                  ana/sergi/birim.html \
+                  ana/liste/birim.html \
                   birim/telefon/birim.html \
                   birim/dil/birim.html \
                   birim/cüzdan.birim \

@@ -1,27 +1,50 @@
- ,USDC USDT TRYB AVAX ETH FTM MATIC
-0123456789+
-Tarayıcı cüzdanı yükle
-Cüzdan bağlandı
-E-devlet ile giriş yap
-Cüzdanıma istek yolla
-Gizle
-Türkçe English Bağlı değil Evet Hayır
-0123456789x
-abcdefABCDEF
-Adres Ağırlık Toplam ağırlık Eşik
-Tamam
-Yine de kur
-İmece iptal kurulmadı
-Yine de kur
-Ödeme isteği yolla
-KimlikDAO
-TCKT al
-Hemen TCKT al | ₺19
-Daha fazla bilgi
+ana
+  dApp’lerde kullanabileceğin dijital bir kimlik kartı
+  Cüzdanında sadece sizin görebileceğiniz şekilde şifreli durur
+  MetaMask gibi NFT destekleyen kripto cüzdanında taşınır
+  dApp’lere istediğin bilgileri paylaş, istediklerini gizli tut
+  KimlikDAO
+  TCKT: Blokzincirdeki kimlik kartın
+  Bir NFT al, birçok app’e kimliğinle oturum aç
+  TCKT al
+  TCKT’ni incele
+
+cüzdan
+  0123456789x
+  abcdefABCDEF
+
 1. Cüzdanınızı bağlayın.
+  Tarayıcı cüzdanı yükle
+  Cüzdan bağlandı
+
 2. Kendinizi tanıtın.
+  PDF ile tanıt
+  E-devlet ile giriş yap (Yakında!)
+  KimlikDAO-ABCDEFGHIJKLMNOPQRSTUVWXYZ
+  Kuruma İbraz
+  E-devlet Nüfus Kayıt Örneği
+  Dosya seç
+  İptal
+
 3. TCKT'nizi şifreleyelim.
-4. TCKT'nizi şifreleyelim.
+  4 imza isteği yolla
+  TCKT’nizi şifreledik
+
+4. İmece iptal adresleri.
+  Evet Hayır
+  Yine de kur
+  İmece iptal kurulmadı
+  Ağırlık
+  Eşik
+  Toplam Ağırlık
+  Adres
+  $₺
+  Tamam İptal
+
 5. Ödemeyi yapın TCKT cüzdanınıza gelsin
+  0123456789+
+   ,USDC USDT TRYB AVAX ETH FTM MATIC
+  Toplam
+  Ödeme isteği yolla
+
 wX
-TCKT: Blokzincirdeki kimlik kartın

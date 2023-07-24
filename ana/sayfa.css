@@ -27,10 +27,6 @@
   align-items: center;
 }
 
-.nf {
-  display: flex;
-}
-
 #nd {
   align-items: center;
   display: flex;
@@ -44,9 +40,9 @@
   background:
     radial-gradient(circle at 20% 20%, rgb(144, 205, 244, 0.1) 0%, rgba(255, 255, 255, 0) 40%),
     radial-gradient(circle at 70% 10%, rgb(99, 179, 237, 0.1) 0%, rgba(255, 255, 255, 0) 60%),
-    radial-gradient(circle at 60% 90%, rgb(49, 130, 206, 0.1) 0%, rgba(255, 255, 255, 0) 40%),
+    radial-gradient(circle at 60% 90%, rgb(49, 130, 206, 0.4) 0%, rgba(255, 255, 255, 0) 40%),
     radial-gradient(circle at 10% 80%, rgb(66, 153, 225, 0.1) 0%, rgba(255, 255, 255, 0) 40%),
-    radial-gradient(circle at 0% 50%, rgb(163, 109, 211, 0.3) 0%, rgba(255, 255, 255, 0) 30%),
+    radial-gradient(circle at 0% 55%, rgb(163, 109, 211, 0.4) 0%, rgba(255, 255, 255, 0) 50%),
     radial-gradient(circle at 75% 60%, rgb(99, 55, 186, 0.3) 0%, rgba(255, 255, 255, 0) 40%);
 
   display: flex;
@@ -57,16 +53,22 @@
 
 #bt {
   display: flex;
+  flex-wrap: wrap-reverse;
+  justify-content: center;
   max-width: 1200px;
+  padding: 0 0 200px;
   width: 100%;
-  padding: 40px 0;
+  margin-top: 30px;
+}
+
+#bts {
+  margin: 0 5em;
 }
 
 h1 {
+  color: #555;
   display: inline-block;
-  color: #3c4043;
   font-size: 35pt;
-  font-weight: 700;
   margin: 0;
   padding: 50px 10px 10px;
   text-align: center;
@@ -79,14 +81,8 @@ h1 {
   margin-top: 2em;
 }
 
-#bu {
-  display: flex;
-  flex-wrap: wrap-reverse;
-  justify-content: center;
-  width: 100%;
-}
 
-@media (max-width: 900px) {
+@media (max-width: 930px) {
   #nd {
     display: none;
   }
@@ -99,7 +95,11 @@ h1 {
 }
 
 #babn {
-  margin-top: 50px;
+  margin-top: 80px;
   display: flex;
   justify-content: center;
+}
+
+#baal {
+  margin-right: 20px;
 }

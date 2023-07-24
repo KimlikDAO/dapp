@@ -1,4 +1,4 @@
-import "/ana/sergi/birim";
+import "/ana/liste/birim";
 import Cüzdan from "/birim/cüzdan/birim";
 import "/birim/dil/birim";
 import TCKT from "/lib/ethereum/TCKTLite.js";
