@@ -1,5 +1,6 @@
 build/iptal/sayfa-%.js: iptal/sayfa.js \
                         birim/cüzdan/birim.js \
+                        birim/dil/birim.js \
                         lib/crypto/sha3.js \
                         lib/crypto/secp256k1.js lib/crypto/modular.js \
                         lib/ethereum/transaction.d.js lib/ethereum/provider.d.js \
@@ -32,11 +33,13 @@ build/iptal/sayfa-%.keymap: $(call compressions, build/iptal/sayfa-%.js)
 
 build/iptal-%.html: iptal/sayfa.html \
                     birim/cüzdan.birim \
+                    birim/dil/birim.html \
                     build/iptal/sayfa-%.keymap \
                     build/iptal/sayfa.keymap \
                     build/ana/sayfa-%.keymap \
                     build/font/fonts-%.keymap \
-                    build/birim/cüzdan/birim.keymap
+                    build/birim/cüzdan/birim.keymap \
+                    build/birim/dil/birim.keymap
 	node tools/htmlProcessor $< $*
 	tools/keymapper.py $@ $(filter %.keymap,$^)
 	yarn html-minifier -c tools/html-minifier.conf $@ -o $@

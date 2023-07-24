@@ -34,11 +34,14 @@ build/oyla/sayfa-%.keymap: $(call compressions, build/oyla/sayfa-%.js)
 
 build/oyla-%.html: oyla/sayfa.html \
                    birim/cüzdan.birim \
+                   birim/dil/birim.html \
                    birim/logo.birim \
                    build/oyla/sayfa.keymap \
                    build/oyla/sayfa-%.keymap \
+                   build/oyla/dropdownok.svg.inl \
                    build/ana/sayfa-%.keymap \
                    build/birim/cüzdan/birim.keymap \
+                   build/birim/dil/birim.keymap \
                    build/birim/paralar/birim.keymap \
                    build/font/fonts-%.keymap
 	node tools/htmlProcessor $< $*

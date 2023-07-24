@@ -1,4 +1,4 @@
-#n {
+#naa {
   align-items: center;
   background-color: rgba(255, 255, 255, 0.95);
   display: flex;
@@ -9,25 +9,7 @@
   z-index: 20;
 }
 
-.ne {
-  padding: 10px;
-  margin: auto 15px;
-}
-
-.nav {
-  display: flex;
-  justify-content: space-between;
-  margin: 0 auto;
-  max-width: 1200px;
-  width: 100%;
-}
-
-#nk {
-  display: flex;
-  align-items: center;
-}
-
-#nd {
+#nad {
   align-items: center;
   display: flex;
   margin: 0 12px 0 2px;
@@ -35,6 +17,16 @@
   padding: 0 1em;
   text-align: center;
 }
+
+@media (max-width: 950px) {
+  #nad {
+    display: none;
+  }
+}
+
+/**
+ * Banner stilleri
+ */
 
 #ba {
   background:
@@ -61,7 +53,7 @@
   margin-top: 30px;
 }
 
-#bats {
+#bas {
   margin: 0 2em;
 }
 
@@ -75,31 +67,18 @@ h1 {
   width: 100%;
 }
 
-#bz {
+#baz {
   color: #888;
   font-size: 13pt;
   margin-top: 2em;
 }
 
-
-@media (max-width: 950px) {
-  #nd {
-    display: none;
-  }
-}
-
-@media (max-width: 800px) {
-  .ne, #di {
-    display: none;
-  }
-}
-
-#babn {
+#bab {
   margin-top: 80px;
   display: flex;
   justify-content: center;
 }
 
-#baal {
+#bal {
   margin-right: 20px;
 }

@@ -1,4 +1,4 @@
-<svg  xmlns="http://www.w3.org/2000/svg" fill="none" width="24" height="24" focusable="false">
-    <path d="M5 11.75h12m-5.25-6.5 6.25 6.5-6.25 6.5" stroke="#fff" stroke-width="1.5" stroke-miterlimit="10">       
-    </path>
+<svg xmlns="http://www.w3.org/2000/svg" fill="none" width="24" height="24" focusable="false">
+  <path d="M5,11.75h12m-5.25-6.5,6.25,6.5-6.25,6.5" stroke="#fff" stroke-width="1.5" stroke-miterlimit="10">
+  </path>
 </svg>

@@ -1,9 +1,10 @@
 /**
  * @fileoverview İptal sayfası giriş noktası
  */
-import Cüzdan from '/birim/cüzdan/birim';
-import TCKT from '/lib/ethereum/TCKT';
-import dom from '/lib/util/dom';
+import Cüzdan from "/birim/cüzdan/birim";
+import "/birim/dil/birim";
+import TCKT from "/lib/ethereum/TCKT";
+import dom from "/lib/util/dom";
 
 Cüzdan.adresDeğişince(() => location.reload());
 dom.adla("ipbtnb").onclick = () => {

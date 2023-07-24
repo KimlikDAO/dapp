@@ -31,9 +31,13 @@ build/ana/sayfa-%.css: build/font/lato-%.css ana/sayfa.css \
 	mkdir -p $(dir $@)
 	cat $^ | yarn csso --output $@
 
+# In dapp, we bundle ana/sayfa.css and birim/ortak.css together since both are tiny.
+# In the html call site always pretent no bundling happens and in the Makefile
+# callsite depend on build/ana/sayfa-%.keymap
 build/ana/sayfa-%.keymap: $(call compressions, build/ana/sayfa-%.js build/ana/sayfa-%.css)
 	mkdir -p $(dir $@) && > $@
 	tools/keyhasher.py $@ build/ana/sayfa-$*.js build/ana/sayfa-$*.css
+	sed -i.bak 's#/ana/sayfa.css#/birim/ortak.css#' $@
 
 build/ana-%.html: ana/sayfa.html \
                   ana/liste/birim.html \

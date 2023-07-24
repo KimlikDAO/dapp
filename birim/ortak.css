@@ -30,20 +30,6 @@ body {
   color: #444;
 }
 
-#nlg {
-  display: flex;
-  align-items: center;
-  font-size: 20pt;
-  font-weight: 700;
-  color: #444;
-  margin: 10px;
-  padding: 3px;
-}
-
-#nf {
-  display: flex;
-}
-
 .btn.lft {
   margin-right: 1ex;
 }
@@ -159,5 +145,44 @@ button:hover {
 
   100% {
     transform: scaleY(1);
+  }
+}
+
+/**
+ * Ortak menü çubuğu stilleri
+ */
+
+#na {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 auto;
+  max-width: 1200px;
+  width: 100%;
+}
+
+#nag {
+  display: flex;
+  align-items: center;
+  font-size: 20pt;
+  font-weight: 700;
+  color: #444;
+  margin: 10px;
+  padding: 3px;
+}
+
+#naf {
+  display: flex;
+}
+
+.nae {
+  padding: 10px;
+  margin: auto 15px;
+}
+
+@media (max-width: 800px) {
+
+  .nae,
+  #di {
+    display: none;
   }
 }
