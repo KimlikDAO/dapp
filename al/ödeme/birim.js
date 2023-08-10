@@ -1,8 +1,9 @@
-import Cüzdan, { AğBilgileri, AğBilgisi } from "/birim/cüzdan/birim";
+import { AğBilgileri, AğBilgisi } from "/birim/cüzdan/ağlar";
+import Cüzdan from "/birim/cüzdan/birim";
 import Telefon from "/birim/telefon/birim";
 import TCKT from "/lib/ethereum/TCKT";
-import dom from "/lib/util/dom";
 import { whenMined } from "/lib/ethereum/transaction";
+import dom from "/lib/util/dom";
 
 /**
  * @param {Element} imge

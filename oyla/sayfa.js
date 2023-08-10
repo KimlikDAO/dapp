@@ -9,11 +9,6 @@ import dom from '/lib/util/dom';
 
 let SeçilmişÖneriId;
 
-Cüzdan.bağlanınca(() => {
-  fiyatDeğişikliğiFormuHazırla(Cüzdan.ağ());
-  komuniteÖnergesiHazırla();
-  Cüzdan.ağDeğişince((yeniAğ) => fiyatDeğişikliğiFormuHazırla(yeniAğ))
-})
 
 dom.adla("oyyb").onclick = () => {
   dom.adlaGizle("oyyb");

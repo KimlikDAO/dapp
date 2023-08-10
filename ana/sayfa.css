@@ -12,10 +12,10 @@
 #nad {
   align-items: center;
   display: flex;
+  justify-content: center;
   margin: 0 12px 0 2px;
   min-width: 10ex;
   padding: 0 1em;
-  text-align: center;
 }
 
 @media (max-width: 950px) {
@@ -48,7 +48,7 @@
   flex-wrap: wrap-reverse;
   justify-content: center;
   max-width: 1200px;
-  padding: 0 0 200px;
+  padding: 0 0 120px;
   width: 100%;
   margin-top: 30px;
 }

@@ -1,6 +1,6 @@
 build/ana/sayfa-%.js: ana/sayfa.js \
                       ana/liste/birim.js \
-                      birim/cüzdan/birim.js \
+                      birim/cüzdan/*.js \
                       birim/dil/birim.js \
                       birim/telefon/birim.js \
                       birim/tckt/birim.js \

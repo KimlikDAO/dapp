@@ -3,7 +3,7 @@ include al/tanışma/Makefile
 build/al/sayfa-%.js: al/sayfa.js \
                      al/imeceİptal/birim.js al/ödeme/birim.js \
                      al/tanışma/birim.js \
-                     birim/cüzdan/birim.js \
+                     birim/cüzdan/*.js \
                      birim/dil/birim.js \
                      birim/telefon/birim.js \
                      birim/tckt/birim.js \

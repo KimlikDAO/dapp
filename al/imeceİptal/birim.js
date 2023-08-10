@@ -2,9 +2,10 @@
  * @fileoverview İmece iptal parçası. DOM'da `im` öneki bu parçaya ayrılmıştır.
  */
 
-import Cüzdan, { AğBilgileri, AğBilgisi } from "/birim/cüzdan/birim";
-import evm from "/lib/ethereum/evm";
+import { AğBilgileri, AğBilgisi } from "/birim/cüzdan/ağlar";
+import Cüzdan from "/birim/cüzdan/birim";
 import TCKT from "/lib/ethereum/TCKT";
+import evm from "/lib/ethereum/evm";
 import dom from "/lib/util/dom";
 
 /** @const {Element} */
@@ -19,7 +20,7 @@ const İptalciler = dom.adla("imf");
  */
 const fiyatGöster = (ağ) => {
   /**
-   * @type {AğBilgisi}
+   * @type {!AğBilgisi}
    * @const
    */
   const ağBilgisi = AğBilgileri[ağ];

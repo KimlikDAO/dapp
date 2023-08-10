@@ -1,4 +1,3 @@
-import Cüzdan from "/birim/cüzdan/birim";
 import Tckt from "/birim/tckt/birim";
 import { keccak256Uint8 } from "/lib/crypto/sha3";
 import { combineMultiple } from "/lib/did/decryptedSections";
@@ -31,10 +30,12 @@ const taahhütOluştur = (adres, rastgele) => {
 /**
  * AçıkTCKT alır ve `sonra`'ya aktarır.
  *
+ * @param {string} adres
  * @param {function(!did.DecryptedSections)} sonra AçıkTCKT'yi
  * vereceğimiz yordam.
  */
-const açıkTcktAlVe = (sonra) => {
+const açıkTcktAlVe = (adres, sonra) => {
+  console.log(`here ${adres}`);
   /** @const {!Worker} */
   const powWorker = new Worker("/al/tanışma/powWorker.js", { type: "module" });
 
@@ -46,18 +47,18 @@ const açıkTcktAlVe = (sonra) => {
   const nkoRastgele = new Uint8Array(64);
   {
     /** @const {string} */
-    const b64 = window.localStorage[Cüzdan.adres().toLowerCase() + "nko_r"];
+    const b64 = window.localStorage[adres + "nko_r"];
     if (b64) {
       uint8ArrayeBase64ten(nkoRastgele, b64)
     } else {
       crypto.getRandomValues(nkoRastgele);
-      window.localStorage[Cüzdan.adres().toLowerCase() + "nko_r"] = base64(nkoRastgele);
+      window.localStorage[adres + "nko_r"] = base64(nkoRastgele);
     }
   }
   /** @const {!Promise<string>} */
   const taahhütPowSözü = new Promise((resolve) => {
     /** @const {!Uint8Array} */
-    const taahhüt = taahhütOluştur(/** @type {string} */(Cüzdan.adres()), nkoRastgele);
+    const taahhüt = taahhütOluştur(adres, nkoRastgele);
     /** @const {string} */
     const taahhütB64 = base64(taahhüt);
     /** @const {?string} */
@@ -115,7 +116,7 @@ const açıkTcktAlVe = (sonra) => {
     const istemciAn = Date.now() / 1000 | 0;
     /** @const {!Uint8Array} */
     const taahhüt = new Uint8Array(
-      taahhütOluştur(/** @type {string} */(Cüzdan.adres()), eDevletRastgele).buffer, 0, 72);
+      taahhütOluştur(adres, eDevletRastgele).buffer, 0, 72);
 
     // Şimdilik `edevlet/oauth2` için PoW gerektirmiyoruz.
     // Son 8 byte'ının kullanıcı EVM adresi bilgisi sızmaması için sıfırlayalım.
@@ -136,6 +137,17 @@ const açıkTcktAlVe = (sonra) => {
     const hataBildirimi = dom.adla("tafb");
     /** @type {boolean} */
     let hataOluştu = false;
+
+    numaraSözü.then((numara) => {
+      /** @const {Element} */
+      const kopyala = dom.adla("tacopy");
+      /** @const {string} */
+      const kurumAdı = "KimlikDAO-" + numara;
+      dom.adla("tano").innerText = kurumAdı;
+      dom.göster(kopyala);
+      kopyala.onclick = () => navigator.clipboard.writeText(kurumAdı);
+    });
+
     nkoDüğmesi.onclick = () => {
       dom.gizle(eDevletDüğmesi);
       dom.gizle(nkoDüğmesi);
@@ -143,15 +155,6 @@ const açıkTcktAlVe = (sonra) => {
       const dosyaBırakmaBölgesi = dom.adla("tada");
       /** @const {Element} */
       const dosyaSeçici = dom.adla("tain");
-      numaraSözü.then((numara) => {
-        /** @const {Element} */
-        const kopyala = dom.adla("tacopy");
-        /** @const {string} */
-        const kurumAdı = "KimlikDAO-" + numara;
-        dom.adla("tano").innerText = kurumAdı;
-        dom.göster(kopyala);
-        kopyala.onclick = () => navigator.clipboard.writeText(kurumAdı);
-      });
       dom.adla("tadsbtn").onclick = () => dosyaSeçici.click();
       /** @const {Element} */
       const dosyaYüklemeBölümü = dom.adla("tadc");
@@ -213,7 +216,7 @@ const açıkTcktAlVe = (sonra) => {
             nkoDüğmesi.innerText = dom.TR ? "Bilgileriniz onaylandı ✓" : "We confirmed your info ✓";
             dom.göster(nkoDüğmesi);
             dom.düğmeDurdur(nkoDüğmesi);
-            window.localStorage.removeItem(Cüzdan.adres().toLowerCase + "nko_r");
+            window.localStorage.removeItem(adres + "nko_r");
 
             Tckt.açıkTcktGöster(açıkTckt);
             kutu.classList.add("done");

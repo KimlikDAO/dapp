@@ -9,7 +9,10 @@ const NftButton = dom.adla("tenft-button");
 /**
  * @param {string} adres Telefonda gösterilecek adres.
  */
-const adresGir = (adres) => dom.adla("tetr").innerText = adres;
+const adresGir = (adres) => {
+  adres ||= "0xcCc0cCc";
+  dom.adla("tetr").innerText = adres.slice(0, 6) + "..." + adres.slice(-4);
+}
 
 /**
  * @param {string} metin İletişim kutusunda gösterilecek metin.

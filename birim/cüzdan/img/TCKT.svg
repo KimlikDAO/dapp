@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg height="16" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 120 100">
+<svg height="16" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 110 100">
   <path stroke="#666" fill="none" stroke-width="6px"
     d="M25,25c25-25,25-25,50,0s25,25,0,50s-25,25-50,0s-25-25,0-50M50,6.25C70,6.25,70,6.25,80,15L90,25c21,25,21,25,0,50L80,85C70,93.75,70,93.75,50,93.75ZM6.25 50l87.5,0" />
 </svg>
