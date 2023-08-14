@@ -5,6 +5,7 @@
 import Cüzdan from '/birim/cüzdan/birim';
 import "/birim/dil/birim";
 import Tckt from '/birim/tckt/birim';
+import { Provider } from "/lib/crosschain/provider";
 import { fromUnlockableNFT } from '/lib/did/decryptedSections';
 import TCKT from '/lib/ethereum/TCKT';
 import evm from "/lib/ethereum/evm";
@@ -196,6 +197,11 @@ Cüzdan.tcktDeğişince((dosyaSözü) => {
     const kapalıYüzGöster = () => {
       /** @const {string} */
       const ağ = Cüzdan.ağ();
+      /**
+       * @type {!Provider}
+       * @const
+       */
+      const bağlantı = Cüzdan.bağlantı();
       /** @const {string} */
       const adres = Cüzdan.adres();
       Tckt.yüzGöster(false);
@@ -208,7 +214,7 @@ Cüzdan.tcktDeğişince((dosyaSözü) => {
         AçDüğmesi.onclick = () => dosyaSözü
           .then((dosya) => fromUnlockableNFT(dosya,
             ["personInfo", "contactInfo", "addressInfo", "kütükBilgileri"],
-            ethereum,
+            bağlantı,
             adres
           ))
           .then((açıkTckt) => {

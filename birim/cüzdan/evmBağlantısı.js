@@ -1,8 +1,9 @@
 import { AğBilgileri } from "./ağlar";
-import { Bağlantı } from "./bağlantı";
+import { Provider } from "/lib/crosschain/provider";
+import { hex } from "/lib/util/çevir";
 
 /**
- * @param {!eth.UiProvider} provider
+ * @param {!eth.Provider} provider
  * @param {string} ağ
  * @return {!Promise<void>}
  */
@@ -55,13 +56,28 @@ const bağla = (provider, ağ, ağDeğişti, adresDeğişti) => {
 }
 
 /**
- * @type {!Bağlantı}
+ * @param {!eth.Provider} provider
+ * @param {string} metin
+ * @param {string} adres
+ * @param {boolean=} hexeÇevir
+ * @return {!Promise<string>}
+ */
+const imzala = (provider, metin, adres, hexeÇevir) => provider.request(
+  /** @type {!eth.Request} */({
+    method: "personal_sign",
+    params: [hexeÇevir
+      ? "0x" + hex(new TextEncoder().encode(metin))
+      : metin, adres]
+  }));
+
+/**
+ * @type {!Provider}
  * @const
  */
-const CoreBağlantısı = /** @type {!Bağlantı} */({
-  varsaKur: () => {
+const CoreBağlantısı = /** @type {!Provider} */({
+  initIfAvailable: () => {
     /** @const {boolean} */
-    const varMı = window?.avalanche?.info?.name == "core";
+    const varMı = !!(window?.avalanche?.info?.name == "core");
     if (varMı)
       /** @const {!eth.UiProvider} */
       CoreBağlantısı.provider = window.avalanche;
@@ -69,37 +85,49 @@ const CoreBağlantısı = /** @type {!Bağlantı} */({
   },
 
   /**
-   * @param {string} ağ
-   * @param {function(string)} ağDeğişti
-   * @param {function(!Array<string>)} adresDeğişti
-   * @return {!Promise<void>}
-   */
-  bağla: (ağ, ağDeğişti, adresDeğişti) => bağla(CoreBağlantısı.provider, ağ, ağDeğişti, adresDeğişti),
-
-  /**
-   * @override
-   */
-  kopar: () => kopar(CoreBağlantısı.provider),
-
-  /**
-   * @override
-   */
-  ağSeç: (ağ) => ağSeç(CoreBağlantısı.provider, ağ),
-
-  /**
    * @return {string}
    */
-  indirURLi: () => navigator.userAgent.toLowerCase().includes("chrome")
+  downloadURL: () => navigator.userAgent.toLowerCase().includes("chrome")
     ? "//chrome.google.com/webstore/detail/core-crypto-wallet-nft-ex/agoakfejjabomempkjlepdflaleeobhb"
     : "//core.app",
+
+  /**
+   * @param {string} chain
+   * @param {function(string)} chainChanged
+   * @param {function(!Array<string>)} addressChanged
+   * @return {!Promise<void>}
+   */
+  connect: (chain, chainChanged, addressChanged) =>
+    bağla(CoreBağlantısı.provider, chain, chainChanged, addressChanged),
+
+  /**
+   * @override
+   */
+  disconnect: () => kopar(CoreBağlantısı.provider),
+
+  /**
+   * @override
+   */
+  switchChain: (chain) => ağSeç(CoreBağlantısı.provider, chain),
+
+  /**
+   * @override
+   *
+   * @param {string} message
+   * @param {string} address
+   * @return {!Promise<string>}
+   */
+  signMessage: (message, address) =>
+    imzala(CoreBağlantısı.provider, message, address, true)
 });
 
-/** @const {!Bağlantı} */
-const MetaMaskBağlantısı = /** @type {!Bağlantı} */({
-  varsaKur: () => {
+/** @const {!Provider} */
+const MetaMaskBağlantısı = /** @type {!Provider} */({
+  initIfAvailable: () => {
     /** @const {boolean} */
-    const varMı = window?.ethereum?.isMetaMask
-      && !window?.ethereum?.isRabby;
+    const varMı = !!(window?.ethereum?.isMetaMask
+      && !window?.ethereum?.isRabby
+      && !window?.avalanche)
     if (varMı)
       /** @const {!eth.UiProvider} */
       MetaMaskBağlantısı.provider = window.ethereum;
@@ -107,31 +135,58 @@ const MetaMaskBağlantısı = /** @type {!Bağlantı} */({
   },
 
   /**
-   * @param {string} ağ
-   * @param {function(string)} ağDeğişti
-   * @param {function(!Array<string>)} adresDeğişti
+   * @override
+   *
+   * @return {string}
+   */
+  downloadURL: () => "//metamask.io",
+
+  /**
+   * @override
+   *
+   * @param {string} chain
+   * @param {function(string)} chainChanged
+   * @param {function(!Array<string>)} addressChanged
    * @return {!Promise<void>}
    */
-  bağla: (ağ, ağDeğişti, adresDeğişti) => bağla(MetaMaskBağlantısı.provider, ağ, ağDeğişti, adresDeğişti),
+  connect: (chain, chainChanged, addressChanged) =>
+    bağla(MetaMaskBağlantısı.provider, chain, chainChanged, addressChanged),
 
   /**
    * @override
    */
-  kopar: () => kopar(MetaMaskBağlantısı.provider),
+  disconnect: () => kopar(MetaMaskBağlantısı.provider),
 
   /**
    * @override
+   *
+   * @param {string} chain
    */
-  ağSeç: (ağ) => ağSeç(MetaMaskBağlantısı.provider, ağ),
+  switchChain: (chain) => ağSeç(MetaMaskBağlantısı.provider, chain),
 
-  indirURLi: () => "//metamask.io"
+  /**
+   * @override
+   *
+   * @param {string} message
+   * @param {string} address
+   * @return {!Promise<string>}
+   */
+  signMessage: (message, address) =>
+    imzala(MetaMaskBağlantısı.provider, message, address, false)
 });
 
-const RabbyBağlantısı = /** @type {Bağlantı} */({
-  name: "Rabby",
-  varsaKur: () => {
+/**
+ * @const {!Provider}
+ */
+const RabbyBağlantısı = /** @type {!Provider} */({
+  /**
+   * @override
+   *
+   * @return {boolean}
+   */
+  initIfAvailable: () => {
     /** @const {boolean} */
-    const varMı = window?.ethereum?.isRabby;
+    const varMı = !!(window?.ethereum?.isRabby);
     if (varMı)
       /** @const {!eth.UiProvider} */
       RabbyBağlantısı.provider = window.ethereum;
@@ -139,26 +194,46 @@ const RabbyBağlantısı = /** @type {Bağlantı} */({
   },
 
   /**
-   * @param {string} ağ
-   * @param {function(string)} ağDeğişti
-   * @param {function(!Array<string>)} adresDeğişti
-   * @return {!Promise<void>}
-   */
-  bağla: (ağ, ağDeğişti, adresDeğişti) => bağla(RabbyBağlantısı.provider, ağ, ağDeğişti, adresDeğişti),
-
-  /**
    * @override
+   *
+   * @return {boolean}
    */
-  kopar: () => kopar(RabbyBağlantısı.provider),
-
-  /**
-   * @override
-   */
-  ağSeç: (ağ) => ağSeç(RabbyBağlantısı.provider, ağ),
-
-  indirURLi: () => navigator.userAgent.toLowerCase().includes("chrome")
+  downloadURL: () => navigator.userAgent.toLowerCase().includes("chrome")
     ? "//chrome.google.com/webstore/detail/rabby-wallet/acmacodkjbdgmoleebolmdjonilkdbch"
     : "//rabby.io",
+
+  /**
+   * @override
+   *
+   * @param {string} chain
+   * @param {function(string)} chainChanged
+   * @param {function(!Array<string>)} addressChanged
+   * @return {!Promise<void>}
+   */
+  connect: (chain, chainChanged, addressChanged) =>
+    bağla(RabbyBağlantısı.provider, chain, chainChanged, addressChanged),
+
+  /**
+   * @override
+   */
+  disconnect: () => kopar(RabbyBağlantısı.provider),
+
+  /**
+   * @override
+   *
+   * @param {string} chain
+   */
+  switchChain: (chain) => ağSeç(RabbyBağlantısı.provider, chain),
+
+  /**
+   * @override
+   *
+   * @param {string} message
+   * @param {string} address
+   * @return {!Promise<string>}
+   */
+  signMessage: (message, address) =>
+    imzala(RabbyBağlantısı.provider, message, address, false)
 });
 
 export {

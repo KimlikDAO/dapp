@@ -1,6 +1,6 @@
 import { AğBilgileri } from "./ağlar.js";
-import { Bağlantı } from "./bağlantı";
 import { CoreBağlantısı, MetaMaskBağlantısı, RabbyBağlantısı } from "./evmBağlantısı";
+import { Provider } from "/lib/crosschain/provider";
 import TCKT from "/lib/ethereum/TCKTLite";
 import ipfs from "/lib/node/ipfs";
 import dom from "/lib/util/dom";
@@ -10,52 +10,70 @@ import { hexten } from "/lib/util/çevir";
 const KIMLIKDAO_IPFS_URL = "//ipfs.kimlikdao.org";
 
 /**
- * @const {!Object<string, !Bağlantı>}
+ * @type {!Provider}
+ * @const
+ */
+const BoşBağlantı = {
+  /**
+   * @override
+   *
+   * @return {boolean}
+   */
+  initIfAvailable: () => true,
+
+  /**
+   * @return {string}
+   */
+  downloadURL: () => "",
+
+  /**
+   * @override
+   *
+   * @param {string} chain
+   * @param {function(string)} chainChanged
+   * @param {function(!Array<string>)} addressChanged
+   * @return {!Promise<void>}
+   */
+  connect: (chain, chainChanged, addressChanged) => Promise.resolve(),
+
+  /**
+   * @override
+   */
+  disconnect() { },
+
+  /**
+   * @override
+   *
+   * @param {string} ağ
+   * @return {!Promise<void>}
+   */
+  switchChain(ağ) {
+    ağDeğişti(ağ)
+    return Promise.resolve();
+  },
+
+  /**
+   * @override
+   *
+   * @param {string} message
+   * @param {string} address
+   * @return {!Promise<string>}
+   */
+  signMessage: (message, address) => Promise.reject(),
+}
+
+/**
+ * @const {!Object<string, !Provider>}
  * @dict
  */
 const Bağlantılar = {
   "core": CoreBağlantısı,
   "rabby": RabbyBağlantısı,
   "mm": MetaMaskBağlantısı,
-  "": /** @type {!Bağlantı} */({
-    name: "BoşBağlantı",
-    /**
-     * @override
-     *
-     * @param {string} ağ
-     * @return {!Promise<void>}
-     */
-    ağSeç(ağ) {
-      ağDeğişti(ağ)
-      return Promise.resolve();
-    },
-
-    /**
-     * @override
-     *
-     * @param {string} ağ
-     * @param {function(string)} ağDeğişti
-     * @param {function(!Array<string>)} adresDeğişti
-     * @return {!Promise<void>}
-     */
-    bağla: (ağ, ağDeğişti, adresDeğişti) => Promise.resolve(),
-
-    /**
-     * @override
-     */
-    kopar() { },
-
-    /**
-     * @override
-     *
-     * @return {boolean}
-     */
-    varsaKur: () => true
-  })
 };
 
-/** @type {!Bağlantı} */
-let Bağlı = Bağlantılar[""];
+/** @type {!Provider} */
+let Bağlı = BoşBağlantı;
 /** @type {?string} */
 let Adres = null;
 /** @type {string} */
@@ -68,6 +86,8 @@ let Kopunca = [];
 let AğDeğişince = [];
 /** @type {!Array<function(Promise<!eth.ERC721Unlockable>)>} */
 let TcktDeğişince = [];
+/** @type {!Array<function(!Bağlantı)>} */
+let BağlantıDeğişince = [];
 /** @type {?string} */
 let BağlaMetni;
 
@@ -78,10 +98,20 @@ const AğButonu = dom.adla("cuc");
 /** @const {Element} */
 const Menü = dom.adla("cub");
 
-/** @const {function():string} */
+/**
+ * @return {string} Seçili ağ
+ */
 const ağ = () => Ağ;
-/** @const {function():?string} */
+
+/**
+ * @return {?string} Seçili adres veya adres seçili değilse null.
+ */
 const adres = () => Adres;
+
+/**
+ * @return {!Provider}
+ */
+const bağlantı = () => Bağlı;
 
 /**
  * Verilen bir EVM adresini UI'da hızlıca göstermeye uygun hale getirir.
@@ -132,7 +162,7 @@ const tcktDeğişti = () => {
   /** @const {string} */
   const ağ = Ağ;
   /** @const {!eth.Provider} */
-  const provider = Bağlı.provider;
+  const provider = /** @type {!eth.Provider} */(Bağlı.provider);
   /** @const {string} */
   const adres = Adres;
 
@@ -170,10 +200,10 @@ const adresDeğişti = (adresler) => {
   if (!adresler || !adresler.length) {
     Adres = null;
     AdresButonu.innerText = BağlaMetni;
-    if (Bağlı != Bağlantılar[""]) {
+    if (Bağlı != BoşBağlantı) {
       const bağlı = Bağlı;
-      Bağlı = Bağlantılar[""];
-      bağlı.kopar();
+      Bağlı = BoşBağlantı;
+      bağlı.disconnect();
     }
     dom.adlaGizle("cue");
     bağlantıSeçiciGöster();
@@ -224,19 +254,27 @@ const tcktDeğişince = (f) => {
 }
 
 /**
- * @param {string} ağ
+ * @param {function(!Provider)}
  */
-const ağSeçildi = (ağ) => Bağlı.ağSeç(ağ)
+const bağlantıDeğişince = (f) => bağlantıDeğişince.push(f);
 
 /**
- * @param {!Bağlantı} bağlantı
+ * @param {string} ağ
+ */
+const ağSeçildi = (ağ) => Bağlı.switchChain(ağ)
+
+/**
+ * @param {!Provider} bağlantı
  */
 const bağlantıSeçildi = (bağlantı) => {
-  /** @const {!eth.Provider} */
+  /** @const {!Provider} */
   const eskiBağlantı = Bağlı;
   Bağlı = bağlantı;
-  bağlantı.bağla(Ağ, ağDeğişti, adresDeğişti)
-    .then(eskiBağlantı.kopar)
+  bağlantı.connect(Ağ, ağDeğişti, adresDeğişti)
+    .then(() => {
+      eskiBağlantı.disconnect();
+      for (const f of BağlantıDeğişince) f(bağlantı);
+    })
     .catch((e) => {
       console.log(e);
       Bağlı = eskiBağlantı
@@ -250,21 +288,22 @@ const bağlantıSeçiciGöster = () => {
   /** @const {!NodeList<!Element>} */
   const satırlar = dom.adla("cuf").children;
   for (const satır of satırlar) {
-    /** @const {!Bağlantı} */
+    /** @const {!Provider} */
     const bağlantı = Bağlantılar[satır.id.slice(2)];
-    if (bağlantı.varsaKur()) {
-      satır.classList.add("on");
-      satır.onclick = () => bağlantıSeçildi(bağlantı);
-    } else {
-      /** @const {Element} */
-      const elm = satır.lastElementChild;
-      /** @const {string} */
-      const indirURLi = bağlantı.indirURLi();
-      if (elm.classList.contains("cui") && indirURLi) {
-        dom.göster(elm);
-        elm.onclick = () => window.open(indirURLi, "_blank").focus();
-      }
-    }
+    /** @const {boolean} */
+    const varMı = bağlantı.initIfAvailable();
+    satır.classList.toggle("on", varMı);
+    satır.onclick = varMı ? () => bağlantıSeçildi(bağlantı) : null;
+    /** @const {Element} */
+    const düğmeMi = satır.lastElementChild;
+    /** @const {string} */
+    const indirURLi = varMı ? "" : bağlantı.downloadURL();
+    /** @const {boolean} */
+    const düğmeGöster = indirURLi && düğmeMi.classList.contains("cui");
+    dom.gösterGizle(düğmeMi, düğmeGöster);
+    düğmeMi.onclick = düğmeGöster
+      ? () => window.open(indirURLi, "_blank").focus()
+      : null;
   }
 }
 
@@ -314,7 +353,7 @@ const kur = () => {
     const url = "//debank.com/profile/" + Adres;
     window.open(url, "_blank");
   }
-  bağlantıSeçiciGöster();
+  setTimeout(bağlantıSeçiciGöster, 200);
 }
 kur();
 
@@ -324,6 +363,8 @@ export default {
   adresDeğişince,
   ağ,
   ağDeğişince,
+  bağlantı,
+  bağlantıDeğişince,
   kopunca,
   hızlıArabirimAdı,
   tcktDeğişince,
