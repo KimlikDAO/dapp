@@ -4,11 +4,12 @@ build/ana/sayfa-%.js: ana/sayfa.js \
                       birim/dil/birim.js \
                       birim/telefon/birim.js \
                       birim/tckt/birim.js \
+                      lib/crosschain/unlockable.d.js \
+                      lib/crosschain/provider.js lib/crosschain/signer.js \
                       lib/did/*.d.js \
-                      lib/ethereum/*.d.js \
-                      lib/ethereum/TCKTLite.js \
-                      lib/node/nvi.d.js \
-                      lib/util/dom.js
+                      lib/ethereum/*.d.js lib/ethereum/TCKTLite.js \
+                      lib/node/*.d.js lib/node/ipfs.js \
+                      lib/util/dom.js lib/util/çevir.js
 	mkdir -p $(dir $@)
 	yarn google-closure-compiler -W VERBOSE -O ADVANCED --charset UTF-8 \
                              --define "TR\$$\$$module\$$lib\$$util\$$dom=$(Lang-$*)" \

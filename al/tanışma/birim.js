@@ -31,7 +31,7 @@ const taahhütOluştur = (adres, rastgele) => {
  * AçıkTCKT alır ve `sonra`'ya aktarır.
  *
  * @param {string} adres
- * @param {function(!did.DecryptedSections)} sonra AçıkTCKT'yi
+ * @param {function(string, !did.DecryptedSections)} sonra AçıkTCKT'yi
  * vereceğimiz yordam.
  */
 const açıkTcktAlVe = (adres, sonra) => {
@@ -130,7 +130,7 @@ const açıkTcktAlVe = (adres, sonra) => {
       .then((/** @type {!did.DecryptedSections} */ açıkTckt) => {
         Tckt.açıkTcktGöster(açıkTckt);
         kutu.classList.add("done");
-        sonra(açıkTckt);
+        sonra(adres, açıkTckt);
       });
   } else {
     /** @const {Element} */
@@ -220,7 +220,7 @@ const açıkTcktAlVe = (adres, sonra) => {
 
             Tckt.açıkTcktGöster(açıkTckt);
             kutu.classList.add("done");
-            sonra(açıkTckt);
+            sonra(adres, açıkTckt);
           } else {
             /** @const {!node.HataBildirimi} */
             const hata = /** @type {node.HataBildirimi} */(results.find(

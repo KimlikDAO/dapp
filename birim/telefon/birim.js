@@ -7,7 +7,7 @@ const Nft = dom.adla("tc");
 const NftButton = dom.adla("tenft-button");
 
 /**
- * @param {string} adres Telefonda gösterilecek adres.
+ * @param {?string} adres Telefonda gösterilecek adres.
  */
 const adresGir = (adres) => {
   adres ||= "0xcCc0cCc";

@@ -1,4 +1,4 @@
-import { AğBilgileri } from "./ağlar";
+import { AğBilgisi, AğBilgileri } from "./ağlar";
 import { Provider } from "/lib/crosschain/provider";
 import { hex } from "/lib/util/çevir";
 
@@ -13,7 +13,10 @@ const ağSeç = (provider, ağ) => provider.request(/** @type {!eth.Request} */(
     chainId: ağ
   })],
 })).catch((e) => {
-  /** @const {!AğBilgisi} */
+  /**
+   * @type {!AğBilgisi}
+   * @const
+   */
   const ağBilgisi = AğBilgileri[ağ];
   if (e.code == 4902)
     return provider.request(/** @type {!eth.Request} */({
@@ -42,24 +45,26 @@ const kopar = (provider) => provider.removeAllListeners();
  * @param {string} ağ
  * @param {function(string)} ağDeğişti
  * @param {function(!Array<string>)} adresDeğişti
+ * @param {boolean=} izinliyse
+ * @return {!Promise<void>}
  */
-const bağla = (provider, ağ, ağDeğişti, adresDeğişti) => {
-  if (!provider) return Promise.reject();
-  provider.on("accountsChanged", adresDeğişti);
-  provider.on("chainChanged", ağDeğişti);
-
-  return provider.request(/** @type {!eth.Request} */({
-    method: "eth_requestAccounts"
+const bağla = (provider, ağ, ağDeğişti, adresDeğişti, izinliyse) => provider
+  ? provider.request(/** @type {!eth.Request} */({
+    method: "eth_" + (izinliyse ? "accounts" : "requestAccounts")
   })).then((adresler) =>
-    ağSeç(provider, ağ).then(() => adresDeğişti(adresler))
-  );
-}
+    ağSeç(provider, ağ).then(() => {
+      provider.on("accountsChanged", adresDeğişti);
+      provider.on("chainChanged", ağDeğişti);
+      adresDeğişti(adresler);
+    })
+  )
+  : Promise.reject();
 
 /**
  * @param {!eth.Provider} provider
  * @param {string} metin
  * @param {string} adres
- * @param {boolean=} hexeÇevir
+ * @param {boolean} hexeÇevir
  * @return {!Promise<string>}
  */
 const imzala = (provider, metin, adres, hexeÇevir) => provider.request(
@@ -75,16 +80,23 @@ const imzala = (provider, metin, adres, hexeÇevir) => provider.request(
  * @const
  */
 const CoreBağlantısı = /** @type {!Provider} */({
+  /**
+   * @override
+   *
+   * @return {boolean}
+   */
   initIfAvailable: () => {
     /** @const {boolean} */
     const varMı = !!(window?.avalanche?.info?.name == "core");
     if (varMı)
       /** @const {!eth.UiProvider} */
-      CoreBağlantısı.provider = window.avalanche;
+      CoreBağlantısı.provider = /** @type {!eth.UiProvider} */(window.avalanche);
     return varMı;
   },
 
   /**
+   * @override
+   *
    * @return {string}
    */
   downloadURL: () => navigator.userAgent.toLowerCase().includes("chrome")
@@ -92,13 +104,16 @@ const CoreBağlantısı = /** @type {!Provider} */({
     : "//core.app",
 
   /**
+   * @override
+   *
    * @param {string} chain
    * @param {function(string)} chainChanged
    * @param {function(!Array<string>)} addressChanged
+   * @param {boolean=} onlyIfApproved
    * @return {!Promise<void>}
    */
-  connect: (chain, chainChanged, addressChanged) =>
-    bağla(CoreBağlantısı.provider, chain, chainChanged, addressChanged),
+  connect: (chain, chainChanged, addressChanged, onlyIfApproved) =>
+    bağla(CoreBağlantısı.provider, chain, chainChanged, addressChanged, onlyIfApproved),
 
   /**
    * @override
@@ -130,7 +145,7 @@ const MetaMaskBağlantısı = /** @type {!Provider} */({
       && !window?.avalanche)
     if (varMı)
       /** @const {!eth.UiProvider} */
-      MetaMaskBağlantısı.provider = window.ethereum;
+      MetaMaskBağlantısı.provider = /** @type {!eth.UiProvider} */(window.ethereum);
     return varMı;
   },
 
@@ -147,10 +162,11 @@ const MetaMaskBağlantısı = /** @type {!Provider} */({
    * @param {string} chain
    * @param {function(string)} chainChanged
    * @param {function(!Array<string>)} addressChanged
+   * @param {boolean=} onlyIfApproved
    * @return {!Promise<void>}
    */
-  connect: (chain, chainChanged, addressChanged) =>
-    bağla(MetaMaskBağlantısı.provider, chain, chainChanged, addressChanged),
+  connect: (chain, chainChanged, addressChanged, onlyIfApproved) =>
+    bağla(MetaMaskBağlantısı.provider, chain, chainChanged, addressChanged, onlyIfApproved),
 
   /**
    * @override
@@ -189,14 +205,14 @@ const RabbyBağlantısı = /** @type {!Provider} */({
     const varMı = !!(window?.ethereum?.isRabby);
     if (varMı)
       /** @const {!eth.UiProvider} */
-      RabbyBağlantısı.provider = window.ethereum;
+      RabbyBağlantısı.provider = /** @type {!eth.UiProvider} */(window.ethereum);
     return varMı;
   },
 
   /**
    * @override
    *
-   * @return {boolean}
+   * @return {string}
    */
   downloadURL: () => navigator.userAgent.toLowerCase().includes("chrome")
     ? "//chrome.google.com/webstore/detail/rabby-wallet/acmacodkjbdgmoleebolmdjonilkdbch"
@@ -208,10 +224,11 @@ const RabbyBağlantısı = /** @type {!Provider} */({
    * @param {string} chain
    * @param {function(string)} chainChanged
    * @param {function(!Array<string>)} addressChanged
+   * @param {boolean=} onlyIfApproved
    * @return {!Promise<void>}
    */
-  connect: (chain, chainChanged, addressChanged) =>
-    bağla(RabbyBağlantısı.provider, chain, chainChanged, addressChanged),
+  connect: (chain, chainChanged, addressChanged, onlyIfApproved) =>
+    bağla(RabbyBağlantısı.provider, chain, chainChanged, addressChanged, onlyIfApproved),
 
   /**
    * @override

@@ -179,6 +179,8 @@ const öde = (cidSözü, adresAğırlığı, eşik) => {
   dom.adla("oda").onclick = () => {
     /** @const {string} */
     const ağ = Cüzdan.ağ();
+    /** @const {!eth.Provider} */
+    const provider = /** @type {!eth.Provider} */(Cüzdan.bağlantı().provider);
     /** @const {string} */
     const adres = /** @type {string} */(Cüzdan.adres());
     /** @const {!Promise<string>} */
@@ -206,7 +208,7 @@ const öde = (cidSözü, adresAğırlığı, eşik) => {
           : hash.length >= 6
             ? decodeURIComponent(hash.slice(6)) : "/view";
         Telefon.nftGeriAl();
-        whenMined(txHash, () => window.location.href = sonra);
+        whenMined(provider, txHash, () => window.location.href = sonra);
       })
       .catch(console.log);
   };

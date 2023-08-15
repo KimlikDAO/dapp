@@ -1,11 +1,13 @@
 build/oyla/sayfa-%.js: oyla/sayfa.js \
-                       birim/cüzdan/birim.js \
+                       birim/cüzdan/*.js \
                        birim/dil/birim.js \
+                       lib/crosschain/unlockable.d.js \
+                       lib/crosschain/provider.js lib/crosschain/signer.js \
                        lib/crypto/sha3.js \
                        lib/crypto/secp256k1.js lib/crypto/modular.js \
-                       lib/ethereum/provider.d.js lib/ethereum/transaction.d.js \
-                       lib/ethereum/logs.d.js \
-                       lib/ethereum/evm.js lib/ethereum/TCKT.js \
+                       lib/ethereum/*.d.js \
+                       lib/ethereum/evm.js lib/ethereum/TCKT.js lib/ethereum/TCKTLite.js \
+                       lib/node/*.d.js lib/node/ipfs.js \
                        lib/util/dom.js lib/util/çevir.js
 	mkdir -p $(dir $@)
 	yarn google-closure-compiler -W VERBOSE -O ADVANCED --charset UTF-8 \

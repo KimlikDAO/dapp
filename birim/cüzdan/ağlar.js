@@ -4,25 +4,25 @@ import dom from "/lib/util/dom";
  * @interface
  * @struct
  */
-const AğBilgisi = function () { }
+function AğBilgisi() { }
 
 /** @const {string} */
-AğBilgisi.ad;
+AğBilgisi.prototype.ad;
 
 /** @const {string} */
-AğBilgisi.izleyici;
+AğBilgisi.prototype.izleyici;
 
 /** @const {string} */
-AğBilgisi.tokenKodu;
+AğBilgisi.prototype.tokenKodu;
 
 /** @const {string} */
-AğBilgisi.token;
+AğBilgisi.prototype.token;
 
 /** @const {!Array<string>} */
-AğBilgisi.tokenEki;
+AğBilgisi.prototype.tokenEki;
 
 /** @const {string} */
-AğBilgisi.rpcUrl;
+AğBilgisi.prototype.rpcUrl;
 
 /**
 * @const {!Object<string, !AğBilgisi>}
@@ -84,4 +84,5 @@ const AğBilgileri = {
 export {
   AğBilgileri,
   AğBilgisi
-}
+};
+

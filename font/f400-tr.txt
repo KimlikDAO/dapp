@@ -2,7 +2,7 @@
 0123456789
 abcçdefgğhıijklmnoöprsştuüvyz
 ABCÇDEFGĞHIİJKLMNOÖPRSŞTUÜVYZ
-xwX
+xwXW
 ₺
 E-devlet Nüfus Kayıt Örneği
 â

@@ -7,8 +7,9 @@ import { öde } from "/al/ödeme/birim";
 import Cüzdan from "/birim/cüzdan/birim";
 import "/birim/dil/birim";
 import Telefon from "/birim/telefon/birim";
+import { OnaylamaAnahtarları, imzaMetni, metadataVeBölümler } from "/lib/did/TCKTVerisi";
 import { toUnlockableNFT, verifyProofs } from "/lib/did/decryptedSections";
-import { imzaMetni, metadataVeBölümler, OnaylamaAnahtarları } from "/lib/did/TCKTVerisi";
+import TCKT from "/lib/ethereum/TCKT";
 import ipfs from "/lib/node/ipfs";
 import network from "/lib/node/network";
 import dom from "/lib/util/dom";
@@ -42,7 +43,7 @@ const tcktYarat = (adres, açıkTckt) => {
         metadata,
         açıkTckt,
         bölümler,
-        ethereum,
+        Cüzdan.bağlantı(),
         adres)
     }).then((/** @type {!eth.ERC721Unlockable} */ unlockableNFT) => {
       Telefon.kutuKapat();
@@ -83,7 +84,10 @@ const bağlaAdımı = () => {
       dom.adla("al1").classList.add("done");
       Tanışma.açıkTcktAlVe(adres.toLowerCase(), tcktYarat);
     }
-  })
+  });
 }
+
+Cüzdan.bağlantıDeğişince((bağlantı) =>
+  TCKT.setProvider(/** @type {!eth.Provider} */(bağlantı.provider)));
 
 bağlaAdımı();

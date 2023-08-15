@@ -1,13 +1,13 @@
 build/incele/sayfa-%.js: incele/sayfa.js \
-                         birim/cüzdan/birim.js \
-                         birim/dil/birim.js \
-                         birim/tckt/birim.js \
-                         lib/crypto/*.js \
-                         lib/did/*.js \
-                         lib/ethereum/*.js \
-                         lib/node/ipfs.d.js lib/node/ipfs.js \
-                         lib/node/nvi.d.js lib/node/error.d.js \
-                         lib/util/dom.js lib/util/çevir.js
+    birim/cüzdan/*.js \
+    birim/dil/birim.js \
+    birim/tckt/birim.js \
+    lib/crosschain/*.js \
+    lib/crypto/*.js \
+    lib/did/*.js \
+    lib/ethereum/*.js \
+    lib/node/*.d.js lib/node/ipfs.js \
+    lib/util/dom.js lib/util/çevir.js
 	mkdir -p $(dir $@)
 	yarn google-closure-compiler -W VERBOSE -O ADVANCED --charset UTF-8 \
                              --define "TR\$$\$$module\$$lib\$$util\$$dom=$(Lang-$*)" \
@@ -35,6 +35,7 @@ build/incele/sayfa-%.keymap: $(call compressions, build/incele/sayfa-%.js)
 build/incele-%.html: incele/sayfa.html \
                      birim/cüzdan.birim \
                      birim/dil/birim.html \
+                     birim/logo.birim \
                      birim/tckt/birim.html \
                      build/al/paste.svg.inl \
                      build/incele/sayfa-%.keymap \

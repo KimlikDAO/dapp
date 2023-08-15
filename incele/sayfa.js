@@ -11,9 +11,6 @@ import TCKT from '/lib/ethereum/TCKT';
 import evm from "/lib/ethereum/evm";
 import dom from '/lib/util/dom';
 
-/** @const {string} */
-const KIMLIKDAO_IPFS_URL = "//ipfs.kimlikdao.org";
-
 /** @const {Element} */
 const İmeceİptalDüğmesi = dom.adla("inbtn1");
 /** @const {Element} */
@@ -115,7 +112,7 @@ const silKutusuGöster = () => {
     TCKT.revoke(adres)
       .then(() => {
         delete Bellek[ağ + adres];
-        kapalıYüzGöster(adres);
+        kapalıYüzGöster();
       })
       .catch(console.log);
   }
@@ -171,11 +168,52 @@ const ağırlıkBlurOlunca = (event) => {
 
 dom.adlaGizle("tc");
 
+/**
+ * @param {!did.DecryptedSections} açıkTckt
+ */
+const açıkYüzGöster = (açıkTckt) => {
+  Tckt.açıkTcktGöster(açıkTckt);
+  AçDüğmesi.innerText = dom.TR ? "Gizle" : "Hide";
+  AçDüğmesi.onclick = kapalıYüzGöster;
+}
+
+/** @type {Promise<!eth.ERC721Unlockable>} */
+let DosyaSözü;
+
+const kapalıYüzGöster = () => {
+  /** @const {string} */
+  const ağ = Cüzdan.ağ();
+  /**
+   * @type {!Provider}
+   * @const
+   */
+  const bağlantı = Cüzdan.bağlantı();
+  /** @const {string} */
+  const adres = /** @type {string} */(Cüzdan.adres());
+  Tckt.yüzGöster(false);
+  AçDüğmesi.innerText = dom.TR ? "Aç" : "Unlock";
+
+  /** @const {!did.DecryptedSections} */
+  const bellektenTckt = Bellek[ağ + adres];
+  AçDüğmesi.onclick = bellektenTckt
+    ? () => açıkYüzGöster(bellektenTckt)
+    : () => DosyaSözü
+      .then((dosya) => fromUnlockableNFT(dosya,
+        ["personInfo", "contactInfo", "addressInfo", "kütükBilgileri"],
+        bağlantı,
+        adres
+      ))
+      .then((açıkTckt) => {
+        Bellek[ağ + adres] = açıkTckt;
+        açıkYüzGöster(açıkTckt);
+      })
+      .catch(console.log);
+}
+
 Cüzdan.tcktDeğişince((dosyaSözü) => {
   /** @const {boolean} */
   const tcktVar = dosyaSözü != null;
-
-  console.log(`TCKT Değişine ${tcktVar}`);
+  DosyaSözü = dosyaSözü;
 
   İmeceİptalDüğmesi.onclick = tcktVar ? imeceİptalKutusuGöster : null;
   EşikAzaltmaDüğmesi.onclick = tcktVar ? eşikKutusuGöster : null;
@@ -184,47 +222,8 @@ Cüzdan.tcktDeğişince((dosyaSözü) => {
   dom.gösterGizle(TcktVar, tcktVar);
   dom.gösterGizle(TcktYok, !tcktVar);
 
-  if (tcktVar) {
-    /**
-     * @param {!did.DecryptedSections} açıkTckt
-     */
-    const açıkYüzGöster = (açıkTckt) => {
-      Tckt.açıkTcktGöster(açıkTckt);
-      AçDüğmesi.innerText = dom.TR ? "Gizle" : "Hide";
-      AçDüğmesi.onclick = kapalıYüzGöster;
-    }
-
-    const kapalıYüzGöster = () => {
-      /** @const {string} */
-      const ağ = Cüzdan.ağ();
-      /**
-       * @type {!Provider}
-       * @const
-       */
-      const bağlantı = Cüzdan.bağlantı();
-      /** @const {string} */
-      const adres = Cüzdan.adres();
-      Tckt.yüzGöster(false);
-      AçDüğmesi.innerText = dom.TR ? "Aç" : "Unlock";
-      const bellektenTckt = Bellek[ağ + adres];
-      if (bellektenTckt)
-        AçDüğmesi.onclick = () => açıkYüzGöster(bellektenTckt);
-      else {
-        AçDüğmesi.onclick = null;
-        AçDüğmesi.onclick = () => dosyaSözü
-          .then((dosya) => fromUnlockableNFT(dosya,
-            ["personInfo", "contactInfo", "addressInfo", "kütükBilgileri"],
-            bağlantı,
-            adres
-          ))
-          .then((açıkTckt) => {
-            Bellek[ağ + adres] = açıkTckt;
-            açıkYüzGöster(açıkTckt);
-          })
-          .catch(console.log);
-      }
-    }
+  if (tcktVar)
     kapalıYüzGöster();
-  } else
+  else
     dom.gösterGizle(TcktYok.firstElementChild, Cüzdan.adres() != null);
 });

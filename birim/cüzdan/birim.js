@@ -13,7 +13,7 @@ const KIMLIKDAO_IPFS_URL = "//ipfs.kimlikdao.org";
  * @type {!Provider}
  * @const
  */
-const BoşBağlantı = {
+const BoşBağlantı = /** @type {!Provider} */({
   /**
    * @override
    *
@@ -60,36 +60,16 @@ const BoşBağlantı = {
    * @return {!Promise<string>}
    */
   signMessage: (message, address) => Promise.reject(),
-}
+});
 
 /**
  * @const {!Object<string, !Provider>}
- * @dict
  */
 const Bağlantılar = {
-  "core": CoreBağlantısı,
-  "rabby": RabbyBağlantısı,
+  "co": CoreBağlantısı,
+  "ra": RabbyBağlantısı,
   "mm": MetaMaskBağlantısı,
 };
-
-/** @type {!Provider} */
-let Bağlı = BoşBağlantı;
-/** @type {?string} */
-let Adres = null;
-/** @type {string} */
-let Ağ = "0xa86a";
-/** @type {!Array<function(?string)>} */
-let AdresDeğişince = [];
-/** @type {!Array<function()>} */
-let Kopunca = [];
-/** @type {!Array<function(string)>} */
-let AğDeğişince = [];
-/** @type {!Array<function(Promise<!eth.ERC721Unlockable>)>} */
-let TcktDeğişince = [];
-/** @type {!Array<function(!Bağlantı)>} */
-let BağlantıDeğişince = [];
-/** @type {?string} */
-let BağlaMetni;
 
 /** @const {Element} */
 const AdresButonu = dom.adla("cua");
@@ -97,6 +77,26 @@ const AdresButonu = dom.adla("cua");
 const AğButonu = dom.adla("cuc");
 /** @const {Element} */
 const Menü = dom.adla("cub");
+/** @type {!Array<function(?string)>} */
+const AdresDeğişince = [];
+/** @const {!Array<function()>} */
+const Kopunca = [];
+/** @const {!Array<function(string)>} */
+const AğDeğişince = [];
+/** @const {!Array<function(Promise<!eth.ERC721Unlockable>)>} */
+const TcktDeğişince = [];
+/** @const {!Array<function(!Provider)>} */
+const BağlantıDeğişince = [];
+/** @type {!Provider} */
+let Bağlı = BoşBağlantı;
+/** @type {?string} */
+let Adres = null;
+/** @type {string} */
+let Ağ = "0xa86a";
+/** @type {?string} */
+let BağlaMetni;
+/** @type {?string} */
+let TcktYokResmi;
 
 /**
  * @return {string} Seçili ağ
@@ -167,7 +167,6 @@ const tcktDeğişti = () => {
   const adres = Adres;
 
   TCKT.handleOf(provider, Adres).then((cidHex) => {
-    console.log(`hex geldi ${cidHex}`);
     if (ağ != Ağ || adres != Adres) return;
     /** @const {boolean} */
     const varMı = cidHex.replaceAll("0", "") != "x";
@@ -178,13 +177,14 @@ const tcktDeğişti = () => {
       window.location.href = "//kimlikdao.org" + (varMı
         ? dom.TR ? "/incele" : "/view"
         : dom.TR ? "/al" : "/mint");
-    if (!varMı) tcktResmi.src = null;
+    if (!varMı && TcktYokResmi) tcktResmi.src = TcktYokResmi;
     /** @const {Promise<!eth.ERC721Unlockable>} */
     const dosyaSözü = varMı
       ? ipfs.cidBytetanOku(KIMLIKDAO_IPFS_URL, hexten(cidHex.slice(2)))
         .then((/** @type {string} */ dosya) => {
           if (ağ != Ağ || adres != Adres) return Promise.reject();
           const tcktDosyası = /** @type {!eth.ERC721Unlockable} */(JSON.parse(dosya))
+          TcktYokResmi ||= tcktResmi.src;
           tcktResmi.src = tcktDosyası.image;
           return tcktDosyası;
         })
@@ -197,23 +197,19 @@ const tcktDeğişti = () => {
  * @param {!Array<string>} adresler cüzdandan gelen adresler dizisi.
  */
 const adresDeğişti = (adresler) => {
+  console.log(`adresDeğişti(${adresler})`);
   if (!adresler || !adresler.length) {
     Adres = null;
     AdresButonu.innerText = BağlaMetni;
-    if (Bağlı != BoşBağlantı) {
-      const bağlı = Bağlı;
-      Bağlı = BoşBağlantı;
-      bağlı.disconnect();
-    }
+    bağlantıSeçildi("", BoşBağlantı);
     dom.adlaGizle("cue");
     bağlantıSeçiciGöster();
-    console.log("Koptu");
     for (const f of Kopunca) f();
   } else if (adresler[0] != Adres) {
     /** @const {?string} */
     const eskiAdres = Adres;
     Adres = adresler[0];
-    BağlaMetni = AdresButonu.innerText;
+    BağlaMetni ||= AdresButonu.innerText;
     dom.adla("cuad").firstElementChild.innerText =
       AdresButonu.innerText = hızlıArabirimAdı(Adres);
 
@@ -242,7 +238,9 @@ const ağDeğişince = (f) => AğDeğişince.push(f);
  */
 const adresDeğişince = (f) => AdresDeğişince.push(f);
 
-/** @param {function()} */
+/**
+ * @param {function()} f Bağlantı kopunca çağırılacak yordam.
+ */
 const kopunca = (f) => Kopunca.push(f);
 
 /**
@@ -254,9 +252,10 @@ const tcktDeğişince = (f) => {
 }
 
 /**
- * @param {function(!Provider)}
+ * @param {function(!Provider)} f Bağlantı değişince yeni bağlantıyla çağırılacak
+ *                                yordam.
  */
-const bağlantıDeğişince = (f) => bağlantıDeğişince.push(f);
+const bağlantıDeğişince = (f) => BağlantıDeğişince.push(f);
 
 /**
  * @param {string} ağ
@@ -264,20 +263,26 @@ const bağlantıDeğişince = (f) => bağlantıDeğişince.push(f);
 const ağSeçildi = (ağ) => Bağlı.switchChain(ağ)
 
 /**
+ * @param {string} bağlantıAdı
  * @param {!Provider} bağlantı
  */
-const bağlantıSeçildi = (bağlantı) => {
+const bağlantıSeçildi = (bağlantıAdı, bağlantı) => {
   /** @const {!Provider} */
   const eskiBağlantı = Bağlı;
+  if (eskiBağlantı == bağlantı) {
+    console.log("same");
+    return
+  };
   Bağlı = bağlantı;
   bağlantı.connect(Ağ, ağDeğişti, adresDeğişti)
     .then(() => {
+      document.cookie = `cu=${bağlantıAdı};domain=.kimlikdao.org;max-age=` + 1e6;
       eskiBağlantı.disconnect();
       for (const f of BağlantıDeğişince) f(bağlantı);
     })
     .catch((e) => {
       console.log(e);
-      Bağlı = eskiBağlantı
+      Bağlı = eskiBağlantı;
     });
 }
 
@@ -286,25 +291,46 @@ const bağlantıSeçiciGöster = () => {
   const seçici = dom.adla("cuf");
   dom.göster(seçici);
   /** @const {!NodeList<!Element>} */
-  const satırlar = dom.adla("cuf").children;
+  const satırlar = seçici.children;
   for (const satır of satırlar) {
+    /** @const {string} */
+    const bağlantıAdı = satır.id.slice(2)
     /** @const {!Provider} */
-    const bağlantı = Bağlantılar[satır.id.slice(2)];
+    const bağlantı = Bağlantılar[bağlantıAdı];
     /** @const {boolean} */
     const varMı = bağlantı.initIfAvailable();
     satır.classList.toggle("on", varMı);
-    satır.onclick = varMı ? () => bağlantıSeçildi(bağlantı) : null;
+    satır.onclick = varMı ? () => bağlantıSeçildi(bağlantıAdı, bağlantı) : null;
     /** @const {Element} */
     const düğmeMi = satır.lastElementChild;
     /** @const {string} */
     const indirURLi = varMı ? "" : bağlantı.downloadURL();
     /** @const {boolean} */
-    const düğmeGöster = indirURLi && düğmeMi.classList.contains("cui");
+    const düğmeGöster = indirURLi != "" && düğmeMi.classList.contains("cui");
     dom.gösterGizle(düğmeMi, düğmeGöster);
     düğmeMi.onclick = düğmeGöster
       ? () => window.open(indirURLi, "_blank").focus()
       : null;
   }
+}
+
+const izinliyseBağla = () => {
+  /** @const {string} */
+  const cookie = document.cookie;
+  /** @const {number} */
+  const idx = cookie.indexOf("cu=");
+  /** @const {Provider} */
+  const bağlantı = Bağlantılar[cookie.slice(idx + 3, idx + 5)];
+  if (bağlantı && bağlantı.initIfAvailable()) {
+    Bağlı = bağlantı;
+    bağlantı.connect(Ağ, ağDeğişti, adresDeğişti, true)
+      .then(() => BağlantıDeğişince.forEach((f) => f(Bağlı)))
+      .catch(() => {
+        Bağlı = BoşBağlantı;
+        bağlantıSeçiciGöster()
+      });
+  } else
+    bağlantıSeçiciGöster();
 }
 
 const aç = () => {
@@ -353,7 +379,7 @@ const kur = () => {
     const url = "//debank.com/profile/" + Adres;
     window.open(url, "_blank");
   }
-  setTimeout(bağlantıSeçiciGöster, 200);
+  setTimeout(izinliyseBağla, 200);
 }
 kur();
 
