@@ -10,4 +10,6 @@ build/birim/cüzdan/birim.keymap: $(call compressions, $(CÜZDAN_REQUEST_SVG_OUT
 	mkdir -p $(dir $@) && rm -rf $@
 	tools/keyhasher.py $@ $(CÜZDAN_REQUEST_SVG_OUT)
 
-birim/cüzdan.birim: birim/cüzdan/birim.html $(CÜZDAN_INLINE_SVG_OUT)
+birim/cüzdan.birim: birim/cüzdan/birim.html \
+    $(CÜZDAN_INLINE_SVG_OUT) \
+    build/birim/paste.svg.inl

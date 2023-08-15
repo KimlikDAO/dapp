@@ -7,17 +7,19 @@ import { öde } from "/al/ödeme/birim";
 import Cüzdan from "/birim/cüzdan/birim";
 import "/birim/dil/birim";
 import Telefon from "/birim/telefon/birim";
+import { OnaylamaAnahtarları, imzaMetni, metadataVeBölümler } from "/lib/did/TCKTVerisi";
 import { toUnlockableNFT, verifyProofs } from "/lib/did/decryptedSections";
-import { imzaMetni, metadataVeBölümler, OnaylamaAnahtarları } from "/lib/did/TCKTVerisi";
+import TCKT from "/lib/ethereum/TCKT";
 import ipfs from "/lib/node/ipfs";
 import network from "/lib/node/network";
 import dom from "/lib/util/dom";
 import { hex } from "/lib/util/çevir";
 
 /**
+ * @param {string} adres
  * @param {!did.DecryptedSections} açıkTckt
  */
-const tcktYarat = (açıkTckt) => {
+const tcktYarat = (adres, açıkTckt) => {
   /** @const {Element} */
   const s3a = dom.adla("s3a");
   dom.adla("te").style.opacity = 1;
@@ -41,9 +43,8 @@ const tcktYarat = (açıkTckt) => {
         metadata,
         açıkTckt,
         bölümler,
-        ethereum,
-        /** @type {string} */(Cüzdan.adres())
-      )
+        Cüzdan.bağlantı(),
+        adres)
     }).then((/** @type {!eth.ERC721Unlockable} */ unlockableNFT) => {
       Telefon.kutuKapat();
       s3a.innerText = dom.TR ? "TCKT’nizi şifreledik ✓" : "We encrypted your TCKT ✓";
@@ -68,24 +69,25 @@ const tcktYarat = (açıkTckt) => {
 }
 
 Telefon.nftYukarıGönder();
-if (window["ethereum"]) {
-  /** @const {Element} */
-  const s1b = dom.adla("s1b");
-  s1b.onclick = Cüzdan.bağla;
-  s1b.innerText = dom.TR ? "Tarayıcı cüzdanı bağla" : "Connect wallet";
-  s1b.target = "";
-  s1b.href = "javascript:"
 
-  Cüzdan.bağlanınca((adres) => {
-    s1b.innerText = dom.TR ? "Cüzdan bağlandı ✓" : "Wallet connected ✓";
-    s1b.href = "javascript:";
-    s1b.target = "";
-    s1b.classList.remove("act");
-    dom.düğmeDurdur(s1b);
-    dom.adla("s1").classList.add("done");
-    Telefon.adresGir(Cüzdan.hızlıArabirimAdı(adres));
-    Tanışma.açıkTcktAlVe(tcktYarat);
+const bağlaAdımı = () => {
+  /** @const {Element} */
+  const düğme = dom.adla("al1a");
+  düğme.onclick = Cüzdan.aç;
+
+  Cüzdan.adresDeğişince((adres) => {
+    Telefon.adresGir(adres);
+    if (adres) {
+      düğme.innerText = dom.TR ? "Cüzdan bağlandı ✓" : "Wallet connected ✓";
+      düğme.classList.remove("act");
+      dom.düğmeDurdur(düğme);
+      dom.adla("al1").classList.add("done");
+      Tanışma.açıkTcktAlVe(adres.toLowerCase(), tcktYarat);
+    }
   });
-  Cüzdan.adresDeğişince(() => location.reload());
-  Cüzdan.kopunca(() => location.reload());
 }
+
+Cüzdan.bağlantıDeğişince((bağlantı) =>
+  TCKT.setProvider(/** @type {!eth.Provider} */(bağlantı.provider)));
+
+bağlaAdımı();

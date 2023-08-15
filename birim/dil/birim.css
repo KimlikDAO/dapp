@@ -4,7 +4,6 @@
 }
 
 #did {
-  animation: growDown 300ms ease-in-out forwards;
   background-color: #fff;
   border-radius: 5px;
   border: 1px solid #f8f8f8;

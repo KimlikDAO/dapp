@@ -8,10 +8,11 @@ ana
   Bir NFT al, birçok app’e kimliğinle oturum aç
   TCKT al
   TCKT’ni incele
+  Hemen TCKT al | ₺19
   Daha fazla bilgi
 
 cüzdan
-  0123456789x
+  0123456789x...
   abcdefABCDEF
 
 1. Cüzdanınızı bağlayın.
@@ -47,5 +48,3 @@ cüzdan
    ,USDC USDT TRYB AVAX ETH FTM MATIC
   Toplam
   Ödeme isteği yolla
-
-wX

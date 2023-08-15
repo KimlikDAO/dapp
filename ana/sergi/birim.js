@@ -52,7 +52,4 @@ const sergiSaatiKur = () => {
   SergiSaati = setInterval(() => kartDeğiştir((Kart + 1) % 4), 4000);
 }
 
-Cüzdan.bağlanınca((adres) =>
-  Telefon.adresGir(Cüzdan.hızlıArabirimAdı(adres)));
-
-// sergiSaatiKur();
+Cüzdan.adresDeğişince((adres) => Telefon.adresGir(adres));

@@ -3,19 +3,18 @@ include al/tanışma/Makefile
 build/al/sayfa-%.js: al/sayfa.js \
                      al/imeceİptal/birim.js al/ödeme/birim.js \
                      al/tanışma/birim.js \
-                     birim/cüzdan/birim.js \
+                     birim/cüzdan/*.js \
                      birim/dil/birim.js \
                      birim/telefon/birim.js \
                      birim/tckt/birim.js \
+                     lib/crosschain/*.js \
                      lib/crypto/sha3.js \
                      lib/crypto/secp256k1.js lib/crypto/modular.js \
                      lib/crypto/primes.js lib/crypto/wesolowski.js \
-                     lib/did/*.d.js lib/did/TCKTVerisi.js \
-                     lib/did/section.js lib/did/decryptedSections.js \
-                     lib/did/verifiableID.js \
+                     lib/did/*.js \
                      lib/ethereum/*.js \
-                     lib/node/ipfs.d.js lib/node/ipfs.js lib/node/network.js \
-                     lib/node/nvi.d.js lib/node/error.d.js \
+                     lib/node/*.d.js \
+                     lib/node/ipfs.js lib/node/network.js \
                      lib/util/dom.js lib/util/çevir.js \
                      build/al/tanışma/birim.keymap
 	mkdir -p $(dir $@)

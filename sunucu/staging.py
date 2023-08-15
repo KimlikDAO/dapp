@@ -15,7 +15,7 @@ REVERSE = {
 }
 
 PAGES = {
-    "/": "ana-tr.html",
+    "/": "ana-en.html",
     "/al": "al-tr.html",
     "/get": "al-en.html",
     "/mint": "al-en.html",

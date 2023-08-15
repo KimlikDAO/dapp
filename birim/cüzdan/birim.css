@@ -1,81 +1,191 @@
 #cu {
   display: flex;
   align-items: center;
-}
-
-.cu {
-  display: flex;
   position: relative;
 }
 
+/**
+ * Ağ düğmesi
+ */
 #cuc {
   min-width: 48px;
   border-radius: 6px 0 0 6px;
-  padding-top: 3px;
+  padding-top: 4px;
 }
 
+/**
+ * Adres düğmesi
+ */
 #cua {
-  margin-right: 1ex;
+  margin-right: 10px;
   white-space: nowrap;
   width: 10em;
   border-left: 0;
   border-radius: 0 6px 6px 0;
 }
 
-#cud {
-  width: 215px;
-  left: -10px;
-}
-
-#cue {
-  right: 0;
-  width: 215px;
-}
-
-#cud,
-#cue {
-  cursor: pointer;
-  margin: 10px 0;
-  padding: 0;
+/**
+ * Cüzdan dropdownı
+ */
+#cub {
   background-color: #fff;
-  border: 1px solid #f8f8f8;
-  border-radius: 5px;
+  border-radius: 10px;
   box-shadow: 0px 1px 20px rgba(0, 0, 0, 0.2);
-  display: block;
-  position: absolute;
-  top: 45px;
-  animation: growDown 300ms ease-in-out forwards;
-  transform-origin: top center;
-  list-style: none;
-  z-index: 20;
-}
-
-#cud li,
-#cue li {
-  height: 45px;
-  margin: 1px;
-  padding: 6px 13px;
   display: flex;
-  align-items: center;
-  justify-content: left;
+  position: absolute;
+  right: -55px;
+  top: 53px;
+  width: 380px;
+  z-index: 20;
+  outline: 0;
 }
 
-#cud li:hover,
-#cue li:hover {
+@media (max-width: 1350px) {
+  #cub {
+    right: 10px;
+  }
+}
+
+#cud {
+  cursor: pointer;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  width: 168px;
+  border-right: 1px solid #f2f2f2;
+}
+
+#cue {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  width: 210px;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+
+#cuf {
+  cursor: pointer;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 210px;
+}
+
+#cud>li,
+#cue>li,
+#cuf>li {
+  cursor: pointer;
+  align-items: center;
+  border-radius: 10px;
+  display: flex;
+  height: 45px;
+  justify-content: left;
+  margin: 1px;
+  padding: 6px 12px;
+}
+
+#cuf>li {
+  position: relative;
+}
+
+#cud>li:hover,
+#cue>li:hover,
+#cuf>li:hover {
   background-color: #f2f2f2;
 }
 
-#cud li.sel {
+#cud>li.sel {
   background-color: #eee;
 }
 
-li#cue0 {
-  margin-top: 10px;
+#cueh {
+  display: flex;
+  height: 90px;
+  padding: 8px;
+}
+
+#cutc {
+  cursor: pointer;
+  margin-right: 8px;
+  background: #fff;
+  border: 1px solid rgba(200, 200, 200, 0.5);
+}
+
+#cuad {
+  color: #666;
+  cursor: pointer;
+  font-size: 10pt;
+  font-weight: 700;
+  line-height: 0.4;
+  margin-top: 5px;
+}
+
+#cuadi {
+  margin-left: 5px;
+}
+
+#cuadi:active {
+  position: relative;
+  top: 1px;
+}
+
+#cude,
+#cuex {
+  cursor: pointer;
+  font-size: 9pt;
+  color: #666;
 }
 
 hr {
   border: 0;
   height: 0;
-  border-top: 1px solid rgba(0, 0, 0, 0.1);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  padding: 0;
+  margin: 3px 0;
+  border-bottom: 1px solid #f2f2f2;
+}
+
+li.on>.cust {
+  background: green;
+}
+
+.cust {
+  width: 6px;
+  height: 6px;
+  border-radius: 3px;
+  background: rgb(241, 29, 29);
+  position: absolute;
+  bottom: 14px;
+  left: 40px;
+}
+
+#cuin,
+.cui {
+  background: #f2f2f2;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  color: #6337ba;
+  cursor: pointer;
+  font-size: 9pt;
+  font-weight: 700;
+  padding: 5px;
+  text-align: center;
+}
+
+#cuin {
+  margin-top: 20px;
+}
+
+.cui {
+  position: absolute;
+  right: 7px;
+}
+
+.cuo {
+  color: #6337ba;
+  font-size: 9pt;
 }

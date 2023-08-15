@@ -4,16 +4,11 @@
  */
 import Cüzdan from '/birim/cüzdan/birim';
 import "/birim/dil/birim";
+import { Provider } from "/lib/crosschain/provider";
 import TCKT from '/lib/ethereum/TCKT';
 import dom from '/lib/util/dom';
 
 let SeçilmişÖneriId;
-
-Cüzdan.bağlanınca(() => {
-  fiyatDeğişikliğiFormuHazırla(Cüzdan.ağ());
-  komuniteÖnergesiHazırla();
-  Cüzdan.ağDeğişince((yeniAğ) => fiyatDeğişikliğiFormuHazırla(yeniAğ))
-})
 
 dom.adla("oyyb").onclick = () => {
   dom.adlaGizle("oyyb");
@@ -182,15 +177,17 @@ const aktifOyKartıOluştur = (data) => {
     remainingTime.innerText = data.remainingTime + " REMAINING";
     /** @type {number} */
     let totalVotes = data.votes.reduce((a, b) => a + b, 0);
+    /**
+     * @type {!Provider}
+     * @const
+     */
+    const bağlantı = Cüzdan.bağlantı();
+
     for (let i = 0; i < data.votes.length; ++i) {  //FIXME CloneNode oy çeşitliliğine göre
       const chartElements = middleDiv.children[1].children[i];
       chartElements.children[0].onclick = (e) => {
-        if (data.chain != Cüzdan.ağ()) {
-          ethereum.request(/** @type {!eth.Request} */({
-            method: "wallet_switchEthereumChain",
-            params: [{ "chainId": data.chain }],
-          })).catch(console.log);
-        }
+        if (data.chain != Cüzdan.ağ())
+          bağlantı.switchChain(data.chain)
         e.stopPropagation();
       }
       const percentage = orandanMetne(data.votes[i], totalVotes);
