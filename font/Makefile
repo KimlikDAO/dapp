@@ -11,7 +11,7 @@ f600Source := Lato-SemiBold.ttf
 f700Source := Lato-Bold.ttf
 f800Source := Lato-Heavy.ttf
 
-FontFaces := f400 f700 f800
+FontFaces := f400 f700
 
 fonts = $(addprefix build/font/,$(addsuffix -$(1).$(2), $(FontFaces)))
 

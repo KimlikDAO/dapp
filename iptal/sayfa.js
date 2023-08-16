@@ -6,8 +6,6 @@ import "/birim/dil/birim";
 import TCKT from "/lib/ethereum/TCKT";
 import dom from "/lib/util/dom";
 
-Cüzdan.adresDeğişince(() => location.reload());
-
 Cüzdan.bağlantıDeğişince((bağlantı) =>
   TCKT.setProvider(/** @type {!eth.Provider} */(bağlantı.provider)));
 

@@ -227,3 +227,6 @@ Cüzdan.tcktDeğişince((dosyaSözü) => {
   else
     dom.gösterGizle(TcktYok.firstElementChild, Cüzdan.adres() != null);
 });
+
+Cüzdan.bağlantıDeğişince((bağlantı) =>
+  TCKT.setProvider(/** @type {!eth.Provider} */(bağlantı.provider)));

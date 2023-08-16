@@ -30,11 +30,11 @@ const seçiliDeğiştir = (seçili) => {
   Liste[seçili].classList.add("sel");
   Seçili = seçili;
 
-  // Saati sıfırla ki kullanıcı yeni geldiği sayfaya 4sn bakabilsin.
+  // Saati sıfırla ki kullanıcı yeni geldiği sayfaya 10sn bakabilsin.
   saatKur();
 }
 
-Cüzdan.adresDeğişince((adres) => Telefon.adresGir(adres));
+Cüzdan.adresDeğişince(Telefon.adresGir);
 
 for (let /** number */ i = 0; i < Liste.length; ++i)
   Liste[i].onclick = () => seçiliDeğiştir(i);
