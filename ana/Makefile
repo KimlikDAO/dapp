@@ -51,6 +51,7 @@ build/ana-%.html: ana/sayfa.html \
                   build/ana/sayfa-%.keymap \
                   build/birim/cüzdan/birim.keymap \
                   build/birim/dil/birim.keymap \
+                  build/birim/font/fonts.keymap \
                   build/birim/font/fonts-%.keymap \
                   build/birim/tckt/birim.keymap
 	node tools/htmlProcessor $< $*

@@ -43,6 +43,7 @@ build/iptal-%.html: iptal/sayfa.html \
                     build/ana/sayfa-%.keymap \
                     build/birim/cüzdan/birim.keymap \
                     build/birim/dil/birim.keymap \
+                    build/birim/font/fonts.keymap \
                     build/birim/font/fonts-%.keymap
 	node tools/htmlProcessor $< $*
 	tools/keymapper.py $@ $(filter %.keymap,$^)

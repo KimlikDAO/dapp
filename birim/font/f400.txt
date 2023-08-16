@@ -10,3 +10,11 @@ Türkçe
 ₺
 ıÇankaya
 âğİ
+ ’$(%),
+0123456789
+abcçdefgğhıijklmnoöprsştuüvyz
+ABCÇDEFGĞHIİJKLMNOÖPRSŞTUÜVYZ
+xwXW
+₺
+E-devlet Nüfus Kayıt Örneği
+â
