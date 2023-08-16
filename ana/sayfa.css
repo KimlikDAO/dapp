@@ -1,4 +1,4 @@
-#naa {
+#baa {
   align-items: center;
   background-color: rgba(255, 255, 255, 0.95);
   display: flex;
@@ -9,7 +9,7 @@
   z-index: 20;
 }
 
-#nad {
+#bal {
   align-items: center;
   display: flex;
   justify-content: center;
@@ -19,16 +19,16 @@
 }
 
 @media (max-width: 950px) {
-  #nad {
+  #bal {
     display: none;
   }
 }
 
 /**
- * Banner stilleri
+ * Hero banner stilleri
  */
 
-#ba {
+#he {
   background:
     radial-gradient(circle at 20% 20%, rgb(144, 205, 244, 0.1) 0%, rgba(255, 255, 255, 0) 40%),
     radial-gradient(circle at 70% 10%, rgb(99, 179, 237, 0.1) 0%, rgba(255, 255, 255, 0) 60%),
@@ -43,7 +43,7 @@
   justify-content: center;
 }
 
-#bat {
+#het {
   display: flex;
   flex-wrap: wrap-reverse;
   justify-content: center;
@@ -53,7 +53,7 @@
   margin-top: 30px;
 }
 
-#bas {
+#hes {
   margin: 0 2em;
 }
 
@@ -67,18 +67,18 @@ h1 {
   width: 100%;
 }
 
-#baz {
+#hez {
   color: #888;
   font-size: 13pt;
   margin-top: 2em;
 }
 
-#bab {
+#heb {
   margin-top: 80px;
   display: flex;
   justify-content: center;
 }
 
-#bal {
+#hel {
   margin-right: 20px;
 }

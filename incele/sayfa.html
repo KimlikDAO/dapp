@@ -13,6 +13,24 @@
 </head>
 
 <body>
+  <birim:başlık />
+  <div id="in">
+    <div id="intckt">
+      <div id="innotckt">
+        <span data-en="The connected wallet does not have a TCKT on this chain.&lt;br>&lt;br>"
+          style="display:none">Bağlı cüzdanda bu ağda TCKT yok.<br><br>
+          <a href="/al" class="lnk" data-en="Click here to get one.">Almak için tıklayın.</a>
+        </span>
+      </div>
+      <birim:tckt style="display:none" />
+      <div id="intcktb" data-en="Unlock" style="display:none">Aç</div>
+    </div>
+    <div id="inbtn">
+      <a href="javascript:" id="inbtn1" class="btn" data-en="Add social revoker">İmece iptal adresi ekle</a>
+      <a href="javascript:" id="inbtn2" class="btn" data-en="Decrease revoke threshold">Eşik azalt</a>
+      <a href=" javascript:" id="inbtn3" class="btn danger" data-en="Revoke TCKT">TCKT iptal et</a>
+    </div>
+  </div>
   <div id="inbd" style="display:none">
     <div id="inmc">
       <div id="inx" class="xbtn"></div>
@@ -63,30 +81,6 @@
           <a href="javascript:" id="insyr" class="btn" data-en="Cancel">İptal</a>
         </div>
       </div>
-    </div>
-  </div>
-  <div id="na">
-    <a href="/" id="nag"><img src="/birim/logo.svg" data-inline />KimlikDAO</a>
-    <div id="naf">
-      <birim:dil />
-      <birim:cüzdan />
-    </div>
-  </div>
-  <div id="in">
-    <div id="intckt">
-      <div id="innotckt">
-        <span data-en="The connected wallet does not have a TCKT on this chain.&lt;br>&lt;br>"
-          style="display:none">Bağlı cüzdanda bu ağda TCKT yok.<br><br>
-          <a href="/al" class="lnk" data-en="Click here to get one.">Almak için tıklayın.</a>
-        </span>
-      </div>
-      <birim:tckt style="display:none" />
-      <div id="intcktb" data-en="Unlock" style="display:none">Aç</div>
-    </div>
-    <div id="inbtn">
-      <a href="javascript:" id="inbtn1" class="btn" data-en="Add social revoker">İmece iptal adresi ekle</a>
-      <a href="javascript:" id="inbtn2" class="btn" data-en="Decrease revoke threshold">Eşik azalt</a>
-      <a href=" javascript:" id="inbtn3" class="btn danger" data-en="Revoke TCKT">TCKT iptal et</a>
     </div>
   </div>
   <script async type="module" src="/incele/sayfa.js" data-remove-type></script>

@@ -25,6 +25,7 @@ build/ana/sayfa-%.js: ana/sayfa.js \
 build/ana/sayfa-%.css: build/birim/font/lato-%.css ana/sayfa.css \
                        ana/liste/birim.css \
                        birim/ortak.css \
+                       birim/başlık/birim.css \
                        birim/cüzdan/birim.css \
                        birim/dil/birim.css \
                        birim/telefon/birim.css \
