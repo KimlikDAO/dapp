@@ -48,8 +48,6 @@ const SAYFALAR = {
   "/vote": "oyla/sayfa.html",
   "/iptal": "iptal/sayfa.html",
   "/revoke": "iptal/sayfa.html",
-  "/bildir": "bildir/sayfa.html",
-  "/report": "bildir/sayfa.html",
 };
 
 createServer({

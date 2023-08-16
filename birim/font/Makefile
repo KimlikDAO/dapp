@@ -1,4 +1,4 @@
-SourceDir := font/Lato2OFL
+SourceDir := birim/font/Lato2OFL
 PyftsubsetParams := --no-recommended-glyphs \
                     --no-hinting \
                     --with-zopfli \
@@ -13,26 +13,26 @@ f800Source := Lato-Heavy.ttf
 
 FontFaces := f400 f700
 
-fonts = $(addprefix build/font/,$(addsuffix -$(1).$(2), $(FontFaces)))
+fonts = $(addprefix build/birim/font/,$(addsuffix -$(1).$(2), $(FontFaces)))
 
-build/font/lato-%.css: font/lato.css build/font/fonts-%.keymap
+build/birim/font/lato-%.css: birim/font/lato.css build/birim/font/fonts-%.keymap
 	mkdir -p $(dir $@)
 	tools/keymapper.py $^ -o $@
 
-build/font/fonts-%.keymap: $(call compressions, $(call fonts,%,ttf)) \
+build/birim/font/fonts-%.keymap: $(call compressions, $(call fonts,%,ttf)) \
                            $(call fonts,%,woff2)
 	mkdir -p $(dir $@) && > $@
 	tools/keyhasher.py $@ $(call fonts,$*,ttf)
 	tools/keyhasher.py $@ --nocompress $(call fonts,$*,woff2)
 
-build/font/%.ttf: font/%.txt
+build/birim/font/%.ttf: birim/font/%.txt
 	mkdir -p $(dir $@)
 	pyftsubset $(SourceDir)/$($(call removeLang,$*)Source) \
            $(PyftsubsetParams) \
            --text-file=$< \
            --output-file=$@
 
-build/font/%.woff2: build/font/%.ttf font/Makefile
+build/birim/font/%.woff2: build/birim/font/%.ttf birim/font/Makefile
 	woff2_compress $<
 
-.PRECIOUS: build/font/%.woff2
+.PRECIOUS: build/birim/font/%.woff2

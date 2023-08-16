@@ -41,9 +41,9 @@ build/incele-%.html: incele/sayfa.html \
                      build/incele/sayfa-%.keymap \
                      build/incele/sayfa.keymap \
                      build/ana/sayfa-%.keymap \
-                     build/font/fonts-%.keymap \
                      build/birim/cüzdan/birim.keymap \
                      build/birim/dil/birim.keymap \
+                     build/birim/font/fonts-%.keymap \
                      build/birim/tckt/birim.keymap
 	node tools/htmlProcessor $< $*
 	tools/keymapper.py $@ $(filter %.keymap,$^)

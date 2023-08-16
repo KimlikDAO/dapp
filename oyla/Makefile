@@ -44,8 +44,8 @@ build/oyla-%.html: oyla/sayfa.html \
                    build/ana/sayfa-%.keymap \
                    build/birim/cüzdan/birim.keymap \
                    build/birim/dil/birim.keymap \
-                   build/birim/paralar/birim.keymap \
-                   build/font/fonts-%.keymap
+                   build/birim/font/fonts-%.keymap \
+                   build/birim/paralar/birim.keymap
 	node tools/htmlProcessor $< $*
 	tools/keymapper.py $@ $(filter %.keymap,$^)
 	yarn html-minifier -c tools/html-minifier.conf $@ -o $@

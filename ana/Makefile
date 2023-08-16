@@ -22,7 +22,7 @@ build/ana/sayfa-%.js: ana/sayfa.js \
                              --js_output_file $@
 	yarn uglifyjs $@ -m -c toplevel,unsafe -o $@
 
-build/ana/sayfa-%.css: build/font/lato-%.css ana/sayfa.css \
+build/ana/sayfa-%.css: build/birim/font/lato-%.css ana/sayfa.css \
                        ana/liste/birim.css \
                        birim/ortak.css \
                        birim/cüzdan/birim.css \
@@ -33,7 +33,7 @@ build/ana/sayfa-%.css: build/font/lato-%.css ana/sayfa.css \
 	cat $^ | yarn csso --output $@
 
 # In dapp, we bundle ana/sayfa.css and birim/ortak.css together since both are tiny.
-# In the html call site always pretent no bundling happens and in the Makefile
+# In the html call site always pretend no bundling happens and in the Makefile
 # callsite depend on build/ana/sayfa-%.keymap
 build/ana/sayfa-%.keymap: $(call compressions, build/ana/sayfa-%.js build/ana/sayfa-%.css)
 	mkdir -p $(dir $@) && > $@
@@ -48,9 +48,9 @@ build/ana-%.html: ana/sayfa.html \
                   birim/logo.birim \
                   build/ana/ok.svg.inl \
                   build/ana/sayfa-%.keymap \
-                  build/font/fonts-%.keymap \
                   build/birim/cüzdan/birim.keymap \
                   build/birim/dil/birim.keymap \
+                  build/birim/font/fonts-%.keymap \
                   build/birim/tckt/birim.keymap
 	node tools/htmlProcessor $< $*
 	tools/keymapper.py $@ $(filter %.keymap,$^)

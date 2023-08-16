@@ -41,9 +41,9 @@ build/iptal-%.html: iptal/sayfa.html \
                     build/iptal/sayfa-%.keymap \
                     build/iptal/sayfa.keymap \
                     build/ana/sayfa-%.keymap \
-                    build/font/fonts-%.keymap \
                     build/birim/cüzdan/birim.keymap \
-                    build/birim/dil/birim.keymap
+                    build/birim/dil/birim.keymap \
+                    build/birim/font/fonts-%.keymap
 	node tools/htmlProcessor $< $*
 	tools/keymapper.py $@ $(filter %.keymap,$^)
 	yarn html-minifier -c tools/html-minifier.conf $@ -o $@

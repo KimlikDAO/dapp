@@ -6,7 +6,6 @@ include tools/Makefile
 include al/Makefile
 include ana/Makefile
 include birim/Makefile
-include font/Makefile
 include incele/Makefile
 include iptal/Makefile
 include oyla/Makefile
