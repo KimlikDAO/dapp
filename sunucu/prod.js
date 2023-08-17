@@ -106,7 +106,7 @@ const ProdWorker = {
         "cache-control": idx == HOST_URL.lastIndexOf(".")
           ? PAGE_CACHE_CONTROL
           : STATIC_CACHE_CONTROL,
-        "cdn-cache-control": STATIC_CACHE_CONTROL,
+        ...(idx == HOST_URL.lastIndexOf(".") && { "cdn-cache-control": STATIC_CACHE_CONTROL }),
         "content-encoding": ext === ".br" ? "br" : ext === ".gz" ? "gzip" : "",
         "content-length": body.byteLength,
         "content-type": idx == HOST_URL.lastIndexOf(".")

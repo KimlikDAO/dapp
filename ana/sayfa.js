@@ -7,8 +7,8 @@ Cüzdan.tcktDeğişince((dosyaSözü) => {
   /** @const {!Element} */
   const düğme = /** @type {!Element} */(dom.adla("bal"));
   düğme.childNodes[0].data = dosyaSözü
-    ? dom.TR ? "TCKT’ni gör" : "View TCKT"
-    : dom.TR ? "TCKT al" : "Mint TCKT"
+    ? dom.TR ? "TCKT’ni incele" : "View TCKT"
+    : dom.TR ? "Hemen TCKT al" : "Mint TCKT"
   düğme.href = dosyaSözü
     ? dom.TR ? "/incele" : "/view"
     : dom.TR ? "/al" : "/mint"
