@@ -210,7 +210,7 @@ const kapalıYüzGöster = () => {
       .catch(console.log);
 }
 
-Cüzdan.tcktDeğişince((dosyaSözü) => {
+Cüzdan.tcktDeğişince((_, dosyaSözü) => {
   /** @const {boolean} */
   const tcktVar = dosyaSözü != null;
   DosyaSözü = dosyaSözü;

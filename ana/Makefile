@@ -22,14 +22,16 @@ build/ana/sayfa-%.js: ana/sayfa.js \
                              --js_output_file $@
 	yarn uglifyjs $@ -m -c toplevel,unsafe -o $@
 
-build/ana/sayfa-%.css: build/birim/font/lato-%.css ana/sayfa.css \
-                       ana/liste/birim.css \
-                       birim/ortak.css \
-                       birim/başlık/birim.css \
-                       birim/cüzdan/birim.css \
-                       birim/dil/birim.css \
-                       birim/telefon/birim.css \
-                       birim/tckt/birim.css
+build/ana/sayfa-%.css: ana/sayfa.css \
+    build/birim/lato/l400.css \
+    build/birim/lato/l700-%.css \
+    ana/liste/birim.css \
+    birim/ortak.css \
+    birim/başlık/birim.css \
+    birim/cüzdan/birim.css \
+    birim/dil/birim.css \
+    birim/telefon/birim.css \
+    birim/tckt/birim.css
 	mkdir -p $(dir $@)
 	cat $^ | yarn csso --output $@
 
@@ -51,8 +53,8 @@ build/ana-%.html: ana/sayfa.html \
                   build/ana/sayfa-%.keymap \
                   build/birim/cüzdan/birim.keymap \
                   build/birim/dil/birim.keymap \
-                  build/birim/font/fonts.keymap \
-                  build/birim/font/fonts-%.keymap \
+                  build/birim/lato/l400.keymap \
+                  build/birim/lato/l700-%.keymap \
                   build/birim/tckt/birim.keymap
 	node tools/htmlProcessor $< $*
 	tools/keymapper.py $@ $(filter %.keymap,$^)

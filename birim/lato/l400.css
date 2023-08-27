@@ -1,0 +1,9 @@
+@font-face {
+  font-family: 'l';
+  src: url('/birim/lato/l400.woff2') format('woff2'),
+    url('/birim/lato/l400.ttf') format('truetype');
+
+  font-weight: 400;
+  font-style: normal;
+  font-display: block;
+}

@@ -1,85 +1,85 @@
 @font-face {
-  font-family: 'f';
-  src: url('/birim/font/Lato2OFL/Lato-Thin.ttf') format('truetype');
+  font-family: 'l';
+  src: url('/birim/lato/Lato2OFL/Lato-Thin.ttf') format('truetype');
 
   font-weight: 275;
   font-style: normal;
 }
 
 @font-face {
-  font-family: 'f';
-  src: url('/birim/font/Lato2OFL/Lato-ThinItalic.ttf') format('truetype');
+  font-family: 'l';
+  src: url('/birim/lato/Lato2OFL/Lato-ThinItalic.ttf') format('truetype');
 
   font-weight: 275;
   font-style: italic;
 }
 
 @font-face {
-  font-family: 'f';
-  src: url('/birim/font/Lato2OFL/Lato-Regular.ttf') format('truetype');
+  font-family: 'l';
+  src: url('/birim/lato/Lato2OFL/Lato-Regular.ttf') format('truetype');
 
   font-weight: 400;
   font-style: normal;
 }
 
 @font-face {
-  font-family: 'f';
-  src: url('/birim/font/Lato2OFL/Lato-Italic.ttf') format('truetype');
+  font-family: 'l';
+  src: url('/birim/lato/Lato2OFL/Lato-Italic.ttf') format('truetype');
 
   font-weight: 400;
   font-style: italic;
 }
 
 @font-face {
-  font-family: 'f';
-  src: url('/birim/font/Lato2OFL/Lato-Medium.ttf') format('truetype');
+  font-family: 'l';
+  src: url('/birim/lato/Lato2OFL/Lato-Medium.ttf') format('truetype');
 
   font-weight: 500;
   font-style: normal;
 }
 
 @font-face {
-  font-family: 'f';
-  src: url('/birim/font/Lato2OFL/Lato-MediumItalic.ttf') format('truetype');
+  font-family: 'l';
+  src: url('/birim/lato/Lato2OFL/Lato-MediumItalic.ttf') format('truetype');
 
   font-weight: 500;
   font-style: italic;
 }
 
 @font-face {
-  font-family: 'f';
-  src: url('/birim/font/Lato2OFL/Lato-Semibold.ttf') format('truetype');
+  font-family: 'l';
+  src: url('/birim/lato/Lato2OFL/Lato-Semibold.ttf') format('truetype');
 
   font-weight: 600;
   font-style: normal;
 }
 
 @font-face {
-  font-family: 'f';
-  src: url('/birim/font/Lato2OFL/Lato-SemiboldItalic.ttf') format('truetype');
+  font-family: 'l';
+  src: url('/birim/lato/Lato2OFL/Lato-SemiboldItalic.ttf') format('truetype');
 
   font-weight: 600;
   font-style: italic;
 }
 
 @font-face {
-  font-family: 'f';
-  src: url('/birim/font/Lato2OFL/Lato-Bold.ttf') format('truetype');
+  font-family: 'l';
+  src: url('/birim/lato/Lato2OFL/Lato-Bold.ttf') format('truetype');
 
   font-weight: 700;
   font-style: normal;
 }
 
 @font-face {
-  font-family: 'f';
-  src: url('/birim/font/Lato2OFL/Lato-BlackItalic.ttf') format('truetype');
+  font-family: 'l';
+  src: url('/birim/lato/Lato2OFL/Lato-BlackItalic.ttf') format('truetype');
 
   font-weight: 700;
   font-style: italic;
 }
 
 @font-face {
-  font-family: 'f';
+  font-family: 'l';
   src: url('/birim/font/Lato2OFL/Lato-Heavy.ttf') format('truetype');
 
   font-weight: 800;
@@ -87,7 +87,7 @@
 }
 
 @font-face {
-  font-family: 'f';
+  font-family: 'l';
   src: url('/birim/font/Lato2OFL/Lato-HeavyItalic.ttf') format('truetype');
 
   font-weight: 800;
@@ -95,7 +95,7 @@
 }
 
 @font-face {
-  font-family: 'f';
+  font-family: 'l';
   src: url('/birim/font/Lato2OFL/Lato-Black.ttf') format('truetype');
 
   font-weight: 900;
@@ -103,7 +103,7 @@
 }
 
 @font-face {
-  font-family: 'f';
+  font-family: 'l';
   src: url('/birim/font/Lato2OFL/Lato-BlackItalic.ttf') format('truetype');
 
   font-weight: 900;

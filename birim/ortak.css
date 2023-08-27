@@ -1,16 +1,16 @@
 html {
-  font-family: 'f', sans-serif;
+  font-family: 'l', sans-serif;
   font-size: 11pt;
   font-weight: 400;
 }
 
 input {
-  font-family: 'f', sans-serif;
+  font-family: 'l', sans-serif;
 }
 
 button {
   color: #555;
-  font-family: 'f', sans-serif;
+  font-family: 'l', sans-serif;
   font-size: 11pt;
   font-weight: 700;
 }

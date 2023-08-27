@@ -58,8 +58,8 @@ build/al-%.html: al/sayfa.html \
                  build/ana/sayfa-%.keymap \
                  build/birim/cüzdan/birim.keymap \
                  build/birim/dil/birim.keymap \
-                 build/birim/font/fonts.keymap \
-                 build/birim/font/fonts-%.keymap \
+                 build/birim/lato/l400.keymap \
+                 build/birim/lato/l700-%.keymap \
                  build/birim/paralar/birim.keymap \
                  build/birim/tckt/birim.keymap
 	node tools/htmlProcessor $< $*

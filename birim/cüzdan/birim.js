@@ -85,7 +85,7 @@ const AdresDeğişince = [];
 const Kopunca = [];
 /** @const {!Array<function(string)>} */
 const AğDeğişince = [];
-/** @const {!Array<function(Promise<!eth.ERC721Unlockable>)>} */
+/** @const {!Array<function(?string, Promise<!eth.ERC721Unlockable>)>} */
 const TcktDeğişince = [];
 /** @const {!Array<function(!Provider)>} */
 const BağlantıDeğişince = [];
@@ -190,7 +190,7 @@ const tcktDeğişti = () => {
           return tcktDosyası;
         })
       : null;
-    for (const f of TcktDeğişince) f(dosyaSözü);
+    for (const f of TcktDeğişince) f(cidHex, dosyaSözü);
   })
 }
 
@@ -243,11 +243,11 @@ const adresDeğişince = (f) => AdresDeğişince.push(f);
 const kopunca = (f) => Kopunca.push(f);
 
 /**
- * @param {function(Promise<!eth.ERC721Unlockable>)} f
+ * @param {function(?string, Promise<!eth.ERC721Unlockable>)} f
  */
 const tcktDeğişince = (f) => {
   TcktDeğişince.push(f);
-  Kopunca.push(() => f(null));
+  Kopunca.push(() => f(null, null));
 }
 
 /**

@@ -3,7 +3,7 @@ import Cüzdan from "/birim/cüzdan/birim";
 import "/birim/dil/birim";
 import dom from "/lib/util/dom";
 
-Cüzdan.tcktDeğişince((dosyaSözü) => {
+Cüzdan.tcktDeğişince((_, dosyaSözü) => {
   /** @const {!Element} */
   const düğme = /** @type {!Element} */(dom.adla("bal"));
   düğme.childNodes[0].data = dosyaSözü
