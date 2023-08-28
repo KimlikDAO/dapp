@@ -106,7 +106,7 @@ const ProdWorker = {
      */
     const makeResponse = (body) => {
       /** @const {string} */
-      const suffix = idx == HOST_URL.lastIndexOf(".") ? "" : url.slice(idx + 1);
+      const suffix = url.slice(idx + 1);
       /** @type {!Object<string, string>} */
       let headers = {
         "cache-control": idx == HOST_URL.lastIndexOf(".")

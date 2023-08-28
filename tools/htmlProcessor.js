@@ -21,7 +21,7 @@ const readInline = (name, lang) => {
   return file.trim();
 }
 
-const readModule = (moduleName, lang, addAttr) => {
+const readModule = (moduleName, lang, baseAttrs) => {
   const EN = lang == "en";
   let output = ""
   let depth = 0;
@@ -29,72 +29,69 @@ const readModule = (moduleName, lang, addAttr) => {
   let phantom = {};
   let staged = null;
 
+  /** @const {!Object<string, string>} */
+  const dict = {};
+  for (const attr in baseAttrs)
+    if (attr.startsWith("data-")) {
+      dict[attr.slice(5)] = baseAttrs[attr];
+      delete baseAttrs[attr];
+    }
+
   const parser = new Parser({
-    onopentag(tag, attr) {
+    onopentag(tag, attrs) {
       depth += 1;
 
-      if ("data-remove" in attr) return;
+      if ("data-remove" in attrs) return;
 
       if (tag.startsWith("birim:")) {
-        output += readModule(`birim/${tag.slice(6)}/birim.html`, lang, attr);
+        output += readModule(`birim/${tag.slice(6)}/birim.html`, lang, attrs);
         return;
       }
 
       if (tag.startsWith("altbirim:")) {
-        output += readModule(moduleName.slice(0, -10) + tag.slice(9) + "/birim.html", lang);
+        output += readModule(moduleName.slice(0, -10) + tag.slice(9) + "/birim.html", lang, attrs);
         return;
       }
 
-      if ("data-remove-type" in attr) {
-        delete attr["data-remove-type"];
-        delete attr.type;
+      for (const attr in attrs) {
+        if (attr.startsWith("data-remove-")) {
+          delete attrs[attr.slice("data-remove-".length)];
+          delete attrs[attr];
+        } else if (attr.startsWith("data-en-")) {
+          if (EN) attrs[attr.slice("data-en-".length)] = attrs[attr];
+          delete attrs[attr];
+        } else if (attr.startsWith("data-set-")) {
+          const value = dict[attrs[attr]];
+          if (value) attrs[attr.slice("data-set-".length)] = value;
+          delete attrs[attr];
+        }
       }
 
-      if ("data-inline" in attr) {
+      if ("data-inline" in attrs) {
         if (tag === 'script') output += '<script>';
-        output += readInline(attr.src, lang);
+        output += readInline(attrs.src, lang);
         return;
-      }
-
-      if (attr["data-en-title"]) {
-        if (EN) attr.title = attr["data-en-title"];
-        delete attr["data-en-title"];
-      }
-
-      if (attr["data-en-href"]) {
-        if (EN) attr.href = attr["data-en-href"];
-        delete attr["data-en-href"];
-      }
-
-      if (attr["data-en-lang"]) {
-        if (EN) attr.lang = attr["data-en-lang"];
-        delete attr["data-en-lang"];
-      }
-
-      if (attr["data-en-src"]) {
-        if (EN) attr.src = attr["data-en-src"];
-        delete attr["data-en-src"];
       }
 
       let replaceStr = "";
-      if ("data-en" in attr) {
-        if (replaceDepth) console.error("Nested replace!");
+      if ("data-en" in attrs) {
+        if (replaceDepth) console.error("Nested replace!", tag, attrs);
         if (EN) {
           replaceDepth = depth;
-          replaceStr = attr["data-en"];
+          replaceStr = attrs["data-en"];
         }
-        delete attr["data-en"];
+        delete attrs["data-en"];
       } else if (replaceDepth > 0) {
         return;
       }
 
-      if ("data-phantom" in attr) {
+      if ("data-phantom" in attrs) {
         phantom[depth] = true;
       } else {
         if (depth == 1)
-          Object.assign(attr, addAttr);
+          Object.assign(attrs, baseAttrs);
 
-        output += serializeTag(tag, attr);
+        output += serializeTag(tag, attrs);
       }
 
       output += replaceStr;
