@@ -3,7 +3,10 @@
 const HOST_URL = "https://kimlikdao.org/";
 /** @const {string} */
 const PAGE_CACHE_CONTROL = "max-age=90,public";
-/** @const {string} */
+/**
+ * @const {string}
+ * @noinline
+ */
 const STATIC_CACHE_CONTROL = "max-age=29030400,public,immutable";
 /** @const {!Object<string, string>} */
 const MIMES = {
@@ -101,22 +104,31 @@ const ProdWorker = {
      * @param {!ArrayBuffer} body
      * @return {!Response}
      */
-    const makeResponse = (body) => new Response(body, {
-      headers: {
+    const makeResponse = (body) => {
+      /** @const {string} */
+      const suffix = idx == HOST_URL.lastIndexOf(".") ? "" : url.slice(idx + 1);
+      /** @type {!Object<string, string>} */
+      let headers = {
         "cache-control": idx == HOST_URL.lastIndexOf(".")
           ? PAGE_CACHE_CONTROL
           : STATIC_CACHE_CONTROL,
-        ...(idx == HOST_URL.lastIndexOf(".") && { "cdn-cache-control": STATIC_CACHE_CONTROL }),
         "content-encoding": ext === ".br" ? "br" : ext === ".gz" ? "gzip" : "",
         "content-length": body.byteLength,
         "content-type": idx == HOST_URL.lastIndexOf(".")
           ? "text/html;charset=utf-8"
-          : MIMES[url.slice(idx + 1)],
+          : MIMES[suffix],
         "expires": "Sun, 01 Jan 2034 00:00:00 GMT",
         "vary": "accept-encoding",
-      },
-      "encodeBody": "manual"
-    });
+      }
+      if (idx == HOST_URL.lastIndexOf("."))
+        headers["cdn-cache-control"] = STATIC_CACHE_CONTROL;
+      else if (suffix == "woff2" || suffix == "ttf")
+        headers["access-control-allow-origin"] = "*";
+      return new Response(body, {
+        headers,
+        "encodeBody": "manual"
+      });
+    }
 
     /**
      * In parallel, we also query the CF KV. Under normal circumstances, if

@@ -22,9 +22,10 @@ build/ana/sayfa-%.js: ana/sayfa.js \
                              --js_output_file $@
 	yarn uglifyjs $@ -m -c toplevel,unsafe -o $@
 
-build/ana/sayfa-%.css: ana/sayfa.css \
+build/ana/sayfa-%.css: \
     build/birim/lato/l400.css \
     build/birim/lato/l700-%.css \
+    ana/sayfa.css \
     ana/liste/birim.css \
     birim/ortak.css \
     birim/başlık/birim.css \
