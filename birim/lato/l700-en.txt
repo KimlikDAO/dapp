@@ -43,6 +43,4 @@ wallet
    ,USDC USDT TRYB AVAX ETH FTM MATIC
   Total
   .
-  Authoriza payment in wallet
-
-ğış
+  Authorize payment in wallet

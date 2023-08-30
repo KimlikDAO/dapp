@@ -48,3 +48,5 @@ cüzdan
    ,USDC USDT TRYB AVAX ETH FTM MATIC
   Toplam
   Ödeme isteği yolla
+
+Twitter
