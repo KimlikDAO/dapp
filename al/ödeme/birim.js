@@ -182,7 +182,7 @@ const öde = (cidSözü, adresAğırlığı, eşik) => {
     /** @const {!eth.Provider} */
     const provider = /** @type {!eth.Provider} */(Cüzdan.bağlantı().provider);
     /** @const {string} */
-    const adres = /** @type {string} */(Cüzdan.adres());
+    const adres = /** @type {string} */(Cüzdan.adres()).toLowerCase();
     /** @const {!Promise<string>} */
     const sonuç = para == 0
       ? cidSözü.then((cid) =>
@@ -208,6 +208,7 @@ const öde = (cidSözü, adresAğırlığı, eşik) => {
           : hash.length >= 6
             ? decodeURIComponent(hash.slice(6)) : "/view";
         Telefon.nftGeriAl();
+        window.localStorage.removeItem(adres + "nko_r");
         whenMined(provider, txHash, () => window.location.href = sonra);
       })
       .catch(console.log);

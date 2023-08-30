@@ -50,6 +50,7 @@ build/ana-%.html: ana/sayfa.html \
                   birim/dil/birim.html \
                   birim/cüzdan.birim \
                   birim/logo.birim \
+                  birim/tckt.birim \
                   build/ana/ok.svg.inl \
                   build/ana/sayfa-%.keymap \
                   build/birim/cüzdan/birim.keymap \

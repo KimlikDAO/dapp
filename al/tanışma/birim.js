@@ -215,8 +215,6 @@ const açıkTcktAlVe = (adres, sonra) => {
             nkoDüğmesi.innerText = dom.TR ? "Bilgileriniz onaylandı ✓" : "We confirmed your info ✓";
             dom.göster(nkoDüğmesi);
             dom.düğmeDurdur(nkoDüğmesi);
-            window.localStorage.removeItem(adres + "nko_r");
-
             Tckt.açıkTcktGöster(açıkTckt);
             kutu.classList.add("done");
             sonra(adres, açıkTckt);

@@ -50,6 +50,7 @@ build/al-%.html: al/sayfa.html \
                  birim/dil/birim.html \
                  birim/cüzdan.birim \
                  birim/logo.birim \
+                 birim/tckt.birim \
                  build/al/paste.svg.inl \
                  build/al/tanışma/external-link.svg.inl \
                  build/al/sayfa-%.keymap \

@@ -36,7 +36,7 @@ build/incele-%.html: incele/sayfa.html \
                      birim/cüzdan.birim \
                      birim/dil/birim.html \
                      birim/logo.birim \
-                     birim/tckt/birim.html \
+                     birim/tckt.birim \
                      build/al/paste.svg.inl \
                      build/incele/sayfa-%.keymap \
                      build/incele/sayfa.keymap \

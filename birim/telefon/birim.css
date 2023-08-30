@@ -161,6 +161,10 @@
   height: 250px;
   font-size: 10pt;
 }
+#tenftb .tcp {
+  width: 250px;
+  height: 250px;
+}
 
 #tc.moveintowallet {
   transform: translate(-70px, 272px) scale(0.5);
