@@ -112,4 +112,8 @@ const açıkTcktGöster = (açıkTckt) => {
   Tckt.classList.add("flipped");
 }
 
-export default { açıkTcktGöster, çevir, yüzGöster };
+export default {
+  açıkTcktGöster,
+  çevir,
+  yüzGöster
+};

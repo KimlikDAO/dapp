@@ -204,9 +204,9 @@ const öde = (cidSözü, adresAğırlığı, eşik) => {
         /** @const {string} */
         const sonra = dom.TR
           ? hash.length >= 7
-            ? decodeURIComponent(hash.slice(7)) : "/incele"
+            ? decodeURIComponent(hash.slice("#sonra=".length)) : "/incele"
           : hash.length >= 6
-            ? decodeURIComponent(hash.slice(6)) : "/view";
+            ? decodeURIComponent(hash.slice("#then=".length)) : "/view";
         Telefon.nftGeriAl();
         window.localStorage.removeItem(adres + "nko_r");
         whenMined(provider, txHash, () => window.location.href = sonra);

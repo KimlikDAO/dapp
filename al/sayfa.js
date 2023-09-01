@@ -6,6 +6,7 @@ import Tanışma from "/al/tanışma/birim";
 import { öde } from "/al/ödeme/birim";
 import Cüzdan from "/birim/cüzdan/birim";
 import "/birim/dil/birim";
+import Tckt from "/birim/tckt/birim";
 import Telefon from "/birim/telefon/birim";
 import { OnaylamaAnahtarları, imzaMetni, metadataVeBölümler } from "/lib/did/TCKTVerisi";
 import { toUnlockableNFT, verifyProofs } from "/lib/did/decryptedSections";
@@ -49,6 +50,7 @@ const tcktYarat = (adres, açıkTckt) => {
       Telefon.kutuKapat();
       s3a.innerText = dom.TR ? "TCKT’nizi şifreledik ✓" : "We encrypted your TCKT ✓";
       s3a.classList.remove("act");
+      Tckt.yüzGöster(false);
       dom.düğmeDurdur(s3a);
       dom.adla("s3").classList.add("done");
       İmeceİptal.göster();

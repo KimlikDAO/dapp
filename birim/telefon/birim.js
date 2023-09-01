@@ -77,7 +77,7 @@ const nftYukarıGönder = () => {
 
 const nftGeriAl = () => {
   Nft.classList.add('movedown');
-  nftGöster(true, true);
+  nftGöster(true, false);
 }
 
 export default {

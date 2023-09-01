@@ -172,7 +172,7 @@
 }
 
 #tc.movedown {
-  transform: translate3d(5px, 360px, 0px) scale(0.892);
+  transform: translate3d(0, 360px, 0px) scale(0.892);
 }
 
 #tc.movedown.flipped {
