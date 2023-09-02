@@ -1,10 +1,10 @@
 import Tckt from "/birim/tckt/birim";
 import dom from "/lib/util/dom";
 
-/** @const {Element} */
-const Nft = dom.adla("tc");
-/** @const {Element} */
-const NftButton = dom.adla("tenft-button");
+/** @const {!Element} */
+const Nft = /** @type {!Element} */(dom.adla("tc"));
+/** @const {!Element} */
+const NftButton = /** @type {!Element} */(dom.adla("tenft-button"));
 
 /**
  * @param {?string} adres Telefonda gösterilecek adres.
@@ -63,7 +63,7 @@ const nftGöster = (kutudaGöster, bilgiYüzü) => {
     }
   }
 
-  Nft.classList.toggle("moveintowallet", !kutudaGöster);
+  Nft.classList.toggle("w", !kutudaGöster);
   NftButton.classList.toggle("show", kutudaGöster);
 }
 
@@ -76,7 +76,7 @@ const nftYukarıGönder = () => {
 }
 
 const nftGeriAl = () => {
-  Nft.classList.add('movedown');
+  Nft.classList.add('down');
   nftGöster(true, false);
 }
 

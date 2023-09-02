@@ -166,15 +166,15 @@
   height: 250px;
 }
 
-#tc.moveintowallet {
+#tc.w {
   transform: translate(-70px, 272px) scale(0.5);
   border: 2px solid #ccc;
 }
 
-#tc.movedown {
+#tc.down {
   transform: translate3d(0, 360px, 0px) scale(0.892);
 }
 
-#tc.movedown.flipped {
+#tc.down.flipped {
   transform: translate3d(0, 360px, 0px) rotateY(-180deg) scale(0.892);
 }
