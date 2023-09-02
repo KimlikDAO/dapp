@@ -11,26 +11,26 @@ import TCKT from '/lib/ethereum/TCKT';
 import evm from "/lib/ethereum/evm";
 import dom from '/lib/util/dom';
 
-/** @const {Element} */
-const İmeceİptalDüğmesi = dom.adla("inbtn1");
-/** @const {Element} */
-const EşikAzaltmaDüğmesi = dom.adla("inbtn2");
-/** @const {Element} */
-const SilDüğmesi = dom.adla("inbtn3");
-/** @const {Element} */
-const AçDüğmesi = dom.adla("intcktb");
-/** @const {Element} */
-const Mask = dom.adla("inbd");
-/** @const {Element} */
-const İmeceİptalKutusu = dom.adla("inmii");
-/** @const {Element} */
-const EşikKutusu = dom.adla("inmes");
-/** @const {Element} */
-const SilKutusu = dom.adla("inmsy");
-/** @const {Element} */
-const TcktVar = dom.adla("tc");
-/** @const {Element} */
-const TcktYok = dom.adla("innotckt");
+/** @const {!Element} */
+const İmeceİptalDüğmesi = /** @const {!Element} */(dom.adla("inbtn1"));
+/** @const {!Element} */
+const EşikAzaltmaDüğmesi = /** @const {!Element} */(dom.adla("inbtn2"));
+/** @const {!Element} */
+const SilDüğmesi = /** @const {!Element} */(dom.adla("inbtn3"));
+/** @const {!Element} */
+const AçDüğmesi = /** @const {!Element} */(dom.adla("intcktb"));
+/** @const {!Element} */
+const Mask = /** @const {!Element} */(dom.adla("inbd"));
+/** @const {!Element} */
+const İmeceİptalKutusu = /** @const {!Element} */(dom.adla("inmii"));
+/** @const {!Element} */
+const EşikKutusu = /** @const {!Element} */(dom.adla("inmes"));
+/** @const {!Element} */
+const SilKutusu = /** @const {!Element} */(dom.adla("inmsy"));
+/** @const {!Element} */
+const TcktVar = /** @const {!Element} */(dom.adla("tc"));
+/** @const {!Element} */
+const TcktYok = /** @const {!Element} */(dom.adla("innotckt"));
 
 /** @const {!Object<string, !did.DecryptedSections>} */
 const Bellek = {};
