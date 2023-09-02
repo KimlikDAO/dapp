@@ -8,10 +8,10 @@ const Gösterme = new Set([
   "secp256k1",
   "signatureTs",
 ]);
-/** @const {Element} */
-const Kartlar = dom.adla("tck");
-/** @const {Element} */
-const Tckt = dom.adla("tc");
+/** @const {!Element} */
+const Kartlar = /** @const {!Element} */(dom.adla("tck"));
+/** @const {!Element} */
+const Tckt = /** @const {!Element} */(dom.adla("tc"));
 /** @type {number} */
 let Kart = 0;
 /** @type {number} */
@@ -33,12 +33,12 @@ dom.adla("tcsa").onclick = () => kartDeğiştir((Kart + 1) % KartSayısı);
 /**
  * @param {boolean} bilgiYüzü
  */
-const yüzGöster = (bilgiYüzü) => Tckt.classList.toggle("flipped", bilgiYüzü);
+const yüzGöster = (bilgiYüzü) => Tckt.classList.toggle("flp", bilgiYüzü);
 
 /**
  * @return {boolean}
  */
-const çevir = () => Tckt.classList.toggle("flipped");
+const çevir = () => Tckt.classList.toggle("flp");
 
 /**
  * @param {!did.PersonInfo} personInfo
@@ -51,7 +51,6 @@ const personInfoGöster = (personInfo) => {
     }
 
   dom.adla('tclocalIdNumber').innerText = personInfo.localIdNumber.slice(2);
-
   if (dom.TR)
     dom.adla("tcgender").innerText = dom.adla("tcgender").innerText == 'M'
       ? 'E'
@@ -78,10 +77,12 @@ const contactInfoGöster = (contactInfo) => {
 const addressInfoGöster = (addressInfo) => {
   // Şimdilik sadece `TürkiyeAdresi` gösterebiliyoruz.
   if (!addressInfo || addressInfo.country != "Türkiye") return;
+  /** @const {!did.TürkiyeAdresi} */
   const adres = /** @type {!did.TürkiyeAdresi} */(addressInfo);
 
   KartSayısı += 1;
   dom.adlaGöster("tcabp");
+  /** @type {string} */
   let mahalle = adres.mahalle;
   if (mahalle.endsWith("ahallesi"))
     mahalle = mahalle.slice(0, -6) + ".";
@@ -109,7 +110,7 @@ const açıkTcktGöster = (açıkTckt) => {
   contactInfoGöster(/** @type {?did.ContactInfo} */(açıkTckt["contactInfo"]));
   addressInfoGöster(/** @type {?did.AddressInfo} */(açıkTckt["addressInfo"]));
   kütükBilgileriGöster(/** @type {?did.KütükBilgileri} */(açıkTckt["kütükBilgileri"]));
-  Tckt.classList.add("flipped");
+  Tckt.classList.add("flp");
 }
 
 export default {

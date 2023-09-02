@@ -14,7 +14,7 @@
   left: 0;
 }
 
-#tc.flipped {
+#tc.flp {
   transform: rotateY(-180deg);
 }
 

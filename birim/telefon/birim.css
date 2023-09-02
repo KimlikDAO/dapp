@@ -175,6 +175,6 @@
   transform: translate3d(0, 360px, 0px) scale(0.892);
 }
 
-#tc.down.flipped {
+#tc.down.flp {
   transform: translate3d(0, 360px, 0px) rotateY(-180deg) scale(0.892);
 }
