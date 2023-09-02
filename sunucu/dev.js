@@ -4,8 +4,17 @@ import path from 'path';
 import { parse } from 'toml';
 import { createServer } from 'vite';
 
+/**
+ * @param {string} dosyaAdı
+ * @return {{
+ *   sayfa: string,
+ *   stiller: !Array<string>
+ * }}
+ */
 const birimOku = (dosyaAdı) => {
-  let stiller = [];
+  /** @const {!Array<string>} */
+  const stiller = [];
+  /** @type {string} */
   let sayfa = "";
   try {
     sayfa = readFileSync(dosyaAdı, 'utf-8');
@@ -16,21 +25,21 @@ const birimOku = (dosyaAdı) => {
   }
 
   sayfa = sayfa.replace(/<birim:([^\s]+)[^\/]+\/>/g, (_, birimAdı) => {
-    let [birim, altStiller] = birimOku(`birim/${birimAdı.trim()}/birim.html`);
+    const { sayfa: birim, stiller: altStiller } = birimOku(`birim/${birimAdı.trim()}/birim.html`);
     stiller.push(...altStiller);
     return birim;
   });
   sayfa = sayfa.replace(/<altbirim:([^\s]+)[^\/]+\/>/g, (_, birimAdı) => {
-    let [birim, altStiller] = birimOku(`${path.dirname(dosyaAdı)}/${birimAdı.trim()}/birim.html`);
+    const { sayfa: birim, stiller: altStiller } = birimOku(`${path.dirname(dosyaAdı)}/${birimAdı.trim()}/birim.html`);
     stiller.push(...altStiller);
     return birim;
   });
-  return [sayfa, stiller];
+  return { sayfa, stiller };
 }
 
 /** @param {string} dosyaAdı */
 const sayfaOku = (dosyaAdı) => {
-  let [sayfa, stiller] = birimOku(dosyaAdı);
+  let { sayfa, stiller } = birimOku(dosyaAdı);
   stiller = stiller
     .map((stil) => `  <link href="${stil}" rel="stylesheet" type="text/css" />\n`)
     .join('');
