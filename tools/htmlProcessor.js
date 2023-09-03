@@ -21,6 +21,12 @@ const readInline = (name, lang) => {
   return file.trim();
 }
 
+/**
+ * @param {string} moduleName
+ * @param {string} lang
+ * @param {!Object<string, string>} baseAttrs
+ * @return {string}
+ */
 const readModule = (moduleName, lang, baseAttrs) => {
   const EN = lang == "en";
   let output = ""
@@ -131,12 +137,12 @@ const readModule = (moduleName, lang, baseAttrs) => {
   return output;
 }
 
-/** @const {Array<string>} */
+/** @const {!Array<string>} */
 const args = process.argv;
 
 /** @const {string} */
 const out = readModule(args[2], args[3], {});
 
-/** @const {Array<string>} */
+/** @const {!Array<string>} */
 const parts = args[2].split('.');
 writeFileSync(`build/${parts[0].slice(0, -6)}-${args[3]}.${parts[1]}`, out);

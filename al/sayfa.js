@@ -21,11 +21,13 @@ import { hex } from "/lib/util/çevir";
  * @param {!did.DecryptedSections} açıkTckt
  */
 const tcktYarat = (adres, açıkTckt) => {
-  /** @const {Element} */
-  const s3a = dom.adla("s3a");
+  /** @const {!Element} */
+  const şifrele = /** @const {!Element} */(dom.adla("al3"));
+  /** @const {!Element} */
+  const şifreleDüğmesi = /** @const {!Element} */(dom.adla("al3a"));
   dom.adla("te").style.opacity = 1;
-  dom.adla("s3").classList.remove("disabled");
-  s3a.classList.remove("disabled");
+  şifrele.classList.remove("disabled");
+  şifreleDüğmesi.classList.remove("disabled");
 
   /** @const {string} */
   const telefonMetni = imzaMetni(["personInfo"]);
@@ -36,7 +38,7 @@ const tcktYarat = (adres, açıkTckt) => {
   /** @const {!Promise<!did.DecryptedSections>} */
   const açıkTcktSözü = verifyProofs(açıkTckt, OnaylamaAnahtarları);
 
-  s3a.onclick = () => {
+  şifreleDüğmesi.onclick = () => {
     /** @const {!Promise<!eth.ERC721Unlockable>} */
     const unlockableNFTSözü = açıkTcktSözü.then((açıkTckt) => {
       const { metadata, bölümler } = metadataVeBölümler(Cüzdan.ağ());
@@ -48,11 +50,11 @@ const tcktYarat = (adres, açıkTckt) => {
         adres)
     }).then((/** @type {!eth.ERC721Unlockable} */ unlockableNFT) => {
       Telefon.kutuKapat();
-      s3a.innerText = dom.TR ? "TCKT’nizi şifreledik ✓" : "We encrypted your TCKT ✓";
-      s3a.classList.remove("act");
+      şifreleDüğmesi.innerText = dom.TR ? "TCKT’nizi şifreledik ✓" : "We encrypted your TCKT ✓";
+      şifreleDüğmesi.classList.remove("act");
       Tckt.yüzGöster(false);
-      dom.düğmeDurdur(s3a);
-      dom.adla("s3").classList.add("done");
+      dom.düğmeDurdur(şifreleDüğmesi);
+      şifrele.classList.add("done");
       İmeceİptal.göster();
       return unlockableNFT;
     });
