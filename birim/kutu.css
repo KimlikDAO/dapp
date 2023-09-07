@@ -1,16 +1,16 @@
-.xbtn {
+.kux {
   position: absolute;
   opacity: 0.3;
   cursor: pointer;
   padding: 1em;
 }
 
-.xbtn:hover {
+.kux:hover {
   opacity: 1;
 }
 
-.xbtn::before,
-.xbtn::after {
+.kux::before,
+.kux::after {
   position: absolute;
   left: 13.5px;
   top: 9.5px;
@@ -21,10 +21,10 @@
   content: "";
 }
 
-.xbtn::before {
+.kux::before {
   transform: rotate(45deg);
 }
 
-.xbtn::after {
+.kux::after {
   transform: rotate(-45deg);
 }
