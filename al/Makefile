@@ -46,11 +46,9 @@ build/al/sayfa-%.keymap: $(call compressions, build/al/sayfa-%.js)
 build/al-%.html: al/sayfa.html \
                  al/imeceİptal/birim.html \
                  al/tanışma.birim \
-                 birim/telefon/birim.html \
-                 birim/dil/birim.html \
-                 birim/cüzdan.birim \
-                 birim/logo.birim \
+                 birim/başlık.birim \
                  birim/tckt.birim \
+                 birim/telefon.birim \
                  build/al/paste.svg.inl \
                  build/al/tanışma/external-link.svg.inl \
                  build/al/sayfa-%.keymap \

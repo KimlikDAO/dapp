@@ -33,9 +33,7 @@ build/incele/sayfa-%.keymap: $(call compressions, build/incele/sayfa-%.js)
 	tools/keyhasher.py $@ build/incele/sayfa-$*.js
 
 build/incele-%.html: incele/sayfa.html \
-                     birim/cüzdan.birim \
-                     birim/dil/birim.html \
-                     birim/logo.birim \
+                     birim/başlık.birim \
                      birim/tckt.birim \
                      build/al/paste.svg.inl \
                      build/incele/sayfa-%.keymap \

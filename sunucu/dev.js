@@ -1,62 +1,20 @@
-import express from 'express';
-import { readFileSync } from 'fs';
-import path from 'path';
-import { parse } from 'toml';
-import { createServer } from 'vite';
-
-/**
- * @param {string} dosyaAdı
- * @return {{
- *   sayfa: string,
- *   stiller: !Array<string>
- * }}
- */
-const birimOku = (dosyaAdı) => {
-  /** @const {!Array<string>} */
-  const stiller = [];
-  /** @type {string} */
-  let sayfa = "";
-  try {
-    sayfa = readFileSync(dosyaAdı, 'utf-8');
-    stiller.push("/" + dosyaAdı.slice(0, -5) + ".css");
-  } catch (e) {
-    sayfa = readFileSync(dosyaAdı.slice(0, -11) + '.html', 'utf-8');
-    stiller.push("/" + dosyaAdı.slice(0, -11) + '.css');
-  }
-
-  sayfa = sayfa.replace(/<birim:([^\s]+)[^\/]+\/>/g, (_, birimAdı) => {
-    const { sayfa: birim, stiller: altStiller } = birimOku(`birim/${birimAdı.trim()}/birim.html`);
-    stiller.push(...altStiller);
-    return birim;
-  });
-  sayfa = sayfa.replace(/<altbirim:([^\s]+)[^\/]+\/>/g, (_, birimAdı) => {
-    const { sayfa: birim, stiller: altStiller } = birimOku(`${path.dirname(dosyaAdı)}/${birimAdı.trim()}/birim.html`);
-    stiller.push(...altStiller);
-    return birim;
-  });
-  return { sayfa, stiller };
-}
-
-/** @param {string} dosyaAdı */
-const sayfaOku = (dosyaAdı) => {
-  let { sayfa, stiller } = birimOku(dosyaAdı);
-  stiller = stiller
-    .map((stil) => `  <link href="${stil}" rel="stylesheet" type="text/css" />\n`)
-    .join('');
-  return sayfa.replace("</head>", stiller + "</head>");
-}
+import express from "express";
+import { readFileSync } from "fs";
+import { parse } from "toml";
+import { createServer } from "vite";
+import { sayfaOku } from "../lib/util/birimler.js";
 
 /** @const {Object<string, string>} */
 const SAYFALAR = {
-  "/": "ana/sayfa.html",
-  "/al": "al/sayfa.html",
-  "/get": "al/sayfa.html",
-  "/incele": "incele/sayfa.html",
-  "/view": "incele/sayfa.html",
-  "/oyla": "oyla/sayfa.html",
-  "/vote": "oyla/sayfa.html",
-  "/iptal": "iptal/sayfa.html",
-  "/revoke": "iptal/sayfa.html",
+  "/": { ad: "ana/sayfa.html", dil: "tr" },
+  "/al": { ad: "al/sayfa.html", dil: "tr" },
+  "/get": { ad: "al/sayfa.html", dil: "en" },
+  "/incele": { ad: "incele/sayfa.html", dil: "tr" },
+  "/view": { ad: "incele/sayfa.html", dil: "en" },
+  "/oyla": { ad: "oyla/sayfa.html", dil: "tr" },
+  "/vote": { ad: "oyla/sayfa.html", dil: "en" },
+  "/iptal": { ad: "iptal/sayfa.html", dil: "tr" },
+  "/revoke": { ad: "iptal/sayfa.html", dil: "en" },
 };
 
 createServer({
@@ -69,7 +27,9 @@ createServer({
     if (!(req.path in SAYFALAR)) {
       res.status(200).end(); // Dev sunucuda hata vermemeye çalış
     } else {
-      let sayfa = sayfaOku(SAYFALAR[req.path]);
+      const { ad, dil } = SAYFALAR[req.path]
+      /** @const {string} */
+      const sayfa = sayfaOku(ad, { dil, dev: true });
       vite.transformIndexHtml(req.path, sayfa).then((sayfa) => {
         res.status(200)
           .set({ 'Content-type': 'text/html;charset=utf-8' })

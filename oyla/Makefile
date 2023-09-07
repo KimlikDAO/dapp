@@ -35,9 +35,7 @@ build/oyla/sayfa-%.keymap: $(call compressions, build/oyla/sayfa-%.js)
 	tools/keyhasher.py $@ build/oyla/sayfa-$*.js
 
 build/oyla-%.html: oyla/sayfa.html \
-                   birim/cüzdan.birim \
-                   birim/dil/birim.html \
-                   birim/logo.birim \
+                   birim/başlık.birim \
                    build/oyla/sayfa.keymap \
                    build/oyla/sayfa-%.keymap \
                    build/oyla/dropdownok.svg.inl \

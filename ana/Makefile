@@ -46,11 +46,9 @@ build/ana/sayfa-%.keymap: $(call compressions, build/ana/sayfa-%.js build/ana/sa
 
 build/ana-%.html: ana/sayfa.html \
                   ana/liste/birim.html \
-                  birim/telefon/birim.html \
-                  birim/dil/birim.html \
-                  birim/cüzdan.birim \
-                  birim/logo.birim \
+                  birim/başlık.birim \
                   birim/tckt.birim \
+                  birim/telefon.birim \
                   build/ana/ok.svg.inl \
                   build/ana/sayfa-%.keymap \
                   build/birim/cüzdan/birim.keymap \

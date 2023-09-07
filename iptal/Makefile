@@ -35,9 +35,7 @@ build/iptal/sayfa-%.keymap: $(call compressions, build/iptal/sayfa-%.js)
 	tools/keyhasher.py $@ build/iptal/sayfa-$*.js
 
 build/iptal-%.html: iptal/sayfa.html \
-                    birim/cüzdan.birim \
-                    birim/dil/birim.html \
-                    birim/logo.birim \
+                    birim/başlık.birim \
                     build/iptal/sayfa-%.keymap \
                     build/iptal/sayfa.keymap \
                     build/ana/sayfa-%.keymap \
