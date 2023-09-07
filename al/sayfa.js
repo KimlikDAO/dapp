@@ -64,7 +64,7 @@ const tcktYarat = (adres, açıkTckt) => {
       .then(([
         /** @type {!Array<string>} */ nodelar,
         /** @type {!eth.ERC721Unlockable} */ unlockableNFT
-      ]) => ipfs.yaz("//" + nodelar[0], JSON.stringify(unlockableNFT, null, 2)))
+      ]) => ipfs.yaz("//" + nodelar[0], JSON.stringify(unlockableNFT, null, 2)), "application/json")
       .then(hex);
 
     İmeceİptal.kurVe(
