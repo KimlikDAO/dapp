@@ -2,14 +2,14 @@
  * @fileoverview İncele sayfası giriş noktası
  *
  */
-import Cüzdan from '/birim/cüzdan/birim';
+import Cüzdan from "/birim/cüzdan/birim";
 import "/birim/dil/birim";
-import Tckt from '/birim/tckt/birim';
+import Tckt from "/birim/tckt/birim";
 import { Provider } from "/lib/crosschain/provider";
-import { fromUnlockableNFT } from '/lib/did/decryptedSections';
-import TCKT from '/lib/ethereum/TCKT';
+import { fromUnlockableNFT } from "/lib/did/decryptedSections";
+import TCKT from "/lib/ethereum/TCKT";
 import evm from "/lib/ethereum/evm";
-import dom from '/lib/util/dom';
+import dom from "/lib/util/dom";
 
 /** @const {!Element} */
 const İmeceİptalDüğmesi = /** @const {!Element} */(dom.adla("inbtn1"));

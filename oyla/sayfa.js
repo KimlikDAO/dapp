@@ -2,11 +2,11 @@
  * @fileoverview Oyla sayfası giriş noktası
  *
  */
-import Cüzdan from '/birim/cüzdan/birim';
+import Cüzdan from "/birim/cüzdan/birim";
 import "/birim/dil/birim";
 import { Provider } from "/lib/crosschain/provider";
-import TCKT from '/lib/ethereum/TCKT';
-import dom from '/lib/util/dom';
+import TCKT from "/lib/ethereum/TCKT";
+import dom from "/lib/util/dom";
 
 let SeçilmişÖneriId;
 
@@ -90,7 +90,7 @@ const fiyatDeğişikliğiFormuHazırla = (yeniAğ) => {
   }
 }
 
-const komuniteÖnergesiHazırla = () => {
+const toplulukÖnergesiHazırla = () => {
   /** @const {Element} */
   const metinGirdisi = dom.adla("oyycva");
   /** @const {Element} */
@@ -149,6 +149,16 @@ const komuniteÖnergesiHazırla = () => {
   }
 }
 
+/**
+ * @param {{
+ *   title: string,
+ *   chain: string,
+ *   address: string,
+ *   calldata: string,
+ *   remainingTime: number,
+ *   votes: !Array<number>,
+ * }} data
+ */
 const aktifOyKartıOluştur = (data) => {
   const element = dom.adla("oyac").children[1].cloneNode(true);
   const topDiv = element.children[0];
@@ -171,8 +181,8 @@ const aktifOyKartıOluştur = (data) => {
     description.innerText = data.description;
     const address = middleDiv.children[0].children[1].children[0];
     address.innerText = data.address;
-    const callData = middleDiv.children[0].children[1].children[1];
-    callData.innerText = data.callData;
+    const calldata = middleDiv.children[0].children[1].children[1];
+    calldata.innerText = data.calldata;
     const remainingTime = middleDiv.children[0].children[2].children[1];
     remainingTime.innerText = data.remainingTime + " REMAINING";
     /** @type {number} */
