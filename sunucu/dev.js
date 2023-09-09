@@ -29,7 +29,10 @@ createServer({
     } else {
       const { ad, dil } = SAYFALAR[req.path]
       /** @const {string} */
-      const sayfa = sayfaOku(ad, { dil, dev: true });
+      const sayfa = sayfaOku(ad, {
+        dil: "tr" in req.query ? "tr" : "en" in req.query ? "en" : dil,
+        dev: true
+      });
       vite.transformIndexHtml(req.path, sayfa).then((sayfa) => {
         res.status(200)
           .set({ 'Content-type': 'text/html;charset=utf-8' })

@@ -15,7 +15,9 @@ REVERSE = {
 }
 
 PAGES = {
-    "/": "ana-tr.html",
+    "/": "ana-en.html",
+    "/?tr": "ana-tr.html",
+    "/?en": "ana-en.html",
     "/al": "al-tr.html",
     "/mint": "al-en.html",
     "/incele": "incele-tr.html",
@@ -61,7 +63,7 @@ def multireplace(string, replacements):
 
 class TestServer(BaseHTTPRequestHandler):
     def do_GET(self):
-        fname = PAGES.get(urlparse(self.path).path, None)
+        fname = PAGES.get(self.path, None)
         if fname:
             fname = 'build/' + fname
             ctype = "text/html;charset=utf-8"
