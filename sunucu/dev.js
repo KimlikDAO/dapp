@@ -8,7 +8,7 @@ import { sayfaOku } from "../lib/util/birimler.js";
 const SAYFALAR = {
   "/": { ad: "ana/sayfa.html", dil: "tr" },
   "/al": { ad: "al/sayfa.html", dil: "tr" },
-  "/get": { ad: "al/sayfa.html", dil: "en" },
+  "/mint": { ad: "al/sayfa.html", dil: "en" },
   "/incele": { ad: "incele/sayfa.html", dil: "tr" },
   "/view": { ad: "incele/sayfa.html", dil: "en" },
   "/oyla": { ad: "oyla/sayfa.html", dil: "tr" },
