@@ -4,14 +4,22 @@ import dom from "/lib/util/dom";
 /** @const {!Element} */
 const Nft = /** @type {!Element} */(dom.adla("tc"));
 /** @const {!Element} */
-const NftButton = /** @type {!Element} */(dom.adla("tenft-button"));
+const NftDüğmesi = /** @type {!Element} */(dom.adla("tez"));
+/** @const {!Element} */
+const Kutu = /** @type {!Element} */(dom.adla("tek"));
+/** @const {!Element} */
+const DüğmeliNft = /** @type {!Element} */(dom.adla("tel"))
+/** @const {!Element} */
+const Adres = /** @type {!Element} */(dom.adla("ted"));
+/** @const {!Element} */
+const AnaEkran = /** @type {!Element} */(dom.adla("tea"));
 
 /**
  * @param {?string} adres Telefonda gösterilecek adres.
  */
 const adresGir = (adres) => {
   adres ||= "0xcCc0cCc";
-  dom.adla("tetr").innerText = adres.slice(0, 6) + "..." + adres.slice(-4);
+  Adres.innerText = adres.slice(0, 6) + "..." + adres.slice(-4);
 }
 
 /**
@@ -19,23 +27,21 @@ const adresGir = (adres) => {
  * @param {string=} sağDüğme
  */
 const kutuGöster = (metin, sağDüğme) => {
-  /** @const {Element} */
-  const kutu = dom.adla("tefirw");
-  if (sağDüğme) dom.adla("tefirwy").innerText = sağDüğme;
-  kutu.style.opacity = "";
-  kutu.firstElementChild.innerText = metin;
-  kutu.classList.add("show");
-  dom.adla("tebg").classList.add("whenmsg");
-  dom.adla("tenftb").classList.add("whenmsg");
+  if (sağDüğme) dom.adla("tey").innerText = sağDüğme;
+  Kutu.style.opacity = "";
+  Kutu.firstElementChild.innerText = metin;
+  Kutu.classList.add("teg");
+  AnaEkran.classList.add("tem");
+  DüğmeliNft.classList.add("tem");
 }
 
 /**
  * Telefondaki iletişim kutusunu kapatır.
  */
 const kutuKapat = () => {
-  dom.adla("tefirw").classList.remove("show");
-  dom.adla("tebg").classList.remove("whenmsg");
-  dom.adla("tenftb").classList.remove("whenmsg");
+  Kutu.classList.remove("teg");
+  DüğmeliNft.classList.remove("tem");
+  AnaEkran.classList.remove("tem");
 }
 
 /**
@@ -49,22 +55,22 @@ const nftGöster = (kutudaGöster, bilgiYüzü) => {
 
   const yüzGöster = () => {
     Tckt.yüzGöster(bilgiYüzü);
-    NftButton.innerText = bilgiYüzü
+    NftDüğmesi.innerText = bilgiYüzü
       ? dom.TR ? "Gizle" : "Encrypt"
       : dom.TR ? "Aç" : "Decrypt";
   }
   yüzGöster();
   if (kutudaGöster) {
     Nft.style.opacity = "";
-    dom.göster(NftButton);
-    NftButton.onclick ||= () => {
+    dom.göster(NftDüğmesi);
+    NftDüğmesi.onclick ||= () => {
       bilgiYüzü = !bilgiYüzü;
       yüzGöster();
     }
   }
 
-  Nft.classList.toggle("w", !kutudaGöster);
-  NftButton.classList.toggle("show", kutudaGöster);
+  Nft.classList.toggle("tew", !kutudaGöster);
+  NftDüğmesi.classList.toggle("teg", kutudaGöster);
 }
 
 /**
@@ -76,7 +82,7 @@ const nftYukarıGönder = () => {
 }
 
 const nftGeriAl = () => {
-  Nft.classList.add('down');
+  Nft.classList.add("tex");
   nftGöster(true, false);
 }
 

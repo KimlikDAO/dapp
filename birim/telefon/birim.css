@@ -8,7 +8,7 @@
   background: white;
 }
 
-#tebg {
+#tea {
   background-color: #fff;
   border-radius: 40px;
   height: 100%;
@@ -17,25 +17,27 @@
   width: 100%;
 }
 
-#tebg.whenmsg {
+#tea.tem {
   filter: blur(3px);
 }
 
-.tefr {
+/* Bakiye */
+#teb {
   display: flex;
   font-size: 24px;
   justify-content: center;
   padding-top: 60px;
 }
 
-.tesr {
+/* Hesap adı */
+#tec {
   display: flex;
   font-size: 9pt;
   justify-content: center;
   padding-bottom: 20px;
 }
 
-#tetr {
+#ted {
   background-color: #E8F9FD;
   border-radius: 13px;
   color: #999;
@@ -44,13 +46,15 @@
   width: fit-content;
 }
 
-.tefor {
+/* Token NFT seçici */
+#tee {
   display: flex;
   font-size: 12px;
   padding-top: 40px;
 }
 
-.tefort {
+/* Tokens */
+#tef {
   border-bottom: 1px solid #73777B;
   color: #73777B;
   height: 26px;
@@ -58,7 +62,8 @@
   width: 50%;
 }
 
-.teforn {
+/* NFTler */
+#teg {
   border-bottom: 2px solid #3d67ab;
   color: #3d67ab;
   height: 25px;
@@ -66,13 +71,15 @@
   width: 50%;
 }
 
-.tefir {
+/* NFT örnekleri gösteren bölme */
+#teh {
   display: flex;
   justify-content: space-around;
   padding: 25px 5px;
 }
 
-.tefirn {
+/* NFT örneği */
+.tei {
   border-radius: 5px;
   border: 1px solid #ccc;
   box-shadow: 0px 1px 5px rgb(0 0 0 / 15%);
@@ -80,7 +87,7 @@
   width: 125px;
 }
 
-#tefirw {
+#tek {
   background: rgb(255 255 255 / 0.8);
   border-radius: 10px;
   box-shadow: 0px 2px 10px rgb(0 0 0 / 15%);
@@ -93,43 +100,44 @@
   width: 270px;
 }
 
-#tefirw.show {
+#tek.teg {
   opacity: 1;
 }
 
-#tefirwt {
+#tet {
   padding: 35px 10px;
 }
 
-#tefirwyn {
+#tes {
   border-top: 0.3px solid #ccc;
   display: flex;
   height: 40px;
 }
 
-#tefirwn,
-#tefirwy {
+#ten,
+#tey {
   padding: 10px;
   width: 50%;
 }
 
-#tefirwy {
+#tey {
   border-left: 0.3px solid #ccc;
   font-weight: 700;
 }
 
-#tenftb {
+/* NFT ve altındaki düğme */
+#tel {
   height: 100%;
   perspective: 750px;
   position: absolute;
   width: 100%;
 }
 
-#tenftb.whenmsg {
+#tel.tem {
   filter: blur(3px);
 }
 
-#tenft-button {
+#tez {
   align-items: center;
   background-color: #fff;
   border-radius: 4px;
@@ -149,32 +157,33 @@
   width: 250px;
 }
 
-#tenft-button.show {
+#tez.teg {
   transform: none;
   opacity: 1;
 }
 
-#tenftb>#tc {
+#tel>#tc {
   top: 45px;
   left: 15px;
   width: 250px;
   height: 250px;
   font-size: 10pt;
 }
-#tenftb .tcp {
+
+#tel .tcp {
   width: 250px;
   height: 250px;
 }
 
-#tc.w {
+#tc.tew {
   transform: translate(-70px, 272px) scale(0.5);
   border: 2px solid #ccc;
 }
 
-#tc.down {
+#tc.tex {
   transform: translate3d(0, 360px, 0px) scale(0.892);
 }
 
-#tc.down.flp {
+#tc.tex.flp {
   transform: translate3d(0, 360px, 0px) rotateY(-180deg) scale(0.892);
 }
