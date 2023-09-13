@@ -34,6 +34,7 @@ build/incele/sayfa-%.keymap: $(call compressions, build/incele/sayfa-%.js)
 
 build/incele-%.html: incele/sayfa.html \
                      birim/başlık.birim \
+                     birim/favicon.birim \
                      birim/tckt.birim \
                      build/al/paste.svg.inl \
                      build/incele/sayfa-%.keymap \
@@ -41,6 +42,7 @@ build/incele-%.html: incele/sayfa.html \
                      build/ana/sayfa-%.keymap \
                      build/birim/cüzdan/birim.keymap \
                      build/birim/dil/birim.keymap \
+                     build/birim/favicon/birim.keymap \
                      build/birim/lato/l400.keymap \
                      build/birim/lato/l700-%.keymap \
                      build/birim/tckt/birim.keymap

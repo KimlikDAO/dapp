@@ -27,6 +27,7 @@ Yazılımcıların dApp'i test etmesi için gereken adımlar:
 
 Staging ve deployment adımları için birkaç araca daha ihtiyacımız var
 ```shell
+brew install pngcrush
 brew install zopfli
 brew install brotli
 pip install fonttools

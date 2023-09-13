@@ -13,9 +13,9 @@ const MIMES = {
   "css": "text/css",
   "js": "application/javascript;charset=utf-8",
   "svg": "image/svg+xml",
-  "ttf": "font/ttf",
   "woff2": "font/woff2",
-  "ico": "image/x-icon",
+  "ttf": "font/ttf",
+  "png": "image/png",
   "txt": "text/plain",
 };
 /** @const {!Object<string, string>} */
@@ -58,7 +58,8 @@ const ProdWorker = {
     /** @const {string} */
     const enc = req.cf.clientAcceptEncoding || "";
     /** @const {string} */
-    const ext = url.endsWith(".woff2") ? ""
+    const ext = (url.endsWith(".woff2") || url.endsWith(".png"))
+      ? ""
       : enc.includes("br") ? ".br" : enc.includes("gz") ? ".gz" : "";
     /** @const {number} */
     const idx = url.lastIndexOf(".");

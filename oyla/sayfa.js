@@ -156,6 +156,7 @@ const toplulukÖnergesiHazırla = () => {
  *   address: string,
  *   calldata: string,
  *   remainingTime: number,
+ *   description: string,
  *   votes: !Array<number>,
  * }} data
  */

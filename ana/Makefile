@@ -47,12 +47,14 @@ build/ana/sayfa-%.keymap: $(call compressions, build/ana/sayfa-%.js build/ana/sa
 build/ana-%.html: ana/sayfa.html \
                   ana/liste/birim.html \
                   birim/başlık.birim \
+                  birim/favicon.birim \
                   birim/tckt.birim \
                   birim/telefon.birim \
                   build/ana/ok.svg.inl \
                   build/ana/sayfa-%.keymap \
                   build/birim/cüzdan/birim.keymap \
                   build/birim/dil/birim.keymap \
+                  build/birim/favicon/birim.keymap \
                   build/birim/lato/l400.keymap \
                   build/birim/lato/l700-%.keymap \
                   build/birim/tckt/birim.keymap

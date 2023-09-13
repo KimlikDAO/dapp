@@ -34,7 +34,7 @@ MIMES = {
     "svg": "image/svg+xml",
     "ttf": "font/ttf",
     "woff2": "font/woff2",
-    "ico": "image/x-icon",
+    "png": "image/png",
     "txt": "text/plain",
 }
 

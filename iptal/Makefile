@@ -36,11 +36,13 @@ build/iptal/sayfa-%.keymap: $(call compressions, build/iptal/sayfa-%.js)
 
 build/iptal-%.html: iptal/sayfa.html \
                     birim/başlık.birim \
+                    birim/favicon.birim \
                     build/iptal/sayfa-%.keymap \
                     build/iptal/sayfa.keymap \
                     build/ana/sayfa-%.keymap \
                     build/birim/cüzdan/birim.keymap \
                     build/birim/dil/birim.keymap \
+                    build/birim/favicon/birim.keymap \
                     build/birim/lato/l400.keymap \
                     build/birim/lato/l700-%.keymap
 	node tools/htmlProcessor $< $*

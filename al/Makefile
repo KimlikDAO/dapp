@@ -47,6 +47,7 @@ build/al-%.html: al/sayfa.html \
                  al/imeceİptal/birim.html \
                  al/tanışma.birim \
                  birim/başlık.birim \
+                 birim/favicon.birim \
                  birim/tckt.birim \
                  birim/telefon.birim \
                  build/al/paste.svg.inl \
@@ -57,6 +58,7 @@ build/al-%.html: al/sayfa.html \
                  build/ana/sayfa-%.keymap \
                  build/birim/cüzdan/birim.keymap \
                  build/birim/dil/birim.keymap \
+                 build/birim/favicon/birim.keymap \
                  build/birim/lato/l400.keymap \
                  build/birim/lato/l700-%.keymap \
                  build/birim/paralar/birim.keymap \
