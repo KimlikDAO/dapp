@@ -1,13 +1,23 @@
+build/birim/favicon/icon16.png: build/birim/favicon/icon.svg
+	mkdir -p $(dir $@)
+	yarn svgexport $^ $@.tmp 16:16
+	pngcrush -brute $@.tmp $@
 
-build/birim/favicon/icon.png: build/birim/favicon/icon.svg
+build/birim/favicon/icon32.png: build/birim/favicon/icon.svg
 	mkdir -p $(dir $@)
 	yarn svgexport $^ $@.tmp 32:32
-	pngcrush -brute $@.tmp $@ 
+	pngcrush -brute $@.tmp $@
+
+build/favicon.ico: \
+  build/birim/favicon/icon16.png \
+  build/birim/favicon/icon32.png \
+  build/birim/favicon/icon64.png
+	convert -background transparent $^ $@
 
 build/birim/favicon/birim.keymap: $(call compressions, build/birim/favicon/icon.svg) \
-  build/birim/favicon/icon.png
+	build/birim/favicon/icon32.png
 	mkdir -p $(dir $@) && > $@
 	tools/keyhasher.py $@ build/birim/favicon/icon.svg
-	tools/keyhasher.py $@ --nocompress build/birim/favicon/icon.png
+	tools/keyhasher.py $@ --nocompress build/birim/favicon/icon32.png
 
 birim/favicon.birim: birim/favicon/birim.html
