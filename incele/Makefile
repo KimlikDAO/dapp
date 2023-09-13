@@ -35,6 +35,7 @@ build/incele/sayfa-%.keymap: $(call compressions, build/incele/sayfa-%.js)
 build/incele-%.html: incele/sayfa.html \
                      birim/başlık.birim \
                      birim/favicon.birim \
+                     birim/lato.birim \
                      birim/tckt.birim \
                      build/al/paste.svg.inl \
                      build/incele/sayfa-%.keymap \

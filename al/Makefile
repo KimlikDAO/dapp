@@ -48,6 +48,7 @@ build/al-%.html: al/sayfa.html \
                  al/tanışma.birim \
                  birim/başlık.birim \
                  birim/favicon.birim \
+                 birim/lato.birim \
                  birim/tckt.birim \
                  birim/telefon.birim \
                  build/al/paste.svg.inl \

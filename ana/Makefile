@@ -48,6 +48,7 @@ build/ana-%.html: ana/sayfa.html \
                   ana/liste/birim.html \
                   birim/başlık.birim \
                   birim/favicon.birim \
+                  birim/lato.birim \
                   birim/tckt.birim \
                   birim/telefon.birim \
                   build/ana/ok.svg.inl \

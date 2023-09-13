@@ -48,4 +48,6 @@ build/birim/lato/%.ttf: birim/lato/%.txt
 build/birim/lato/%.woff2: build/birim/lato/%.ttf birim/lato/Makefile
 	woff2_compress $<
 
+birim/lato.birim: birim/lato/birim.html
+
 .PRECIOUS: build/birim/lato/%.woff2

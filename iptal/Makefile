@@ -37,6 +37,7 @@ build/iptal/sayfa-%.keymap: $(call compressions, build/iptal/sayfa-%.js)
 build/iptal-%.html: iptal/sayfa.html \
                     birim/başlık.birim \
                     birim/favicon.birim \
+                    birim/lato.birim \
                     build/iptal/sayfa-%.keymap \
                     build/iptal/sayfa.keymap \
                     build/ana/sayfa-%.keymap \

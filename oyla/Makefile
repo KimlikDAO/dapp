@@ -37,6 +37,7 @@ build/oyla/sayfa-%.keymap: $(call compressions, build/oyla/sayfa-%.js)
 build/oyla-%.html: oyla/sayfa.html \
                    birim/başlık.birim \
                    birim/favicon.birim \
+                   birim/lato.birim \
                    build/oyla/sayfa.keymap \
                    build/oyla/sayfa-%.keymap \
                    build/oyla/dropdownok.svg.inl \
