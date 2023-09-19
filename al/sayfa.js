@@ -72,8 +72,6 @@ const tcktYarat = (adres, açıkTckt) => {
   }
 }
 
-Telefon.nftYukarıGönder();
-
 const bağlaAdımı = () => {
   /** @const {Element} */
   const düğme = dom.adla("al1a");

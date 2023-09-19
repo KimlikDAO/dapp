@@ -9,9 +9,14 @@ const Gösterme = new Set([
   "signatureTs",
 ]);
 /** @const {!Element} */
-const Kartlar = /** @const {!Element} */(dom.adla("tck"));
+const Kartlar = /** @const {!Element} */(dom.adla("tcc"));
 /** @const {!Element} */
 const Tckt = /** @const {!Element} */(dom.adla("tc"));
+/** @const {!Element} */
+const SolDüğme = /** @const {!Element} */(dom.adla("tcso"));
+/** @const {!Element} */
+const SağDüğme = /** @const {!Element} */(dom.adla("tcsa"));
+
 /** @type {number} */
 let Kart = 0;
 /** @type {number} */
@@ -27,8 +32,8 @@ const kartDeğiştir = (yeniKart) => {
   Kart = yeniKart;
 }
 
-dom.adla("tcso").onclick = () => kartDeğiştir((Kart + (KartSayısı - 1)) % KartSayısı);
-dom.adla("tcsa").onclick = () => kartDeğiştir((Kart + 1) % KartSayısı);
+SolDüğme.onclick = () => kartDeğiştir((Kart + (KartSayısı - 1)) % KartSayısı);
+SağDüğme.onclick = () => kartDeğiştir((Kart + 1) % KartSayısı);
 
 /**
  * @param {boolean} bilgiYüzü
@@ -44,7 +49,7 @@ const çevir = () => Tckt.classList.toggle("flp");
  * @param {!did.PersonInfo} personInfo
  */
 const personInfoGöster = (personInfo) => {
-  for (let satır of Object.entries(/** @type {!Object<string, string>} */(personInfo)))
+  for (const satır of Object.entries(/** @type {!Object<string, string>} */(personInfo)))
     if (satır[1] && !Gösterme.has(satır[0])) {
       const birim = dom.adla("tc" + satır[0]);
       if (birim) birim.innerText = satır[1];
@@ -64,7 +69,7 @@ const contactInfoGöster = (contactInfo) => {
   if (!contactInfo) return;
   KartSayısı += 1;
   dom.adlaGöster("tcibp");
-  for (let satır of Object.entries(/** @type {!Object<string, string>} */(contactInfo)))
+  for (const satır of Object.entries(/** @type {!Object<string, string>} */(contactInfo)))
     if (satır[1] && !Gösterme.has(satır[0]))
       dom.adla("tc" + satır[0]).innerText = satır[0] == "phone"
         ? dom.telefondanMetne(satır[1])
@@ -97,7 +102,7 @@ const addressInfoGöster = (addressInfo) => {
  * @param {?did.KütükBilgileri} kütükBilgileri
  */
 const kütükBilgileriGöster = (kütükBilgileri) => {
-  for (let satır of Object.entries(/** @type {!Object<string, string>} */(kütükBilgileri)))
+  for (const satır of Object.entries(/** @type {!Object<string, string>} */(kütükBilgileri)))
     if (satır[1] && !Gösterme.has(satır[0]))
       dom.adla("tc" + satır[0]).innerText = satır[1];
 }

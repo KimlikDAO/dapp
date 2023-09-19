@@ -1,5 +1,5 @@
 import ProdWorker from "../prod";
-import { assertEq, assertStats } from "/lib/testing/assert";
+import { assertEq } from "/lib/testing/assert";
 
 /**
  * @constructor
@@ -18,12 +18,29 @@ KeyKey.prototype.get = (key, type) =>
   Promise.resolve(new TextEncoder().encode(key).buffer);
 
 /**
+ * @override
+ *
  * @param {string} key
  * @param {string|!ArrayBuffer} value
  * @return {!Promise<void>}
  */
 KeyKey.prototype.put = (key, value) => Promise.resolve()
   .then(() => console.log(key, value));
+
+/**
+ * @override
+ *
+ * @param {string} key
+ * @return {!Promise<void>}
+ */
+KeyKey.prototype.delete = (key) => Promise.resolve();
+
+/**
+ * @override
+ *
+ * @return {!Promise<!cloudflare.KeyValueList>}
+ */
+KeyKey.prototype.list = () => Promise.resolve(new cloudflare.KeyValueList());
 
 globalThis["caches"] = {};
 globalThis["caches"]["default"] = /** @type {!Cache} */({
@@ -40,7 +57,7 @@ globalThis["caches"]["default"] = /** @type {!Cache} */({
    * @param {string} key
    * @param {!Response} res
    */
-  put(key, res) { }
+  put(key, res) { return Promise.resolve(); },
 });
 
 /** @const {!ProdEnvironment} */
@@ -81,14 +98,12 @@ const testKvName = (url, acceptEncoding, cookie, kvName) => ProdWorker.fetch(
   .then((res) => res.text())
   .then((res) => assertEq(res, kvName));
 
-Promise.all([
-  testKvName("https://kimlikdao.org/", "br", "l=tr", "ana-tr.html.br"),
-  testKvName("https://kimlikdao.org/", "br", null, "ana-en.html.br"),
-  testKvName("https://kimlikdao.org/?tr", "gzip", "l=en", "ana-tr.html.gz"),
-  testKvName("https://kimlikdao.org/?en", "", "l=tr", "ana-en.html"),
-  testKvName("https://kimlikdao.org/?utm_source=Wallet", "br, gzip", null, "ana-en.html.br"),
-  testKvName("https://kimlikdao.org/?utm", "gzip, br", "l=tr", "ana-tr.html.br"),
-  testKvName("https://kimlikdao.org/abc.woff2", "br", null, "abc.woff2"),
-  testKvName("https://kimlikdao.org/vote", "br", null, "oyla-en.html.br"),
-  testKvName("https://kimlikdao.org/vote", "gzip", "l=tr", "oyla-en.html.gz"),
-]).then(assertStats);
+testKvName("https://kimlikdao.org/", "br", "l=tr", "ana-tr.html.br");
+testKvName("https://kimlikdao.org/", "br", null, "ana-en.html.br");
+testKvName("https://kimlikdao.org/?tr", "gzip", "l=en", "ana-tr.html.gz");
+testKvName("https://kimlikdao.org/?en", "", "l=tr", "ana-en.html");
+testKvName("https://kimlikdao.org/?utm_source=Wallet", "br, gzip", null, "ana-en.html.br");
+testKvName("https://kimlikdao.org/?utm", "gzip, br", "l=tr", "ana-tr.html.br");
+testKvName("https://kimlikdao.org/abc.woff2", "br", null, "abc.woff2");
+testKvName("https://kimlikdao.org/vote", "br", null, "oyla-en.html.br");
+testKvName("https://kimlikdao.org/vote", "gzip", "l=tr", "oyla-en.html.gz");

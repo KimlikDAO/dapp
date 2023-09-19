@@ -29,13 +29,6 @@ build/sunucu/prod.js: sunucu/prod.js sunucu/prod.d.js \
 	sed -i.bak 's/globalThis.ProdWorker=/export default/g' $@
 	wc $@
 
-.PHONY: build/TCKT
-build/TCKT: $(call compressions, build/TCKT.svg)
-
-build/TCKT.svg: build/birim/tckt/görsel.svg
-	mkdir -p $(dir $@)
-	cp $< $@
-
 al-en := mint
 incele-en := view
 oyla-en := vote

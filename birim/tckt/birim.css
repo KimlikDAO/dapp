@@ -18,9 +18,10 @@
   transform: rotateY(-180deg);
 }
 
-#tca,
+#tck,
 #tci {
   backface-visibility: hidden;
+  border-radius: 10px;
   height: 100%;
   overflow: hidden;
   position: absolute;
@@ -28,7 +29,7 @@
 }
 
 /* Kapak yüzü */
-#tca {
+#tck {
   align-items: center;
   display: flex;
   justify-content: center;
@@ -40,8 +41,8 @@
   transform: rotateY(180deg);
 }
 
-/* Kartlar */
-#tck {
+/* TCKT Carousel */
+#tcc {
   display: flex;
   height: 100%;
   transition: transform 1s;

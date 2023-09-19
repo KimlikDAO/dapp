@@ -73,14 +73,6 @@ const nftGöster = (kutudaGöster, bilgiYüzü) => {
   NftDüğmesi.classList.toggle("teg", kutudaGöster);
 }
 
-/**
- * Temsili nft'yi Al sayfasında daha yukarıda gösterir
- */
-const nftYukarıGönder = () => {
-  dom.adla("te").previousElementSibling.appendChild(Nft);
-  Nft.style.opacity = "";
-}
-
 const nftGeriAl = () => {
   Nft.classList.add("tex");
   nftGöster(true, false);
@@ -91,6 +83,5 @@ export default {
   kutuGöster,
   kutuKapat,
   nftGöster,
-  nftYukarıGönder,
   nftGeriAl,
 };

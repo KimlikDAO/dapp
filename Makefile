@@ -20,7 +20,7 @@ dev:
 staging: build
 	sunucu/staging.py
 
-cf-deployment: build build/sunucu/prod.js build/sitemap build/TCKT sunucu/prod.toml
+cf-deployment: build build/sunucu/prod.js build/sitemap sunucu/prod.toml
 	tools/cfuploader.py sunucu/prod.toml sunucu/Makefile
 	wrangler deploy \
         --config sunucu/prod.toml \
