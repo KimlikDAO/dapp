@@ -19,7 +19,7 @@ dom.adla("did").onclick = (/** @type {Event} */ event) => {
         "/oyla": "/vote",
         "/iptal": "/revoke"
       };
-      document.cookie = "l=en;path=/;domain=.kimlikdao.org;max-age=" + 1e6;
+      document.cookie = "l=en;path=/;domain=.kimlikdao.org;SameSite=Strict;max-age=" + 1e6;
       window.location.href = sayfalar[window.location.pathname] + window.location.hash;
     }
   } else {
@@ -31,7 +31,7 @@ dom.adla("did").onclick = (/** @type {Event} */ event) => {
         "/vote": "/oyla",
         "/revoke": "/iptal"
       };
-      document.cookie = "l=tr;path=/;domain=.kimlikdao.org;max-age=" + 1e6;
+      document.cookie = "l=tr;path=/;domain=.kimlikdao.org;SameSite=Strict;max-age=" + 1e6;
       window.location.href = sayfalar[window.location.pathname] + window.location.hash;
     }
   }

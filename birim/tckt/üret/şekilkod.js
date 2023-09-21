@@ -39,6 +39,9 @@ const bubble = (w, pay, payda, innerR) => {
       type: SVGPathData.ARC,
       relative: true, rX: innerR, rY: innerR, xRot: 0, sweepFlag: 1, lArcFlag: 0,
       x: l + h - 2 * r, y: 2 * r - l - h
+    },
+    {
+      type: SVGPathData.CLOSE_PATH
     }
   ]);
 }
@@ -269,6 +272,9 @@ const yuvartı = (w) => new SVGPathData([
     xRot: 0, sweepFlag: 1, lArcFlag: 0,
     x: -w / 2, y: w / 2
   },
+  {
+    type: SVGPathData.CLOSE_PATH
+  }
 ]);
 
 

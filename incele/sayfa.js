@@ -30,7 +30,7 @@ const SilKutusu = /** @const {!Element} */(dom.adla("inmsy"));
 /** @const {!Element} */
 const TcktVar = /** @const {!Element} */(dom.adla("tc"));
 /** @const {!Element} */
-const TcktYok = /** @const {!Element} */(dom.adla("innotckt"));
+const TcktYok = /** @const {!Element} */(dom.adla("inn"));
 
 /** @const {!Object<string, !did.DecryptedSections>} */
 const Bellek = {};
