@@ -1,4 +1,4 @@
-import { SVGPathData } from "svg-pathdata";
+const { SVGPathData } = require("svg-pathdata");
 
 /**
  * Sol alt ve sağ üstte birer halka içeren 2x2 grid ve bu iki halkanın
@@ -94,6 +94,12 @@ const kumsaati = (w, pay, payda, boyun) => {
   ]);
 }
 
+/**
+ * @param {number} w ızgara kenar uzunluğu
+ * @param {number} r köşe yuvarlama yarıçapı
+ * @param {number} delta gradyan vektör uzunluğu çarpanı
+ * @return {!SVGPathData}
+ */
 const ikiliGemi = (w, r, delta) => {
   const D = r * (1 - delta);
   return new SVGPathData([
@@ -138,6 +144,12 @@ const ikiliGemi = (w, r, delta) => {
   ])
 }
 
+/**
+ * @param {number} w ızgara kenar uzunluğu
+ * @param {number} r köşe yuvarlama yarıçapı
+ * @param {number} delta gradyan vektör uzunluğu çarpanı
+ * @return {!SVGPathData}
+ */
 const sivriGemi = (w, r, delta) => {
   const D = r * (1 - delta);
   return new SVGPathData([
@@ -277,7 +289,6 @@ const yuvartı = (w) => new SVGPathData([
   }
 ]);
 
-
 /** @const {!Object<string, string>} */
 const ŞekilKod = {
   "tcks10": bubble(22, 1, 12, 7).round(1e3),
@@ -288,5 +299,12 @@ const ŞekilKod = {
   "tcks16": yuvartı(22).round(1e3),
 }
 
-for (const kod in ŞekilKod)
-  console.log(`<path id="${kod}" d="${ŞekilKod[kod].encode()}" />`);
+let out = "";
+
+exports.üret = () => {
+  if (!out) {
+    for (const kod in ŞekilKod)
+      out += `<path id="${kod}" d="${ŞekilKod[kod].encode()}" />\n    `;
+  }
+  return out
+}

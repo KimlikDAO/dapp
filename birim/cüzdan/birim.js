@@ -272,7 +272,7 @@ const bağlantıSeçildi = (bağlantıAdı, bağlantı) => {
   Bağlı = bağlantı;
   bağlantı.connect(Ağ, ağDeğişti, adresDeğişti)
     .then(() => {
-      document.cookie = `cu=${bağlantıAdı};domain=.kimlikdao.org;max-age=` + 1e6;
+      document.cookie = `cu=${bağlantıAdı};domain=.kimlikdao.org;SameSite=Strict;max-age=` + 1e6;
       eskiBağlantı.disconnect();
       for (const f of BağlantıDeğişince) f(bağlantı);
     })

@@ -7,7 +7,8 @@ Lang-tr := true
 
 build/%.svg: %.svg tools/svgo-config.js
 	mkdir -p $(dir $@)
-	yarn svgo --config tools/svgo-config.js $< --output $@
+	node tools/htmlProcessor $<
+	yarn svgo --config tools/svgo-config.js $@ --output $@
 
 build/%.svg.inl: %.svg tools/svgo-inline-config.js
 	mkdir -p $(dir $@)

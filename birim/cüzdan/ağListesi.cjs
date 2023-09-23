@@ -1,4 +1,4 @@
-(değerler) => {
+exports.üret = (değerler) => {
   const names = {
     "0x1": "Ethereum",
     "0xa86a": "Avalanche",

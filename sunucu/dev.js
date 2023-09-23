@@ -22,6 +22,11 @@ createServer({
   appType: 'custom'
 }).then((vite) => {
   const app = express()
+  app.get("/*.svg", (req, res) => {
+    const sayfaAdı = decodeURIComponent(req.path.slice(1));
+    const svg = sayfaOku(sayfaAdı, { dil: "en", dev: true })
+    res.status(200).set({ "content-type": "image/svg+xml" }).end(svg);
+  })
   app.use(vite.middlewares)
   app.use(Object.keys(SAYFALAR), (req, res, next) => {
     if (!(req.path in SAYFALAR)) {

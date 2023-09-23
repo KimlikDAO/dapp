@@ -1,4 +1,4 @@
-import { SVGPathData } from "svg-pathdata";
+const { SVGPathData } = require("svg-pathdata");
 
 /** @const {!Object<(string|number), !SVGPathData>} */
 const RobotoMono = {
@@ -84,11 +84,18 @@ const RobotoMono = {
   ),
 };
 
-/** @type {number} */
-let i = 0;
-for (const harf in RobotoMono) {
-  /** @const {string} */
-  const d = RobotoMono[harf].translate(0, harf == "T" ? i - 18 : i).round(1e3).encode();
-  console.log(`<path id="tck${harf}" d="${d}"/>`);
-  i -= 6;
+let out = "";
+
+exports.üret = () => {
+  if (!out) {
+    /** @type {number} */
+    let i = 0;
+    for (const harf in RobotoMono) {
+      /** @const {string} */
+      const d = RobotoMono[harf].translate(0, harf == "T" ? i - 18 : i).round(1e3).encode();
+      out += `<path id="tck${harf}" d="${d}"/>\n    `;
+      i -= 6;
+    }
+  }
+  return out;
 }
