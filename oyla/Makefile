@@ -1,3 +1,6 @@
+oyla-en := vote
+oyla-tr := oyla
+
 build/oyla/sayfa-%.js: oyla/sayfa.js \
                        birim/cüzdan/*.js \
                        birim/dil/birim.js \
@@ -12,6 +15,8 @@ build/oyla/sayfa-%.js: oyla/sayfa.js \
 	mkdir -p $(dir $@)
 	yarn google-closure-compiler -W VERBOSE -O ADVANCED --charset UTF-8 \
                              --define "TR\$$\$$module\$$lib\$$util\$$dom=$(Lang-$*)" \
+                             --define "KonumTR\$$\$$module\$$birim\$$dil\$$birim=$(oyla-tr)" \
+                             --define "KonumEN\$$\$$module\$$birim\$$dil\$$birim=$(oyla-en)" \
                              --emit_use_strict \
                              --module_resolution NODE \
                              --assume_function_wrapper \

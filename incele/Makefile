@@ -1,3 +1,6 @@
+incele-en := view
+incele-tr := incele
+
 build/incele/sayfa-%.js: incele/sayfa.js \
     birim/cüzdan/*.js \
     birim/dil/birim.js \
@@ -11,6 +14,8 @@ build/incele/sayfa-%.js: incele/sayfa.js \
 	mkdir -p $(dir $@)
 	yarn google-closure-compiler -W VERBOSE -O ADVANCED --charset UTF-8 \
                              --define "TR\$$\$$module\$$lib\$$util\$$dom=$(Lang-$*)" \
+                             --define "KonumTR\$$\$$module\$$birim\$$dil\$$birim=$(incele-tr)" \
+                             --define "KonumEN\$$\$$module\$$birim\$$dil\$$birim=$(incele-en)" \
                              --emit_use_strict \
                              --module_resolution NODE \
                              --assume_function_wrapper \

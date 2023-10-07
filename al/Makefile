@@ -1,5 +1,8 @@
 include al/tanışma/Makefile
 
+al-en := mint
+al-tr := al
+
 build/al/sayfa-%.js: al/sayfa.js \
                      al/imeceİptal/birim.js al/ödeme/birim.js \
                      al/tanışma/birim.js \
@@ -20,6 +23,8 @@ build/al/sayfa-%.js: al/sayfa.js \
 	mkdir -p $(dir $@)
 	yarn google-closure-compiler -W VERBOSE -O ADVANCED --charset UTF-8 \
                              --define "TR\$$\$$module\$$lib\$$util\$$dom=$(Lang-$*)" \
+                             --define "KonumTR\$$\$$module\$$birim\$$dil\$$birim=$(al-tr)" \
+                             --define "KonumEN\$$\$$module\$$birim\$$dil\$$birim=$(al-en)" \
                              --emit_use_strict \
                              --module_resolution NODE \
                              --assume_function_wrapper \

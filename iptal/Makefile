@@ -1,3 +1,6 @@
+iptal-en := revoke
+iptal-tr := iptal
+
 build/iptal/sayfa-%.js: iptal/sayfa.js \
     birim/cüzdan/*.js \
     birim/dil/birim.js \
@@ -13,6 +16,8 @@ build/iptal/sayfa-%.js: iptal/sayfa.js \
 	yarn google-closure-compiler -W VERBOSE -O ADVANCED --charset UTF-8 \
                              --jscomp_error=unusedLocalVariables \
                              --define "TR\$$\$$module\$$lib\$$util\$$dom=$(Lang-$*)" \
+                             --define "KonumTR\$$\$$module\$$birim\$$dil\$$birim=$(iptal-tr)" \
+                             --define "KonumEN\$$\$$module\$$birim\$$dil\$$birim=$(iptal-en)" \
                              --emit_use_strict \
                              --module_resolution NODE \
                              --assume_function_wrapper \

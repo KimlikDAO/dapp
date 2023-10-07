@@ -29,11 +29,6 @@ build/sunucu/prod.js: sunucu/prod.js sunucu/prod.d.js \
 	sed -i.bak 's/globalThis.ProdWorker=/export default/g' $@
 	wc $@
 
-al-en := mint
-incele-en := view
-oyla-en := vote
-iptal-en := revoke
-
 build/sitemap.txt:
 	mkdir -p $(dir $@)
 	echo "https://kimlikdao.org" > $@
