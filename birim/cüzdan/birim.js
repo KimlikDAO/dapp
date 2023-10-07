@@ -94,7 +94,7 @@ let Bağlı = BoşBağlantı;
 /** @type {?string} */
 let Adres = null;
 /** @type {string} */
-let Ağ = "0xa86a";
+let Ağ = "0xa4b1";
 /** @type {?string} */
 let BağlaMetni;
 /** @type {?string} */
@@ -338,9 +338,9 @@ const aç = () => {
 
 const kur = () => {
   /** @const {Element} */
-  const avax = dom.adla("cud0xa86a");
-  avax.replaceChild(AğButonu.firstElementChild.cloneNode(true),
-    avax.firstElementChild);
+  const anaAğ = dom.adla("cud0xa4b1");
+  anaAğ.replaceChild(AğButonu.firstElementChild.cloneNode(true),
+    anaAğ.firstElementChild);
   AdresButonu.onclick = AğButonu.onclick = aç;
   Menü.onblur = () => {
     dom.gizle(Menü);
