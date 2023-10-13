@@ -67,7 +67,9 @@ const imeceİptalKutusuGöster = () => {
   dom.adla("iniio").onclick = () => {
     const weight = +agirlikGirdisi.value;
     address = evm.adresDüzelt(adresGirdisi.value).slice(2).toLowerCase();
-    TCKT.addRevoker(/** @type {string} */(Cüzdan.adres()), weight, address);
+    TCKT.addRevoker(
+      Cüzdan.ağ(),
+      /** @type {string} */(Cüzdan.adres()), weight, address);
   }
 }
 
@@ -92,7 +94,7 @@ const eşikKutusuGöster = () => {
       /** @const {number} */
       const delta = eşik - Number(girdi.value);
       delta ? TCKT
-        .reduceRevokeThreshold(adres, delta)
+        .reduceRevokeThreshold(ağ, adres, delta)
         .then(kutuKapat)
         .catch(console.log) : kutuKapat();
     }
@@ -109,7 +111,7 @@ const silKutusuGöster = () => {
     /** @const {string} */
     const adres = /** @type {string} */(Cüzdan.adres());
     kutuKapat();
-    TCKT.revoke(adres)
+    TCKT.revoke(ağ, adres)
       .then(() => {
         delete Bellek[ağ + adres];
         kapalıYüzGöster();

@@ -98,7 +98,9 @@ const revokeeAdımınıGöster = () => {
 
   onaylaDüğmesi.onclick = () => {
     if (seçilmişAdres) {
-      TCKT.revokeFriend(/** @type {string} */(Cüzdan.adres()), seçilmişAdres.innerText);
+      TCKT.revokeFriend(
+        Cüzdan.ağ(),
+        /** @type {string} */(Cüzdan.adres()), seçilmişAdres.innerText);
       onaylaDüğmesi.innerText = dom.TR ? "Adres İptal Edildi ✓" : "Address revoked ✓";
       dom.adla("ipiir").innerText = dom.TR ? "Geri" : "Back";
       dom.düğmeDurdur(onaylaDüğmesi);
@@ -127,7 +129,7 @@ dom.adla("ipbtna").onclick = () => {
 
     dom.adla("ip1c").onclick = () => {
       const adres = /** @type {string} */(Cüzdan.adres());
-      TCKT.revoke(adres).catch(console.log);
+      TCKT.revoke(Cüzdan.ağ(), adres).catch(console.log);
     }
 
     dom.adla("ip1d").onclick = () => {

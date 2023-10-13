@@ -191,7 +191,7 @@ const öde = (cidSözü, adresAğırlığı, eşik) => {
         ? Promise.all([cidSözü, TCKT.getPermitFor(ağ, adres, para, iptalli)])
           .then(birazBekle)
           .then((/** @type {!Array<string>} */[cid, imza]) =>
-            TCKT.createWithRevokersWithTokenPermit(adres, cid, eşik, adresAğırlığı, imza)
+            TCKT.createWithRevokersWithTokenPermit(ağ, adres, cid, eşik, adresAğırlığı, imza)
           )
         : Promise.all([cidSözü, TCKT.getApprovalFor(ağ, adres, para)])
           .then(birazBekle)
