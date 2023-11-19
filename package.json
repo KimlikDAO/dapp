@@ -19,10 +19,10 @@
     "htmlparser2": "^9.0.0",
     "svg-pathdata": "^6.0.3",
     "svgexport": "^0.4.2",
-    "svgo": "^3.0.2",
+    "svgo": "^3.0.4",
     "toml": "^3.0.0",
     "uglify-js": "^3.16.2",
-    "vite": "^4.4.11",
-    "wrangler": "^3.13.1"
+    "vite": "^5.0.0",
+    "wrangler": "^3.16.0"
   }
 }
