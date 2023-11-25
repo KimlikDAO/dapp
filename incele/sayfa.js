@@ -221,7 +221,7 @@ Cüzdan.tcktDeğişince((_, dosyaSözü) => {
   EşikAzaltmaDüğmesi.onclick = tcktVar ? eşikKutusuGöster : null;
   SilDüğmesi.onclick = tcktVar ? silKutusuGöster : null;
   dom.gösterGizle(AçDüğmesi, tcktVar);
-  dom.gösterGizle(TcktVar, tcktVar);
+  dom.gösterGizle(Tckt.Kök, tcktVar);
   dom.gösterGizle(TcktYok, !tcktVar);
 
   if (tcktVar)

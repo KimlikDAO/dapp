@@ -2,8 +2,6 @@ import Tckt from "/birim/tckt/birim";
 import dom from "/lib/util/dom";
 
 /** @const {!Element} */
-const Nft = /** @type {!Element} */(dom.adla("tc"));
-/** @const {!Element} */
 const NftDüğmesi = /** @type {!Element} */(dom.adla("tez"));
 /** @const {!Element} */
 const Kutu = /** @type {!Element} */(dom.adla("tek"));
@@ -61,7 +59,7 @@ const nftGöster = (kutudaGöster, bilgiYüzü) => {
   }
   yüzGöster();
   if (kutudaGöster) {
-    Nft.style.opacity = "";
+    Tckt.Kök.style.opacity = "";
     dom.göster(NftDüğmesi);
     NftDüğmesi.onclick ||= () => {
       bilgiYüzü = !bilgiYüzü;
@@ -69,12 +67,12 @@ const nftGöster = (kutudaGöster, bilgiYüzü) => {
     }
   }
 
-  Nft.classList.toggle("tew", !kutudaGöster);
+  Tckt.Kök.classList.toggle("tew", !kutudaGöster);
   NftDüğmesi.classList.toggle("teg", kutudaGöster);
 }
 
 const nftGeriAl = () => {
-  Nft.classList.add("tex");
+  Tckt.Kök.classList.add("tex");
   nftGöster(true, false);
 }
 

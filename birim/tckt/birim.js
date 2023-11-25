@@ -11,7 +11,7 @@ const Gösterme = new Set([
 /** @const {!Element} */
 const Kartlar = /** @const {!Element} */(dom.adla("tcc"));
 /** @const {!Element} */
-const Tckt = /** @const {!Element} */(dom.adla("tc"));
+const Kök = /** @const {!Element} */(dom.adla("tc"));
 /** @const {!Element} */
 const SolDüğme = /** @const {!Element} */(dom.adla("tcso"));
 /** @const {!Element} */
@@ -38,12 +38,12 @@ SağDüğme.onclick = () => kartDeğiştir((Kart + 1) % KartSayısı);
 /**
  * @param {boolean} bilgiYüzü
  */
-const yüzGöster = (bilgiYüzü) => Tckt.classList.toggle("flp", bilgiYüzü);
+const yüzGöster = (bilgiYüzü) => Kök.classList.toggle("flp", bilgiYüzü);
 
 /**
  * @return {boolean}
  */
-const çevir = () => Tckt.classList.toggle("flp");
+const çevir = () => Kök.classList.toggle("flp");
 
 /**
  * @param {!did.PersonInfo} personInfo
@@ -115,10 +115,11 @@ const açıkTcktGöster = (açıkTckt) => {
   contactInfoGöster(/** @type {?did.ContactInfo} */(açıkTckt["contactInfo"]));
   addressInfoGöster(/** @type {?did.AddressInfo} */(açıkTckt["addressInfo"]));
   kütükBilgileriGöster(/** @type {?did.KütükBilgileri} */(açıkTckt["kütükBilgileri"]));
-  Tckt.classList.add("flp");
+  Kök.classList.add("flp");
 }
 
 export default {
+  Kök,
   açıkTcktGöster,
   çevir,
   yüzGöster
