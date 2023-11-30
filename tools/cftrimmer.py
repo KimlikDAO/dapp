@@ -22,7 +22,7 @@ NAMED_ASSET = {
 
 EXT = ['', '.br', '.gz']
 
-CF_CONFIG = toml.load('tools/prod.toml')
+CF_CONFIG = toml.load('sunucu/prod.toml')
 ROUTE = f"https://{CF_CONFIG['route']['pattern']}/"
 ACCOUNT_ID = CF_CONFIG['account_id']
 ZONE_ID = CF_CONFIG['zone_id']
@@ -38,7 +38,7 @@ ZONES_URL = f"{URL}/zones/{ZONE_ID}/"
 
 
 def read_pages() -> str:
-    for line in open('Makefile'):
+    for line in open('sunucu/Makefile'):
         if line.startswith('PAGES :='):
             return line[8:].split()
     assert False, "Sayfalar bulunamadı"

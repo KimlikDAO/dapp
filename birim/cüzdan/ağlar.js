@@ -38,7 +38,7 @@ const AğBilgileri = {
   },
   "0xa86a": {
     ad: "Avalanche",
-    izleyici: "snowtrace.dev",
+    izleyici: "snowtrace.io",
     tokenKodu: "AVAX",
     tokenEki: dom.TR ? ["’tan", "’a"] : [],
     rpcUrl: "api.avax.network/ext/bc/C/rpc",
