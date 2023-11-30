@@ -26,4 +26,7 @@ cf-deployment: build build/sunucu/prod.js build/sitemap sunucu/prod.toml
         --config sunucu/prod.toml \
         --compatibility-date $(shell date -v -1d +%Y-%m-%d)
 
-.PHONY: cf-deployment clean dev staging
+cf-trim: cf-deployment
+	tools/cftrimmer.py sunucu/prod.toml sunucu/Makefile
+
+.PHONY: cf-deployment cf-trim clean dev staging
