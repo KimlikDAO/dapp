@@ -1,6 +1,7 @@
 build/sunucu/test/prod.compiled-test.js: sunucu/test/prod.compiled-test.js \
     sunucu/prod.js sunucu/prod.d.js \
     lib/cloudflare/types.d.js lib/cloudflare/moduleWorker.d.js \
+    lib/cloudflare/pageWorker.d.js lib/cloudflare/pageWorker.js \
     lib/testing/assert.js lib/testing/nodejs.d.js
 	mkdir -p $(dir $@)
 	yarn google-closure-compiler -W VERBOSE -O ADVANCED --charset UTF-8 \

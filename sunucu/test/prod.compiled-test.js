@@ -93,8 +93,9 @@ const createRequest = (url, encoding, cookie) => /** @type {!cloudflare.Request}
   }
 });
 
-const testKvName = (url, acceptEncoding, cookie, kvName) => ProdWorker.fetch(
-  createRequest(url, acceptEncoding, cookie), env, ctx)
+const testKvName = (url, acceptEncoding, cookie, kvName) => /** @type {!Promise<Response>} */(
+  ProdWorker.fetch(
+    createRequest(url, acceptEncoding, cookie), env, ctx))
   .then((res) => res.text())
   .then((res) => assertEq(res, kvName));
 
