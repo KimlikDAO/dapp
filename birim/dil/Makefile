@@ -5,6 +5,6 @@ DİL_REQUEST_SVG_OUT := $(addprefix build/birim/dil/, $(DİL_REQUEST_SVG))
 
 build/birim/dil/birim.keymap: $(call compressions, $(DİL_REQUEST_SVG_OUT))
 	mkdir -p $(dir $@) && rm -rf $@
-	tools/keyhasher.py $@ $(DİL_REQUEST_SVG_OUT)
+	node lib/birimler/hasher $@ $(DİL_REQUEST_SVG_OUT)
 
 birim/dil.birim: birim/dil/birim.html

@@ -46,7 +46,7 @@ build/ana/sayfa-%.css: \
 # callsite depend on build/ana/sayfa-%.keymap
 build/ana/sayfa-%.keymap: $(call compressions, build/ana/sayfa-%.js build/ana/sayfa-%.css)
 	mkdir -p $(dir $@) && > $@
-	tools/keyhasher.py $@ build/ana/sayfa-$*.js build/ana/sayfa-$*.css
+	node lib/birimler/hasher $@ build/ana/sayfa-$*.js build/ana/sayfa-$*.css
 	sed -i.bak 's#/ana/sayfa.css#/birim/ortak.css#' $@
 
 build/ana-%.html: ana/sayfa.html \
@@ -64,6 +64,6 @@ build/ana-%.html: ana/sayfa.html \
                   build/birim/lato/l400.keymap \
                   build/birim/lato/l700-%.keymap \
                   build/birim/tckt/birim.keymap
-	node tools/htmlProcessor $< $*
-	tools/keymapper.py $@ $(filter %.keymap,$^)
-	yarn html-minifier -c tools/html-minifier.conf $@ -o $@
+	node lib/birimler/işleyici $< $*
+	lib/birimler/keymapper.py $@ $(filter %.keymap,$^)
+	yarn html-minifier -c lib/birimler/htmlMinifierConfig.json $@ -o $@

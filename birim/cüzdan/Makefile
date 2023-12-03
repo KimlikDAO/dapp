@@ -8,7 +8,7 @@ CÜZDAN_REQUEST_SVG_OUT := $(addprefix build/birim/cüzdan/img/, $(CÜZDAN_REQUE
 
 build/birim/cüzdan/birim.keymap: $(call compressions, $(CÜZDAN_REQUEST_SVG_OUT))
 	mkdir -p $(dir $@) && rm -rf $@
-	tools/keyhasher.py $@ $(CÜZDAN_REQUEST_SVG_OUT)
+	node lib/birimler/hasher $@ $(CÜZDAN_REQUEST_SVG_OUT)
 
 birim/cüzdan.birim: birim/cüzdan/birim.html \
     $(CÜZDAN_INLINE_SVG_OUT) \

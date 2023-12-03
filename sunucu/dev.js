@@ -1,10 +1,10 @@
 import { readFileSync } from "fs";
 import { parse } from "toml";
-import { devSunucu } from "../lib/util/sunucu.js";
+import { çalıştır } from "../lib/birimler/devSunucu.js";
 
-const config = parse(readFileSync('sunucu/dev.toml'));
+const config = parse(readFileSync("sunucu/dev.toml"));
 
-devSunucu({
+çalıştır({
   port: config.port,
   dizin: "ana",
   sayfalar: [

@@ -2,7 +2,7 @@ MAKEFLAGS := -j 8
 
 all: build
 
-include tools/Makefile
+include lib/birimler/Makefile
 include al/Makefile
 include ana/Makefile
 include birim/Makefile
@@ -25,8 +25,5 @@ cf-deployment: build build/sunucu/prod.js build/sitemap sunucu/prod.toml
 	wrangler deploy \
         --config sunucu/prod.toml \
         --compatibility-date $(shell date -v -1d +%Y-%m-%d)
-
-cf-trim: cf-deployment
-	tools/cftrimmer.py sunucu/prod.toml sunucu/Makefile
 
 .PHONY: cf-deployment cf-trim clean dev staging

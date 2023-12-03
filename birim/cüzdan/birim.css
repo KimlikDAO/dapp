@@ -32,12 +32,13 @@
   border-radius: 10px;
   box-shadow: 0px 1px 20px rgba(0, 0, 0, 0.2);
   display: flex;
-  position: absolute;
   left: -121px;
+  min-height: 349px;
+  outline: 0;
+  position: absolute;
   top: 53px;
   width: 380px;
   z-index: 20;
-  outline: 0;
 }
 
 @media (max-width: 1350px) {

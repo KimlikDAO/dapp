@@ -32,7 +32,7 @@ build/al/sayfa-%.js: al/sayfa.js \
                              --entry_point $< \
                              --js $(filter %.js,$^) \
                              --js_output_file $@
-	tools/keymapper.py $@ $(filter %.keymap,$^)
+	lib/birimler/keymapper.py $@ $(filter %.keymap,$^)
 	yarn uglifyjs $@ -m -c toplevel,unsafe -o $@
 	wc $@
 
@@ -42,11 +42,11 @@ build/al/sayfa.css: al/sayfa.css al/*/*.css birim/kutu.css
 
 build/al/sayfa.keymap: $(call compressions, build/al/sayfa.css)
 	mkdir -p $(dir $@) && > $@
-	tools/keyhasher.py $@ build/al/sayfa.css
+	node lib/birimler/hasher $@ build/al/sayfa.css
 
 build/al/sayfa-%.keymap: $(call compressions, build/al/sayfa-%.js)
 	mkdir -p $(dir $@) && > $@
-	tools/keyhasher.py $@ build/al/sayfa-$*.js
+	node lib/birimler/hasher $@ build/al/sayfa-$*.js
 
 build/al-%.html: al/sayfa.html \
                  al/imeceİptal/birim.html \
@@ -69,6 +69,6 @@ build/al-%.html: al/sayfa.html \
                  build/birim/lato/l700-%.keymap \
                  build/birim/paralar/birim.keymap \
                  build/birim/tckt/birim.keymap
-	node tools/htmlProcessor $< $*
-	tools/keymapper.py $@ $(filter %.keymap,$^)
-	yarn html-minifier -c tools/html-minifier.conf $@ -o $@
+	node lib/birimler/işleyici $< $*
+	lib/birimler/keymapper.py $@ $(filter %.keymap,$^)
+	yarn html-minifier -c lib/birimler/htmlMinifierConfig.json $@ -o $@

@@ -33,11 +33,11 @@ build/oyla/sayfa.css: oyla/sayfa.css oyla/*/*.css
 
 build/oyla/sayfa.keymap: $(call compressions, build/oyla/sayfa.css)
 	mkdir -p $(dir $@) && > $@
-	tools/keyhasher.py $@ build/oyla/sayfa.css
+	node lib/birimler/hasher $@ build/oyla/sayfa.css
 
 build/oyla/sayfa-%.keymap: $(call compressions, build/oyla/sayfa-%.js)
 	mkdir -p $(dir $@) && > $@
-	tools/keyhasher.py $@ build/oyla/sayfa-$*.js
+	node lib/birimler/hasher $@ build/oyla/sayfa-$*.js
 
 build/oyla-%.html: oyla/sayfa.html \
                    birim/başlık.birim \
@@ -53,6 +53,6 @@ build/oyla-%.html: oyla/sayfa.html \
                    build/birim/lato/l400.keymap \
                    build/birim/lato/l700-%.keymap \
                    build/birim/paralar/birim.keymap
-	node tools/htmlProcessor $< $*
-	tools/keymapper.py $@ $(filter %.keymap,$^)
-	yarn html-minifier -c tools/html-minifier.conf $@ -o $@
+	node lib/birimler/işleyici $< $*
+	lib/birimler/keymapper.py $@ $(filter %.keymap,$^)
+	yarn html-minifier -c lib/birimler/htmlMinifierConfig.json $@ -o $@

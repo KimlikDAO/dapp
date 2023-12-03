@@ -31,11 +31,11 @@ build/incele/sayfa.css: incele/sayfa.css incele/*/*.css birim/kutu.css
 
 build/incele/sayfa.keymap: $(call compressions, build/incele/sayfa.css)
 	mkdir -p $(dir $@) && > $@
-	tools/keyhasher.py $@ build/incele/sayfa.css
+	node lib/birimler/hasher $@ build/incele/sayfa.css
 
 build/incele/sayfa-%.keymap: $(call compressions, build/incele/sayfa-%.js)
 	mkdir -p $(dir $@) && > $@
-	tools/keyhasher.py $@ build/incele/sayfa-$*.js
+	node lib/birimler/hasher $@ build/incele/sayfa-$*.js
 
 build/incele-%.html: incele/sayfa.html \
                      birim/başlık.birim \
@@ -52,6 +52,6 @@ build/incele-%.html: incele/sayfa.html \
                      build/birim/lato/l400.keymap \
                      build/birim/lato/l700-%.keymap \
                      build/birim/tckt/birim.keymap
-	node tools/htmlProcessor $< $*
-	tools/keymapper.py $@ $(filter %.keymap,$^)
-	yarn html-minifier -c tools/html-minifier.conf $@ -o $@
+	node lib/birimler/işleyici $< $*
+	lib/birimler/keymapper.py $@ $(filter %.keymap,$^)
+	yarn html-minifier -c lib/birimler/htmlMinifierConfig.json $@ -o $@

@@ -33,11 +33,11 @@ build/iptal/sayfa.css: iptal/sayfa.css
 
 build/iptal/sayfa.keymap: $(call compressions, build/iptal/sayfa.css)
 	mkdir -p $(dir $@) && > $@
-	tools/keyhasher.py $@ build/iptal/sayfa.css
+	node lib/birimler/hasher $@ build/iptal/sayfa.css
 
 build/iptal/sayfa-%.keymap: $(call compressions, build/iptal/sayfa-%.js)
 	mkdir -p $(dir $@) && > $@
-	tools/keyhasher.py $@ build/iptal/sayfa-$*.js
+	node lib/birimler/hasher $@ build/iptal/sayfa-$*.js
 
 build/iptal-%.html: iptal/sayfa.html \
                     birim/başlık.birim \
@@ -51,6 +51,6 @@ build/iptal-%.html: iptal/sayfa.html \
                     build/birim/favicon/birim.keymap \
                     build/birim/lato/l400.keymap \
                     build/birim/lato/l700-%.keymap
-	node tools/htmlProcessor $< $*
-	tools/keymapper.py $@ $(filter %.keymap,$^)
-	yarn html-minifier -c tools/html-minifier.conf $@ -o $@
+	node lib/birimler/işleyici $< $*
+	lib/birimler/keymapper.py $@ $(filter %.keymap,$^)
+	yarn html-minifier -c lib/birimler/htmlMinifierConfig.json $@ -o $@

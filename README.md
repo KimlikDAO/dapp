@@ -3,18 +3,18 @@
 ## Organizasyon
 Her http request gerektiren bölümü 'sayfa' olarak adlandırıyoruz.
 Her sayfa için gerekli dosyalar http `pathname`'i ile aynı isimli
-bir klasörde toplanıyor.
+bir dizinde toplanıyor.
 
-Buna istisna `/` pathindeki ana sayfa; bu sayfaya `ana` klasörünü
+Buna istisna `/` pathindeki ana sayfa; bu sayfaya `ana` dizinini
 ayırıyoruz.
 
 Sayfaların bazı `altbirim`leri olabilir; bunlar sayfa içindeki sınırları belli
-bileşenler ve bu bileşenlere ait her dosya altbirimle aynı adda bir klasörde
+bileşenler ve bu bileşenlere ait her dosya altbirimle aynı adda bir dizinde
 duruyor. Örneğin `al/` sayfasının `tanışma` ve `ödeme` gibi altbirimleri
-`al/tanışma` ve `al/ödeme` klasöründe duruyor.
+`al/tanışma` ve `al/ödeme` dizininde duruyor.
 
 Birden çok yerde kullanılabilen bileşenlere ise `birim` adını
-veriyoruz ve bunlari `birim/` klasörüne koyuyoruz.
+veriyoruz ve bunları `birim/` dizinine koyuyoruz.
 
 ## Kullanım
 Yazılımcıların dApp'i test etmesi için gereken adımlar:

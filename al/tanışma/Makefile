@@ -8,7 +8,7 @@ AL_TANIŞMA_REQUEST_SVG_OUT := $(addprefix build/al/tanışma/, $(AL_TANIŞMA_RE
 
 build/al/tanışma/birim.keymap: $(call compressions, $(AL_TANIŞMA_REQUEST_SVG_OUT) build/al/tanışma/powWorker.js)
 	mkdir -p $(dir $@) && rm -rf $@
-	tools/keyhasher.py $@ $(AL_TANIŞMA_REQUEST_SVG_OUT) build/al/tanışma/powWorker.js
+	node lib/birimler/hasher $@ $(AL_TANIŞMA_REQUEST_SVG_OUT) build/al/tanışma/powWorker.js
 
 al/tanışma.birim: al/tanışma/birim.html $(AL_TANIŞMA_INLINE_SVG_OUT)
 
