@@ -1,9 +1,9 @@
 import dom from "/lib/util/dom";
 
 /** @define {string} */
-const KonumTR = "/";
+const KonumTR = "/?tr";
 /** @define {string} */
-const KonumEN = "/";
+const KonumEN = "/?en";
 
 /** @const {Element} */
 const DilButonu = dom.adla("dib");

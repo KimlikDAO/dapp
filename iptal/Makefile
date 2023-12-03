@@ -49,8 +49,8 @@ build/iptal-%.html: iptal/sayfa.html \
                     build/birim/cüzdan/birim.keymap \
                     build/birim/dil/birim.keymap \
                     build/birim/favicon/birim.keymap \
-                    build/birim/lato/l400.keymap \
-                    build/birim/lato/l700-%.keymap
+                    build/birim/lato/birim.keymap \
+                    build/birim/lato/birim-%.keymap
 	node lib/birimler/işleyici $< $*
 	lib/birimler/keymapper.py $@ $(filter %.keymap,$^)
 	yarn html-minifier -c lib/birimler/htmlMinifierConfig.json $@ -o $@

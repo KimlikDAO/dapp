@@ -15,23 +15,23 @@ l700Files = $(addprefix build/birim/lato/,$(addsuffix -$(1).$(2), l700))
 l400Files = $(addprefix build/birim/lato/,$(addsuffix .$(1), l400))
 
 build/birim/lato/l400.css: birim/lato/l400.css \
-    build/birim/lato/l400.keymap
+    build/birim/lato/birim.keymap
 	mkdir -p $(dir $@)
 	lib/birimler/keymapper.py $^ -o $@
 
 build/birim/lato/l700-%.css: birim/lato/l700.css \
-    build/birim/lato/l700-%.keymap
+    build/birim/lato/birim-%.keymap
 	mkdir -p $(dir $@)
 	lib/birimler/keymapper.py $^ -o $@
 
-build/birim/lato/l400.keymap: \
+build/birim/lato/birim.keymap: \
 	$(call compressions, $(call l400Files,ttf)) \
     $(call l400Files,woff2)
 	mkdir -p $(dir $@) && > $@
 	node lib/birimler/hasher $@ $(call l400Files,ttf)
 	node lib/birimler/hasher $@ --nocompress $(call l400Files,woff2)
 
-build/birim/lato/l700-%.keymap: \
+build/birim/lato/birim-%.keymap: \
     $(call compressions, $(call l700Files,%,ttf)) \
     $(call l700Files,%,woff2)
 	mkdir -p $(dir $@) && > $@
