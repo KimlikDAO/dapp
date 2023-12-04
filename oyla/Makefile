@@ -35,24 +35,18 @@ build/oyla/sayfa.keymap: $(call compressions, build/oyla/sayfa.css)
 	mkdir -p $(dir $@) && > $@
 	node lib/birimler/hasher $@ build/oyla/sayfa.css
 
-build/oyla/sayfa-%.keymap: $(call compressions, build/oyla/sayfa-%.js)
+build/oyla/sayfa-%.keymap: build/ana/sayfa-%.keymap \
+    $(call compressions, build/oyla/sayfa-%.js)
 	mkdir -p $(dir $@) && > $@
 	node lib/birimler/hasher $@ build/oyla/sayfa-$*.js
+	cat $< >> $@
 
 build/oyla-%.html: oyla/sayfa.html \
-                   birim/başlık.birim \
-                   birim/favicon.birim \
-                   birim/lato.birim \
                    build/oyla/sayfa.keymap \
                    build/oyla/sayfa-%.keymap \
-                   build/oyla/dropdownok.svg.inl \
-                   build/ana/sayfa-%.keymap \
-                   build/birim/cüzdan/birim.keymap \
-                   build/birim/dil/birim.keymap \
-                   build/birim/favicon/birim.keymap \
-                   build/birim/lato/birim.keymap \
-                   build/birim/lato/birim-%.keymap \
-                   build/birim/paralar/birim.keymap
+                   birim/başlık.birim \
+                   birim/favicon.birim \
+                   birim/lato-%.birim \
+                   build/oyla/dropdownok.svg.inl
 	node lib/birimler/işleyici $< $*
-	lib/birimler/keymapper.py $@ $(filter %.keymap,$^)
 	yarn html-minifier -c lib/birimler/htmlMinifierConfig.json $@ -o $@

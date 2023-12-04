@@ -11,5 +11,6 @@ build/birim/cüzdan/birim.keymap: $(call compressions, $(CÜZDAN_REQUEST_SVG_OUT
 	node lib/birimler/hasher $@ $(CÜZDAN_REQUEST_SVG_OUT)
 
 birim/cüzdan.birim: birim/cüzdan/birim.html \
+    build/birim/cüzdan/birim.keymap \
     $(CÜZDAN_INLINE_SVG_OUT) \
     build/birim/paste.svg.inl

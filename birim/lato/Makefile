@@ -25,18 +25,16 @@ build/birim/lato/l700-%.css: birim/lato/l700.css \
 	lib/birimler/keymapper.py $^ -o $@
 
 build/birim/lato/birim.keymap: \
-	$(call compressions, $(call l400Files,ttf)) \
+    $(call compressions, $(call l400Files,ttf)) \
     $(call l400Files,woff2)
 	mkdir -p $(dir $@) && > $@
-	node lib/birimler/hasher $@ $(call l400Files,ttf)
-	node lib/birimler/hasher $@ --nocompress $(call l400Files,woff2)
+	node lib/birimler/hasher $@ $(call l400Files,ttf) --nocompress $(call l400Files,woff2)
 
 build/birim/lato/birim-%.keymap: \
     $(call compressions, $(call l700Files,%,ttf)) \
     $(call l700Files,%,woff2)
 	mkdir -p $(dir $@) && > $@
-	node lib/birimler/hasher $@ $(call l700Files,$*,ttf)
-	node lib/birimler/hasher $@ --nocompress $(call l700Files,$*,woff2)
+	node lib/birimler/hasher $@ $(call l700Files,$*,ttf) --nocompress $(call l700Files,$*,woff2)
 
 build/birim/lato/%.ttf: birim/lato/%.txt
 	mkdir -p $(dir $@)
@@ -48,6 +46,12 @@ build/birim/lato/%.ttf: birim/lato/%.txt
 build/birim/lato/%.woff2: build/birim/lato/%.ttf birim/lato/Makefile
 	woff2_compress $<
 
-birim/lato.birim: birim/lato/birim.html
+birim/lato-en.birim: birim/lato/birim.html \
+    build/birim/lato/birim-en.keymap \
+	  build/birim/lato/birim.keymap
+
+birim/lato-tr.birim: birim/lato/birim.html \
+    build/birim/lato/birim-tr.keymap \
+	  build/birim/lato/birim.keymap
 
 .PRECIOUS: build/birim/lato/%.woff2

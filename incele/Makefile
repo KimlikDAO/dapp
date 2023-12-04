@@ -33,25 +33,19 @@ build/incele/sayfa.keymap: $(call compressions, build/incele/sayfa.css)
 	mkdir -p $(dir $@) && > $@
 	node lib/birimler/hasher $@ build/incele/sayfa.css
 
-build/incele/sayfa-%.keymap: $(call compressions, build/incele/sayfa-%.js)
+build/incele/sayfa-%.keymap: build/ana/sayfa-%.keymap \
+    $(call compressions, build/incele/sayfa-%.js)
 	mkdir -p $(dir $@) && > $@
 	node lib/birimler/hasher $@ build/incele/sayfa-$*.js
+	cat $< >> $@
 
 build/incele-%.html: incele/sayfa.html \
-                     birim/başlık.birim \
-                     birim/favicon.birim \
-                     birim/lato.birim \
-                     birim/tckt.birim \
-                     build/al/paste.svg.inl \
                      build/incele/sayfa-%.keymap \
                      build/incele/sayfa.keymap \
-                     build/ana/sayfa-%.keymap \
-                     build/birim/cüzdan/birim.keymap \
-                     build/birim/dil/birim.keymap \
-                     build/birim/favicon/birim.keymap \
-                     build/birim/lato/birim.keymap \
-                     build/birim/lato/birim-%.keymap \
-                     build/birim/tckt/birim.keymap
+                     birim/başlık.birim \
+                     birim/favicon.birim \
+                     birim/lato-%.birim \
+                     birim/tckt.birim \
+                     build/al/paste.svg.inl
 	node lib/birimler/işleyici $< $*
-	lib/birimler/keymapper.py $@ $(filter %.keymap,$^)
 	yarn html-minifier -c lib/birimler/htmlMinifierConfig.json $@ -o $@

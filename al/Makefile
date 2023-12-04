@@ -1,3 +1,4 @@
+include al/ödeme/Makefile
 include al/tanışma/Makefile
 
 al-en := mint
@@ -44,31 +45,24 @@ build/al/sayfa.keymap: $(call compressions, build/al/sayfa.css)
 	mkdir -p $(dir $@) && > $@
 	node lib/birimler/hasher $@ build/al/sayfa.css
 
-build/al/sayfa-%.keymap: $(call compressions, build/al/sayfa-%.js)
+build/al/sayfa-%.keymap: build/ana/sayfa-%.keymap \
+    $(call compressions, build/al/sayfa-%.js)
 	mkdir -p $(dir $@) && > $@
 	node lib/birimler/hasher $@ build/al/sayfa-$*.js
+	cat $< >> $@
 
 build/al-%.html: al/sayfa.html \
                  al/imeceİptal/birim.html \
+                 al/ödeme.birim \
                  al/tanışma.birim \
-                 birim/başlık.birim \
-                 birim/favicon.birim \
-                 birim/lato.birim \
-                 birim/tckt.birim \
-                 birim/telefon.birim \
-                 build/al/paste.svg.inl \
-                 build/al/tanışma/external-link.svg.inl \
                  build/al/sayfa-%.keymap \
                  build/al/sayfa.keymap \
-                 build/al/tanışma/birim.keymap \
-                 build/ana/sayfa-%.keymap \
-                 build/birim/cüzdan/birim.keymap \
-                 build/birim/dil/birim.keymap \
-                 build/birim/favicon/birim.keymap \
-                 build/birim/lato/birim.keymap \
-                 build/birim/lato/birim-%.keymap \
-                 build/birim/paralar/birim.keymap \
-                 build/birim/tckt/birim.keymap
+                 build/al/paste.svg.inl \
+                 build/al/tanışma/external-link.svg.inl \
+                 birim/başlık.birim \
+                 birim/favicon.birim \
+                 birim/lato-%.birim \
+                 birim/tckt.birim \
+                 birim/telefon.birim
 	node lib/birimler/işleyici $< $*
-	lib/birimler/keymapper.py $@ $(filter %.keymap,$^)
 	yarn html-minifier -c lib/birimler/htmlMinifierConfig.json $@ -o $@

@@ -35,22 +35,17 @@ build/iptal/sayfa.keymap: $(call compressions, build/iptal/sayfa.css)
 	mkdir -p $(dir $@) && > $@
 	node lib/birimler/hasher $@ build/iptal/sayfa.css
 
-build/iptal/sayfa-%.keymap: $(call compressions, build/iptal/sayfa-%.js)
+build/iptal/sayfa-%.keymap: build/ana/sayfa-%.keymap \
+    $(call compressions, build/iptal/sayfa-%.js)
 	mkdir -p $(dir $@) && > $@
 	node lib/birimler/hasher $@ build/iptal/sayfa-$*.js
+	cat $< >> $@
 
 build/iptal-%.html: iptal/sayfa.html \
-                    birim/başlık.birim \
-                    birim/favicon.birim \
-                    birim/lato.birim \
                     build/iptal/sayfa-%.keymap \
                     build/iptal/sayfa.keymap \
-                    build/ana/sayfa-%.keymap \
-                    build/birim/cüzdan/birim.keymap \
-                    build/birim/dil/birim.keymap \
-                    build/birim/favicon/birim.keymap \
-                    build/birim/lato/birim.keymap \
-                    build/birim/lato/birim-%.keymap
+                    birim/başlık.birim \
+                    birim/favicon.birim \
+                    birim/lato-%.birim
 	node lib/birimler/işleyici $< $*
-	lib/birimler/keymapper.py $@ $(filter %.keymap,$^)
 	yarn html-minifier -c lib/birimler/htmlMinifierConfig.json $@ -o $@

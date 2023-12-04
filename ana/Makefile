@@ -50,20 +50,13 @@ build/ana/sayfa-%.keymap: $(call compressions, build/ana/sayfa-%.js build/ana/sa
 	sed -i.bak 's#/ana/sayfa.css#/birim/ortak.css#' $@
 
 build/ana-%.html: ana/sayfa.html \
+                  build/ana/sayfa-%.keymap \
                   ana/liste/birim.html \
                   birim/başlık.birim \
                   birim/favicon.birim \
-                  birim/lato.birim \
+                  birim/lato-%.birim \
                   birim/tckt.birim \
                   birim/telefon.birim \
-                  build/ana/ok.svg.inl \
-                  build/ana/sayfa-%.keymap \
-                  build/birim/cüzdan/birim.keymap \
-                  build/birim/dil/birim.keymap \
-                  build/birim/favicon/birim.keymap \
-                  build/birim/lato/birim.keymap \
-                  build/birim/lato/birim-%.keymap \
-                  build/birim/tckt/birim.keymap
+                  build/ana/ok.svg.inl
 	node lib/birimler/işleyici $< $*
-	lib/birimler/keymapper.py $@ $(filter %.keymap,$^)
 	yarn html-minifier -c lib/birimler/htmlMinifierConfig.json $@ -o $@

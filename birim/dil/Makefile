@@ -7,4 +7,5 @@ build/birim/dil/birim.keymap: $(call compressions, $(DİL_REQUEST_SVG_OUT))
 	mkdir -p $(dir $@) && rm -rf $@
 	node lib/birimler/hasher $@ $(DİL_REQUEST_SVG_OUT)
 
-birim/dil.birim: birim/dil/birim.html
+birim/dil.birim: birim/dil/birim.html \
+    build/birim/dil/birim.keymap

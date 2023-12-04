@@ -10,7 +10,8 @@ build/al/tanışma/birim.keymap: $(call compressions, $(AL_TANIŞMA_REQUEST_SVG_
 	mkdir -p $(dir $@) && rm -rf $@
 	node lib/birimler/hasher $@ $(AL_TANIŞMA_REQUEST_SVG_OUT) build/al/tanışma/powWorker.js
 
-al/tanışma.birim: al/tanışma/birim.html $(AL_TANIŞMA_INLINE_SVG_OUT)
+al/tanışma.birim: al/tanışma/birim.html $(AL_TANIŞMA_INLINE_SVG_OUT) \
+    build/al/tanışma/birim.keymap
 
 build/al/tanışma/powWorker.js: al/tanışma/powWorker.js \
     al/tanışma/powWorker.d.js lib/util/worker.d.js \
