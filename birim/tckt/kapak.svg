@@ -52,7 +52,7 @@
       gradientTransform="translate(526.348 89.6089) rotate(-125.623) scale(441.78 373.984)">
       <stop offset="0.447917" stop-color="#7D8AFA" />
       <stop offset="0.572917" stop-color="#5698E2" />
-      <stop offset="0.869792" stop-color="#2A4DC1" />
+      <stop offset="0.869792" stop-color="#3c6aff" />
     </radialGradient>
     <!-- Cam Göbeği 2-->
     <linearGradient id="tckcg2" x1="560.27" y1="483.094" x2="474.592" y2="-52.9144" gradientUnits="userSpaceOnUse">
@@ -63,18 +63,17 @@
     </linearGradient>
     <!-- Cam göbeği -->
     <radialGradient id="tckcg" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse"
-      gradientTransform="translate(105.051 355.226) rotate(-24.5399) scale(441.549 373.789)">
+      gradientTransform="translate(105 355) rotate(-24.5) scale(441.549 373.789)">
       <stop offset="0.12" stop-color="#2A4DC1" />
       <stop offset="0.285" stop-color="#935BCA" />
       <stop offset="0.465" stop-color="#5698E2" />
     </radialGradient>
     <!-- Sağ üst mor -->
-    <radialGradient id="tcksu" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse"
-      gradientTransform="translate(-207.652 171.26) rotate(52.8058) scale(438.404 360.309)">
-      <stop offset="0.833333" stop-color="#C4659F" />
+    <radialGradient id="tcksu" cx="-200" cy="170" r="400" gradientUnits="userSpaceOnUse">
+      <stop offset="0.8" stop-color="#C4659F" />
       <stop offset="1" stop-color="#7D8AFA" />
     </radialGradient>
-    <circle id="tcks0" cx="11" cy="11" r="11" />
+    <circle id="tcks0" cx="11" cy="11" r="11"></circle>
     <path id="tcks1" d="M5,5c6-6,6-6,12,0s6,6,0,12s-6,6-12,0s-6-6,0-12Z" />
     <rect id="tcks2" x="0.5" y="0.5" width="21" height="21" />
     <rect id="tcks3" width="22" height="22" rx="8" />
@@ -214,20 +213,22 @@
     <use href="#tckT" x="15" y="288" />
   </g>
   <g clip-path="url(#tckz)">
-    <rect x="0" y="0" width="400" height="400" fill="white" />
-    <path filter="url(#tcksam)"
-      d="M257.64 313.656C258.601 348.517 141.426 526.8 107.983 527.721C74.5394 528.642 30.9618 521.692 30.0014 486.832C29.041 451.971 31.8738 157.571 65.3173 156.649C107.983 527.721 256.68 278.795 257.64 313.656Z"
-      fill="#935BCA" />
-    <path filter="url(#tckugk)"
-      d="M80.5168 -126.302C127.687 -173.472 209.531 -150.698 274.32 -85.9088C339.11 -21.1195 258.092 283.46 210.922 330.63C163.752 377.8 58.4887 14.4413 -6.30057 -50.348C-71.0899 -115.137 33.3469 -79.1324 80.5168 -126.302Z"
-      fill="url(#tckrm)" />
-    <ellipse filter="url(#tckaom)" cx="365.58" cy="307.423" rx="275.294" ry="194.025"
-      transform="rotate(-67.5082 365.58 307.423)" fill="url(#tckcg2)" />
-    <path style="mix-blend-mode:color-dodge" filter="url(#tckcgb)"
-      d="M207.169 190.135C227.044 -234.081 457.091 226.686 537.777 130.991C527.14 533.082 371.409 305.018 371.409 305.018C371.409 305.018 315.244 610.522 121.645 559.463C-58.0769 402.397 -38.3402 59.9342 207.169 190.135Z"
-      fill="url(#tckcg)" />
-    <path filter="url(#tcksum)"
-      d="M464.963 179.305C413.519 235.402 317.128 211.669 237.637 138.77C158.146 65.8715 231.27 -289.186 282.715 -345.282C334.159 -401.379 442.691 -72.0634 522.182 0.835473C601.673 73.7344 516.408 123.209 464.963 179.305Z"
-      fill="url(#tcksu)" />
+    <g transform="rotate(1 200 200)">
+      <rect x="0" y="0" width="400" height="400" fill="white" />
+      <path filter="url(#tcksam)"
+        d="M257.64 313.656C258.601 348.517 141.426 526.8 107.983 527.721C74.5394 528.642 31 521 30 486.832C29.041 451.971 31.8738 157.571 65.3173 156.649C107.983 527.721 256.68 278.795 257.64 313.656Z"
+        fill="#935BCA" />
+      <path filter="url(#tckugk)"
+        d="M80.5168 -126.302C127.687 -173.472 209.531 -150.698 274.32 -85.9088C339.11 -21.1195 258.092 283.46 210.922 330.63C163.752 377.8 58.4887 14.4413 -6.30057 -50.348C-71.0899 -115.137 33.3469 -79.1324 80.5168 -126.302Z"
+        fill="url(#tckrm)" />
+      <ellipse filter="url(#tckaom)" cx="365" cy="307" rx="275" ry="194" transform="rotate(-67 365 307)"
+        fill="url(#tckcg2)" />
+      <path filter="url(#tckcgb)" style="mix-blend-mode:color-dodge"
+        d="M207 190C227 -234 457 226 537 130C527 533 371 305 371 305C371 305 315 610 121 559C-58 402 -38 59 207 190Z"
+        fill="url(#tckcg)" />
+      <circle filter="url(#tcksum)" cx="400" cy="35" fill="url(#tcksu)" r="190" />
+      <animateTransform attributeName="transform" dur="5s" repeatCount="indefinite" type="rotate" calcMode="spline"
+        keySplines="0.4 0 0.2 1; 0.4 0 0.2 1" values="1 200 200;6 200 200;1 200 200" />
+    </g>
   </g>
 </svg>
