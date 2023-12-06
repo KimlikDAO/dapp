@@ -57,8 +57,8 @@ build/al-%.html: al/sayfa.html \
                  al/tanışma.birim \
                  build/al/sayfa-%.keymap \
                  build/al/sayfa.keymap \
-                 build/al/paste.svg.inl \
-                 build/al/tanışma/external-link.svg.inl \
+                 build/al/paste.isvg \
+                 build/al/tanışma/external-link.isvg \
                  birim/başlık.birim \
                  birim/favicon.birim \
                  birim/lato-%.birim \

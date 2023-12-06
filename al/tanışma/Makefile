@@ -1,6 +1,6 @@
 AL_TANIŞMA_INLINE_SVG := external-link.svg
 
-AL_TANIŞMA_INLINE_SVG_OUT := $(foreach item,$(AL_TANIŞMA_INLINE_SVG),build/al/tanışma/$(item).inl)
+AL_TANIŞMA_INLINE_SVG_OUT := $(foreach item,$(AL_TANIŞMA_INLINE_SVG),build/al/tanışma/$(basename $(item)).isvg)
 
 AL_TANIŞMA_REQUEST_SVG := $(filter-out $(AL_TANIŞMA_INLINE_SVG), $(notdir $(wildcard al/tanışma/*.svg)))
 

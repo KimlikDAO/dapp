@@ -4,7 +4,6 @@ zone_id = "cb31764917040dd0b9a7b79e1ec099df"
 main = "../build/sunucu/prod.js"
 name = "dapp"
 route = { pattern = "kimlikdao.org", custom_domain = true }
-usage_model = "bundled"
 
 workers_dev = false
 no_bundle = true

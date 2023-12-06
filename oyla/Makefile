@@ -47,6 +47,6 @@ build/oyla-%.html: oyla/sayfa.html \
                    birim/başlık.birim \
                    birim/favicon.birim \
                    birim/lato-%.birim \
-                   build/oyla/dropdownok.svg.inl
+                   build/oyla/dropdownok.isvg
 	node lib/birimler/işleyici $< $*
 	yarn html-minifier -c lib/birimler/htmlMinifierConfig.json $@ -o $@
