@@ -1,9 +1,10 @@
 #odb {
   align-items: center;
-  background: #4856b0;
-  border-left: 0;
-  border-radius: 0 6px 6px 0;
-  border: 1px solid #0a46a7;
+  background: #5256c9;
+  border-left: 2px solid #9a9bc5;
+  border-radius: 0 8px 8px 0;
+  border-top: 1px solid #5256c9;
+  border-bottom: 1px solid #5256c9;
   display: flex;
   min-width: 32px;
   opacity: 0.9;
@@ -15,7 +16,7 @@
 }
 
 #oda {
-  border-radius: 6px 0 0 6px;
+  border-radius: 8px 0 0 8px;
 }
 
 #odc {

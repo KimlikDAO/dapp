@@ -35,9 +35,9 @@ body {
 }
 
 .act.btn {
-  background: #484bb0;
+  background: #5256c9;
+  border: 1px solid #5256c9;
   color: white;
-  border: 1px solid #0a46a7;
   opacity: 0.9;
   transition: opacity 0.2s;
 }
@@ -60,7 +60,7 @@ body {
   padding: 12px;
   line-height: 1;
   user-select: none;
-  border-radius: 5px;
+  border-radius: 8px;
   cursor: pointer;
   margin: 0;
   text-align: center;
