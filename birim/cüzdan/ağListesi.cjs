@@ -6,7 +6,8 @@ exports.üret = (değerler) => {
     "0xa4b1": "Arbitrum One",
     "0x38": "BNB Chain",
     "0x406": "Conflux eSpace",
-    "0xfa": "Fantom"
+    "0xfa": "Fantom",
+    "0x144": "zkSync Era"
   }
   if (!("chains" in değerler)) return "";
   /** @const {!Array<string>} */
