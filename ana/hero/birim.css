@@ -1,0 +1,55 @@
+#he {
+  background:
+    radial-gradient(circle at 20% 20%, rgb(144, 205, 244, 0.1) 0%, rgba(255, 255, 255, 0) 40%),
+    radial-gradient(circle at 70% 10%, rgb(99, 179, 237, 0.1) 0%, rgba(255, 255, 255, 0) 60%),
+    radial-gradient(circle at 60% 90%, rgb(49, 130, 206, 0.4) 0%, rgba(255, 255, 255, 0) 40%),
+    radial-gradient(circle at 10% 80%, rgb(66, 153, 225, 0.1) 0%, rgba(255, 255, 255, 0) 40%),
+    radial-gradient(circle at 0% 55%, rgb(163, 109, 211, 0.4) 0%, rgba(255, 255, 255, 0) 50%),
+    radial-gradient(circle at 75% 60%, rgb(99, 55, 186, 0.3) 0%, rgba(255, 255, 255, 0) 40%);
+
+  display: flex;
+  flex-wrap: wrap;
+  height: 100%;
+  justify-content: center;
+}
+
+#het {
+  display: flex;
+  flex-wrap: wrap-reverse;
+  justify-content: center;
+  max-width: 1200px;
+  padding: 0 0 70px;
+  width: 100%;
+  margin-top: 30px;
+}
+
+#hes {
+  margin: 0 2em;
+}
+
+
+h1 {
+  color: #666;
+  display: inline-block;
+  font-size: 35pt;
+  margin: 0;
+  padding: 50px 10px 10px;
+  text-align: center;
+  width: 100%;
+}
+
+#hez {
+  color: #888;
+  font-size: 13pt;
+  margin-top: 2em;
+}
+
+#heb {
+  margin-top: 80px;
+  display: flex;
+  justify-content: center;
+}
+
+#hel {
+  margin-right: 20px;
+}

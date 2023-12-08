@@ -1,8 +1,10 @@
+include ana/hero/Makefile
+
 ana-en := "?en"
 ana-tr := "?tr"
 
 build/ana/sayfa-%.js: ana/sayfa.js \
-                      ana/liste/birim.js \
+                      ana/hero/liste/birim.js \
                       birim/cüzdan/*.js \
                       birim/dil/birim.js \
                       birim/telefon/birim.js \
@@ -31,7 +33,8 @@ build/ana/sayfa-%.css: \
     build/birim/lato/l400.css \
     build/birim/lato/l700-%.css \
     ana/sayfa.css \
-    ana/liste/birim.css \
+    ana/hero/birim.css \
+    ana/hero/liste/birim.css \
     birim/ortak.css \
     birim/başlık/birim.css \
     birim/cüzdan/birim.css \
@@ -51,7 +54,7 @@ build/ana/sayfa-%.keymap: $(call compressions, build/ana/sayfa-%.js build/ana/sa
 
 build/ana-%.html: ana/sayfa.html \
                   build/ana/sayfa-%.keymap \
-                  ana/liste/birim.html \
+                  ana/hero.birim \
                   birim/başlık.birim \
                   birim/favicon.birim \
                   birim/lato-%.birim \

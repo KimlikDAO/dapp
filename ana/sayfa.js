@@ -1,4 +1,4 @@
-import "/ana/liste/birim";
+import "/ana/hero/liste/birim";
 import Cüzdan from "/birim/cüzdan/birim";
 import "/birim/dil/birim";
 import dom from "/lib/util/dom";
