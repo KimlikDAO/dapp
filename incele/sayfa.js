@@ -28,8 +28,6 @@ const EşikKutusu = /** @const {!Element} */(dom.adla("inmes"));
 /** @const {!Element} */
 const SilKutusu = /** @const {!Element} */(dom.adla("inmsy"));
 /** @const {!Element} */
-const TcktVar = /** @const {!Element} */(dom.adla("tc"));
-/** @const {!Element} */
 const TcktYok = /** @const {!Element} */(dom.adla("inn"));
 
 /** @const {!Object<string, !did.DecryptedSections>} */
@@ -168,7 +166,7 @@ const ağırlıkBlurOlunca = (event) => {
   if (val < 1 || val === "") event.target.value = 1;
 }
 
-dom.adlaGizle("tc");
+dom.gizle(Tckt.Kök);
 
 /**
  * @param {!did.DecryptedSections} açıkTckt

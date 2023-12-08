@@ -185,7 +185,7 @@ const açıkTcktAlVe = (adres, sonra) => {
         formData.set('f', dosya);
 
         Promise.all([
-          network.getNodes(5),
+          network.getNodes(6),
           taahhütPowSözü
         ]).then(([
           /** @type {!Array<string>} */ nodelar,
