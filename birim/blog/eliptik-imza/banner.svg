@@ -1,0 +1,51 @@
+<svg viewBox="0 0 440 230" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <clipPath id="yuvarla">
+      <rect width="250" height="250" rx="15" />
+    </clipPath>
+    <filter id="bbb" x="-600" y="-360" width="1040" height="830" filterUnits="userSpaceOnUse">
+      <feGaussianBlur stdDeviation="30" />
+    </filter>
+    <filter id="ccc" x="134" y="-525" width="690" height="1015" filterUnits="userSpaceOnUse">
+      <feGaussianBlur stdDeviation="30" />
+    </filter>
+    <filter id="ddd" x="-656" y="-400" width="1215" height="960" filterUnits="userSpaceOnUse">
+      <feGaussianBlur stdDeviation="18" />
+    </filter>
+    <filter id="gölge" color-interpolation-filters="sRGB">
+      <feDropShadow dx="5" dy="5" stdDeviation="3" flood-opacity="0.2" />
+    </filter>
+    <radialGradient id="açıkmavi" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse"
+      gradientTransform="translate(426 92) rotate(-148) scale(650 550)">
+      <stop offset="0.44" stop-color="#7D8AFA" />
+      <stop offset="0.57" stop-color="#5698E2" />
+      <stop offset="0.87" stop-color="#2A4DC1" />
+    </radialGradient>
+    <radialGradient id="açıkmor" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse"
+      gradientTransform="translate(688 -400) rotate(165) scale(1422 1200)">
+      <stop offset="0.12" stop-color="#2A4DC1" />
+      <stop offset="0.28" stop-color="#935BCA" />
+      <stop offset="0.46" stop-color="#5698E2" />
+    </radialGradient>
+    <linearGradient id="mavi" x1="-661" y1="81" x2="276" y2="-264" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#A0A2B4" />
+      <stop offset="0.2" stop-color="#CFD3F2" />
+      <stop offset="0.44" stop-color="#5698E2" />
+      <stop offset="0.5" stop-color="#2A4DC1" />
+    </linearGradient>
+  </defs>
+  <rect width="440" height="230" fill="#6337BA" />
+  <circle cx="-280" cy="-230" r="630" fill="url(#açıkmavi)" filter="url(#bbb)" />
+  <path style="mix-blend-mode:color-dodge" filter="url(#ccc)"
+    d="M327.831 -405.479C405.215 -502.585 561.355 -477.571 694.73 -371.281C828.11 -264.991 741.93 315.294 664.547 412.4C587.163 509.506 385.179 -4.72531 251.801 -111.015C118.423 -217.305 250.446 -308.373 327.831 -405.479Z"
+    fill="url(#açıkmor)" />
+  <circle cx="-205" cy="115" style="mix-blend-mode:color-dodge" filter="url(#ddd)" fill="url(#mavi)" r="415" />
+  <g transform="translate(90,20)">
+    <use x="72" y="72" href="#blr" height="250" width="250" />
+    <use x="48" y="48" href="#blr" height="250" width="250" />
+    <use x="24" y="24" href="#blr" height="250" width="250" />
+    <g id="blr" filter="url(#gölge)">
+      <image href="/birim/tckt/kapak.svg" height="250" width="250" clip-path="url(#yuvarla)" />
+    </g>
+  </g>
+</svg>
