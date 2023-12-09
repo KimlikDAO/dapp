@@ -1,5 +1,5 @@
-import { AğBilgileri } from "./ağlar.js";
 import { CoreBağlantısı, MetaMaskBağlantısı, RabbyBağlantısı } from "./evmBağlantısı";
+import { AğBilgileri } from "/birim/ağlar/birim";
 import { Provider } from "/lib/crosschain/provider";
 import TCKT from "/lib/ethereum/TCKTLite";
 import ipfs from "/lib/node/ipfs";

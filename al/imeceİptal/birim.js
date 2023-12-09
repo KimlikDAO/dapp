@@ -2,7 +2,7 @@
  * @fileoverview İmece iptal parçası. DOM'da `im` öneki bu parçaya ayrılmıştır.
  */
 
-import { AğBilgileri, AğBilgisi } from "/birim/cüzdan/ağlar";
+import { AğBilgileri, AğBilgisi } from "/birim/ağlar/birim";
 import Cüzdan from "/birim/cüzdan/birim";
 import TCKT from "/lib/ethereum/TCKT";
 import evm from "/lib/ethereum/evm";

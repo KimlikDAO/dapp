@@ -2,6 +2,7 @@ incele-en := view
 incele-tr := incele
 
 build/incele/sayfa-%.js: incele/sayfa.js \
+    birim/ağlar/*.js \
     birim/cüzdan/*.js \
     birim/dil/birim.js \
     birim/tckt/birim.js \

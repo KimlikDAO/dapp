@@ -2,6 +2,7 @@ oyla-en := vote
 oyla-tr := oyla
 
 build/oyla/sayfa-%.js: oyla/sayfa.js \
+                       birim/ağlar/*.js \
                        birim/cüzdan/*.js \
                        birim/dil/birim.js \
                        lib/crosschain/unlockable.d.js \

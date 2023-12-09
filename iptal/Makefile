@@ -2,6 +2,7 @@ iptal-en := revoke
 iptal-tr := iptal
 
 build/iptal/sayfa-%.js: iptal/sayfa.js \
+    birim/ağlar/*.js \
     birim/cüzdan/*.js \
     birim/dil/birim.js \
     lib/crosschain/unlockable.d.js \

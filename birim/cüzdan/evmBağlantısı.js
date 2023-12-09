@@ -1,4 +1,4 @@
-import { AğBilgisi, AğBilgileri } from "./ağlar";
+import { AğBilgileri, AğBilgisi } from "/birim/ağlar/birim";
 import { Provider } from "/lib/crosschain/provider";
 import { hex } from "/lib/util/çevir";
 

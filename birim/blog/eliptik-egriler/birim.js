@@ -1,4 +1,4 @@
-import { AğBilgileri } from "/birim/cüzdan/ağlar";
+import { AğBilgileri } from "/birim/ağlar/birim";
 import jsonrpc from "/lib/api/jsonrpc";
 import dom from "/lib/util/dom";
 

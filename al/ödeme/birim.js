@@ -1,4 +1,4 @@
-import { AğBilgileri, AğBilgisi } from "/birim/cüzdan/ağlar";
+import { AğBilgileri, AğBilgisi } from "/birim/ağlar/birim";
 import Cüzdan from "/birim/cüzdan/birim";
 import Telefon from "/birim/telefon/birim";
 import TCKT from "/lib/ethereum/TCKT";

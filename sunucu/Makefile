@@ -4,9 +4,9 @@ PAGES := al ana incele iptal oyla
 
 NAMED_ASSETS := sitemap.txt TCKT.svg
 
-PAGE_TARGETS := $(addsuffix .sayfa, $(addprefix build/, $(PAGES)))
+PAGE_TARGETS := $(addsuffix .sayfa, $(PAGES))
 
-$(PAGE_TARGETS): build/%.sayfa: $(call compressions,build/%-en.html build/%-tr.html)
+$(PAGE_TARGETS): %.sayfa: $(call compressions,build/%-en.html build/%-tr.html)
 
 .PHONY: $(PAGE_TARGETS)
 

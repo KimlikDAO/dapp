@@ -5,6 +5,7 @@ ana-tr := "?tr"
 
 build/ana/sayfa-%.js: ana/sayfa.js \
                       ana/hero/liste/birim.js \
+                      birim/ağlar/*.js \
                       birim/cüzdan/*.js \
                       birim/dil/birim.js \
                       birim/telefon/birim.js \
