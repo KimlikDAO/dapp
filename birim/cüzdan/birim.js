@@ -6,6 +6,9 @@ import ipfs from "/lib/node/ipfs";
 import dom from "/lib/util/dom";
 import { hexten } from "/lib/util/çevir";
 
+/** @define {string} */
+const VARSAYILAN_AĞ = "0xa4b1";
+
 /** @const {string} */
 const KIMLIKDAO_IPFS_URL = "//ipfs.kimlikdao.org";
 
@@ -338,7 +341,7 @@ const aç = () => {
 
 const kur = () => {
   /** @const {Element} */
-  const anaAğ = dom.adla("cud0xa4b1");
+  const anaAğ = dom.adla("cud" + VARSAYILAN_AĞ);
   anaAğ.replaceChild(AğButonu.firstElementChild.cloneNode(true),
     anaAğ.firstElementChild);
   AdresButonu.onclick = AğButonu.onclick = aç;

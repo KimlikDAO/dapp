@@ -78,6 +78,14 @@ const AğBilgileri = {
     tokenKodu: "FTM",
     tokenEki: dom.TR ? ["’dan", "’a"] : [],
     rpcUrl: "rpc.ankr.com/fantom"
+  },
+  "0x144": {
+    ad: "zkSync Era",
+    izleyici: "explorer.zksync.io",
+    tokenKodu: "ETH",
+    token: "ether",
+    tokenEki: dom.TR ? ["’den", "’e"] : [],
+    rpcUrl: "mainnet.era.zksync.io"
   }
 }
 
@@ -85,4 +93,3 @@ export {
   AğBilgileri,
   AğBilgisi
 };
-
