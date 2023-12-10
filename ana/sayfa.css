@@ -5,15 +5,15 @@
   height: 80px;
   justify-content: space-between;
   position: sticky;
-  top: 0;
   z-index: 20;
+  margin: 0 21px 0 10px;
 }
 
 #bal {
   align-items: center;
   display: flex;
   justify-content: center;
-  margin: 0 12px 0 2px;
+  margin-left: 2px;
   min-width: 10ex;
   padding: 0 1em;
 }

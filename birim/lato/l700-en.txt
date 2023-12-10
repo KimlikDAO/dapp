@@ -44,3 +44,5 @@ wallet
   Total
   .
   Authorize payment in wallet
+
+&

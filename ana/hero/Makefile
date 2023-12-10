@@ -1,1 +1,1 @@
-ana/hero.birim: ana/hero/birim.html ana/hero/liste/birim.html
+ana/hero.birim: ana/hero/birim.html ana/hero/sergi/birim.html

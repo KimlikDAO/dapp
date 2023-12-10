@@ -50,3 +50,5 @@ cüzdan
   Ödeme isteği yolla
 
 Twitter
+
+&

@@ -1,14 +1,9 @@
 #se {
-  width: 400px;
-  margin-right: 30px;
+  max-width: 550px;
+  margin-left: 2px;
 }
 
-#setop {
-  display: flex;
-  align-items: center;
-  height: 200px;
-}
-
+/*
 .sed {
   position: relative;
   width: 10px;
@@ -34,6 +29,7 @@
   border-radius: 2px;
 }
 
+
 .sed.prev::before {
   transform: rotate(45deg);
   border-width: 0 0 4px 4px;
@@ -43,66 +39,60 @@
   transform: rotate(-45deg);
   border-width: 0 4px 4px 0px;
 }
+*/
 
-#sepgc {
-  width: 100%;
+h2 {
+  color: #5256c9;
+  font-size: 20px;
+  margin: 20px 0 5px;
+  padding: 0;
+}
+
+#sec {
   overflow: hidden;
 }
 
-#sepgs {
-  position: relative;
-  padding: 0;
-  margin: 0;
-  list-style: none;
+#sem {
   display: flex;
-  width: 400%;
+  list-style: none;
+  padding: 0;
+  position: relative;
   transition: transform 1s;
+  width: 400%;
 }
 
 .sek {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  width: 25%;
-  height: 100%;
+  font-size: 18px;
   font-weight: 400;
-  font-size: 15pt;
-  padding: 0 1em;
+  height: 100%;
   line-height: 1.6;
+  padding-right: 30px;
+  width: 25%;
 }
 
-#senavs {
-  text-align: center;
-  height: 10%;
-  margin-bottom: 30px;
+#sen {
+  height: 20px;
+  margin: 0 0 40px;
 }
 
 .seb {
+  cursor: pointer;
   display: inline-block;
-  width: 9px;
-  height: 9px;
-  background-color: rgba(0, 0, 0, 0.3);
-  border-radius: 50%;
-  margin: 4px 4px;
-  transition: background-color 1s;
+  padding: 10px 8px;
 }
 
-.seb:hover {
-  background-color: rgba(0, 0, 0, 0.7);
+.sei {
+  background-color: rgba(82, 86, 201, 0.2);
+  border-radius: 5px;
+  height: 10px;
+  transition: background-color 0.3s;
+  width: 10px;
 }
 
-.seb.current {
-  background-color: rgba(0, 0, 0, 0.7);
+.sei:hover {
+  background-color: rgba(82, 86, 201, 1);
 }
 
-#seal {
-  margin-right: 20px;
-}
-
-@media (max-width: 930px) {
-  #se {
-    width: 90%;
-    margin-right:0;
-  }
+.sei.sel {
+  background-color: rgba(82, 86, 201, 0.9);
 }

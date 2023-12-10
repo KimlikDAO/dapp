@@ -4,7 +4,7 @@ ana-en := "?en"
 ana-tr := "?tr"
 
 build/ana/sayfa-%.js: ana/sayfa.js \
-                      ana/hero/liste/birim.js \
+                      ana/hero/sergi/birim.js \
                       birim/ağlar/*.js \
                       birim/cüzdan/*.js \
                       birim/dil/birim.js \
@@ -35,7 +35,7 @@ build/ana/sayfa-%.css: \
     build/birim/lato/l700-%.css \
     ana/sayfa.css \
     ana/hero/birim.css \
-    ana/hero/liste/birim.css \
+    ana/hero/sergi/birim.css \
     birim/ortak.css \
     birim/başlık/birim.css \
     birim/cüzdan/birim.css \
