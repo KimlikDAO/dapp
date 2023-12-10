@@ -39,7 +39,14 @@ h1 {
   #he {
     border-radius: 0;
   }
+
   #te {
     display: none;
+  }
+}
+
+@media (max-width: 600px) {
+  h1 {
+    font-size: 40pt;
   }
 }

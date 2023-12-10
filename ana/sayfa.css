@@ -17,10 +17,6 @@
   padding: 0 1em;
 }
 
-#an {
-  margin: 0 20px;
-}
-
 @media (max-width: 1000px) {
   #bal {
     display: none;
@@ -28,5 +24,15 @@
 
   #an {
     margin: 0;
+  }
+}
+
+@media (min-width: 1000px) {
+  #an {
+    margin: 0 20px;
+  }
+
+  #sa {
+    margin: 0 -20px;
   }
 }

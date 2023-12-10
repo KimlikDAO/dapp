@@ -22,8 +22,14 @@
   margin-top: 30px;
 }
 
-@media (max-width: 900px) {
+@media (min-width: 500px) and (max-width: 900px) {
   #ka {
     grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 500px) {
+  #ka {
+    grid-template-columns: repeat(1, 1fr);
   }
 }

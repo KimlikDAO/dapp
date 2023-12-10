@@ -14,6 +14,8 @@ const Kartlar = /** @type {!Element} */(dom.adla("sem"));
 let Kart = 0;
 /** @type {number} */
 let SergiSaati = 0;
+/** @type {number} */
+let YerleştirSaati = 0;
 
 Telefon.nftGöster(true, true);
 
@@ -37,6 +39,15 @@ const kartDeğiştir = (yeniKart) => {
 
   // Saati sıfırla ki kullanıcı yeni geldiği sayfaya 8sn bakabilsin.
   sergiSaatiKur();
+}
+
+window.onresize = () => {
+  clearTimeout(YerleştirSaati);
+  YerleştirSaati = setTimeout(() => {
+    /** @const {number} */
+    const width = Kartlar.firstElementChild.getBoundingClientRect().width;
+    Kartlar.style.transform = `translate3d(-${Kart * width}px,0,0)`;
+  }, 100);
 }
 
 // SağDüğme.onclick = () => kartDeğiştir((Kart + 1) % 4);
