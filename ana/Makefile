@@ -1,4 +1,5 @@
 include ana/hero/Makefile
+include ana/sayılar/Makefile
 
 ana-en := "?en"
 ana-tr := "?tr"
@@ -36,6 +37,7 @@ build/ana/sayfa-%.css: \
     ana/sayfa.css \
     ana/hero/birim.css \
     ana/hero/sergi/birim.css \
+    ana/sayılar/birim.css \
     birim/ortak.css \
     birim/başlık/birim.css \
     birim/cüzdan/birim.css \
@@ -56,6 +58,7 @@ build/ana/sayfa-%.keymap: $(call compressions, build/ana/sayfa-%.js build/ana/sa
 build/ana-%.html: ana/sayfa.html \
                   build/ana/sayfa-%.keymap \
                   ana/hero.birim \
+                  ana/sayılar.birim \
                   birim/başlık.birim \
                   birim/favicon.birim \
                   birim/lato-%.birim \

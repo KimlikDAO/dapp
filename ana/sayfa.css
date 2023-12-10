@@ -6,7 +6,6 @@
   justify-content: space-between;
   position: sticky;
   z-index: 20;
-  margin: 0 21px 0 10px;
 }
 
 #bal {
@@ -18,8 +17,16 @@
   padding: 0 1em;
 }
 
-@media (max-width: 950px) {
+#an {
+  margin: 0 20px;
+}
+
+@media (max-width: 1000px) {
   #bal {
     display: none;
+  }
+
+  #an {
+    margin: 0;
   }
 }

@@ -1,27 +1,25 @@
 #he {
   background: linear-gradient(100deg, #D1EAFF 11%, rgba(226, 190, 255, 0.274) 83%, rgba(20, 0, 255, 0) 110%);
   border-radius: 22px;
-  margin: 0 20px;
   display: flex;
   flex-wrap: wrap;
-  height: 100%;
   justify-content: center;
 }
 
 #het {
   display: flex;
-  flex-wrap: wrap-reverse;
   justify-content: space-around;
   margin: 40px;
+  width: 100%;
 }
 
 #hes {
   margin: 0 2em;
-  max-width: 800px;
+  max-width: 750px;
 }
 
 h1 {
-  color: #222;
+  color: #333;
   display: inline-block;
   font-size: 50pt;
   margin: 0;
@@ -37,10 +35,11 @@ h1 {
   margin-right: 20px;
 }
 
-
-@media (max-width: 800px) {
+@media (max-width: 1000px) {
   #he {
     border-radius: 0;
-    margin:0;
+  }
+  #te {
+    display: none;
   }
 }
