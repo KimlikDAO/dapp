@@ -1,4 +1,4 @@
-const { Ağlar } = require("./ağlar.cjs");
+const { Ağlar } = require("../ağlar/birim.cjs");
 const { optimize } = require("svgo");
 const { readFileSync } = require('fs');
 

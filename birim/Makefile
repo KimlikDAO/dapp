@@ -1,4 +1,5 @@
 include birim/ağlar/Makefile
+include birim/blog/Makefile
 include birim/başlık/Makefile
 include birim/cüzdan/Makefile
 include birim/dil/Makefile

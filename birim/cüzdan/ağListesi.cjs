@@ -1,4 +1,4 @@
-const { Ağlar } = require("./ağlar.cjs");
+const { Ağlar } = require("../ağlar/birim.cjs");
 
 exports.üret = (değerler) => {
   if (!("chains" in değerler)) return "";
