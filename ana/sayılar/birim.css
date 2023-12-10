@@ -1,9 +1,10 @@
 #sa {
-  margin: 0;
+  margin: 0 -20px;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
   padding: 30px 0;
+  background: linear-gradient(90deg, #F8F8F8 -9.07%, rgba(132, 199, 255, 0.2) 100%, rgba(255, 255, 255, 0.8) 69.02%);
 }
 
 #sak {

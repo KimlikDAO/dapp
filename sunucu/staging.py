@@ -37,6 +37,7 @@ MIMES = {
     "png": "image/png",
     "ico": "image/x-icon",
     "txt": "text/plain",
+    "webp": "image/webp"
 }
 
 

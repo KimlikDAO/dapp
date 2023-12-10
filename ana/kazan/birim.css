@@ -1,0 +1,29 @@
+#ka {
+  margin: 50px 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+#kaa {
+  padding: 20px;
+}
+
+#kat {
+  color: #3182CE 
+}
+
+#kab {
+  font-size: 16px;
+  line-height: 1.4;
+}
+
+#kao {
+  margin-top: 30px;
+}
+
+@media (max-width: 900px) {
+  #ka {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
