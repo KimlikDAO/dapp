@@ -40,7 +40,7 @@ build/ana/sayfa-%.css: \
     ana/hero/sergi/birim.css \
     ana/kazan/birim.css \
     ana/sayılar/birim.css \
-    birim/altnot/birim.css \
+    birim/altdizin/birim.css \
     birim/ortak.css \
     birim/başlık/birim.css \
     birim/blog/birim.css \
