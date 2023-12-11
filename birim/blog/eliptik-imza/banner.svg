@@ -57,30 +57,25 @@
     d="M327.831 -405.479C405.215 -502.585 561.355 -477.571 694.73 -371.281C828.11 -264.991 741.93 315.294 664.547 412.4C587.163 509.506 385.179 -4.72531 251.801 -111.015C118.423 -217.305 250.446 -308.373 327.831 -405.479Z"
     fill="url(#bleig)" />
   <circle cx="-205" cy="115" style="mix-blend-mode:color-dodge" filter="url(#bleid)" fill="url(#bleih)" r="415" />
-  <g filter="url(#bleie)">
-    <rect height="250" width="250" fill="#fff" clip-path="url(#bleia)" transform="translate(162,92)" />
-  </g>
+
+  <rect height="250" x="162" y="92" width="250" fill="#fff" rx="15" filter="url(#bleie)" />
   <use href="#tcks5" x="390.125" y="100.125" fill="url(#bleig)" />
   <use href="#tcks1" x="390.125" y="127.625" fill="url(#bleif)" />
   <use href="#tcks6" x="390.125" y="141.375" fill="url(#bleif)" />
   <use href="#tcks7" x="390.125" y="196.375" fill="url(#bleig)" />
 
-  <g filter="url(#bleie)">
-    <rect height="250" width="250" fill="#fff" clip-path="url(#bleia)" transform="translate(138,68)" />
-  </g>
+  <rect x="138" y="68" height="250" width="250" fill="#fff" rx="15" filter="url(#bleie)" />
   <use href="#tcks0" x="366.125" y="76.125" fill="url(#bleih)" />
   <use href="#tcks2" x="366.125" y="158.625" fill="url(#bleig)" />
   <use href="#tcks8" x="366.125" y="186.125" fill="#7D8AFA" />
 
-  <g filter="url(#bleie)">
-    <rect height="250" width="250" fill="#fff" clip-path="url(#bleia)" transform="translate(114,44)" />
-  </g>
+  <rect x="114" y="44" height="250" width="250" fill="#fff" rx="15" filter="url(#bleie)" />
   <use href="#tcks6" x="342.125" y="65.875" fill="#5698E2" />
   <use href="#tcks3" x="342.125" y="134.625" fill="#7D8AFA" />
-  <use href="#tcks4" x="342.125" y="189.625" fill="cyan" />
-  <use href="#tcks4" x="342.125" y="203.375" fill="#7edcdc" />
+  <use href="#tcks4" x="342.125" y="189.625" fill="#0aeeee" />
+  <use href="#tcks4" x="342.125" y="203.375" fill="#84f0f0" />
 
-  <g filter="url(#bleie)">
-    <image href="/birim/tckt/kapak.svg" transform="translate(90,20)" height="250" width="250" clip-path="url(#bleia)" />
+  <g transform="translate(90,20)" filter="url(#bleie)">
+    <image href="/birim/tckt/kapak.svg" clip-path="url(#bleia)" height="250" width="250" />
   </g>
 </svg>
