@@ -1,0 +1,19 @@
+#alt {
+  padding: 80px 0 40px;
+  display: flex;
+  justify-content: space-around;
+}
+
+.altc {
+  padding: 0 40px;
+}
+
+.altc>b {
+  color: #061C3D;
+}
+
+.altc>a {
+  display: block;
+  margin: 15px 0;
+  color: #666;
+}
