@@ -84,31 +84,50 @@ h2 {
   max-width: 375px;
 }
 
+@keyframes doner {
+  from {
+    transform: rotate(0deg) translateX(1.5px) rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg) translateX(1.5px) rotate(-360deg);
+  }
+}
+
 @media (min-width: 800px) {
   .sac.polygon {
     position: relative;
     left: 60px;
     top: 20px;
+    animation: doner 5s linear infinite;
   }
 
   .sac.avax {
     position: relative;
     left: 40px;
     top: 20px;
+    animation: doner 5.4s linear infinite;
   }
 
   .sac.arb {
     position: relative;
     top: 20px;
+    animation: doner 4.8s linear infinite reverse;
   }
 
   .sac.ftm {
     position: relative;
     left: 10px;
+    animation: doner 5.2s linear infinite;
   }
 
   .sac.bnb {
     position: relative;
     left: -40px;
+    animation: doner 5.3s linear infinite reverse;
+  }
+
+  .sac.eth {
+    animation: doner 4.4s linear infinite;
   }
 }
