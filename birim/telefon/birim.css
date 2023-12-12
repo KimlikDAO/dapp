@@ -1,7 +1,7 @@
 #te {
   border-radius: 40px;
   border: 5px solid #333;
-  height: 530px;
+  height: 520px;
   min-width: 280px;
   position: relative;
   width: 280px;
@@ -50,7 +50,7 @@
 #tee {
   display: flex;
   font-size: 12px;
-  padding-top: 40px;
+  padding-top: 30px;
 }
 
 /* Tokens */
@@ -95,7 +95,7 @@
   opacity: 0;
   position: absolute;
   text-align: center;
-  top: 200px;
+  top: 190px;
   transition: opacity 0.4s ease-in;
   width: 270px;
 }
@@ -141,7 +141,7 @@
   align-items: center;
   background-color: #fff;
   border-radius: 7px;
-  bottom: 189px;
+  bottom: 182px;
   box-shadow: 0px 2px 10px rgb(0 0 0 / 15%);
   cursor: pointer;
   display: flex;
@@ -177,7 +177,7 @@
 }
 
 #tc.tew {
-  transform: translate(-70px, 265px) scale(0.5);
+  transform: translate(-69px, 255px) scale(0.5);
 }
 
 #tc.tex {
