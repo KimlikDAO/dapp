@@ -181,9 +181,9 @@
 }
 
 #tc.tex {
-  transform: translate3d(33px, 360px, 0px) scale(0.892);
+  transform: translate3d(4px, 360px, 0px) scale(0.892);
 }
 
 #tc.tex.flp {
-  transform: translate3d(33px, 360px, 0px) rotateY(-180deg) scale(0.892);
+  transform: translate3d(4px, 360px, 0px) rotateY(-180deg) scale(0.892);
 }
