@@ -1,6 +1,6 @@
-# KimlikDAO dApp'ı
+<h1><img src="birim/logo.svg" align="top">KimlikDAO dApp'ı</a></h1>
 
-## Organizasyon
+## Dizinler
 Her http request gerektiren bölümü 'sayfa' olarak adlandırıyoruz.
 Her sayfa için gerekli dosyalar http `pathname`'i ile aynı isimli
 bir dizinde toplanıyor.
@@ -20,18 +20,15 @@ veriyoruz ve bunları `birim/` dizinine koyuyoruz.
 Yazılımcıların dApp'i test etmesi için gereken adımlar:
 - `git clone --recursive https://github.com/KimlikDAO/dapp`
 
-- `yarn` gerekli build toollarını ve dev sunucusunu yükler
+- `yarn` gerekli build araçlarını ve dev sunucusunu yükler
 
 - `make dev` dev sunucuyu çalıştırır.
     - http://localhost:8787/al
 
 Staging ve deployment adımları için birkaç araca daha ihtiyacımız var
 ```shell
-brew install pngcrush
-brew install zopfli
-brew install brotli
+brew install pngcrush brotli zopfli woff2
 pip install fonttools
-brew install woff2
 ```
 - `make staging` deploya hazır dApp'i `build` edip staging sunucusunu
    çalıştırır
