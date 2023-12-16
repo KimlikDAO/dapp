@@ -74,8 +74,8 @@ const tcktYarat = (adres, açıkTckt) => {
 }
 
 const bağlaAdımı = () => {
-  /** @const {Element} */
-  const düğme = dom.adla("al1a");
+  /** @const {!Element} */
+  const düğme = /** @type {!Element} */(dom.adla("al1a"));
   düğme.onclick = Cüzdan.aç;
 
   Cüzdan.adresDeğişince((adres) => {

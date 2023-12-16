@@ -7,22 +7,50 @@ on:
     branches: ["ana", "prod"]
 
 jobs:
-  check:
-    name: Unit tests
+  build-dapp:
+    name: dApp'ı oluştur
     strategy:
       fail-fast: true
 
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     steps:
-      - uses: actions/checkout@v3
+      - name: Repoyu al
+        uses: actions/checkout@v3
         with:
           submodules: true
 
-      - uses: actions/setup-node@v3
+      - name: Node kur
+        uses: actions/setup-node@v3
         with:
-          node-version: 18
+          node-version: 20
 
-      - name: ProdWorker tests
+      - name: Araçları kur
         run: |
           yarn
-          make build/sunucu/test/prod.compiled-test.js
+          brew install pngcrush brotli zopfli woff2
+          pip install fonttools
+          make ana.sayfa
+
+      - name: ana sayfa
+        run: |
+          make ana.sayfa
+
+      - name: al sayfası
+        run: |
+          make al.sayfa
+
+      - name: incele sayfası
+        run: |
+          make incele.sayfa
+
+      - name: iptal sayfası
+        run: |
+          make iptal.sayfa
+
+      - name: oyla sayfası
+        run: |
+          make oyla.sayfa
+
+      - name: sunucu
+        run: |
+          make build/sunucu/prod.js

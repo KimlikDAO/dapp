@@ -3,10 +3,6 @@ import Telefon from "/birim/telefon/birim";
 import dom from '/lib/util/dom';
 
 /** @const {!Element} */
-//const SolDüğme = /** @type {!Element} */(dom.adla("seso"));
-/** @const {!Element} */
-// const SağDüğme = /** @type {!Element} */(dom.adla("sesa"));
-/** @const {!Element} */
 const Boncuklar = /** @type {!Element} */(dom.adla("sen"));
 /** @const {!Element} */
 const Kartlar = /** @type {!Element} */(dom.adla("sem"));
@@ -19,13 +15,20 @@ let YerleştirSaati = 0;
 
 Telefon.nftGöster(true, true);
 
+
+/**
+ * Kartları `Kart` değişkenine göre doğru konuma çeker.
+ */
+const yerleştir = () => {
+  /** @const {number} */
+  const width = Kartlar.firstElementChild.getBoundingClientRect().width;
+  Kartlar.style.transform = `translate3d(-${Kart * width}px,0,0)`;
+}
+
 /**
  * @param {number} yeniKart
  */
 const kartDeğiştir = (yeniKart) => {
-  /** @const {number} */
-  const width = Kartlar.firstElementChild.getBoundingClientRect().width;
-
   Telefon.nftGöster(yeniKart <= 1, !yeniKart);
   yeniKart === 3
     ? Telefon.kutuGöster(dom.TR
@@ -34,25 +37,15 @@ const kartDeğiştir = (yeniKart) => {
     : Telefon.kutuKapat();
   Boncuklar.children[Kart].firstElementChild.classList.remove("sel");
   Boncuklar.children[yeniKart].firstElementChild.classList.add("sel");
-  Kartlar.style.transform = `translate3d(-${yeniKart * width}px,0,0)`;
   Kart = yeniKart;
-
-  // Saati sıfırla ki kullanıcı yeni geldiği sayfaya 8sn bakabilsin.
+  yerleştir();
   sergiSaatiKur();
 }
 
 window.onresize = () => {
   clearTimeout(YerleştirSaati);
-  YerleştirSaati = setTimeout(() => {
-    /** @const {number} */
-    const width = Kartlar.firstElementChild.getBoundingClientRect().width;
-    Kartlar.style.transform = `translate3d(-${Kart * width}px,0,0)`;
-  }, 100);
+  YerleştirSaati = setTimeout(yerleştir, 100);
 }
-
-// SağDüğme.onclick = () => kartDeğiştir((Kart + 1) % 4);
-
-// SolDüğme.onclick = () => kartDeğiştir((Kart + 3) % 4);
 
 for (let /** number */ i = 0; i < Boncuklar.childElementCount; ++i) {
   Boncuklar.children[i].onclick = () => kartDeğiştir(i);

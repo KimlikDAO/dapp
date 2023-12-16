@@ -1,5 +1,3 @@
-include sunucu/test/Makefile
-
 PAGES := al ana incele iptal oyla
 
 NAMED_ASSETS := sitemap.txt TCKT.svg
@@ -12,7 +10,7 @@ $(PAGE_TARGETS): %.sayfa: $(call compressions,build/%-en.html build/%-tr.html)
 
 build: $(PAGE_TARGETS)
 
-build/sunucu/prod.js: sunucu/prod.js sunucu/prod.d.js \
+build/sunucu/prod.js: sunucu/prod.js \
     lib/cloudflare/moduleWorker.d.js lib/cloudflare/types.d.js \
     lib/cloudflare/pageWorker.d.js lib/cloudflare/pageWorker.js
 	mkdir -p $(dir $@)
