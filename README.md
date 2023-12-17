@@ -1,4 +1,4 @@
-<h1><img src="birim/logo.svg" align="top">KimlikDAO dApp'ı</a></h1>
+<h1><img src="birim/favicon/icon.svg" align="top" height="44"> KimlikDAO dApp'ı</a></h1>
 
 ## Dizinler
 Her http request gerektiren bölümü 'sayfa' olarak adlandırıyoruz.
