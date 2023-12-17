@@ -40,3 +40,17 @@ build/sitemap.txt:
 build/sitemap: $(call compressions, build/sitemap.txt)
 
 .PHONY: build/sitemap
+
+dev:
+	node lib/birimler/devSunucu --çalıştır sunucu/dev.toml
+
+kanarya: build
+	node lib/birimler/kanaryaSunucu --çalıştır sunucu/dev.toml
+
+cf-deployment: build build/sunucu/prod.js build/sitemap sunucu/prod.toml
+	node lib/cloudflare/uploader sunucu/prod.toml sunucu/Makefile
+	wrangler deploy \
+        --config sunucu/prod.toml \
+        --compatibility-date $(shell date -v -1d +%Y-%m-%d)
+
+.PHONY: cf-deployment dev kanarya

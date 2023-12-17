@@ -25,12 +25,12 @@ Yazılımcıların dApp'i test etmesi için gereken adımlar:
 - `make dev` dev sunucuyu çalıştırır.
     - http://localhost:8787/al
 
-Staging ve deployment adımları için birkaç araca daha ihtiyacımız var
+Kanarya ve deployment adımları için birkaç araca daha ihtiyacımız var
 ```shell
 brew install pngcrush brotli zopfli woff2
 pip install fonttools
 ```
-- `make staging` deploya hazır dApp'i `build` edip staging sunucusunu
+- `make kanarya` deploya hazır dApp'i `build` edip kanarya sunucusunu
    çalıştırır
     - http://localhost:8787/al
 - `make cf-deployment` deploya hazır dApp'i Cloudflare'e yükler

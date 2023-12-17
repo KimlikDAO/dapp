@@ -1,2 +1,10 @@
 port = 8787
 hostname = "http://localhost"
+"kök" = ""
+dizin = "ana"
+sayfalar = [
+  ["al", "mint"],
+  ["incele", "view"],
+  ["oyla", "vote"],
+  ["iptal", "revoke"]
+]

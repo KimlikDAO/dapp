@@ -14,16 +14,4 @@ include sunucu/Makefile
 clean:
 	rm -rf build
 
-dev:
-	node sunucu/dev.js
-
-staging: build
-	sunucu/staging.py
-
-cf-deployment: build build/sunucu/prod.js build/sitemap sunucu/prod.toml
-	node lib/cloudflare/uploader sunucu/prod.toml sunucu/Makefile
-	wrangler deploy \
-        --config sunucu/prod.toml \
-        --compatibility-date $(shell date -v -1d +%Y-%m-%d)
-
-.PHONY: cf-deployment cf-trim clean dev staging
+.PHONY: clean
