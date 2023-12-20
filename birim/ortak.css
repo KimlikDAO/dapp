@@ -46,6 +46,12 @@ body {
   opacity: 1;
 }
 
+.info.btn {
+  background: transparent;
+  border: 1px solid #5256c9;
+  color: #5256c9;
+}
+
 .btn.dis {
   cursor: default;
 }
