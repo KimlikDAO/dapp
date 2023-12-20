@@ -1,3 +1,4 @@
+include ana/ağ/Makefile
 include ana/hero/Makefile
 include ana/kazan/Makefile
 include ana/sayılar/Makefile
@@ -36,6 +37,7 @@ build/ana/sayfa-%.css: \
     build/birim/lato/l400.css \
     build/birim/lato/l700-%.css \
     ana/sayfa.css \
+    ana/ağ/birim.css \
     ana/hero/birim.css \
     ana/hero/sergi/birim.css \
     ana/kazan/birim.css \
@@ -63,6 +65,7 @@ build/ana/sayfa-%.keymap: $(call compressions, build/ana/sayfa-%.js build/ana/sa
 
 build/ana-%.html: ana/sayfa.html \
                   build/ana/sayfa-%.keymap \
+                  ana/ağ.birim \
                   ana/hero.birim \
                   ana/sayılar.birim \
                   ana/kazan.birim \

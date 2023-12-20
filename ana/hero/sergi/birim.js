@@ -39,7 +39,6 @@ const kartDeğiştir = (yeniKart) => {
   Boncuklar.children[yeniKart].firstElementChild.classList.add("sel");
   Kart = yeniKart;
   yerleştir();
-  sergiSaatiKur();
 }
 
 window.onresize = () => {
@@ -48,7 +47,10 @@ window.onresize = () => {
 }
 
 for (let /** number */ i = 0; i < Boncuklar.childElementCount; ++i) {
-  Boncuklar.children[i].onclick = () => kartDeğiştir(i);
+  Boncuklar.children[i].onclick = () => {
+    kartDeğiştir(i);
+    sergiSaatiKur();
+  }
 }
 
 const sergiSaatiKur = () => {
@@ -59,3 +61,5 @@ const sergiSaatiKur = () => {
 Cüzdan.adresDeğişince((adres) => Telefon.adresGir(adres));
 
 sergiSaatiKur();
+
+setInterval(() => console.log("tick"), 1000);
