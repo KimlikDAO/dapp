@@ -63,11 +63,11 @@
   opacity: 0.7;
 }
 
-#tcso {
+.tcso {
   right: 20px;
 }
 
-#tcsa {
+.tcsa {
   right: 3px;
 }
 
@@ -77,8 +77,8 @@
   position: absolute;
 }
 
-#tcso::before,
-#tcsa::before {
+.tcso::before,
+.tcsa::before {
   border-radius: 2px;
   border: solid #000;
   box-sizing: border-box;
@@ -88,12 +88,12 @@
   width: 10px;
 }
 
-#tcso::before {
+.tcso::before {
   border-width: 0 0 4px 4px;
   transform: rotate(45deg);
 }
 
-#tcsa::before {
+.tcsa::before {
   border-width: 0 4px 4px 0;
   transform: rotate(-45deg);
 }
