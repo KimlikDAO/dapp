@@ -1,8 +1,6 @@
 #he {
-  padding: 40px;
+  padding: 40px 60px;
   border-radius: 22px;
-  display: flex;
-  justify-content: space-around;
   /**
    * #8e2de2 -> rgb(142, 45, 226)
    */
@@ -15,8 +13,15 @@
     radial-gradient(circle at 75% 60%, rgba(99, 55, 186, 0.3) 0%, rgba(255, 255, 255, 0) 40%);
 }
 
+#het {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 auto;
+  max-width: 1400px;
+}
+
 #hes {
-  margin: 0 2em;
+  margin: auto 20px;
   max-width: 750px;
 }
 
@@ -25,7 +30,6 @@ h1 {
   display: inline-block;
   font-size: 50pt;
   margin: 0;
-  padding: 50px 0 0;
   text-align: left;
 }
 
@@ -35,6 +39,10 @@ h1 {
 
 #hel {
   margin-right: 20px;
+}
+
+#te {
+  margin: 0 20px;
 }
 
 @media (max-width: 1000px) {

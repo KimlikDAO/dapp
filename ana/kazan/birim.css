@@ -1,8 +1,9 @@
 #ka {
-  margin: 50px 0;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
   gap: 20px;
+  grid-template-columns: 1fr 1fr 1fr;
+  margin: 50px auto;
+  max-width: 1400px;
 }
 
 #kaa {

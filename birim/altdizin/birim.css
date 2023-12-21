@@ -1,7 +1,9 @@
 #alt {
-  padding: 70px 0 40px;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
+  margin: 0 auto;
+  max-width: 1400px;
+  padding: 70px 0 40px;
 }
 
 .altc {

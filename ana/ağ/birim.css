@@ -1,14 +1,14 @@
 #ag {
-  margin: 40px 0 80px;
   display: grid;
+  gap: 40px;
   grid-template-columns: 1fr 1fr 1fr;
   justify-content: end;
-  gap: 40px;
+  margin: 40px auto 80px;
+  max-width: 1400px;
 }
 
 #agy {
   text-align: right;
-  max-width: 500px;
   padding: 0 20px;
 }
 
@@ -138,5 +138,4 @@
 
 #agn {
   margin: auto;
-  max-height: 400px;
 }

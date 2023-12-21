@@ -61,5 +61,3 @@ const sergiSaatiKur = () => {
 Cüzdan.adresDeğişince((adres) => Telefon.adresGir(adres));
 
 sergiSaatiKur();
-
-setInterval(() => console.log("tick"), 1000);
