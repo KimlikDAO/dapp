@@ -17,7 +17,7 @@
   display: flex;
   justify-content: space-between;
   margin: 0 auto;
-  max-width: 1400px;
+  max-width: 1300px;
 }
 
 #hes {
@@ -41,10 +41,6 @@ h1 {
   margin-right: 20px;
 }
 
-#te {
-  margin: 0 20px;
-}
-
 @media (max-width: 1000px) {
   #he {
     border-radius: 0;
@@ -58,5 +54,9 @@ h1 {
 @media (max-width: 600px) {
   h1 {
     font-size: 40pt;
+  }
+
+  #he {
+    padding: 40px 10px;
   }
 }

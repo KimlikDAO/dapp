@@ -4,7 +4,9 @@
 }
 
 @media (max-width: 600px) {
-  #se { max-width: 300px}
+  #se {
+    width: 400px;
+  }
 }
 
 /*

@@ -1,0 +1,134 @@
+#sa {
+  background: linear-gradient(90deg, #F8F8F8 -9.07%, rgba(132, 199, 255, 0.2) 100%, rgba(255, 255, 255, 0.8) 69.02%);
+}
+
+#sai {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row-reverse;
+  margin: 0 auto;
+  max-width: 1300px;
+}
+
+#sak {
+  margin: 0 auto;
+  padding: 35px 0 50px;
+  display: grid;
+  grid-template-rows: auto auto auto;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px 10px;
+}
+
+#sal {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  width: 200px;
+  padding: 10px;
+}
+
+#saz {
+  display: flex;
+  justify-content: right;
+  margin-top: 30px;
+}
+
+h2 {
+  font-size: 40px;
+}
+
+.sac {
+  display: flex;
+  height: 74px;
+  width: 210px;
+  border-radius: 12px;
+  align-content: center;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+.sau {
+  font-weight: 700;
+  font-size: 20px;
+}
+
+.saa {
+  font-size: 12px;
+}
+
+.sac.eth {
+  background-color: #F1EBFF;
+}
+
+.sac.bnb {
+  background-color: #FFC3C3;
+}
+
+.sac.ftm {
+  background-color: #B0FFDE;
+}
+
+.sac.arb {
+  background-color: #FEEDFA;
+}
+
+.sac.avax {
+  background-color: #D7AEFF;
+}
+
+.sac.polygon {
+  background-color: #C6FFCB;
+}
+
+.sat {
+  display: inline-block;
+  max-width: 375px;
+}
+
+@keyframes doner {
+  from {
+    transform: rotate(0deg) translateX(1.5px) rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg) translateX(1.5px) rotate(-360deg);
+  }
+}
+
+@media (min-width: 800px) {
+  .sac.polygon {
+    position: relative;
+    left: 60px;
+    top: 20px;
+    animation: doner 5s linear infinite;
+  }
+
+  .sac.avax {
+    position: relative;
+    left: 40px;
+    top: 20px;
+    animation: doner 5.4s linear infinite;
+  }
+
+  .sac.arb {
+    position: relative;
+    top: 20px;
+    animation: doner 4.8s linear infinite reverse;
+  }
+
+  .sac.ftm {
+    position: relative;
+    left: 10px;
+    animation: doner 5.2s linear infinite;
+  }
+
+  .sac.bnb {
+    position: relative;
+    left: -40px;
+    animation: doner 5.3s linear infinite reverse;
+  }
+
+  .sac.eth {
+    animation: doner 4.4s linear infinite;
+  }
+}

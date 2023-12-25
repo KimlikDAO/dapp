@@ -1,14 +1,9 @@
 #ag {
-  display: grid;
-  gap: 40px;
-  grid-template-columns: 1fr 1fr 1fr;
-  justify-content: end;
-  margin: 40px auto 80px;
-  max-width: 1400px;
+  row-gap: 50px;
+  margin: 80px auto;
 }
 
 #agy {
-  text-align: right;
   padding: 0 20px;
 }
 
@@ -16,32 +11,22 @@
   margin-top: 30px;
 }
 
-#agh {
-  color: #3182CE;
-}
-
-#agb {
-  font-size: 16px;
-  line-height: 1.4;
-}
-
 .agi:hover {
   opacity: 1;
 }
 
 .agi {
-  cursor: default;
-  transition: opacity 0.5s;
-  opacity: 0.7;
-  font-size: 14px;
-  border-radius: 15px;
-  padding: 3px;
-  margin: 4px 0;
-  width: 180px;
-  color: rgba(10, 10, 100, 0.9);
-  display: flex;
   align-items: center;
-  ;
+  border-radius: 15px;
+  color: rgba(10, 10, 100, 0.9);
+  cursor: default;
+  display: flex;
+  font-size: 14px;
+  margin: 4px 0;
+  opacity: 0.7;
+  padding: 3px;
+  transition: opacity 0.5s;
+  width: 180px;
 }
 
 .agp {

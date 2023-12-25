@@ -47,12 +47,18 @@ body {
 }
 
 .info.btn {
-  background: transparent;
+  background: none;
   border: 1px solid #5256c9;
   color: #5256c9;
 }
 
-.btn.dis {
+.more.btn {
+  color: #3182CE;
+  border: 1px solid #3182CE;
+  background: none;
+}
+
+.dis.btn {
   cursor: default;
 }
 
@@ -137,4 +143,12 @@ button:hover {
   background-color: #F3F4F6;
   text-decoration: none;
   transition-duration: 0.1s;
+}
+
+.oblu {
+  color: #3182CE
+}
+
+.oprp {
+  color: #5256c9;
 }

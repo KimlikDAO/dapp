@@ -27,7 +27,7 @@ Yazılımcıların dApp'i test etmesi için gereken adımlar:
 
 Kanarya ve deployment adımları için birkaç araca daha ihtiyacımız var
 ```shell
-brew install pngcrush brotli zopfli woff2
+brew install pngcrush brotli zopfli woff2 webp
 pip install fonttools
 ```
 - `make kanarya` deploya hazır dApp'i `build` edip kanarya sunucusunu

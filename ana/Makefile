@@ -1,6 +1,8 @@
 include ana/ağ/Makefile
 include ana/hero/Makefile
 include ana/kazan/Makefile
+include ana/raporlar/Makefile
+include ana/sahipler/Makefile
 include ana/sayılar/Makefile
 
 ana-en := "?en"
@@ -41,6 +43,7 @@ build/ana/sayfa-%.css: \
     ana/hero/birim.css \
     ana/hero/sergi/birim.css \
     ana/kazan/birim.css \
+    ana/sahipler/birim.css \
     ana/sayılar/birim.css \
     birim/altdizin/birim.css \
     birim/ortak.css \
@@ -67,8 +70,10 @@ build/ana-%.html: ana/sayfa.html \
                   build/ana/sayfa-%.keymap \
                   ana/ağ.birim \
                   ana/hero.birim \
-                  ana/sayılar.birim \
                   ana/kazan.birim \
+                  ana/raporlar.birim \
+                  ana/sahipler.birim \
+                  ana/sayılar.birim \
                   birim/başlık.birim \
                   birim/favicon.birim \
                   birim/lato-%.birim \
