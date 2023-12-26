@@ -28,12 +28,16 @@
   gap: 20px;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   margin: 50px auto;
-  max-width: 1300px;
+  max-width: 1200px;
 }
 
 .ansag {
   text-align: right;
   padding: 0 20px;
+}
+
+.anhr {
+  margin: 100px 0;
 }
 
 .btn.anust {

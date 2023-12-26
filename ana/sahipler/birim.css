@@ -4,10 +4,11 @@
 
 #sai {
   display: flex;
-  flex-wrap: wrap;
   flex-direction: row-reverse;
+  flex-wrap: wrap;
   margin: 0 auto;
-  max-width: 1300px;
+  max-width: 1200px;
+  padding: 0 20px;
 }
 
 #sak {
