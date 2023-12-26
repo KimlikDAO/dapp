@@ -27,7 +27,7 @@ jobs:
       - name: Araçları kur
         run: |
           yarn
-          brew install pngcrush brotli zopfli woff2
+          brew install pngcrush brotli zopfli woff2 webp
           pip install fonttools
           make ana.sayfa
 

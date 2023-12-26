@@ -4,6 +4,7 @@ __pycache__/
 .gizli
 .ipynb_checkpoints/
 .vscode/
+*.lock*
 **/*.rs.bk
 /build
 /dist
@@ -15,4 +16,3 @@ package-lock.json
 pkg/
 wasm-pack.log
 worker/
-yarn.lock

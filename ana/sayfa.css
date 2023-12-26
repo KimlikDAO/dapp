@@ -26,6 +26,7 @@
 .an3 {
   display: grid;
   gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   margin: 50px auto;
   max-width: 1300px;
 }
@@ -37,24 +38,6 @@
 
 .btn.anust {
   margin-top: 30px;
-}
-
-@media (min-width: 950px) {
-  .an3 {
-    grid-template-columns: 1fr 1fr 1fr;
-  }
-}
-
-@media (min-width: 620px) and (max-width: 950px) {
-  .an3 {
-    grid-template-columns: 1fr 1fr;
-  }
-}
-
-@media (max-width: 620px) {
-  .an3 {
-    grid-template-columns: 1fr;
-  }
 }
 
 @media (max-width: 1000px) {
