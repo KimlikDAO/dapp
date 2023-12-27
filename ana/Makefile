@@ -11,8 +11,10 @@ ana-tr := "?tr"
 build/ana/sayfa-%.js: ana/sayfa.js \
                       ana/hero/sergi/birim.js \
                       birim/ağlar/*.js \
+                      birim/altdizin/*.js \
                       birim/cüzdan/*.js \
                       birim/dil/birim.js \
+                      birim/kaydol/*.js \
                       birim/telefon/birim.js \
                       birim/tckt/birim.js \
                       lib/crosschain/unlockable.d.js \

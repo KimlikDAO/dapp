@@ -1,4 +1,5 @@
 import "/ana/hero/sergi/birim";
+import "/birim/altdizin/birim";
 import Cüzdan from "/birim/cüzdan/birim";
 import "/birim/dil/birim";
 import dom from "/lib/util/dom";
@@ -12,4 +13,4 @@ Cüzdan.tcktDeğişince((_, dosyaSözü) => {
   düğme.href = dosyaSözü
     ? dom.TR ? "/incele" : "/view"
     : dom.TR ? "/al" : "/mint"
-})
+});
