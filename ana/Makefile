@@ -55,6 +55,7 @@ build/ana/sayfa-%.css: \
     birim/blog/eliptik-imza/birim.css \
     birim/cüzdan/birim.css \
     birim/dil/birim.css \
+    birim/kaydol/birim.css \
     birim/telefon/birim.css \
     birim/tckt/birim.css
 	mkdir -p $(dir $@)

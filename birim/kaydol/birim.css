@@ -1,3 +1,14 @@
-.kayi {}
+.kayi {
+  border-color: #3182CE;
+  border-radius: 8px 0 0 8px;
+  border-style: solid;
+  border-width: 1px 0 1px 1px;
+  height: 43px;
+  outline: 0;
+  padding: 0 10px;
+}
 
-.kayb {}
+.act.btn.kayb {
+  box-shadow: none;
+  border-radius: 0 8px 8px 0;
+}

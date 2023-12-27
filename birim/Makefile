@@ -1,9 +1,11 @@
 include birim/ağlar/Makefile
+include birim/altdizin/Makefile
 include birim/blog/Makefile
 include birim/başlık/Makefile
 include birim/cüzdan/Makefile
 include birim/dil/Makefile
 include birim/favicon/Makefile
+include birim/kaydol/Makefile
 include birim/lato/Makefile
 include birim/paralar/Makefile
 include birim/tckt/Makefile

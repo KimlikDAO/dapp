@@ -7,7 +7,7 @@
 }
 
 .altc {
-  padding: 7px 40px 0;
+  margin: 7px 40px 0;
 }
 
 .altc>b {
@@ -33,20 +33,24 @@
 #altl {
   display: flex;
   align-items: center;
-  font-size: 20px;
+  font-size: 24px;
   font-weight: 700;
 }
 
 #altt {
   margin-top: 20px;
   display: inline-block;
-  max-width: 250px;
+  max-width: 320px;
   color: #666;
   line-height: 1.5;
 }
 
 #altm {
-  margin-top: 40px;
+  margin: 50px 0 10px;
   font-weight: 700;
   font-size: 13px;
+}
+
+#altb {
+  width: 330px;
 }
