@@ -30,7 +30,10 @@ const kur = (domAdı) => {
     düğme.innerText = KaydolMetni + " ⏳";
     fetch("//bulten.kimlikdao.org/ekle", {
       method: "POST",
-      body: JSON.stringify({ email: girdi.value })
+      body: JSON.stringify({
+        "email": girdi.value,
+        "dil": dom.TR ? "tr" : "en"
+      })
     }).then(
       (res) => güncelle(res && res.ok),
       () => güncelle(false)
