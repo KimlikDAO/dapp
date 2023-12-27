@@ -20,7 +20,7 @@
   color: #666;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 700px) {
   #altk {
     display: none;
   }
