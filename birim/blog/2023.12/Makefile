@@ -1,6 +1,6 @@
 build/birim/blog/2023.12/banner.webp: birim/blog/2023.12/banner.png
 	mkdir -p $(dir $@)
-	cwebp -q 80 $< -o $@
+	cwebp -m 6 -pass 10 -q 80 $< -o $@
 
 build/birim/blog/2023.12/birim.keymap: build/birim/blog/2023.12/banner.webp
 	mkdir -p $(dir $@) && rm -rf $@
