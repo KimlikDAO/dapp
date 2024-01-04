@@ -49,4 +49,3 @@ build/incele-%.html: incele/sayfa.html \
                      birim/tckt.birim \
                      build/al/paste.isvg
 	node lib/birimler/işleyici $< $*
-	yarn html-minifier -c lib/birimler/htmlMinifierConfig.json $@ -o $@

@@ -66,4 +66,3 @@ build/al-%.html: al/sayfa.html \
                  birim/tckt.birim \
                  birim/telefon.birim
 	node lib/birimler/işleyici $< $*
-	yarn html-minifier -c lib/birimler/htmlMinifierConfig.json $@ -o $@

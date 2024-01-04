@@ -49,4 +49,3 @@ build/iptal-%.html: iptal/sayfa.html \
                     birim/favicon.birim \
                     birim/lato-%.birim
 	node lib/birimler/işleyici $< $*
-	yarn html-minifier -c lib/birimler/htmlMinifierConfig.json $@ -o $@

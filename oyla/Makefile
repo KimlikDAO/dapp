@@ -50,4 +50,3 @@ build/oyla-%.html: oyla/sayfa.html \
                    birim/lato-%.birim \
                    build/oyla/dropdownok.isvg
 	node lib/birimler/işleyici $< $*
-	yarn html-minifier -c lib/birimler/htmlMinifierConfig.json $@ -o $@

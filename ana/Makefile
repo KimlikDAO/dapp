@@ -84,4 +84,3 @@ build/ana-%.html: ana/sayfa.html \
                   birim/telefon.birim \
                   build/ana/ok.isvg
 	node lib/birimler/işleyici $< $*
-	yarn html-minifier -c lib/birimler/htmlMinifierConfig.json $@ -o $@
