@@ -76,9 +76,13 @@ const kapalıYüzGöster = () => {
       .catch(() => console.log);
 }
 
+let DiscordDüğmesiMetni;
+
 const discordRolüAl = () => {
   window.onmessage = (event) => {
     if (event.origin != "https://discord.kimlikdao.org") return;
+    DiscordDüğmesiMetni ||= DiscordDüğmesi.innerText;
+    DiscordDüğmesi.innerText = DiscordDüğmesiMetni + " ⏳";
     /**
      * @const
      * @type {!Signer}
@@ -104,7 +108,13 @@ const discordRolüAl = () => {
           lang: dom.TR ? "tr" : "en"
         }))
       }))
-      .then(() => console.log);
+      .then((res) => {
+        DiscordDüğmesi.innerText = DiscordDüğmesiMetni + (res.ok ? " 👍" : " 🙀");
+        if (!res.ok)
+          setTimeout(() => DiscordDüğmesi.innerText = DiscordDüğmesiMetni, 2000);
+        else
+          dom.düğmeDurdur(DiscordDüğmesi);
+      });
   };
   const popup = window.open("//discord.com/api/oauth2/authorize?client_id=1068629633970487428"
     + "&redirect_uri=https://discord.kimlikdao.org"

@@ -25,7 +25,11 @@ const kur = (domAdı) => {
       girdi.value = "";
   }
 
-  düğme.onclick = () => {
+  /**
+   * @param {Event=} event
+   */
+  const yolla = (event) => {
+    if (event) event.preventDefault();
     KaydolMetni ||= düğme.innerText;
     düğme.innerText = KaydolMetni + " ⏳";
     fetch("//bulten.kimlikdao.org/ekle", {
@@ -38,7 +42,8 @@ const kur = (domAdı) => {
       (res) => güncelle(res && res.ok),
       () => güncelle(false)
     );
-  }
+  };
+  kök.onsubmit = yolla;
 }
 
 export { kur };
