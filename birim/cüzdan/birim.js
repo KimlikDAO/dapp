@@ -179,7 +179,7 @@ const tcktDeğişti = () => {
       : dom.TR ? "TCKT AL" : "MINT TCKT";
     tcktDüğmesi.onclick = tcktResmi.onclick = () =>
       window.location.href = "//kimlikdao.org" + (varMı
-        ? dom.TR ? "/incele" : "/view"
+        ? dom.TR ? "/tcktm" : "/my-tckt"
         : dom.TR ? "/al" : "/mint");
     if (!varMı && TcktYokResmi) tcktResmi.src = TcktYokResmi;
     /** @const {Promise<!eth.ERC721Unlockable>} */

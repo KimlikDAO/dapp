@@ -1,7 +1,8 @@
-incele-en := view
-incele-tr := incele
+tcktm-en := my-tckt
+tcktm-tr := tcktm
 
-build/incele/sayfa-%.js: incele/sayfa.js \
+build/tcktm/sayfa-%.js: tcktm/sayfa.js tcktm/pencere/*.js \
+    tcktm/discord.d.js tcktm/discord.js \
     birim/ağlar/*.js \
     birim/cüzdan/*.js \
     birim/dil/birim.js \
@@ -15,8 +16,8 @@ build/incele/sayfa-%.js: incele/sayfa.js \
 	mkdir -p $(dir $@)
 	yarn google-closure-compiler -W VERBOSE -O ADVANCED --charset UTF-8 \
                              --define "TR\$$\$$module\$$lib\$$util\$$dom=$(Lang-$*)" \
-                             --define "KonumTR\$$\$$module\$$birim\$$dil\$$birim=$(incele-tr)" \
-                             --define "KonumEN\$$\$$module\$$birim\$$dil\$$birim=$(incele-en)" \
+                             --define "KonumTR\$$\$$module\$$birim\$$dil\$$birim=$(tcktm-tr)" \
+                             --define "KonumEN\$$\$$module\$$birim\$$dil\$$birim=$(tcktm-en)" \
                              --emit_use_strict \
                              --module_resolution NODE \
                              --assume_function_wrapper \
@@ -26,23 +27,23 @@ build/incele/sayfa-%.js: incele/sayfa.js \
                              --js_output_file $@
 	yarn uglifyjs $@ -m -o $@
 
-build/incele/sayfa.css: incele/sayfa.css incele/*/*.css birim/kutu.css
+build/tcktm/sayfa.css: tcktm/sayfa.css tcktm/*/*.css birim/kutu.css
 	mkdir -p $(dir $@)
 	cat $^ | yarn csso --output $@
 
-build/incele/sayfa.keymap: $(call compressions, build/incele/sayfa.css)
+build/tcktm/sayfa.keymap: $(call compressions, build/tcktm/sayfa.css)
 	mkdir -p $(dir $@) && > $@
-	node lib/birimler/hasher $@ build/incele/sayfa.css
+	node lib/birimler/hasher $@ build/tcktm/sayfa.css
 
-build/incele/sayfa-%.keymap: build/ana/sayfa-%.keymap \
-    $(call compressions, build/incele/sayfa-%.js)
+build/tcktm/sayfa-%.keymap: build/ana/sayfa-%.keymap \
+    $(call compressions, build/tcktm/sayfa-%.js)
 	mkdir -p $(dir $@) && > $@
-	node lib/birimler/hasher $@ build/incele/sayfa-$*.js
+	node lib/birimler/hasher $@ build/tcktm/sayfa-$*.js
 	cat $< >> $@
 
-build/incele-%.html: incele/sayfa.html \
-                     build/incele/sayfa-%.keymap \
-                     build/incele/sayfa.keymap \
+build/tcktm-%.html: tcktm/sayfa.html \
+                     build/tcktm/sayfa-%.keymap \
+                     build/tcktm/sayfa.keymap \
                      birim/başlık.birim \
                      birim/favicon.birim \
                      birim/lato-%.birim \

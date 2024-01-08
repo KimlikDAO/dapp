@@ -29,7 +29,6 @@ jobs:
           yarn
           brew install pngcrush brotli zopfli woff2 webp
           pip install fonttools
-          make ana.sayfa
 
       - name: ana sayfa
         run: |
@@ -39,9 +38,9 @@ jobs:
         run: |
           make al.sayfa
 
-      - name: incele sayfası
+      - name: tcktm sayfası
         run: |
-          make incele.sayfa
+          make tcktm.sayfa
 
       - name: iptal sayfası
         run: |

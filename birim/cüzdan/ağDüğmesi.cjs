@@ -15,7 +15,7 @@ exports.üret = (değerler) => {
     const parts = chain.split(",");
     if (parts.length > 3) {
       out = optimize(
-        readFileSync(`birim/ağlar/${Ağlar[parts[0]].replace(" ", "").toLowerCase()}.svg`), {
+        readFileSync(`birim/ağlar/${Ağlar[parts[0]].replaceAll(" ", "").toLowerCase()}.svg`), {
         multipass: true,
         plugins: [
           "cleanupAttrs",

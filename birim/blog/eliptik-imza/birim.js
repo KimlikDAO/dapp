@@ -1,5 +1,6 @@
 import { AğBilgileri } from "/birim/ağlar/birim";
 import jsonrpc from "/lib/api/jsonrpc";
+import { address } from "/lib/ethereum/provider";
 import dom from "/lib/util/dom";
 
 /** @const {string} */
@@ -14,12 +15,10 @@ const ODUL = "0xfd086bc7cd5c481dcc9c85ebe478a1c0b69fcbb9"
  */
 const USDT_ARB = "0xfd086bc7cd5c481dcc9c85ebe478a1c0b69fcbb9";
 
-const addr = (address) => "0".repeat(24) + address.slice(2);
-
 jsonrpc.call("https://" + AğBilgileri["0xa4b1"].rpcUrl, "eth_call", [
   /** @type {!eth.Transaction} */({
     to: USDT_ARB,
-    data: "0xdd62ed3e" + addr(DEV_FUND) + addr(ODUL)
+    data: "0xdd62ed3e" + address(DEV_FUND) + address(ODUL)
   }), "latest"
 ]).then((izin) => {
   const kalan = parseInt(izin.slice(-36), 16);

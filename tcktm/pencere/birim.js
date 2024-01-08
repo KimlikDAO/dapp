@@ -1,24 +1,8 @@
-/**
- * @fileoverview İncele sayfası giriş noktası
- *
- */
 import Cüzdan from "/birim/cüzdan/birim";
-import "/birim/dil/birim";
-import Tckt from "/birim/tckt/birim";
-import { Provider } from "/lib/crosschain/provider";
-import { fromUnlockableNFT } from "/lib/did/decryptedSections";
 import TCKT from "/lib/ethereum/TCKT";
 import evm from "/lib/ethereum/evm";
 import dom from "/lib/util/dom";
 
-/** @const {!Element} */
-const İmeceİptalDüğmesi = /** @const {!Element} */(dom.adla("inbtn1"));
-/** @const {!Element} */
-const EşikAzaltmaDüğmesi = /** @const {!Element} */(dom.adla("inbtn2"));
-/** @const {!Element} */
-const SilDüğmesi = /** @const {!Element} */(dom.adla("inbtn3"));
-/** @const {!Element} */
-const AçDüğmesi = /** @const {!Element} */(dom.adla("intcktb"));
 /** @const {!Element} */
 const Mask = /** @const {!Element} */(dom.adla("inbd"));
 /** @const {!Element} */
@@ -27,11 +11,6 @@ const İmeceİptalKutusu = /** @const {!Element} */(dom.adla("inmii"));
 const EşikKutusu = /** @const {!Element} */(dom.adla("inmes"));
 /** @const {!Element} */
 const SilKutusu = /** @const {!Element} */(dom.adla("inmsy"));
-/** @const {!Element} */
-const TcktYok = /** @const {!Element} */(dom.adla("inn"));
-
-/** @const {!Object<string, !did.DecryptedSections>} */
-const Bellek = {};
 
 const kutuKapat = () => {
   dom.gizle(Mask);
@@ -99,7 +78,10 @@ const eşikKutusuGöster = () => {
   });
 }
 
-const silKutusuGöster = () => {
+/**
+ * @param {function(string)} iptelEdince
+ */
+const silKutusuGöster = (iptelEdince) => {
   dom.göster(Mask);
   dom.göster(SilKutusu);
   dom.adla("insyr").onclick = kutuKapat;
@@ -110,10 +92,7 @@ const silKutusuGöster = () => {
     const adres = /** @type {string} */(Cüzdan.adres());
     kutuKapat();
     TCKT.revoke(ağ, adres)
-      .then(() => {
-        delete Bellek[ağ + adres];
-        kapalıYüzGöster();
-      })
+      .then(() => iptelEdince(ağ + adres))
       .catch(console.log);
   }
 }
@@ -166,67 +145,8 @@ const ağırlıkBlurOlunca = (event) => {
   if (val < 1 || val === "") event.target.value = 1;
 }
 
-dom.gizle(Tckt.Kök);
-
-/**
- * @param {!did.DecryptedSections} açıkTckt
- */
-const açıkYüzGöster = (açıkTckt) => {
-  Tckt.açıkTcktGöster(açıkTckt);
-  AçDüğmesi.innerText = dom.TR ? "Gizle" : "Hide";
-  AçDüğmesi.onclick = kapalıYüzGöster;
-}
-
-/** @type {Promise<!eth.ERC721Unlockable>} */
-let DosyaSözü;
-
-const kapalıYüzGöster = () => {
-  /** @const {string} */
-  const ağ = Cüzdan.ağ();
-  /**
-   * @type {!Provider}
-   * @const
-   */
-  const bağlantı = Cüzdan.bağlantı();
-  /** @const {string} */
-  const adres = /** @type {string} */(Cüzdan.adres());
-  Tckt.yüzGöster(false);
-  AçDüğmesi.innerText = dom.TR ? "Aç" : "Unlock";
-
-  /** @const {!did.DecryptedSections} */
-  const bellektenTckt = Bellek[ağ + adres];
-  AçDüğmesi.onclick = bellektenTckt
-    ? () => açıkYüzGöster(bellektenTckt)
-    : () => DosyaSözü
-      .then((dosya) => fromUnlockableNFT(dosya,
-        ["personInfo", "contactInfo", "addressInfo", "kütükBilgileri"],
-        bağlantı,
-        adres
-      ))
-      .then((açıkTckt) => {
-        Bellek[ağ + adres] = açıkTckt;
-        açıkYüzGöster(açıkTckt);
-      })
-      .catch(console.log);
-}
-
-Cüzdan.tcktDeğişince((_, dosyaSözü) => {
-  /** @const {boolean} */
-  const tcktVar = dosyaSözü != null;
-  DosyaSözü = dosyaSözü;
-
-  İmeceİptalDüğmesi.onclick = tcktVar ? imeceİptalKutusuGöster : null;
-  EşikAzaltmaDüğmesi.onclick = tcktVar ? eşikKutusuGöster : null;
-  SilDüğmesi.onclick = tcktVar ? silKutusuGöster : null;
-  dom.gösterGizle(AçDüğmesi, tcktVar);
-  dom.gösterGizle(Tckt.Kök, tcktVar);
-  dom.gösterGizle(TcktYok, !tcktVar);
-
-  if (tcktVar)
-    kapalıYüzGöster();
-  else
-    dom.gösterGizle(TcktYok.firstElementChild, Cüzdan.adres() != null);
-});
-
-Cüzdan.bağlantıDeğişince((bağlantı) =>
-  TCKT.setProvider(/** @type {!eth.Provider} */(bağlantı.provider)));
+export {
+  eşikKutusuGöster,
+  imeceİptalKutusuGöster,
+  silKutusuGöster
+};

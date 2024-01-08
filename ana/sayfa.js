@@ -6,11 +6,11 @@ import dom from "/lib/util/dom";
 
 Cüzdan.tcktDeğişince((_, dosyaSözü) => {
   /** @const {!Element} */
-  const düğme = /** @type {!Element} */(dom.adla("bal"));
-  düğme.firstChild.data = dosyaSözü
+  const eylemDüğmesi = /** @type {!Element} */(dom.adla("bal"));
+  eylemDüğmesi.firstChild.data = dosyaSözü
     ? dom.TR ? "TCKT’ni incele" : "View TCKT"
     : dom.TR ? "Hemen TCKT al" : "Mint TCKT"
-  düğme.href = dosyaSözü
-    ? dom.TR ? "/incele" : "/view"
+  eylemDüğmesi.href = dosyaSözü
+    ? dom.TR ? "/tcktm" : "/my-tckt"
     : dom.TR ? "/al" : "/mint"
 });

@@ -20,7 +20,8 @@ build/ana/sayfa-%.js: ana/sayfa.js \
                       lib/crosschain/unlockable.d.js \
                       lib/crosschain/provider.js lib/crosschain/signer.js \
                       lib/did/*.d.js \
-                      lib/ethereum/*.d.js lib/ethereum/TCKTLite.js \
+                      lib/ethereum/*.d.js \
+                      lib/ethereum/provider.js lib/ethereum/TCKTLite.js \
                       lib/node/*.d.js lib/node/ipfs.js \
                       lib/util/dom.js lib/util/çevir.js
 	mkdir -p $(dir $@)

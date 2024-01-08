@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html data-en-lang=en lang=tr>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title data-en="KimlikDAO | My TCKT">KimlikDAO | TCKT’m</title>
+  <birim:lato />
+  <link href="/birim/ortak.css" rel="stylesheet" type="text/css" />
+  <link href="/tcktm/sayfa.css" rel="stylesheet" type="text/css" />
+  <birim:favicon />
+</head>
+
+<body>
+  <birim:başlık />
+  <div id="in">
+    <div id="intckt">
+      <div id="inn">
+        <span style="display:none">
+          <span data-phantom data-en="The connected wallet does not have a TCKT on this chain.">Bağlı
+            cüzdanda bu ağda TCKT yok.</span>
+          <br><br>
+          <a href="/al" class="inl" data-en="Click here to get one.">Almak için tıklayın.</a>
+        </span>
+      </div>
+      <birim:tckt style="display:none" />
+      <div id="intcktb" data-en="Unlock" style="display:none">Aç</div>
+    </div>
+    <div id="inbtn">
+      <a href="javascript:" id="inbtn0" class="info btn" data-en="Claim Discord role">Discord rolü al</a>
+      <a href="javascript:" id="inbtn1" class="more btn" data-en="Add social revoker">İmece iptal adresi ekle</a>
+      <a href="javascript:" id="inbtn2" class="more btn" data-en="Decrease revoke threshold">Eşik azalt</a>
+      <a href=" javascript:" id="inbtn3" class="danger btn" data-en="Revoke TCKT">TCKT iptal et</a>
+    </div>
+  </div>
+  <altbirim:pencere />
+  <script async type="module" src="/tcktm/sayfa.js" data-remove-type></script>
+</body>
+
+</html>

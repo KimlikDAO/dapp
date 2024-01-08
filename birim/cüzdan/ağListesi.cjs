@@ -12,7 +12,7 @@ exports.üret = (değerler) => {
     return `\n<li id="cud${parts[0]}"${selected ? ' class=sel' : ""}>` +
       (selected
         ? "<span></span>"
-        : `<img src="/birim/ağlar/${Ağlar[parts[0]].toLowerCase().replace(" ", "")}.svg" width="32" height="32">`) +
+        : `<img src="/birim/ağlar/${Ağlar[parts[0]].toLowerCase().replaceAll(" ", "")}.svg" width="32" height="32">`) +
       (parts.length > 1
         ? ` <div>${Ağlar[parts[0]]}<div class=cuo>${parts[1 + (değerler.dil == "en")]}</div></div>`
         : ` ${Ağlar[parts[0]]}`) +

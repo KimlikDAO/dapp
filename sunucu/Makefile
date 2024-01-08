@@ -1,4 +1,4 @@
-PAGES := al ana incele iptal oyla
+PAGES := al ana tcktm iptal oyla
 
 NAMED_ASSETS := sitemap.txt TCKT.svg TCKT.png TCKT.webp
 
