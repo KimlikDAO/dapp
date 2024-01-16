@@ -27,13 +27,13 @@ build/birim/lato/l700-%.css: birim/lato/l700.css \
 build/birim/lato/birim.keymap: \
     $(call compressions, $(call l400Files,ttf)) \
     $(call l400Files,woff2)
-	mkdir -p $(dir $@) && > $@
+	mkdir -p $(dir $@)
 	node lib/birimler/hasher $@ $(call l400Files,ttf) $(call l400Files,woff2)
 
 build/birim/lato/birim-%.keymap: \
     $(call compressions, $(call l700Files,%,ttf)) \
     $(call l700Files,%,woff2)
-	mkdir -p $(dir $@) && > $@
+	mkdir -p $(dir $@)
 	node lib/birimler/hasher $@ $(call l700Files,$*,ttf) $(call l700Files,$*,woff2)
 
 build/birim/lato/%.ttf: birim/lato/%.txt

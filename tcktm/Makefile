@@ -32,12 +32,12 @@ build/tcktm/sayfa.css: tcktm/sayfa.css tcktm/*/*.css birim/kutu.css
 	cat $^ | yarn csso --output $@
 
 build/tcktm/sayfa.keymap: $(call compressions, build/tcktm/sayfa.css)
-	mkdir -p $(dir $@) && > $@
+	mkdir -p $(dir $@)
 	node lib/birimler/hasher $@ build/tcktm/sayfa.css
 
 build/tcktm/sayfa-%.keymap: build/ana/sayfa-%.keymap \
     $(call compressions, build/tcktm/sayfa-%.js)
-	mkdir -p $(dir $@) && > $@
+	mkdir -p $(dir $@)
 	node lib/birimler/hasher $@ build/tcktm/sayfa-$*.js
 	cat $< >> $@
 

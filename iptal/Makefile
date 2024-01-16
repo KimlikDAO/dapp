@@ -34,12 +34,12 @@ build/iptal/sayfa.css: iptal/sayfa.css
 	cat $^ | yarn csso --output $@
 
 build/iptal/sayfa.keymap: $(call compressions, build/iptal/sayfa.css)
-	mkdir -p $(dir $@) && > $@
+	mkdir -p $(dir $@)
 	node lib/birimler/hasher $@ build/iptal/sayfa.css
 
 build/iptal/sayfa-%.keymap: build/ana/sayfa-%.keymap \
     $(call compressions, build/iptal/sayfa-%.js)
-	mkdir -p $(dir $@) && > $@
+	mkdir -p $(dir $@)
 	node lib/birimler/hasher $@ build/iptal/sayfa-$*.js
 	cat $< >> $@
 

@@ -3,7 +3,7 @@ build/birim/blog/2023.12/banner.webp: birim/blog/2023.12/banner.png
 	cwebp -m 6 -pass 10 -q 80 $< -o $@
 
 build/birim/blog/2023.12/birim.keymap: build/birim/blog/2023.12/banner.webp
-	mkdir -p $(dir $@) && rm -rf $@
+	mkdir -p $(dir $@)
 	node lib/birimler/hasher $@ $<
 	sed -i.bak 's#banner.webp#banner.png#' $@
 

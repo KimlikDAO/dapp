@@ -65,9 +65,10 @@ build/ana/sayfa-%.css: \
 # In dapp, we bundle ana/sayfa.css and birim/ortak.css together since both are tiny.
 # In the html call site always pretend no bundling happens and in the Makefile
 # callsite depend on build/ana/sayfa-%.keymap
-build/ana/sayfa-%.keymap: $(call compressions, build/ana/sayfa-%.js build/ana/sayfa-%.css)
-	mkdir -p $(dir $@) && > $@
-	node lib/birimler/hasher $@ build/ana/sayfa-$*.js build/ana/sayfa-$*.css
+build/ana/sayfa-%.keymap: lib/birimler/hasher.js \
+    $(call compressions, build/ana/sayfa-%.js build/ana/sayfa-%.css)
+	mkdir -p $(dir $@)
+	node $< $@ build/ana/sayfa-$*.js build/ana/sayfa-$*.css
 	sed -i.bak 's#/ana/sayfa.css#/birim/ortak.css#' $@
 
 build/ana-%.html: ana/sayfa.html \
@@ -84,4 +85,4 @@ build/ana-%.html: ana/sayfa.html \
                   birim/tckt.birim \
                   birim/telefon.birim \
                   build/ana/ok.isvg
-	node lib/birimler/işleyici $< $*
+	node lib/birimler/işleyici.js $< $*

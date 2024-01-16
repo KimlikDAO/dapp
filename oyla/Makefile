@@ -34,12 +34,12 @@ build/oyla/sayfa.css: oyla/sayfa.css oyla/*/*.css
 	cat $^ | yarn csso --output $@
 
 build/oyla/sayfa.keymap: $(call compressions, build/oyla/sayfa.css)
-	mkdir -p $(dir $@) && > $@
+	mkdir -p $(dir $@)
 	node lib/birimler/hasher $@ build/oyla/sayfa.css
 
 build/oyla/sayfa-%.keymap: build/ana/sayfa-%.keymap \
     $(call compressions, build/oyla/sayfa-%.js)
-	mkdir -p $(dir $@) && > $@
+	mkdir -p $(dir $@)
 	node lib/birimler/hasher $@ build/oyla/sayfa-$*.js
 	cat $< >> $@
 

@@ -3,7 +3,7 @@ AĞLAR_REQUEST_SVGS := $(addsuffix .svg,$(addprefix build/birim/ağlar/, $(AĞLA
 AĞLAR_INLINE_SVGS := $(addsuffix .isvg,$(addprefix build/birim/ağlar/, $(AĞLAR_SVGS)))
 
 build/birim/ağlar/birim.keymap:  $(call compressions, $(AĞLAR_REQUEST_SVGS))
-	mkdir -p $(dir $@) && rm -rf $@
+	mkdir -p $(dir $@)
 	node lib/birimler/hasher $@ $(AĞLAR_REQUEST_SVGS)
 
 birim/ağlar.birim: build/birim/ağlar/birim.keymap $(AĞLAR_INLINE_SVGS)

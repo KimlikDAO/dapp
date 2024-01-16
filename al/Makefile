@@ -43,12 +43,12 @@ build/al/sayfa.css: al/sayfa.css al/*/*.css birim/kutu.css
 	cat $^ | yarn csso --output $@
 
 build/al/sayfa.keymap: $(call compressions, build/al/sayfa.css)
-	mkdir -p $(dir $@) && > $@
+	mkdir -p $(dir $@)
 	node lib/birimler/hasher $@ build/al/sayfa.css
 
 build/al/sayfa-%.keymap: build/ana/sayfa-%.keymap \
     $(call compressions, build/al/sayfa-%.js)
-	mkdir -p $(dir $@) && > $@
+	mkdir -p $(dir $@)
 	node lib/birimler/hasher $@ build/al/sayfa-$*.js
 	cat $< >> $@
 
