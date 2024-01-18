@@ -156,9 +156,7 @@ const CoreBağlantısı = /** @type {!Provider} */({
 const MetaMaskBağlantısı = /** @type {!Provider} */({
   initIfAvailable: () => {
     /** @const {boolean} */
-    const varMı = !!(window?.ethereum
-      && !window?.ethereum?.isRabby
-      && !window?.avalanche)
+    const varMı = !!(window?.ethereum);
     if (varMı)
       /** @const {!eth.UiProvider} */
       MetaMaskBağlantısı.provider = /** @type {!eth.UiProvider} */(window.ethereum);

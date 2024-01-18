@@ -7,7 +7,7 @@ import { keccak256 } from "/lib/crypto/sha3";
  */
 const roleRequestChallenge = (discordID, role, TR) => TR
   ? `${discordID.username} Discord hesabıma ${role} rolünü eklemek istiyorum.`
-  : `I would like to add the ${role} role to my Discord account ${discordID.username}`
+  : `I would like to add the ${role} role to my Discord account ${discordID.username}.`
 
 /**
  * @param {!discord.SignedID} discordID

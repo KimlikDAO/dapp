@@ -16,13 +16,13 @@
     "express": "^4.18.1",
     "google-closure-compiler": "^20230802.0.0",
     "html-minifier": "^4.0.0",
-    "htmlparser2": "^9.0.0",
+    "htmlparser2": "^9.1.0",
     "svg-pathdata": "^6.0.3",
     "svgexport": "^0.4.2",
     "svgo": "^3.2.0",
     "toml": "^3.0.0",
     "uglify-js": "^3.16.2",
-    "vite": "^5.0.8",
-    "wrangler": "^3.22.3"
+    "vite": "^5.0.11",
+    "wrangler": "^3.23.0"
   }
 }
