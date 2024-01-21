@@ -34,7 +34,7 @@ build/al/sayfa-%.js: al/sayfa.js \
                              --entry_point $< \
                              --js $(filter %.js,$^) \
                              --js_output_file $@
-	lib/birimler/keymapper.py $@ $(filter %.keymap,$^)
+	node lib/birimler/değiştirici.js $@ $(filter %.keymap,$^)
 	yarn uglifyjs $@ -m -c toplevel,unsafe -o $@
 	wc $@
 

@@ -62,7 +62,7 @@ const eşikKutusuGöster = () => {
   dom.göster(EşikKutusu);
   dom.adla("inesr").onclick = kutuKapat;
 
-  TCKT.revokesRemaining(adres).then((eşik) => {
+  TCKT.revokesRemaining(ağ, adres).then((eşik) => {
     dom.adla("inesm").onclick = birAzalt;
     dom.adla("inesp").onclick = (e) => birArttır(e, eşik);
     girdi.value = eşik;

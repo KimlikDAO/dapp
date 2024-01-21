@@ -57,41 +57,42 @@ const revokeeAdımınıGöster = () => {
         revokeeAdımınıGöster();
       }
     }, 2000)
-    TCKT.getRevokeeAddresses(/** @type {string} */(Cüzdan.adres())).then((data) => {
-      const filtered = data.map((element) => "0x" + element.topics[1].slice(26));
-      clearTimeout(timer);
-      if (filtered.length == 0) {
+    TCKT.getRevokeeAddresses(Cüzdan.ağ(), /** @type {string} */(Cüzdan.adres()))
+      .then((data) => {
+        const filtered = data.map((element) => "0x" + element.topics[1].slice(26));
+        clearTimeout(timer);
+        if (filtered.length == 0) {
+          dom.adlaGöster("ipmc");
+          dom.adlaGöster("ipaym");
+          dom.adlaGizle("iplc");
+          dom.adlaGizle("iphm");
+          dom.düğmeDurdur(onaylaDüğmesi);
+          onaylaDüğmesi.classList.remove("act");
+        } else {
+          for (let i = 0; i < filtered.length; ++i) {
+            innerHTML += `<li id=ipiia${i} class="ipiia">${filtered[i]}</li>`
+          }
+          ul.onclick = (e) => {
+            let li = e.target;
+            if (seçilmişAdres) seçilmişAdres.classList.remove("sel");
+            li.classList.add("sel");
+            seçilmişAdres = li;
+          }
+          ul.innerHTML = innerHTML;
+          dom.adlaGöster("ipiilc");
+          dom.adlaGizle("iplc");
+          hataMesajınıKapat();
+          onaylaDüğmesiDüzelt();
+        }
+      }).catch((e) => {
+        clearTimeout(timer);
         dom.adlaGöster("ipmc");
-        dom.adlaGöster("ipaym");
-        dom.adlaGizle("iplc");
-        dom.adlaGizle("iphm");
-        dom.düğmeDurdur(onaylaDüğmesi);
-        onaylaDüğmesi.classList.remove("act");
-      } else {
-        for (let i = 0; i < filtered.length; ++i) {
-          innerHTML += `<li id=ipiia${i} class="ipiia">${filtered[i]}</li>`
+        dom.adlaGöster("iphm");
+        onaylaDüğmesi.innerText = dom.TR ? "Tekrar Dene" : "Retry";
+        onaylaDüğmesi.onclick = () => {
+          revokeeAdımınıGöster();
         }
-        ul.onclick = (e) => {
-          let li = e.target;
-          if (seçilmişAdres) seçilmişAdres.classList.remove("sel");
-          li.classList.add("sel");
-          seçilmişAdres = li;
-        }
-        ul.innerHTML = innerHTML;
-        dom.adlaGöster("ipiilc");
-        dom.adlaGizle("iplc");
-        hataMesajınıKapat();
-        onaylaDüğmesiDüzelt();
-      }
-    }).catch((e) => {
-      clearTimeout(timer);
-      dom.adlaGöster("ipmc");
-      dom.adlaGöster("iphm");
-      onaylaDüğmesi.innerText = dom.TR ? "Tekrar Dene" : "Retry";
-      onaylaDüğmesi.onclick = () => {
-        revokeeAdımınıGöster();
-      }
-    })
+      })
   }
 
   revokeeAdresAra();

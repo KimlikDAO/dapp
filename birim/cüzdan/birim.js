@@ -170,7 +170,7 @@ const tcktDeğişti = () => {
   /** @const {string} */
   const adres = Adres;
 
-  TCKT.handleOf(provider, Adres).then((cidHex) => {
+  TCKT.handleOf(provider, ağ, Adres).then((cidHex) => {
     if (ağ != Ağ || adres != Adres) return;
     /** @const {boolean} */
     const varMı = cidHex.replaceAll("0", "") != "x";
