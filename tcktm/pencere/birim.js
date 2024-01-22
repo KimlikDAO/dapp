@@ -1,4 +1,5 @@
 import Cüzdan from "/birim/cüzdan/birim";
+import { ChainId } from "/lib/crosschain/chainId";
 import TCKT from "/lib/ethereum/TCKT";
 import evm from "/lib/ethereum/evm";
 import dom from "/lib/util/dom";
@@ -44,14 +45,16 @@ const imeceİptalKutusuGöster = () => {
   dom.adla("iniio").onclick = () => {
     const weight = +agirlikGirdisi.value;
     address = evm.adresDüzelt(adresGirdisi.value).slice(2).toLowerCase();
-    TCKT.addRevoker(
-      Cüzdan.ağ(),
+    TCKT.addRevoker(Cüzdan.ağ(),
       /** @type {string} */(Cüzdan.adres()), weight, address);
   }
 }
 
 const eşikKutusuGöster = () => {
-  /** @const {string} */
+  /**
+   * @const
+   * @type {ChainId}
+   */
   const ağ = Cüzdan.ağ();
   /** @const {string} */
   const adres = /** @type {string} */(Cüzdan.adres());
@@ -86,7 +89,7 @@ const silKutusuGöster = (iptelEdince) => {
   dom.göster(SilKutusu);
   dom.adla("insyr").onclick = kutuKapat;
   dom.adla("insyo").onclick = () => {
-    /** @const {string} */
+    /** @const {ChainId} */
     const ağ = Cüzdan.ağ();
     /** @const {string} */
     const adres = /** @type {string} */(Cüzdan.adres());

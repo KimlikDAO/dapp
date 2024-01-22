@@ -1,3 +1,4 @@
+import { ChainId } from "/lib/crosschain/chainId";
 import dom from "/lib/util/dom";
 
 /**
@@ -25,8 +26,9 @@ AğBilgisi.prototype.tokenEki;
 AğBilgisi.prototype.rpcUrl;
 
 /**
-* @const {!Object<string, !AğBilgisi>}
-*/
+ * @const
+ * @type {!Object<ChainId, !AğBilgisi>}
+ */
 const AğBilgileri = {
   "0x1": {
     ad: "Ethereum",

@@ -4,6 +4,7 @@
  */
 import Cüzdan from "/birim/cüzdan/birim";
 import "/birim/dil/birim";
+import { ChainId } from "/lib/crosschain/chainId";
 import { Provider } from "/lib/crosschain/provider";
 import TCKT from "/lib/ethereum/TCKT";
 import dom from "/lib/util/dom";
@@ -31,7 +32,7 @@ dom.adla("oyyb").onclick = () => {
 }
 
 /**
- * @param {string} yeniAğ Ağ değişince UI'da gösterir
+ * @param {ChainId} yeniAğ Ağ değişince UI'da gösterir
  */
 const fiyatDeğişikliğiFormuHazırla = (yeniAğ) => {
   /** @const {Element} */
@@ -152,7 +153,7 @@ const toplulukÖnergesiHazırla = () => {
 /**
  * @param {{
  *   title: string,
- *   chain: string,
+ *   chain: ChainId,
  *   address: string,
  *   calldata: string,
  *   remainingTime: number,

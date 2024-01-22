@@ -17,8 +17,7 @@ build/ana/sayfa-%.js: ana/sayfa.js \
                       birim/kaydol/*.js \
                       birim/telefon/birim.js \
                       birim/tckt/birim.js \
-                      lib/crosschain/unlockable.d.js \
-                      lib/crosschain/provider.js lib/crosschain/signer.js \
+                      lib/crosschain/*.js \
                       lib/did/*.d.js \
                       lib/ethereum/*.d.js \
                       lib/ethereum/provider.js lib/ethereum/TCKTLite.js \

@@ -1,5 +1,6 @@
 import { CoreBağlantısı, MetaMaskBağlantısı, RabbyBağlantısı } from "./evmBağlantısı";
 import { AğBilgileri } from "/birim/ağlar/birim";
+import { ChainId } from "/lib/crosschain/chainId";
 import { Provider } from "/lib/crosschain/provider";
 import TCKT from "/lib/ethereum/TCKTLite";
 import ipfs from "/lib/node/ipfs";
@@ -32,8 +33,8 @@ const BoşBağlantı = /** @type {!Provider} */({
   /**
    * @override
    *
-   * @param {string} chain
-   * @param {function(string)} chainChanged
+   * @param {ChainId} chain
+   * @param {function(ChainId)} chainChanged
    * @param {function(!Array<string>)} addressChanged
    * @param {boolean=} onlyIfApproved
    * @return {!Promise<void>}
@@ -49,7 +50,7 @@ const BoşBağlantı = /** @type {!Provider} */({
   /**
    * @override
    *
-   * @param {string} ağ
+   * @param {ChainId} ağ
    * @return {!Promise<void>}
    */
   switchChain(ağ) {
@@ -86,7 +87,7 @@ const Menü = dom.adla("cub");
 const AdresDeğişince = [];
 /** @const {!Array<function()>} */
 const Kopunca = [];
-/** @const {!Array<function(string)>} */
+/** @const {!Array<function(ChainId)>} */
 const AğDeğişince = [];
 /** @const {!Array<function(?string, Promise<!eth.ERC721Unlockable>)>} */
 const TcktDeğişince = [];
@@ -96,15 +97,15 @@ const BağlantıDeğişince = [];
 let Bağlı = BoşBağlantı;
 /** @type {?string} */
 let Adres = null;
-/** @type {string} */
-let Ağ = "0xa4b1";
+/** @type {ChainId} */
+let Ağ = /** @type {ChainId} */(VARSAYILAN_AĞ);
 /** @type {?string} */
 let BağlaMetni;
 /** @type {?string} */
 let TcktYokResmi;
 
 /**
- * @return {string} Seçili ağ
+ * @return {ChainId} Seçili ağ
  */
 const ağ = () => Ağ;
 
@@ -137,7 +138,7 @@ const hızlıArabirimAdı = (adres) => adres.slice(0, 6) + "..." + adres.slice(-
 const nihaiArabirimAdı = (hesap) => new Promise((_) => null);
 
 /**
- * @param {string} yeniAğ harf dizisi olarak yeni ağ adı.
+ * @param {ChainId} yeniAğ harf dizisi olarak yeni ağ adı.
  */
 const ağDeğişti = (yeniAğ) => {
   if (!(yeniAğ in AğBilgileri)) {
@@ -163,7 +164,7 @@ const tcktDeğişti = () => {
   /** @const {Element} */
   const tcktResmi = dom.adla("cutc");
 
-  /** @const {string} */
+  /** @const {ChainId} */
   const ağ = Ağ;
   /** @const {!eth.Provider} */
   const provider = /** @type {!eth.Provider} */(Bağlı.provider);
@@ -229,7 +230,7 @@ const adresDeğişti = (adresler) => {
 }
 
 /**
- * @param {function(string)} f Ağ değişince yeni ağın adıyla çağırılacak
+ * @param {function(ChainId)} f Ağ değişince yeni ağın adıyla çağırılacak
  *                             fonksiyon.
  */
 const ağDeğişince = (f) => AğDeğişince.push(f);
@@ -260,7 +261,7 @@ const tcktDeğişince = (f) => {
 const bağlantıDeğişince = (f) => BağlantıDeğişince.push(f);
 
 /**
- * @param {string} ağ
+ * @param {ChainId} ağ
  */
 const ağSeçildi = (ağ) => Bağlı.switchChain(ağ)
 
@@ -355,8 +356,8 @@ const kur = () => {
     let li = event.target;
     for (; li.nodeName != 'LI'; li = li.parentElement)
       if (li.nodeName == 'BODY') return;
-    /** @const {string} */
-    const ağ = li.id.slice(3);
+    /** @const {ChainId} */
+    const ağ = /** @type {ChainId} */(li.id.slice(3));
     ağSeçildi(ağ);
   }
 

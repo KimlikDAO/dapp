@@ -5,8 +5,7 @@ build/oyla/sayfa-%.js: oyla/sayfa.js \
                        birim/ağlar/*.js \
                        birim/cüzdan/*.js \
                        birim/dil/birim.js \
-                       lib/crosschain/unlockable.d.js \
-                       lib/crosschain/provider.js lib/crosschain/signer.js \
+                       lib/crosschain/*.js \
                        lib/crypto/sha3.js \
                        lib/crypto/secp256k1.js lib/crypto/modular.js \
                        lib/ethereum/*.d.js \

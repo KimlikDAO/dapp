@@ -6,6 +6,7 @@ import { roleRequestChallenge } from "./discord.js";
 import Cüzdan from "/birim/cüzdan/birim";
 import "/birim/dil/birim";
 import Tckt from "/birim/tckt/birim";
+import { ChainId } from "/lib/crosschain/chainId";
 import { Provider } from "/lib/crosschain/provider";
 import { Signer } from "/lib/crosschain/signer";
 import { fromUnlockableNFT } from "/lib/did/decryptedSections";
@@ -47,7 +48,10 @@ const açıkYüzGöster = (açıkTckt) => {
 let DosyaSözü;
 
 const kapalıYüzGöster = () => {
-  /** @const {string} */
+  /**
+   * @const
+   * @type {ChainId}
+   */
   const ağ = Cüzdan.ağ();
   /**
    * @type {!Provider}
@@ -88,7 +92,7 @@ const discordRolüAl = () => {
      * @type {!Signer}
      */
     const imzacı = Cüzdan.bağlantı();
-    /** @const {string} */
+    /** @const {ChainId} */
     const ağ = Cüzdan.ağ();
     /** @const {string} */
     const adres = /** @type {string} */(Cüzdan.adres());

@@ -1,13 +1,17 @@
 import { AğBilgileri, AğBilgisi } from "/birim/ağlar/birim";
 import Cüzdan from "/birim/cüzdan/birim";
 import Telefon from "/birim/telefon/birim";
+import { ChainId } from "/lib/crosschain/chainId";
 import TCKT from "/lib/ethereum/TCKT";
 import { whenMined } from "/lib/ethereum/transaction";
 import dom from "/lib/util/dom";
 
+/** @const {!Element} */
+const Kök = /** @const {!Element} */(dom.adla("od"));
+
 /**
  * @param {Element} imge
- * @param {Element} satır
+ * @param {Element} satır∏∏
  */
 const imgeEkle = (imge, satır) => {
   satır = satır.lastElementChild;
@@ -44,7 +48,7 @@ const paraVeMiktar = (para, miktar) => {
     return (para == 3 ? "₺" : "$") + miktarMetni;
 
   /**
-   * @type {AğBilgisi}
+   * @type {!AğBilgisi}
    * @const
    */
   const ağBilgisi = AğBilgileri[Cüzdan.ağ()];
@@ -70,7 +74,9 @@ const öde = (cidSözü, adresAğırlığı, eşik) => {
   /** @type {number} */
   let para = 0;
 
-  /** @const {function(string)} */
+  /**
+   * @param {ChainId} yeniAğ
+   */
   const ağDeğişti = (yeniAğ) => {
     /** @const {Element} */
     const li = dom.adla("odd" + yeniAğ);
@@ -120,7 +126,7 @@ const öde = (cidSözü, adresAğırlığı, eşik) => {
     // Eğer 'native token'da ödemiyorsak, ağ ücretini ayrıca göster
     toplamKutusu.lastElementChild.style.display = para == 0 ? "none" : "inline-block";
 
-    /** @const {string} */
+    /** @const {ChainId} */
     const ağ = Cüzdan.ağ();
     /** @const {string} */
     const adres = /** @type {string} */(Cüzdan.adres());
@@ -175,9 +181,9 @@ const öde = (cidSözü, adresAğırlığı, eşik) => {
   const birazBekle = (cevap) => new Promise(
     (/** @type {function(T):void} */ resolve) => setTimeout(() => resolve(cevap), 100))
 
-  dom.adla("od").classList.remove("disabled");
+  Kök.classList.remove("disabled");
   dom.adla("oda").onclick = () => {
-    /** @const {string} */
+    /** @const {ChainId} */
     const ağ = Cüzdan.ağ();
     /** @const {!eth.Provider} */
     const provider = /** @type {!eth.Provider} */(Cüzdan.bağlantı().provider);
@@ -215,4 +221,4 @@ const öde = (cidSözü, adresAğırlığı, eşik) => {
   };
 }
 
-export { öde };
+export { Kök, öde };

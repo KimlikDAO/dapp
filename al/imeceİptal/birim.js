@@ -4,6 +4,7 @@
 
 import { AğBilgileri, AğBilgisi } from "/birim/ağlar/birim";
 import Cüzdan from "/birim/cüzdan/birim";
+import { ChainId } from "/lib/crosschain/chainId";
 import TCKT from "/lib/ethereum/TCKT";
 import evm from "/lib/ethereum/evm";
 import dom from "/lib/util/dom";
@@ -16,7 +17,7 @@ const İptalButonu = dom.adla("imbh");
 const İptalciler = dom.adla("imf");
 
 /**
- * @param {string} ağ Native tokeninde TCKT fiyatının gösterileceği ağ.
+ * @param {ChainId} ağ Native tokeninde TCKT fiyatının gösterileceği ağ.
  */
 const fiyatGöster = (ağ) => {
   /**

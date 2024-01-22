@@ -1,10 +1,11 @@
 import { AğBilgileri, AğBilgisi } from "/birim/ağlar/birim";
+import { ChainId } from "/lib/crosschain/chainId";
 import { Provider } from "/lib/crosschain/provider";
 import { hex } from "/lib/util/çevir";
 
 /**
  * @param {!eth.Provider} provider
- * @param {string} ağ
+ * @param {ChainId} ağ
  * @return {!Promise<void>}
  */
 const ağSeç = (provider, ağ) => provider.request(/** @type {!eth.Request} */({
@@ -42,8 +43,8 @@ const kopar = (provider) => provider.removeAllListeners();
 
 /**
  * @param {!eth.UiProvider} provider
- * @param {string} ağ
- * @param {function(string)} ağDeğişti
+ * @param {ChainId} ağ
+ * @param {function(ChainId)} ağDeğişti
  * @param {function(!Array<string>)} adresDeğişti
  * @param {boolean=} izinliyse
  * @return {!Promise<void>}
@@ -120,8 +121,8 @@ const CoreBağlantısı = /** @type {!Provider} */({
   /**
    * @override
    *
-   * @param {string} chain
-   * @param {function(string)} chainChanged
+   * @param {ChainId} chain
+   * @param {function(ChainId)} chainChanged
    * @param {function(!Array<string>)} addressChanged
    * @param {boolean=} onlyIfApproved
    * @return {!Promise<void>}
@@ -137,7 +138,7 @@ const CoreBağlantısı = /** @type {!Provider} */({
   /**
    * @override
    *
-   * @param {string} chain
+   * @param {ChainId} chain
    */
   switchChain: (chain) => ağSeç(CoreBağlantısı.provider, chain),
 
@@ -173,8 +174,8 @@ const MetaMaskBağlantısı = /** @type {!Provider} */({
   /**
    * @override
    *
-   * @param {string} chain
-   * @param {function(string)} chainChanged
+   * @param {ChainId} chain
+   * @param {function(ChainId)} chainChanged
    * @param {function(!Array<string>)} addressChanged
    * @param {boolean=} onlyIfApproved
    * @return {!Promise<void>}
@@ -190,7 +191,7 @@ const MetaMaskBağlantısı = /** @type {!Provider} */({
   /**
    * @override
    *
-   * @param {string} chain
+   * @param {ChainId} chain
    */
   switchChain: (chain) => ağSeç(MetaMaskBağlantısı.provider, chain),
 
@@ -235,8 +236,8 @@ const RabbyBağlantısı = /** @type {!Provider} */({
   /**
    * @override
    *
-   * @param {string} chain
-   * @param {function(string)} chainChanged
+   * @param {ChainId} chain
+   * @param {function(ChainId)} chainChanged
    * @param {function(!Array<string>)} addressChanged
    * @param {boolean=} onlyIfApproved
    * @return {!Promise<void>}
@@ -252,7 +253,7 @@ const RabbyBağlantısı = /** @type {!Provider} */({
   /**
    * @override
    *
-   * @param {string} chain
+   * @param {ChainId} chain
    */
   switchChain: (chain) => ağSeç(RabbyBağlantısı.provider, chain),
 
