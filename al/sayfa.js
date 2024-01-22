@@ -26,6 +26,7 @@ const tcktYarat = (adres, açıkTckt) => {
   const şifrele = /** @const {!Element} */(dom.adla("al3"));
   /** @const {!Element} */
   const şifreleDüğmesi = /** @const {!Element} */(dom.adla("al3a"));
+
   dom.adla("te").style.opacity = 1;
   şifrele.classList.remove("disabled");
   şifreleDüğmesi.classList.remove("disabled");
@@ -75,6 +76,8 @@ const tcktYarat = (adres, açıkTckt) => {
 
 const bağlaAdımı = () => {
   /** @const {!Element} */
+  const kök = /** @type {!Element} */(dom.adla("al1"));
+  /** @const {!Element} */
   const düğme = /** @type {!Element} */(dom.adla("al1a"));
   düğme.onclick = Cüzdan.aç;
 
@@ -84,7 +87,7 @@ const bağlaAdımı = () => {
       düğme.innerText = dom.TR ? "Cüzdan bağlandı ✓" : "Wallet connected ✓";
       düğme.classList.remove("act");
       dom.düğmeDurdur(düğme);
-      dom.adla("al1").classList.add("done");
+      kök.classList.add("done");
       Tanışma.açıkTcktAlVe(adres.toLowerCase(), tcktYarat);
     }
   });

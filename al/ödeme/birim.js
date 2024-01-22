@@ -11,7 +11,7 @@ const Kök = /** @const {!Element} */(dom.adla("od"));
 
 /**
  * @param {Element} imge
- * @param {Element} satır∏∏
+ * @param {Element} satır
  */
 const imgeEkle = (imge, satır) => {
   satır = satır.lastElementChild;
