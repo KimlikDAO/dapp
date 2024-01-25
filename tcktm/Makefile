@@ -14,7 +14,7 @@ build/tcktm/sayfa-%.js: tcktm/sayfa.js tcktm/pencere/*.js \
     lib/node/*.d.js lib/node/ipfs.js \
     lib/util/dom.js lib/util/çevir.js
 	mkdir -p $(dir $@)
-	yarn google-closure-compiler -W VERBOSE -O ADVANCED --charset UTF-8 \
+	bun google-closure-compiler -W VERBOSE -O ADVANCED --charset UTF-8 \
                              --define "TR\$$\$$module\$$lib\$$util\$$dom=$(Lang-$*)" \
                              --define "KonumTR\$$\$$module\$$birim\$$dil\$$birim=$(tcktm-tr)" \
                              --define "KonumEN\$$\$$module\$$birim\$$dil\$$birim=$(tcktm-en)" \
@@ -25,28 +25,28 @@ build/tcktm/sayfa-%.js: tcktm/sayfa.js tcktm/pencere/*.js \
                              --entry_point $< \
                              --js $^ \
                              --js_output_file $@
-	yarn uglifyjs $@ -m -o $@
+	bun uglifyjs $@ -m -o $@
 
 build/tcktm/sayfa.css: tcktm/sayfa.css tcktm/*/*.css birim/kutu.css
 	mkdir -p $(dir $@)
-	cat $^ | yarn csso --output $@
+	cat $^ | bun csso --output $@
 
 build/tcktm/sayfa.keymap: $(call compressions, build/tcktm/sayfa.css)
 	mkdir -p $(dir $@)
-	node lib/birimler/hasher $@ build/tcktm/sayfa.css
+	bun lib/birimler/hasher.js $@ build/tcktm/sayfa.css
 
 build/tcktm/sayfa-%.keymap: build/ana/sayfa-%.keymap \
     $(call compressions, build/tcktm/sayfa-%.js)
 	mkdir -p $(dir $@)
-	node lib/birimler/hasher $@ build/tcktm/sayfa-$*.js
+	bun lib/birimler/hasher.js $@ build/tcktm/sayfa-$*.js
 	cat $< >> $@
 
 build/tcktm-%.html: tcktm/sayfa.html \
-                     build/tcktm/sayfa-%.keymap \
-                     build/tcktm/sayfa.keymap \
-                     birim/başlık.birim \
-                     birim/favicon.birim \
-                     birim/lato-%.birim \
-                     birim/tckt.birim \
-                     build/al/paste.isvg
-	node lib/birimler/işleyici $< $*
+                    build/tcktm/sayfa-%.keymap \
+                    build/tcktm/sayfa.keymap \
+                    birim/başlık.birim \
+                    birim/favicon.birim \
+                    birim/lato-%.birim \
+                    birim/tckt.birim \
+                    build/al/paste.isvg
+	bun lib/birimler/işleyici.js $< $*

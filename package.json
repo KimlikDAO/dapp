@@ -9,7 +9,7 @@
   "scripts": {
     "build": "make build",
     "start": "make dev",
-    "test": "vitest"
+    "test": "bun vitest"
   },
   "devDependencies": {
     "csso-cli": "^4.0.2",

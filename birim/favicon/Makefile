@@ -1,11 +1,11 @@
 build/birim/favicon/icon16.png: build/birim/favicon/icon.svg
 	mkdir -p $(dir $@)
-	yarn svgexport $^ $@.tmp 16:16
+	bun svgexport $^ $@.tmp 16:16
 	pngcrush -brute $@.tmp $@
 
 build/birim/favicon/icon32.png: build/birim/favicon/icon.svg
 	mkdir -p $(dir $@)
-	yarn svgexport $^ $@.tmp 32:32
+	bun svgexport $^ $@.tmp 32:32
 	pngcrush -brute $@.tmp $@
 
 build/favicon.ico: \

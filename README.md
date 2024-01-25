@@ -20,7 +20,7 @@ veriyoruz ve bunları `birim/` dizinine koyuyoruz.
 Yazılımcıların dApp'i test etmesi için gereken adımlar:
 - `git clone --recursive https://github.com/KimlikDAO/dapp`
 
-- `yarn` gerekli build araçlarını ve dev sunucusunu yükler
+- `bun i` gerekli build araçlarını ve dev sunucusunu yükler
 
 - `make dev` dev sunucuyu çalıştırır.
     - http://localhost:8787/al

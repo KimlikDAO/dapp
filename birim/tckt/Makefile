@@ -10,7 +10,7 @@ build/TCKT.svg: build/birim/tckt/kapak.svg
 
 build/TCKT.png: build/TCKT.svg
 	mkdir -p $(dir $@)
-	yarn svgexport $^ $@ 400:400
+	bun svgexport $^ $@ 400:400
 	pngcrush -brute -ow $@
 
 build/TCKT.webp: build/TCKT.png

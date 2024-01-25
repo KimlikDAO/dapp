@@ -24,7 +24,7 @@ build/ana/sayfa-%.js: ana/sayfa.js \
                       lib/node/*.d.js lib/node/ipfs.js \
                       lib/util/dom.js lib/util/çevir.js
 	mkdir -p $(dir $@)
-	yarn google-closure-compiler -W VERBOSE -O ADVANCED --charset UTF-8 \
+	bun google-closure-compiler -W VERBOSE -O ADVANCED --charset UTF-8 \
                              --define "TR\$$\$$module\$$lib\$$util\$$dom=$(Lang-$*)" \
                              --define "KonumTR\$$\$$module\$$birim\$$dil\$$birim=$(ana-tr)" \
                              --define "KonumEN\$$\$$module\$$birim\$$dil\$$birim=$(ana-en)" \
@@ -35,7 +35,7 @@ build/ana/sayfa-%.js: ana/sayfa.js \
                              --entry_point $< \
                              --js $^ \
                              --js_output_file $@
-	yarn uglifyjs $@ -m -c toplevel,unsafe -o $@
+	bun uglifyjs $@ -m -c toplevel,unsafe -o $@
 
 build/ana/sayfa-%.css: \
     build/birim/lato/l400.css \
@@ -59,7 +59,7 @@ build/ana/sayfa-%.css: \
     birim/telefon/birim.css \
     birim/tckt/birim.css
 	mkdir -p $(dir $@)
-	cat $^ | yarn csso --output $@
+	cat $^ | bun csso --output $@
 
 # In dapp, we bundle ana/sayfa.css and birim/ortak.css together since both are tiny.
 # In the html call site always pretend no bundling happens and in the Makefile
@@ -67,7 +67,7 @@ build/ana/sayfa-%.css: \
 build/ana/sayfa-%.keymap: lib/birimler/hasher.js \
     $(call compressions, build/ana/sayfa-%.js build/ana/sayfa-%.css)
 	mkdir -p $(dir $@)
-	node $< $@ build/ana/sayfa-$*.js build/ana/sayfa-$*.css
+	bun $< $@ build/ana/sayfa-$*.js build/ana/sayfa-$*.css
 	sed -i.bak 's#/ana/sayfa.css#/birim/ortak.css#' $@
 
 build/ana-%.html: ana/sayfa.html \
@@ -84,4 +84,4 @@ build/ana-%.html: ana/sayfa.html \
                   birim/tckt.birim \
                   birim/telefon.birim \
                   build/ana/ok.isvg
-	node lib/birimler/işleyici.js $< $*
+	bun lib/birimler/işleyici.js $< $*

@@ -19,14 +19,12 @@ jobs:
         with:
           submodules: true
 
-      - name: Node kur
-        uses: actions/setup-node@v3
-        with:
-          node-version: 20
+      - name: Bun kur
+        uses: oven-sh/setup-bun@v1
 
       - name: Araçları kur
         run: |
-          yarn
+          bun i
           brew install pngcrush brotli zopfli woff2 webp
           pip install fonttools
 

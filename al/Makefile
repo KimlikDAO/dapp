@@ -23,33 +23,33 @@ build/al/sayfa-%.js: al/sayfa.js \
                      lib/util/dom.js lib/util/çevir.js \
                      build/al/tanışma/birim.keymap
 	mkdir -p $(dir $@)
-	yarn google-closure-compiler -W VERBOSE -O ADVANCED --charset UTF-8 \
-                             --define "TR\$$\$$module\$$lib\$$util\$$dom=$(Lang-$*)" \
-                             --define "KonumTR\$$\$$module\$$birim\$$dil\$$birim=$(al-tr)" \
-                             --define "KonumEN\$$\$$module\$$birim\$$dil\$$birim=$(al-en)" \
-                             --emit_use_strict \
-                             --module_resolution NODE \
-                             --assume_function_wrapper \
-                             --dependency_mode PRUNE \
-                             --entry_point $< \
-                             --js $(filter %.js,$^) \
-                             --js_output_file $@
-	node lib/birimler/değiştirici.js $@ $(filter %.keymap,$^)
-	yarn uglifyjs $@ -m -c toplevel,unsafe -o $@
+	bun google-closure-compiler -W VERBOSE -O ADVANCED --charset UTF-8 \
+                            --define "TR\$$\$$module\$$lib\$$util\$$dom=$(Lang-$*)" \
+                            --define "KonumTR\$$\$$module\$$birim\$$dil\$$birim=$(al-tr)" \
+                            --define "KonumEN\$$\$$module\$$birim\$$dil\$$birim=$(al-en)" \
+                            --emit_use_strict \
+                            --module_resolution NODE \
+                            --assume_function_wrapper \
+                            --dependency_mode PRUNE \
+                            --entry_point $< \
+                            --js $(filter %.js,$^) \
+                            --js_output_file $@
+	bun lib/birimler/değiştirici.js $@ $(filter %.keymap,$^)
+	bun uglifyjs $@ -m -c toplevel,unsafe -o $@
 	wc $@
 
 build/al/sayfa.css: al/sayfa.css al/*/*.css birim/kutu.css
 	mkdir -p $(dir $@)
-	cat $^ | yarn csso --output $@
+	cat $^ | bun csso --output $@
 
 build/al/sayfa.keymap: $(call compressions, build/al/sayfa.css)
 	mkdir -p $(dir $@)
-	node lib/birimler/hasher $@ build/al/sayfa.css
+	bun lib/birimler/hasher.js $@ build/al/sayfa.css
 
 build/al/sayfa-%.keymap: build/ana/sayfa-%.keymap \
     $(call compressions, build/al/sayfa-%.js)
 	mkdir -p $(dir $@)
-	node lib/birimler/hasher $@ build/al/sayfa-$*.js
+	bun lib/birimler/hasher.js $@ build/al/sayfa-$*.js
 	cat $< >> $@
 
 build/al-%.html: al/sayfa.html \
@@ -65,4 +65,4 @@ build/al-%.html: al/sayfa.html \
                  birim/lato-%.birim \
                  birim/tckt.birim \
                  birim/telefon.birim
-	node lib/birimler/işleyici $< $*
+	bun lib/birimler/işleyici.js $< $*
