@@ -4,6 +4,6 @@ AĞLAR_INLINE_SVGS := $(addsuffix .isvg,$(addprefix build/birim/ağlar/, $(AĞLA
 
 build/birim/ağlar/birim.keymap:  $(call compressions, $(AĞLAR_REQUEST_SVGS))
 	mkdir -p $(dir $@)
-	node lib/birimler/hasher $@ $(AĞLAR_REQUEST_SVGS)
+	bun lib/birimler/hasher.js $@ $(AĞLAR_REQUEST_SVGS)
 
 birim/ağlar.birim: build/birim/ağlar/birim.keymap $(AĞLAR_INLINE_SVGS)

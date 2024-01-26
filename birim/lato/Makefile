@@ -17,24 +17,24 @@ l400Files = $(addprefix build/birim/lato/,$(addsuffix .$(1), l400))
 build/birim/lato/l400.css: birim/lato/l400.css \
     build/birim/lato/birim.keymap
 	mkdir -p $(dir $@)
-	node lib/birimler/değiştirici $^ -o $@
+	bun lib/birimler/değiştirici.js $^ -o $@
 
 build/birim/lato/l700-%.css: birim/lato/l700.css \
     build/birim/lato/birim-%.keymap
 	mkdir -p $(dir $@)
-	node lib/birimler/değiştirici $^ -o $@
+	bun lib/birimler/değiştirici.js $^ -o $@
 
 build/birim/lato/birim.keymap: \
     $(call compressions, $(call l400Files,ttf)) \
     $(call l400Files,woff2)
 	mkdir -p $(dir $@)
-	node lib/birimler/hasher $@ $(call l400Files,ttf) $(call l400Files,woff2)
+	bun lib/birimler/hasher.js $@ $(call l400Files,ttf) $(call l400Files,woff2)
 
 build/birim/lato/birim-%.keymap: \
     $(call compressions, $(call l700Files,%,ttf)) \
     $(call l700Files,%,woff2)
 	mkdir -p $(dir $@)
-	node lib/birimler/hasher $@ $(call l700Files,$*,ttf) $(call l700Files,$*,woff2)
+	bun lib/birimler/hasher.js $@ $(call l700Files,$*,ttf) $(call l700Files,$*,woff2)
 
 build/birim/lato/%.ttf: birim/lato/%.txt
 	mkdir -p $(dir $@)

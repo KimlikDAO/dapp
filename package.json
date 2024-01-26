@@ -8,8 +8,7 @@
   "type": "module",
   "scripts": {
     "build": "make build",
-    "start": "make dev",
-    "test": "bun vitest"
+    "start": "make dev"
   },
   "devDependencies": {
     "csso-cli": "^4.0.2",

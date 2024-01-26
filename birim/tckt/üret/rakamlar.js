@@ -1,4 +1,4 @@
-const { SVGPathData } = require("svg-pathdata");
+import { SVGPathData } from "svg-pathdata";
 
 /** @const {!Object<(string|number), !SVGPathData>} */
 const RobotoMono = {
@@ -86,7 +86,7 @@ const RobotoMono = {
 
 let out = "";
 
-exports.üret = () => {
+export const üret = () => {
   if (!out) {
     /** @type {number} */
     let i = 0;
@@ -98,4 +98,4 @@ exports.üret = () => {
     }
   }
   return out;
-}
+};

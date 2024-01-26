@@ -4,7 +4,7 @@ build/birim/blog/2024.01/banner.webp: birim/blog/2024.01/banner.png
 
 build/birim/blog/2024.01/birim.keymap: build/birim/blog/2024.01/banner.webp
 	mkdir -p $(dir $@)
-	node lib/birimler/hasher $@ $<
+	bun lib/birimler/hasher.js $@ $<
 	sed -i.bak 's#banner.webp#banner.png#' $@
 
 birim/blog/2024.01.birim: birim/blog/2024.01/birim.html \

@@ -1,4 +1,4 @@
-const { SVGPathData } = require("svg-pathdata");
+import { SVGPathData } from "svg-pathdata";
 
 /**
  * Sol alt ve sağ üstte birer halka içeren 2x2 grid ve bu iki halkanın
@@ -301,10 +301,10 @@ const ŞekilKod = {
 
 let out = "";
 
-exports.üret = () => {
+export const üret = () => {
   if (!out) {
     for (const kod in ŞekilKod)
       out += `<path id="${kod}" d="${ŞekilKod[kod].encode()}" />\n    `;
   }
   return out
-}
+};

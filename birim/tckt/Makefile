@@ -18,5 +18,6 @@ build/TCKT.webp: build/TCKT.png
 	cwebp -m 6 -pass 10 -q 80 $^ -o $@
 
 birim/tckt.birim: birim/tckt/birim.html \
+    birim/tckt/üret/*.js \
     build/birim/tckt/birim.keymap \
     $(BIRIM_TCKT_ASSETS)

@@ -5,7 +5,7 @@ build/birim/blog/eliptik-egriler/banner.webp: birim/blog/eliptik-egriler/banner.
 build/birim/blog/eliptik-egriler/birim.keymap: build/birim/blog/eliptik-egriler/banner.webp \
     build/birim/paralar/DOBBY.webp
 	mkdir -p $(dir $@)
-	node lib/birimler/hasher $@ $^
+	bun lib/birimler/hasher.js $@ $^
 	sed -i.bak 's#banner.webp#banner.png#' $@
 	sed -i.bak 's#DOBBY.webp#DOBBY.png#' $@
 

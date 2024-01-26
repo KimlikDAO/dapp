@@ -15,7 +15,7 @@ const NODES = [
  */
 const h = (renk) => (renk.startsWith("#") ? renk : "#" + renk).toUpperCase();
 
-exports.üret = (d) => {
+const üret = (d) => {
   /** @const {number} */
   const n = NODES.length;
   const cx = d.width / 2;
@@ -35,4 +35,6 @@ exports.üret = (d) => {
     out += `<text x="${x}" y="${y + 23}" text-anchor="middle" fill="#444">${NODES[i][1]}</text>`;
   }
   return out;
-}
+};
+
+export { üret };

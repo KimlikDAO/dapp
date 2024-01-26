@@ -9,7 +9,7 @@ CÜZDAN_REQUEST_SVG_OUT := $(addprefix build/birim/cüzdan/img/, $(CÜZDAN_REQUE
 build/birim/cüzdan/birim.keymap: build/birim/ağlar/birim.keymap \
     $(call compressions, $(CÜZDAN_REQUEST_SVG_OUT))
 	mkdir -p $(dir $@)
-	node lib/birimler/hasher $@ $(CÜZDAN_REQUEST_SVG_OUT)
+	bun lib/birimler/hasher.js $@ $(CÜZDAN_REQUEST_SVG_OUT)
 	cat $< >> $@
 
 birim/cüzdan.birim: birim/cüzdan/birim.html \

@@ -1,4 +1,5 @@
-exports.Ağlar = {
+/** @const {!Object<string, string>} */
+export const Adlar = {
   "0x1": "Ethereum",
   "0xa86a": "Avalanche",
   "0x89": "Polygon",

@@ -17,7 +17,7 @@ build/favicon.ico: \
 build/birim/favicon/birim.keymap: $(call compressions, build/birim/favicon/icon.svg) \
 	build/birim/favicon/icon32.png
 	mkdir -p $(dir $@)
-	node lib/birimler/hasher $@ build/birim/favicon/icon.svg build/birim/favicon/icon32.png
+	bun lib/birimler/hasher.js $@ build/birim/favicon/icon.svg build/birim/favicon/icon32.png
 
 birim/favicon.birim: birim/favicon/birim.html \
     build/birim/favicon/birim.keymap
