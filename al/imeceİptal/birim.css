@@ -71,11 +71,11 @@
   margin: 4px 0 0 10px;
 }
 
-.im3 > .imcont > .imdel {
+.im4 > .imcont > .imdel {
   opacity: 0.3
 }
 
-.im3 > .imcont > .imdel:hover {
+.im4 > .imcont > .imdel:hover {
   opacity: 1;
 }
 

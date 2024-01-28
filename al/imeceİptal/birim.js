@@ -9,17 +9,32 @@ import TCKT from "/lib/ethereum/TCKT";
 import evm from "/lib/ethereum/evm";
 import dom from "/lib/util/dom";
 
-/** @const {Element} */
-const GösterButonu = dom.adla("imbe");
-/** @const {Element} */
-const İptalButonu = dom.adla("imbh");
-/** @const {Element} */
-const İptalciler = dom.adla("imf");
+/** @const {!Element} */
+const Kök = /** @type {!Element} */(dom.adla("im"));
+/** @const {!Element} */
+const EşikGirdisi = /** @type {!Element} */(dom.adla("imt"));
+/** @const {!Element} */
+const GösterButonu = /** @type {!Element} */(dom.adla("imbe"));
+/** @const {!Element} */
+const İptalButonu = /** @type {!Element} */(dom.adla("imbh"));
+/** @const {!Element} */
+const İptalciler = /** @type {!Element} */(dom.adla("imf"));
+/** @const {!Element} */
+const Kutu = /** @type {!Element} */(dom.adla("imc"));
+/** @const {!Element} */
+const ToplamAğırlık = /** @type {!Element} */(dom.adla("ims"));
 
 /**
  * @param {ChainId} ağ Native tokeninde TCKT fiyatının gösterileceği ağ.
  */
 const fiyatGöster = (ağ) => {
+  /** @const {!Element} */
+  const indirimsizFiyat = /** @type {!Element} */(dom.adla("imft"));
+  /** @const {!Element} */
+  const indirimliFiyat = /** @type {!Element} */(dom.adla("imfs"));
+  /** @const {!Element} */
+  const indirimYüzdesi = /** @type {!Element} */(dom.adla("imfu"));
+
   /**
    * @type {!AğBilgisi}
    * @const
@@ -30,16 +45,16 @@ const fiyatGöster = (ağ) => {
   /** @const {!Array<string>} */
   const ek = ağBilgisi.tokenEki;
   TCKT.priceIn(ağ, 0).then(([çok, az]) => {
-    dom.adla("imft").innerText = dom.paradanMetne(çok) + " " + token + (dom.TR ? ek[0] : "");
-    dom.adla("imfs").innerText = dom.paradanMetne(az) + " " + token + (dom.TR ? ek[1] : "");
-    dom.adla("imfu").innerText = Math.round(100 * (çok - az) / çok);
+    indirimsizFiyat.innerText = dom.paradanMetne(çok) + " " + token + (dom.TR ? ek[0] : "");
+    indirimliFiyat.innerText = dom.paradanMetne(az) + " " + token + (dom.TR ? ek[1] : "");
+    indirimYüzdesi.innerText = Math.round(100 * (çok - az) / çok);
   });
 }
 
 const göster = () => {
   fiyatGöster(Cüzdan.ağ());
   Cüzdan.ağDeğişince(fiyatGöster);
-  dom.adla("im").classList.remove("disabled");
+  Kök.classList.remove("disabled");
 }
 
 /**
@@ -62,8 +77,8 @@ const atla = (sonra) => {
   İptalButonu.innerText = dom.TR ? "İmece iptal kurulmadı 🤌" : "Skipped 🤌";
   İptalButonu.classList.add("done");
   dom.düğmeDurdur(İptalButonu);
-  dom.adla("im").classList.add("done");
-  dom.gizle(dom.adla("imc"));
+  Kök.classList.add("done");
+  dom.gizle(Kutu);
   sonra({}, 0);
 }
 
@@ -71,22 +86,33 @@ const atla = (sonra) => {
  * @param {function(!Object<string, number>, number)} sonra
  */
 const kutularıAç = (sonra) => {
-  dom.adla("im").classList.remove("done");
-  dom.göster(dom.adla("imc"));
+  /** @const {!Element} */
+  const iptalciGirdisiEkleDüğmesi = /** @type {!Element} */(dom.adla("imba"));
+  /** @const {!Element} */
+  const eşikDüşürDüğmesi = /** @type {!Element} */(dom.adla("imtm"));
+  /** @const {!Element} */
+  const eşikArtırDüğmesi = /** @type {!Element} */(dom.adla("imtp"));
+  /** @const {!Element} */
+  const tamamDüğmesi = /** @type {!Element} */(dom.adla("imbt"));
+  /** @const {!Element} */
+  const atlaDüğmesi = /** @type {!Element} */(dom.adla("imbi"));
+
+  Kök.classList.remove("done");
+  dom.göster(Kutu);
   dom.gizle(GösterButonu);
   dom.gizle(İptalButonu);
-  dom.adla("imbi").onclick = () => atla(sonra);
+  atlaDüğmesi.onclick = () => atla(sonra);
 
   /** @const {NodeList<!Element>} */
   const satır = İptalciler.children;
-  for (let i = 0; i < satır.length; ++i) {
+  for (let i = 0; i < satır.length; ++i)
     işlevEkle(satır[i]);
-  }
-  dom.adla("imba").onclick = girdiAlanıEkle;
-  dom.adla("imt").onblur = eşikDeğeriBlurOlunca;
-  dom.adla("imtm").onclick = () => eşikBirDeğiştir(false);
-  dom.adla("imtp").onclick = () => eşikBirDeğiştir(true);
-  dom.adla("imbt").onclick = () => {
+
+  iptalciGirdisiEkleDüğmesi.onclick = iptalciGirdisiEkle;
+  EşikGirdisi.onblur = eşikDeğeriBlurOlunca;
+  eşikDüşürDüğmesi.onclick = () => eşikBirDeğiştir(false);
+  eşikArtırDüğmesi.onclick = () => eşikBirDeğiştir(true);
+  tamamDüğmesi.onclick = () => {
     /** @type {!Object<string, number>} */
     let adresAğırlığı = {};
     /** @type {boolean} */
@@ -97,39 +123,43 @@ const kutularıAç = (sonra) => {
     /** @const {NodeList<!Element>} */
     const satır = İptalciler.children;
     for (let /** number */ i = 0; i < satır.length; ++i) {
-      /** @const {Element} */
-      const girdi = satır[i].firstElementChild;
+      /** @const {!Element} */
+      const girdi = /** @type {!Element} */(satır[i].firstElementChild);
       /** @const {string} */
       const adres = girdi.value;
       if (!evm.adresGeçerli(adres) || adres in adresAğırlığı ||
-        adres.toLowerCase() === Cüzdan.adres()) {
+        adres.toLowerCase() == Cüzdan.adres().toLowerCase()) {
         geçerli = false;
         satır[i].firstElementChild.classList.add("imin");
+      } else {
+        /** @type {number} */
+        const ağırlık = +satır[i].children[3].value;
+        adresAğırlığı[adres] = ağırlık;
+        toplamAğırlık += ağırlık;
       }
-      /** @type {number} */
-      const ağırlık = +satır[i].children[3].value;
-      adresAğırlığı[adres] = ağırlık;
-      toplamAğırlık += ağırlık;
     }
     /** @type {number} */
-    const eşikDeğeri = +dom.adla("imt").value;
+    const eşikDeğeri = +EşikGirdisi.value;
     if (toplamAğırlık < eşikDeğeri) {
       geçerli = false;
-      dom.adla("imt").classList.add("imin");
+      EşikGirdisi.classList.add("imin");
+    }
+    if (Object.keys(adresAğırlığı).length < 3) {
+      geçerli = false;
     }
     if (geçerli) {
       dom.göster(İptalButonu);
       İptalButonu.innerText = dom.TR ? "İmece iptal kuruldu ✓" : "Social revoke setup is complete ✓";
       İptalButonu.onclick = null;
-      dom.gizle(dom.adla("imc"));
-      dom.adla("im").classList.add("done");
+      dom.gizle(Kutu);
+      Kök.classList.add("done");
       sonra(adresAğırlığı, eşikDeğeri);
     }
   };
 }
 
 /**
- * @param {Element} satır
+ * @param {!Element} satır
  */
 const işlevEkle = (satır) => {
   /** @const {NodeList<!Element>} */
@@ -143,26 +173,42 @@ const işlevEkle = (satır) => {
   elemanlar[3].onclick = (e) => e.target.value = "";
   elemanlar[3].value = 1;
   elemanlar[4].onclick = birArttır;
-  elemanlar[5].onclick = satırSil;
+  elemanlar[5].onclick = iptalciGirdisiSil;
 }
 
-const girdiAlanıEkle = () => {
+const iptalciGirdisiEkle = () => {
   /** @const {number} */
   const tane = İptalciler.childElementCount;
   if (tane >= 5) return;
-  /** @type {Element} */
-  let yeniSatır = İptalciler.firstElementChild.cloneNode(true);
+  /** @const {!Element} */
+  const yeniSatır = İptalciler.firstElementChild.cloneNode(true);
   işlevEkle(yeniSatır);
-  if (tane > 2)
-    İptalciler.classList.add("im3");
+  if (tane >= 3)
+    İptalciler.classList.add("im4");
   İptalciler.appendChild(yeniSatır);
   ağırlıkHesapla();
 }
 
+const iptalciGirdisiSil = (event) => {
+  /** @type {Element} */
+  const a = event.target.nodeName == "A"
+    ? event.target : event.target.parentElement
+  const satırSayısı = İptalciler.childElementCount;
+  // Silmeden önceki sayı 4 ise, x'leri kaldır.
+  if (satırSayısı <= 4)
+    İptalciler.classList.remove("im4");
+  if (satırSayısı > 3)
+    a.parentElement.remove();
+  ağırlıkHesapla();
+}
+
+/**
+ * @param {Event} event
+ */
 const eşikDeğeriBlurOlunca = (event) => {
   /** @const {boolean} */
-  const geçerli = +event.target.value <= +dom.adla("ims").value;
-  dom.adla("imt").classList.toggle("imin", geçerli);
+  const geçerli = +event.target.value <= +ToplamAğırlık.value;
+  EşikGirdisi.classList.toggle("imin", geçerli);
 }
 
 /**
@@ -176,7 +222,7 @@ const girdiDüzelt = (girdi) => {
   if (düz) girdi.value = düz
   /** @const {boolean} */
   const hataVar = değer != "" &&
-    (!düz || değer.toLowerCase() === Cüzdan.adres().toLowerCase())
+    (!düz || değer.toLowerCase() == Cüzdan.adres().toLowerCase())
   girdi.classList.toggle("imin", hataVar);
 }
 
@@ -187,24 +233,13 @@ const yapıştır = (event) => {
   /** @type {Element} */
   let a = /** @type {Element} */(event.target);
   for (; a.nodeName !== 'A'; a = a.parentElement)
-    if (a.nodeName === 'DIV') return;
+    if (a.nodeName == 'DIV') return;
   const girdi = a.previousElementSibling;
   navigator.clipboard.readText().then(
     (değer) => {
       girdi.value = değer;
       girdiDüzelt(girdi);
     })
-}
-
-const satırSil = (event) => {
-  let a = event.target.nodeName == "A"
-    ? event.target : event.target.parentElement
-  const satırSayısı = İptalciler.childElementCount;
-  if (satırSayısı <= 3)
-    İptalciler.classList.remove("im3");
-  if (satırSayısı >= 3)
-    a.parentElement.remove();
-  ağırlıkHesapla();
 }
 
 const birAzalt = (event) => {
@@ -224,16 +259,16 @@ const birArttır = (event) => {
 const ağırlıkBlurOlunca = (event) => {
   let val = event.target.value;
   if (val > 9) event.target.value = 9;
-  if (val < 1 || val === "") event.target.value = 1;
+  if (val < 1 || val == "") event.target.value = 1;
   ağırlıkHesapla();
 }
 
 const eşikBirDeğiştir = (artır) => {
-  /** @const {Element} */
-  const eşik = dom.adla("imt");
-  const değer = +eşik.value;
-  const toplam = +dom.adla("ims").value;
-  eşik.value = artır
+  /** @const {number} */
+  const değer = +EşikGirdisi.value;
+  /** @const {number} */
+  const toplam = +ToplamAğırlık.value;
+  EşikGirdisi.value = artır
     ? Math.min(değer + 1, 99, toplam) : Math.max(değer - 1, 1);
 }
 
@@ -245,10 +280,9 @@ const ağırlıkHesapla = () => {
   for (let /** number */ i = 0; i < satır.length; ++i) {
     total += +satır[i].children[3].value;
   }
-  dom.adla("ims").value = total;
-  const eşik = dom.adla("imt");
-  if (eşik.value > total)
-    eşik.value = total;
+  ToplamAğırlık.value = total;
+  if (EşikGirdisi.value > total)
+    EşikGirdisi.value = total;
 }
 
 export default { kurVe, göster };
