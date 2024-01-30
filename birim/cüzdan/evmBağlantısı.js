@@ -1,5 +1,5 @@
 import { AğBilgileri, AğBilgisi } from "/birim/ağlar/birim";
-import { ChainId } from "/lib/crosschain/chainId";
+import { ChainId } from "/lib/crosschain/chains";
 import { Provider } from "/lib/crosschain/provider";
 import { hex } from "/lib/util/çevir";
 

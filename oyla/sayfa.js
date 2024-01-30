@@ -4,7 +4,7 @@
  */
 import Cüzdan from "/birim/cüzdan/birim";
 import "/birim/dil/birim";
-import { ChainId } from "/lib/crosschain/chainId";
+import { ChainId } from "/lib/crosschain/chains";
 import { Provider } from "/lib/crosschain/provider";
 import TCKT from "/lib/ethereum/TCKT";
 import dom from "/lib/util/dom";

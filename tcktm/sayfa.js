@@ -6,7 +6,7 @@ import { roleRequestChallenge } from "./discord.js";
 import Cüzdan from "/birim/cüzdan/birim";
 import "/birim/dil/birim";
 import Tckt from "/birim/tckt/birim";
-import { ChainId } from "/lib/crosschain/chainId";
+import { ChainId } from "/lib/crosschain/chains";
 import { Provider } from "/lib/crosschain/provider";
 import { Signer } from "/lib/crosschain/signer";
 import { fromUnlockableNFT } from "/lib/did/decryptedSections";

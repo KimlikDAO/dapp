@@ -1,4 +1,4 @@
-import { ChainId } from "/lib/crosschain/chainId";
+import { ChainId } from "/lib/crosschain/chains";
 import dom from "/lib/util/dom";
 
 /**
@@ -88,6 +88,13 @@ const AğBilgileri = {
     token: "ether",
     tokenEki: dom.TR ? ["’den", "’e"] : [],
     rpcUrl: "mainnet.era.zksync.io"
+  },
+  "m:berkeley": {
+    ad: "Mina Berkeley",
+    izleyici: "berkeley.minaexplorer.com/",
+    tokenKodu: "tMINA",
+    tokenEki: dom.TR ? ["’dan", "’ya"] : [],
+    rpcUrl: "proxy.berkeley.minaexplorer.com"
   }
 }
 

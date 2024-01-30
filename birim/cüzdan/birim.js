@@ -1,6 +1,7 @@
 import { CoreBağlantısı, MetaMaskBağlantısı, RabbyBağlantısı } from "./evmBağlantısı";
+import { AuroConnection as AuroBağlantısı } from "./minaBağlantısı";
 import { AğBilgileri } from "/birim/ağlar/birim";
-import { ChainId } from "/lib/crosschain/chainId";
+import { ChainGroup, ChainGroups, ChainId } from "/lib/crosschain/chains";
 import { Provider } from "/lib/crosschain/provider";
 import TCKT from "/lib/ethereum/TCKTLite";
 import ipfs from "/lib/node/ipfs";
@@ -54,7 +55,7 @@ const BoşBağlantı = /** @type {!Provider} */({
    * @return {!Promise<void>}
    */
   switchChain(ağ) {
-    ağDeğişti(ağ)
+    ağDeğişti(ağ);
     return Promise.resolve();
   },
 
@@ -75,14 +76,17 @@ const Bağlantılar = {
   "co": CoreBağlantısı,
   "ra": RabbyBağlantısı,
   "mm": MetaMaskBağlantısı,
+  "au": AuroBağlantısı,
 };
 
-/** @const {Element} */
-const AdresButonu = dom.adla("cua");
-/** @const {Element} */
-const AğButonu = dom.adla("cuc");
-/** @const {Element} */
-const Menü = dom.adla("cub");
+/** @const {!Element} */
+const AdresButonu = /** @type {!Element} */(dom.adla("cua"));
+/** @const {!Element} */
+const AğButonu = /** @type {!Element} */(dom.adla("cuc"));
+/** @const {!Element} */
+const Menü = /** @type {!Element} */(dom.adla("cub"));
+/** @const {string} */
+const BağlaMetni = AdresButonu.innerText;
 /** @type {!Array<function(?string)>} */
 const AdresDeğişince = [];
 /** @const {!Array<function()>} */
@@ -99,8 +103,6 @@ let Bağlı = BoşBağlantı;
 let Adres = null;
 /** @type {ChainId} */
 let Ağ = /** @type {ChainId} */(VARSAYILAN_AĞ);
-/** @type {?string} */
-let BağlaMetni;
 /** @type {?string} */
 let TcktYokResmi;
 
@@ -151,7 +153,11 @@ const ağDeğişti = (yeniAğ) => {
     AğButonu.replaceChild(
       dom.adla("cud" + yeniAğ).firstElementChild.cloneNode(true),
       AğButonu.firstElementChild);
+    /** @const {boolean} */
+    const ağGrubuDeğişti = !Ağ.startsWith(yeniAğ.slice(0, 2));
     Ağ = yeniAğ;
+    if (ağGrubuDeğişti)
+      bağlantıSeçiciGöster();
     tcktDeğişti();
     for (const f of AğDeğişince) f(yeniAğ);
   }
@@ -198,22 +204,25 @@ const tcktDeğişti = () => {
   })
 }
 
+const koptu = () => {
+  Adres = null;
+  AdresButonu.innerText = BağlaMetni;
+  bağlantıSeçildi("", BoşBağlantı);
+  dom.adlaGizle("cue");
+  bağlantıSeçiciGöster();
+  for (const f of Kopunca) f();
+}
+
 /**
  * @param {!Array<string>} adresler cüzdandan gelen adresler dizisi.
  */
 const adresDeğişti = (adresler) => {
-  if (!adresler || !adresler.length) {
-    Adres = null;
-    AdresButonu.innerText = BağlaMetni;
-    bağlantıSeçildi("", BoşBağlantı);
-    dom.adlaGizle("cue");
-    bağlantıSeçiciGöster();
-    for (const f of Kopunca) f();
-  } else if (adresler[0] != Adres) {
+  if (!adresler || !adresler.length)
+    koptu();
+  else if (adresler[0] != Adres) {
     /** @const {?string} */
     const eskiAdres = Adres;
     Adres = adresler[0];
-    BağlaMetni ||= AdresButonu.innerText;
     dom.adla("cuad").firstElementChild.innerText =
       AdresButonu.innerText = hızlıArabirimAdı(Adres);
 
@@ -222,11 +231,11 @@ const adresDeğişti = (adresler) => {
     });
     tcktDeğişti();
     if (!eskiAdres) {
-      dom.adlaGizle("cuf");
+      bağlantıSeçiciGizle();
       dom.adlaGöster("cue");
     }
+    for (const f of AdresDeğişince) f(Adres);
   }
-  for (const f of AdresDeğişince) f(Adres);
 }
 
 /**
@@ -263,7 +272,12 @@ const bağlantıDeğişince = (f) => BağlantıDeğişince.push(f);
 /**
  * @param {ChainId} ağ
  */
-const ağSeçildi = (ağ) => Bağlı.switchChain(ağ)
+const ağSeçildi = (ağ) => {
+  if (ağ.slice(0, 2) != Ağ.slice(0, 2))
+    koptu();
+
+  Bağlı.switchChain(ağ);
+}
 
 /**
  * @param {string} bağlantıAdı
@@ -286,10 +300,18 @@ const bağlantıSeçildi = (bağlantıAdı, bağlantı) => {
     });
 }
 
+const bağlantıSeçiciGizle = () => dom.adlaGizle("cuf" + Ağ.slice(0, 2));
+
 const bağlantıSeçiciGöster = () => {
-  /** @const {Element} */
-  const seçici = dom.adla("cuf");
-  dom.göster(seçici);
+  /** @const {ChainGroup} */
+  const ağGrubu = /** @type {ChainGroup} */(Ağ.slice(0, 2));
+  console.log(ağGrubu);
+  for (const grup of ChainGroups)
+    dom.adlaGösterGizle("cuf" + grup, grup == ağGrubu)
+
+  /** @const {!Element} */
+  const seçici = /** @type {!Element} */(dom.adla("cuf" + ağGrubu));
+
   /** @const {!NodeList<!Element>} */
   const satırlar = seçici.children;
   for (const satır of satırlar) {
@@ -342,9 +364,9 @@ const aç = () => {
 
 const kur = () => {
   /** @const {Element} */
-  const anaAğ = dom.adla("cud" + VARSAYILAN_AĞ);
-  anaAğ.replaceChild(AğButonu.firstElementChild.cloneNode(true),
-    anaAğ.firstElementChild);
+  const seçiliAğ = dom.adla("cud" + VARSAYILAN_AĞ);
+  seçiliAğ.replaceChild(AğButonu.firstElementChild.cloneNode(true),
+    seçiliAğ.firstElementChild);
   AdresButonu.onclick = AğButonu.onclick = aç;
   Menü.onblur = () => {
     dom.gizle(Menü);
@@ -368,11 +390,12 @@ const kur = () => {
     window.location.href = dom.TR ? "//kimlikdao.org/oyla" : "//kimlikdao.org/vote";
   düğmeler[4].onclick = () =>
     window.location.href = "//kimlikdao.org" + (dom.TR ? "/iptal" : "/revoke");
-  düğmeler[5].onclick = () => adresDeğişti([]);
+  düğmeler[5].onclick = () => koptu();
 
   dom.adla("cuad").onclick = () => navigator.clipboard.writeText(/** @type {string} */(Adres));
   dom.adla("cuex").onclick = () => {
-    const url = `//${AğBilgileri[Ağ].izleyici}/address/${Adres}`;
+    const adresEki = Ağ.startsWith("m:") ? "wallet" : "address";
+    const url = `//${AğBilgileri[Ağ].izleyici}/${adresEki}/${Adres}`;
     window.open(url, "_blank");
   }
   dom.adla("cude").onclick = () => {

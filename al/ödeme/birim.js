@@ -1,7 +1,7 @@
 import { AğBilgileri, AğBilgisi } from "/birim/ağlar/birim";
 import Cüzdan from "/birim/cüzdan/birim";
 import Telefon from "/birim/telefon/birim";
-import { ChainId } from "/lib/crosschain/chainId";
+import { ChainId } from "/lib/crosschain/chains";
 import TCKT from "/lib/ethereum/TCKT";
 import { whenMined } from "/lib/ethereum/transaction";
 import dom from "/lib/util/dom";

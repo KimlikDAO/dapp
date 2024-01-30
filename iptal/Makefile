@@ -11,6 +11,7 @@ build/iptal/sayfa-%.js: iptal/sayfa.js \
     lib/ethereum/*.d.js \
     lib/ethereum/evm.js lib/ethereum/TCKT.js \
     lib/ethereum/provider.js lib/ethereum/TCKTLite.js \
+    lib/mina/*.d.js \
     lib/node/*.d.js lib/node/ipfs.js \
     lib/util/dom.js lib/util/çevir.js
 	mkdir -p $(dir $@)

@@ -18,6 +18,7 @@ build/al/sayfa-%.js: al/sayfa.js \
                      lib/crypto/primes.js lib/crypto/wesolowski.js \
                      lib/did/*.js \
                      lib/ethereum/*.js \
+                     lib/mina/*.d.js \
                      lib/node/*.d.js \
                      lib/node/ipfs.js lib/node/network.js \
                      lib/util/dom.js lib/util/çevir.js \

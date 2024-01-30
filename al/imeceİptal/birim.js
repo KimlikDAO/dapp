@@ -4,7 +4,7 @@
 
 import { AğBilgileri, AğBilgisi } from "/birim/ağlar/birim";
 import Cüzdan from "/birim/cüzdan/birim";
-import { ChainId } from "/lib/crosschain/chainId";
+import { ChainId } from "/lib/crosschain/chains";
 import TCKT from "/lib/ethereum/TCKT";
 import evm from "/lib/ethereum/evm";
 import dom from "/lib/util/dom";

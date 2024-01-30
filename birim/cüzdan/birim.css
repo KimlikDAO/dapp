@@ -67,7 +67,7 @@
   right: 0;
 }
 
-#cuf {
+.cuf {
   cursor: pointer;
   list-style: none;
   margin: 0;
@@ -80,7 +80,7 @@
 
 #cud>li,
 #cue>li,
-#cuf>li {
+.cuf>li {
   cursor: pointer;
   align-items: center;
   border-radius: 8px;
@@ -91,13 +91,13 @@
   padding: 6px 12px;
 }
 
-#cuf>li {
+.cuf>li {
   position: relative;
 }
 
 #cud>li:hover,
 #cue>li:hover,
-#cuf>li:hover {
+.cuf>li:hover {
   background-color: #f2f2f2;
 }
 
@@ -162,7 +162,7 @@ li.on>.cust {
   background: rgb(241, 29, 29);
   position: absolute;
   bottom: 14px;
-  left: 40px;
+  left: 42px;
 }
 
 #cuin,

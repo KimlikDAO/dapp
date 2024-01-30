@@ -11,6 +11,7 @@ build/tcktm/sayfa-%.js: tcktm/sayfa.js tcktm/pencere/*.js \
     lib/crypto/*.js \
     lib/did/*.js \
     lib/ethereum/*.js \
+    lib/mina/*.d.js \
     lib/node/*.d.js lib/node/ipfs.js \
     lib/util/dom.js lib/util/çevir.js
 	mkdir -p $(dir $@)
