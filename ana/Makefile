@@ -26,16 +26,16 @@ build/ana/sayfa-%.js: ana/sayfa.js \
                       lib/util/dom.js lib/util/çevir.js
 	mkdir -p $(dir $@)
 	bun google-closure-compiler -W VERBOSE -O ADVANCED --charset UTF-8 \
-                             --define "TR\$$\$$module\$$lib\$$util\$$dom=$(Lang-$*)" \
-                             --define "KonumTR\$$\$$module\$$birim\$$dil\$$birim=$(ana-tr)" \
-                             --define "KonumEN\$$\$$module\$$birim\$$dil\$$birim=$(ana-en)" \
-                             --emit_use_strict \
-                             --module_resolution NODE \
-                             --assume_function_wrapper \
-                             --dependency_mode PRUNE \
-                             --entry_point $< \
-                             --js $^ \
-                             --js_output_file $@
+                            --define "TR\$$\$$module\$$lib\$$util\$$dom=$(Lang-$*)" \
+                            --define "KonumTR\$$\$$module\$$birim\$$dil\$$birim=$(ana-tr)" \
+                            --define "KonumEN\$$\$$module\$$birim\$$dil\$$birim=$(ana-en)" \
+                            --emit_use_strict \
+                            --module_resolution NODE \
+                            --assume_function_wrapper \
+                            --dependency_mode PRUNE \
+                            --entry_point $< \
+                            --js $^ \
+                            --js_output_file $@
 	bun uglifyjs $@ -m -c toplevel,unsafe -o $@
 
 build/ana/sayfa-%.css: \

@@ -95,14 +95,26 @@ const açıkTcktAlVe = (adres, sonra) => {
   const nkoDüğmesi = dom.adla("tab");
   /** @const {Element} */
   const kutu = dom.adla("ta");
+  /** @const {string} */
+  const eDevletDüğmesiMetni = eDevletDüğmesi.innerText;
 
-  if (Cüzdan.ağ() == ChainId.MinaBerkeley) {
-    eDevletDüğmesi.innerText = "Proceed with test data (Berkeley)";
-    eDevletDüğmesi.onclick = () =>
-      window.location.href = "//mock-edevlet-kapisi.kimlikdao.net/auth?" +
+  /**
+   * @param {string} yeniAğ
+   */
+  const testVeriDüğmesiGüncelle = (yeniAğ) => {
+    const testVeri = yeniAğ == ChainId.MinaBerkeley;
+    eDevletDüğmesi.innerText = testVeri
+      ? dom.TR ? "Deneme veri ile ilerle" : "Proceed with test data (Berkeley)"
+      : eDevletDüğmesiMetni;
+    eDevletDüğmesi.onclick = testVeri
+      ? () =>
+        window.location.href = "//mock-edevlet-kapisi.kimlikdao.net/auth?" +
         "response_type=code&client_id=F5CAA82F-E2CF-4F21-A745-471ABE3CE7F8&" +
-        "redirect_uri=https://kimlikdao.org/mint"
+        `redirect_uri=https://kimlikdao.org/${dom.TR ? "al" : "mint"}`
+      : null;
   }
+  Cüzdan.ağDeğişince(testVeriDüğmesiGüncelle);
+  testVeriDüğmesiGüncelle(Cüzdan.ağ());
 
   kutu.classList.remove("disabled");
 
