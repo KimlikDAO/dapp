@@ -85,6 +85,8 @@ const AdresButonu = /** @type {!Element} */(dom.adla("cua"));
 const AğButonu = /** @type {!Element} */(dom.adla("cuc"));
 /** @const {!Element} */
 const Menü = /** @type {!Element} */(dom.adla("cub"));
+/** @const {!Element} */
+const DebankLinki = /** @type {!Element} */(dom.adla("cude"));
 /** @const {string} */
 const BağlaMetni = AdresButonu.innerText;
 /** @type {!Array<function(?string)>} */
@@ -231,6 +233,7 @@ const adresDeğişti = (adresler) => {
     });
     tcktDeğişti();
     if (!eskiAdres) {
+      dom.gösterGizle(DebankLinki, Ağ.startsWith(ChainGroup.EVM));
       bağlantıSeçiciGizle();
       dom.adlaGöster("cue");
     }
@@ -300,12 +303,14 @@ const bağlantıSeçildi = (bağlantıAdı, bağlantı) => {
     });
 }
 
-const bağlantıSeçiciGizle = () => dom.adlaGizle("cuf" + Ağ.slice(0, 2));
+const bağlantıSeçiciGizle = () => {
+  for (const grup of ChainGroups)
+    dom.adlaGizle("cuf" + grup);
+}
 
 const bağlantıSeçiciGöster = () => {
   /** @const {ChainGroup} */
   const ağGrubu = /** @type {ChainGroup} */(Ağ.slice(0, 2));
-  console.log(ağGrubu);
   for (const grup of ChainGroups)
     dom.adlaGösterGizle("cuf" + grup, grup == ağGrubu)
 
@@ -398,7 +403,7 @@ const kur = () => {
     const url = `//${AğBilgileri[Ağ].izleyici}/${adresEki}/${Adres}`;
     window.open(url, "_blank");
   }
-  dom.adla("cude").onclick = () => {
+  DebankLinki.onclick = () => {
     const url = "//debank.com/profile/" + Adres;
     window.open(url, "_blank");
   }

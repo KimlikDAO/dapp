@@ -13,10 +13,10 @@ const connectWithProvider = (provider, chainId, chainChanged, addressChanged, on
   ? provider.getAccounts()
     .then((addresses) => {
       if (!addresses || !addresses.length) return Promise.reject();
-      addressChanged(addresses);
       provider.requestNetwork()
         .then((/** @type {!mina.ChainInfoArgs} */ chainInfo) => {
           chainChanged(/** @type {ChainId} */("m:" + chainInfo.chainId));
+          addressChanged(addresses);
           provider.on("accountsChanged", addressChanged);
           provider.on("chainChanged",
             (/** @type {!mina.ChainInfoArgs} */ chainInfo) =>

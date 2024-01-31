@@ -1,4 +1,6 @@
+import Cüzdan from "/birim/cüzdan/birim";
 import Tckt from "/birim/tckt/birim";
+import { ChainId } from "/lib/crosschain/chains";
 import { keccak256Uint8 } from "/lib/crypto/sha3";
 import { combineMultiple } from "/lib/did/decryptedSections";
 import network from "/lib/node/network";
@@ -94,6 +96,14 @@ const açıkTcktAlVe = (adres, sonra) => {
   /** @const {Element} */
   const kutu = dom.adla("ta");
 
+  if (Cüzdan.ağ() == ChainId.MinaBerkeley) {
+    eDevletDüğmesi.innerText = "Proceed with test data (Berkeley)";
+    eDevletDüğmesi.onclick = () =>
+      window.location.href = "//mock-edevlet-kapisi.kimlikdao.net/auth?" +
+        "response_type=code&client_id=F5CAA82F-E2CF-4F21-A745-471ABE3CE7F8&" +
+        "redirect_uri=https://kimlikdao.org/mint"
+  }
+
   kutu.classList.remove("disabled");
 
   /** @type {!URLSearchParams} */
@@ -109,7 +119,7 @@ const açıkTcktAlVe = (adres, sonra) => {
     dom.gizle(eDevletDüğmesi);
     nkoDüğmesi.href = "javascript:";
     nkoDüğmesi.classList.remove("act");
-    nkoDüğmesi.innerText = dom.TR ? "E-devlet’ten bilgileriniz alındı ✓" : "We got your info ✓";
+    nkoDüğmesi.innerText = dom.TR ? "VerifiableID’leriniz heaplanıyor ⏳" : "Computing your VerifiableIDs ⏳";
     dom.düğmeDurdur(nkoDüğmesi);
     /** @const {number} */
     const istemciAn = Date.now() / 1000 | 0;
@@ -127,6 +137,7 @@ const açıkTcktAlVe = (adres, sonra) => {
         `${base64(new Uint8Array(taahhüt))}&ts=${istemciAn}&oauth_code=${code}`))
       .then((/** @type {!Response} */ res) => res.json())
       .then((/** @type {!did.DecryptedSections} */ açıkTckt) => {
+        nkoDüğmesi.innerText = dom.TR ? "Bilgileriniz alındı ✓" : "We got your info ✓";
         Tckt.açıkTcktGöster(açıkTckt);
         kutu.classList.add("done");
         sonra(adres, açıkTckt);

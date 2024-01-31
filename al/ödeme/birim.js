@@ -1,7 +1,7 @@
 import { AğBilgileri, AğBilgisi } from "/birim/ağlar/birim";
 import Cüzdan from "/birim/cüzdan/birim";
 import Telefon from "/birim/telefon/birim";
-import { ChainId } from "/lib/crosschain/chains";
+import { ChainGroup, ChainId } from "/lib/crosschain/chains";
 import TCKT from "/lib/ethereum/TCKT";
 import { whenMined } from "/lib/ethereum/transaction";
 import dom from "/lib/util/dom";
@@ -185,40 +185,74 @@ const öde = (cidSözü, adresAğırlığı, eşik) => {
   dom.adla("oda").onclick = () => {
     /** @const {ChainId} */
     const ağ = Cüzdan.ağ();
-    /** @const {!eth.Provider} */
-    const provider = /** @type {!eth.Provider} */(Cüzdan.bağlantı().provider);
     /** @const {string} */
     const adres = /** @type {string} */(Cüzdan.adres()).toLowerCase();
-    /** @const {!Promise<string>} */
-    const sonuç = para == 0
-      ? cidSözü.then((cid) =>
-        TCKT.createWithRevokers(ağ, adres, cid, eşik, adresAğırlığı))
-      : TCKT.isTokenERC20Permit(ağ, para)
-        ? Promise.all([cidSözü, TCKT.getPermitFor(ağ, adres, para, iptalli)])
-          .then(birazBekle)
-          .then((/** @type {!Array<string>} */[cid, imza]) =>
-            TCKT.createWithRevokersWithTokenPermit(ağ, adres, cid, eşik, adresAğırlığı, imza)
-          )
-        : Promise.all([cidSözü, TCKT.getApprovalFor(ağ, adres, para)])
-          .then(birazBekle)
-          .then(([/** @type {string} */ cid, _]) =>
-            TCKT.createWithRevokersWithTokenPayment(ağ, adres, cid, eşik, adresAğırlığı, para));
-    sonuç
-      .then((txHash) => {
-        /** @const {string} */
-        const hash = window.location.hash;
-        /** @const {string} */
-        const sonra = dom.TR
-          ? hash.length >= 7
-            ? decodeURIComponent(hash.slice("#sonra=".length)) : "/tcktm"
-          : hash.length >= 6
-            ? decodeURIComponent(hash.slice("#then=".length)) : "/my-tckt";
-        Telefon.nftGeriAl();
-        window.localStorage.removeItem(adres + "nko_r");
-        whenMined(provider, txHash, () => window.location.href = sonra);
-      })
-      .catch(console.log);
+
+    const zincireYazılınca = () => {
+      /** @const {string} */
+      const hash = window.location.hash;
+      /** @const {string} */
+      const sonra = dom.TR
+        ? hash.length >= 7
+          ? decodeURIComponent(hash.slice("#sonra=".length)) : "/tcktm"
+        : hash.length >= 6
+          ? decodeURIComponent(hash.slice("#then=".length)) : "/my-tckt";
+      window.localStorage.removeItem(adres + "nko_r");
+      window.location.href = sonra;
+    }
+
+    if (ağ.startsWith(ChainGroup.MINA))
+      return cidSözü.then((cid) => inscribeOnMina(
+        /** @type {!mina.Provider} */(Cüzdan.bağlantı().provider), adres, cid, eşik, adresAğırlığı))
+        .then(zincireYazılınca);
+    else {
+      (para == 0
+        ? cidSözü.then((cid) =>
+          TCKT.createWithRevokers(ağ, adres, cid, eşik, adresAğırlığı))
+        : TCKT.isTokenERC20Permit(ağ, para)
+          ? Promise.all([cidSözü, TCKT.getPermitFor(ağ, adres, para, iptalli)])
+            .then(birazBekle)
+            .then((/** @type {!Array<string>} */[cid, imza]) =>
+              TCKT.createWithRevokersWithTokenPermit(ağ, adres, cid, eşik, adresAğırlığı, imza)
+            )
+          : Promise.all([cidSözü, TCKT.getApprovalFor(ağ, adres, para)])
+            .then(birazBekle)
+            .then(([/** @type {string} */ cid, _]) =>
+              TCKT.createWithRevokersWithTokenPayment(ağ, adres, cid, eşik, adresAğırlığı, para)))
+        .then((txHash) => {
+          Telefon.nftGeriAl();
+          const provider = /** @type {!eth.Provider} */(Cüzdan.bağlantı().provider);
+          whenMined(provider, txHash, zincireYazılınca);
+        });
+    }
   };
 }
+
+/**
+ * @param {!mina.Provider} provider
+ * @param {string} address
+ * @param {string} cid
+ * @param {number} threshold
+ * @param {!Object<string, number>} weightByRevoker
+ * @return {!Promise<void>}
+ */
+const inscribeOnMina = (provider, address, cid, threshold, weightByRevoker) =>
+  provider.signJsonMessage({
+    message: [{
+      label: "Address",
+      value: address
+    }, {
+      label: "IPFS hash",
+      value: cid
+    }]
+  }).then((/** @type {!mina.SignedData} */ signedData) => fetch("//demo-mapping.kimlikdao.org", {
+    method: "PUT",
+    body: JSON.stringify({
+      "address": address,
+      "cid": cid,
+      "sig-s": signedData.signature.scalar,
+      "sig-f": signedData.signature.field
+    })
+  }));
 
 export { Kök, öde };

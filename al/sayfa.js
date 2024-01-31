@@ -33,8 +33,8 @@ const tcktYarat = (adres, açıkTckt) => {
 
   /** @const {string} */
   const telefonMetni = imzaMetni(["personInfo"]);
-  Telefon.kutuGöster(telefonMetni.slice(0, 25) +
-    telefonMetni.slice(35, dom.TR ? 161 : 173), dom.TR ? "İmzala" : "Sign"
+  Telefon.kutuGöster(telefonMetni.slice(0, dom.TR ? 25 : 35) +
+    telefonMetni.slice(35, dom.TR ? 161 : 193), dom.TR ? "İmzala" : "Sign"
   );
 
   /** @const {!Promise<!did.DecryptedSections>} */

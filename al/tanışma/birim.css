@@ -3,10 +3,6 @@
   position: relative;
 }
 
-#taa {
-  cursor: default;
-}
-
 #tada {
   outline: 1px dashed #c2c2c2;
   border-radius: 5px;
