@@ -91,7 +91,7 @@ const AğBilgileri = {
   },
   "m:berkeley": {
     ad: "Mina Berkeley",
-    izleyici: "berkeley.minaexplorer.com/",
+    izleyici: "berkeley.minaexplorer.com",
     tokenKodu: "tMINA",
     tokenEki: dom.TR ? ["’dan", "’ya"] : [],
     rpcUrl: "proxy.berkeley.minaexplorer.com"

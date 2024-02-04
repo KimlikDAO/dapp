@@ -30,7 +30,7 @@ Kanarya ve deployment adımları için birkaç araca daha ihtiyacımız var
 brew install pngcrush brotli zopfli woff2 webp
 pip install fonttools
 ```
-- `make kanarya` deploya hazır dApp'i `build` edip kanarya sunucusunu
-   çalıştırır
+- `make 🦜` veya `make kanarya` deploya hazır dApp'i `build` edip kanarya
+  sunucusunu çalıştırır
     - http://localhost:8787/al
 - `make cf-deployment` deploya hazır dApp'i Cloudflare'e yükler

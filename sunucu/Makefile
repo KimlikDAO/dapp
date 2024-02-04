@@ -44,6 +44,8 @@ build/sitemap: $(call compressions, build/sitemap.txt)
 dev: lib/birimler/devSunucu.js sunucu/dev.toml
 	bun $< --çalıştır sunucu/dev.toml
 
+🦜: kanarya
+
 kanarya: lib/birimler/kanaryaSunucu.js build sunucu/dev.toml
 	bun $< --çalıştır sunucu/dev.toml
 

@@ -131,7 +131,7 @@ const açıkTcktAlVe = (adres, sonra) => {
     dom.gizle(eDevletDüğmesi);
     nkoDüğmesi.href = "javascript:";
     nkoDüğmesi.classList.remove("act");
-    nkoDüğmesi.innerText = dom.TR ? "VerifiableID’leriniz heaplanıyor ⏳" : "Computing your VerifiableIDs ⏳";
+    nkoDüğmesi.innerText = dom.TR ? "VerifiableID’leriniz hesaplanıyor ⏳" : "Computing your VerifiableIDs ⏳";
     dom.düğmeDurdur(nkoDüğmesi);
     /** @const {number} */
     const istemciAn = Date.now() / 1000 | 0;
