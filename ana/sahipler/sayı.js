@@ -6,7 +6,7 @@ const Sayılar = {
   "avax": 57,
   "bnb": 5,
   "arb": 8,
-  "mina": 122,
+  "mina": 130,
 };
 
 const üret = (d) => {
