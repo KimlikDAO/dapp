@@ -7,6 +7,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
+    "postinstall": "mkdir -p ./node_modules/@kimlikdao && ln -sfn ../../lib ./node_modules/@kimlikdao/lib",
     "build": "make build",
     "start": "make dev"
   },

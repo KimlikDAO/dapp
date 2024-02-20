@@ -14,14 +14,14 @@ al/tanışma.birim: al/tanışma/birim.html $(AL_TANIŞMA_INLINE_SVG_OUT) \
     build/al/tanışma/birim.keymap
 
 build/al/tanışma/powWorker.js: al/tanışma/powWorker.js \
-    al/tanışma/powWorker.d.js lib/util/worker.d.js \
+    al/tanışma/powWorker.d.js \
     lib/crypto/sha3.js \
+    lib/util/worker.d.js \
     lib/util/çevir.js
 	mkdir -p $(dir $@)
 	bun google-closure-compiler -W VERBOSE -O ADVANCED --charset UTF-8 \
                             --jscomp_error=unusedLocalVariables \
                             --jscomp_error=strictCheckTypes \
-                            --language_in ECMASCRIPT_NEXT \
                             --rewrite_polyfills=false \
                             --emit_use_strict \
                             --module_resolution NODE \
