@@ -90,7 +90,7 @@ const AğBilgileri = {
     rpcUrl: "mainnet.era.zksync.io"
   },
   "m:berkeley": {
-    ad: "Mina Berkeley",
+    ad: "Mina",
     izleyici: "berkeley.minaexplorer.com",
     tokenKodu: "tMINA",
     tokenEki: dom.TR ? ["’dan", "’ya"] : [],

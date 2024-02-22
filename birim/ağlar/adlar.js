@@ -8,5 +8,5 @@ export const Adlar = {
   "0x406": "Conflux eSpace",
   "0xfa": "Fantom",
   "0x144": "zkSync Era",
-  "m:berkeley": "Mina Berkeley",
+  "m:berkeley": "Mina",
 };
