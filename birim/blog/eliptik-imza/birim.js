@@ -1,5 +1,6 @@
 import { AğBilgileri } from "/birim/ağlar/birim";
 import jsonrpc from "/lib/api/jsonrpc";
+import { ChainId } from "/lib/crosschain/chains";
 import { address } from "/lib/ethereum/provider";
 import dom from "/lib/util/dom";
 
@@ -15,7 +16,7 @@ const ODUL = "0xfd086bc7cd5c481dcc9c85ebe478a1c0b69fcbb9"
  */
 const USDT_ARB = "0xfd086bc7cd5c481dcc9c85ebe478a1c0b69fcbb9";
 
-jsonrpc.call("https://" + AğBilgileri["0xa4b1"].rpcUrl, "eth_call", [
+jsonrpc.call("https://" + AğBilgileri[ChainId.xa4b1].rpcUrl, "eth_call", [
   /** @type {!eth.Transaction} */({
     to: USDT_ARB,
     data: "0xdd62ed3e" + address(DEV_FUND) + address(ODUL)
@@ -26,4 +27,3 @@ jsonrpc.call("https://" + AğBilgileri["0xa4b1"].rpcUrl, "eth_call", [
   div.innerText = kalan;
   div.parentElement.previousElementSibling.style.width = kalan * 180 / 5000 + "px";
 });
-
