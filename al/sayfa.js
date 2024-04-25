@@ -6,12 +6,12 @@ import Tanışma from "/al/tanışma/birim";
 import { öde } from "/al/ödeme/birim";
 import Cüzdan from "/birim/cüzdan/birim";
 import "/birim/dil/birim";
-import Tckt from "/birim/tckt/birim";
+import Kpass from "/birim/kpass/birim";
 import Telefon from "/birim/telefon/birim";
-import { OnaylamaAnahtarları, imzaMetni, metadataVeBölümler } from "/lib/did/TCKTVerisi";
+import { VerificationKeys, metadataAndSections, signPrompt } from "/lib/did/KPassData";
 import { toUnlockableNFT } from "/lib/did/decryptedSections";
 import { verifyProofs } from "/lib/did/decryptedSectionsVerifier";
-import TCKT from "/lib/ethereum/TCKT";
+import KPass from "/lib/ethereum/KPass";
 import ipfs from "/lib/node/ipfs";
 import network from "/lib/node/network";
 import dom from "/lib/util/dom";
@@ -19,9 +19,9 @@ import { hex } from "/lib/util/çevir";
 
 /**
  * @param {string} adres
- * @param {!did.DecryptedSections} açıkTckt
+ * @param {!did.DecryptedSections} açıkKPass
  */
-const tcktYarat = (adres, açıkTckt) => {
+const kpassYarat = (adres, açıkKPass) => {
   /** @const {!Element} */
   const şifrele = /** @const {!Element} */(dom.adla("al3"));
   /** @const {!Element} */
@@ -32,29 +32,29 @@ const tcktYarat = (adres, açıkTckt) => {
   şifreleDüğmesi.classList.remove("disabled");
 
   /** @const {string} */
-  const telefonMetni = imzaMetni(["personInfo"]);
+  const telefonMetni = signPrompt(["personInfo"]);
   Telefon.kutuGöster(telefonMetni.slice(0, dom.TR ? 25 : 35) +
     telefonMetni.slice(35, dom.TR ? 161 : 193), dom.TR ? "İmzala" : "Sign"
   );
 
   /** @const {!Promise<!did.DecryptedSections>} */
-  const açıkTcktSözü = verifyProofs(açıkTckt, OnaylamaAnahtarları);
+  const açıkKPassSözü = verifyProofs(açıkKPass, VerificationKeys);
 
   şifreleDüğmesi.onclick = () => {
     /** @const {!Promise<!eth.ERC721Unlockable>} */
-    const unlockableNFTSözü = açıkTcktSözü.then((açıkTckt) => {
-      const { metadata, bölümler } = metadataVeBölümler(Cüzdan.ağ());
+    const unlockableNFTSözü = açıkKPassSözü.then((açıkKPass) => {
+      const { metadata, sections } = metadataAndSections(Cüzdan.ağ());
       return toUnlockableNFT(
         metadata,
-        açıkTckt,
-        bölümler,
+        açıkKPass,
+        sections,
         Cüzdan.bağlantı(),
         adres)
     }).then((/** @type {!eth.ERC721Unlockable} */ unlockableNFT) => {
       Telefon.kutuKapat();
-      şifreleDüğmesi.innerText = dom.TR ? "TCKT’nizi şifreledik ✓" : "We encrypted your TCKT ✓";
+      şifreleDüğmesi.innerText = dom.TR ? "KPass’inizi şifreledik ✓" : "We encrypted your KPass ✓";
       şifreleDüğmesi.classList.remove("act");
-      Tckt.yüzGöster(false);
+      Kpass.yüzGöster(false);
       dom.düğmeDurdur(şifreleDüğmesi);
       şifrele.classList.add("done");
       İmeceİptal.göster();
@@ -88,12 +88,12 @@ const bağlaAdımı = () => {
       düğme.classList.remove("act");
       dom.düğmeDurdur(düğme);
       kök.classList.add("done");
-      Tanışma.açıkTcktAlVe(adres.toLowerCase(), tcktYarat);
+      Tanışma.açıkKPassAlVe(adres.toLowerCase(), kpassYarat);
     }
   });
 }
 
 Cüzdan.bağlantıDeğişince((bağlantı) =>
-  TCKT.setProvider(/** @type {!eth.Provider} */(bağlantı.provider)));
+  KPass.setProvider(/** @type {!eth.Provider} */(bağlantı.provider)));
 
 bağlaAdımı();

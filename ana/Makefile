@@ -15,12 +15,13 @@ build/ana/sayfa-%.js: ana/sayfa.js \
                       birim/cüzdan/*.js \
                       birim/dil/birim.js \
                       birim/kaydol/*.js \
+                      birim/kpass/birim.js \
                       birim/telefon/birim.js \
-                      birim/tckt/birim.js \
+                      lib/api/jsonrpc.d.js lib/api/jsonrpc.js \
                       lib/crosschain/*.js \
                       lib/did/*.d.js \
                       lib/ethereum/*.d.js \
-                      lib/ethereum/provider.js lib/ethereum/TCKTLite.js \
+                      lib/ethereum/provider.js lib/ethereum/KPassLite.js \
                       lib/mina/*.d.js \
                       lib/node/*.d.js lib/node/ipfs.js \
                       lib/util/dom.js lib/util/çevir.js
@@ -58,7 +59,7 @@ build/ana/sayfa-%.css: \
     birim/dil/birim.css \
     birim/kaydol/birim.css \
     birim/telefon/birim.css \
-    birim/tckt/birim.css
+    birim/kpass/birim.css
 	mkdir -p $(dir $@)
 	cat $^ | bun csso --output $@
 
@@ -81,8 +82,8 @@ build/ana-%.html: ana/sayfa.html \
                   ana/sayılar.birim \
                   birim/başlık.birim \
                   birim/favicon.birim \
+                  birim/kpass.birim \
                   birim/lato-%.birim \
-                  birim/tckt.birim \
                   birim/telefon.birim \
                   build/ana/ok.isvg
 	bun lib/birimler/işleyici.js $< $*

@@ -23,8 +23,8 @@ const seçiliDeğiştir = (seçili) => {
   Telefon.nftGöster(seçili <= 1, !seçili);
   seçili == 3
     ? Telefon.kutuGöster(dom.TR
-      ? "Bağlı app TCKT’nizdeki iletişim bilgilerinize erişmek istiyor. İzin veriyor musunuz?"
-      : "The connected app would like to access your contact info section of your TCKT.")
+      ? "Bağlı app KPass’indeki iletişim bilgilerinize erişmek istiyor. İzin veriyor musunuz?"
+      : "The connected app would like to access your contact info section of your KPass.")
     : Telefon.kutuKapat();
   Liste[Seçili].classList.remove("sel");
   Liste[seçili].classList.add("sel");

@@ -3,11 +3,11 @@
  */
 import Cüzdan from "/birim/cüzdan/birim";
 import "/birim/dil/birim";
-import TCKT from "/lib/ethereum/TCKT";
+import KPass from "/lib/ethereum/KPass";
 import dom from "/lib/util/dom";
 
 Cüzdan.bağlantıDeğişince((bağlantı) =>
-  TCKT.setProvider(/** @type {!eth.Provider} */(bağlantı.provider)));
+  KPass.setProvider(/** @type {!eth.Provider} */(bağlantı.provider)));
 
 dom.adla("ipbtnb").onclick = () => {
   revokeeAdımınıGöster();
@@ -57,7 +57,7 @@ const revokeeAdımınıGöster = () => {
         revokeeAdımınıGöster();
       }
     }, 2000)
-    TCKT.getRevokeeAddresses(Cüzdan.ağ(), /** @type {string} */(Cüzdan.adres()))
+    KPass.getRevokeeAddresses(Cüzdan.ağ(), /** @type {string} */(Cüzdan.adres()))
       .then((data) => {
         const filtered = data.map((element) => "0x" + element.topics[1].slice(26));
         clearTimeout(timer);
@@ -99,7 +99,7 @@ const revokeeAdımınıGöster = () => {
 
   onaylaDüğmesi.onclick = () => {
     if (seçilmişAdres) {
-      TCKT.revokeFriend(
+      KPass.revokeFriend(
         Cüzdan.ağ(),
         /** @type {string} */(Cüzdan.adres()), seçilmişAdres.innerText);
       onaylaDüğmesi.innerText = dom.TR ? "Adres İptal Edildi ✓" : "Address revoked ✓";
@@ -130,7 +130,7 @@ dom.adla("ipbtna").onclick = () => {
 
     dom.adla("ip1c").onclick = () => {
       const adres = /** @type {string} */(Cüzdan.adres());
-      TCKT.revoke(Cüzdan.ağ(), adres).catch(console.log);
+      KPass.revoke(Cüzdan.ağ(), adres).catch(console.log);
     }
 
     dom.adla("ip1d").onclick = () => {

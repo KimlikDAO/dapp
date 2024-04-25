@@ -36,13 +36,13 @@ jobs:
         run: |
           make al.sayfa
 
-      - name: tcktm sayfası
-        run: |
-          make tcktm.sayfa
-
       - name: iptal sayfası
         run: |
           make iptal.sayfa
+
+      - name: kpassim sayfası
+        run: |
+          make kpassim.sayfa
 
       - name: oyla sayfası
         run: |

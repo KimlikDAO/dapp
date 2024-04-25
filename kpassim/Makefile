@@ -1,12 +1,13 @@
-tcktm-en := my-tckt
-tcktm-tr := tcktm
+kpassim-en := kpass
+kpassim-tr := kpassim
 
-build/tcktm/sayfa-%.js: tcktm/sayfa.js tcktm/pencere/*.js \
-    tcktm/discord.d.js tcktm/discord.js \
+build/kpassim/sayfa-%.js: kpassim/sayfa.js kpassim/pencere/*.js \
+    kpassim/discord.d.js kpassim/discord.js \
     birim/ağlar/*.js \
     birim/cüzdan/*.js \
     birim/dil/birim.js \
-    birim/tckt/birim.js \
+    birim/kpass/birim.js \
+    lib/api/jsonrpc.d.js lib/api/jsonrpc.js \
     lib/crosschain/*.js \
     lib/crypto/*.js \
     lib/did/*.js \
@@ -17,8 +18,8 @@ build/tcktm/sayfa-%.js: tcktm/sayfa.js tcktm/pencere/*.js \
 	mkdir -p $(dir $@)
 	bun google-closure-compiler -W VERBOSE -O ADVANCED --charset UTF-8 \
                              --define "TR\$$\$$module\$$lib\$$util\$$dom=$(Lang-$*)" \
-                             --define "KonumTR\$$\$$module\$$birim\$$dil\$$birim=$(tcktm-tr)" \
-                             --define "KonumEN\$$\$$module\$$birim\$$dil\$$birim=$(tcktm-en)" \
+                             --define "KonumTR\$$\$$module\$$birim\$$dil\$$birim=$(kpassim-tr)" \
+                             --define "KonumEN\$$\$$module\$$birim\$$dil\$$birim=$(kpassim-en)" \
                              --emit_use_strict \
                              --module_resolution NODE \
                              --assume_function_wrapper \
@@ -28,26 +29,26 @@ build/tcktm/sayfa-%.js: tcktm/sayfa.js tcktm/pencere/*.js \
                              --js_output_file $@
 	bun uglifyjs $@ -m -o $@
 
-build/tcktm/sayfa.css: tcktm/sayfa.css tcktm/*/*.css birim/kutu.css
+build/kpassim/sayfa.css: kpassim/sayfa.css kpassim/*/*.css birim/kutu.css
 	mkdir -p $(dir $@)
 	cat $^ | bun csso --output $@
 
-build/tcktm/sayfa.keymap: $(call compressions, build/tcktm/sayfa.css)
+build/kpassim/sayfa.keymap: $(call compressions, build/kpassim/sayfa.css)
 	mkdir -p $(dir $@)
-	bun lib/birimler/hasher.js $@ build/tcktm/sayfa.css
+	bun lib/birimler/hasher.js $@ build/kpassim/sayfa.css
 
-build/tcktm/sayfa-%.keymap: build/ana/sayfa-%.keymap \
-    $(call compressions, build/tcktm/sayfa-%.js)
+build/kpassim/sayfa-%.keymap: build/ana/sayfa-%.keymap \
+    $(call compressions, build/kpassim/sayfa-%.js)
 	mkdir -p $(dir $@)
-	bun lib/birimler/hasher.js $@ build/tcktm/sayfa-$*.js
+	bun lib/birimler/hasher.js $@ build/kpassim/sayfa-$*.js
 	cat $< >> $@
 
-build/tcktm-%.html: tcktm/sayfa.html \
-                    build/tcktm/sayfa-%.keymap \
-                    build/tcktm/sayfa.keymap \
+build/kpassim-%.html: kpassim/sayfa.html \
+                    build/kpassim/sayfa-%.keymap \
+                    build/kpassim/sayfa.keymap \
                     birim/başlık.birim \
                     birim/favicon.birim \
                     birim/lato-%.birim \
-                    birim/tckt.birim \
+                    birim/kpass.birim \
                     build/al/paste.isvg
 	bun lib/birimler/işleyici.js $< $*

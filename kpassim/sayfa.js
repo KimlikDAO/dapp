@@ -5,41 +5,41 @@
 import { roleRequestChallenge } from "./discord.js";
 import Cüzdan from "/birim/cüzdan/birim";
 import "/birim/dil/birim";
-import Tckt from "/birim/tckt/birim";
-import { ChainId } from "/lib/crosschain/chains";
-import { Provider } from "/lib/crosschain/provider";
-import { Signer } from "/lib/crosschain/signer";
-import { fromUnlockableNFT } from "/lib/did/decryptedSections";
-import TCKT from "/lib/ethereum/TCKT";
-import evm from "/lib/ethereum/evm";
-import dom from "/lib/util/dom";
+import Kpass from "/birim/kpass/birim";
 import {
   eşikKutusuGöster,
   imeceİptalKutusuGöster,
   silKutusuGöster
-} from "/tcktm/pencere/birim";
+} from "/kpassim/pencere/birim";
+import { ChainId } from "/lib/crosschain/chains";
+import { Provider } from "/lib/crosschain/provider";
+import { Signer } from "/lib/crosschain/signer";
+import { fromUnlockableNFT } from "/lib/did/decryptedSections";
+import KPass from "/lib/ethereum/KPass";
+import evm from "/lib/ethereum/evm";
+import dom from "/lib/util/dom";
 
 /** @const {!Element} */
-const DiscordDüğmesi = /** @const {!Element} */(dom.adla("inbtn0"));
+const DiscordDüğmesi = dom.adla("inbtn0");
 /** @const {!Element} */
-const İmeceİptalDüğmesi = /** @const {!Element} */(dom.adla("inbtn1"));
+const İmeceİptalDüğmesi = dom.adla("inbtn1");
 /** @const {!Element} */
-const EşikAzaltmaDüğmesi = /** @const {!Element} */(dom.adla("inbtn2"));
+const EşikAzaltmaDüğmesi = dom.adla("inbtn2");
 /** @const {!Element} */
-const SilDüğmesi = /** @const {!Element} */(dom.adla("inbtn3"));
+const SilDüğmesi = dom.adla("inbtn3");
 /** @const {!Element} */
-const AçDüğmesi = /** @const {!Element} */(dom.adla("intcktb"));
+const AçDüğmesi = dom.adla("intcktb");
 /** @const {!Element} */
-const TcktYok = /** @const {!Element} */(dom.adla("inn"));
+const KpassYok = dom.adla("inn");
 
 /** @const {!Object<string, !did.DecryptedSections>} */
 const Bellek = {};
 
 /**
- * @param {!did.DecryptedSections} açıkTckt
+ * @param {!did.DecryptedSections} açıkKPass
  */
-const açıkYüzGöster = (açıkTckt) => {
-  Tckt.açıkTcktGöster(açıkTckt);
+const açıkYüzGöster = (açıkKPass) => {
+  Kpass.açıkKPassGöster(açıkKPass);
   AçDüğmesi.innerText = dom.TR ? "Gizle" : "Hide";
   AçDüğmesi.onclick = kapalıYüzGöster;
 }
@@ -60,22 +60,22 @@ const kapalıYüzGöster = () => {
   const bağlantı = Cüzdan.bağlantı();
   /** @const {string} */
   const adres = /** @type {string} */(Cüzdan.adres());
-  Tckt.yüzGöster(false);
+  Kpass.yüzGöster(false);
   AçDüğmesi.innerText = dom.TR ? "Aç" : "Unlock";
 
   /** @const {!did.DecryptedSections} */
-  const bellektenTckt = Bellek[ağ + adres];
-  AçDüğmesi.onclick = bellektenTckt
-    ? () => açıkYüzGöster(bellektenTckt)
+  const bellektenKPass = Bellek[ağ + adres];
+  AçDüğmesi.onclick = bellektenKPass
+    ? () => açıkYüzGöster(bellektenKPass)
     : () => DosyaSözü
       .then((dosya) => fromUnlockableNFT(dosya,
         ["personInfo", "contactInfo", "addressInfo", "kütükBilgileri"],
         bağlantı,
         adres
       ))
-      .then((açıkTckt) => {
-        Bellek[ağ + adres] = açıkTckt;
-        açıkYüzGöster(açıkTckt);
+      .then((açıkKPass) => {
+        Bellek[ağ + adres] = açıkKPass;
+        açıkYüzGöster(açıkKPass);
       })
       .catch(() => console.log);
 }
@@ -99,14 +99,14 @@ const discordRolüAl = () => {
     /** @const {!discord.SignedID} */
     const discordID = /** @type {!discord.SignedID} */(event.data);
     /** @const {string} */
-    const role = "TCKT HOLDER";
+    const role = "KPASS HOLDER";
     imzacı.signMessage(roleRequestChallenge(discordID, role, dom.TR), adres)
       .then((signature) => fetch("//discord.kimlikdao.org", {
         method: "PUT",
         headers: { "content-type": "application/json" },
         body: JSON.stringify(/** @type {!discord.RoleRequest} */({
           discordID,
-          role: "TCKT HOLDER",
+          role: "KPASS HOLDER",
           chainID: ağ,
           signature: evm.compactSignature(signature),
           lang: dom.TR ? "tr" : "en"
@@ -133,30 +133,30 @@ const discordRolüAl = () => {
  * @param {?string} _
  * @param {Promise<!eth.ERC721Unlockable>} dosyaSözü
  */
-const tcktDeğişti = (_, dosyaSözü) => {
+const kpassDeğişti = (_, dosyaSözü) => {
   /** @const {boolean} */
-  const tcktVar = dosyaSözü != null;
+  const kpassVar = dosyaSözü != null;
   DosyaSözü = dosyaSözü;
 
-  DiscordDüğmesi.onclick = tcktVar ? discordRolüAl : Cüzdan.aç;
-  İmeceİptalDüğmesi.onclick = tcktVar ? imeceİptalKutusuGöster : Cüzdan.aç;
-  EşikAzaltmaDüğmesi.onclick = tcktVar ? eşikKutusuGöster : Cüzdan.aç;
-  SilDüğmesi.onclick = tcktVar ? () => silKutusuGöster((ağAdres) => {
+  DiscordDüğmesi.onclick = kpassVar ? discordRolüAl : Cüzdan.aç;
+  İmeceİptalDüğmesi.onclick = kpassVar ? imeceİptalKutusuGöster : Cüzdan.aç;
+  EşikAzaltmaDüğmesi.onclick = kpassVar ? eşikKutusuGöster : Cüzdan.aç;
+  SilDüğmesi.onclick = kpassVar ? () => silKutusuGöster((ağAdres) => {
     delete Bellek[ağAdres];
     kapalıYüzGöster();
   }) : Cüzdan.aç;
-  dom.gösterGizle(AçDüğmesi, tcktVar);
-  dom.gösterGizle(Tckt.Kök, tcktVar);
-  dom.gösterGizle(TcktYok, !tcktVar);
+  dom.gösterGizle(AçDüğmesi, kpassVar);
+  dom.gösterGizle(Kpass.Kök, kpassVar);
+  dom.gösterGizle(KpassYok, !kpassVar);
 
-  if (tcktVar)
+  if (kpassVar)
     kapalıYüzGöster();
   else
-    dom.gösterGizle(TcktYok.firstElementChild, Cüzdan.adres() != null);
+    dom.gösterGizle(KpassYok.firstElementChild, Cüzdan.adres() != null);
 }
 
-tcktDeğişti("", null);
+kpassDeğişti("", null);
 
-Cüzdan.tcktDeğişince(tcktDeğişti);
+Cüzdan.kpassDeğişince(kpassDeğişti);
 Cüzdan.bağlantıDeğişince((bağlantı) =>
-  TCKT.setProvider(/** @type {!eth.Provider} */(bağlantı.provider)));
+  KPass.setProvider(/** @type {!eth.Provider} */(bağlantı.provider)));

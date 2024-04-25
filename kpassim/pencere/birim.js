@@ -1,17 +1,17 @@
 import Cüzdan from "/birim/cüzdan/birim";
 import { ChainId } from "/lib/crosschain/chains";
-import TCKT from "/lib/ethereum/TCKT";
+import KPass from "/lib/ethereum/KPass";
 import evm from "/lib/ethereum/evm";
 import dom from "/lib/util/dom";
 
 /** @const {!Element} */
-const Mask = /** @const {!Element} */(dom.adla("inbd"));
+const Mask = dom.adla("inbd");
 /** @const {!Element} */
-const İmeceİptalKutusu = /** @const {!Element} */(dom.adla("inmii"));
+const İmeceİptalKutusu = dom.adla("inmii");
 /** @const {!Element} */
-const EşikKutusu = /** @const {!Element} */(dom.adla("inmes"));
+const EşikKutusu = dom.adla("inmes");
 /** @const {!Element} */
-const SilKutusu = /** @const {!Element} */(dom.adla("inmsy"));
+const SilKutusu = dom.adla("inmsy");
 
 const kutuKapat = () => {
   dom.gizle(Mask);
@@ -45,7 +45,7 @@ const imeceİptalKutusuGöster = () => {
   dom.adla("iniio").onclick = () => {
     const weight = +agirlikGirdisi.value;
     address = evm.adresDüzelt(adresGirdisi.value).slice(2).toLowerCase();
-    TCKT.addRevoker(Cüzdan.ağ(),
+    KPass.addRevoker(Cüzdan.ağ(),
       /** @type {string} */(Cüzdan.adres()), weight, address);
   }
 }
@@ -65,7 +65,7 @@ const eşikKutusuGöster = () => {
   dom.göster(EşikKutusu);
   dom.adla("inesr").onclick = kutuKapat;
 
-  TCKT.revokesRemaining(ağ, adres).then((eşik) => {
+  KPass.revokesRemaining(ağ, adres).then((eşik) => {
     dom.adla("inesm").onclick = birAzalt;
     dom.adla("inesp").onclick = (e) => birArttır(e, eşik);
     girdi.value = eşik;
@@ -73,8 +73,7 @@ const eşikKutusuGöster = () => {
     dom.adla("ineso").onclick = () => {
       /** @const {number} */
       const delta = eşik - Number(girdi.value);
-      delta ? TCKT
-        .reduceRevokeThreshold(ağ, adres, delta)
+      delta ? KPass.reduceRevokeThreshold(ağ, adres, delta)
         .then(kutuKapat)
         .catch(console.log) : kutuKapat();
     }
@@ -94,7 +93,7 @@ const silKutusuGöster = (iptelEdince) => {
     /** @const {string} */
     const adres = /** @type {string} */(Cüzdan.adres());
     kutuKapat();
-    TCKT.revoke(ağ, adres)
+    KPass.revoke(ağ, adres)
       .then(() => iptelEdince(ağ + adres))
       .catch(console.log);
   }

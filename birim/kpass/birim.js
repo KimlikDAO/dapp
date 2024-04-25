@@ -108,19 +108,19 @@ const kütükBilgileriGöster = (kütükBilgileri) => {
 }
 
 /**
- * @param {!did.DecryptedSections} açıkTckt
+ * @param {!did.DecryptedSections} açıkKPass
  */
-const açıkTcktGöster = (açıkTckt) => {
-  personInfoGöster(/** @type {!did.PersonInfo} */(açıkTckt["personInfo"]));
-  contactInfoGöster(/** @type {?did.ContactInfo} */(açıkTckt["contactInfo"]));
-  addressInfoGöster(/** @type {?did.AddressInfo} */(açıkTckt["addressInfo"]));
-  kütükBilgileriGöster(/** @type {?did.KütükBilgileri} */(açıkTckt["kütükBilgileri"]));
+const açıkKPassGöster = (açıkKPass) => {
+  personInfoGöster(/** @type {!did.PersonInfo} */(açıkKPass["personInfo"]));
+  contactInfoGöster(/** @type {?did.ContactInfo} */(açıkKPass["contactInfo"]));
+  addressInfoGöster(/** @type {?did.AddressInfo} */(açıkKPass["addressInfo"]));
+  kütükBilgileriGöster(/** @type {?did.KütükBilgileri} */(açıkKPass["kütükBilgileri"]));
   Kök.classList.add("flp");
 }
 
 export default {
   Kök,
-  açıkTcktGöster,
+  açıkKPassGöster,
   çevir,
   yüzGöster
 };

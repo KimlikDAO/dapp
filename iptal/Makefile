@@ -5,12 +5,13 @@ build/iptal/sayfa-%.js: iptal/sayfa.js \
     birim/ağlar/*.js \
     birim/cüzdan/*.js \
     birim/dil/birim.js \
+    lib/api/jsonrpc.d.js lib/api/jsonrpc.js \
     lib/crosschain/*.js \
     lib/crypto/sha3.js \
     lib/crypto/secp256k1.js lib/crypto/modular.js \
     lib/ethereum/*.d.js \
-    lib/ethereum/evm.js lib/ethereum/TCKT.js \
-    lib/ethereum/provider.js lib/ethereum/TCKTLite.js \
+    lib/ethereum/evm.js lib/ethereum/KPass.js \
+    lib/ethereum/provider.js lib/ethereum/KPassLite.js \
     lib/mina/*.d.js \
     lib/node/*.d.js lib/node/ipfs.js \
     lib/util/dom.js lib/util/çevir.js

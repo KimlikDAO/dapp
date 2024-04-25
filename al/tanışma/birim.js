@@ -1,5 +1,5 @@
 import Cüzdan from "/birim/cüzdan/birim";
-import Tckt from "/birim/tckt/birim";
+import Kpass from "/birim/kpass/birim";
 import { ChainId } from "/lib/crosschain/chains";
 import { keccak256Uint8 } from "/lib/crypto/sha3";
 import { combineMultiple } from "/lib/did/decryptedSections";
@@ -30,13 +30,13 @@ const taahhütOluştur = (adres, rastgele) => {
 }
 
 /**
- * AçıkTCKT alır ve `sonra`'ya aktarır.
+ * AçıkKPass alır ve `sonra`'ya aktarır.
  *
  * @param {string} adres
- * @param {function(string, !did.DecryptedSections)} sonra AçıkTCKT'yi
+ * @param {function(string, !did.DecryptedSections)} sonra AçıkKpass'i
  * vereceğimiz yordam.
  */
-const açıkTcktAlVe = (adres, sonra) => {
+const açıkKPassAlVe = (adres, sonra) => {
   /** @const {!Worker} */
   const powWorker = new Worker("/al/tanışma/powWorker.js", { type: "module" });
 
@@ -148,11 +148,11 @@ const açıkTcktAlVe = (adres, sonra) => {
         `//${nodelar[0]}/edevlet/oauth2?` +
         `${base64(new Uint8Array(taahhüt))}&ts=${istemciAn}&oauth_code=${code}`))
       .then((/** @type {!Response} */ res) => res.json())
-      .then((/** @type {!did.DecryptedSections} */ açıkTckt) => {
+      .then((/** @type {!did.DecryptedSections} */ açıkKPass) => {
         nkoDüğmesi.innerText = dom.TR ? "Bilgileriniz alındı ✓" : "We got your info ✓";
-        Tckt.açıkTcktGöster(açıkTckt);
+        Kpass.açıkKPassGöster(açıkKPass);
         kutu.classList.add("done");
-        sonra(adres, açıkTckt);
+        sonra(adres, açıkKPass);
       });
   } else {
     /** @const {Element} */
@@ -192,8 +192,8 @@ const açıkTcktAlVe = (adres, sonra) => {
         setTimeout(() => {
           if (!hataOluştu)
             hataBildirimi.innerText = dom.TR
-              ? "TCKT’niz oluşturuluyor"
-              : "Minting your TCKT"
+              ? "KPass’iniz oluşturuluyor"
+              : "Minting your KPass"
         }, 1500);
         setTimeout(() => {
           if (!hataOluştu)
@@ -223,7 +223,7 @@ const açıkTcktAlVe = (adres, sonra) => {
         )).then((/** @type {!Array<!Promise.AllSettledResultElement<!did.DecryptedSections>>} */
           results) => {
           /** @const {!did.DecryptedSections} */
-          const açıkTckt = combineMultiple(
+          const açıkKPass = combineMultiple(
             results
               .filter((result) => result.status == "fulfilled")
               .map((result) => result.value),
@@ -231,16 +231,16 @@ const açıkTcktAlVe = (adres, sonra) => {
             base64(nkoRastgele.subarray(32)),
             3
           );
-          if ("personInfo" in açıkTckt) {
+          if ("personInfo" in açıkKPass) {
             dom.gizle(dosyaYüklemeBölümü);
             nkoDüğmesi.href = "javascript:";
             nkoDüğmesi.classList.remove("act");
             nkoDüğmesi.innerText = dom.TR ? "Bilgileriniz onaylandı ✓" : "We confirmed your info ✓";
             dom.göster(nkoDüğmesi);
             dom.düğmeDurdur(nkoDüğmesi);
-            Tckt.açıkTcktGöster(açıkTckt);
+            Kpass.açıkKPassGöster(açıkKPass);
             kutu.classList.add("done");
-            sonra(adres, açıkTckt);
+            sonra(adres, açıkKPass);
           } else {
             /** @const {!node.HataBildirimi} */
             const hata = /** @type {node.HataBildirimi} */(results.find(
@@ -325,4 +325,4 @@ const açıkTcktAlVe = (adres, sonra) => {
   }
 }
 
-export default { açıkTcktAlVe };
+export default { açıkKPassAlVe };

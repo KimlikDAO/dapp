@@ -1,6 +1,6 @@
-PAGES := al ana tcktm iptal oyla
+PAGES := al ana kpassim iptal oyla
 
-NAMED_ASSETS := sitemap.txt TCKT.svg TCKT.png TCKT.webp
+NAMED_ASSETS := sitemap.txt TCKT.svg TCKT.png TCKT.webp KPASS.svg KPASS.png KPASS.webp
 
 PAGE_TARGETS := $(addsuffix .sayfa, $(PAGES))
 

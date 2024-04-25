@@ -5,7 +5,7 @@
 import { AğBilgileri, AğBilgisi } from "/birim/ağlar/birim";
 import Cüzdan from "/birim/cüzdan/birim";
 import { ChainId } from "/lib/crosschain/chains";
-import TCKT from "/lib/ethereum/TCKT";
+import KPass from "/lib/ethereum/KPass";
 import evm from "/lib/ethereum/evm";
 import dom from "/lib/util/dom";
 
@@ -25,7 +25,7 @@ const Kutu = /** @type {!Element} */(dom.adla("imc"));
 const ToplamAğırlık = /** @type {!Element} */(dom.adla("ims"));
 
 /**
- * @param {ChainId} ağ Native tokeninde TCKT fiyatının gösterileceği ağ.
+ * @param {ChainId} ağ Native tokeninde KPass fiyatının gösterileceği ağ.
  */
 const fiyatGöster = (ağ) => {
   /** @const {!Element} */
@@ -44,7 +44,7 @@ const fiyatGöster = (ağ) => {
   const token = ağBilgisi.token || ağBilgisi.tokenKodu;
   /** @const {!Array<string>} */
   const ek = ağBilgisi.tokenEki;
-  TCKT.priceIn(ağ, 0).then(([çok, az]) => {
+  KPass.priceIn(ağ, 0).then(([çok, az]) => {
     indirimsizFiyat.innerText = dom.paradanMetne(çok) + " " + token + (dom.TR ? ek[0] : "");
     indirimliFiyat.innerText = dom.paradanMetne(az) + " " + token + (dom.TR ? ek[1] : "");
     indirimYüzdesi.innerText = Math.round(100 * (çok - az) / çok);

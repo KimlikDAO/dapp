@@ -1,6 +1,6 @@
 # Ana sayfa
 
-TCKT'yi açıklayan banner ve hemen altında alım akışı `/al`'a yönlendiren
+KPass'i açıklayan banner ve hemen altında alım akışı `/al`'a yönlendiren
 dügme var.
 
 Alt yarıda ise:

@@ -174,8 +174,9 @@ li.on>.cust {
   cursor: pointer;
   font-size: 9pt;
   font-weight: 700;
-  padding: 5px;
+  padding: 5px 2px;
   text-align: center;
+  text-wrap: nowrap;
 }
 
 #cuin {

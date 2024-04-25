@@ -4,7 +4,7 @@ hostname = "http://localhost"
 dizin = "ana"
 sayfalar = [
   ["al", "mint"],
-  ["tcktm", "my-tckt"],
+  ["kpassim", "kpass"],
   ["oyla", "vote"],
   ["iptal", "revoke"]
 ]

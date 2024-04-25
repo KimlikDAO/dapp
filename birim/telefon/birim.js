@@ -1,4 +1,4 @@
-import Tckt from "/birim/tckt/birim";
+import KPass from "/birim/kpass/birim";
 import dom from "/lib/util/dom";
 
 /** @const {!Element} */
@@ -49,17 +49,17 @@ const kutuKapat = () => {
  * Ana sayfa Telefon görselinin içinde temsili nft'yi gösterir.
  */
 const nftGöster = (kutudaGöster, bilgiYüzü) => {
-  Tckt.yüzGöster(bilgiYüzü);
+  KPass.yüzGöster(bilgiYüzü);
 
   const yüzGöster = () => {
-    Tckt.yüzGöster(bilgiYüzü);
+    KPass.yüzGöster(bilgiYüzü);
     NftDüğmesi.innerText = bilgiYüzü
       ? dom.TR ? "Gizle" : "Encrypt"
       : dom.TR ? "Aç" : "Decrypt";
   }
   yüzGöster();
   if (kutudaGöster) {
-    Tckt.Kök.style.opacity = "";
+    KPass.Kök.style.opacity = "";
     dom.göster(NftDüğmesi);
     NftDüğmesi.onclick ||= () => {
       bilgiYüzü = !bilgiYüzü;
@@ -67,12 +67,12 @@ const nftGöster = (kutudaGöster, bilgiYüzü) => {
     }
   }
 
-  Tckt.Kök.classList.toggle("tew", !kutudaGöster);
+  KPass.Kök.classList.toggle("tew", !kutudaGöster);
   NftDüğmesi.classList.toggle("teg", kutudaGöster);
 }
 
 const nftGeriAl = () => {
-  Tckt.Kök.classList.add("tex");
+  KPass.Kök.classList.add("tex");
   nftGöster(true, false);
 }
 

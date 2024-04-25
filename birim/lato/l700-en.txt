@@ -1,9 +1,9 @@
 main
   KimlikDAO
-  TCKT: Your ID token for web3
+  KPass: Your ID token for web3
   Self-custody ID token for KYC’ed wallet logins
-  Mint your TCKT | $1
-  View TCKT
+  Mint your KPass | $1
+  View KPass
 
 wallet
   0123456789x...
@@ -22,9 +22,9 @@ wallet
   Select file
   Cancel
 
-3. Let’s encrypt your TCKT.
+3. Let’s encrypt your KPass.
   Request 4 signatures
-  We encrypted your TCKT
+  We encrypted your KPass
 
 4. Social revoke addresses.
   Yes No
@@ -38,7 +38,7 @@ wallet
   Cancel
   ₺$
 
-5. Send the payment and receive your TCKT.
+5. Send the payment and receive your KPass.
   0123456789+
    ,USDC USDT TRYB AVAX ETH FTM MATIC
   Total

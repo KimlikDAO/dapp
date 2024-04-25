@@ -36,7 +36,7 @@
   transform: rotateY(180deg);
 }
 
-/* TCKT Carousel */
+/* KPass Carousel */
 #tcc {
   display: flex;
   height: 100%;
@@ -49,7 +49,7 @@
   height: 280px;
 }
 
-/* TCKT Düğmesi */
+/* KPass Düğmesi */
 .tcd {
   bottom: 5px;
   height: 10px;

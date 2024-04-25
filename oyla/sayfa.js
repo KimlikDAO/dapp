@@ -6,7 +6,7 @@ import Cüzdan from "/birim/cüzdan/birim";
 import "/birim/dil/birim";
 import { ChainId } from "/lib/crosschain/chains";
 import { Provider } from "/lib/crosschain/provider";
-import TCKT from "/lib/ethereum/TCKT";
+import KPass from "/lib/ethereum/KPass";
 import dom from "/lib/util/dom";
 
 let SeçilmişÖneriId;
@@ -52,7 +52,7 @@ const fiyatDeğişikliğiFormuHazırla = (yeniAğ) => {
   let seçilmişTokenId = yeniAğ;
   // Seçilen ağa göre USDC USDT TRYB ayarla
   for (let i = 1; i <= 3; ++i) {
-    dom.adla("oyyt" + i).style.display = TCKT.isTokenAvailable(yeniAğ, i)
+    dom.adla("oyyt" + i).style.display = KPass.isTokenAvailable(yeniAğ, i)
       ? ""
       : "none";
   }

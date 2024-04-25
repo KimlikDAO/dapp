@@ -4,11 +4,11 @@ ana
   MetaMask gibi NFT destekleyen kripto cüzdanında taşınır
   dApp’lere istediğin bilgileri paylaş, istediklerini gizli tut
   KimlikDAO
-  TCKT: Blokzincirdeki kimlik kartın
+  KPass: Blokzincirdeki kimlik kartın
   Bir NFT al, birçok app’e kimliğinle oturum aç
-  TCKT al
-  TCKT’ni incele
-  Hemen TCKT al | ₺19
+  KPass al
+  KPass’ini incele
+  Hemen KPass al | ₺19
   Daha fazla bilgi
 
 cüzdan
@@ -28,9 +28,9 @@ cüzdan
   Dosya seç
   İptal
 
-3. TCKT'nizi şifreleyelim.
+3. KPass'ini şifreleyelim.
   4 imza isteği yolla
-  TCKT’nizi şifreledik
+  KPass’ini şifreledik
 
 4. İmece iptal adresleri.
   Evet Hayır
@@ -43,7 +43,7 @@ cüzdan
   $₺
   Tamam İptal
 
-5. Ödemeyi yapın TCKT cüzdanınıza gelsin
+5. Ödemeyi yapın KPass cüzdanınıza gelsin
   0123456789+
    ,USDC USDT TRYB AVAX ETH FTM MATIC
   Toplam

@@ -5,24 +5,25 @@ al-en := mint
 al-tr := al
 
 build/al/sayfa-%.js: al/sayfa.js \
-                     al/imeceİptal/birim.js al/ödeme/birim.js \
-                     al/tanışma/birim.js \
-                     birim/ağlar/*.js \
-                     birim/cüzdan/*.js \
-                     birim/dil/birim.js \
-                     birim/telefon/birim.js \
-                     birim/tckt/birim.js \
-                     lib/crosschain/*.js \
-                     lib/crypto/sha3.js \
-                     lib/crypto/secp256k1.js lib/crypto/modular.js \
-                     lib/crypto/primes.js lib/crypto/wesolowski.js \
-                     lib/did/*.js \
-                     lib/ethereum/*.js \
-                     lib/mina/*.d.js \
-                     lib/node/*.d.js \
-                     lib/node/ipfs.js lib/node/network.js \
-                     lib/util/dom.js lib/util/çevir.js \
-                     build/al/tanışma/birim.keymap
+    al/imeceİptal/birim.js al/ödeme/birim.js \
+    al/tanışma/birim.js \
+    birim/ağlar/*.js \
+    birim/cüzdan/*.js \
+    birim/dil/birim.js \
+    birim/kpass/birim.js \
+    birim/telefon/birim.js \
+    lib/api/jsonrpc.d.js lib/api/jsonrpc.js \
+    lib/crosschain/*.js \
+    lib/crypto/sha3.js \
+    lib/crypto/secp256k1.js lib/crypto/modular.js \
+    lib/crypto/primes.js lib/crypto/wesolowski.js \
+    lib/did/*.js \
+    lib/ethereum/*.js \
+    lib/mina/*.d.js \
+    lib/node/*.d.js \
+    lib/node/ipfs.js lib/node/network.js \
+    lib/util/dom.js lib/util/çevir.js \
+    build/al/tanışma/birim.keymap
 	mkdir -p $(dir $@)
 	bun google-closure-compiler -W VERBOSE -O ADVANCED --charset UTF-8 \
                             --define "TR\$$\$$module\$$lib\$$util\$$dom=$(Lang-$*)" \
@@ -63,7 +64,7 @@ build/al-%.html: al/sayfa.html \
                  build/al/tanışma/external-link.isvg \
                  birim/başlık.birim \
                  birim/favicon.birim \
+                 birim/kpass.birim \
                  birim/lato-%.birim \
-                 birim/tckt.birim \
                  birim/telefon.birim
 	bun lib/birimler/işleyici.js $< $*

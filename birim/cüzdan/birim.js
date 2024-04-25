@@ -3,7 +3,7 @@ import { AuroConnection as AuroBağlantısı } from "./minaBağlantısı";
 import { AğBilgileri } from "/birim/ağlar/birim";
 import { ChainGroup, ChainGroups, ChainId } from "/lib/crosschain/chains";
 import { Provider } from "/lib/crosschain/provider";
-import TCKT from "/lib/ethereum/TCKTLite";
+import KPass from "/lib/ethereum/KPassLite";
 import ipfs from "/lib/node/ipfs";
 import dom from "/lib/util/dom";
 import { hexten } from "/lib/util/çevir";
@@ -96,7 +96,7 @@ const Kopunca = [];
 /** @const {!Array<function(ChainId)>} */
 const AğDeğişince = [];
 /** @const {!Array<function(?string, Promise<!eth.ERC721Unlockable>)>} */
-const TcktDeğişince = [];
+const KPassDeğişince = [];
 /** @const {!Array<function(!Provider)>} */
 const BağlantıDeğişince = [];
 /** @type {!Provider} */
@@ -106,7 +106,7 @@ let Adres = null;
 /** @type {ChainId} */
 let Ağ = /** @type {ChainId} */(VARSAYILAN_AĞ);
 /** @type {?string} */
-let TcktYokResmi;
+let KPassYokResmi;
 
 /**
  * @return {ChainId} Seçili ağ
@@ -160,17 +160,17 @@ const ağDeğişti = (yeniAğ) => {
     Ağ = yeniAğ;
     if (ağGrubuDeğişti)
       bağlantıSeçiciGöster();
-    tcktDeğişti();
+    kpassDeğişti();
     for (const f of AğDeğişince) f(yeniAğ);
   }
 }
 
-const tcktDeğişti = () => {
+const kpassDeğişti = () => {
   if (!Adres) return;
-  /** @const {Element} */
-  const tcktDüğmesi = dom.adla("cuin");
-  /** @const {Element} */
-  const tcktResmi = dom.adla("cutc");
+  /** @const {!Element} */
+  const kpassDüğmesi = dom.adla("cuin");
+  /** @const {!Element} */
+  const kpassResmi = dom.adla("cutc");
 
   /** @const {ChainId} */
   const ağ = Ağ;
@@ -179,30 +179,30 @@ const tcktDeğişti = () => {
   /** @const {string} */
   const adres = Adres;
 
-  TCKT.handleOf(provider, ağ, Adres).then((cidHex) => {
+  KPass.handleOf(provider, ağ, Adres).then((cidHex) => {
     if (ağ != Ağ || adres != Adres) return;
     /** @const {boolean} */
     const varMı = cidHex.replaceAll("0", "") != "x";
-    tcktDüğmesi.innerText = varMı
-      ? dom.TR ? "TCKT’Nİ İNCELE" : "VIEW TCKT"
-      : dom.TR ? "TCKT AL" : "MINT TCKT";
-    tcktDüğmesi.onclick = tcktResmi.onclick = () =>
+    kpassDüğmesi.innerText = varMı
+      ? dom.TR ? "KPASS’İNİ İNCELE" : "VIEW KPASS"
+      : dom.TR ? "KPASS AL" : "MINT KPASS";
+    kpassDüğmesi.onclick = kpassResmi.onclick = () =>
       window.location.href = "//kimlikdao.org" + (varMı
-        ? dom.TR ? "/tcktm" : "/my-tckt"
+        ? dom.TR ? "/kpassim" : "/kpass"
         : dom.TR ? "/al" : "/mint");
-    if (!varMı && TcktYokResmi) tcktResmi.src = TcktYokResmi;
+    if (!varMı && KPassYokResmi) kpassResmi.src = KPassYokResmi;
     /** @const {Promise<!eth.ERC721Unlockable>} */
     const dosyaSözü = varMı
       ? ipfs.cidBytetanOku(KIMLIKDAO_IPFS_URL, hexten(cidHex.slice(2)))
         .then((/** @type {string} */ dosya) => {
           if (ağ != Ağ || adres != Adres) return Promise.reject();
-          const tcktDosyası = /** @type {!eth.ERC721Unlockable} */(JSON.parse(dosya))
-          TcktYokResmi ||= tcktResmi.src;
-          tcktResmi.src = tcktDosyası.image;
-          return tcktDosyası;
+          const kpassDosyası = /** @type {!eth.ERC721Unlockable} */(JSON.parse(dosya))
+          KPassYokResmi ||= kpassResmi.src;
+          kpassResmi.src = kpassDosyası.image;
+          return kpassDosyası;
         })
       : null;
-    for (const f of TcktDeğişince) f(cidHex, dosyaSözü);
+    for (const f of KPassDeğişince) f(cidHex, dosyaSözü);
   })
 }
 
@@ -231,7 +231,7 @@ const adresDeğişti = (adresler) => {
     nihaiArabirimAdı(Adres).then((ad) => {
       if (ad) AdresButonu.innerText = ad;
     });
-    tcktDeğişti();
+    kpassDeğişti();
     if (!eskiAdres) {
       dom.gösterGizle(DebankLinki, Ağ.startsWith(ChainGroup.EVM));
       bağlantıSeçiciGizle();
@@ -261,8 +261,8 @@ const kopunca = (f) => Kopunca.push(f);
 /**
  * @param {function(?string, Promise<!eth.ERC721Unlockable>)} f
  */
-const tcktDeğişince = (f) => {
-  TcktDeğişince.push(f);
+const kpassDeğişince = (f) => {
+  KPassDeğişince.push(f);
   Kopunca.push(() => f(null, null));
 }
 
@@ -421,5 +421,5 @@ export default {
   bağlantıDeğişince,
   kopunca,
   hızlıArabirimAdı,
-  tcktDeğişince,
+  kpassDeğişince,
 };

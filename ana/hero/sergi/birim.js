@@ -32,8 +32,8 @@ const kartDeğiştir = (yeniKart) => {
   Telefon.nftGöster(yeniKart <= 1, !yeniKart);
   yeniKart === 3
     ? Telefon.kutuGöster(dom.TR
-      ? "Bağlı app TCKT’nizdeki iletişim bilgilerinize erişmek istiyor. İzin veriyor musunuz?"
-      : "The connected app would like to access your contact info section of your TCKT.")
+      ? "Bağlı app KPass’inizdeki iletişim bilgilerinize erişmek istiyor. İzin veriyor musunuz?"
+      : "The connected app would like to access your contact info section of your KPass.")
     : Telefon.kutuKapat();
   Boncuklar.children[Kart].firstElementChild.classList.remove("sel");
   Boncuklar.children[yeniKart].firstElementChild.classList.add("sel");

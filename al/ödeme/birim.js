@@ -2,7 +2,7 @@ import { AğBilgileri, AğBilgisi } from "/birim/ağlar/birim";
 import Cüzdan from "/birim/cüzdan/birim";
 import Telefon from "/birim/telefon/birim";
 import { ChainGroup, ChainId } from "/lib/crosschain/chains";
-import TCKT from "/lib/ethereum/TCKT";
+import KPass from "/lib/ethereum/KPass";
 import { whenMined } from "/lib/ethereum/transaction";
 import dom from "/lib/util/dom";
 
@@ -91,16 +91,16 @@ const öde = (cidSözü, adresAğırlığı, eşik) => {
       /** @const {Element} */
       const tokenLi = dom.adla("odd" + (i == 0 ? yeniAğ : i));
       /** @const {boolean} */
-      const tokenYok = (i > 0) && !TCKT.isTokenAvailable(yeniAğ, i);
+      const tokenYok = (i > 0) && !KPass.isTokenAvailable(yeniAğ, i);
       tokenLi.style.display = tokenYok ? "none" : "";
       if (!tokenYok)
-        TCKT.priceIn(yeniAğ, i).then((fiyat) => {
+        KPass.priceIn(yeniAğ, i).then((fiyat) => {
           tokenLi.firstElementChild.innerText = dom.paradanMetne(fiyat[+iptalli]);
         });
     }
 
     // yeniAğ'da mevcut token yoksa 'native token'e geç
-    if (!TCKT.isTokenAvailable(yeniAğ, para)) para = 0;
+    if (!KPass.isTokenAvailable(yeniAğ, para)) para = 0;
 
     // Ağ ücreti imgesini ekle
     imgeEkle(li.lastElementChild, döküm.children[2]);
@@ -131,11 +131,11 @@ const öde = (cidSözü, adresAğırlığı, eşik) => {
     /** @const {string} */
     const adres = /** @type {string} */(Cüzdan.adres());
     // Nonce'ın cachelenmesi için şimdiden çağır
-    if (para) TCKT.getNonce(ağ, adres, para);
+    if (para) KPass.getNonce(ağ, adres, para);
     /** @const {!Promise<number>} */
-    const ağÜcretiSözü = TCKT.estimateNetworkFee(ağ);
+    const ağÜcretiSözü = KPass.estimateNetworkFee(ağ);
     /** @const {!Promise<!Array<number>>} */
-    const fiyatSözü = TCKT.priceIn(ağ, para)
+    const fiyatSözü = KPass.priceIn(ağ, para)
       .then((/** @type {!Array<number>} */ fiyat) => {
         kesirGir(fiyat[1], döküm.children[0]);
         if (!iptalli)
@@ -194,9 +194,9 @@ const öde = (cidSözü, adresAğırlığı, eşik) => {
       /** @const {string} */
       const sonra = dom.TR
         ? hash.length >= 7
-          ? decodeURIComponent(hash.slice("#sonra=".length)) : "/tcktm"
+          ? decodeURIComponent(hash.slice("#sonra=".length)) : "/kpassim"
         : hash.length >= 6
-          ? decodeURIComponent(hash.slice("#then=".length)) : "/my-tckt";
+          ? decodeURIComponent(hash.slice("#then=".length)) : "/kpass";
       window.localStorage.removeItem(adres + "nko_r");
       window.location.href = sonra;
     }
@@ -208,17 +208,17 @@ const öde = (cidSözü, adresAğırlığı, eşik) => {
     else {
       (para == 0
         ? cidSözü.then((cid) =>
-          TCKT.createWithRevokers(ağ, adres, cid, eşik, adresAğırlığı))
-        : TCKT.isTokenERC20Permit(ağ, para)
-          ? Promise.all([cidSözü, TCKT.getPermitFor(ağ, adres, para, iptalli)])
+          KPass.createWithRevokers(ağ, adres, cid, eşik, adresAğırlığı))
+        : KPass.isTokenERC20Permit(ağ, para)
+          ? Promise.all([cidSözü, KPass.getPermitFor(ağ, adres, para, iptalli)])
             .then(birazBekle)
             .then((/** @type {!Array<string>} */[cid, imza]) =>
-              TCKT.createWithRevokersWithTokenPermit(ağ, adres, cid, eşik, adresAğırlığı, imza)
+              KPass.createWithRevokersWithTokenPermit(ağ, adres, cid, eşik, adresAğırlığı, imza)
             )
-          : Promise.all([cidSözü, TCKT.getApprovalFor(ağ, adres, para)])
+          : Promise.all([cidSözü, KPass.getApprovalFor(ağ, adres, para)])
             .then(birazBekle)
             .then(([/** @type {string} */ cid, _]) =>
-              TCKT.createWithRevokersWithTokenPayment(ağ, adres, cid, eşik, adresAğırlığı, para)))
+              KPass.createWithRevokersWithTokenPayment(ağ, adres, cid, eşik, adresAğırlığı, para)))
         .then((txHash) => {
           Telefon.nftGeriAl();
           const provider = /** @type {!eth.Provider} */(Cüzdan.bağlantı().provider);

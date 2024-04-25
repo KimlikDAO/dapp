@@ -6,7 +6,7 @@ include birim/cüzdan/Makefile
 include birim/dil/Makefile
 include birim/favicon/Makefile
 include birim/kaydol/Makefile
+include birim/kpass/Makefile
 include birim/lato/Makefile
 include birim/paralar/Makefile
-include birim/tckt/Makefile
 include birim/telefon/Makefile
