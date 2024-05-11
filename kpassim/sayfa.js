@@ -106,7 +106,7 @@ const discordRolüAl = () => {
         headers: { "content-type": "application/json" },
         body: JSON.stringify(/** @type {!discord.RoleRequest} */({
           discordID,
-          role: "KPASS HOLDER",
+          role,
           chainID: ağ,
           signature: evm.compactSignature(signature),
           lang: dom.TR ? "tr" : "en"

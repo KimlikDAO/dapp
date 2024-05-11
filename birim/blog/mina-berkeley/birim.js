@@ -9,7 +9,7 @@ const DEV_FUND = "0x79883D9aCBc4aBac6d2d216693F66FcC5A0BcBC1".toLowerCase();
 /** @const {string} */
 const ODUL = "0xfd086bc7cd5c481dcc9c85ebe478a1c0b69fcbb9"
 /** @const {!Element} */
-const RemainingBar = dom.adla("blei");
+const RemainingBar = dom.adla("blmb");
 
 /**
  * USDT contract address on Arbitrum One.
