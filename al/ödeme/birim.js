@@ -7,7 +7,7 @@ import { whenMined } from "/lib/ethereum/transaction";
 import dom from "/lib/util/dom";
 
 /** @const {!Element} */
-const Kök = /** @const {!Element} */(dom.adla("od"));
+const Kök = dom.adla("od");
 
 /**
  * @param {Element} imge

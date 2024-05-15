@@ -80,13 +80,13 @@ const Bağlantılar = {
 };
 
 /** @const {!Element} */
-const AdresButonu = /** @type {!Element} */(dom.adla("cua"));
+const AdresButonu = dom.adla("cua");
 /** @const {!Element} */
-const AğButonu = /** @type {!Element} */(dom.adla("cuc"));
+const AğButonu = dom.adla("cuc");
 /** @const {!Element} */
-const Menü = /** @type {!Element} */(dom.adla("cub"));
+const Menü = dom.adla("cub");
 /** @const {!Element} */
-const DebankLinki = /** @type {!Element} */(dom.adla("cude"));
+const DebankLinki = dom.adla("cude");
 /** @const {string} */
 const BağlaMetni = AdresButonu.innerText;
 /** @type {!Array<function(?string)>} */
@@ -315,7 +315,7 @@ const bağlantıSeçiciGöster = () => {
     dom.adlaGösterGizle("cuf" + grup, grup == ağGrubu)
 
   /** @const {!Element} */
-  const seçici = /** @type {!Element} */(dom.adla("cuf" + ağGrubu));
+  const seçici = dom.adla("cuf" + ağGrubu);
 
   /** @const {!NodeList<!Element>} */
   const satırlar = seçici.children;

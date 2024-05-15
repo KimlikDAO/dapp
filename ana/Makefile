@@ -38,6 +38,8 @@ build/ana/sayfa-%.js: ana/sayfa.js \
                             --js $^ \
                             --js_output_file $@
 	bun uglifyjs $@ -m -c toplevel,unsafe -o $@
+	bun lib/birimler/bigintCompressor.js $@
+	wc $@
 
 build/ana/sayfa-%.css: \
     build/birim/lato/l400.css \

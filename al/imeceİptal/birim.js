@@ -10,30 +10,30 @@ import evm from "/lib/ethereum/evm";
 import dom from "/lib/util/dom";
 
 /** @const {!Element} */
-const Kök = /** @type {!Element} */(dom.adla("im"));
+const Kök = dom.adla("im");
 /** @const {!Element} */
-const EşikGirdisi = /** @type {!Element} */(dom.adla("imt"));
+const EşikGirdisi = dom.adla("imt");
 /** @const {!Element} */
-const GösterButonu = /** @type {!Element} */(dom.adla("imbe"));
+const GösterButonu = dom.adla("imbe");
 /** @const {!Element} */
-const İptalButonu = /** @type {!Element} */(dom.adla("imbh"));
+const İptalButonu = dom.adla("imbh");
 /** @const {!Element} */
-const İptalciler = /** @type {!Element} */(dom.adla("imf"));
+const İptalciler = dom.adla("imf");
 /** @const {!Element} */
-const Kutu = /** @type {!Element} */(dom.adla("imc"));
+const Kutu = dom.adla("imc");
 /** @const {!Element} */
-const ToplamAğırlık = /** @type {!Element} */(dom.adla("ims"));
+const ToplamAğırlık = dom.adla("ims");
 
 /**
  * @param {ChainId} ağ Native tokeninde KPass fiyatının gösterileceği ağ.
  */
 const fiyatGöster = (ağ) => {
   /** @const {!Element} */
-  const indirimsizFiyat = /** @type {!Element} */(dom.adla("imft"));
+  const indirimsizFiyat = dom.adla("imft");
   /** @const {!Element} */
-  const indirimliFiyat = /** @type {!Element} */(dom.adla("imfs"));
+  const indirimliFiyat = dom.adla("imfs");
   /** @const {!Element} */
-  const indirimYüzdesi = /** @type {!Element} */(dom.adla("imfu"));
+  const indirimYüzdesi = dom.adla("imfu");
 
   /**
    * @type {!AğBilgisi}
@@ -87,15 +87,15 @@ const atla = (sonra) => {
  */
 const kutularıAç = (sonra) => {
   /** @const {!Element} */
-  const iptalciGirdisiEkleDüğmesi = /** @type {!Element} */(dom.adla("imba"));
+  const iptalciGirdisiEkleDüğmesi = dom.adla("imba");
   /** @const {!Element} */
-  const eşikDüşürDüğmesi = /** @type {!Element} */(dom.adla("imtm"));
+  const eşikDüşürDüğmesi = dom.adla("imtm");
   /** @const {!Element} */
-  const eşikArtırDüğmesi = /** @type {!Element} */(dom.adla("imtp"));
+  const eşikArtırDüğmesi = dom.adla("imtp");
   /** @const {!Element} */
-  const tamamDüğmesi = /** @type {!Element} */(dom.adla("imbt"));
+  const tamamDüğmesi = dom.adla("imbt");
   /** @const {!Element} */
-  const atlaDüğmesi = /** @type {!Element} */(dom.adla("imbi"));
+  const atlaDüğmesi = dom.adla("imbi");
 
   Kök.classList.remove("done");
   dom.göster(Kutu);

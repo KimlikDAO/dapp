@@ -9,13 +9,13 @@ const Gösterme = new Set([
   "signatureTs",
 ]);
 /** @const {!Element} */
-const Kartlar = /** @const {!Element} */(dom.adla("tcc"));
+const Kartlar = dom.adla("tcc");
 /** @const {!Element} */
-const Kök = /** @const {!Element} */(dom.adla("tc"));
+const Kök = dom.adla("tc");
 /** @const {!Element} */
-const SolDüğme = /** @const {!Element} */(dom.adla("tcso"));
+const SolDüğme = dom.adla("tcso");
 /** @const {!Element} */
-const SağDüğme = /** @const {!Element} */(dom.adla("tcsa"));
+const SağDüğme = dom.adla("tcsa");
 
 /** @type {number} */
 let Kart = 0;

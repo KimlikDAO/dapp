@@ -29,6 +29,8 @@ build/iptal/sayfa-%.js: iptal/sayfa.js \
                              --js $^ \
                              --js_output_file $@
 	bun uglifyjs $@ -m -o $@
+	bun lib/birimler/bigintCompressor.js $@
+	wc $@
 
 build/iptal/sayfa.css: iptal/sayfa.css
 	mkdir -p $(dir $@)

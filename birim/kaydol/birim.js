@@ -7,7 +7,7 @@ const kur = (domAdı) => {
   /** @type {?string} */
   let KaydolMetni;
   /** @const {!Element} */
-  const kök = /** @type {!Element} */(dom.adla(domAdı));
+  const kök = dom.adla(domAdı);
   /** @const {!Element} */
   const girdi = /** @type {!Element} */(kök.firstElementChild);
   /** @const {!Element} */

@@ -6,7 +6,7 @@ import dom from "/lib/util/dom";
 
 Cüzdan.kpassDeğişince((_, dosyaSözü) => {
   /** @const {!Element} */
-  const eylemDüğmesi = /** @type {!Element} */(dom.adla("bal"));
+  const eylemDüğmesi = dom.adla("bal");
   eylemDüğmesi.firstChild.data = dosyaSözü
     ? dom.TR ? "KPass’ini incele" : "View KPass"
     : dom.TR ? "Hemen KPass al" : "Mint KPass"

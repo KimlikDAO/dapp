@@ -14,7 +14,7 @@
   "devDependencies": {
     "csso-cli": "^4.0.2",
     "express": "^4.18.1",
-    "google-closure-compiler": "^20230802.0.0",
+    "google-closure-compiler": "^20240317.0.0",
     "html-minifier": "^4.0.0",
     "htmlparser2": "^9.1.0",
     "svg-pathdata": "^6.0.3",
@@ -23,6 +23,6 @@
     "toml": "^3.0.0",
     "uglify-js": "^3.16.2",
     "vite": "^5.0.11",
-    "wrangler": "^3.23.0"
+    "wrangler": "^3.56.0"
   }
 }

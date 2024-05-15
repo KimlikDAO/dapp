@@ -2,15 +2,15 @@ import KPass from "/birim/kpass/birim";
 import dom from "/lib/util/dom";
 
 /** @const {!Element} */
-const NftDüğmesi = /** @type {!Element} */(dom.adla("tez"));
+const NftDüğmesi = dom.adla("tez");
 /** @const {!Element} */
-const Kutu = /** @type {!Element} */(dom.adla("tek"));
+const Kutu = dom.adla("tek");
 /** @const {!Element} */
-const DüğmeliNft = /** @type {!Element} */(dom.adla("tel"))
+const DüğmeliNft = dom.adla("tel");
 /** @const {!Element} */
-const Adres = /** @type {!Element} */(dom.adla("ted"));
+const Adres = dom.adla("ted");
 /** @const {!Element} */
-const AnaEkran = /** @type {!Element} */(dom.adla("tea"));
+const AnaEkran = dom.adla("tea");
 
 /**
  * @param {?string} adres Telefonda gösterilecek adres.

@@ -23,9 +23,9 @@ import { hex } from "/lib/util/çevir";
  */
 const kpassYarat = (adres, açıkKPass) => {
   /** @const {!Element} */
-  const şifrele = /** @const {!Element} */(dom.adla("al3"));
+  const şifrele = dom.adla("al3");
   /** @const {!Element} */
-  const şifreleDüğmesi = /** @const {!Element} */(dom.adla("al3a"));
+  const şifreleDüğmesi = dom.adla("al3a");
 
   dom.adla("te").style.opacity = 1;
   şifrele.classList.remove("disabled");
@@ -76,9 +76,9 @@ const kpassYarat = (adres, açıkKPass) => {
 
 const bağlaAdımı = () => {
   /** @const {!Element} */
-  const kök = /** @type {!Element} */(dom.adla("al1"));
+  const kök = dom.adla("al1");
   /** @const {!Element} */
-  const düğme = /** @type {!Element} */(dom.adla("al1a"));
+  const düğme = dom.adla("al1a");
   düğme.onclick = Cüzdan.aç;
 
   Cüzdan.adresDeğişince((adres) => {

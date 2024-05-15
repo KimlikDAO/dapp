@@ -28,6 +28,7 @@ build/oyla/sayfa-%.js: oyla/sayfa.js \
                              --js $^ \
                              --js_output_file $@
 	bun uglifyjs $@ -m -c toplevel,unsafe -o $@
+	bun lib/birimler/bigintCompressor.js $@
 	wc $@
 
 build/oyla/sayfa.css: oyla/sayfa.css oyla/*/*.css

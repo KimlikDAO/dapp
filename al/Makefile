@@ -38,6 +38,7 @@ build/al/sayfa-%.js: al/sayfa.js \
                             --js_output_file $@
 	bun lib/birimler/değiştirici.js $@ $(filter %.keymap,$^)
 	bun uglifyjs $@ -m -c toplevel,unsafe -o $@
+	bun lib/birimler/bigintCompressor.js $@
 	wc $@
 
 build/al/sayfa.css: al/sayfa.css al/*/*.css birim/kutu.css

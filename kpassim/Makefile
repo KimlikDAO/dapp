@@ -28,6 +28,8 @@ build/kpassim/sayfa-%.js: kpassim/sayfa.js kpassim/pencere/*.js \
                              --js $^ \
                              --js_output_file $@
 	bun uglifyjs $@ -m -o $@
+	bun lib/birimler/bigintCompressor.js $@
+	wc $@
 
 build/kpassim/sayfa.css: kpassim/sayfa.css kpassim/*/*.css birim/kutu.css
 	mkdir -p $(dir $@)

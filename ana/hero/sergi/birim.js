@@ -3,9 +3,9 @@ import Telefon from "/birim/telefon/birim";
 import dom from '/lib/util/dom';
 
 /** @const {!Element} */
-const Boncuklar = /** @type {!Element} */(dom.adla("sen"));
+const Boncuklar = dom.adla("sen");
 /** @const {!Element} */
-const Kartlar = /** @type {!Element} */(dom.adla("sem"));
+const Kartlar = dom.adla("sem");
 /** @type {number} */
 let Kart = 0;
 /** @type {number} */
