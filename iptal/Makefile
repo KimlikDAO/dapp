@@ -14,7 +14,7 @@ build/iptal/sayfa-%.js: iptal/sayfa.js \
     lib/ethereum/provider.js lib/ethereum/KPassLite.js \
     lib/mina/*.d.js \
     lib/node/*.d.js lib/node/ipfs.js \
-    lib/util/dom.js lib/util/çevir.js
+    lib/util/dom.js lib/util/çevir.js lib/util/base58.js
 	mkdir -p $(dir $@)
 	bun google-closure-compiler -W VERBOSE -O ADVANCED --charset UTF-8 \
                              --jscomp_error=unusedLocalVariables \

@@ -14,6 +14,7 @@ build/al/sayfa-%.js: al/sayfa.js \
     birim/telefon/birim.js \
     lib/api/jsonrpc.d.js lib/api/jsonrpc.js \
     lib/crosschain/*.js \
+    lib/crypto/poseidon.js \
     lib/crypto/sha3.js \
     lib/crypto/secp256k1.js lib/crypto/modular.js \
     lib/crypto/primes.js lib/crypto/wesolowski.js \
@@ -22,7 +23,7 @@ build/al/sayfa-%.js: al/sayfa.js \
     lib/mina/*.d.js \
     lib/node/*.d.js \
     lib/node/ipfs.js lib/node/network.js \
-    lib/util/dom.js lib/util/çevir.js \
+    lib/util/dom.js lib/util/çevir.js lib/util/base58.js \
     build/al/tanışma/birim.keymap
 	mkdir -p $(dir $@)
 	bun google-closure-compiler -W VERBOSE -O ADVANCED --charset UTF-8 \

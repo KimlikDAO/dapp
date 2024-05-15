@@ -8,6 +8,7 @@ import Cüzdan from "/birim/cüzdan/birim";
 import "/birim/dil/birim";
 import Kpass from "/birim/kpass/birim";
 import Telefon from "/birim/telefon/birim";
+import { ChainGroup } from "/lib/crosschain/chains";
 import { VerificationKeys, metadataAndSections, signPrompt } from "/lib/did/KPassData";
 import { toUnlockableNFT } from "/lib/did/decryptedSections";
 import { verifyProofs } from "/lib/did/decryptedSectionsVerifier";
@@ -88,7 +89,8 @@ const bağlaAdımı = () => {
       düğme.classList.remove("act");
       dom.düğmeDurdur(düğme);
       kök.classList.add("done");
-      Tanışma.açıkKPassAlVe(adres.toLowerCase(), kpassYarat);
+      Tanışma.açıkKPassAlVe(
+        /** @type {ChainGroup} */(Cüzdan.ağ().slice(0, 2)), adres.toLowerCase(), kpassYarat);
     }
   });
 }
