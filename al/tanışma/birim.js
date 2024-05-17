@@ -12,7 +12,7 @@ import { base64, uint8ArrayeBase64ten } from "/lib/util/çevir";
  * oluşturur.
  *
  * @param {ChainGroup} ağÇeşidi
- * @param {string} adres 0x ile başlayan EVM adresi.
+ * @param {string} adres cüzdan adresi.
  * @param {!Uint8Array} rastgele bitdizisi, 64 byte uzunluğunda.
  * @return {!Uint8Array} Kriptografik taahhüt, 64 byte uzunluğunda.
  */
