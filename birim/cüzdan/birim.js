@@ -9,7 +9,7 @@ import dom from "/lib/util/dom";
 import { hexten } from "/lib/util/çevir";
 
 /** @define {string} */
-const VARSAYILAN_AĞ = "m:berkeley";
+const VARSAYILAN_AĞ = "m:devnet";
 
 /** @const {string} */
 const KIMLIKDAO_IPFS_URL = "//ipfs.kimlikdao.org";
