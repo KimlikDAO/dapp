@@ -4,7 +4,7 @@ import dom from "/lib/util/dom";
 const RemainingBar = dom.adla("blmb");
 
 /** @const {!string} */
-const zkAppAddress = "B62qnnFm3SEtrMgStoj4SRVxKSTERh8Ho3Y9jCCa8TvgBF1mqa97Sij";
+const zkAppAddress = "B62qmuv9skuJS8564ZptVbp9NmMR5a1wjMaFDEUFcmBciZuekQJZ4gD";
 
 fetch("https://devnet.api.minaexplorer.com/accounts/" + zkAppAddress).then(
   async (response) => {
