@@ -80,6 +80,7 @@ const kapalıYüzGöster = () => {
       .catch(() => console.log);
 }
 
+/** @type {?string} */
 let DiscordDüğmesiMetni;
 
 const discordRolüAl = () => {

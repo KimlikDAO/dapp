@@ -1,17 +1,18 @@
+import { AğBilgileri } from "/birim/ağlar/birim";
+import { ChainId } from "/lib/crosschain/chains";
 import dom from "/lib/util/dom";
 
 /** @const {!Element} */
 const RemainingBar = dom.adla("blmb");
 
-/** @const {!string} */
-const zkAppAddress = "B62qmuv9skuJS8564ZptVbp9NmMR5a1wjMaFDEUFcmBciZuekQJZ4gD";
+/** @const {string} */
+const ZkAppAddress = "B62qmuv9skuJS8564ZptVbp9NmMR5a1wjMaFDEUFcmBciZuekQJZ4gD";
 
-fetch("https://devnet.api.minaexplorer.com/accounts/" + zkAppAddress).then(
-  async (response) => {
-    const res = await response.json();
-    const kalan = parseInt(res.account.balance.total);
-    RemainingBar.innerHTML = kalan;
+fetch(`https://${AğBilgileri[ChainId.MinaDevnet].rpcUrl}/accounts/${ZkAppAddress}`)
+  .then((res) => res.json())
+  .then((data) => {
+    const kalan = +data["account"]["balance"]["total"] | 0;
+    RemainingBar.innerText = kalan;
     RemainingBar.parentElement.previousElementSibling.style.width =
       (kalan * 180) / 5000 + "px";
-  }
-);
+  });

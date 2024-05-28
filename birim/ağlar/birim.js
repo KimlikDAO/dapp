@@ -89,13 +89,13 @@ const AğBilgileri = {
     tokenEki: dom.TR ? ["’den", "’e"] : [],
     rpcUrl: "mainnet.era.zksync.io"
   },
-  "m:berkeley": {
+  "m:devnet": {
     ad: "Mina",
-    izleyici: "berkeley.minaexplorer.com",
-    tokenKodu: "tMINA",
+    izleyici: "devnet.minaexplorer.com",
+    tokenKodu: "MINA",
     tokenEki: dom.TR ? ["’dan", "’ya"] : [],
-    rpcUrl: "proxy.berkeley.minaexplorer.com"
-  }
+    rpcUrl: "devnet.api.minaexplorer.com"
+  },
 }
 
 export {

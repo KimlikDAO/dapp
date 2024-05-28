@@ -10,8 +10,10 @@ ana-tr := "?tr"
 
 build/ana/sayfa-%.js: ana/sayfa.js \
                       ana/hero/sergi/birim.js \
+                      ana/kazan/birim.js \
                       birim/ağlar/*.js \
                       birim/altdizin/*.js \
+                      birim/blog/mina-berkeley/*.js \
                       birim/cüzdan/*.js \
                       birim/dil/birim.js \
                       birim/kaydol/*.js \
@@ -55,8 +57,8 @@ build/ana/sayfa-%.css: \
     birim/ortak.css \
     birim/başlık/birim.css \
     birim/blog/birim.css \
-    birim/blog/eliptik-egriler/birim.css \
     birim/blog/eliptik-imza/birim.css \
+    birim/blog/mina-berkeley/birim.css \
     birim/cüzdan/birim.css \
     birim/dil/birim.css \
     birim/kaydol/birim.css \
