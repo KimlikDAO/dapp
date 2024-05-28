@@ -1,5 +1,6 @@
 import "/ana/hero/sergi/birim";
 import "/birim/altdizin/birim";
+import "/ana/kazan/birim";
 import Cüzdan from "/birim/cüzdan/birim";
 import "/birim/dil/birim";
 import dom from "/lib/util/dom";
