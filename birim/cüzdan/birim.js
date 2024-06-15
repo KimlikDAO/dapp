@@ -169,8 +169,8 @@ const kpassDeğişti = () => {
   if (!Adres) return;
   /** @const {!Element} */
   const kpassDüğmesi = dom.adla("cuin");
-  /** @const {!Element} */
-  const kpassResmi = dom.adla("cutc");
+  /** @const {!HTMLImageElement} */
+  const kpassResmi = /** @type {!HTMLImageElement} */(dom.adla("cutc"));
 
   /** @const {ChainId} */
   const ağ = Ağ;

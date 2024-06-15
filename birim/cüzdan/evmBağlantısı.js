@@ -19,7 +19,7 @@ const ağSeç = (provider, ağ) => provider.request(/** @type {!eth.Request} */(
    * @const
    */
   const ağBilgisi = AğBilgileri[ağ];
-  if (e.code == 4902)
+  if (/** @type {eth.ProviderRpcError} */(e).code == 4902)
     return provider.request(/** @type {!eth.Request} */({
       method: "wallet_addEthereumChain",
       params: [/** @type {!eth.AddChainParam} */({

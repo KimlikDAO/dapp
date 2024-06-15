@@ -10,9 +10,10 @@ const DilButonu = dom.adla("dib");
 
 dom.menüYarat(DilButonu, dom.adla("did"));
 dom.adla("did").onclick = (/** @type {Event} */ event) => {
+  /** @const {!Element} */
+  const targetElem = /** @type {!Element} */(event.target);
   /** @const {Element} */
-  const li = event.target.nodeName == "LI"
-    ? event.target : event.target.parentElement;
+  const li = targetElem.nodeName == "LI" ? targetElem : targetElem.parentElement;
 
   /** @const {string} */
   const diğerDil = dom.TR ? "en" : "tr";

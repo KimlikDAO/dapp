@@ -29,11 +29,13 @@ dom.adla("inx").onclick = kutuKapat;
 const imeceİptalKutusuGöster = () => {
   dom.göster(Mask);
   dom.göster(İmeceİptalKutusu);
-  const adresGirdisi = dom.adla("iniii");
+  /** @const {!HTMLInputElement} */
+  const adresGirdisi = /** @const {!HTMLInputElement} */(dom.adla("iniii"));
   let address = adresGirdisi.value;
-  const agirlikGirdisi = dom.adla("iniiw");
+  /** @const {!HTMLInputElement} */
+  const agirlikGirdisi = /** @const {!HTMLInputElement} */(dom.adla("iniiw"));
   adresGirdisi.classList.remove("inin");
-  adresGirdisi.onblur = (e) => girdiDüzelt(e.target);
+  adresGirdisi.onblur = (e) => girdiDüzelt(/** @const {!HTMLInputElement} */(e.target));
   adresGirdisi.value = "";
   dom.adla("iniiy").onclick = yapıştır;
   dom.adla("iniim").onclick = birAzalt;
@@ -58,8 +60,8 @@ const eşikKutusuGöster = () => {
   const ağ = Cüzdan.ağ();
   /** @const {string} */
   const adres = /** @type {string} */(Cüzdan.adres());
-  /** @const {Element} */
-  const girdi = dom.adla("inesw");
+  /** @const {!HTMLInputElement} */
+  const girdi = /** @type {!HTMLInputElement} */(dom.adla("inesw"));
 
   dom.göster(Mask);
   dom.göster(EşikKutusu);
@@ -103,9 +105,12 @@ const silKutusuGöster = (iptelEdince) => {
  * @param {Event} event
  */
 const yapıştır = (event) => {
-  let a = event.target.nodeName === 'A'
-    ? event.target : event.target.parentElement;
-  const girdi = a.previousElementSibling;
+  /** @const {!Element} */
+  const target = /** @type {!Element} */(event.target);
+  let a = target.nodeName === 'A'
+    ? target : target.parentElement;
+  /** @const {!HTMLInputElement} */
+  const girdi = /** @type {!HTMLInputElement} */(a.previousElementSibling);
   navigator.clipboard.readText().then((değer) => {
     girdi.value = değer;
     girdiDüzelt(girdi);
@@ -113,7 +118,7 @@ const yapıştır = (event) => {
 }
 
 /**
- * @param {Element} girdi
+ * @param {!HTMLInputElement} girdi
  */
 const girdiDüzelt = (girdi) => {
   /** @const {string} */

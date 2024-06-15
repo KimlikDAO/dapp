@@ -18,17 +18,4 @@ build/al/tanışma/powWorker.js: al/tanışma/powWorker.js \
     lib/crypto/sha3.js \
     lib/util/worker.d.js \
     lib/util/çevir.js
-	mkdir -p $(dir $@)
-	bun google-closure-compiler -W VERBOSE -O ADVANCED --charset UTF-8 \
-                            --jscomp_error=unusedLocalVariables \
-                            --jscomp_error=strictCheckTypes \
-                            --rewrite_polyfills=false \
-                            --emit_use_strict \
-                            --module_resolution NODE \
-                            --assume_function_wrapper \
-                            --dependency_mode PRUNE \
-                            --entry_point $< \
-                            --js $^ \
-                            --js_output_file $@
-	bun uglifyjs $@ -m -c toplevel,unsafe -o $@
-	wc $@
+	bun lib/kdc/kdc.js $^ -o $@

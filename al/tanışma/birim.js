@@ -99,8 +99,8 @@ const açıkKPassAlVe = (ağÇeşidi, adres, sonra) => {
 
   /** @const {Element} */
   const eDevletDüğmesi = dom.adla("taa");
-  /** @const {Element} */
-  const nkoDüğmesi = dom.adla("tab");
+  /** @const {HTMLAnchorElement} */
+  const nkoDüğmesi = /** @type {!HTMLAnchorElement} */(dom.adla("tab"));
   /** @const {Element} */
   const kutu = dom.adla("ta");
   /** @const {string} */
@@ -183,8 +183,8 @@ const açıkKPassAlVe = (ağÇeşidi, adres, sonra) => {
       dom.gizle(nkoDüğmesi);
       /** @const {Element} */
       const dosyaBırakmaBölgesi = dom.adla("tada");
-      /** @const {Element} */
-      const dosyaSeçici = dom.adla("tain");
+      /** @const {!HTMLInputElement} */
+      const dosyaSeçici = /** @type {!HTMLInputElement} */(dom.adla("tain"));
       dom.adla("tadsbtn").onclick = () => dosyaSeçici.click();
       /** @const {Element} */
       const dosyaYüklemeBölümü = dom.adla("tadc");

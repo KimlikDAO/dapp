@@ -10,11 +10,11 @@ import dom from "/lib/util/dom";
 const Kök = dom.adla("od");
 
 /**
- * @param {Element} imge
- * @param {Element} satır
+ * @param {!HTMLImageElement} imge
+ * @param {!Element} satır
  */
 const imgeEkle = (imge, satır) => {
-  satır = satır.lastElementChild;
+  satır = /** @type {!Element} */(satır.lastElementChild);
   imge = imge.cloneNode(true);
   imge.width = 16;
   imge.height = 16;
@@ -65,10 +65,10 @@ const paraVeMiktar = (para, miktar) => {
 const öde = (cidSözü, adresAğırlığı, eşik) => {
   /** @const {Element} */
   const paraDüğmesi = dom.adla("odb");
-  /** @const {Element} */
-  const döküm = dom.adla("odi").firstElementChild;
-  /** @const {Element} */
-  const toplamKutusu = döküm.children[3].lastElementChild;
+  /** @const {!Element} */
+  const döküm = /** @type {!Element} */(dom.adla("odi").firstElementChild);
+  /** @const {!Element} */
+  const toplamKutusu = /** @type {!Element} */(döküm.children[3].lastElementChild);
   /** @const {boolean} */
   const iptalli = !!eşik;
   /** @type {number} */
@@ -102,15 +102,17 @@ const öde = (cidSözü, adresAğırlığı, eşik) => {
     // yeniAğ'da mevcut token yoksa 'native token'e geç
     if (!KPass.isTokenAvailable(yeniAğ, para)) para = 0;
 
+    /** @const {!HTMLImageElement} */
+    const imge = /** @type {!HTMLImageElement} */(li.lastElementChild);
     // Ağ ücreti imgesini ekle
-    imgeEkle(li.lastElementChild, döküm.children[2]);
-    imgeEkle(li.lastElementChild, toplamKutusu);
-    paraDeğişti(para, para == 0 ? li.lastElementChild : null);
+    imgeEkle(imge, döküm.children[2]);
+    imgeEkle(imge, toplamKutusu);
+    paraDeğişti(para, para == 0 ? imge : null);
   }
 
   /**
    * @param {number} yeniPara
-   * @param {?Element} imgeAslı
+   * @param {?HTMLImageElement} imgeAslı
    */
   const paraDeğişti = (yeniPara, imgeAslı) => {
     para = yeniPara;
@@ -167,7 +169,7 @@ const öde = (cidSözü, adresAğırlığı, eşik) => {
     const li = event.target.nodeName == "LI"
       ? event.target : event.target.parentElement;
     if (!li.id.startsWith("odd")) return;
-    paraDeğişti(+li.id[3], li.lastElementChild);
+    paraDeğişti(+li.id[3], /** @type {!HTMLImageElement} */(li.lastElementChild));
   };
 
   ağDeğişti(Cüzdan.ağ());

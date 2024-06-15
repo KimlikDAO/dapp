@@ -22,7 +22,9 @@ const revokeeAdımınıGöster = () => {
   dom.adla("ipbtnb").classList.remove("act");
   dom.adlaGizle("iptac");
   dom.adlaGöster("ipiic");
-  const onaylaDüğmesi = dom.adla("ipiio");
+
+  /** @const {!HTMLAnchorElement} */
+  const onaylaDüğmesi = /** @type {!HTMLAnchorElement} */(dom.adla("ipiio"));
 
   const onaylaDüğmesiDüzelt = () => {
     onaylaDüğmesi.classList.add("act");

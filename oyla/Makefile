@@ -16,20 +16,10 @@ build/oyla/sayfa-%.js: oyla/sayfa.js \
                        lib/node/*.d.js lib/node/ipfs.js \
                        lib/util/dom.js lib/util/çevir.js lib/util/base58.js
 	mkdir -p $(dir $@)
-	bun google-closure-compiler -W VERBOSE -O ADVANCED --charset UTF-8 \
-                             --define "TR\$$\$$module\$$lib\$$util\$$dom=$(Lang-$*)" \
-                             --define "KonumTR\$$\$$module\$$birim\$$dil\$$birim=$(oyla-tr)" \
-                             --define "KonumEN\$$\$$module\$$birim\$$dil\$$birim=$(oyla-en)" \
-                             --emit_use_strict \
-                             --module_resolution NODE \
-                             --assume_function_wrapper \
-                             --dependency_mode PRUNE \
-                             --entry_point $< \
-                             --js $^ \
-                             --js_output_file $@
-	bun uglifyjs $@ -m -c toplevel,unsafe -o $@
-	bun lib/birimler/bigintCompressor.js $@
-	wc $@
+	bun lib/kdc/kdc.js $^ -o $@ --loose --define \
+	    "TR\$$\$$module\$$lib\$$util\$$dom=$(Lang-$*)" \
+	    "KonumTR\$$\$$module\$$birim\$$dil\$$birim=$(oyla-tr)" \
+	    "KonumEN\$$\$$module\$$birim\$$dil\$$birim=$(oyla-en)"
 
 build/oyla/sayfa.css: oyla/sayfa.css oyla/*/*.css
 	mkdir -p $(dir $@)

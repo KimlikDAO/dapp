@@ -11,18 +11,18 @@ import dom from "/lib/util/dom";
 
 /** @const {!Element} */
 const Kök = dom.adla("im");
-/** @const {!Element} */
-const EşikGirdisi = dom.adla("imt");
+/** @const {!HTMLInputElement} */
+const EşikGirdisi = /** @type {!HTMLInputElement} */(dom.adla("imt"));
 /** @const {!Element} */
 const GösterButonu = dom.adla("imbe");
-/** @const {!Element} */
-const İptalButonu = dom.adla("imbh");
+/** @const {!HTMLAnchorElement} */
+const İptalButonu = /** @type {!HTMLAnchorElement} */(dom.adla("imbh"));
 /** @const {!Element} */
 const İptalciler = dom.adla("imf");
 /** @const {!Element} */
 const Kutu = dom.adla("imc");
-/** @const {!Element} */
-const ToplamAğırlık = dom.adla("ims");
+/** @const {!HTMLInputElement} */
+const ToplamAğırlık = /** @type {!HTMLInputElement} */(dom.adla("ims"));
 
 /**
  * @param {ChainId} ağ Native tokeninde KPass fiyatının gösterileceği ağ.
@@ -123,8 +123,8 @@ const kutularıAç = (sonra) => {
     /** @const {NodeList<!Element>} */
     const satır = İptalciler.children;
     for (let /** number */ i = 0; i < satır.length; ++i) {
-      /** @const {!Element} */
-      const girdi = /** @type {!Element} */(satır[i].firstElementChild);
+      /** @const {!HTMLInputElement} */
+      const girdi = /** @type {!HTMLInputElement} */(satır[i].firstElementChild);
       /** @const {string} */
       const adres = girdi.value;
       if (!evm.adresGeçerli(adres) || adres in adresAğırlığı ||
@@ -133,7 +133,7 @@ const kutularıAç = (sonra) => {
         satır[i].firstElementChild.classList.add("imin");
       } else {
         /** @type {number} */
-        const ağırlık = +satır[i].children[3].value;
+        const ağırlık = +/** @type {!HTMLInputElement} */(satır[i].children[3]).value;
         adresAğırlığı[adres] = ağırlık;
         toplamAğırlık += ağırlık;
       }
@@ -164,14 +164,14 @@ const kutularıAç = (sonra) => {
 const işlevEkle = (satır) => {
   /** @const {NodeList<!Element>} */
   const elemanlar = satır.children;
-  elemanlar[0].value = "";
+  /** @type {!HTMLInputElement} */(elemanlar[0]).value = "";
   elemanlar[0].onblur = (e) => girdiDüzelt(e.target);
   elemanlar[0].classList.remove("imin");
   elemanlar[1].onclick = yapıştır;
   elemanlar[2].onclick = birAzalt;
   elemanlar[3].onblur = ağırlıkBlurOlunca;
   elemanlar[3].onclick = (e) => e.target.value = "";
-  elemanlar[3].value = 1;
+  /** @type {!HTMLInputElement} */(elemanlar[3]).value = 1;
   elemanlar[4].onclick = birArttır;
   elemanlar[5].onclick = iptalciGirdisiSil;
 }
@@ -212,7 +212,7 @@ const eşikDeğeriBlurOlunca = (event) => {
 }
 
 /**
- * @param {Element} girdi
+ * @param {!HTMLInputElement} girdi
  */
 const girdiDüzelt = (girdi) => {
   /** @const {string} */
@@ -234,7 +234,8 @@ const yapıştır = (event) => {
   let a = /** @type {Element} */(event.target);
   for (; a.nodeName !== 'A'; a = a.parentElement)
     if (a.nodeName == 'DIV') return;
-  const girdi = a.previousElementSibling;
+  /** @const {HTMLInputElement} */
+  const girdi = /** @type {HTMLInputElement} */(a.previousElementSibling);
   navigator.clipboard.readText().then(
     (değer) => {
       girdi.value = değer;
@@ -278,10 +279,10 @@ const ağırlıkHesapla = () => {
   /** @const {NodeList<!Element>} */
   const satır = İptalciler.children;
   for (let /** number */ i = 0; i < satır.length; ++i) {
-    total += +satır[i].children[3].value;
+    total += +/** @type {HTMLInputElement} */(satır[i].children[3]).value;
   }
   ToplamAğırlık.value = total;
-  if (EşikGirdisi.value > total)
+  if (+EşikGirdisi.value > total)
     EşikGirdisi.value = total;
 }
 

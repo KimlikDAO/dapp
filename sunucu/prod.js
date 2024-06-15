@@ -19,5 +19,4 @@ const ProdWorker = create(DappUrl, {
   "revoke": "iptal-en.html"
 });
 
-globalThis["ProdWorker"] = ProdWorker;
 export default ProdWorker;

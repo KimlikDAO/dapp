@@ -1,0 +1,14 @@
+kök: ""
+dizin: "ana"
+sayfalar:
+  - tr: "al"
+    en: "mint"
+
+  - tr: "kpassim"
+    en: "kpass"
+
+  - tr: "oyla"
+    en: "vote"
+
+  - tr: "iptal"
+    en: "revoke"

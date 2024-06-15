@@ -25,22 +25,11 @@ build/al/sayfa-%.js: al/sayfa.js \
     lib/node/ipfs.js lib/node/network.js \
     lib/util/dom.js lib/util/çevir.js lib/util/base58.js \
     build/al/tanışma/birim.keymap
-	mkdir -p $(dir $@)
-	bun google-closure-compiler -W VERBOSE -O ADVANCED --charset UTF-8 \
-                            --define "TR\$$\$$module\$$lib\$$util\$$dom=$(Lang-$*)" \
-                            --define "KonumTR\$$\$$module\$$birim\$$dil\$$birim=$(al-tr)" \
-                            --define "KonumEN\$$\$$module\$$birim\$$dil\$$birim=$(al-en)" \
-                            --emit_use_strict \
-                            --module_resolution NODE \
-                            --assume_function_wrapper \
-                            --dependency_mode PRUNE \
-                            --entry_point $< \
-                            --js $(filter %.js,$^) \
-                            --js_output_file $@
+	bun lib/kdc/kdc.js $^ -o $@ --loose --define \
+	    "TR\$$\$$module\$$lib\$$util\$$dom=$(Lang-$*)" \
+	    "KonumTR\$$\$$module\$$birim\$$dil\$$birim=$(al-tr)" \
+	    "KonumEN\$$\$$module\$$birim\$$dil\$$birim=$(al-en)"
 	bun lib/birimler/değiştirici.js $@ $(filter %.keymap,$^)
-	bun uglifyjs $@ -m -c toplevel,unsafe -o $@
-	bun lib/birimler/bigintCompressor.js $@
-	wc $@
 
 build/al/sayfa.css: al/sayfa.css al/*/*.css birim/kutu.css
 	mkdir -p $(dir $@)

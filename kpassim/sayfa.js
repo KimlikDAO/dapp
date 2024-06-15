@@ -19,8 +19,8 @@ import KPass from "/lib/ethereum/KPass";
 import evm from "/lib/ethereum/evm";
 import dom from "/lib/util/dom";
 
-/** @const {!Element} */
-const DiscordDüğmesi = dom.adla("inbtn0");
+/** @const {!HTMLAnchorElement} */
+const DiscordDüğmesi = /** @type {!HTMLAnchorElement} */(dom.adla("inbtn0"));
 /** @const {!Element} */
 const İmeceİptalDüğmesi = dom.adla("inbtn1");
 /** @const {!Element} */
@@ -84,7 +84,7 @@ const kapalıYüzGöster = () => {
 let DiscordDüğmesiMetni;
 
 const discordRolüAl = () => {
-  window.onmessage = (event) => {
+  window["onmessage"] = (event) => {
     if (event.origin != "https://discord.kimlikdao.org") return;
     DiscordDüğmesiMetni ||= DiscordDüğmesi.innerText;
     DiscordDüğmesi.innerText = DiscordDüğmesiMetni + " ⏳";

@@ -8,8 +8,8 @@ const kur = (domAdı) => {
   let KaydolMetni;
   /** @const {!Element} */
   const kök = dom.adla(domAdı);
-  /** @const {!Element} */
-  const girdi = /** @type {!Element} */(kök.firstElementChild);
+  /** @const {!HTMLInputElement} */
+  const girdi = /** @type {!HTMLInputElement} */(kök.firstElementChild);
   /** @const {!Element} */
   const düğme = /** @type {!Element} */(girdi.nextElementSibling);
 
