@@ -5,6 +5,7 @@ import { ChainGroup, ChainId } from "/lib/crosschain/chains";
 import KPass from "/lib/ethereum/KPass";
 import { whenMined } from "/lib/ethereum/transaction";
 import dom from "/lib/util/dom";
+import { bekle } from "/lib/util/promises";
 
 /** @const {!Element} */
 const Kök = dom.adla("od");
@@ -180,8 +181,7 @@ const öde = (cidSözü, adresAğırlığı, eşik) => {
    * @param {T} cevap
    * @return {!Promise<T>}
    */
-  const birazBekle = (cevap) => new Promise(
-    (/** @type {function(T):void} */ resolve) => setTimeout(() => resolve(cevap), 100))
+  const birazBekle = (cevap) => bekle(100, cevap);
 
   Kök.classList.remove("disabled");
   dom.adla("oda").onclick = () => {

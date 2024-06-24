@@ -1,3 +1,4 @@
+import "./powWorker.d";
 import { f } from "/lib/crypto/sha3";
 
 /** @define {number} */

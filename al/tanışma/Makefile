@@ -16,6 +16,6 @@ al/tanışma.birim: al/tanışma/birim.html $(AL_TANIŞMA_INLINE_SVG_OUT) \
 build/al/tanışma/powWorker.js: al/tanışma/powWorker.js \
     al/tanışma/powWorker.d.js \
     lib/crypto/sha3.js \
-    lib/util/worker.d.js \
+    lib/kdjs/externs/worker.d.js \
     lib/util/çevir.js
-	bun lib/kdc/kdc.js $^ -o $@
+	bun lib/kdjs/kdjs.js $< -o $@ --externs lib/kdjs/externs/worker.d.js

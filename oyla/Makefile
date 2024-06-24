@@ -15,8 +15,7 @@ build/oyla/sayfa-%.js: oyla/sayfa.js \
                        lib/mina/*.d.js \
                        lib/node/*.d.js lib/node/ipfs.js \
                        lib/util/dom.js lib/util/çevir.js lib/util/base58.js
-	mkdir -p $(dir $@)
-	bun lib/kdc/kdc.js $^ -o $@ --loose --define \
+	bun lib/kdjs/kdjs.js $< -o $@ --loose --define \
 	    "TR\$$\$$module\$$lib\$$util\$$dom=$(Lang-$*)" \
 	    "KonumTR\$$\$$module\$$birim\$$dil\$$birim=$(oyla-tr)" \
 	    "KonumEN\$$\$$module\$$birim\$$dil\$$birim=$(oyla-en)"

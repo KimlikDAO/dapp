@@ -2,6 +2,8 @@
  * @externs
  */
 
+import eth from "/lib/ethereum/eth.d";
+
 /** @const {eth.UiProvider|undefined} */
 window.ethereum;
 
@@ -11,12 +13,18 @@ window.ethereum.isRabby;
 /** @const {boolean} */
 window.ethereum.isMetaMask;
 
-/** @const {eth.UiProvider|undefined} */
-window.avalanche;
+/**
+ * @interface
+ * @extends {eth.UiProvider}
+ */
+eth.CoreProvider = function () { }
 
 /**
- * @const {({
+ * @typedef {{
  *   name: string
- * }|undefined)}
+ * }}
  */
-window.avalanche.info;
+eth.CoreProvider.prototype.info;
+
+/** @const {eth.CoreProvider|undefined} */
+window.avalanche;

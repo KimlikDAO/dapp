@@ -25,7 +25,7 @@ build/al/sayfa-%.js: al/sayfa.js \
     lib/node/ipfs.js lib/node/network.js \
     lib/util/dom.js lib/util/çevir.js lib/util/base58.js \
     build/al/tanışma/birim.keymap
-	bun lib/kdc/kdc.js $^ -o $@ --loose --define \
+	bun lib/kdjs/kdjs.js $< -o $@ --loose --define \
 	    "TR\$$\$$module\$$lib\$$util\$$dom=$(Lang-$*)" \
 	    "KonumTR\$$\$$module\$$birim\$$dil\$$birim=$(al-tr)" \
 	    "KonumEN\$$\$$module\$$birim\$$dil\$$birim=$(al-en)"

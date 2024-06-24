@@ -4,7 +4,7 @@
  * @constructor
  * @extends {MessageEvent<*>}
  */
-function PowWorkerEvent() {};
+function PowWorkerEvent() { };
 
 /** @const {!ArrayBuffer} */
 PowWorkerEvent.prototype.data;

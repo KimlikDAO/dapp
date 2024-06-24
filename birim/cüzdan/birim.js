@@ -3,6 +3,7 @@ import { AuroConnection as AuroBağlantısı } from "./minaBağlantısı";
 import { AğBilgileri } from "/birim/ağlar/birim";
 import { ChainGroup, ChainGroups, ChainId } from "/lib/crosschain/chains";
 import { Provider } from "/lib/crosschain/provider";
+import "/lib/ethereum/ERC721Unlockable.d";
 import KPass from "/lib/ethereum/KPassLite";
 import ipfs from "/lib/node/ipfs";
 import dom from "/lib/util/dom";
@@ -399,7 +400,7 @@ const kur = () => {
 
   dom.adla("cuad").onclick = () => navigator.clipboard.writeText(/** @type {string} */(Adres));
   dom.adla("cuex").onclick = () => {
-    const adresEki = Ağ.startsWith("m:") ? "wallet" : "address";
+    const adresEki = Ağ.startsWith("mi") ? "wallet" : "address";
     const url = `//${AğBilgileri[Ağ].izleyici}/${adresEki}/${Adres}`;
     window.open(url, "_blank");
   }

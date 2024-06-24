@@ -1,3 +1,4 @@
+import "./discord.d";
 import { keccak256 } from "/lib/crypto/sha3";
 
 /**

@@ -3,6 +3,7 @@ import Kpass from "/birim/kpass/birim";
 import { ChainGroup, ChainId } from "/lib/crosschain/chains";
 import { keccak256Uint8 } from "/lib/crypto/sha3";
 import { combineMultiple } from "/lib/did/decryptedSections";
+import "/lib/node/error.d";
 import network from "/lib/node/network";
 import dom from "/lib/util/dom";
 import { base64, uint8ArrayeBase64ten } from "/lib/util/çevir";

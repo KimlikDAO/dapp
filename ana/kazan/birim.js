@@ -1,1 +1,0 @@
-import "/birim/blog/mina-berkeley/birim";

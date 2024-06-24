@@ -1,3 +1,4 @@
+import "./evmBağlantısı.d";
 import { AğBilgileri, AğBilgisi } from "/birim/ağlar/birim";
 import { ChainId } from "/lib/crosschain/chains";
 import { Provider } from "/lib/crosschain/provider";
@@ -102,7 +103,7 @@ const CoreBağlantısı = /** @type {!Provider} */({
    */
   initIfAvailable: () => {
     /** @const {boolean} */
-    const varMı = !!(window?.avalanche?.info?.name == "core");
+    const varMı = window.avalanche?.info?.name === 'core';
     if (varMı)
       /** @const {!eth.UiProvider} */
       CoreBağlantısı.provider = /** @type {!eth.UiProvider} */(window.avalanche);

@@ -1,4 +1,4 @@
-import { readFileSync } from "fs";
+import { readFileSync } from "node:fs";
 import { optimize } from "svgo";
 import svgoConfig from "../../lib/birimler/svgoInlineConfig";
 import { ChainId } from "../../lib/crosschain/chains";
@@ -9,7 +9,7 @@ import { Adlar } from "../ağlar/adlar";
  * @return {string}
  */
 const resimAdı = (ağAdı) => "birim/ağlar/" +
-  (ağAdı.startsWith("m:")
+  (ağAdı.startsWith("mi")
     ? "mina.png"
     : Adlar[ağAdı].replaceAll(" ", "").toLowerCase() + ".svg");
 
@@ -17,7 +17,7 @@ const resimAdı = (ağAdı) => "birim/ağlar/" +
 * @param {ChainId} ağAdı
 * @return {string}
 */
-const ağAdındanResim = (ağAdı) => ağAdı.startsWith("m:")
+const ağAdındanResim = (ağAdı) => ağAdı.startsWith("mi")
   ? `<img src="/birim/ağlar/mina.png" height=32 width=32>`
   : optimize(readFileSync(resimAdı(ağAdı)), svgoConfig).data;
 

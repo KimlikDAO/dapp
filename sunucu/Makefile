@@ -10,10 +10,8 @@ $(PAGE_TARGETS): %.sayfa: $(call compressions,build/%-en.html build/%-tr.html)
 
 build: $(PAGE_TARGETS)
 
-build/sunucu/prod.js: sunucu/prod.js \
-    lib/cloudflare/moduleWorker.d.js lib/cloudflare/types.d.js \
-    lib/cloudflare/pageWorker.d.js lib/cloudflare/pageWorker.js
-	bun lib/kdc/kdc.js $^ -o $@ --strict --nologs
+build/sunucu/prod.js: sunucu/prod.js
+	bun lib/kdjs/kdjs.js $< -o $@ --strict --nologs
 
 build/sitemap.txt:
 	mkdir -p $(dir $@)

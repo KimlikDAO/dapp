@@ -1,3 +1,4 @@
+import "/lib/did/decryptedSections.d";
 import dom from '/lib/util/dom';
 
 /** @const {!Set<string>} */
