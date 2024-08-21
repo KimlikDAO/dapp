@@ -89,12 +89,12 @@ const AğBilgileri = {
     tokenEki: dom.TR ? ["’den", "’e"] : [],
     rpcUrl: "mainnet.era.zksync.io"
   },
-  "mina:mainnet": {
+  "mina:testnet": {
     ad: "Mina",
-    izleyici: "minaexplorer.com",
+    izleyici: "devnet.minaexplorer.com",
     tokenKodu: "MINA",
     tokenEki: dom.TR ? ["’dan", "’ya"] : [],
-    rpcUrl: "api.minaexplorer.com"
+    rpcUrl: "devnet.api.minaexplorer.com"
   },
 }
 

@@ -8,7 +8,7 @@ const RemainingBar = dom.adla("blmb");
 /** @const {string} */
 const ZkAppAddress = "B62qmuv9skuJS8564ZptVbp9NmMR5a1wjMaFDEUFcmBciZuekQJZ4gD";
 
-fetch(`https://${AğBilgileri[ChainId.MinaDevnet].rpcUrl}/accounts/${ZkAppAddress}`)
+fetch(`https://${AğBilgileri[ChainId.MinaTestnet].rpcUrl}/accounts/${ZkAppAddress}`)
   .then((res) => res.json())
   .then((data) => {
     const kalan = +data["account"]["balance"]["total"] | 0;

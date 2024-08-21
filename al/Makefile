@@ -14,7 +14,7 @@ build/al/sayfa-%.js: al/sayfa.js \
     birim/telefon/birim.js \
     lib/api/jsonrpc.d.js lib/api/jsonrpc.js \
     lib/crosschain/*.js \
-    lib/crypto/poseidon.js \
+    lib/crypto/minaPoseidon.js \
     lib/crypto/sha3.js \
     lib/crypto/secp256k1.js lib/crypto/modular.js \
     lib/crypto/primes.js lib/crypto/wesolowski.js \

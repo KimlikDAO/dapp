@@ -15,7 +15,6 @@ let YerleştirSaati = 0;
 
 Telefon.nftGöster(true, true);
 
-
 /**
  * Kartları `Kart` değişkenine göre doğru konuma çeker.
  */

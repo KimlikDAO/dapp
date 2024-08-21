@@ -14,7 +14,7 @@ import {
 import { ChainId } from "/lib/crosschain/chains";
 import { Provider } from "/lib/crosschain/provider";
 import { Signer } from "/lib/crosschain/signer";
-import { fromUnlockableNFT } from "/lib/did/decryptedSections";
+import { fromUnlockableNFT } from "/lib/did/KPass";
 import KPass from "/lib/ethereum/KPass";
 import evm from "/lib/ethereum/evm";
 import dom from "/lib/util/dom";

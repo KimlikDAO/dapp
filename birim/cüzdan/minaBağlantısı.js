@@ -10,34 +10,37 @@ import { Provider } from "/lib/crosschain/provider";
  * @param {boolean=} onlyIfApproved
  * @return {!Promise<void>}
  */
-const connectWithProvider = (provider, chainId, chainChanged, addressChanged, onlyIfApproved) => onlyIfApproved
-  ? provider.getAccounts()
-    .then((addresses) => {
-      if (!addresses || !addresses.length) return Promise.reject();
-      provider.requestNetwork()
-        .then((/** @type {!mina.ChainInfoArgs} */ chainInfo) => {
-          chainChanged(/** @type {ChainId} */(chainInfo.networkID));
-          addressChanged(addresses);
+const connectWithProvider = (provider, chainId, chainChanged, addressChanged, onlyIfApproved) => {
+  console.log(chainId);
+  return onlyIfApproved
+    ? provider.getAccounts()
+      .then((addresses) => {
+        if (!addresses || !addresses.length) return Promise.reject();
+        provider.requestNetwork()
+          .then((/** @type {!mina.ChainInfoArgs} */ chainInfo) => {
+            chainChanged(/** @type {ChainId} */(chainInfo.networkID));
+            addressChanged(addresses);
+            provider.on("accountsChanged", addressChanged);
+            provider.on("chainChanged",
+              (/** @type {!mina.ChainInfoArgs} */ chainInfo) =>
+                chainChanged(/** @type {ChainId} */(chainInfo.networkID))
+            );
+          })
+      })
+    : provider.requestAccounts()
+      .then((addresses) => provider.switchChain(/** @type {!mina.SwitchChainArgs} */({
+        networkID: chainId
+      }))
+        .then(() => {
           provider.on("accountsChanged", addressChanged);
           provider.on("chainChanged",
             (/** @type {!mina.ChainInfoArgs} */ chainInfo) =>
               chainChanged(/** @type {ChainId} */(chainInfo.networkID))
           );
+          addressChanged(addresses);
         })
-    })
-  : provider.requestAccounts()
-    .then((addresses) => provider.switchChain(/** @type {!mina.SwitchChainArgs} */({
-      networkID: chainId
-    }))
-      .then(() => {
-        provider.on("accountsChanged", addressChanged);
-        provider.on("chainChanged",
-          (/** @type {!mina.ChainInfoArgs} */ chainInfo) =>
-            chainChanged(/** @type {ChainId} */(chainInfo.networkID))
-        );
-        addressChanged(addresses);
-      })
-    );
+      );
+}
 
 /**
  * @param {!mina.Provider} provider

@@ -48,7 +48,7 @@ build/ana/sayfa-%.css: \
     birim/başlık/birim.css \
     birim/blog/birim.css \
     birim/blog/eliptik-imza/birim.css \
-    birim/blog/mina-berkeley/birim.css \
+    birim/blog/eliptik-egriler/birim.css \
     birim/cüzdan/birim.css \
     birim/dil/birim.css \
     birim/kaydol/birim.css \

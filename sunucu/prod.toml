@@ -11,6 +11,7 @@ minify = false
 send_metrics = false
 node_compat = false
 logpush = false
+upload-source-maps = false
 
 rules = [{ type = "Text", globs = [], fallthrough = false }]
 

@@ -10,5 +10,5 @@ export const Adlar = {
   "0x144": "zkSync Era",
   "mina:mainnet": "Mina",
   "mina:berkeley": "Mina Berkeley",
-  "mina:devnet": "Mina Devnet"
+  "mina:testnet": "Mina Testnet"
 };

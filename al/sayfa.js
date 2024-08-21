@@ -9,9 +9,8 @@ import "/birim/dil/birim";
 import Kpass from "/birim/kpass/birim";
 import Telefon from "/birim/telefon/birim";
 import { ChainGroup } from "/lib/crosschain/chains";
-import { VerificationKeys, metadataAndSections, signPrompt } from "/lib/did/KPassData";
-import { toUnlockableNFT } from "/lib/did/decryptedSections";
-import { verifyProofs } from "/lib/did/decryptedSectionsVerifier";
+import { checkVerifiableIDs, toUnlockableNFT } from "/lib/did/KPass";
+import { VerificationKeys, metadataAndSections, signPrompt } from "/lib/did/KPassMetadata";
 import KPass from "/lib/ethereum/KPass";
 import ipfs from "/lib/node/ipfs";
 import network from "/lib/node/network";
@@ -39,7 +38,7 @@ const kpassYarat = (adres, açıkKPass) => {
   );
 
   /** @const {!Promise<!did.DecryptedSections>} */
-  const açıkKPassSözü = verifyProofs(açıkKPass, VerificationKeys);
+  const açıkKPassSözü = checkVerifiableIDs(açıkKPass, VerificationKeys);
 
   şifreleDüğmesi.onclick = () => {
     /** @const {!Promise<!eth.ERC721Unlockable>} */

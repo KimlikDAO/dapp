@@ -1,41 +1,12 @@
 import Cüzdan from "/birim/cüzdan/birim";
 import Kpass from "/birim/kpass/birim";
 import { ChainGroup, ChainId } from "/lib/crosschain/chains";
-import { keccak256Uint8 } from "/lib/crypto/sha3";
-import { combineMultiple } from "/lib/did/decryptedSections";
+import { commitDouble } from "/lib/did/commitment";
+import { combineMultiple } from "/lib/did/KPass";
 import "/lib/node/error.d";
 import network from "/lib/node/network";
 import dom from "/lib/util/dom";
 import { base64, uint8ArrayeBase64ten } from "/lib/util/çevir";
-
-/**
- * Verilen bir `hesap` için `rastgele` bitdizisi ile kriptografik taahhüt
- * oluşturur.
- *
- * @param {ChainGroup} ağÇeşidi
- * @param {string} adres cüzdan adresi.
- * @param {!Uint8Array} rastgele bitdizisi, 64 byte uzunluğunda.
- * @return {!Uint8Array} Kriptografik taahhüt, 64 byte uzunluğunda.
- */
-const taahhütOluştur = (ağÇeşidi, adres, rastgele) => {
-  switch (ağÇeşidi) {
-    case ChainGroup.EVM: {
-      /** @type {!Uint8Array} */
-      const eskiz = new Uint8Array(32 + 20);
-      for (let /** number */ i = 1; i <= 20; ++i)
-        eskiz[i + 31] = parseInt(adres.substring(2 * i, 2 * i + 2), 16);
-
-      eskiz.set(rastgele.subarray(0, 32));
-      /** @const {!Uint8Array} */
-      const taahhüt = new Uint8Array(keccak256Uint8(eskiz).buffer, 0, 64);
-      eskiz.set(rastgele.subarray(32, 64));
-      taahhüt.set(keccak256Uint8(eskiz), 32);
-      return taahhüt;
-    }
-    case ChainGroup.MINA:
-  }
-  return new Uint8Array(64); // TODO(KimlikDAO-bot)
-}
 
 /**
  * AçıkKPass alır ve `sonra`'ya aktarır.
@@ -68,7 +39,7 @@ const açıkKPassAlVe = (ağÇeşidi, adres, sonra) => {
   /** @const {!Promise<string>} */
   const taahhütPowSözü = new Promise((resolve) => {
     /** @const {!Uint8Array} */
-    const taahhüt = taahhütOluştur(ağÇeşidi, adres, nkoRastgele);
+    const taahhüt = commitDouble(ağÇeşidi, adres, nkoRastgele);
     /** @const {string} */
     const taahhütB64 = base64(taahhüt);
     /** @const {?string} */
@@ -146,7 +117,7 @@ const açıkKPassAlVe = (ağÇeşidi, adres, sonra) => {
     const istemciAn = Date.now() / 1000 | 0;
     /** @const {!Uint8Array} */
     const taahhüt = new Uint8Array(
-      taahhütOluştur(ağÇeşidi, adres, eDevletRastgele).buffer, 0, 72);
+      commitDouble(ağÇeşidi, adres, eDevletRastgele).buffer, 0, 72);
 
     // Şimdilik `edevlet/oauth2` için PoW gerektirmiyoruz.
     // Son 8 byte'ının kullanıcı EVM adresi bilgisi sızmaması için sıfırlayalım.
