@@ -2,7 +2,9 @@ import "./evmBağlantısı.d";
 import { AğBilgileri, AğBilgisi } from "/birim/ağlar/birim";
 import { ChainId } from "/lib/crosschain/chains";
 import { Provider } from "/lib/crosschain/provider";
-import { hex } from "/lib/util/çevir";
+import eth from "/lib/ethereum/eth.d";
+import evm from "/lib/ethereum/evm";
+import { hex, hexten } from "/lib/util/çevir";
 
 /**
  * @param {!eth.Provider} provider
@@ -81,7 +83,7 @@ const bağla = (provider, ağ, ağDeğişti, adresDeğişti, izinliyse) => provi
  * @param {string} metin
  * @param {string} adres
  * @param {boolean} hexeÇevir
- * @return {!Promise<string>}
+ * @return {!Promise<eth.CompactSignature>}
  */
 const imzala = (provider, metin, adres, hexeÇevir) => provider.request(
   /** @type {!eth.Request} */({
@@ -89,7 +91,8 @@ const imzala = (provider, metin, adres, hexeÇevir) => provider.request(
     params: [hexeÇevir
       ? "0x" + hex(new TextEncoder().encode(metin))
       : metin, adres]
-  }));
+  }
+  )).then((imza) => evm.compactSignature(imza));
 
 /**
  * @type {!Provider}
@@ -148,10 +151,21 @@ const CoreBağlantısı = /** @type {!Provider} */({
    *
    * @param {string} message
    * @param {string} address
-   * @return {!Promise<string>}
+   * @return {!Promise<eth.CompactSignature>}
    */
   signMessage: (message, address) =>
+    imzala(CoreBağlantısı.provider, message, address, true),
+
+  /**
+   * @override
+   *
+   * @param {string} message
+   * @param {string} address
+   * @return {!Promise<!ArrayBuffer>}
+   */
+  deriveSecret: (message, address) =>
     imzala(CoreBağlantısı.provider, message, address, true)
+      .then((sig) => crypto.subtle.digest("SHA-256", hexten(sig.slice(2))))
 });
 
 /** @const {!Provider} */
@@ -201,10 +215,21 @@ const MetaMaskBağlantısı = /** @type {!Provider} */({
    *
    * @param {string} message
    * @param {string} address
-   * @return {!Promise<string>}
+   * @return {!Promise<eth.CompactSignature>}
    */
   signMessage: (message, address) =>
+    imzala(MetaMaskBağlantısı.provider, message, address, false),
+
+  /**
+   * @override
+   *
+   * @param {string} message
+   * @param {string} address
+   * @return {!Promise<!ArrayBuffer>}
+   */
+  deriveSecret: (message, address) =>
     imzala(MetaMaskBağlantısı.provider, message, address, false)
+      .then((sig) => crypto.subtle.digest("SHA-256", hexten(sig.slice(2))))
 });
 
 /**
@@ -263,10 +288,21 @@ const RabbyBağlantısı = /** @type {!Provider} */({
    *
    * @param {string} message
    * @param {string} address
-   * @return {!Promise<string>}
+   * @return {!Promise<eth.CompactSignature>}
    */
   signMessage: (message, address) =>
+    imzala(RabbyBağlantısı.provider, message, address, false),
+
+  /**
+   * @override
+   *
+   * @param {string} message
+   * @param {string} address
+   * @return {!Promise<!ArrayBuffer>}
+   */
+  deriveSecret: (message, address) =>
     imzala(RabbyBağlantısı.provider, message, address, false)
+      .then((sig) => crypto.subtle.digest("SHA-256", hexten(sig.slice(2))))
 });
 
 export {

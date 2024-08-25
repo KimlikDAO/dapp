@@ -3,6 +3,9 @@
  * @externs
  */
 
+import eth from "/lib/ethereum/eth.d";
+import mina from "/lib/mina/mina.d";
+
 /**
  * @const
  */
@@ -22,8 +25,10 @@ discord.SignedID;
  *   discordID: !discord.SignedID,
  *   role: string,
  *   chainID: string,
- *   signature: string,
+ *   signerSignature: (eth.CompactSignature|mina.SignerSignature),
  *   lang: string
  * }}
  */
 discord.RoleRequest;
+
+export default discord;

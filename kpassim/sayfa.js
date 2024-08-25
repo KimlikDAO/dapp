@@ -2,6 +2,7 @@
  * @fileoverview İncele sayfası giriş noktası
  *
  */
+import "./discord.d";
 import { roleRequestChallenge } from "./discord.js";
 import Cüzdan from "/birim/cüzdan/birim";
 import "/birim/dil/birim";
@@ -13,10 +14,9 @@ import {
 } from "/kpassim/pencere/birim";
 import { ChainId } from "/lib/crosschain/chains";
 import { Provider } from "/lib/crosschain/provider";
-import { Signer } from "/lib/crosschain/signer";
+import { Signature, Signer } from "/lib/crosschain/signer";
 import { fromUnlockableNFT } from "/lib/did/KPass";
 import KPass from "/lib/ethereum/KPass";
-import evm from "/lib/ethereum/evm";
 import dom from "/lib/util/dom";
 
 /** @const {!HTMLAnchorElement} */
@@ -88,28 +88,25 @@ const discordRolüAl = () => {
     if (event.origin != "https://discord.kimlikdao.org") return;
     DiscordDüğmesiMetni ||= DiscordDüğmesi.innerText;
     DiscordDüğmesi.innerText = DiscordDüğmesiMetni + " ⏳";
-    /**
-     * @const
-     * @type {!Signer}
-     */
+    /** @const {!Signer} */
     const imzacı = Cüzdan.bağlantı();
     /** @const {ChainId} */
     const ağ = Cüzdan.ağ();
     /** @const {string} */
     const adres = /** @type {string} */(Cüzdan.adres());
-    /** @const {!discord.SignedID} */
-    const discordID = /** @type {!discord.SignedID} */(event.data);
+    /** @const {discord.SignedID} */
+    const discordID = /** @type {discord.SignedID} */(event.data);
     /** @const {string} */
     const role = "KPASS HOLDER";
     imzacı.signMessage(roleRequestChallenge(discordID, role, dom.TR), adres)
-      .then((signature) => fetch("//discord.kimlikdao.org", {
+      .then((/** @type {Signature} */ signerSignature) => fetch("//discord.kimlikdao.org", {
         method: "PUT",
         headers: { "content-type": "application/json" },
         body: JSON.stringify(/** @type {!discord.RoleRequest} */({
           discordID,
           role,
           chainID: ağ,
-          signature: evm.compactSignature(signature),
+          signerSignature,
           lang: dom.TR ? "tr" : "en"
         }))
       }))
@@ -121,13 +118,10 @@ const discordRolüAl = () => {
           dom.düğmeDurdur(DiscordDüğmesi);
       });
   };
-  const popup = window.open("//discord.com/api/oauth2/authorize?client_id=1068629633970487428"
+  dom.pencere("//discord.com/api/oauth2/authorize?client_id=1068629633970487428"
     + "&redirect_uri=https://discord.kimlikdao.org"
     + "&response_type=code"
-    + "&scope=identify", "_blank",
-    "menubar=no,toolbar=no,status=no,width=500,height=650," +
-    `left=${screen.width / 2 - 250},top=${screen.height / 2 - 325}`);
-  if (window.focus) popup.focus();
+    + "&scope=identify", 500, 650);
 }
 
 /**

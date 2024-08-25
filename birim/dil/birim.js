@@ -5,7 +5,7 @@ const KonumTR = "/?tr";
 /** @define {string} */
 const KonumEN = "/?en";
 
-/** @const {Element} */
+/** @const {!Element} */
 const DilButonu = dom.adla("dib");
 
 dom.menüYarat(DilButonu, dom.adla("did"));

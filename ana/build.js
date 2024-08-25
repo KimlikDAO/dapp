@@ -43,4 +43,4 @@ const css = (lang) => Promise.all([
   })
   .then((_) => `build/ana/sayfa-${lang}.css`);
 
-await css("en");
+await js("en");
