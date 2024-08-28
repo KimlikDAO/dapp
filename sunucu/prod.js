@@ -3,7 +3,7 @@ import { create } from "/lib/birimler/cloudflare/kvPageWorker";
 /** @define {string} */
 const DappUrl = "https://kimlikdao.org/";
 
-/** @const {!ModuleWorker} */
+/** @const {ModuleWorker} */
 const ProdWorker = create(DappUrl, {
   "?tr": "ana-tr.html",
   "?en": "ana-en.html",

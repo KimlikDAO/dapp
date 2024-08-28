@@ -6,10 +6,21 @@ import "/birim/dil/birim";
 import KPass from "/lib/ethereum/KPass";
 import dom from "/lib/util/dom";
 
+/** @const {!Element} */
+const KiminKutusu = dom.adla("ipssc");
+/** @const {!Element} */
+const BenDüğmesi = dom.adla("ipbtna");
+/** @const {!Element} */
+const BaşkasıDüğmesi = dom.adla("ipbtnb");
+/** @const {!Element} */
+const KimKutusu = dom.adla("ipiic");
+/** @const {!Element} */
+const AdresKutusu = dom.adla("iptac");
+
 Cüzdan.bağlantıDeğişince((bağlantı) =>
   KPass.setProvider(/** @type {!eth.Provider} */(bağlantı.provider)));
 
-dom.adla("ipbtnb").onclick = () => {
+BaşkasıDüğmesi.onclick = () => {
   revokeeAdımınıGöster();
   Cüzdan.ağDeğişince(revokeeAdımınıGöster);
 }
@@ -17,11 +28,11 @@ dom.adla("ipbtnb").onclick = () => {
 const revokeeAdımınıGöster = () => {
   /** @type {?Element} */
   let seçilmişAdres = null;
-  dom.adla("ipssc").classList.add("done");
-  dom.adla("ipbtna").classList.remove("act");
-  dom.adla("ipbtnb").classList.remove("act");
-  dom.adlaGizle("iptac");
-  dom.adlaGöster("ipiic");
+  KiminKutusu.classList.add("done");
+  BenDüğmesi.classList.remove("act");
+  BaşkasıDüğmesi.classList.remove("act");
+  dom.gizle(AdresKutusu);
+  dom.göster(KimKutusu);
 
   /** @const {!HTMLAnchorElement} */
   const onaylaDüğmesi = /** @type {!HTMLAnchorElement} */(dom.adla("ipiio"));
@@ -112,22 +123,22 @@ const revokeeAdımınıGöster = () => {
   }
 
   dom.adla("ipiir").onclick = () => {
-    dom.adla("ipssc").classList.remove("done");
-    dom.adlaGizle("ipiic");
-    dom.adla("ipbtna").classList.add("act");
-    dom.adla("ipbtnb").classList.add("act");
+    KiminKutusu.classList.remove("done");
+    dom.gizle(KimKutusu);
+    BenDüğmesi.classList.add("act");
+    BaşkasıDüğmesi.classList.add("act");
   }
 }
 
-dom.adla("ipbtna").onclick = () => {
-  dom.adla("ipssc").classList.add("done");
-  dom.adla("ipbtna").classList.remove("act");
-  dom.adla("ipbtnb").classList.remove("act");
-  dom.adlaGizle("ipiic");
-  dom.adlaGöster("iptac");
+BenDüğmesi.onclick = () => {
+  KiminKutusu.classList.add("done");
+  BenDüğmesi.classList.remove("act");
+  BaşkasıDüğmesi.classList.remove("act");
+  dom.gizle(KimKutusu);
+  dom.göster(AdresKutusu);
 
   dom.adla("ip1a").onclick = () => {
-    dom.adlaGizle("iptac");
+    dom.gizle(AdresKutusu);
     dom.adlaGöster("iptaic");
 
     dom.adla("ip1c").onclick = () => {
@@ -137,7 +148,7 @@ dom.adla("ipbtna").onclick = () => {
 
     dom.adla("ip1d").onclick = () => {
       dom.adlaGizle("iptaic");
-      dom.adlaGöster("iptac");
+      dom.göster(AdresKutusu);
     }
   }
 }

@@ -20,7 +20,7 @@ jobs:
           submodules: true
 
       - name: Bun kur
-        uses: oven-sh/setup-bun@v1
+        uses: oven-sh/setup-bun@v2
 
       - name: Araçları kur
         run: |
