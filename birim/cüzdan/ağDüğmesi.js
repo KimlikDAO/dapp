@@ -1,6 +1,6 @@
 import { readFileSync } from "node:fs";
 import { optimize } from "svgo";
-import svgoConfig from "../../lib/birimler/svgoInlineConfig";
+import svgoConfig from "../../lib/birimler/sayfa/svgoInlineConfig";
 import { ChainId } from "../../lib/crosschain/chains";
 import { Adlar } from "../ağlar/adlar";
 

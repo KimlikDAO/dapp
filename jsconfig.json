@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "jsx": "react-jsx",
-    "jsxImportSource": "@kimlikdao/lib/birimler/js",
+    "jsxImportSource": "@kimlikdao/lib/birimler/sayfa",
     "baseUrl": ".",
     "paths": {
       "/*": [

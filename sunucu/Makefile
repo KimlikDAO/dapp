@@ -23,12 +23,12 @@ build/sitemap: $(call compressions, build/sitemap.txt)
 
 .PHONY: build/sitemap
 
-dev: lib/birimler/devSunucu.js sunucu/dev.toml
+dev: lib/birimler/sunucu/devSunucu.js sunucu/dev.toml
 	bun $< --çalıştır sunucu/dev.toml
 
 🦜: kanarya
 
-kanarya: lib/birimler/kanaryaSunucu.js build sunucu/dev.toml
+kanarya: lib/birimler/sunucu/kanaryaSunucu.js build sunucu/dev.toml
 	bun $< --çalıştır sunucu/dev.toml
 
 cf-deployment: lib/cloudflare/uploader.js build \
