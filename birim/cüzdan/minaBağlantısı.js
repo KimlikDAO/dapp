@@ -1,5 +1,5 @@
 import "./minaBağlantısı.d";
-import { ChainId } from "/lib/crosschain/chains";
+import { ChainGroup, ChainId } from "/lib/crosschain/chains";
 import { Provider } from "/lib/crosschain/provider";
 import { Signature } from "/lib/mina/mina";
 
@@ -129,7 +129,15 @@ const AuroConnection = /** @type {!Provider} */({
       message
     }))
     .then((/** @type {mina.SignedData} */ signed) => crypto.subtle.digest(
-      "SHA-256", new TextEncoder().encode(signed.signature.field + signed.signature.scalar)))
+      "SHA-256", new TextEncoder().encode(signed.signature.field + signed.signature.scalar))),
+
+  /**
+   * @override
+   *
+   * @param {ChainId} chainId
+   * @return {boolean}
+   */
+  isChainSupported: (chainId) => chainId.startsWith(ChainGroup.MINA)
 });
 
 export { AuroConnection };

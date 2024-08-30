@@ -9,11 +9,12 @@ import ipfs from "/lib/node/ipfs";
 import dom from "/lib/util/dom";
 import { hexten } from "/lib/util/çevir";
 
-/** @define {string} */
-const VARSAYILAN_AĞ = "0xa4b1";
-
 /** @const {string} */
 const KIMLIKDAO_IPFS_URL = "//ipfs.kimlikdao.org";
+/** @define {string} */
+const DefaultChain = "0xa4b1";
+/** @define {string} */
+const Chains = "0x1,mina:testnet,0xa4b1,0x89,0xa86a,0x38";
 
 /**
  * @type {!Provider}
@@ -68,6 +69,13 @@ const BoşBağlantı = /** @type {!Provider} */({
    * @return {!Promise<string>}
    */
   signMessage: (message, address) => Promise.reject(),
+
+  /**
+   * @override
+   *
+   * @param {ChainId} _
+   */
+  isChainSupported: (_) => true
 });
 
 /**
@@ -79,6 +87,8 @@ const Bağlantılar = {
   "mm": MetaMaskBağlantısı,
   "au": AuroBağlantısı,
 };
+/** @const {!Set<ChainId>} */
+const Ağlar = new Set(/** @type {!Array<ChainId>} */(Chains.split(",")));
 
 /** @const {!Element} */
 const AdresButonu = dom.adla("cua");
@@ -105,7 +115,7 @@ let Bağlı = BoşBağlantı;
 /** @type {?string} */
 let Adres = null;
 /** @type {ChainId} */
-let Ağ = /** @type {ChainId} */(VARSAYILAN_AĞ);
+let Ağ = /** @type {ChainId} */(DefaultChain);
 /** @type {?string} */
 let KPassYokResmi;
 
@@ -146,7 +156,7 @@ const nihaiArabirimAdı = (hesap) => new Promise((_) => null);
  * @param {ChainId} yeniAğ harf dizisi olarak yeni ağ adı.
  */
 const ağDeğişti = (yeniAğ) => {
-  if (!(yeniAğ in AğBilgileri)) {
+  if (!Ağlar.has(yeniAğ)) {
     // Kullanıcı desteklemediğimiz bir ağa geçerse (uzantı cüzdanı
     // arabiriminden), en son seçili ağa geri geçme isteği yolluyoruz.
     ağSeçildi(Ağ);
@@ -277,9 +287,7 @@ const bağlantıDeğişince = (f) => BağlantıDeğişince.push(f);
  * @param {ChainId} ağ
  */
 const ağSeçildi = (ağ) => {
-  if (ağ.slice(0, 2) != Ağ.slice(0, 2))
-    koptu();
-
+  if (!Bağlı.isChainSupported(ağ)) koptu();
   Bağlı.switchChain(ağ);
 }
 
@@ -370,7 +378,7 @@ const aç = () => {
 
 const kur = () => {
   /** @const {Element} */
-  const seçiliAğ = dom.adla("cud" + VARSAYILAN_AĞ);
+  const seçiliAğ = dom.adla("cud" + DefaultChain);
   seçiliAğ.replaceChild(AğButonu.firstElementChild.cloneNode(true),
     seçiliAğ.firstElementChild);
   AdresButonu.onclick = AğButonu.onclick = aç;

@@ -16,16 +16,13 @@
     "acorn-walk": "^8.3.3",
     "astring": "^1.8.6",
     "csso-cli": "^4.0.2",
-    "express": "^4.19.2",
     "google-closure-compiler": "^20240317.0.0",
     "html-minifier": "^4.0.0",
     "htmlparser2": "^9.1.0",
     "svg-pathdata": "^7.0.0",
     "svgexport": "^0.4.2",
     "svgo": "^3.3.2",
-    "toml": "^3.0.0",
     "uglify-js": "^3.19.2",
-    "vite": "^5.4.2",
-    "wrangler": "^3.72.2"
+    "vite": "^5.4.2"
   }
 }

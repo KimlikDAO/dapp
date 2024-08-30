@@ -1,6 +1,6 @@
 import "./evmBağlantısı.d";
 import { AğBilgileri, AğBilgisi } from "/birim/ağlar/birim";
-import { ChainId } from "/lib/crosschain/chains";
+import { ChainGroup, ChainId } from "/lib/crosschain/chains";
 import { Provider } from "/lib/crosschain/provider";
 import eth from "/lib/ethereum/eth.d";
 import evm from "/lib/ethereum/evm";
@@ -43,6 +43,12 @@ const ağSeç = (provider, ağ) => provider.request(/** @type {!eth.Request} */(
  * @param {!eth.UiProvider} provider
  */
 const kopar = (provider) => provider.removeAllListeners();
+
+/**
+ * @param {ChainId} chainId
+ * @return {boolean}
+ */
+const isChainSupported = (chainId) => chainId.startsWith(ChainGroup.EVM);
 
 /**
  * @param {!eth.UiProvider} provider
@@ -165,7 +171,15 @@ const CoreBağlantısı = /** @type {!Provider} */({
    */
   deriveSecret: (message, address) =>
     imzala(CoreBağlantısı.provider, message, address, true)
-      .then((sig) => crypto.subtle.digest("SHA-256", hexten(sig.slice(2))))
+      .then((sig) => crypto.subtle.digest("SHA-256", hexten(sig.slice(2)))),
+
+  /**
+   * @override
+   *
+   * @param {ChainId} chain
+   * @return {boolean}
+   */
+  isChainSupported
 });
 
 /** @const {!Provider} */
@@ -229,7 +243,15 @@ const MetaMaskBağlantısı = /** @type {!Provider} */({
    */
   deriveSecret: (message, address) =>
     imzala(MetaMaskBağlantısı.provider, message, address, false)
-      .then((sig) => crypto.subtle.digest("SHA-256", hexten(sig.slice(2))))
+      .then((sig) => crypto.subtle.digest("SHA-256", hexten(sig.slice(2)))),
+
+  /**
+   * @override
+   *
+   * @param {ChainId} chain
+   * @return {boolean}
+   */
+  isChainSupported
 });
 
 /**
@@ -302,7 +324,15 @@ const RabbyBağlantısı = /** @type {!Provider} */({
    */
   deriveSecret: (message, address) =>
     imzala(RabbyBağlantısı.provider, message, address, false)
-      .then((sig) => crypto.subtle.digest("SHA-256", hexten(sig.slice(2))))
+      .then((sig) => crypto.subtle.digest("SHA-256", hexten(sig.slice(2)))),
+
+  /**
+   * @override
+   *
+   * @param {ChainId} chain
+   * @return {boolean}
+   */
+  isChainSupported
 });
 
 export {

@@ -1,9 +1,9 @@
 import dom from "/lib/util/dom";
 
 /** @define {string} */
-const KonumTR = "/?tr";
+const KonumTR = "?tr";
 /** @define {string} */
-const KonumEN = "/?en";
+const KonumEN = "?en";
 
 /** @const {!Element} */
 const DilButonu = dom.adla("dib");
@@ -12,8 +12,10 @@ dom.menüYarat(DilButonu, dom.adla("did"));
 dom.adla("did").onclick = (/** @type {Event} */ event) => {
   /** @const {!Element} */
   const targetElem = /** @type {!Element} */(event.target);
-  /** @const {Element} */
-  const li = targetElem.nodeName == "LI" ? targetElem : targetElem.parentElement;
+  /** @const {!Element} */
+  const li = targetElem.nodeName == "LI"
+    ? targetElem
+    : /** @type {!Element} */(targetElem.parentElement);
 
   /** @const {string} */
   const diğerDil = dom.TR ? "en" : "tr";
