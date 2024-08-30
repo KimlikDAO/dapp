@@ -2,14 +2,16 @@ import { Adlar } from "../ağlar/adlar";
 import { resimAdı } from "./ağDüğmesi";
 
 const üret = (değerler) => {
-  if (!("chains" in değerler)) return "";
+  if (!("Chains" in değerler)) return "";
   /** @const {!Array<string>} */
-  const chains = değerler.chains.split("|");
+  const chains = değerler.Chains.split("|");
+  /** @const {ChainId} */
+  const defaultChain = değerler.DefaultChain;
 
   return chains.map((chain) => {
     const parts = chain.split(",");
     /** @const {boolean} */
-    const selected = parts.length > 3;
+    const selected = parts[0] == defaultChain;
     return `\n<li id="cud${parts[0]}"${selected ? ' class=sel' : ""}>` +
       (selected
         ? "<span></span>"

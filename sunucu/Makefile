@@ -23,8 +23,8 @@ build/sitemap: $(call compressions, build/sitemap.txt)
 
 .PHONY: build/sitemap
 
-dev: lib/birimler/sunucu/devSunucu.js sunucu/dev.toml
-	bun $< --çalıştır sunucu/dev.toml
+dev: lib/birimler/sunucu/dev.js
+	bun $<
 
 🦜: kanarya
 

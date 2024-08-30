@@ -76,6 +76,6 @@
   <use href="#tcks4" x="342.125" y="203.375" fill="#84f0f0" />
 
   <g transform="translate(90,20)" filter="url(#bleie)">
-    <image href="/birim/kpass/kapak.svg" clip-path="url(#bleia)" height="250" width="250" />
+    <image href="/birim/kpass/kapak.m.svg" clip-path="url(#bleia)" height="250" width="250" />
   </g>
 </svg>
