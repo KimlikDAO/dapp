@@ -1,0 +1,21 @@
+dizin: "ana"
+sayfalar:
+  - tr: al
+    en: mint
+
+  - tr: kpassim
+    en: kpass
+
+  - tr: oyla
+    en: vote
+
+  - tr: iptal
+    en: revoke
+
+worker:
+  entry: sunucu/prod.js
+  name: dapp
+  domain_binding: kimlikdao.org
+  kvs:
+    - name: KV
+      namespace_id: 836c46196848459ba8b3348e383bddf2

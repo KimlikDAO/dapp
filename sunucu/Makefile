@@ -28,8 +28,8 @@ dev: lib/birimler/sunucu/dev.js
 
 🦜: kanarya
 
-kanarya: lib/birimler/sunucu/kanaryaSunucu.js build sunucu/dev.toml
-	bun $< --çalıştır sunucu/dev.toml
+kanarya: lib/birimler/sunucu/canary.js build
+	bun $<
 
 cf-deployment: lib/cloudflare/uploader.js build \
     build/sunucu/prod.js \
