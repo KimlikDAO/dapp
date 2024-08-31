@@ -25,7 +25,7 @@ jobs:
       - name: Araçları kur
         run: |
           bun i
-          brew install pngcrush brotli zopfli woff2 webp
+          brew install pngcrush brotli zopfli woff2 webp librsvg
           pip install fonttools
 
       - name: ana sayfa

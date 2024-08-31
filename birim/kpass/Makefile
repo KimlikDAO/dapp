@@ -12,7 +12,7 @@ build/TCKT.svg: build/birim/kpass/kapak.m.svg
 
 build/TCKT.png: build/TCKT.svg
 	mkdir -p $(dir $@)
-	bun svgexport $^ $@ 400:400
+	rsvg-convert -w 400 -h 400 -o $@ $^
 	pngcrush -brute -ow $@
 
 build/TCKT.webp: build/TCKT.png
