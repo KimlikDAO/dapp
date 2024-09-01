@@ -47,7 +47,3 @@ jobs:
       - name: oyla sayfası
         run: |
           make oyla.sayfa
-
-      - name: sunucu
-        run: |
-          make build/sunucu/prod.js

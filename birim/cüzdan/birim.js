@@ -14,7 +14,7 @@ const KIMLIKDAO_IPFS_URL = "//ipfs.kimlikdao.org";
 /** @define {string} */
 const DefaultChain = "0xa4b1";
 /** @define {string} */
-const Chains = "0x1,mina:testnet,0xa4b1,0x89,0xa86a,0x38";
+const Chains = "0x1|mina:mainnet|0xa4b1|0x89|0xa86a|0x38";
 
 /**
  * @type {!Provider}
@@ -88,7 +88,7 @@ const Bağlantılar = {
   "au": AuroBağlantısı,
 };
 /** @const {!Set<ChainId>} */
-const Ağlar = new Set(/** @type {!Array<ChainId>} */(Chains.split(",")));
+const Ağlar = new Set(/** @type {!Array<ChainId>} */(Chains.split("|")));
 
 /** @const {!Element} */
 const AdresButonu = dom.adla("cua");
@@ -159,6 +159,9 @@ const ağDeğişti = (yeniAğ) => {
   if (!Ağlar.has(yeniAğ)) {
     // Kullanıcı desteklemediğimiz bir ağa geçerse (uzantı cüzdanı
     // arabiriminden), en son seçili ağa geri geçme isteği yolluyoruz.
+    // Eğer cüzdanı cookie'den bağlamışsak, son seçili ağ bulunduğumuz
+    // sayfada desteklenmiyor olabilir; bu durumda `ağSeçildi()` cüzdanın
+    // kopmasını sağlıyor.
     ağSeçildi(Ağ);
   } else if (yeniAğ != Ağ) {
     dom.adla("cud" + Ağ).classList.remove("sel");
