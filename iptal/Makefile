@@ -34,10 +34,20 @@ build/iptal/sayfa-%.keymap: build/ana/sayfa-%.keymap \
 	bun lib/birimler/hasher.js $@ build/iptal/sayfa-$*.js
 	cat $< >> $@
 
-build/iptal-%.html: iptal/sayfa.html \
-                    build/iptal/sayfa-%.keymap \
-                    build/iptal/sayfa.keymap \
-                    birim/başlık.birim \
-                    birim/favicon.birim \
-                    birim/lato-%.birim
-	bun lib/birimler/işleyici.js $< $*
+build/iptal.html: iptal/sayfa.html \
+    build/iptal/sayfa-tr.keymap \
+    build/iptal/sayfa.keymap \
+    birim/başlık.birim \
+    birim/favicon.birim \
+    birim/lato-tr.birim
+	bun lib/birimler/işleyici.js $< tr
+
+build/revoke.html: iptal/sayfa.html \
+    build/iptal/sayfa-en.keymap \
+    build/iptal/sayfa.keymap \
+    birim/başlık.birim \
+    birim/favicon.birim \
+    birim/lato-en.birim
+	bun lib/birimler/işleyici.js $< en
+
+iptal.sayfa: $(call compressions,build/iptal.html build/revoke.html)

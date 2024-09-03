@@ -45,17 +45,34 @@ build/al/sayfa-%.keymap: build/ana/sayfa-%.keymap \
 	bun lib/birimler/hasher.js $@ build/al/sayfa-$*.js
 	cat $< >> $@
 
-build/al-%.html: al/sayfa.html \
-                 al/imeceİptal/birim.html \
-                 al/ödeme.birim \
-                 al/tanışma.birim \
-                 build/al/sayfa-%.keymap \
-                 build/al/sayfa.keymap \
-                 build/al/paste.isvg \
-                 build/al/tanışma/external-link.isvg \
-                 birim/başlık.birim \
-                 birim/favicon.birim \
-                 birim/kpass.birim \
-                 birim/lato-%.birim \
-                 birim/telefon.birim
-	bun lib/birimler/işleyici.js $< $*
+build/al.html: al/sayfa.html \
+               al/imeceİptal/birim.html \
+               al/ödeme.birim \
+               al/tanışma.birim \
+               build/al/sayfa-tr.keymap \
+               build/al/sayfa.keymap \
+               build/al/paste.isvg \
+               build/al/tanışma/external-link.isvg \
+               birim/başlık.birim \
+               birim/favicon.birim \
+               birim/kpass.birim \
+               birim/lato-tr.birim \
+               birim/telefon.birim
+	bun lib/birimler/işleyici.js $< tr
+
+build/mint.html: al/sayfa.html \
+               al/imeceİptal/birim.html \
+               al/ödeme.birim \
+               al/tanışma.birim \
+               build/al/sayfa-en.keymap \
+               build/al/sayfa.keymap \
+               build/al/paste.isvg \
+               build/al/tanışma/external-link.isvg \
+               birim/başlık.birim \
+               birim/favicon.birim \
+               birim/kpass.birim \
+               birim/lato-tr.birim \
+               birim/telefon.birim
+	bun lib/birimler/işleyici.js $< en
+
+al.sayfa: $(call compressions,build/al.html build/mint.html)

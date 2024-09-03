@@ -4,7 +4,7 @@ BIRIM_KPASS_ASSETS := build/TCKT.svg build/TCKT.png build/TCKT.webp \
 build/birim/kpass/birim.keymap: $(call compressions, build/TCKT.svg) \
     $(call compressions, build/KPASS.svg)
 	mkdir -p $(dir $@)
-	echo "/birim/kpass/kapak.m.svg -> TCKT.svg" > $@
+	echo "/birim/kpass/kapak.m.svg -> KPASS.svg" > $@
 
 build/TCKT.svg: build/birim/kpass/kapak.m.svg
 	mkdir -p $(dir $@)

@@ -34,12 +34,24 @@ build/kpassim/sayfa-%.keymap: build/ana/sayfa-%.keymap \
 	bun lib/birimler/hasher.js $@ build/kpassim/sayfa-$*.js
 	cat $< >> $@
 
-build/kpassim-%.html: kpassim/sayfa.html \
-                    build/kpassim/sayfa-%.keymap \
-                    build/kpassim/sayfa.keymap \
-                    birim/başlık.birim \
-                    birim/favicon.birim \
-                    birim/lato-%.birim \
-                    birim/kpass.birim \
-                    build/al/paste.isvg
-	bun lib/birimler/işleyici.js $< $*
+build/kpassim.html: kpassim/sayfa.html \
+    build/kpassim/sayfa-tr.keymap \
+    build/kpassim/sayfa.keymap \
+    birim/başlık.birim \
+    birim/favicon.birim \
+    birim/lato-tr.birim \
+    birim/kpass.birim \
+    build/al/paste.isvg
+	bun lib/birimler/işleyici.js $< tr
+
+build/kpass.html: kpassim/sayfa.html \
+    build/kpassim/sayfa-en.keymap \
+    build/kpassim/sayfa.keymap \
+    birim/başlık.birim \
+    birim/favicon.birim \
+    birim/lato-en.birim \
+    birim/kpass.birim \
+    build/al/paste.isvg
+	bun lib/birimler/işleyici.js $< en
+
+kpassim.sayfa: $(call compressions,build/kpassim.html build/kpass.html)

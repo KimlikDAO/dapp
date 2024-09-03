@@ -19,13 +19,7 @@ PAGES := al ana kpassim iptal oyla
 
 NAMED_ASSETS := sitemap.txt TCKT.svg TCKT.png TCKT.webp KPASS.svg KPASS.png KPASS.webp
 
-PAGE_TARGETS := $(addsuffix .sayfa, $(PAGES))
-
-$(PAGE_TARGETS): %.sayfa: $(call compressions,build/%-en.html build/%-tr.html)
-
-.PHONY: $(PAGE_TARGETS)
-
-build: $(PAGE_TARGETS)
+build: ana.sayfa al.sayfa kpassim.sayfa iptal.sayfa oyla.sayfa
 
 dev: lib/birimler/sunucu/dev.js
 	bun $<

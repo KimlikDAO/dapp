@@ -66,18 +66,36 @@ build/ana/sayfa-%.keymap: lib/birimler/hasher.js \
 	bun $< $@ build/ana/sayfa-$*.js build/ana/sayfa-$*.css
 	sed -i.bak 's#/ana/sayfa.css#/birim/ortak.css#' $@
 
-build/ana-%.html: ana/sayfa.html \
-                  build/ana/sayfa-%.keymap \
-                  ana/ağ.birim \
-                  ana/hero.birim \
-                  ana/kazan.birim \
-                  ana/raporlar.birim \
-                  ana/sahipler.birim \
-                  ana/sayılar.birim \
-                  birim/başlık.birim \
-                  birim/favicon.birim \
-                  birim/kpass.birim \
-                  birim/lato-%.birim \
-                  birim/telefon.birim \
-                  build/ana/ok.isvg
-	bun lib/birimler/işleyici.js $< $*
+build/en.html: ana/sayfa.html \
+    build/ana/sayfa-en.keymap \
+    ana/ağ.birim \
+    ana/hero.birim \
+    ana/kazan.birim \
+    ana/raporlar.birim \
+    ana/sahipler.birim \
+    ana/sayılar.birim \
+    birim/başlık.birim \
+    birim/favicon.birim \
+    birim/kpass.birim \
+    birim/lato-en.birim \
+    birim/telefon.birim \
+    build/ana/ok.isvg
+	bun lib/birimler/işleyici.js $< en
+
+build/tr.html: ana/sayfa.html \
+    build/ana/sayfa-en.keymap \
+    ana/ağ.birim \
+    ana/hero.birim \
+    ana/kazan.birim \
+    ana/raporlar.birim \
+    ana/sahipler.birim \
+    ana/sayılar.birim \
+    birim/başlık.birim \
+    birim/favicon.birim \
+    birim/kpass.birim \
+    birim/lato-tr.birim \
+    birim/telefon.birim \
+    build/ana/ok.isvg
+	bun lib/birimler/işleyici.js $< tr
+
+ana.sayfa: $(call compressions,build/en.html build/tr.html)

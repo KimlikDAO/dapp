@@ -34,11 +34,22 @@ build/oyla/sayfa-%.keymap: build/ana/sayfa-%.keymap \
 	bun lib/birimler/hasher.js $@ build/oyla/sayfa-$*.js
 	cat $< >> $@
 
-build/oyla-%.html: oyla/sayfa.html \
-                   build/oyla/sayfa.keymap \
-                   build/oyla/sayfa-%.keymap \
-                   birim/başlık.birim \
-                   birim/favicon.birim \
-                   birim/lato-%.birim \
-                   build/oyla/dropdownok.isvg
-	bun lib/birimler/işleyici.js $< $*
+build/oyla.html: oyla/sayfa.html \
+    build/oyla/sayfa.keymap \
+    build/oyla/sayfa-tr.keymap \
+    birim/başlık.birim \
+    birim/favicon.birim \
+    birim/lato-tr.birim \
+    build/oyla/dropdownok.isvg
+	bun lib/birimler/işleyici.js $< tr
+
+build/vote.html: oyla/sayfa.html \
+    build/oyla/sayfa.keymap \
+    build/oyla/sayfa-en.keymap \
+    birim/başlık.birim \
+    birim/favicon.birim \
+    birim/lato-en.birim \
+    build/oyla/dropdownok.isvg
+	bun lib/birimler/işleyici.js $< en
+
+oyla.sayfa: $(call compressions,build/oyla.html build/vote.html)
