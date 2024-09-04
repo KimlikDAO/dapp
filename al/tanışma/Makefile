@@ -6,9 +6,9 @@ AL_TANIŞMA_REQUEST_SVG := $(filter-out $(AL_TANIŞMA_INLINE_SVG), $(notdir $(wi
 
 AL_TANIŞMA_REQUEST_SVG_OUT := $(addprefix build/al/tanışma/, $(AL_TANIŞMA_REQUEST_SVG))
 
-build/al/tanışma/birim.keymap: $(call compressions, $(AL_TANIŞMA_REQUEST_SVG_OUT) build/al/tanışma/powWorker.js)
+build/al/tanışma/birim.keymap: $(call compressions, $(AL_TANIŞMA_REQUEST_SVG_OUT))
 	mkdir -p $(dir $@)
-	bun lib/birimler/hasher.js $@ $(AL_TANIŞMA_REQUEST_SVG_OUT) build/al/tanışma/powWorker.js
+	bun lib/birimler/hasher.js $@ $(AL_TANIŞMA_REQUEST_SVG_OUT)
 
 al/tanışma.birim: al/tanışma/birim.html $(AL_TANIŞMA_INLINE_SVG_OUT) \
     build/al/tanışma/birim.keymap

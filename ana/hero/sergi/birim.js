@@ -54,7 +54,7 @@ for (let /** number */ i = 0; i < Boncuklar.childElementCount; ++i) {
 
 const sergiSaatiKur = () => {
   if (SergiSaati) clearInterval(SergiSaati);
-  SergiSaati = setInterval(() => kartDeğiştir((Kart + 1) % 4), 8000);
+  SergiSaati = setInterval(() => kartDeğiştir((Kart + 1) % 4), 12000);
 }
 
 Cüzdan.adresDeğişince((adres) => Telefon.adresGir(adres));

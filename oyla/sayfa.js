@@ -2,6 +2,7 @@
  * @fileoverview Oyla sayfası giriş noktası
  * @author KimlikDAO
  */
+import "/birim/cüzdan/birim";
 import "/birim/dil/birim";
 import dom from "/lib/util/dom";
 

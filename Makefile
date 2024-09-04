@@ -13,7 +13,7 @@ include oyla/Makefile
 clean:
 	rm -rf build
 
-.PHONY: clean
+.PHONY: clean build
 
 PAGES := al ana kpassim iptal oyla
 
