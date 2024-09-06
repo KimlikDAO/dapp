@@ -29,21 +29,4 @@ jobs:
           pip install fonttools
 
       - name: ana sayfa
-        run: |
-          make ana.sayfa
-
-      - name: al sayfası
-        run: |
-          make al.sayfa
-
-      - name: iptal sayfası
-        run: |
-          make iptal.sayfa
-
-      - name: kpassim sayfası
-        run: |
-          make kpassim.sayfa
-
-      - name: oyla sayfası
-        run: |
-          make oyla.sayfa
+        run: bun run build

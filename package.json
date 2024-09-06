@@ -8,6 +8,7 @@
   "type": "module",
   "scripts": {
     "postinstall": "mkdir -p ./node_modules/@kimlikdao && ln -sfn ../../lib ./node_modules/@kimlikdao/lib",
+    "build": "bun lib/birimler/builder.js",
     "canary": "bun lib/birimler/sunucu/canary.js",
     "dev": "bun lib/birimler/sunucu/dev.js"
   },
@@ -23,6 +24,6 @@
     "svg-pathdata": "^7.1.0",
     "svgo": "^3.3.2",
     "uglify-js": "^3.19.3",
-    "vite": "^5.4.2"
+    "vite": "^5.4.3"
   }
 }

@@ -14,14 +14,14 @@ const Sahipler = () => (
       <div class="ansag">
         <h2 data-en="KPass holders&lt;br>by chain.">Ağlara göre<br />KPass sahipleri.</h2>
         <span class="sat anac">
-          <span data-phantom data-en="Join over ">6 farklı zincirde </span>
+          <i18n data-en="Join over ">6 farklı zincirde </i18n>
           {Object.values(Sayılar).reduce((x, y) => x + y)}
-          <span data-phantom data-en=" happy KPass holders across 6 different chains."> üzerinde
-            mutlu KPass kullanıcısı arasına katılın.</span>
+          <i18n data-en=" happy KPass holders across 6 different chains."> üzerinde
+            mutlu KPass kullanıcısı arasına katılın.</i18n>
         </span>
-        <div id="saz"><a data-en-href="/mint" id="sal" href="/al" class="act btn"><span data-phantom
+        <div id="saz"><a en:href="/mint" id="sal" href="/al" class="act btn"><i18n
           data-en="Become a KPass holder">Sen de KPass
-          sahibi ol</span> <img src="/ana/ok.svg" data-inline /></a>
+          sahibi ol</i18n> <img src="/ana/ok.svg" data-inline /></a>
         </div>
       </div>
       <div id="sak">
