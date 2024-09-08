@@ -1,4 +1,10 @@
-import { AdresButonu, AğButonu, DebankLinki, Menü } from "./birim.jsx";
+import {
+  AdresButonu,
+  AdresMetni,
+  AğButonu,
+  DebankLinki,
+  Menü
+} from "./birim.jsx";
 import { CoreBağlantısı, MetaMaskBağlantısı, RabbyBağlantısı } from "./evmBağlantısı";
 import { AuroConnection as AuroBağlantısı } from "./minaBağlantısı";
 import { AğBilgileri } from "/birim/ağlar/birim";
@@ -231,7 +237,7 @@ const adresDeğişti = (adresler) => {
     /** @const {?string} */
     const eskiAdres = Adres;
     Adres = adresler[0];
-    dom.adla("cuad").firstElementChild.innerText =
+    AdresMetni.firstElementChild.innerText =
       AdresButonu.innerText = hızlıArabirimAdı(Adres);
 
     nihaiArabirimAdı(Adres).then((ad) => {
@@ -401,7 +407,7 @@ const kur = () => {
     window.location.href = "//kimlikdao.org" + (dom.TR ? "/iptal" : "/revoke");
   düğmeler[5].onclick = () => koptu();
 
-  dom.adla("cuad").onclick = () => navigator.clipboard.writeText(/** @type {string} */(Adres));
+  AdresMetni.onclick = () => navigator.clipboard.writeText(/** @type {string} */(Adres));
   dom.adla("cuex").onclick = () => {
     const adresEki = Ağ.startsWith("mi") ? "wallet" : "address";
     const url = `//${AğBilgileri[Ağ].izleyici}/${adresEki}/${Adres}`;
