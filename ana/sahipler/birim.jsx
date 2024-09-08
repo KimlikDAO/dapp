@@ -1,13 +1,31 @@
-/** @const {!Object<string, number>} */
-const Sayılar = {
-  "polygon": 2,
-  "eth": 13,
-  "avax": 57,
-  "bnb": 5,
-  "arb": 8,
-  "mina": 130,
+import { AğBilgileri, ağResmi } from "/birim/ağlar/birim";
+import { ChainId } from "/lib/crosschain/chains";
+
+/**
+ * @const {!Object<ChainId, {
+ *   ek: string,
+ *   holder: number
+ * }>}
+ */
+const Tablo = {
+  [ChainId.x1]: { ad: "ETHEREUM", ek: "’DA", holder: 13 },
+  [ChainId.xa86a]: { ad: "AVALANCHE", ek: "’TA", holder: 57 },
+  [ChainId.x38]: { ad: "BNB CHAIN", ek: "’DE", holder: 5 },
+  [ChainId.xa4b1]: { ad: "ARBITRUM", ek: "’DA", holder: 8 },
+  [ChainId.MinaMainnet]: { ad: "MINA", ek: "’DA", holder: 130 },
+  [ChainId.x89]: { ad: "POLYGON", ek: "’DA", holder: 2 },
 };
 
+const Balon = ({ chainId }) => (
+  <div class={`sac ${AğBilgileri[chainId].tokenKodu.toLowerCase()}`}>
+    <img src={ağResmi(chainId)} height={40} width={40} />
+    <div>
+      <div class="sau">{Tablo[chainId].holder}</div>
+      <span class="saa" data-en={`HOLDERS ON ${Tablo[chainId].ad}`}>{
+        AğBilgileri[chainId].ad.toUpperCase() + Tablo[chainId].ek} KPASS</span>
+    </div>
+  </div>
+)
 const Sahipler = () => (
   <div id="sa">
     <div id="sai">
@@ -15,7 +33,7 @@ const Sahipler = () => (
         <h2 data-en="KPass holders&lt;br>by chain.">Ağlara göre<br />KPass sahipleri.</h2>
         <span class="sat anac">
           <i18n data-en="Join over ">6 farklı zincirde </i18n>
-          {Object.values(Sayılar).reduce((x, y) => x + y)}
+          {Object.values(Tablo).reduce((sum, x) => sum + x.holder, 0)}
           <i18n data-en=" happy KPass holders across 6 different chains."> üzerinde
             mutlu KPass kullanıcısı arasına katılın.</i18n>
         </span>
@@ -25,48 +43,7 @@ const Sahipler = () => (
         </div>
       </div>
       <div id="sak">
-        <div class="sac eth">
-          <img src="/birim/ağlar/ethereum.svg" height="40" width="40" />
-          <div>
-            <div class="sau">{Sayılar["eth"]}</div>
-            <span class="saa" data-en="HOLDERS ON ETHEREUM">ETHEREUM’DA KPASS</span>
-          </div>
-        </div>
-        <div class="sac avax">
-          <img src="/birim/ağlar/avalanche.svg" height="40" width="40" />
-          <div>
-            <div class="sau">{Sayılar["avax"]}</div>
-            <span class="saa" data-en="HOLDERS ON AVALANCHE">AVALANCHE’TA KPASS</span>
-          </div>
-        </div>
-        <div class="sac bnb">
-          <img src="/birim/ağlar/bnbchain.svg" height="40" width="40" />
-          <div>
-            <div class="sau">{Sayılar["bnb"]}</div>
-            <span class="saa" data-en="HOLDERS ON BNB CHAIN">BNB CHAIN’DE KPASS</span>
-          </div>
-        </div>
-        <div class="sac arb">
-          <img src="/birim/ağlar/arbitrumone.svg" height="40" width="40" />
-          <div>
-            <div class="sau">{Sayılar["arb"]}</div>
-            <span class="saa" data-en="HOLDERS ON ARBITRUM">ARBITRUM’DA KPASS</span>
-          </div>
-        </div>
-        <div class="sac mina">
-          <img src="/birim/ağlar/mina.png" height="40" width="40" />
-          <div>
-            <div class="sau">{Sayılar["mina"]}</div>
-            <span class="saa" data-en="HOLDERS ON MINA">MINA’DA KPASS</span>
-          </div>
-        </div>
-        <div class="sac polygon">
-          <img src="/birim/ağlar/polygon.svg" height="40" width="40" />
-          <div>
-            <div class="sau">{Sayılar["polygon"]}</div>
-            <span class="saa" data-en="HOLDERS ON POLYGON">POLYGON’DA KPASS</span>
-          </div>
-        </div>
+        {Object.keys(Tablo).map((chainId) => <Balon chainId={chainId} />)}
       </div>
     </div>
   </div>

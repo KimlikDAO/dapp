@@ -71,7 +71,16 @@ const AğBilgileri = {
   },
 }
 
+/**
+ * @param {ChainId} ağAdı
+ * @return {string} url
+ */
+const ağResmi = (ağAdı) => "birim/ağlar/" + (ağAdı.startsWith("mi")
+  ? "mina.png"
+  : AğBilgileri[ağAdı].ad.replaceAll(" ", "").toLowerCase() + ".svg");
+
 export {
   AğBilgileri,
-  AğBilgisi
+  AğBilgisi,
+  ağResmi
 };

@@ -1,4 +1,4 @@
-import { AğBilgileri } from "../ağlar/birim";
+import { AğBilgileri, ağResmi } from "../ağlar/birim";
 import { ChainId } from "/lib/crosschain/chains";
 import dom from "/lib/util/dom";
 
@@ -12,14 +12,6 @@ export const AğButonu = dom.button("cuc");
 export const DebankLinki = dom.span("cude");
 /** @const {!HTMLDivElement} */
 export const Menü = dom.div("cub");
-
-/**
- * @param {ChainId} ağAdı
- * @return {string} url
- */
-const ağResmi = (ağAdı) => "birim/ağlar/" + (ağAdı.startsWith("mi")
-  ? "mina.png"
-  : AğBilgileri[ağAdı].ad.replaceAll(" ", "").toLowerCase() + ".svg");
 
 /**
  * @param {string} ad
