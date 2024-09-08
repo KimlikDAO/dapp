@@ -17,7 +17,7 @@ const Tablo = {
 };
 
 const Balon = ({ chainId }) => (
-  <div class={`sac ${AğBilgileri[chainId].tokenKodu.toLowerCase()}`}>
+  <div class={`sac ${chainId == ChainId.MinaMainnet ? "mina" : chainId.slice(1)}`}>
     <img src={ağResmi(chainId)} height={40} width={40} />
     <div>
       <div class="sau">{Tablo[chainId].holder}</div>

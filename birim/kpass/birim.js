@@ -1,3 +1,4 @@
+import { Kartlar, Kök, SağDüğme, SolDüğme } from "./birim.jsx";
 import "/lib/did/section.d";
 import dom from '/lib/util/dom';
 
@@ -9,14 +10,6 @@ const Gösterme = new Set([
   "secp256k1",
   "signatureTs",
 ]);
-/** @const {!Element} */
-const Kartlar = dom.adla("tcc");
-/** @const {!Element} */
-const Kök = dom.adla("tc");
-/** @const {!Element} */
-const SolDüğme = dom.adla("tcso");
-/** @const {!Element} */
-const SağDüğme = dom.adla("tcsa");
 
 /** @type {number} */
 let Kart = 0;
@@ -52,13 +45,13 @@ const çevir = () => Kök.classList.toggle("flp");
 const personInfoGöster = (personInfo) => {
   for (const satır of Object.entries(/** @type {!Object<string, string>} */(personInfo)))
     if (satır[1] && !Gösterme.has(satır[0])) {
-      const birim = dom.adla("tc" + satır[0]);
+      const birim = dom.adla("kp" + satır[0]);
       if (birim) birim.innerText = satır[1];
     }
 
-  dom.adla('tclocalIdNumber').innerText = personInfo.localIdNumber.slice(2);
+  dom.adla('kplocalIdNumber').innerText = personInfo.localIdNumber.slice(2);
   if (dom.TR)
-    dom.adla("tcgender").innerText = dom.adla("tcgender").innerText == 'M'
+    dom.adla("kpgender").innerText = dom.adla("kpgender").innerText == 'M'
       ? 'E'
       : 'K';
 }
@@ -69,10 +62,10 @@ const personInfoGöster = (personInfo) => {
 const contactInfoGöster = (contactInfo) => {
   if (!contactInfo) return;
   KartSayısı += 1;
-  dom.adlaGöster("tcibp");
+  dom.adlaGöster("kpibp");
   for (const satır of Object.entries(/** @type {!Object<string, string>} */(contactInfo)))
     if (satır[1] && !Gösterme.has(satır[0]))
-      dom.adla("tc" + satır[0]).innerText = satır[0] == "phone"
+      dom.adla("kp" + satır[0]).innerText = satır[0] == "phone"
         ? dom.telefondanMetne(satır[1])
         : satır[1];
 }
@@ -87,16 +80,16 @@ const addressInfoGöster = (addressInfo) => {
   const adres = /** @type {!did.TürkiyeAdresi} */(addressInfo);
 
   KartSayısı += 1;
-  dom.adlaGöster("tcabp");
+  dom.adlaGöster("kpabp");
   /** @type {string} */
   let mahalle = adres.mahalle;
   if (mahalle.endsWith("ahallesi"))
     mahalle = mahalle.slice(0, -6) + ".";
-  dom.adla("tcam").innerText = mahalle;
-  dom.adla("tcasnd").innerText = adres.CSBM + " " + adres.dışKapı +
+  dom.adla("kpam").innerText = mahalle;
+  dom.adla("kpasnd").innerText = adres.CSBM + " " + adres.dışKapı +
     (adres.içKapı && `/${adres.içKapı}`);
-  dom.adla("tcaii").innerText = adres.ilçe + " / " + adres.il;
-  dom.adla("tcau").innerText = adres.country;
+  dom.adla("kpaii").innerText = adres.ilçe + " / " + adres.il;
+  dom.adla("kpau").innerText = adres.country;
 }
 
 /**
@@ -105,7 +98,7 @@ const addressInfoGöster = (addressInfo) => {
 const kütükBilgileriGöster = (kütükBilgileri) => {
   for (const satır of Object.entries(/** @type {!Object<string, string>} */(kütükBilgileri)))
     if (satır[1] && !Gösterme.has(satır[0]))
-      dom.adla("tc" + satır[0]).innerText = satır[1];
+      dom.adla("kp" + satır[0]).innerText = satır[1];
 }
 
 /**

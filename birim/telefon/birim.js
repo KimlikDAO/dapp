@@ -1,24 +1,18 @@
+import {
+  Adres,
+  AnaEkran,
+  DüğmeliNft,
+  Kutu,
+  NftDüğmesi
+} from "./birim.jsx";
 import KPass from "/birim/kpass/birim";
 import dom from "/lib/util/dom";
-
-/** @const {!Element} */
-const NftDüğmesi = dom.adla("tez");
-/** @const {!Element} */
-const Kutu = dom.adla("tek");
-/** @const {!Element} */
-const DüğmeliNft = dom.adla("tel");
-/** @const {!Element} */
-const Adres = dom.adla("ted");
-/** @const {!Element} */
-const AnaEkran = dom.adla("tea");
 
 /**
  * @param {?string} adres Telefonda gösterilecek adres.
  */
-const adresGir = (adres) => {
-  adres ||= "0xcCc0cCc";
+const adresGir = (adres = "0xcCc0cCc") =>
   Adres.innerText = adres.slice(0, 6) + "..." + adres.slice(-4);
-}
 
 /**
  * @param {string} metin İletişim kutusunda gösterilecek metin.

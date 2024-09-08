@@ -1,4 +1,4 @@
-#tc {
+#kp {
   background: #fff;
   border-radius: 10px;
   box-shadow: 0px 2px 10px rgb(0 0 0 / 15%);
@@ -9,12 +9,12 @@
   z-index: 4;
 }
 
-#tc.flp {
+#kp.flp {
   transform: rotateY(-180deg);
 }
 
-#tck,
-#tci {
+#kpk,
+#kpi {
   backface-visibility: hidden;
   border-radius: 10px;
   height: 100%;
@@ -24,7 +24,7 @@
 }
 
 /* Kapak yüzü */
-#tck {
+#kpk {
   align-items: center;
   display: flex;
   justify-content: center;
@@ -32,25 +32,25 @@
 }
 
 /* Bilgi yüzü */
-#tci {
+#kpi {
   transform: rotateY(180deg);
 }
 
 /* KPass Carousel */
-#tcc {
+#kpc {
   display: flex;
   height: 100%;
   transition: transform 1s;
   width: 1400px;
 }
 
-.tcp {
+.kpp {
   width: 280px;
   height: 280px;
 }
 
 /* KPass Düğmesi */
-.tcd {
+.kpd {
   bottom: 5px;
   height: 10px;
   opacity: 0.3;
@@ -59,26 +59,26 @@
   width: 10px;
 }
 
-.tcd:hover {
+.kpd:hover {
   opacity: 0.7;
 }
 
-.tcso {
+.kpso {
   right: 20px;
 }
 
-.tcsa {
+.kpsa {
   right: 3px;
 }
 
-#tclo {
+#kplo {
   bottom: 6px;
   left: 10px;
   position: absolute;
 }
 
-.tcso::before,
-.tcsa::before {
+.kpso::before,
+.kpsa::before {
   border-radius: 2px;
   border: solid #000;
   box-sizing: border-box;
@@ -88,31 +88,31 @@
   width: 10px;
 }
 
-.tcso::before {
+.kpso::before {
   border-width: 0 0 4px 4px;
   transform: rotate(45deg);
 }
 
-.tcsa::before {
+.kpsa::before {
   border-width: 0 4px 4px 0;
   transform: rotate(-45deg);
 }
 
-.tcip {
+.kpip {
   padding: 3ex 20px;
 }
 
-.tcl {
+.kpl {
   font-size: 7px;
   padding: 5px 0 0;
 }
 
-.tcpc {
+.kppc {
   display: flex;
   justify-content: space-between;
 }
 
-#tcam {
+#kpam {
   min-width: 4em;
 }
 
@@ -124,6 +124,6 @@ h7 {
   margin: 1em 0;
 }
 
-.tcal {
+.kpal {
   line-height: 1.5;
 }
