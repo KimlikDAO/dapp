@@ -22,6 +22,15 @@ jobs:
       - name: Bun kur
         uses: oven-sh/setup-bun@v2
 
+      - name: "`cüzdan` birimini derle"
+        run: bun lib/kdjs/kdjs.js birim/cüzdan/birim.js
+
+      - name: "`dil` birimini derle"
+        run: bun lib/kdjs/kdjs.js birim/dil/birim.js
+
+      - name: "`kpass` birimini derle"
+        run: bun lib/kdjs/kdjs.js birim/kpass/birim.js
+
       - name: Araçları kur
         run: |
           bun i

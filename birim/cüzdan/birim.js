@@ -1,3 +1,4 @@
+import { AdresButonu, AğButonu, DebankLinki, Menü } from "./birim.jsx";
 import { CoreBağlantısı, MetaMaskBağlantısı, RabbyBağlantısı } from "./evmBağlantısı";
 import { AuroConnection as AuroBağlantısı } from "./minaBağlantısı";
 import { AğBilgileri } from "/birim/ağlar/birim";
@@ -89,15 +90,6 @@ const Bağlantılar = {
 };
 /** @const {!Set<ChainId>} */
 const Ağlar = new Set(/** @type {!Array<ChainId>} */(Chains.split("|")));
-
-/** @const {!Element} */
-const AdresButonu = dom.adla("cua");
-/** @const {!Element} */
-const AğButonu = dom.adla("cuc");
-/** @const {!Element} */
-const Menü = dom.adla("cub");
-/** @const {!Element} */
-const DebankLinki = dom.adla("cude");
 /** @const {string} */
 const BağlaMetni = AdresButonu.innerText;
 /** @type {!Array<function(?string)>} */
@@ -380,7 +372,7 @@ const aç = () => {
 }
 
 const kur = () => {
-  /** @const {Element} */
+  /** @const {!Element} */
   const seçiliAğ = dom.adla("cud" + DefaultChain);
   seçiliAğ.replaceChild(AğButonu.firstElementChild.cloneNode(true),
     seçiliAğ.firstElementChild);

@@ -8,7 +8,10 @@ import dom from "/lib/util/dom";
 
 let SeçilmişÖneriId;
 
-dom.adla("oyyb").onclick = () => {
+/** @const {!Element} */
+const ProposeButton = dom.adla("oyyb");
+
+ProposeButton.onclick = () => {
   dom.adlaGizle("oyyb");
   dom.adlaGöster("oyy");
   if (!SeçilmişÖneriId) SeçilmişÖneriId = "2";

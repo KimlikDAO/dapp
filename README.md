@@ -25,8 +25,8 @@ Yazılımcıların dApp'i test etmesi için gereken adımlar:
 
 - `bun i` gerekli build araçlarını ve dev sunucusunu yükler
 
-- `make dev` dev sunucuyu çalıştırır.
-  - http://localhost:8787/al
+- `bun run dev` dev sunucuyu çalıştırır.
+  - http://localhost:8787/
 
 Kanarya ve deployment adımları için birkaç araca daha ihtiyacımız var
 
@@ -35,7 +35,6 @@ brew install pngcrush brotli zopfli woff2 webp librsvg
 pip install fonttools
 ```
 
-- `make 🦜` veya `make kanarya` deploya hazır dApp'i `build` edip kanarya
+- `bun run dev --build` veya `bun run build; bun run canary` deploya hazır dApp'i `build` edip kanarya
   sunucusunu çalıştırır
-  - http://localhost:8787/al
-- `make cf-deployment` deploya hazır dApp'i Cloudflare'e yükler
+  - http://localhost:8787/

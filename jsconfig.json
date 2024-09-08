@@ -8,5 +8,10 @@
         "*"
       ]
     }
-  }
+  },
+  "exclude": [
+    "node_modules",
+    "build",
+    ".kdjs_isolate"
+  ]
 }
