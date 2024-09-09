@@ -1,4 +1,4 @@
-import { AğBilgileri, ağResmi } from "/birim/ağlar/birim";
+import { ağResmi } from "/birim/ağlar/birim";
 import { ChainId } from "/lib/crosschain/chains";
 
 /**
@@ -22,7 +22,7 @@ const Balon = ({ chainId }) => (
     <div>
       <div class="sau">{Tablo[chainId].holder}</div>
       <span class="saa" data-en={`HOLDERS ON ${Tablo[chainId].ad}`}>{
-        AğBilgileri[chainId].ad.toUpperCase() + Tablo[chainId].ek} KPASS</span>
+        Tablo[chainId].ad + Tablo[chainId].ek} KPASS</span>
     </div>
   </div>
 )

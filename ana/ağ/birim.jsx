@@ -1,20 +1,30 @@
+import { keccak256 } from "/lib/crypto/sha3";
 
-const Node = (props) => (
-  <div class={`agi ag${props.idx}`}>
-    <div class={`agp ag${props.idx}n`}></div>{props.addr}
-  </div>
-);
+/**
+ * @param {{
+ *   idx: string,
+ * }} props
+ * @return {string}
+ */
+const Node = ({ idx }) => {
+  const h = keccak256(idx);
+  return (
+    <div class={`agi ag${idx}`}>
+      <div class={`agp ag${idx}n`}></div>{`0x${h.slice(0, 8)}...${h.slice(8, 16)}`}
+    </div>
+  );
+}
 
-/** @const {!Array<!Array<string>>} */
-const NODES = [
-  ["0x299A3490c8De309D855221468167aAD6C44c59E0", "node.kimlikdao.org", "9266ec", "4A00E0"],
-  ["0x86f6B34A26705E6a22B8e2EC5ED0cC5aB3f6F828", "yenibank.org", "83b4e2", "3182CE", "üst"],
-  ["0x77c60E68158De0bC70260DFd1201be9445EfFc07", "sstg.io", "edc7c7", "E5AFAF"],
-  ["0xE3581636Df37f1eBfFbdFE22F8719F57c555d4f7", "yenilira.org", "#bbe7d5", "9EDDC3", "üst"],
-  ["0xc855dB548A6feB1f34AcAE6531c84261008ea55A", "kopru3.com", "#b06ceb", "8E2DE2"],
-  ["0x4F1DBED3c377646c89B4F8864E0b41806f2B79fd", "dobbyinu.com", "#fe94f4", "FE66EF"],
-  ["0x384bF113dcdF3e7084C1AE2Bb97918c3Bf15A6d2", "lstcm.co", "666", "111"],
-];
+/** @const {!Object<string, !Array<string>>} */
+const NODES = {
+  kd: ["0x299A3490c8De309D855221468167aAD6C44c59E0", "node.kimlikdao.org", "9266ec", "4A00E0"],
+  yb: ["0x86f6B34A26705E6a22B8e2EC5ED0cC5aB3f6F828", "yenibank.org", "83b4e2", "3182CE", "üst"],
+  td: ["0x77c60E68158De0bC70260DFd1201be9445EfFc07", "timedogankoy.com", "edc7c7", "E5AFAF"],
+  yl: ["0xE3581636Df37f1eBfFbdFE22F8719F57c555d4f7", "yenilira.org", "#bbe7d5", "9EDDC3", "üst"],
+  di: ["0x4F1DBED3c377646c89B4F8864E0b41806f2B79fd", "dobbyinu.com", "#fe94f4", "FE66EF"],
+  k3: ["0xc855dB548A6feB1f34AcAE6531c84261008ea55A", "kopru3.com", "#b06ceb", "8E2DE2"],
+  ls: ["0x384bF113dcdF3e7084C1AE2Bb97918c3Bf15A6d2", "lstcm.co", "666", "111"],
+};
 
 /**
  * @param {string} renk
@@ -29,8 +39,9 @@ const h = (renk) => (renk.startsWith("#") ? renk : "#" + renk).toUpperCase();
  * @return {string}
  */
 const Grafik = ({ width }) => {
+  const keys = Object.keys(NODES);
   /** @const {number} */
-  const n = NODES.length;
+  const n = keys.length;
   const cx = width / 2;
   const cy = cx;
   const r = cx - 80;
@@ -44,13 +55,13 @@ const Grafik = ({ width }) => {
       </defs>
       <text class="agsvgt" x={cx} y={cy - 30} data-en="The KimlikDAO">KimlikDAO</text>
       <text class="agsvgt" x={cx} y={cy + 7} data-en="Network">Ağı</text>
-      {Array.from({ length: n }).map((_, i) => {
+      {keys.map((key, i) => {
         const x = Math.round(cx + r * Math.sin((Math.PI * 2 * i) / n));
         const y = Math.round(cy - r * Math.cos((Math.PI * 2 * i) / n));
         return (<>
-          <use href="#ag6" x={x - 45} y={y - 75} fill={h(NODES[i][2])} stroke={h(NODES[i][3])} />
-          <text x={x} y={y - 30} text-anchor="middle" fill="#fff">{NODES[i][0].slice(0, 8)}</text>
-          <text x={x} y={y + 23} text-anchor="middle" fill="#444">{NODES[i][1]}</text>
+          <use href="#ag6" x={x - 45} y={y - 75} fill={h(NODES[key][2])} stroke={h(NODES[key][3])} />
+          <text x={x} y={y - 30} text-anchor="middle" fill="#fff">{NODES[key][0].slice(0, 8)}</text>
+          <text x={x} y={y + 23} text-anchor="middle" fill="#444">{NODES[key][1]}</text>
         </>);
       })}
     </svg>
@@ -72,25 +83,19 @@ const Ağ = () => (
     </div>
     <div id="agt">
       <div id="agtc">
-        <div class="tcip">
-          <div class="tcl" data-en="City of birth">Doğum yeri</div>
+        <div class="kpip">
+          <div class="kpl" data-en="City of birth">Doğum yeri</div>
           <div data-en="Istanbul">İstanbul</div>
-          <div class="tcl" data-en="Gender">Cinsiyet</div>
+          <div class="kpl" data-en="Gender">Cinsiyet</div>
           <div data-en="F">K</div>
         </div>
-        <svg id="tclo" height={24} width={24}>
+        <svg id="kplo" height={24} width={24}>
           <use href="#bak" width={24} height={24} />
         </svg>
-        <a href="javascript:" class="tcd tcso"></a>
-        <a href="javascript:" class="tcd tcsa"></a>
+        <a href="javascript:" class="kpd kpso"></a>
+        <a href="javascript:" class="kpd kpsa"></a>
       </div>
-      <Node idx="kd" addr="0x9c342cd5...0c706978" />
-      <Node idx="yb" addr="0xbf0896da...e541dfca" />
-      <Node idx="ss" addr="0x53fdd7a3...8b9b67e4" />
-      <Node idx="dp" addr="0x754523c5...c7b6eafb" />
-      <Node idx="do" addr="0x8f43e70c...4b43f25d" />
-      <Node idx="k3" addr="0xb82cd972...f543e33e" />
-      <Node idx="ls" addr="0x3cded416...615afd40" />
+      {Object.keys(NODES).map((key) => <Node idx={key} />)}
     </div>
     <Grafik width={500} />
   </div >

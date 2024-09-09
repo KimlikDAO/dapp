@@ -33,12 +33,13 @@ const Bağlantı = ({ idx, name }) => (
 /**
  * @param {{
  *   DefaultChain: string,
- *   Chains: string
+ *   Chains: string,
+ *   piggyback: string
  * }} props
  * @return {string}
  */
-const Cüzdan = ({ DefaultChain, Chains }) => (
-  <div id="cu">
+const Cüzdan = ({ DefaultChain, Chains, piggyback }) => (
+  <div id="cu" data-piggyback={piggyback}>
     <link rel="stylesheet" href="/birim/cüzdan/birim.css" data-shared />
     <AğButonu><img src={ağResmi(/** @type {ChainId} */(DefaultChain))} height={32} width={32} /></AğButonu>
     <AdresButonu data-en="Connect wallet">Cüzdan bağla</AdresButonu>

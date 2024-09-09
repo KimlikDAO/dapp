@@ -1,4 +1,3 @@
-
 /**
  * @param {{
  *   href: string,

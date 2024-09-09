@@ -50,6 +50,7 @@ const AddressInfoKartı = () => (
     </div>
   </div>
 );
+
 const KPass = () => (
   <Kök>
     <link rel="stylesheet" href="/birim/kpass/birim.css" data-shared />

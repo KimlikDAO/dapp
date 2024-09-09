@@ -1,3 +1,4 @@
+import KPass from "../kpass/birim";
 import dom from "/lib/util/dom";
 
 /** @const {!HTMLDivElement} */
@@ -11,7 +12,7 @@ export const Kutu = dom.div("tek");
 /** @const {!HTMLDivElement} */
 export const NftDüğmesi = dom.div("tez");
 
-const Telefon = () => (
+const Telefon = ({ kpass }) => (
   <div id="te">
     <AnaEkran>
       <div id="teb">$1523.74</div>
@@ -34,7 +35,7 @@ const Telefon = () => (
       </div>
     </Kutu>
     <DüğmeliNft>
-      <birim:kpass data-remove-if="kpasssiz" />
+      {kpass && <KPass />}
       <NftDüğmesi style="display:none" data-en="Encrypt">Gizle</NftDüğmesi>
     </DüğmeliNft>
   </div >

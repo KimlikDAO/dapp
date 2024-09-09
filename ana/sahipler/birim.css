@@ -73,7 +73,7 @@ h2 {
   background-color: #FEEDFA;
 }
 
-.sac.x86a {
+.sac.xa86a {
   background-color: #D7AEFF;
 }
 
@@ -97,39 +97,39 @@ h2 {
 }
 
 @media (min-width: 800px) {
-  .sac.polygon {
+  .sac.x89 {
     position: relative;
     left: 60px;
     top: 20px;
     animation: doner 5s linear infinite;
   }
 
-  .sac.avax {
+  .sac.xa86a {
     position: relative;
     left: 40px;
     top: 20px;
     animation: doner 5.4s linear infinite;
   }
 
-  .sac.arb {
+  .sac.xa4b1 {
     position: relative;
     top: 20px;
     animation: doner 4.8s linear infinite reverse;
   }
 
-  .sac.ftm {
+  .sac.mina {
     position: relative;
     left: 10px;
     animation: doner 5.2s linear infinite;
   }
 
-  .sac.bnb {
+  .sac.x38 {
     position: relative;
     left: -40px;
     animation: doner 5.3s linear infinite reverse;
   }
 
-  .sac.eth {
+  .sac.x1 {
     animation: doner 4.4s linear infinite;
   }
 }

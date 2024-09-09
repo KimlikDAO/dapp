@@ -1,0 +1,239 @@
+
+const Kapak = () => (
+  <svg id="kpk" width="280" height="280" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg"
+    xmlns:svg="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="kpkp" x1="50%" x2="57%" y1="0%" y2="100%">
+        <stop offset="0%" stop-color="#8e2de2" />
+        <stop offset="20%" stop-color="#6337ba" />
+        <stop offset="42%" stop-color="#a36dd3" />
+        <stop offset="80%" stop-color="#4a00e0" />
+      </linearGradient>
+      <linearGradient id="kpkw" x1="200" y1="0" x2="7" y2="400" gradientUnits="userSpaceOnUse">
+        <stop stop-color="white" />
+        <stop offset="0.286458" stop-color="#EEFDFF" />
+        <stop offset="0.630208" stop-color="#F2ECFF" />
+        <stop offset="0.828125" stop-color="white" />
+        <stop offset="1" stop-color="white" />
+      </linearGradient>
+      <clipPath id="kpksq">
+        <path d="M25,25c25-25,25-25,50,0s25,25,0,50s-25,25-50,0s-25-25,0-50Z" />
+      </clipPath>
+      {/* Sol alt mor */}
+      <filter id="kpksam" x="-23.4732" y="103.323" width="334.446" height="477.802" filterUnits="userSpaceOnUse"
+        color-interpolation-filters="sRGB">
+        <feBlend mode="normal" in="SourceGraphic" />
+        <feGaussianBlur stdDeviation="27" />
+      </filter>
+      {/* Üstten gelen koyu mavi */}
+      <filter id="kpkugk" x="-111.265" y="-235.711" width="494.072" height="654.905" filterUnits="userSpaceOnUse"
+        color-interpolation-filters="sRGB">
+        <feBlend mode="normal" in="SourceGraphic" />
+        <feGaussianBlur stdDeviation="42" />
+      </filter>
+      {/* Alt orta mor */}
+      <filter id="kpkaom" x="89.5561" y="-25.6872" width="552.048" height="666.22" filterUnits="userSpaceOnUse"
+        color-interpolation-filters="sRGB">
+        <feBlend mode="normal" in="SourceGraphic" />
+        <feGaussianBlur stdDeviation="34" />
+      </filter>
+      {/* Cam göbeği blend */}
+      <filter id="kpkcgb" x="-41.7933" y="-36.8208" width="623.86" height="646.327" filterUnits="userSpaceOnUse"
+        color-interpolation-filters="sRGB">
+        <feBlend mode="normal" in="SourceGraphic" />
+        <feGaussianBlur stdDeviation="22" />
+      </filter>
+      {/* Sağ üst mavi */}
+      <filter id="kpksum" x="161.478" y="-392.698" width="434.159" height="644.074" filterUnits="userSpaceOnUse"
+        color-interpolation-filters="sRGB">
+        <feBlend mode="normal" in="SourceGraphic" />
+        <feGaussianBlur stdDeviation="20" />
+      </filter>
+      {/* Radyal Mavi */}
+      <radialGradient id="kpkrm" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse"
+        gradientTransform="translate(526.348 89.6089) rotate(-125.623) scale(441.78 373.984)">
+        <stop offset="0.447917" stop-color="#7D8AFA" />
+        <stop offset="0.572917" stop-color="#5698E2" />
+        <stop offset="0.869792" stop-color="#3c6aff" />
+      </radialGradient>
+      {/* Cam Göbeği 2 */}
+      <linearGradient id="kpkcg2" x1="560.27" y1="483.094" x2="474.592" y2="-52.9144" gradientUnits="userSpaceOnUse">
+        <stop stop-color="#7D8AFA" />
+        <stop offset="0.203125" stop-color="#8E2DE2" />
+        <stop offset="0.4375" stop-color="#5698E2" />
+        <stop offset="0.505208" stop-color="#2A4DC1" />
+      </linearGradient>
+      {/* Cam göbeği */}
+      <radialGradient id="kpkcg" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse"
+        gradientTransform="translate(105 355) rotate(-24.5) scale(441.549 373.789)">
+        <stop offset="0.12" stop-color="#2A4DC1" />
+        <stop offset="0.285" stop-color="#935BCA" />
+        <stop offset="0.465" stop-color="#5698E2" />
+      </radialGradient>
+      {/* Sağ üst mor */}
+      <radialGradient id="kpksu" cx="-200" cy="170" r="400" gradientUnits="userSpaceOnUse">
+        <stop offset="0.8" stop-color="#C4659F" />
+        <stop offset="1" stop-color="#7D8AFA" />
+      </radialGradient>
+      <circle id="kpks0" cx="11" cy="11" r="11" />
+      <path id="kpks1" d="M5,5c6-6,6-6,12,0s6,6,0,12s-6,6-12,0s-6-6,0-12Z" />
+      <rect id="kpks2" x="0.5" y="0.5" width="21" height="21" />
+      <rect id="kpks3" width="22" height="22" rx="8" />
+      <path id="kpks4"
+        d="M6.9 0.6C3.58 0.6 0.885 3.28 0.885 6.591L0.885 10.728C0.885 12.22 1.445 13.658 2.454 14.7619L6.95139 19.6785C9.334 22.289 13.4675 22.2895 15.856 19.6785L20.3534 14.762C21.3627 13.6586 21.922 12.22 21.922 10.728L21.922 6.591C21.922 3.282 19.226 0.6 15.9 0.6L6.9 0.6Z" />
+      <path id="kpks5" d="M0,0A22,22,0,0,0,22,22V0Z" />
+      <path id="kpks6" d="M0 0h10c 7 0 12 5 12 11s-5 11 -12 11H0Z" />
+      <rect id="kpks7" width="44" height="22" rx="10" />
+      <path id="kpks8" d="M0 0a22 22 0 0 0 44 0z" />
+      <rect id="kpks15" width="66" height="22" rx="10" />
+      <g data-phantom="true" data-generate="üret/şekilkod"></g>
+      <g data-phantom="true" data-generate="üret/rakamlar"></g>
+      <clipPath id="kpkz">
+        <use href="#kpks0" x="277" y="57" />
+        <use href="#kpks0" x="189" y="13" />
+        <use href="#kpks5" x="365" y="13" />
+        <use href="#kpks3" x="79" y="35" />
+        <use href="#kpks3" x="101" y="35" />
+        <use href="#kpks15" x="167" y="35" />
+        <use href="#kpks13" transform="translate(79,79)rotate(-90, 11, 11)" />
+        <use href="#kpks3" x="123" y="79" />
+        <use href="#kpks0" x="57" y="123" />
+        <use href="#kpks0" x="79" y="167" />
+        <use href="#kpks0" x="79" y="189" />
+        <use href="#kpks0" x="57" y="189" />
+        <use href="#kpks5" x="123" y="145" />
+        <use href="#kpks5" x="145" y="145" />
+        <use href="#kpks2" x="167" y="123" />
+        <use href="#kpks0" x="233" y="123" />
+        <use href="#kpks3" x="255" y="123" />
+        <use href="#kpks15" x="277" y="123" />
+        <use href="#kpks16" x="189" y="57" />
+        <use href="#kpks11" x="189" y="145" />
+        <use href="#kpks11" x="211" y="145" />
+        <use href="#kpks3" x="255" y="145" />
+        <use href="#kpks15" transform="translate(365,123)rotate(90, 11, 11)" />
+        <use href="#kpks0" x="343" y="145" />
+        <use href="#kpks3" x="145" y="167" />
+        <use href="#kpks16" x="101" y="189" />
+        <use href="#kpks8" transform="translate(57,299)rotate(-90,11,11)" />
+        <use href="#kpks15" transform="translate(57,321)rotate(90,11,11)" />
+        <use href="#kpks3" x="79" y="255" />
+        <use href="#kpks5" x="101" y="255" />
+        <use href="#kpks0" x="101" y="277" />
+        <use href="#kpks10" x="79" y="299" />
+        <use href="#kpks4" x="123" y="277" />
+        <use href="#kpks4" x="167" y="189" />
+        <use href="#kpks0" x="167" y="211" />
+        <use href="#kpks1" x="167" y="233" />
+        <use href="#kpks10" x="189" y="189" />
+        <use href="#kpks12" x="189" y="233" />
+        <use href="#kpks15" x="167" y="255" />
+        <use href="#kpks0" x="189" y="277" />
+        <use href="#kpks12" x="189" y="299" />
+        <use href="#kpks7" transform="translate(233,277)rotate(90,11,11)" />
+        <use href="#kpks13" transform="translate(189,343)rotate(-90,11,11)" />
+        <use href="#kpks3" x="167" y="343" />
+        <use href="#kpks10" x="211" y="321" />
+        <use href="#kpks0" x="277" y="321" />
+        <use href="#kpks0" x="255" y="189" />
+        <use href="#kpks3" x="233" y="211" />
+        <use href="#kpks15" x="277" y="189" />
+        <use href="#kpks8" transform="translate(255,233)scale(1,-1)" />
+        <use href="#kpks8" transform="translate(343,233)rotate(-90,11,11)" />
+        <use href="#kpks8" transform="translate(365,233)rotate(-90,11,11)" />
+        <use href="#kpks6" x="343" y="255" />
+        <use href="#kpks1" x="321" y="277" />
+        <use href="#kpks4" transform="translate(365,277)rotate(90,11,11)" />
+        <use href="#kpks0" x="365" y="299" />
+        <use href="#kpks10" transform="translate(387,343)scale(-1,1)" />
+        <use href="#kpks3" x="277" y="233" />
+        <use href="#kpks14" x="255" y="233" />
+        <use href="#kpks12" x="277" y="299" />
+        <use href="#kpks12" x="277" y="343" />
+        <use href="#kpks15" x="123" y="365" />
+      </clipPath>
+    </defs>
+    <rect width="400" height="400" fill="url(#tckw)" />
+    <g id="kpkaddr" fill="#4299E1">
+      <use href="#kpk0" x="15" y="256" />
+      <use href="#kpkx" x="15" y="250" />
+      <use href="#kpkc" x="15" y="244" />
+      <use href="#kpkC" x="15" y="238" />
+      <use href="#kpkc" x="15" y="232" />
+      <use href="#kpk0" x="15" y="226" />
+      <use href="#kpka" x="15" y="220" />
+      <use href="#kpk9" x="15" y="214" />
+      <use href="#kpkb" x="15" y="208" />
+      <use href="#kpk0" x="15" y="202" />
+      <use href="#kpk2" x="15" y="196" />
+      <use href="#kpk3" x="15" y="190" />
+      <use href="#kpk1" x="15" y="184" />
+      <use href="#kpk7" x="15" y="178" />
+      <use href="#kpk7" x="15" y="172" />
+      <use href="#kpk5" x="15" y="166" />
+      <use href="#kpk4" x="15" y="160" />
+      <use href="#kpk9" x="15" y="154" />
+      <use href="#kpkf" x="15" y="148" />
+      <use href="#kpkc" x="15" y="142" />
+      <use href="#kpkf" x="15" y="136" />
+      <use href="#kpk2" x="15" y="130" />
+      <use href="#kpk6" x="15" y="124" />
+      <use href="#kpkc" x="15" y="118" />
+      <use href="#kpk9" x="15" y="112" />
+      <use href="#kpk4" x="15" y="106" />
+      <use href="#kpk7" x="15" y="100" />
+      <use href="#kpke" x="15" y="94" />
+      <use href="#kpkd" x="15" y="88" />
+      <use href="#kpkb" x="15" y="82" />
+      <use href="#kpk5" x="15" y="76" />
+      <use href="#kpkb" x="15" y="70" />
+      <use href="#kpkf" x="15" y="64" />
+      <use href="#kpkD" x="15" y="58" />
+      <use href="#kpk9" x="15" y="52" />
+      <use href="#kpkB" x="15" y="46" />
+      <use href="#kpk2" x="15" y="40" />
+      <use href="#kpk3" x="15" y="34" />
+      <use href="#kpk0" x="15" y="28" />
+      <use href="#kpkc" x="15" y="22" />
+      <use href="#kpkC" x="15" y="16" />
+      <use href="#kpkc" x="15" y="10" />
+    </g>
+    <g transform="translate(10,365)scale(0.23)">
+      <path fill="url(#tckp)"
+        d="M50,6.25C70,6.25,70,6.25,80,15L90,25c21,25,21,25,0,50L80,85C70,93.75,70,93.75,50,93.75Z" />
+      <g clip-path="url(#tcksq)">
+        <path fill="#90cdf4" d="M0,50h50V0Z" />
+        <path fill="#63B3ED" d="M50,0v50h50Z" />
+        <path fill="#3182CE" d="M100,50H50v50Z" />
+        <path fill="#4299E1" d="M50,100V50H0Z" />
+      </g>
+    </g>
+    <g fill="#8E2DE2">
+      <use href="#kpkT" x="15" y="269" />
+      <use href="#kpkK" x="15" y="275" />
+      <use href="#kpkC" x="15" y="281" />
+      <use href="#kpkT" x="15" y="288" />
+    </g>
+    <g clip-path="url(#tckz)">
+      <g transform="rotate(-5 100 50)">
+        <rect x="0" y="0" width="400" height="400" fill="white" />
+        <path filter="url(#tcksam)"
+          d="M257.64 313.656C258.601 348.517 141.426 526.8 107.983 527.721C74.5394 528.642 31 521 30 486.832C29.041 451.971 31.8738 157.571 65.3173 156.649C107.983 527.721 256.68 278.795 257.64 313.656Z"
+          fill="#935BCA" />
+        <path filter="url(#tckugk)"
+          d="M80.5168 -126.302C127.687 -173.472 209.531 -150.698 274.32 -85.9088C339.11 -21.1195 258.092 283.46 210.922 330.63C163.752 377.8 58.4887 14.4413 -6.30057 -50.348C-71.0899 -115.137 33.3469 -79.1324 80.5168 -126.302Z"
+          fill="url(#tckrm)" />
+        <ellipse filter="url(#tckaom)" cx="365" cy="307" rx="275" ry="194" transform="rotate(-67 365 307)"
+          fill="url(#tckcg2)" />
+        <path filter="url(#tckcgb)" style="mix-blend-mode:color-dodge"
+          d="M207 190C227 -234 457 226 537 130C527 533 371 305 371 305C371 305 315 610 121 559C-58 402 -38 59 207 190Z"
+          fill="url(#tckcg)" />
+        <circle filter="url(#tcksum)" cx="400" cy="20" fill="url(#tcksu)" r="180" />
+        <animateTransform attributeName="transform" dur="10s" repeatCount="indefinite" type="rotate" calcMode="spline"
+          keySplines="0.8 0 0.2 1; 0.8 0 0.2 1" values="-5 100 50;12 50 100;-5 100 50" />
+      </g>
+    </g>
+  </svg>
+);
+
+export default Kapak();
