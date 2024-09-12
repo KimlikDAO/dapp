@@ -1,15 +1,12 @@
+import { DilButonu, DilListesi } from "./birim.jsx";
 import dom from "/lib/util/dom";
+import { I18nString, LangCode } from "/lib/util/i18n";
 
-/** @define {string} */
-const KonumTR = "tr";
-/** @define {string} */
-const KonumEN = "en";
+/** @define {I18nString} */
+const Route = { [LangCode.TR]: "tr", [LangCode.EN]: "en" };
 
-/** @const {!Element} */
-const DilButonu = dom.adla("dib");
-
-dom.menüYarat(DilButonu, dom.adla("did"));
-dom.adla("did").onclick = (/** @type {Event} */ event) => {
+dom.menüYarat(DilButonu, DilListesi);
+DilListesi.onclick = (/** @type {Event} */ event) => {
   /** @const {!Element} */
   const targetElem = /** @type {!Element} */(event.target);
   /** @const {!Element} */
@@ -17,10 +14,10 @@ dom.adla("did").onclick = (/** @type {Event} */ event) => {
     ? targetElem
     : /** @type {!Element} */(targetElem.parentElement);
 
-  /** @const {string} */
-  const diğerDil = dom.TR ? "en" : "tr";
+  /** @const {LangCode} */
+  const diğerDil = dom.TR ? LangCode.EN : LangCode.TR;
   if (li.id.slice(2) == diğerDil) {
     document.cookie = `l=${diğerDil};path=/;domain=.kimlikdao.org;SameSite=Strict;max-age=${1e6}`;
-    window.location.href = (dom.TR ? KonumEN : KonumTR) + window.location.hash;
+    window.location.href = Route[diğerDil] + window.location.hash;
   }
 };

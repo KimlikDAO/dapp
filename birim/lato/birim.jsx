@@ -1,10 +1,9 @@
 const Lato = () => {
-  return (
-    <span>
-      <link rel="preload" crossorigin href="/birim/lato/l400.woff2" as="font" data-dev-remove />
-      <link rel="preload" crossorigin href="/birim/lato/l700.woff2" as="font" data-dev-remove />
-      <link href="/birim/lato/tümü.css" rel="stylesheet" data-shared />
-    </span>
+  return (<>
+    <link rel="preload" crossorigin href="/birim/lato/l400.woff2" as="font" data-dev-remove />
+    <link rel="preload" crossorigin href="/birim/lato/l700.woff2" as="font" data-dev-remove />
+    <link href="/birim/lato/tümü.css" rel="stylesheet" data-shared />
+  </>
   );
 }
 

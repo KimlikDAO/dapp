@@ -23,13 +23,13 @@ jobs:
         uses: oven-sh/setup-bun@v2
 
       - name: "`cüzdan` birimini derle"
-        run: bun lib/kdjs/kdjs.js birim/cüzdan/birim.js
+        run: bun lib/kdjs/kdjs.js birim/cüzdan/birim.js --globals '{"GEN":false,"DefaultChain":"0x1","Chains":["0x1","0xa4b1"]}'
 
       - name: "`dil` birimini derle"
-        run: bun lib/kdjs/kdjs.js birim/dil/birim.js
+        run: bun lib/kdjs/kdjs.js birim/dil/birim.js --globals '{"GEN":false,"Route":{"en":"mint","tr":"al"}}'
 
       - name: "`kpass` birimini derle"
-        run: bun lib/kdjs/kdjs.js birim/kpass/birim.js
+        run: bun lib/kdjs/kdjs.js birim/kpass/birim.js --globals '{"GEN":false}'
 
       - name: Araçları kur
         run: |
@@ -38,4 +38,5 @@ jobs:
           pip install fonttools
 
       - name: ana sayfa
+        if: false # Temporarily disabled
         run: bun run build

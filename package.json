@@ -7,14 +7,14 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "postinstall": "mkdir -p ./node_modules/@kimlikdao && ln -sfn ../../lib ./node_modules/@kimlikdao/lib",
-    "build": "NODE_ENV=production bun lib/birimler/builder.js",
-    "canary": "NODE_ENV=production bun lib/birimler/sunucu/canary.js",
-    "dev": "NODE_ENV=production bun lib/birimler/sunucu/dev.js"
+    "postinstall": "mkdir -p ./node_modules/@kimlikdao && ln -sfn ../../lib ./node_modules/@kimlikdao/lib && ln -sfn ../../lib/kdjs ./node_modules/@kimlikdao/kdjs",
+    "build": "NODE_ENV=production bun lib/kastro/kastro.js",
+    "canary": "NODE_ENV=production bun lib/kastro/workers/canaryServer.js",
+    "dev": "NODE_ENV=production bun lib/kastro/workers/devServer.js"
   },
   "devDependencies": {
     "acorn": "^8.12.1",
-    "acorn-walk": "^8.3.3",
+    "acorn-walk": "^8.3.4",
     "astring": "^1.9.0",
     "bun-types": "^1.1.27",
     "csso-cli": "^4.0.2",
@@ -25,6 +25,6 @@
     "svg-pathdata": "^7.1.0",
     "svgo": "^3.3.2",
     "uglify-js": "~3.19.3",
-    "vite": "^5.4.3"
+    "vite": "^5.4.4"
   }
 }

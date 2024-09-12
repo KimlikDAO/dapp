@@ -1,5 +1,5 @@
-dizin: "ana"
-sayfalar:
+index: "ana"
+pages:
   - tr: al
     en: mint
   - tr: kpassim
@@ -8,3 +8,4 @@ sayfalar:
     en: vote
   - tr: iptal
     en: revoke
+codebaseLang: "tr"

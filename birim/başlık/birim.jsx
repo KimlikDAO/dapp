@@ -1,8 +1,10 @@
+import Dil from "/birim/dil/birim.jsx";
+
 /**
  * @param {{
  *   href: string,
  *   title: string,
- *   piggyback: string|undefined
+ *   piggyback: (string|undefined)
  * }} props
  * @return {string}
  */
@@ -11,7 +13,7 @@ const Başlık = ({ href, title = "KimlikDAO", piggyback }) => (
     <link rel="stylesheet" href="/birim/başlık/birim.css" data-shared />
     <a href={href} id="bag"><img id="bak" src="/birim/logo.svg" data-inline />{title}</a>
     <div id="baf">
-      <birim:dil data-piggyback={piggyback} />
+      <Dil piggyback={piggyback} />
       <birim:cüzdan data-piggyback={piggyback} />
     </div>
   </div>

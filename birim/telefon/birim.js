@@ -37,10 +37,10 @@ const kutuKapat = () => {
 }
 
 /**
+ * Ana sayfa Telefon görselinin içinde temsili nft'yi gösterir.
+ *
  * @param {boolean} kutudaGöster NFT tek başına kutuda gösterilsin mi.
  * @param {boolean} bilgiYüzü NFT'nin bilgi yüzü gösterilsin.
- *
- * Ana sayfa Telefon görselinin içinde temsili nft'yi gösterir.
  */
 const nftGöster = (kutudaGöster, bilgiYüzü) => {
   KPass.yüzGöster(bilgiYüzü);

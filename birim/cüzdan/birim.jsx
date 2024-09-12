@@ -1,6 +1,7 @@
 import { AğBilgileri, ağResmi } from "../ağlar/birim";
 import { ChainId } from "/lib/crosschain/chains";
 import dom from "/lib/util/dom";
+import { I18nString } from "/lib/util/i18n";
 
 /** @const {!HTMLButtonElement} */
 export const AdresButonu = dom.button("cua");
@@ -32,31 +33,29 @@ const Bağlantı = ({ idx, name }) => (
 
 /**
  * @param {{
- *   DefaultChain: string,
- *   Chains: string,
+ *   DefaultChain: ChainId,
+ *   Chains: !Array<ChainId>,
+ *   ChainNotes: !Object<ChainId, I18nString>,
  *   piggyback: string
  * }} props
  * @return {string}
  */
-const Cüzdan = ({ DefaultChain, Chains, piggyback }) => (
+const Cüzdan = ({ DefaultChain, Chains, ChainNotes, piggyback }) => (
   <div id="cu" data-piggyback={piggyback}>
     <link rel="stylesheet" href="/birim/cüzdan/birim.css" data-shared />
-    <AğButonu><img src={ağResmi(/** @type {ChainId} */(DefaultChain))} height={32} width={32} /></AğButonu>
+    <AğButonu><img src={ağResmi(DefaultChain)} height={32} width={32} /></AğButonu>
     <AdresButonu data-en="Connect wallet">Cüzdan bağla</AdresButonu>
     <Menü style="display:none" tabindex="0">
       <ul id="cud">
-        {Chains.split("|").map((chain) => {
-          const [chainId, tr, en] = chain.split(",");
-          return (
-            <li id={`cud${chainId}`} class={chainId == DefaultChain ? "sel" : ""}>
-              {chainId == DefaultChain ? <span></span> : <img src={ağResmi(chainId)} width={32} height={32} />}
-              {" "}
-              {tr
-                ? <div>{AğBilgileri[chainId].ad}<div class="cuo" data-en={en}>{tr}</div></div>
-                : AğBilgileri[chainId].ad}
-            </li>
-          );
-        })}
+        {Chains.map((id) => (
+          <li id={`cud${id}`} class={id == DefaultChain ? "sel" : ""}>
+            {id == DefaultChain ? <span></span> : <img src={ağResmi(id)} width={32} height={32} />}
+            {" "}
+            {ChainNotes[id]
+              ? <div>{AğBilgileri[id].ad}<div class="cuo">{ChainNotes[id]}</div></div>
+              : AğBilgileri[id].ad}
+          </li>
+        ))}
       </ul>
       <ul id="cuf0x" class="cuf">
         <Bağlantı idx="ra" name="Rabby Wallet" />

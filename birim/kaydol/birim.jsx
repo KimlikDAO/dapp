@@ -1,0 +1,9 @@
+const Kaydol = ({ id }) => (
+  <form id={id}>
+    <input inputmode="email" autocomplete="email" name="email" class="kayi" type="email"
+      data-en-placeholder="Your email address" placeholder="E-posta adresiniz" /><button class="act btn kayb"
+        data-en="Subscribe" type="submit">Kaydol</button>
+  </form>
+);
+
+export default Kaydol;

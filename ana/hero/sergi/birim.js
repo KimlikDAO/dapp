@@ -1,11 +1,8 @@
 import Cüzdan from "/birim/cüzdan/birim";
 import Telefon from "/birim/telefon/birim";
 import dom from '/lib/util/dom';
+import { Boncuklar, Kartlar } from './birim.jsx';
 
-/** @const {!Element} */
-const Boncuklar = dom.adla("sen");
-/** @const {!Element} */
-const Kartlar = dom.adla("sem");
 /** @type {number} */
 let Kart = 0;
 /** @type {number} */

@@ -176,14 +176,14 @@
   height: 250px;
 }
 
-#tc.tew {
+#kp.tew {
   transform: translate(-69px, 255px) scale(0.5);
 }
 
-#tc.tex {
+#kp.tex {
   transform: translate3d(4px, 360px, 0px) scale(0.892);
 }
 
-#tc.tex.flp {
+#kp.tex.flp {
   transform: translate3d(4px, 360px, 0px) rotateY(-180deg) scale(0.892);
 }

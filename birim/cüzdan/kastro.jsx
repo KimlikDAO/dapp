@@ -1,13 +1,7 @@
-import {
-  AdresButonu,
-  AdresMetni,
-  AğButonu,
-  DebankLinki,
-  Menü
-} from "./birim.jsx";
+/** @kastro */
 import { CoreBağlantısı, MetaMaskBağlantısı, RabbyBağlantısı } from "./evmBağlantısı";
 import { AuroConnection as AuroBağlantısı } from "./minaBağlantısı";
-import { AğBilgileri } from "/birim/ağlar/birim";
+import { AğBilgileri, ağResmi } from "/birim/ağlar/birim";
 import { ChainGroup, ChainGroups, ChainId } from "/lib/crosschain/chains";
 import { Provider } from "/lib/crosschain/provider";
 import "/lib/ethereum/ERC721Unlockable.d";
@@ -16,12 +10,23 @@ import ipfs from "/lib/node/ipfs";
 import dom from "/lib/util/dom";
 import { hexten } from "/lib/util/çevir";
 
+/** @const {!HTMLButtonElement} */
+const AdresButonu = dom.button("cua");
+/** @const {!HTMLSpanElement} */
+const AdresMetni = dom.span("cuad");
+/** @const {!HTMLButtonElement} */
+const AğButonu = dom.button("cuc");
+/** @const {!HTMLSpanElement} */
+const DebankLinki = dom.span("cude");
+/** @const {!HTMLDivElement} */
+const Menü = dom.div("cub");
+
 /** @const {string} */
 const KIMLIKDAO_IPFS_URL = "//ipfs.kimlikdao.org";
-/** @define {ChainId} */
-const DefaultChain = ChainId.x1;
-/** @define {!Array<ChainId>} */
-const Chains = [ChainId.x1, ChainId.MinaMainnet, ChainId.xa4b1, ChainId.x89, ChainId.xa86a, ChainId.x38];
+/** @define {string} */
+const DefaultChain = "0xa4b1";
+/** @define {string} */
+const Chains = "0x1|mina:mainnet|0xa4b1|0x89|0xa86a|0x38";
 
 /**
  * @type {!Provider}
@@ -95,7 +100,7 @@ const Bağlantılar = {
   "au": AuroBağlantısı,
 };
 /** @const {!Set<ChainId>} */
-const Ağlar = new Set(Chains);
+const Ağlar = new Set(/** @type {!Array<ChainId>} */(Chains.split("|")));
 /** @const {string} */
 const BağlaMetni = AdresButonu.innerText;
 /** @type {!Array<function(?string)>} */
@@ -113,7 +118,7 @@ let Bağlı = BoşBağlantı;
 /** @type {?string} */
 let Adres = null;
 /** @type {ChainId} */
-let Ağ = DefaultChain;
+let Ağ = /** @type {ChainId} */(DefaultChain);
 /** @type {?string} */
 let KPassYokResmi;
 
@@ -398,15 +403,6 @@ const kur = () => {
     ağSeçildi(ağ);
   }
 
-  const düğmeler = dom.adla("cue").children;
-  düğmeler[2].onclick = () =>
-    window.location.href = "//join.kimlikdao.org/#sa-ambassador1";
-  düğmeler[3].onclick = () =>
-    window.location.href = dom.TR ? "//kimlikdao.org/oyla" : "//kimlikdao.org/vote";
-  düğmeler[4].onclick = () =>
-    window.location.href = "//kimlikdao.org" + (dom.TR ? "/iptal" : "/revoke");
-  düğmeler[5].onclick = () => koptu();
-
   AdresMetni.onclick = () => navigator.clipboard.writeText(/** @type {string} */(Adres));
   dom.adla("cuex").onclick = () => {
     const adresEki = Ağ.startsWith("mi") ? "wallet" : "address";
@@ -421,6 +417,64 @@ const kur = () => {
 }
 kur();
 
+/**
+ * @param {string} ad
+ * @return {string} url
+ */
+const bağlantıResmi = (ad) => `/birim/cüzdan/img/${ad.split(" ")[0].toLowerCase()}.svg`;
+
+/**
+ * @param {!Object<string, string>} props
+ * @return {string}
+ */
+const Bağlantı = ({ idx, name }) => (
+  <li id={"cu" + idx}>
+    <img src={bağlantıResmi(name)} width={32} height={32} />
+    <div class="cust"></div> {name}<span class="cui" style="display:none" data-en="GET">İNDİR</span>
+  </li>
+);
+
+const render = ({ DefaultChain, Chains, piggyback, children }) => (
+  <div id="cu" data-piggyback={piggyback}>
+    <link rel="stylesheet" href="/birim/cüzdan/birim.css" data-shared />
+    <AğButonu><img src={ağResmi(DefaultChain)} height={32} width={32} /></AğButonu>
+    <AdresButonu data-en="Connect wallet">Cüzdan bağla</AdresButonu>
+    <Menü style="display:none" tabindex="0">
+      <ul id="cud">
+        {Chains.map(({ id, tr, en }) => (
+          <li id={`cud${id}`} class={id == DefaultChain ? "sel" : ""}>
+            {id == DefaultChain ? <span></span> : <img src={ağResmi(id)} width={32} height={32} />}
+            {" "}
+            {tr
+              ? <div>{AğBilgileri[id].ad}<div class="cuo" data-en={en}>{tr}</div></div>
+              : AğBilgileri[id].ad}
+          </li>
+        ))}
+      </ul>
+      <ul id="cuf0x" class="cuf">
+        <Bağlantı idx="ra" name="Rabby Wallet" />
+        <Bağlantı idx="co" name="Core" />
+        <Bağlantı idx="mm" name="Metamask" />
+      </ul>
+      <ul id="cufmi" class="cuf" style="display:none">
+        <Bağlantı idx="au" name="Auro" />
+      </ul>
+      <ul id="cue" style="display:none">
+        <div id="cueh">
+          <img id="cutc" height={80} width={80} src="/birim/cüzdan/img/qmark.svg" />
+          <div>
+            <div id="cuad"><span>0xcCc...cCc</span><span id="cuadi"><img src="/birim/paste.svg" data-inline /></span></div>
+            <DebankLinki>DeBank</DebankLinki> <span id="cuex">Explorer</span>
+            <div id="cuin" date-en="MINT KPASS">KPASS AL</div>
+          </div>
+        </div>
+        <hr />
+        {children}
+      </ul>
+    </Menü>
+  </div >
+);
+
 export default {
   aç,
   adres,
@@ -432,4 +486,5 @@ export default {
   kopunca,
   hızlıArabirimAdı,
   kpassDeğişince,
+  render,
 };

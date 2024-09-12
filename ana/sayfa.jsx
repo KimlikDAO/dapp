@@ -1,0 +1,68 @@
+import OpenGraph, { Description, Title } from "./opengraph/birim";
+import TwitterCard from "./twittercard/birim";
+import Cüzdan from "/birim/cüzdan/birim";
+import Dil from "/birim/dil/birim";
+import { ChainId } from "/lib/crosschain/chains";
+import { assignGlobals } from "/lib/kastro/compiler/pageGlobals";
+import Hero from "./hero/birim";
+import OkResmi from "./ok.svg";
+
+const Ana = () => {
+  assignGlobals({
+    Chains: [
+      ChainId.x1,
+      ChainId.MinaMainnet,
+      ChainId.xa4b1,
+      ChainId.x89,
+      ChainId.xa86a,
+      ChainId.x38
+    ],
+    ChainNotes: {
+      [ChainId.MinaMainnet]: { tr: "Yeni ✨", en: "New ✨" },
+      [ChainId.xa4b1]: { tr: "Ana ağ", en: "Signal chain" }
+    },
+    DefaultChain: ChainId.xa4b1,
+  });
+  return (
+    <html>
+      <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="description" content={Description} />
+        <OpenGraph />
+        <TwitterCard />
+        <title>{Title}</title>
+        <link rel="canonical" href="https://kimlikdao.org" />
+        <birim:lato />
+        <birim:ortakcss />
+        <birim:favicon />
+        <link rel="stylesheet" href="/birim/başlık/birim.css" data-shared />
+        <script src="/ana/sayfa.js" type="module"></script>
+      </head>
+
+      <body id="an">
+        <div id="baa">
+          <a href="/" id="bag"><img id="bak" src="/birim/logo.svg" height="35" data-inline />KimlikDAO</a>
+          <div id="baf">
+            <a class="bae" en:href="//join.kimlikdao.org/en" href="//join.kimlikdao.org/tr" data-en="Join us">Aramıza
+              katıl</a>
+            <a class="bae" href="//discord.gg/H2wg6pcWXG" target="_blank" rel="noreferrer">Discord</a>
+            <Dil />
+            <Cüzdan />
+            <a id="bal" en:href="/mint" href="/al" class="btn act"><i18n en="Mint KPass" tr="Hemen KPass al"
+            /><OkResmi inline /></a>
+          </div>
+        </div>
+        <Hero />
+        <altbirim:kazan />
+        <altbirim:sahipler />
+        <altbirim:ağ />
+        <hr class="anhr" />
+        <altbirim:raporlar />
+        <birim:altdizin />
+      </body>
+    </html>
+  );
+}
+
+export default Ana;
