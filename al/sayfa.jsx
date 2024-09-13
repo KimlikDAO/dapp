@@ -4,13 +4,17 @@ import { assignGlobals } from "/lib/kastro/compiler/pageGlobals";
 const Al = () => {
   assignGlobals({
     Chains: [
-      { id: ChainId.x1 },
-      { id: ChainId.MinaMainnet, tr: "Yeni ✨", en: "New ✨" },
-      { id: ChainId.xa4b1, tr: "Ana ağ", en: "Signal chain" },
-      { id: ChainId.x89 },
-      { id: ChainId.xa86a },
-      { id: ChainId.x38 }
+      ChainId.x1,
+      ChainId.MinaMainnet,
+      ChainId.xa4b1,
+      ChainId.x89,
+      ChainId.xa86a,
+      ChainId.x38
     ],
+    ChainNotes: {
+      [ChainId.MinaMainnet]: { tr: "Yeni ✨", en: "New ✨" },
+      [ChainId.xa4b1]: { tr: "Ana ağ", en: "Signal chain" }
+    },
     DefaultChain: ChainId.xa4b1,
   });
   return (

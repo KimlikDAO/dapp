@@ -70,6 +70,7 @@ const Grafik = ({ width }) => {
 
 const Ağ = () => (
   <div id="ag" class="an3">
+    <link rel="stylesheet" href="/ana/ağ/birim.css" />
     <div id="agy">
       <h2 class="oblu" data-en="Verified and signed by 7+ independent nodes.">7 bağımsız onay ve imza.</h2>
       <div class="anac"

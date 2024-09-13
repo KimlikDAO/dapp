@@ -25,9 +25,11 @@ const Balon = ({ chainId }) => (
         Tablo[chainId].ad + Tablo[chainId].ek} KPASS</span>
     </div>
   </div>
-)
+);
+
 const Sahipler = () => (
   <div id="sa">
+    <link rel="stylesheet" href="/ana/sahipler/birim.css" />
     <div id="sai">
       <div class="ansag">
         <h2 data-en="KPass holders&lt;br>by chain.">Ağlara göre<br />KPass sahipleri.</h2>

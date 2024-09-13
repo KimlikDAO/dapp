@@ -38,5 +38,4 @@ jobs:
           pip install fonttools
 
       - name: ana sayfa
-        if: false # Temporarily disabled
         run: bun run build

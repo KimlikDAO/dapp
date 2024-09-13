@@ -1,11 +1,16 @@
+import Ağ from "./ağ/birim.jsx";
+import Hero from "./hero/birim";
+import Kazan from "./kazan/birim.jsx";
+import OkResmi from "./ok.svg";
 import OpenGraph, { Description, Title } from "./opengraph/birim";
+import Raporlar from "./raporlar/birim";
+import Sahipler from "./sahipler/birim.jsx";
 import TwitterCard from "./twittercard/birim";
+import Altdizin from "/birim/altdizin/birim";
 import Cüzdan from "/birim/cüzdan/birim";
 import Dil from "/birim/dil/birim";
 import { ChainId } from "/lib/crosschain/chains";
 import { assignGlobals } from "/lib/kastro/compiler/pageGlobals";
-import Hero from "./hero/birim";
-import OkResmi from "./ok.svg";
 
 const Ana = () => {
   assignGlobals({
@@ -49,17 +54,19 @@ const Ana = () => {
             <a class="bae" href="//discord.gg/H2wg6pcWXG" target="_blank" rel="noreferrer">Discord</a>
             <Dil />
             <Cüzdan />
-            <a id="bal" en:href="/mint" href="/al" class="btn act"><i18n en="Mint KPass" tr="Hemen KPass al"
-            /><OkResmi inline /></a>
+            <a id="bal" en:href="/mint" href="/al" class="btn act">{{
+              "en": "Mint KPass",
+              "tr": "Hemen KPass al"
+            }}<OkResmi inline /></a>
           </div>
         </div>
         <Hero />
-        <altbirim:kazan />
-        <altbirim:sahipler />
-        <altbirim:ağ />
+        <Kazan />
+        <Sahipler />
+        <Ağ />
         <hr class="anhr" />
-        <altbirim:raporlar />
-        <birim:altdizin />
+        <Raporlar />
+        <Altdizin />
       </body>
     </html>
   );
