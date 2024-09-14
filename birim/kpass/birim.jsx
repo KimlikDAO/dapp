@@ -1,3 +1,5 @@
+import Css from "./birim.css";
+import Kapak from "./kapak.m.svg";
 import dom from "/lib/util/dom";
 
 /** @const {!HTMLDivElement} */
@@ -53,8 +55,8 @@ const AddressInfoKartı = () => (
 
 const KPass = () => (
   <Kök>
-    <link rel="stylesheet" href="/birim/kpass/birim.css" data-shared />
-    <img src="/birim/kpass/kapak.m.svg" id="kpk" />
+    <Css shared />
+    <Kapak id="kpk" />
     <div id="kpi">
       <Kartlar>
         <PersonInfoKartı />

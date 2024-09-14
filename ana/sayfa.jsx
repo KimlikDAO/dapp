@@ -7,8 +7,10 @@ import Raporlar from "./raporlar/birim";
 import Sahipler from "./sahipler/birim.jsx";
 import TwitterCard from "./twittercard/birim";
 import Altdizin from "/birim/altdizin/birim";
+import BaşlıkCss from "/birim/başlık/birim.css";
 import Cüzdan from "/birim/cüzdan/birim";
 import Dil from "/birim/dil/birim";
+import Logo from "/birim/logo.svg";
 import { ChainId } from "/lib/crosschain/chains";
 import { assignGlobals } from "/lib/kastro/compiler/pageGlobals";
 
@@ -41,20 +43,20 @@ const Ana = () => {
         <birim:lato />
         <birim:ortakcss />
         <birim:favicon />
-        <link rel="stylesheet" href="/birim/başlık/birim.css" data-shared />
+        <BaşlıkCss shared />
         <script src="/ana/sayfa.js" type="module"></script>
       </head>
 
       <body id="an">
         <div id="baa">
-          <a href="/" id="bag"><img id="bak" src="/birim/logo.svg" height="35" data-inline />KimlikDAO</a>
+          <a href="/" id="bag"><Logo id="bak" height="35" inline />KimlikDAO</a>
           <div id="baf">
-            <a class="bae" en:href="//join.kimlikdao.org/en" href="//join.kimlikdao.org/tr" data-en="Join us">Aramıza
-              katıl</a>
+            <a class="bae" href={{ "en": "//join.kimlikdao.org/en", "tr": "//join.kimlikdao.org/tr" }}
+              data-en="Join us">Aramıza katıl</a>
             <a class="bae" href="//discord.gg/H2wg6pcWXG" target="_blank" rel="noreferrer">Discord</a>
             <Dil />
             <Cüzdan />
-            <a id="bal" en:href="/mint" href="/al" class="btn act">{{
+            <a id="bal" href={{ en: "mint", "tr": "al" }} class="btn act">{{
               "en": "Mint KPass",
               "tr": "Hemen KPass al"
             }}<OkResmi inline /></a>

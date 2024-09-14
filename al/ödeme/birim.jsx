@@ -1,0 +1,97 @@
+import dom from "/lib/util/dom";
+
+/** @const {!HTMLDivElement} */
+const Kök = dom.div("od");
+
+const Dot = {
+  "en": ".",
+  "tr": ","
+};
+
+const Ödeme = () => (
+  <div id="od" class="step disabled">
+    <b data-en="5. Send the payment and receive your KPass.">5. Ödemeyi yapın KPass cüzdanınıza gelsin</b>
+    <i18n
+      data-en="We'll send your wallet a request for a transaction of value &lt;span id=odf>$1.5&lt;/span>. When confirmed, your KPass will be minted in the same transaction.">
+      Cüzdanınıza <span id="odf">$1,5</span> alımı için bir istek yollayacağız. Onayladığınızda
+      cüzdanınızdan ücret alınır ve KPass'iniz cüzdanınıza mint edilir.
+    </i18n>
+    <table id="odi">
+      <tr>
+        <td data-en="KimlikDAO fee">KimlikDAO ücreti</td>
+        <td><i></i><span class="odv">1</span>{Dot}<span class="odv0">00</span></td>
+      </tr>
+      <tr>
+        <td data-en="Social revoke omission fee">İmece iptal kurmama</td>
+        <td><i></i><span class="odv">0</span>{Dot}<span class="odv0">50</span></td>
+      </tr>
+      <tr class="ode">
+        <td data-en="Network fee (estimated)">Tahmini ağ ücreti</td>
+        <td><i></i><span class="odv">0</span>{Dot}<span class="odv0">002</span></td>
+      </tr>
+      <tr class="odt">
+        <td data-en="Total">Toplam</td>
+        <td><i></i><span class="odv">0</span>{Dot}<span class="odv0">002</span>
+          <span> + <i></i><span class="odv">0</span>{Dot}<span class="odv0">002</span></span>
+        </td>
+      </tr>
+    </table>
+    <div id="odc">
+      <a href="javascript:" id="oda" class="act btn" data-en="Authorize payment in wallet">Ödeme isteği yolla</a>
+      <a href="javascript:" id="odb">
+        <img src="/birim/paralar/AVAX.svg" height={32} width={32} />
+      </a>
+      <ul id="odd" style="display:none">
+        <li id="odd2">
+          <span class="ods" data-en="1.00">1,00</span><span class="odp">USDC</span><img src="/birim/paralar/USDC.svg"
+            height={32} width={32} />
+        </li>
+        <li id="odd1">
+          <span class="ods" data-en="1.00">1,00</span><span class="odp">USDT</span><img src="/birim/paralar/USDT.svg"
+            height={32} width={32} />
+        </li>
+        <li id="odd3">
+          <span class="ods" data-en="19.00">19,00</span><span class="odp">TRYB</span><img src="/birim/paralar/TRYB.svg"
+            height={32} width={32} />
+        </li>
+        <li id="odd0xa86a">
+          <span class="ods" data-en="0.01">0,01</span><span class="odp">AVAX</span><img src="/birim/paralar/AVAX.svg"
+            height={32} width={32} />
+        </li>
+        <li id="odd0x1">
+          <span class="ods" data-en="0.0006">0,0006</span><span class="odp">ETH</span><img src="/birim/paralar/ETH.svg"
+            height={32} width={32} />
+        </li>
+        <li id="odd0x89">
+          <span class="ods" data-en="0.0006">0,0006</span><span class="odp">MATIC</span><img
+            src="/birim/paralar/MATIC.svg" height={32} width={32} />
+        </li>
+        <li id="odd0xa4b1">
+          <span class="ods" data-en="0.0006">0,0006</span><span class="odp">ETH</span><img src="/birim/paralar/ETH.svg"
+            height={32} width={32} />
+        </li>
+        <li id="odd0x38">
+          <span class="ods" data-en="0.0006">0,0006</span><span class="odp">BNB</span><img src="/birim/paralar/BNB.svg"
+            height={32} width={32} />
+        </li>
+        <li id="odd0x406">
+          <span class="ods" data-en="0.0006">0,0006</span><span class="odp">CFX</span><img src="/birim/paralar/CFX.svg"
+            height={32} width={32} />
+        </li>
+        <li id="odd0xfa">
+          <span class="ods" data-en="0.0006">0,0006</span><span class="odp">FTM</span><img src="/birim/paralar/FTM.svg"
+            height={32} width={32} />
+        </li>
+        <li id="odd0x144">
+          <span class="ods" data-en="0.0006">0,0006</span><span class="odp">ETH</span><img src="/birim/paralar/ETH.svg"
+            height={32} width={32} />
+        </li>
+        <li id="oddm:berkeley">
+          <span class="ods">1</span><span class="odp">tMINA</span><img src="/birim/paralar/MINA.png" height={32} width={32} />
+        </li>
+      </ul>
+    </div>
+  </div>
+);
+
+export default Ödeme;

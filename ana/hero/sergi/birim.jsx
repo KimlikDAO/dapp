@@ -1,3 +1,4 @@
+import Css from "./birim.css";
 import dom from "/lib/util/dom";
 
 /** @const {!HTMLDivElement} */
@@ -5,12 +6,9 @@ export const Boncuklar = dom.div("sen");
 /** @const {!HTMLUListElement} */
 export const Kartlar = dom.ul("sem");
 
-/**
- * @return {!HTMLDivElement}
- */
 const Sergi = () => (
   <div id="se">
-    <link rel="stylesheet" href="/ana/hero/sergi/birim.css" />
+    <Css />
     <div id="sec">
       <Kartlar>
         <li class="sek">

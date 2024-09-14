@@ -1,8 +1,8 @@
-import css from "./birim.css";
+import Css from "./birim.css";
 
 const Altdizin = () => (
   <div id="alt">
-    <link rel="stylesheet" href={css} />
+    <Css />
     <div id="altk">
       <div id="altl">
         <svg height="30" width="39">

@@ -1,9 +1,10 @@
-import EliptikEgriler from "/birim/blog/eliptik-egriler/birim.jsx";
+import Css from "./birim.css";
+import EliptikEğriler from "/birim/blog/eliptik-egriler/birim.jsx";
 import EliptikImza from "/birim/blog/eliptik-imza/birim.jsx";
 
 export default () => (
   <div id="ka" class="an3">
-    <link rel="stylesheet" href="/ana/kazan/birim.css" />
+    <Css />
     <div id="kaa">
       <h2 data-en="Learn & Earn with your KPass." class="oblu">KPass’inle öğren ve kazan.</h2>
       <span class="anac"
@@ -15,6 +16,6 @@ export default () => (
         data-en="Learn & earn (Soon!)">Öğren ve kazan (Yakında!)</a>
     </div>
     <EliptikImza href="" />
-    <EliptikEgriler href="" />
+    <EliptikEğriler href="" />
   </div>
 );

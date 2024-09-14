@@ -1,3 +1,4 @@
+import Css from "./sayfa.css";
 import { ChainId } from "/lib/crosschain/chains";
 import { assignGlobals } from "/lib/kastro/compiler/pageGlobals";
 
@@ -26,6 +27,7 @@ const Al = () => {
         <birim:lato />
         <birim:ortakcss />
         <birim:favicon />
+        <Css />
         <script type="module" src="/al/sayfa.js" data-loose></script>
       </head>
 

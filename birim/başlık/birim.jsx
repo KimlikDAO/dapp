@@ -1,4 +1,7 @@
+import Css from "./birim.css";
+import Cüzdan from "/birim/cüzdan/birim.jsx";
 import Dil from "/birim/dil/birim.jsx";
+import Logo from "/birim/logo.svg";
 
 /**
  * @param {{
@@ -10,11 +13,11 @@ import Dil from "/birim/dil/birim.jsx";
  */
 const Başlık = ({ href, title = "KimlikDAO", piggyback }) => (
   <div id="ba">
-    <link rel="stylesheet" href="/birim/başlık/birim.css" data-shared />
-    <a href={href} id="bag"><img id="bak" src="/birim/logo.svg" data-inline />{title}</a>
+    <Css shared />
+    <a href={href} id="bag"><Logo id="bak" inline />{title}</a>
     <div id="baf">
       <Dil piggyback={piggyback} />
-      <birim:cüzdan data-piggyback={piggyback} />
+      <Cüzdan piggyback={piggyback} />
     </div>
   </div>
 );

@@ -1,4 +1,5 @@
 import { AğBilgileri, ağResmi } from "../ağlar/birim";
+import Css from "./birim.css";
 import { ChainId } from "/lib/crosschain/chains";
 import dom from "/lib/util/dom";
 import { I18nString } from "/lib/util/i18n";
@@ -42,7 +43,7 @@ const Bağlantı = ({ idx, name }) => (
  */
 const Cüzdan = ({ DefaultChain, Chains, ChainNotes, piggyback }) => (
   <div id="cu" data-piggyback={piggyback}>
-    <link rel="stylesheet" href="/birim/cüzdan/birim.css" data-shared />
+    <Css shared />
     <AğButonu><img src={ağResmi(DefaultChain)} height={32} width={32} /></AğButonu>
     <AdresButonu data-en="Connect wallet">Cüzdan bağla</AdresButonu>
     <Menü style="display:none" tabindex="0">

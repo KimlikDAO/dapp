@@ -1,3 +1,4 @@
+import Css from "./birim.css";
 import KPass from "/birim/kpass/birim.jsx";
 import dom from "/lib/util/dom";
 
@@ -14,7 +15,7 @@ export const NftDüğmesi = dom.div("tez");
 
 const Telefon = ({ kpass = true } = {}) => (
   <div id="te">
-    <link rel="stylesheet" href="/birim/telefon/birim.css" />
+    <Css />
     <AnaEkran>
       <div id="teb">$1523.74</div>
       <div id="tec">KimlikDAO</div>

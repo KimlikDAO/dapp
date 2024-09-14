@@ -1,9 +1,10 @@
+import Css from "./birim.css";
 import Sergi from "./sergi/birim";
 import Telefon from "/birim/telefon/birim.jsx";
 
 const Hero = () => (
   <div id="he">
-    <link rel="stylesheet" href="/ana/hero/birim.css" />
+    <Css />
     <div id="het">
       <div id="hes">
         <h1 data-en="KPass: Your ID token for web3">KPass: Blokzincirdeki kimlik kartın</h1>

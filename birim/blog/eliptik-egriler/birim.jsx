@@ -1,13 +1,15 @@
-import dom from "/lib/util/dom";
+import BlogCss from "../birim.css";
 import Yazar from "../yazar/birim";
+import Css from "./birim.css";
+import dom from "/lib/util/dom";
 
 /** @const {!HTMLSpanElement} */
 export const RemainingBar = dom.span("blee");
 
 export default ({ href }) => (
   <a href={href} class="blp">
-    <link href="/birim/blog/birim.css" rel="stylesheet" />
-    <link href="/birim/blog/eliptik-egriler/birim.css" rel="stylesheet" />
+    <Css />
+    <BlogCss />
     <div>
       <img src="/birim/blog/eliptik-egriler/banner.png" class="blpp" width="100%" />
       <h4 data-en="Elliptic curves and their applications in crypto">Eliptik eğriler ve kriptoda kullanımı</h4>

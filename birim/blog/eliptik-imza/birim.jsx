@@ -1,15 +1,19 @@
-import dom from "/lib/util/dom";
+import BlogCss from "../birim.css";
 import Yazar from "../yazar/birim";
+import Banner from "./banner.svg";
+import Css from "./birim.css";
+import USDT from "/birim/paralar/USDT.svg";
+import dom from "/lib/util/dom";
 
 /** @const {!HTMLSpanElement} */
 export const RemainingBar = dom.span("blei");
 
 export default ({ href }) => (
   <a href={href} class="blp">
-    <link href="/birim/blog/birim.css" rel="stylesheet" />
-    <link href="/birim/blog/eliptik-imza/birim.css" rel="stylesheet" />
+    <Css />
+    <BlogCss />
     <div>
-      <img src="/birim/blog/eliptik-imza/banner.svg" class="blpp" data-inline />
+      <Banner class="blpp" inline />
       <h4 data-en="Elliptic curve digital signature algorithm">Eliptik eğri imza algoritması</h4>
       <Yazar ad={{ "tr": "KimlikDAO öğren & kazan", "en": "KimlikDAO learn & earn" }} />
       <div class="bly"
@@ -24,7 +28,7 @@ export default ({ href }) => (
       <div class="blpc usdt">
         <div class="blpi usdt" style="width:180px"></div>
         <div class="blpit">
-          <img src="/birim/paralar/USDT.svg" data-inline width="22" height="22" />{" "}
+          <USDT inline width="22" height="22" />{" "}
           <RemainingBar data-en="5,000">5.000</RemainingBar>/{{ en: "5,000", "tr": "5.000" }} USDT
         </div>
       </div>

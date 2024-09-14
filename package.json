@@ -22,6 +22,7 @@
     "html-minifier": "^4.0.0",
     "htmlparser2": "^9.1.0",
     "js-yaml": "^4.1.0",
+    "sax": "^1.4.1",
     "svg-pathdata": "^7.1.0",
     "svgo": "^3.3.2",
     "uglify-js": "~3.19.3",

@@ -1,3 +1,4 @@
+import { Kök } from "./birim.jsx";
 import { AğBilgileri, AğBilgisi } from "/birim/ağlar/birim";
 import Cüzdan from "/birim/cüzdan/birim";
 import Telefon from "/birim/telefon/birim";
@@ -6,9 +7,6 @@ import KPass from "/lib/ethereum/KPass";
 import { whenMined } from "/lib/ethereum/transaction";
 import dom from "/lib/util/dom";
 import { bekle } from "/lib/util/promises";
-
-/** @const {!Element} */
-const Kök = dom.adla("od");
 
 /**
  * @param {!HTMLImageElement} imge

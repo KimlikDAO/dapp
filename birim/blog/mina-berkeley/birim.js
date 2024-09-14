@@ -1,9 +1,6 @@
+import { RemainingBar } from "./birim.jsx";
 import { AğBilgileri } from "/birim/ağlar/birim";
 import { ChainId } from "/lib/crosschain/chains";
-import dom from "/lib/util/dom";
-
-/** @const {!Element} */
-const RemainingBar = dom.adla("blmb");
 
 /** @const {string} */
 const ZkAppAddress = "B62qmuv9skuJS8564ZptVbp9NmMR5a1wjMaFDEUFcmBciZuekQJZ4gD";

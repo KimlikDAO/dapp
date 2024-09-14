@@ -1,4 +1,5 @@
 /** @kastro */
+import Css from "./birim.css";
 import { CoreBağlantısı, MetaMaskBağlantısı, RabbyBağlantısı } from "./evmBağlantısı";
 import { AuroConnection as AuroBağlantısı } from "./minaBağlantısı";
 import { AğBilgileri, ağResmi } from "/birim/ağlar/birim";
@@ -436,7 +437,7 @@ const Bağlantı = ({ idx, name }) => (
 
 const render = ({ DefaultChain, Chains, piggyback, children }) => (
   <div id="cu" data-piggyback={piggyback}>
-    <link rel="stylesheet" href="/birim/cüzdan/birim.css" data-shared />
+    <Css shared />
     <AğButonu><img src={ağResmi(DefaultChain)} height={32} width={32} /></AğButonu>
     <AdresButonu data-en="Connect wallet">Cüzdan bağla</AdresButonu>
     <Menü style="display:none" tabindex="0">
