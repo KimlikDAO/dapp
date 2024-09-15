@@ -1,4 +1,4 @@
-<h1><img src="birim/favicon/icon.svg" align="top" height="44"> KimlikDAO dApp'ı</a></h1>
+<h1><img src="birim/icon.svg" align="top" height="44"> KimlikDAO dApp'ı</a></h1>
 
 ## Dizinler
 

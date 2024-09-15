@@ -10,6 +10,7 @@ import Altdizin from "/birim/altdizin/birim";
 import BaşlıkCss from "/birim/başlık/birim.css";
 import Cüzdan from "/birim/cüzdan/birim";
 import Dil from "/birim/dil/birim";
+import Favicon from "/birim/icon.svg";
 import Logo from "/birim/logo.svg";
 import { ChainId } from "/lib/crosschain/chains";
 import { assignGlobals } from "/lib/kastro/compiler/pageGlobals";
@@ -42,23 +43,23 @@ const Ana = () => {
         <link rel="canonical" href="https://kimlikdao.org" />
         <birim:lato />
         <birim:ortakcss />
-        <birim:favicon />
+        <Favicon raster={32} rel="icon" />
         <BaşlıkCss shared />
         <script src="/ana/sayfa.js" type="module"></script>
       </head>
 
       <body id="an">
         <div id="baa">
-          <a href="/" id="bag"><Logo id="bak" height="35" inline />KimlikDAO</a>
+          <a href="/" id="bag"><Logo id="bak" height={35} inline />KimlikDAO</a>
           <div id="baf">
-            <a class="bae" href={{ "en": "//join.kimlikdao.org/en", "tr": "//join.kimlikdao.org/tr" }}
+            <a class="bae" href={{ en: "//join.kimlikdao.org/en", tr: "//join.kimlikdao.org/tr" }}
               data-en="Join us">Aramıza katıl</a>
             <a class="bae" href="//discord.gg/H2wg6pcWXG" target="_blank" rel="noreferrer">Discord</a>
             <Dil />
             <Cüzdan />
-            <a id="bal" href={{ en: "mint", "tr": "al" }} class="btn act">{{
-              "en": "Mint KPass",
-              "tr": "Hemen KPass al"
+            <a id="bal" href={{ en: "mint", tr: "al" }} class="btn act">{{
+              en: "Mint KPass",
+              tr: "Hemen KPass al"
             }}<OkResmi inline /></a>
           </div>
         </div>

@@ -1,7 +1,7 @@
 import dom from "/lib/util/dom";
 
 /** @const {!HTMLDivElement} */
-const Kök = dom.div("od");
+export const Kök = dom.div("od");
 
 const Dot = {
   "en": ".",
@@ -74,10 +74,6 @@ const Ödeme = () => (
           <span class="ods" data-en="0.0006">0,0006</span><span class="odp">BNB</span><img src="/birim/paralar/BNB.svg"
             height={32} width={32} />
         </li>
-        <li id="odd0x406">
-          <span class="ods" data-en="0.0006">0,0006</span><span class="odp">CFX</span><img src="/birim/paralar/CFX.svg"
-            height={32} width={32} />
-        </li>
         <li id="odd0xfa">
           <span class="ods" data-en="0.0006">0,0006</span><span class="odp">FTM</span><img src="/birim/paralar/FTM.svg"
             height={32} width={32} />
@@ -86,7 +82,7 @@ const Ödeme = () => (
           <span class="ods" data-en="0.0006">0,0006</span><span class="odp">ETH</span><img src="/birim/paralar/ETH.svg"
             height={32} width={32} />
         </li>
-        <li id="oddm:berkeley">
+        <li id="oddmina:mainnet">
           <span class="ods">1</span><span class="odp">tMINA</span><img src="/birim/paralar/MINA.png" height={32} width={32} />
         </li>
       </ul>
