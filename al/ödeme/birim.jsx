@@ -4,8 +4,8 @@ import dom from "/lib/util/dom";
 export const Kök = dom.div("od");
 
 const Dot = {
-  "en": ".",
-  "tr": ","
+  en: ".",
+  tr: ","
 };
 
 const Ödeme = () => (

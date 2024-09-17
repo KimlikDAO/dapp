@@ -7,11 +7,11 @@ export default () => (
     <div class="ansag">
       <h2 data-en="KimlikDAO progress reports." class="oprp">KimlikDAO ilerleme raporları.</h2>
       <span class="anac">{{
-        "en":
+        en:
           "Read about the progress at KimlikDAO, from advancements in the KimlikDAO " +
           "protocol to new uses of KPass, from the events we participate in, to the " +
           "new partnerships we establish, in our monthly progress reports",
-        "tr":
+        tr:
           "KimlikDAO’nun protokolündeki gelişmelerden yeni kullanım alanlarına, " +
           "katıldığımız etkinliklerden, kurduğumuz yeni ortaklıklara tüm " +
           "gelişmelerini aylık ilerleme raporlarından okuyun."

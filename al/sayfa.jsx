@@ -1,6 +1,32 @@
 import Css from "./sayfa.css";
+import Tanışma from "./tanışma/birim.jsx";
+import Ödeme from "./ödeme/birim.jsx";
+import Başlık from "/birim/başlık/birim";
+import Favicon from "/birim/icon.svg";
+import KPass from "/birim/kpass/birim.jsx";
+import Lato400 from "/birim/lato/l400.ttf";
+import Lato700 from "/birim/lato/l700.ttf";
+import Telefon from "/birim/telefon/birim.jsx";
 import { ChainId } from "/lib/crosschain/chains";
 import { assignGlobals } from "/lib/kastro/compiler/pageGlobals";
+
+const CüzdanBağlama = () =>
+  <div id="al1" class="step">
+    <b data-en="1. Connect your wallet.">1. Cüzdanınızı bağlayın. </b>{{
+      tr: "Cüzdan bağlayarak devam edin.",
+      en: "Proceed with a crypto wallet."
+    }}<br /><br />
+    <a href="javascript:" id="al1a" class="act btn" data-en="Connect wallet">Cüzdan bağla</a>
+  </div>;
+
+const Şifreleme = () =>
+  <div id="al3" class="step disabled">
+    <b data-en="3. Let’s encrypt your KPass.">3. KPass’inizi şifreleyelim. </b>{{
+      en: "We need 4 signatures from you to encrypt your KPass.",
+      tr: "KPass’ini şifrelememiz için sizden 4 adet imzaya ihtiyacımız var. Bu işlem off-chain, tamamen ücretsiz ve güvenli."
+    }}<br /><br />
+    <a href="javascript:" id="al3a" class="act btn" data-en="Request 4 signatures">4 imza isteği yolla</a>
+  </div>;
 
 const Al = () => {
   assignGlobals({
@@ -23,42 +49,30 @@ const Al = () => {
       <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <Lato400 shared />
+        <Lato700 shared />
         <title data-en="KimlikDAO | Mint KPass">KimlikDAO | KPass al</title>
-        <birim:lato />
         <birim:ortakcss />
-        <birim:favicon />
+        <Favicon raster={32} rel="icon" />
         <Css />
         <script type="module" src="/al/sayfa.js" data-loose></script>
       </head>
 
       <body>
-        <birim:başlık data-href="/" />
+        <Başlık href="/" />
         <div id="al">
           <div id="als">
-            <div id="al1" class="step"><b data-en="1. Connect your wallet.">1. Cüzdanınızı bağlayın.</b><span
-              data-en="Proceed with a crypto wallet.">
-              Cüzdan bağlayarak devam edin.</span>
-              <br />
-              <br />
-              <a href="javascript:" id="al1a" class="act btn" data-en="Connect wallet">Cüzdan bağla</a>
-            </div>
-            <altbirim:tanışma />
-            <div id="al3" class="step disabled">
-              <b data-en="3. Let’s encrypt your KPass.">3. KPass’inizi şifreleyelim.</b><span phantom
-                data-en="We need 4 signatures from you to encrypt your KPass.">KPass’ini
-                şifrelememiz için sizden <span id="al3b">4</span> adet imzaya ihtiyacımız var.
-                Bu işlem off-chain, tamamen ücretsiz ve güvenli.</span>
-              <br /><br />
-              <a href="javascript:" id="al3a" class="act btn" data-en="Request 4 signatures">4 imza isteği yolla</a>
-            </div>
+            <CüzdanBağlama />
+            <Tanışma />
+            <Şifreleme />
             <altbirim:imeceİptal />
-            <altbirim:ödeme />
+            <Ödeme />
           </div>
           <div id="alr">
             <div id="alu">
-              <birim:kpass />
+              <KPass />
             </div>
-            <birim:telefon style="opacity:0" data-kpass="true" />
+            <Telefon style="opacity:0" kpass={false} />
           </div>
         </div>
       </body>

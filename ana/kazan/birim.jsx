@@ -12,7 +12,7 @@ export default () => (
         KimlikDAO blog’un bilgi dolu ve ödüllü makalelerini oku, basit soruları cevapla,
         KPass’inin %100 anonim HumanID kısmını sunarak on binlerce dolarlık havuzdan
         ödülünü topla. Çok yakında!</span><br />
-      <a href={{ "en": "//blog.kimlikdao.org/en", "tr": "//blog.kimlikdao.org/tr" }} class="info btn anust"
+      <a href={{ en: "//blog.kimlikdao.org/en", tr: "//blog.kimlikdao.org/tr" }} class="info btn anust"
         data-en="Learn & earn (Soon!)">Öğren ve kazan (Yakında!)</a>
     </div>
     <EliptikImza href="" />

@@ -12,6 +12,6 @@ Cüzdan.kpassDeğişince((_, dosyaSözü) => {
     ? dom.TR ? "KPass’ini incele" : "View KPass"
     : dom.TR ? "Hemen KPass al" : "Mint KPass"
   eylemDüğmesi.href = dosyaSözü
-    ? dom.TR ? "/kpassim" : "/kpass"
-    : dom.TR ? "/al" : "/mint"
+    ? dom.TR ? "kpassim" : "kpass"
+    : dom.TR ? "al" : "mint"
 });

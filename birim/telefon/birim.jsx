@@ -13,8 +13,8 @@ export const Kutu = dom.div("tek");
 /** @const {!HTMLDivElement} */
 export const NftDüğmesi = dom.div("tez");
 
-const Telefon = ({ kpass = true } = {}) => (
-  <div id="te">
+const Telefon = ({ kpass = true, style } = {}) => (
+  <div id="te" style={style}>
     <Css />
     <AnaEkran>
       <div id="teb">$1523.74</div>

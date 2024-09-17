@@ -11,6 +11,8 @@ import BaşlıkCss from "/birim/başlık/birim.css";
 import Cüzdan from "/birim/cüzdan/birim";
 import Dil from "/birim/dil/birim";
 import Favicon from "/birim/icon.svg";
+import Lato400 from "/birim/lato/l400.ttf";
+import Lato700 from "/birim/lato/l700.ttf";
 import Logo from "/birim/logo.svg";
 import { ChainId } from "/lib/crosschain/chains";
 import { assignGlobals } from "/lib/kastro/compiler/pageGlobals";
@@ -39,9 +41,10 @@ const Ana = () => {
         <meta name="description" content={Description} />
         <OpenGraph />
         <TwitterCard />
+        <Lato400 shared />
+        <Lato700 shared />
         <title>{Title}</title>
         <link rel="canonical" href="https://kimlikdao.org" />
-        <birim:lato />
         <birim:ortakcss />
         <Favicon raster={32} rel="icon" />
         <BaşlıkCss shared />

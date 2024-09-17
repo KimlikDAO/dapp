@@ -1,28 +1,18 @@
-/**
- * @fileoverview İmece iptal parçası. DOM'da `im` öneki bu parçaya ayrılmıştır.
- */
-
+import {
+  EşikGirdisi,
+  GösterDüğmesi,
+  Kutu,
+  Kök,
+  ToplamAğırlık,
+  İptalDüğmesi,
+  İptalciler
+} from "./birim.jsx";
 import { AğBilgileri, AğBilgisi } from "/birim/ağlar/birim";
 import Cüzdan from "/birim/cüzdan/birim";
 import { ChainId } from "/lib/crosschain/chains";
 import KPass from "/lib/ethereum/KPass";
 import evm from "/lib/ethereum/evm";
 import dom from "/lib/util/dom";
-
-/** @const {!Element} */
-const Kök = dom.adla("im");
-/** @const {!HTMLInputElement} */
-const EşikGirdisi = /** @type {!HTMLInputElement} */(dom.adla("imt"));
-/** @const {!Element} */
-const GösterButonu = dom.adla("imbe");
-/** @const {!HTMLAnchorElement} */
-const İptalButonu = /** @type {!HTMLAnchorElement} */(dom.adla("imbh"));
-/** @const {!Element} */
-const İptalciler = dom.adla("imf");
-/** @const {!Element} */
-const Kutu = dom.adla("imc");
-/** @const {!HTMLInputElement} */
-const ToplamAğırlık = /** @type {!HTMLInputElement} */(dom.adla("ims"));
 
 /**
  * @param {ChainId} ağ Native tokeninde KPass fiyatının gösterileceği ağ.
@@ -63,20 +53,20 @@ const göster = () => {
  * @param {function(!Object<string, number>, number)} sonra
  */
 const kurVe = (sonra) => {
-  GösterButonu.onclick = () => kutularıAç(sonra);
-  İptalButonu.onclick = () => atla(sonra);
+  GösterDüğmesi.onclick = () => kutularıAç(sonra);
+  İptalDüğmesi.onclick = () => atla(sonra);
 }
 
 /**
  * @param {function(!Object<string, number>, number)} sonra
  */
 const atla = (sonra) => {
-  dom.göster(GösterButonu);
-  GösterButonu.innerText = dom.TR ? "Yine de kur" : "Setup social revoke";
-  dom.göster(İptalButonu);
-  İptalButonu.innerText = dom.TR ? "İmece iptal kurulmadı 🤌" : "Skipped 🤌";
-  İptalButonu.classList.add("done");
-  dom.düğmeDurdur(İptalButonu);
+  dom.göster(GösterDüğmesi);
+  GösterDüğmesi.innerText = dom.TR ? "Yine de kur" : "Setup social revoke";
+  dom.göster(İptalDüğmesi);
+  İptalDüğmesi.innerText = dom.TR ? "İmece iptal kurulmadı 🤌" : "Skipped 🤌";
+  İptalDüğmesi.classList.add("done");
+  dom.düğmeDurdur(İptalDüğmesi);
   Kök.classList.add("done");
   dom.gizle(Kutu);
   sonra({}, 0);
@@ -99,8 +89,8 @@ const kutularıAç = (sonra) => {
 
   Kök.classList.remove("done");
   dom.göster(Kutu);
-  dom.gizle(GösterButonu);
-  dom.gizle(İptalButonu);
+  dom.gizle(GösterDüğmesi);
+  dom.gizle(İptalDüğmesi);
   atlaDüğmesi.onclick = () => atla(sonra);
 
   /** @const {NodeList<!Element>} */
@@ -148,9 +138,9 @@ const kutularıAç = (sonra) => {
       geçerli = false;
     }
     if (geçerli) {
-      dom.göster(İptalButonu);
-      İptalButonu.innerText = dom.TR ? "İmece iptal kuruldu ✓" : "Social revoke setup is complete ✓";
-      İptalButonu.onclick = null;
+      dom.göster(İptalDüğmesi);
+      İptalDüğmesi.innerText = dom.TR ? "İmece iptal kuruldu ✓" : "Social revoke setup is complete ✓";
+      İptalDüğmesi.onclick = null;
       dom.gizle(Kutu);
       Kök.classList.add("done");
       sonra(adresAğırlığı, eşikDeğeri);

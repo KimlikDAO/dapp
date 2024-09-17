@@ -42,8 +42,8 @@ const Sahipler = () => (
             mutlu KPass kullanıcısı arasına katılın.</i18n>
         </span>
         <div id="saz"><a data-en:href="/mint" id="sal" href="/al" class="act btn">{{
-          "en": "Become a KPass holder",
-          "tr": "Sen de KPass sahibi ol"
+          en: "Become a KPass holder",
+          tr: "Sen de KPass sahibi ol"
         }} <img src="/ana/ok.svg" data-inline /></a>
         </div>
       </div>

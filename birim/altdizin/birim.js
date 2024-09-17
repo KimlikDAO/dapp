@@ -1,3 +1,3 @@
-import { kur } from "/birim/kaydol/birim";
+import Kaydol from "/birim/kaydol/birim";
 
-kur("altb");
+Kaydol.bind("altb");

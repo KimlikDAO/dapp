@@ -1,13 +1,13 @@
 import dom from "/lib/util/dom";
 
 /**
- * @param {string} domAdı
+ * @param {string} id
  */
-const kur = (domAdı) => {
+const bind = (id) => {
   /** @type {?string} */
   let KaydolMetni;
   /** @const {!Element} */
-  const kök = dom.adla(domAdı);
+  const kök = dom.adla(id);
   /** @const {!HTMLInputElement} */
   const girdi = /** @type {!HTMLInputElement} */(kök.firstElementChild);
   /** @const {!Element} */
@@ -46,4 +46,4 @@ const kur = (domAdı) => {
   kök.onsubmit = yolla;
 }
 
-export { kur };
+export default { bind };

@@ -1,7 +1,10 @@
+import Css from "./birim.css";
+
 const Kaydol = ({ id }) => (
   <form id={id}>
+    <Css />
     <input inputmode="email" autocomplete="email" name="email" class="kayi" type="email"
-      data-en-placeholder="Your email address" placeholder="E-posta adresiniz" /><button class="act btn kayb"
+      placeholder={{ en: "Your email address", tr: "E-posta adresiniz" }} /><button class="act btn kayb"
         data-en="Subscribe" type="submit">Kaydol</button>
   </form>
 );

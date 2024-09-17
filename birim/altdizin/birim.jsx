@@ -1,4 +1,5 @@
 import Css from "./birim.css";
+import Kaydol from "/birim/kaydol/birim.jsx";
 
 const Altdizin = () => (
   <div id="alt">
@@ -12,7 +13,7 @@ const Altdizin = () => (
       <span id="altt" data-en="Wallet-login to all on/off-ramps with a single account you truly own.">Bir kez KPass al,
         tüm on/off-ramp’leri cüzdanınla hesap açmadan kullan</span>
       <div id="altm" data-en="SUBSCRIBE TO THE KIMLIKDAO NEWSLETTER">KİMLİKDAO BÜLTEN'E KAYDOLUN</div>
-      <birim:kaydol id="altb" />
+      <Kaydol id="altb" />
     </div>
     <div class="altc">
       <b data-en="COMMUNITY">TOPLULUK</b>
