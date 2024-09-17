@@ -3,6 +3,7 @@ import Başlık from "/birim/başlık/birim.jsx";
 import Favicon from "/birim/icon.svg";
 import Lato400 from "/birim/lato/l400.ttf";
 import Lato700 from "/birim/lato/l700.ttf";
+import OrtakCss from "/birim/ortakcss/birim.jsx";
 import { ChainId } from "/lib/crosschain/chains";
 import { assignGlobals } from "/lib/kastro/compiler/pageGlobals";
 import dom from "/lib/util/dom";
@@ -45,6 +46,7 @@ const İptal = () => {
         <Lato700 shared />
         <Favicon raster={32} rel="icon" />
         <script type="module" src="/iptal/sayfa.js" data-inherit="Chains,DefaultChain"></script>
+        <OrtakCss />
         <Css />
       </head>
       <body>

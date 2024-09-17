@@ -5,6 +5,7 @@ import OkResmi from "./ok.svg";
 import OpenGraph, { Description, Title } from "./opengraph/birim";
 import Raporlar from "./raporlar/birim";
 import Sahipler from "./sahipler/birim.jsx";
+import Css from "./sayfa.css";
 import TwitterCard from "./twittercard/birim";
 import Altdizin from "/birim/altdizin/birim";
 import BaşlıkCss from "/birim/başlık/birim.css";
@@ -14,6 +15,7 @@ import Favicon from "/birim/icon.svg";
 import Lato400 from "/birim/lato/l400.ttf";
 import Lato700 from "/birim/lato/l700.ttf";
 import Logo from "/birim/logo.svg";
+import OrtakCss from "/birim/ortakcss/birim";
 import { ChainId } from "/lib/crosschain/chains";
 import { assignGlobals } from "/lib/kastro/compiler/pageGlobals";
 
@@ -45,12 +47,12 @@ const Ana = () => {
         <Lato700 shared />
         <title>{Title}</title>
         <link rel="canonical" href="https://kimlikdao.org" />
-        <birim:ortakcss />
+        <OrtakCss />
+        <Css />
         <Favicon raster={32} rel="icon" />
         <BaşlıkCss shared />
         <script src="/ana/sayfa.js" type="module"></script>
       </head>
-
       <body id="an">
         <div id="baa">
           <a href="/" id="bag"><Logo id="bak" height={35} inline />KimlikDAO</a>

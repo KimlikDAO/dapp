@@ -7,9 +7,14 @@ import Favicon from "/birim/icon.svg";
 import KPass from "/birim/kpass/birim.jsx";
 import Lato400 from "/birim/lato/l400.ttf";
 import Lato700 from "/birim/lato/l700.ttf";
+import OrtakCss from "/birim/ortakcss/birim";
 import Telefon from "/birim/telefon/birim.jsx";
 import { ChainId } from "/lib/crosschain/chains";
 import { assignGlobals } from "/lib/kastro/compiler/pageGlobals";
+import dom from "/lib/util/dom";
+
+/** @const {!HTMLAnchorElement} */
+export const BağlaDüğmesi = dom.a("al1a");
 
 const CüzdanBağlama = () =>
   <div id="al1" class="step">
@@ -17,7 +22,7 @@ const CüzdanBağlama = () =>
       tr: "Cüzdan bağlayarak devam edin.",
       en: "Proceed with a crypto wallet."
     }}<br /><br />
-    <a href="javascript:" id="al1a" class="act btn" data-en="Connect wallet">Cüzdan bağla</a>
+    <BağlaDüğmesi href="javascript:" class="act btn" data-en="Connect wallet">Cüzdan bağla</BağlaDüğmesi>
   </div>;
 
 const Şifreleme = () =>
@@ -53,12 +58,11 @@ const Al = () => {
         <Lato400 shared />
         <Lato700 shared />
         <title data-en="KimlikDAO | Mint KPass">KimlikDAO | KPass al</title>
-        <birim:ortakcss />
         <Favicon raster={32} rel="icon" />
+        <OrtakCss />
         <Css />
         <script type="module" src="/al/sayfa.js" data-loose></script>
       </head>
-
       <body>
         <Başlık href="/" />
         <div id="al">

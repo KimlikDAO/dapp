@@ -3,6 +3,7 @@ import Başlık from "/birim/başlık/birim.jsx";
 import Favicon from "/birim/icon.svg";
 import Lato400 from "/birim/lato/l400.ttf";
 import Lato700 from "/birim/lato/l700.ttf";
+import OrtakCss from "/birim/ortakcss/birim.jsx";
 import { ChainId } from "/lib/crosschain/chains";
 import { assignGlobals } from "/lib/kastro/compiler/pageGlobals";
 
@@ -20,7 +21,6 @@ const Oyla = () => {
 
   return (
     <html>
-
       <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -29,9 +29,9 @@ const Oyla = () => {
         <Lato700 shared />
         <Favicon raster={32} rel="icon" />
         <script type="module" src="/oyla/sayfa.js" data-inherit="Chains,DefaultChain"></script>
+        <OrtakCss />
         <Css />
       </head>
-
       <body>
         <Başlık />
         <div id="oy">
@@ -77,7 +77,6 @@ const Oyla = () => {
           </div>
         </div>
       </body>
-
     </html>
   );
 };

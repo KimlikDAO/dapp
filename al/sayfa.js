@@ -1,6 +1,7 @@
 /**
  * @fileoverview Al sayfası giriş noktası
  */
+import { BağlaDüğmesi } from "./sayfa.jsx";
 import İmeceİptal from "/al/imeceİptal/birim";
 import Tanışma from "/al/tanışma/birim";
 import { öde } from "/al/ödeme/birim";
@@ -77,16 +78,14 @@ const kpassYarat = (adres, açıkKPass) => {
 const bağlaAdımı = () => {
   /** @const {!Element} */
   const kök = dom.adla("al1");
-  /** @const {!HTMLAnchorElement} */
-  const düğme = /** @type {!HTMLAnchorElement} */(dom.adla("al1a"));
-  düğme.onclick = Cüzdan.aç;
+  BağlaDüğmesi.onclick = Cüzdan.aç;
 
   Cüzdan.adresDeğişince((adres) => {
     Telefon.adresGir(adres);
     if (adres) {
-      düğme.innerText = dom.TR ? "Cüzdan bağlandı ✓" : "Wallet connected ✓";
-      düğme.classList.remove("act");
-      dom.düğmeDurdur(düğme);
+      BağlaDüğmesi.innerText = dom.TR ? "Cüzdan bağlandı ✓" : "Wallet connected ✓";
+      BağlaDüğmesi.classList.remove("act");
+      dom.düğmeDurdur(BağlaDüğmesi);
       kök.classList.add("done");
       Tanışma.açıkKPassAlVe(
         /** @type {ChainGroup} */(Cüzdan.ağ().slice(0, 2)), adres.toLowerCase(), kpassYarat);

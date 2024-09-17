@@ -1,10 +1,11 @@
+import Css from "./sayfa.css";
 import Başlık from "/birim/başlık/birim";
 import Favicon from "/birim/icon.svg";
-import Css from "./sayfa.css";
 import KPass from "/birim/kpass/birim.jsx";
-import dom from "/lib/util/dom";
 import Lato400 from "/birim/lato/l400.ttf";
 import Lato700 from "/birim/lato/l700.ttf";
+import OrtakCss from "/birim/ortakcss/birim";
+import dom from "/lib/util/dom";
 
 /** @const {!HTMLAnchorElement} */
 const DiscordDüğmesi = dom.a("inbtn0");
@@ -27,8 +28,8 @@ const KPassim = () =>
       <title data-en="KimlikDAO | My KPass">KimlikDAO | KPass’im</title>
       <Lato400 shared />
       <Lato700 shared />
-      <birim:ortakcss />
       <Favicon raster={32} rel="icon" />
+      <OrtakCss />
       <Css />
       <script type="module" src="/kpassim/sayfa.js" data-inherit="Chains,DefaultChain"></script>
     </head>
