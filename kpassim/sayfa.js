@@ -2,6 +2,14 @@
  * @fileoverview İncele sayfası giriş noktası
  *
  */
+import {
+  AçDüğmesi,
+  DiscordDüğmesi,
+  EşikAzaltmaDüğmesi,
+  İmeceİptalDüğmesi,
+  KPassYok,
+  SilDüğmesi
+} from "./birim.jsx";
 import "./discord.d";
 import { roleRequestChallenge } from "./discord.js";
 import Cüzdan from "/birim/cüzdan/birim";
@@ -14,23 +22,11 @@ import {
 } from "/kpassim/pencere/birim";
 import { ChainId } from "/lib/crosschain/chains";
 import { Provider } from "/lib/crosschain/provider";
-import { Signature, Signer } from "/lib/crosschain/signer";
+import { Signature } from "/lib/crosschain/signer";
 import { fromUnlockableNFT } from "/lib/did/KPass";
 import KPass from "/lib/ethereum/KPass";
 import dom from "/lib/util/dom";
 
-/** @const {!HTMLAnchorElement} */
-const DiscordDüğmesi = /** @type {!HTMLAnchorElement} */(dom.adla("inbtn0"));
-/** @const {!Element} */
-const İmeceİptalDüğmesi = dom.adla("inbtn1");
-/** @const {!Element} */
-const EşikAzaltmaDüğmesi = dom.adla("inbtn2");
-/** @const {!Element} */
-const SilDüğmesi = dom.adla("inbtn3");
-/** @const {!Element} */
-const AçDüğmesi = dom.adla("intcktb");
-/** @const {!Element} */
-const KpassYok = dom.adla("inn");
 
 /** @const {!Object<string, !did.DecryptedSections>} */
 const Bellek = {};
@@ -142,12 +138,12 @@ const kpassDeğişti = (_, dosyaSözü) => {
   }) : Cüzdan.aç;
   dom.gösterGizle(AçDüğmesi, kpassVar);
   dom.gösterGizle(Kpass.Kök, kpassVar);
-  dom.gösterGizle(KpassYok, !kpassVar);
+  dom.gösterGizle(KPassYok, !kpassVar);
 
   if (kpassVar)
     kapalıYüzGöster();
   else
-    dom.gösterGizle(KpassYok.firstElementChild, Cüzdan.adres() != null);
+    dom.gösterGizle(KPassYok.firstElementChild, Cüzdan.adres() != null);
 }
 
 kpassDeğişti("", null);

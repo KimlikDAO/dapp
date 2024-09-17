@@ -1,21 +1,17 @@
 /**
  * @fileoverview İptal sayfası giriş noktası
  */
+import {
+  AdresKutusu,
+  BaşkasıDüğmesi,
+  BenDüğmesi,
+  KiminKutusu,
+  KimKutusu
+} from "./sayfa.jsx";
 import Cüzdan from "/birim/cüzdan/birim";
 import "/birim/dil/birim";
 import KPass from "/lib/ethereum/KPass";
 import dom from "/lib/util/dom";
-
-/** @const {!Element} */
-const KiminKutusu = dom.adla("ipssc");
-/** @const {!Element} */
-const BenDüğmesi = dom.adla("ipbtna");
-/** @const {!Element} */
-const BaşkasıDüğmesi = dom.adla("ipbtnb");
-/** @const {!Element} */
-const KimKutusu = dom.adla("ipiic");
-/** @const {!Element} */
-const AdresKutusu = dom.adla("iptac");
 
 Cüzdan.bağlantıDeğişince((bağlantı) =>
   KPass.setProvider(/** @type {!eth.Provider} */(bağlantı.provider)));

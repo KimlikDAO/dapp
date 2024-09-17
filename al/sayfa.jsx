@@ -1,3 +1,4 @@
+import İmeceİptal from "./imeceİptal/birim.jsx";
 import Css from "./sayfa.css";
 import Tanışma from "./tanışma/birim.jsx";
 import Ödeme from "./ödeme/birim.jsx";
@@ -65,7 +66,7 @@ const Al = () => {
             <CüzdanBağlama />
             <Tanışma />
             <Şifreleme />
-            <altbirim:imeceİptal />
+            <İmeceİptal />
             <Ödeme />
           </div>
           <div id="alr">
