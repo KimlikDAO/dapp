@@ -43,7 +43,7 @@ const Bağlantı = ({ idx, name }) => (
  */
 const Cüzdan = ({ DefaultChain, Chains, ChainNotes, piggyback }) => (
   <div id="cu" data-piggyback={piggyback}>
-    <Css shared />
+    <Css />
     <AğButonu><img src={ağResmi(DefaultChain)} height={32} width={32} /></AğButonu>
     <AdresButonu data-en="Connect wallet">Cüzdan bağla</AdresButonu>
     <Menü style="display:none" tabindex="0">

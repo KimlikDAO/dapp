@@ -16,6 +16,25 @@ import dom from "/lib/util/dom";
 /** @const {!HTMLAnchorElement} */
 export const BağlaDüğmesi = dom.a("al1a");
 
+/** @const {!Array<ChainId>} */
+const Chains = [
+  ChainId.x1,
+  ChainId.MinaMainnet,
+  ChainId.xa4b1,
+  ChainId.x89,
+  ChainId.xa86a,
+  ChainId.x38
+];
+
+/** @const {!Object<ChainId, I18nString>} */
+const ChainNotes = {
+  [ChainId.MinaMainnet]: { tr: "Yeni ✨", en: "New ✨" },
+  [ChainId.xa4b1]: { tr: "Ana ağ", en: "Signal chain" }
+};
+
+/** @const {ChainId} */
+const DefaultChain = ChainId.xa4b1;
+
 const CüzdanBağlama = () =>
   <div id="al1" class="step">
     <b data-en="1. Connect your wallet.">1. Cüzdanınızı bağlayın. </b>{{
@@ -34,55 +53,38 @@ const Şifreleme = () =>
     <a href="javascript:" id="al3a" class="act btn" data-en="Request 4 signatures">4 imza isteği yolla</a>
   </div>;
 
-const Al = () => {
-  assignGlobals({
-    Chains: [
-      ChainId.x1,
-      ChainId.MinaMainnet,
-      ChainId.xa4b1,
-      ChainId.x89,
-      ChainId.xa86a,
-      ChainId.x38
-    ],
-    ChainNotes: {
-      [ChainId.MinaMainnet]: { tr: "Yeni ✨", en: "New ✨" },
-      [ChainId.xa4b1]: { tr: "Ana ağ", en: "Signal chain" }
-    },
-    DefaultChain: ChainId.xa4b1,
-  });
-  return (
-    <html>
-      <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <Lato400 shared />
-        <Lato700 shared />
-        <title data-en="KimlikDAO | Mint KPass">KimlikDAO | KPass al</title>
-        <Favicon raster={32} rel="icon" />
-        <OrtakCss />
-        <Css />
-        <script type="module" src="/al/sayfa.js" data-loose></script>
-      </head>
-      <body>
-        <Başlık href="/" />
-        <div id="al">
-          <div id="als">
-            <CüzdanBağlama />
-            <Tanışma />
-            <Şifreleme />
-            <İmeceİptal />
-            <Ödeme />
-          </div>
-          <div id="alr">
-            <div id="alu">
-              <KPass />
-            </div>
-            <Telefon style="opacity:0" kpass={false} />
-          </div>
+const Al = () => (
+  <html>
+    <head>
+      <meta charset="utf-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <Lato400 shared />
+      <Lato700 shared />
+      <title data-en="KimlikDAO | Mint KPass">KimlikDAO | KPass al</title>
+      <Favicon raster={32} rel="icon" />
+      <OrtakCss />
+      <Css />
+      <script src="/al/sayfa.js" Chains={Chains} DefaultChain={DefaultChain} data-loose />
+    </head>
+    <body>
+      <Başlık href="/" DefaultChain={DefaultChain} Chains={Chains} ChainNotes={ChainNotes} />
+      <div id="al">
+        <div id="als">
+          <CüzdanBağlama />
+          <Tanışma />
+          <Şifreleme />
+          <İmeceİptal />
+          <Ödeme />
         </div>
-      </body>
-    </html>
-  );
-}
+        <div id="alr">
+          <div id="alu">
+            <KPass />
+          </div>
+          <Telefon style="opacity:0" kpass={false} />
+        </div>
+      </div>
+    </body>
+  </html>
+);
 
 export default Al;

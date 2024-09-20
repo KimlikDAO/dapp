@@ -8,7 +8,7 @@ export const DilListesi = dom.ul("did");
 
 const Dil = () => (
   <div id="di">
-    <Css shared />
+    <Css />
     <DilButonu class="bae" data-en="EN" href="javascript:">TR</DilButonu>
     <DilListesi style="display:none">
       <li id="ditr"><img src="/birim/dil/tr.svg" width={16} height={16} /> Türkçe</li>

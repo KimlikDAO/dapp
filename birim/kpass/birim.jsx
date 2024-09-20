@@ -55,7 +55,7 @@ const AddressInfoKartı = () => (
 
 const KPass = () => (
   <Kök>
-    <Css shared />
+    <Css />
     <Kapak id="kpk" />
     <div id="kpi">
       <Kartlar>

@@ -20,6 +20,25 @@ const AçDüğmesi = dom.div("intcktb");
 /** @const {!HTMLDivElement} */
 const KPassYok = dom.div("inn");
 
+/** @const {!Array<ChainId>} */
+const Chains = [
+  ChainId.x1,
+  ChainId.MinaMainnet,
+  ChainId.xa4b1,
+  ChainId.x89,
+  ChainId.xa86a,
+  ChainId.x38
+];
+
+/** @const {!Object<ChainId, I18nString>} */
+const ChainNotes = {
+  [ChainId.MinaMainnet]: { tr: "Yeni ✨", en: "New ✨" },
+  [ChainId.xa4b1]: { tr: "Ana ağ", en: "Signal chain" }
+};
+
+/** @const {ChainId} */
+const DefaultChain = ChainId.xa4b1;
+
 const KPassim = () =>
   <html>
     <head>
@@ -31,10 +50,10 @@ const KPassim = () =>
       <Favicon raster={32} rel="icon" />
       <OrtakCss />
       <Css />
-      <script type="module" src="/kpassim/sayfa.js" data-inherit="Chains,DefaultChain"></script>
+      <script type="module" src="/kpassim/sayfa.js" Chains={Chains} DefaultChain={DefaultChain} />
     </head>
     <body>
-      <Başlık />
+      <Başlık DefaultChain={DefaultChain} Chains={Chains} ChainNotes={ChainNotes} />
       <div id="in">
         <div id="intckt">
           <KPassYok>
