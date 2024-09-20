@@ -1,3 +1,4 @@
+import Script from "kastro:./sayfa.js";
 import Css from "./sayfa.css";
 import Başlık from "/birim/başlık/birim.jsx";
 import Favicon from "/birim/icon.svg";
@@ -34,9 +35,9 @@ const Oyla = () => (
       <Lato400 shared />
       <Lato700 shared />
       <Favicon raster={32} rel="icon" />
-      <script type="module" src="/oyla/sayfa.js" Chains={Chains} DefaultChain={DefaultChain}></script>
       <OrtakCss />
       <Css />
+      <Script Chains={Chains} DefaultChain={DefaultChain} />
     </head>
     <body>
       <Başlık DefaultChain={DefaultChain} Chains={Chains} ChainNotes={ChainNotes} />

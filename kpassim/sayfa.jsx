@@ -1,3 +1,4 @@
+import Script from "kastro:./sayfa.js";
 import Css from "./sayfa.css";
 import Başlık from "/birim/başlık/birim";
 import Favicon from "/birim/icon.svg";
@@ -50,7 +51,7 @@ const KPassim = () =>
       <Favicon raster={32} rel="icon" />
       <OrtakCss />
       <Css />
-      <script type="module" src="/kpassim/sayfa.js" Chains={Chains} DefaultChain={DefaultChain} />
+      <Script Chains={Chains} DefaultChain={DefaultChain} />
     </head>
     <body>
       <Başlık DefaultChain={DefaultChain} Chains={Chains} ChainNotes={ChainNotes} />

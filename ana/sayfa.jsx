@@ -1,3 +1,4 @@
+import Script from "kastro:./sayfa.js";
 import Ağ from "./ağ/birim.jsx";
 import Hero from "./hero/birim";
 import Kazan from "./kazan/birim.jsx";
@@ -51,7 +52,7 @@ const Ana = () => (
       <OrtakCss />
       <Css />
       <Favicon raster={32} rel="icon" />
-      <script src="/ana/sayfa.js" Chains={Chains} DefaultChain={DefaultChain} />
+      <Script Chains={Chains} DefaultChain={DefaultChain} />
     </head>
     <body id="an">
       <div id="baa">

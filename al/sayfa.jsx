@@ -1,3 +1,4 @@
+import Script from "kastro:./sayfa.js";
 import İmeceİptal from "./imeceİptal/birim.jsx";
 import Css from "./sayfa.css";
 import Tanışma from "./tanışma/birim.jsx";
@@ -10,7 +11,6 @@ import Lato700 from "/birim/lato/l700.ttf";
 import OrtakCss from "/birim/ortakcss/birim";
 import Telefon from "/birim/telefon/birim.jsx";
 import { ChainId } from "/lib/crosschain/chains";
-import { assignGlobals } from "/lib/kastro/compiler/pageGlobals";
 import dom from "/lib/util/dom";
 
 /** @const {!HTMLAnchorElement} */
@@ -64,7 +64,7 @@ const Al = () => (
       <Favicon raster={32} rel="icon" />
       <OrtakCss />
       <Css />
-      <script src="/al/sayfa.js" Chains={Chains} DefaultChain={DefaultChain} data-loose />
+      <Script Chains={Chains} DefaultChain={DefaultChain} loose />
     </head>
     <body>
       <Başlık href="/" DefaultChain={DefaultChain} Chains={Chains} ChainNotes={ChainNotes} />

@@ -6,6 +6,7 @@ import Lato700 from "/birim/lato/l700.ttf";
 import OrtakCss from "/birim/ortakcss/birim.jsx";
 import { ChainId } from "/lib/crosschain/chains";
 import dom from "/lib/util/dom";
+import Script from "kastro:./sayfa.js";
 
 /** @const {!HTMLDivElement} */
 export const AdresKutusu = dom.div("iptac");
@@ -46,9 +47,9 @@ const İptal = () => (
       <Lato400 shared />
       <Lato700 shared />
       <Favicon raster={32} rel="icon" />
-      <script type="module" src="/iptal/sayfa.js" Chains={Chains} DefaultChain={DefaultChain} />
       <OrtakCss />
       <Css />
+      <Script Chains={Chains} DefaultChain={DefaultChain} />
     </head>
     <body>
       <Başlık DefaultChain={DefaultChain} Chains={Chains} ChainNotes={ChainNotes} />
