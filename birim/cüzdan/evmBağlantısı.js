@@ -101,6 +101,23 @@ const imzala = (provider, metin, adres, hexeÇevir) => provider.request(
   )).then((imza) => evm.compactSignature(imza));
 
 /**
+ * Mevcut KPass'ler ile uyum için 
+ * @param {!eth.Provider} provider
+ * @param {string} metin
+ * @param {string} adres
+ * @param {boolean} hexeÇevir
+ * @return {!Promise<!ArrayBuffer>}
+ */
+const gizliÜret = (provider, metin, adres, hexeÇevir) => provider.request(
+  /** @type {!eth.Request} */({
+    method: "personal_sign",
+    params: [hexeÇevir
+      ? "0x" + hex(new TextEncoder().encode(metin))
+      : metin, adres]
+  }
+  )).then((imza) => crypto.subtle.digest("SHA-256", hexten(imza.slice(2))));
+
+/**
  * @type {!Provider}
  * @const
  */
@@ -170,8 +187,7 @@ const CoreBağlantısı = /** @type {!Provider} */({
    * @return {!Promise<!ArrayBuffer>}
    */
   deriveSecret: (message, address) =>
-    imzala(CoreBağlantısı.provider, message, address, true)
-      .then((sig) => crypto.subtle.digest("SHA-256", hexten(sig.slice(2)))),
+    gizliÜret(CoreBağlantısı.provider, message, address, true),
 
   /**
    * @override
@@ -242,8 +258,7 @@ const MetaMaskBağlantısı = /** @type {!Provider} */({
    * @return {!Promise<!ArrayBuffer>}
    */
   deriveSecret: (message, address) =>
-    imzala(MetaMaskBağlantısı.provider, message, address, false)
-      .then((sig) => crypto.subtle.digest("SHA-256", hexten(sig.slice(2)))),
+    gizliÜret(MetaMaskBağlantısı.provider, message, address, false),
 
   /**
    * @override
@@ -323,8 +338,7 @@ const RabbyBağlantısı = /** @type {!Provider} */({
    * @return {!Promise<!ArrayBuffer>}
    */
   deriveSecret: (message, address) =>
-    imzala(RabbyBağlantısı.provider, message, address, false)
-      .then((sig) => crypto.subtle.digest("SHA-256", hexten(sig.slice(2)))),
+    gizliÜret(RabbyBağlantısı.provider, message, address, false),
 
   /**
    * @override

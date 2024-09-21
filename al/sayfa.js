@@ -82,14 +82,13 @@ const bağlaAdımı = () => {
 
   Cüzdan.adresDeğişince((adres) => {
     Telefon.adresGir(adres);
-    if (adres) {
-      BağlaDüğmesi.innerText = dom.TR ? "Cüzdan bağlandı ✓" : "Wallet connected ✓";
-      BağlaDüğmesi.classList.remove("act");
-      dom.düğmeDurdur(BağlaDüğmesi);
-      kök.classList.add("done");
-      Tanışma.açıkKPassAlVe(
-        /** @type {ChainGroup} */(Cüzdan.ağ().slice(0, 2)), adres.toLowerCase(), kpassYarat);
-    }
+    if (!adres) return;
+    BağlaDüğmesi.innerText = dom.TR ? "Cüzdan bağlandı ✓" : "Wallet connected ✓";
+    BağlaDüğmesi.classList.remove("act");
+    dom.düğmeDurdur(BağlaDüğmesi);
+    kök.classList.add("done");
+    Tanışma.açıkKPassAlVe(
+      /** @type {ChainGroup} */(Cüzdan.ağ().slice(0, 2)), adres.toLowerCase(), kpassYarat);
   });
 }
 

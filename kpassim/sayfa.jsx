@@ -1,4 +1,5 @@
 import Script from "kastro:./sayfa.js";
+import Pencere from "./pencere/birim.jsx";
 import Css from "./sayfa.css";
 import Başlık from "/birim/başlık/birim";
 import Favicon from "/birim/icon.svg";
@@ -6,20 +7,21 @@ import KPass from "/birim/kpass/birim.jsx";
 import Lato400 from "/birim/lato/l400.ttf";
 import Lato700 from "/birim/lato/l700.ttf";
 import OrtakCss from "/birim/ortakcss/birim";
+import { ChainId } from "/lib/crosschain/chains";
 import dom from "/lib/util/dom";
 
-/** @const {!HTMLAnchorElement} */
-const DiscordDüğmesi = dom.a("inbtn0");
-/** @const {!HTMLAnchorElement} */
-const İmeceİptalDüğmesi = dom.a("inbtn1");
-/** @const {!HTMLAnchorElement} */
-const EşikAzaltDüğmesi = dom.a("inbtn2");
-/** @const {!HTMLAnchorElement} */
-const SilDüğmesi = dom.a("inbtn3");
 /** @const {!HTMLDivElement} */
-const AçDüğmesi = dom.div("intcktb");
+export const AçDüğmesi = dom.div("intcktb");
+/** @const {!HTMLAnchorElement} */
+export const DiscordDüğmesi = dom.a("inbtn0");
+/** @const {!HTMLAnchorElement} */
+export const EşikAzaltmaDüğmesi = dom.a("inbtn2");
+/** @const {!HTMLAnchorElement} */
+export const İmeceİptalDüğmesi = dom.a("inbtn1");
 /** @const {!HTMLDivElement} */
-const KPassYok = dom.div("inn");
+export const KPassYok = dom.div("inn");
+/** @const {!HTMLAnchorElement} */
+export const SilDüğmesi = dom.a("inbtn3");
 
 /** @const {!Array<ChainId>} */
 const Chains = [
@@ -71,13 +73,12 @@ const KPassim = () =>
         <div id="inbtn">
           <DiscordDüğmesi href="javascript:" class="info btn" data-en="Claim Discord role">Discord rolü al</DiscordDüğmesi>
           <İmeceİptalDüğmesi href="javascript:" class="more btn" data-en="Add social revoker">İmece iptal adresi ekle</İmeceİptalDüğmesi>
-          <EşikAzaltDüğmesi href="javascript:" class="more btn" data-en="Decrease revoke threshold">Eşik azalt</EşikAzaltDüğmesi>
+          <EşikAzaltmaDüğmesi href="javascript:" class="more btn" data-en="Decrease revoke threshold">Eşik azalt</EşikAzaltmaDüğmesi>
           <SilDüğmesi href=" javascript:" id="inbtn3" class="danger btn" data-en="Revoke KPass">KPass iptal et</SilDüğmesi>
         </div>
       </div>
-      <altbirim:pencere />
+      <Pencere />
     </body>
   </html>
-
 
 export default KPassim;

@@ -53,8 +53,8 @@ const AddressInfoKartı = () => (
   </div>
 );
 
-const KPass = () => (
-  <Kök>
+const KPass = ({ style }) => (
+  <Kök style={style}>
     <Css />
     <Kapak id="kpk" />
     <div id="kpi">

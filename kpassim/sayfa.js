@@ -2,6 +2,8 @@
  * @fileoverview İncele sayfası giriş noktası
  *
  */
+import "./discord.d";
+import { roleRequestChallenge } from "./discord.js";
 import {
   AçDüğmesi,
   DiscordDüğmesi,
@@ -9,9 +11,7 @@ import {
   İmeceİptalDüğmesi,
   KPassYok,
   SilDüğmesi
-} from "./birim.jsx";
-import "./discord.d";
-import { roleRequestChallenge } from "./discord.js";
+} from "./sayfa.jsx";
 import Cüzdan from "/birim/cüzdan/birim";
 import "/birim/dil/birim";
 import Kpass from "/birim/kpass/birim";
@@ -70,10 +70,11 @@ const kapalıYüzGöster = () => {
         adres
       ))
       .then((açıkKPass) => {
+        console.log("here=", açıkKPass);
         Bellek[ağ + adres] = açıkKPass;
         açıkYüzGöster(açıkKPass);
       })
-      .catch(() => console.log);
+      .catch(console.log);
 }
 
 /** @type {?string} */

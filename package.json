@@ -16,7 +16,8 @@
     "acorn": "^8.12.1",
     "acorn-walk": "^8.3.4",
     "astring": "^1.9.0",
-    "bun-types": "^1.1.27",
+    "bun-types": "^1.1.29",
+    "css": "^3.0.0",
     "csso-cli": "^4.0.2",
     "google-closure-compiler": "^20240317.0.0",
     "html-minifier": "^4.0.0",
@@ -26,6 +27,6 @@
     "svg-pathdata": "^7.1.0",
     "svgo": "^3.3.2",
     "uglify-js": "~3.19.3",
-    "vite": "^5.4.4"
+    "vite": "^5.4.7"
   }
 }
