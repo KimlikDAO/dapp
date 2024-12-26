@@ -18,8 +18,8 @@ const bind = (id) => {
    */
   const güncelle = (başarılı) => {
     düğme.innerText = başarılı
-      ? KaydolMetni + (dom.TR ? "dunuz 👍" : "d 👍")
-      : dom.TR ? "Hata 🫨" : "Error 🫨";
+      ? KaydolMetni + dom.i18n({ tr: "dunuz 👍", en: "d 👍" })
+      : dom.i18n({ tr: "Hata 🫨", en: "Error 🫨" });
     setTimeout(() => düğme.innerText = KaydolMetni, 3000);
     if (başarılı)
       girdi.value = "";
@@ -36,7 +36,7 @@ const bind = (id) => {
       method: "POST",
       body: JSON.stringify({
         "email": girdi.value,
-        "dil": dom.TR ? "tr" : "en"
+        "dil": dom.Lang
       })
     }).then(
       (res) => güncelle(res && res.ok),

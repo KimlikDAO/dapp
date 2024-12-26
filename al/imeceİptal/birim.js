@@ -35,8 +35,8 @@ const fiyatGöster = (ağ) => {
   /** @const {!Array<string>} */
   const ek = ağBilgisi.tokenEki;
   KPass.priceIn(ağ, 0).then(([çok, az]) => {
-    indirimsizFiyat.innerText = dom.paradanMetne(çok) + " " + token + (dom.TR ? ek[0] : "");
-    indirimliFiyat.innerText = dom.paradanMetne(az) + " " + token + (dom.TR ? ek[1] : "");
+    indirimsizFiyat.innerText = dom.paradanMetne(çok) + " " + token + (dom.i18n({ tr: ek[0], en: "" }));
+    indirimliFiyat.innerText = dom.paradanMetne(az) + " " + token + (dom.i18n({ tr: ek[1], en: "" }));
     indirimYüzdesi.innerText = Math.round(100 * (çok - az) / çok);
   });
 }
@@ -62,9 +62,9 @@ const kurVe = (sonra) => {
  */
 const atla = (sonra) => {
   dom.göster(GösterDüğmesi);
-  GösterDüğmesi.innerText = dom.TR ? "Yine de kur" : "Setup social revoke";
+  GösterDüğmesi.innerText = dom.i18n({ tr: "Yine de kur", en: "Setup social revoke" });
   dom.göster(İptalDüğmesi);
-  İptalDüğmesi.innerText = dom.TR ? "İmece iptal kurulmadı 🤌" : "Skipped 🤌";
+  İptalDüğmesi.innerText = dom.i18n({ tr: "İmece iptal kurulmadı 🤌", en: "Skipped 🤌" });
   İptalDüğmesi.classList.add("done");
   dom.düğmeDurdur(İptalDüğmesi);
   Kök.classList.add("done");
@@ -139,7 +139,7 @@ const kutularıAç = (sonra) => {
     }
     if (geçerli) {
       dom.göster(İptalDüğmesi);
-      İptalDüğmesi.innerText = dom.TR ? "İmece iptal kuruldu ✓" : "Social revoke setup is complete ✓";
+      İptalDüğmesi.innerText = dom.i18n({ tr: "İmece iptal kuruldu ✓", en: "Social revoke setup is complete ✓" });
       İptalDüğmesi.onclick = null;
       dom.gizle(Kutu);
       Kök.classList.add("done");

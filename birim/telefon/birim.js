@@ -48,8 +48,8 @@ const nftGöster = (kutudaGöster, bilgiYüzü) => {
   const yüzGöster = () => {
     KPass.yüzGöster(bilgiYüzü);
     NftDüğmesi.innerText = bilgiYüzü
-      ? dom.TR ? "Gizle" : "Encrypt"
-      : dom.TR ? "Aç" : "Decrypt";
+      ? dom.i18n({ tr: "Gizle", en: "Encrypt" })
+      : dom.i18n({ tr: "Aç", en: "Decrypt" });
   }
   yüzGöster();
   if (kutudaGöster) {

@@ -202,12 +202,12 @@ const kpassDeğişti = () => {
     /** @const {boolean} */
     const varMı = cidHex.replaceAll("0", "") != "x";
     kpassDüğmesi.innerText = varMı
-      ? dom.TR ? "KPASS’İNİ İNCELE" : "VIEW KPASS"
-      : dom.TR ? "KPASS AL" : "MINT KPASS";
+      ? dom.i18n({ tr: "KPASS’İNİ İNCELE", en: "VIEW KPASS" })
+      : dom.i18n({ tr: "KPASS AL", en: "MINT KPASS" });
     kpassDüğmesi.onclick = kpassResmi.onclick = () =>
-      window.location.href = "//kimlikdao.org" + (varMı
-        ? dom.TR ? "/kpassim" : "/kpass"
-        : dom.TR ? "/al" : "/mint");
+      window.location.href = "//kimlikdao.org/" + (varMı
+        ? dom.i18n({ tr: "kpassim", en: "kpass" })
+        : dom.i18n({ tr: "al", en: "mint" }));
     if (!varMı && KPassYokResmi) kpassResmi.src = KPassYokResmi;
     /** @const {Promise<!eth.ERC721Unlockable>} */
     const dosyaSözü = varMı

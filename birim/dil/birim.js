@@ -3,7 +3,7 @@ import dom from "/lib/util/dom";
 import { I18nString, LangCode } from "/lib/util/i18n";
 
 /** @define {I18nString} */
-const Route = { [LangCode.TR]: "tr", [LangCode.EN]: "en" };
+const Route = { tr: "tr", en: "en" };
 
 dom.menüYarat(DilButonu, DilListesi);
 DilListesi.onclick = (/** @type {Event} */ event) => {
@@ -15,7 +15,7 @@ DilListesi.onclick = (/** @type {Event} */ event) => {
     : /** @type {!Element} */(targetElem.parentElement);
 
   /** @const {LangCode} */
-  const diğerDil = dom.TR ? LangCode.EN : LangCode.TR;
+  const diğerDil = dom.Lang == LangCode.TR ? LangCode.EN : LangCode.TR;
   if (li.id.slice(2) == diğerDil) {
     document.cookie = `l=${diğerDil};path=/;domain=.kimlikdao.org;SameSite=Strict;max-age=${1e6}`;
     window.location.href = Route[diğerDil] + window.location.hash;

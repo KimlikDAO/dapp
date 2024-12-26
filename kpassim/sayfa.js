@@ -36,7 +36,7 @@ const Bellek = {};
  */
 const açıkYüzGöster = (açıkKPass) => {
   Kpass.açıkKPassGöster(açıkKPass);
-  AçDüğmesi.innerText = dom.TR ? "Gizle" : "Hide";
+  AçDüğmesi.innerText = dom.i18n({ tr: "Gizle", en: "Hide" });
   AçDüğmesi.onclick = kapalıYüzGöster;
 }
 
@@ -57,7 +57,7 @@ const kapalıYüzGöster = () => {
   /** @const {string} */
   const adres = /** @type {string} */(Cüzdan.adres());
   Kpass.yüzGöster(false);
-  AçDüğmesi.innerText = dom.TR ? "Aç" : "Unlock";
+  AçDüğmesi.innerText = dom.i18n({ tr: "Aç", en: "Unlock" });
 
   /** @const {!did.DecryptedSections} */
   const bellektenKPass = Bellek[ağ + adres];
@@ -95,7 +95,7 @@ const discordRolüAl = () => {
     const discordID = /** @type {discord.SignedID} */(event.data);
     /** @const {string} */
     const role = "KPASS HOLDER";
-    imzacı.signMessage(roleRequestChallenge(discordID, role, dom.TR), adres)
+    imzacı.signMessage(roleRequestChallenge(discordID, role, dom.Lang), adres)
       .then((/** @type {Signature} */ signerSignature) => fetch("//discord.kimlikdao.org", {
         method: "PUT",
         headers: { "content-type": "application/json" },
@@ -104,7 +104,7 @@ const discordRolüAl = () => {
           role,
           chainID: ağ,
           signerSignature,
-          lang: dom.TR ? "tr" : "en"
+          lang: dom.Lang
         }))
       }))
       .then((res) => {
@@ -118,7 +118,7 @@ const discordRolüAl = () => {
   dom.pencere("//discord.com/api/oauth2/authorize?client_id=1068629633970487428"
     + "&redirect_uri=https://discord.kimlikdao.org"
     + "&response_type=code"
-    + "&scope=identify", 500, 650);
+    + "&scope=identify", 500, 750);
 }
 
 /**

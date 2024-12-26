@@ -1,7 +1,7 @@
+import { Boncuklar, Kartlar } from './birim.jsx';
 import Cüzdan from "/birim/cüzdan/birim";
 import Telefon from "/birim/telefon/birim";
 import dom from '/lib/util/dom';
-import { Boncuklar, Kartlar } from './birim.jsx';
 
 /** @type {number} */
 let Kart = 0;
@@ -27,9 +27,10 @@ const yerleştir = () => {
 const kartDeğiştir = (yeniKart) => {
   Telefon.nftGöster(yeniKart <= 1, !yeniKart);
   yeniKart === 3
-    ? Telefon.kutuGöster(dom.TR
-      ? "Bağlı app KPass’inizdeki iletişim bilgilerinize erişmek istiyor. İzin veriyor musunuz?"
-      : "The connected app would like to access your contact info section of your KPass.")
+    ? Telefon.kutuGöster(dom.i18n({
+      tr: "Bağlı app KPass’inizdeki iletişim bilgilerinize erişmek istiyor. İzin veriyor musunuz?",
+      en: "The connected app would like to access your contact info section of your KPass."
+    }))
     : Telefon.kutuKapat();
   Boncuklar.children[Kart].firstElementChild.classList.remove("sel");
   Boncuklar.children[yeniKart].firstElementChild.classList.add("sel");

@@ -84,13 +84,13 @@ const açıkKPassAlVe = (ağÇeşidi, adres, sonra) => {
   const testVeriDüğmesiGüncelle = (yeniAğ) => {
     const testVeri = yeniAğ == ChainId.MinaBerkeley;
     eDevletDüğmesi.innerText = testVeri
-      ? dom.TR ? "Deneme veri ile ilerle" : "Proceed with test data (Berkeley)"
+      ? dom.i18n({ tr: "Deneme veri ile ilerle", en: "Proceed with test data (Berkeley)" })
       : eDevletDüğmesiMetni;
     eDevletDüğmesi.onclick = testVeri
       ? () =>
         window.location.href = "//mock-edevlet-kapisi.kimlikdao.net/auth?" +
         "response_type=code&client_id=F5CAA82F-E2CF-4F21-A745-471ABE3CE7F8&" +
-        `redirect_uri=https://kimlikdao.org/${dom.TR ? "al" : "mint"}`
+        `redirect_uri=https://kimlikdao.org/${dom.i18n({ tr: "al", en: "mint" })}`
       : null;
   }
   Cüzdan.ağDeğişince(testVeriDüğmesiGüncelle);
@@ -111,7 +111,7 @@ const açıkKPassAlVe = (ağÇeşidi, adres, sonra) => {
     dom.gizle(eDevletDüğmesi);
     nkoDüğmesi.href = "javascript:";
     nkoDüğmesi.classList.remove("act");
-    nkoDüğmesi.innerText = dom.TR ? "VerifiableID’leriniz hesaplanıyor ⏳" : "Computing your VerifiableIDs ⏳";
+    nkoDüğmesi.innerText = dom.i18n({ tr: "VerifiableID’leriniz hesaplanıyor ⏳", en: "Computing your VerifiableIDs ⏳" });
     dom.düğmeDurdur(nkoDüğmesi);
     /** @const {number} */
     const istemciAn = Date.now() / 1000 | 0;
@@ -129,7 +129,7 @@ const açıkKPassAlVe = (ağÇeşidi, adres, sonra) => {
         `${base64(new Uint8Array(taahhüt))}&ts=${istemciAn}&oauth_code=${code}`))
       .then((/** @type {!Response} */ res) => res.json())
       .then((/** @type {!did.DecryptedSections} */ açıkKPass) => {
-        nkoDüğmesi.innerText = dom.TR ? "Bilgileriniz alındı ✓" : "We got your info ✓";
+        nkoDüğmesi.innerText = dom.i18n({ tr: "Bilgileriniz alındı ✓", en: "We got your info ✓" });
         Kpass.açıkKPassGöster(açıkKPass);
         kutu.classList.add("done");
         sonra(adres, açıkKPass);
@@ -168,19 +168,16 @@ const açıkKPassAlVe = (ağÇeşidi, adres, sonra) => {
         const istemciAnı = Date.now() / 1000 | 0;
 
         hataKaldır();
-        hataBildirimi.innerText = dom.TR ? "Belge yükleniyor" : "Uploading document";
+        hataBildirimi.innerText = dom.i18n({ tr: "Belge yükleniyor", en: "Uploading document" });
         setTimeout(() => {
           if (!hataOluştu)
-            hataBildirimi.innerText = dom.TR
-              ? "KPass’iniz oluşturuluyor"
-              : "Minting your KPass"
+            hataBildirimi.innerText = dom.i18n({ tr: "KPass’iniz oluşturuluyor", en: "Minting your KPass" });
         }, 1500);
         setTimeout(() => {
           if (!hataOluştu)
-            hataBildirimi.innerText = dom.TR
-              ? "VerifiableID hesaplanıyor"
-              : "Computing VerifiableID"
+            hataBildirimi.innerText = dom.i18n({ tr: "VerifiableID hesaplanıyor", en: "Computing VerifiableID" });
         }, 2500);
+        dom.adlaGizle("taimg");
         dom.adlaGizle("taimg");
         dom.adlaGöster("tal");
         /** @const {!FormData} */
@@ -215,7 +212,7 @@ const açıkKPassAlVe = (ağÇeşidi, adres, sonra) => {
             dom.gizle(dosyaYüklemeBölümü);
             nkoDüğmesi.href = "javascript:";
             nkoDüğmesi.classList.remove("act");
-            nkoDüğmesi.innerText = dom.TR ? "Bilgileriniz onaylandı ✓" : "We confirmed your info ✓";
+            nkoDüğmesi.innerText = dom.i18n({ tr: "Bilgileriniz onaylandı ✓", en: "We confirmed your info ✓" });
             dom.göster(nkoDüğmesi);
             dom.düğmeDurdur(nkoDüğmesi);
             Kpass.açıkKPassGöster(açıkKPass);
@@ -255,7 +252,7 @@ const açıkKPassAlVe = (ağÇeşidi, adres, sonra) => {
         dosyaBırakmaBölgesi.classList.remove("tasrk");
       }
 
-      const HataMetinleri = dom.TR ? [
+      const HataMetinleri = dom.Lang == LangCode.TR ? [
         "Belgenin son 24 saat içinde alınmış olması gerekli. Yüklediğiniz belge {} saat önce alınmış.",
         "Yüklediğiniz belgedeki nüfus kaydı geçersiz.",
         "Kurum adı KimlikDAO olmalı",

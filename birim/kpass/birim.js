@@ -9,6 +9,8 @@ const Gösterme = new Set([
   "commitmentR",
   "secp256k1",
   "signatureTs",
+  "localIdNumber",
+  "gender"
 ]);
 
 /** @type {number} */
@@ -50,10 +52,8 @@ const personInfoGöster = (personInfo) => {
     }
 
   dom.adla('kplocalIdNumber').innerText = personInfo.localIdNumber.slice(2);
-  if (dom.TR)
-    dom.adla("kpgender").innerText = dom.adla("kpgender").innerText == 'M'
-      ? 'E'
-      : 'K';
+  // TODO(KimlikDAO-bot): fix
+  dom.adla("kpgender").innerText = personInfo.gender;
 }
 
 /**

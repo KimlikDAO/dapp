@@ -196,12 +196,12 @@ const kpassDeğişti = () => {
     /** @const {boolean} */
     const varMı = cidHex.replaceAll("0", "") != "x";
     kpassDüğmesi.innerText = varMı
-      ? dom.TR ? "KPASS’İNİ İNCELE" : "VIEW KPASS"
-      : dom.TR ? "KPASS AL" : "MINT KPASS";
+      ? dom.i18n({ tr: "KPASS’İNİ İNCELE", en: "VIEW KPASS" })
+      : dom.i18n({ tr: "KPASS AL", en: "MINT KPASS" });
     kpassDüğmesi.onclick = kpassResmi.onclick = () =>
       window.location.href = "//kimlikdao.org" + (varMı
-        ? dom.TR ? "/kpassim" : "/kpass"
-        : dom.TR ? "/al" : "/mint");
+        ? dom.i18n({ tr: "kpassim", en: "kpass" })
+        : dom.i18n({ tr: "al", en: "mint" }));
     if (!varMı && KPassYokResmi) kpassResmi.src = KPassYokResmi;
     /** @const {Promise<!eth.ERC721Unlockable>} */
     const dosyaSözü = varMı
@@ -402,9 +402,9 @@ const kur = () => {
   düğmeler[2].onclick = () =>
     window.location.href = "//join.kimlikdao.org/#sa-ambassador1";
   düğmeler[3].onclick = () =>
-    window.location.href = dom.TR ? "//kimlikdao.org/oyla" : "//kimlikdao.org/vote";
+    window.location.href = "//kimlikdao.org/" + dom.i18n({ tr: "oyla", en: "vote" });
   düğmeler[4].onclick = () =>
-    window.location.href = "//kimlikdao.org" + (dom.TR ? "/iptal" : "/revoke");
+    window.location.href = "//kimlikdao.org/" + dom.i18n({ tr: "iptal", en: "revoke" });
   düğmeler[5].onclick = () => koptu();
 
   AdresMetni.onclick = () => navigator.clipboard.writeText(/** @type {string} */(Adres));

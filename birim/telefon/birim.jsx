@@ -26,9 +26,12 @@ const Telefon = ({ kpass = true, style } = {}) => (
       </div>
       <div id="teh">
         <div class="tei"></div>
-        <div class="tei"></div>
       </div>
     </AnaEkran>
+    <DüğmeliNft>
+      {kpass && <KPass />}
+      <NftDüğmesi style="display:none" data-en="Encrypt">Gizle</NftDüğmesi>
+    </DüğmeliNft>
     <Kutu style="opacity:0">
       <div id="tet"></div>
       <div id="tes">
@@ -36,10 +39,6 @@ const Telefon = ({ kpass = true, style } = {}) => (
         <div id="tey" data-en="Provide">Evet</div>
       </div>
     </Kutu>
-    <DüğmeliNft>
-      {kpass && <KPass />}
-      <NftDüğmesi style="display:none" data-en="Encrypt">Gizle</NftDüğmesi>
-    </DüğmeliNft>
   </div >
 );
 

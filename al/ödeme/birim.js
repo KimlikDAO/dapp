@@ -192,7 +192,7 @@ const öde = (cidSözü, adresAğırlığı, eşik) => {
       /** @const {string} */
       const hash = window.location.hash;
       /** @const {string} */
-      const sonra = dom.TR
+      const sonra = dom.Lang == LangCode.TR
         ? hash.length >= 7
           ? decodeURIComponent(hash.slice("#sonra=".length)) : "/kpassim"
         : hash.length >= 6

@@ -23,21 +23,21 @@ const AğBilgileri = {
     izleyici: "etherscan.io",
     tokenKodu: "ETH",
     token: "ether",
-    tokenEki: dom.TR ? ["’den", "’e"] : [],
+    tokenEki: dom.i18n({ tr: ["’den", "’e"], en: [] }),
     rpcUrl: "cloudflare-eth.com",
   },
   [ChainId.xa86a]: {
     ad: "Avalanche",
     izleyici: "snowtrace.io",
     tokenKodu: "AVAX",
-    tokenEki: dom.TR ? ["’tan", "’a"] : [],
+    tokenEki: dom.i18n({ tr: ["’tan", "’a"], en: [] }),
     rpcUrl: "api.avax.network/ext/bc/C/rpc",
   },
   [ChainId.x89]: {
     ad: "Polygon",
     izleyici: "polygonscan.com",
     tokenKodu: "MATIC",
-    tokenEki: dom.TR ? ["’ten", "’e"] : [],
+    tokenEki: dom.i18n({ tr: ["’ten", "’e"], en: [] }),
     rpcUrl: "polygon-rpc.com"
   },
   [ChainId.xa4b1]: {
@@ -45,28 +45,28 @@ const AğBilgileri = {
     izleyici: "arbiscan.io",
     tokenKodu: "ETH",
     token: "ether",
-    tokenEki: dom.TR ? ["’den", "’e"] : [],
+    tokenEki: dom.i18n({ tr: ["’den", "’e"], en: [] }),
     rpcUrl: "arb1.arbitrum.io/rpc",
   },
   [ChainId.x38]: {
     ad: "BNB Chain",
     izleyici: "bscscan.com",
     tokenKodu: "BNB",
-    tokenEki: dom.TR ? ["’den", "’ye"] : [],
+    tokenEki: dom.i18n({ tr: ["’den", "’ye"], en: [] }),
     rpcUrl: "bsc-dataseed3.binance.org"
   },
   [ChainId.xfa]: {
     ad: "Fantom",
     izleyici: "ftmscan.com",
     tokenKodu: "FTM",
-    tokenEki: dom.TR ? ["’dan", "’a"] : [],
+    tokenEki: dom.i18n({ tr: ["’dan", "’a"], en: [] }),
     rpcUrl: "rpc.ankr.com/fantom"
   },
   [ChainId.MinaMainnet]: {
     ad: "Mina",
     izleyici: "minaexplorer.com",
     tokenKodu: "MINA",
-    tokenEki: dom.TR ? ["’dan", "’ya"] : [],
+    tokenEki: dom.i18n({ tr: ["’dan", "’ya"], en: [] }),
     rpcUrl: "api.minaexplorer.com"
   },
 }

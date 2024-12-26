@@ -34,9 +34,8 @@ const kpassYarat = (adres, açıkKPass) => {
 
   /** @const {string} */
   const telefonMetni = signPrompt(["personInfo"]);
-  Telefon.kutuGöster(telefonMetni.slice(0, dom.TR ? 25 : 35) +
-    telefonMetni.slice(35, dom.TR ? 161 : 193), dom.TR ? "İmzala" : "Sign"
-  );
+  Telefon.kutuGöster(telefonMetni.slice(0, dom.Lang == LangCode.TR ? 25 : 35) +
+    telefonMetni.slice(35, dom.Lang == LangCode.TR ? 161 : 193), dom.i18n({ tr: "İmzala", en: "Sign" }));
 
   /** @const {!Promise<!did.DecryptedSections>} */
   const açıkKPassSözü = checkVerifiableIDs(açıkKPass, VerificationKeys);
@@ -53,7 +52,7 @@ const kpassYarat = (adres, açıkKPass) => {
         adres)
     }).then((/** @type {!eth.ERC721Unlockable} */ unlockableNFT) => {
       Telefon.kutuKapat();
-      şifreleDüğmesi.innerText = dom.TR ? "KPass’inizi şifreledik ✓" : "We encrypted your KPass ✓";
+      şifreleDüğmesi.innerText = dom.i18n({ tr: "KPass’inizi şifreledik ✓", en: "We encrypted your KPass ✓" });
       şifreleDüğmesi.classList.remove("act");
       Kpass.yüzGöster(false);
       dom.düğmeDurdur(şifreleDüğmesi);
@@ -83,7 +82,7 @@ const bağlaAdımı = () => {
   Cüzdan.adresDeğişince((adres) => {
     Telefon.adresGir(adres);
     if (!adres) return;
-    BağlaDüğmesi.innerText = dom.TR ? "Cüzdan bağlandı ✓" : "Wallet connected ✓";
+    BağlaDüğmesi.innerText = dom.i18n({ tr: "Cüzdan bağlandı ✓", en: "Wallet connected ✓" });
     BağlaDüğmesi.classList.remove("act");
     dom.düğmeDurdur(BağlaDüğmesi);
     kök.classList.add("done");

@@ -36,7 +36,7 @@ const revokeeAdımınıGöster = () => {
   const onaylaDüğmesiDüzelt = () => {
     onaylaDüğmesi.classList.add("act");
     onaylaDüğmesi.classList.remove("dis");
-    onaylaDüğmesi.innerText = dom.TR ? "Onayla" : "Confirm";
+    onaylaDüğmesi.innerText = dom.i18n ? "Onayla" : "Confirm";
   }
 
   onaylaDüğmesiDüzelt();
@@ -56,11 +56,9 @@ const revokeeAdımınıGöster = () => {
     const timer = setTimeout(() => {
       dom.adlaGizle("iplc");
       dom.adlaGöster("ipmc");
-      dom.adla("iphm").innerText = dom.TR ?
-        "İstek zaman aşımına uğradı." :
-        "Request timed out.";
+      dom.adla("iphm").innerText = dom.i18n({ tr: "İstek zaman aşımına uğradı.", en: "Request timed out." });
       dom.adlaGöster("iphm");
-      onaylaDüğmesi.innerText = dom.TR ? "Tekrar Dene" : "Retry";
+      onaylaDüğmesi.innerText = dom.i18n({ tr: "Tekrar Dene", en: "Retry" });
       onaylaDüğmesi.onclick = () => {
         clearTimeout(timer);
         revokeeAdımınıGöster();
@@ -97,7 +95,7 @@ const revokeeAdımınıGöster = () => {
         clearTimeout(timer);
         dom.adlaGöster("ipmc");
         dom.adlaGöster("iphm");
-        onaylaDüğmesi.innerText = dom.TR ? "Tekrar Dene" : "Retry";
+        onaylaDüğmesi.innerText = dom.i18n ? "Tekrar Dene" : "Retry";
         onaylaDüğmesi.onclick = () => {
           revokeeAdımınıGöster();
         }
@@ -111,8 +109,8 @@ const revokeeAdımınıGöster = () => {
       KPass.revokeFriend(
         Cüzdan.ağ(),
         /** @type {string} */(Cüzdan.adres()), seçilmişAdres.innerText);
-      onaylaDüğmesi.innerText = dom.TR ? "Adres İptal Edildi ✓" : "Address revoked ✓";
-      dom.adla("ipiir").innerText = dom.TR ? "Geri" : "Back";
+      onaylaDüğmesi.innerText = dom.i18n ? "Adres İptal Edildi ✓" : "Address revoked ✓";
+      dom.adla("ipiir").innerText = dom.i18n ? "Geri" : "Back";
       dom.düğmeDurdur(onaylaDüğmesi);
       onaylaDüğmesi.classList.remove("act");
     }

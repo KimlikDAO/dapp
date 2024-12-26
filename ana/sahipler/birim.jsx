@@ -1,6 +1,9 @@
+import OkResmi from "../ok.svg";
 import Css from "./birim.css";
 import { ağResmi } from "/birim/ağlar/birim";
+import { Page } from "/crate";
 import { ChainId } from "/lib/crosschain/chains";
+import { Image } from "/lib/kastro/image";
 
 /**
  * @const {!Object<ChainId, {
@@ -20,7 +23,7 @@ const Tablo = {
 
 const Balon = ({ chainId }) => (
   <div class={`sac ${chainId == ChainId.MinaMainnet ? "mina" : chainId.slice(1)}`}>
-    <img src={ağResmi(chainId)} height={40} width={40} />
+    <Image src={ağResmi(chainId)} height={40} width={40} />
     <div>
       <div class="sau">{Tablo[chainId].holders}</div>
       <span class="saa" data-en={`HOLDERS ON ${Tablo[chainId].ad}`}>{
@@ -34,22 +37,21 @@ const Sahipler = () => (
     <Css />
     <div id="sai">
       <div class="ansag">
-        <h2 data-en="KPass holders&lt;br>by chain.">Ağlara göre<br />KPass sahipleri.</h2>
-        <span class="sat anac">
-          <i18n data-en="Join over ">6 farklı zincirde </i18n>
-          {Object.values(Tablo).reduce((sum, x) => sum + x.holders, 0)}
-          <i18n data-en=" happy KPass holders across 6 different chains."> üzerinde
-            mutlu KPass kullanıcısı arasına katılın.</i18n>
-        </span>
-        <div id="saz"><a data-en:href="/mint" id="sal" href="/al" class="act btn">{{
+        <h2>{{
+          tr: <>Ağlara göre<br />KPass sahipleri.</>,
+          en: <>KPass holders<br />by chain.</>
+        }}</h2>
+        <span class="sat anac">{{
+          en: `Join over ${Object.values(Tablo).reduce((sum, x) => sum + x.holders, 0)} KPass holders across 6 different chains.`,
+          tr: `6 farklı zincirde ${Object.values(Tablo).reduce((sum, x) => sum + x.holders, 0)} KPass sahibi arasına katılın.`
+        }}</span>
+        <div id="saz"><a href={Page.Al} id="sal" class="act btn">{{
           en: "Become a KPass holder",
           tr: "Sen de KPass sahibi ol"
-        }} <img src="/ana/ok.svg" data-inline /></a>
+        }} <OkResmi inline /></a>
         </div>
       </div>
-      <div id="sak">
-        {Object.keys(Tablo).map((chainId) => <Balon chainId={chainId} />)}
-      </div>
+      <div id="sak">{Object.keys(Tablo).map((chainId) => <Balon chainId={chainId} />)}</div>
     </div>
   </div>
 );

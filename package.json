@@ -8,15 +8,15 @@
   "type": "module",
   "scripts": {
     "postinstall": "mkdir -p ./node_modules/@kimlikdao && ln -sfn ../../lib ./node_modules/@kimlikdao/lib && ln -sfn ../../lib/kdjs ./node_modules/@kimlikdao/kdjs",
-    "build": "NODE_ENV=production bun lib/kastro/kastro.js",
+    "build": "NODE_ENV=production bun lib/kastro/kastro.js build",
     "canary": "NODE_ENV=production bun lib/kastro/workers/canaryServer.js",
-    "dev": "NODE_ENV=production bun lib/kastro/workers/devServer.js"
+    "dev": "NODE_ENV=production bun lib/kastro/kastro.js"
   },
   "devDependencies": {
-    "acorn": "^8.12.1",
+    "acorn": "^8.14.0",
     "acorn-walk": "^8.3.4",
     "astring": "^1.9.0",
-    "bun-types": "^1.1.29",
+    "bun-types": "^1.1.42",
     "css": "^3.0.0",
     "csso-cli": "^4.0.2",
     "google-closure-compiler": "^20240317.0.0",
@@ -27,6 +27,6 @@
     "svg-pathdata": "^7.1.0",
     "svgo": "^3.3.2",
     "uglify-js": "~3.19.3",
-    "vite": "^5.4.7"
+    "vite": "^5.4.11"
   }
 }

@@ -16,7 +16,9 @@ import Lato400 from "/birim/lato/l400.ttf";
 import Lato700 from "/birim/lato/l700.ttf";
 import Logo from "/birim/logo.svg";
 import OrtakCss from "/birim/ortakcss/birim";
+import { Page } from "/crate";
 import { ChainId } from "/lib/crosschain/chains";
+import { I18nString } from "/lib/util/i18n"
 
 /** @const {!Array<ChainId>} */
 const Chains = [
@@ -63,7 +65,7 @@ const Ana = () => (
           <a class="bae" href="//discord.gg/H2wg6pcWXG" target="_blank" rel="noreferrer">Discord</a>
           <Dil />
           <Cüzdan Chains={Chains} DefaultChain={DefaultChain} ChainNotes={ChainNotes} />
-          <a id="bal" href={{ en: "mint", tr: "al" }} class="btn act">{{
+          <a id="bal" href={Page.Al} class="btn act">{{
             en: "Mint KPass",
             tr: "Hemen KPass al"
           }}<OkResmi inline /></a>

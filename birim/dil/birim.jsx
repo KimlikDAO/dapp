@@ -1,5 +1,7 @@
-import dom from "/lib/util/dom";
 import Css from "./birim.css";
+import EnFlag from "./en.svg";
+import TrFlag from "./tr.svg";
+import dom from "/lib/util/dom";
 
 /** @const {!HTMLAnchorElement} */
 export const DilButonu = dom.a("dib");
@@ -11,8 +13,8 @@ const Dil = () => (
     <Css />
     <DilButonu class="bae" data-en="EN" href="javascript:">TR</DilButonu>
     <DilListesi style="display:none">
-      <li id="ditr"><img src="/birim/dil/tr.svg" width={16} height={16} /> Türkçe</li>
-      <li id="dien"><img src="/birim/dil/en.svg" width={16} height={16} /> English</li>
+      <li id="ditr"><TrFlag width={16} height={16} /> Türkçe</li>
+      <li id="dien"><EnFlag width={16} height={16} /> English</li>
     </DilListesi>
   </div>
 );
