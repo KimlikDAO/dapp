@@ -6,6 +6,7 @@ import { ChainGroup, ChainId } from "/lib/crosschain/chains";
 import KPass from "/lib/ethereum/KPass";
 import { whenMined } from "/lib/ethereum/transaction";
 import dom from "/lib/util/dom";
+import { LangCode } from "/lib/util/i18n";
 import { bekle } from "/lib/util/promises";
 
 /**

@@ -6,13 +6,16 @@ import KopyalaResmi from "/al/paste.svg";
 const Tanışma = () => (
   <div id="ta" class="step disabled">
     <Css />
-    <b data-en="2. Introduce yourself.">2. Kendinizi tanıtın.</b>{{
+    <b>{{ en: "2. Introduce yourself.", tr: "2. Kendinizi tanıtın." }}</b>{{
       en: "Authenticate by uploading a verifiable e-devlet PDF.",
       tr: "Kendinizi e-devlet’ten alınmış nüfus kayıt örneği yükleyerek veya e-devlet girişi ile tanıtabilirsiniz."
     }}<br />
     <br />
-    <a href="javascript:" class="act btn lft" id="tab" data-en="PDF authentication">PDF ile tanıt</a>
-    <a class="btn" id="taa" title={{tr: "Çok Yakında!", en: "Soon!"}}>{{
+    <a href="javascript:" class="act btn lft" id="tab">{{
+      en: "PDF authentication",
+      tr: "PDF ile tanıt"
+    }}</a>{" "}
+    <a class="btn" id="taa" title={{ tr: "Çok Yakında!", en: "Soon!" }}>{{
       tr: "E-devlet ile giriş (Yakında!)",
       en: "Login with e-devlet (Soon!)"
     }}</a>
@@ -25,25 +28,28 @@ const Tanışma = () => (
         }}
         <table id="tabi">
           <tr>
-            <td data-en="Certificate type">Nüfus Kayıt Örneği Tipi</td>
-            <td data-en="Self">Kişi</td>
+            <td>{{ en: "Certificate type", tr: "Nüfus Kayıt Örneği Tipi" }}</td>
+            <td>{{ en: "Self", tr: "Kişi" }}</td>
           </tr>
           <tr>
-            <td data-en="Include former spouse list">Eski Eş Listesi</td>
-            <td data-en="No">Hayır</td>
+            <td>{{ en: "Include former spouse list", tr: "Eski Eş Listesi" }}</td>
+            <td>{{ en: "No", tr: "Hayır" }}</td>
           </tr>
           <tr>
-            <td data-en="Include background check">Vukuatlı Belge (Olayları Göster)</td>
-            <td data-en="No">Hayır</td>
+            <td>{{ en: "Include background check", tr: "Vukuatlı Belge (Olayları Göster)" }}</td>
+            <td>{{ en: "No", tr: "Hayır" }}</td>
           </tr>
           <tr>
-            <td data-en="Purpose">Belgenin Neden Verileceği</td>
-            <td data-en="Present to institution">Kuruma İbraz</td>
+            <td>{{ en: "Purpose", tr: "Belgenin Neden Verileceği" }}</td>
+            <td>{{ en: "Present to institution", tr: "Kuruma İbraz" }}</td>
           </tr>
           <tr>
-            <td data-en="Institution name">Kurum adı</td>
-            <td><b id="tano" data-en="Calculating...">Hesaplanıyor...</b><a href="javascript:" id="tacopy"
-                data-en:title="Copy" title="Kopyala" style="display:none"><KopyalaResmi inline /></a>
+            <td>{{ en: "Institution name", tr: "Kurum adı" }}</td>
+            <td><b id="tano">{{
+              en: "Calculating...",
+              tr: "Hesaplanıyor..."
+            }}</b><a href="javascript:" id="tacopy"
+              title={{ tr: "Kopyala", en: "Copy" }} style="display:none"><KopyalaResmi inline /></a>
             </td>
           </tr>
         </table>{{
@@ -53,7 +59,7 @@ const Tanışma = () => (
           <Bağlantı inline />
         </a>{{
           en: " to obtain a verifiable PDF. Once you have the file, drag and drop it here.",
-          tr: " sayfasından yukarıdaki bilgileri girerek bir PDF dosyası alın. Aldığınız dosyayı bu kutuya sürükleyin."
+          tr: " sayfasından yukarıdaki bilgileri girerek bir PDF dosyası alın. Aldığınız dosyayı bu kutuya sürükleyin."
         }}
         <div class="tastt">
           <div id="taimg">
@@ -63,8 +69,14 @@ const Tanışma = () => (
           <div id="tafail" style="display:none"></div>
         </div>
         <div id="tafb"></div>
-        <a href="javascript:" id="tadsbtn" class="btn act lft" data-en="Select file">Dosya seç</a>
-        <a href="javascript:" id="tabip" class="btn" data-en="Cancel">İptal</a>
+        <a href="javascript:" id="tadsbtn" class="btn act lft">{{
+          en: "Select file",
+          tr: "Dosya seç"
+        }}</a>{" "}
+        <a href="javascript:" id="tabip" class="btn">{{
+          en: "Cancel",
+          tr: "İptal"
+        }}</a>
       </div>
     </div>
   </div>

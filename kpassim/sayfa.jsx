@@ -42,12 +42,12 @@ const ChainNotes = {
 /** @const {ChainId} */
 const DefaultChain = ChainId.xa4b1;
 
-const KPassim = () =>
-  <html>
+const KPassim = ({ Lang }) =>
+  <html lang={Lang}>
     <head>
       <meta charset="utf-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1" />
-      <title data-en="KimlikDAO | My KPass">KimlikDAO | KPass’im</title>
+      <title>KimlikDAO | {{ tr: "KPass’im", en: "My KPass" }}</title>
       <Lato400 shared />
       <Lato700 shared />
       <Favicon raster={32} rel="icon" />
@@ -64,11 +64,11 @@ const KPassim = () =>
               en: "The connected wallet does not have a KPass on this chain.",
               tr: "Bağlıcüzdanda bu ağda KPass yok."
             }}<br /><br />
-              <a href="/al" class="inl" data-en="Click here to get one.">Almak için tıklayın.</a>
+              <a href="/al" class="inl">{{ en: "Almak için tıklayın.", tr: "Almak için tıklayın." }}</a>
             </span>
           </KPassYok>
           <KPass style="display:none" />
-          <AçDüğmesi data-en="Unlock" style="display:none">Aç</AçDüğmesi>
+          <AçDüğmesi style="display:none">{{ en: "Unlock", tr: "Aç" }}</AçDüğmesi>
         </div>
         <div id="inbtn">
           <DiscordDüğmesi href="javascript:" class="info btn" data-en="Claim Discord role">Discord rolü al</DiscordDüğmesi>

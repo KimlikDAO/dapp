@@ -11,11 +11,12 @@ import Kpass from "/birim/kpass/birim";
 import Telefon from "/birim/telefon/birim";
 import { ChainGroup } from "/lib/crosschain/chains";
 import { checkVerifiableIDs, toUnlockableNFT } from "/lib/did/KPass";
-import { VerificationKeys, metadataAndSections, signPrompt } from "/lib/did/KPassMetadata";
+import { VerificationKeys, metadataAndSections, userPrompt } from "/lib/did/KPassMetadata";
 import KPass from "/lib/ethereum/KPass";
 import ipfs from "/lib/node/ipfs";
 import network from "/lib/node/network";
 import dom from "/lib/util/dom";
+import { LangCode } from "/lib/util/i18n";
 import { hex } from "/lib/util/çevir";
 
 /**
@@ -33,7 +34,7 @@ const kpassYarat = (adres, açıkKPass) => {
   şifreleDüğmesi.classList.remove("disabled");
 
   /** @const {string} */
-  const telefonMetni = signPrompt(["personInfo"]);
+  const telefonMetni = userPrompt(["personInfo"]);
   Telefon.kutuGöster(telefonMetni.slice(0, dom.Lang == LangCode.TR ? 25 : 35) +
     telefonMetni.slice(35, dom.Lang == LangCode.TR ? 161 : 193), dom.i18n({ tr: "İmzala", en: "Sign" }));
 

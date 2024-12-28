@@ -22,7 +22,7 @@ import {
 } from "/kpassim/pencere/birim";
 import { ChainId } from "/lib/crosschain/chains";
 import { Provider } from "/lib/crosschain/provider";
-import { Signature } from "/lib/crosschain/signer";
+import { Signature, Signer } from "/lib/crosschain/signer";
 import { fromUnlockableNFT } from "/lib/did/KPass";
 import KPass from "/lib/ethereum/KPass";
 import dom from "/lib/util/dom";

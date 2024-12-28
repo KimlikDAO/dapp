@@ -197,7 +197,7 @@ const iptalciGirdisiSil = (event) => {
  */
 const eşikDeğeriBlurOlunca = (event) => {
   /** @const {boolean} */
-  const geçerli = +event.target.value <= +ToplamAğırlık.value;
+  const geçerli = +/** @type {!HTMLInputElement} */(event.target).value <= +ToplamAğırlık.value;
   EşikGirdisi.classList.toggle("imin", geçerli);
 }
 

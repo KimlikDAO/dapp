@@ -37,7 +37,7 @@ const Oyla = () => (
     <head>
       <meta charset="utf-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1" />
-      <title data-en="KimlikDAO | Vote">KimlikDAO | Oylamalar</title>
+      <title>KimlikDAO | {{ tr: "Oylamalar", en: "Vote" }}</title>
       <Lato400 shared />
       <Lato700 shared />
       <Favicon raster={32} rel="icon" />

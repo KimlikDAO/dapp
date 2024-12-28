@@ -12,7 +12,7 @@
     "canary": "NODE_ENV=production bun lib/kastro/workers/canaryServer.js",
     "dev": "NODE_ENV=production bun lib/kastro/kastro.js",
     "compiled": "NODE_ENV=production bun lib/kastro/kastro.js --compiled",
-    "clean": "rm -rf build"
+    "clean": "rm -rf build && clear"
   },
   "devDependencies": {
     "acorn": "^8.14.0",

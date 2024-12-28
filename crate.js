@@ -2,11 +2,11 @@ import { I18nString, LangCode } from "/lib/util/i18n";
 
 /** @enum {I18nString} */
 const Page = {
-  Ana: { en: "en", tr: "tr" },
-  Al: { en: "mint", tr: "al" },
-  İptal: { en: "revoke", tr: "iptal" },
-  Oyla: { en: "vote", tr: "oyla" },
-  KPassim: { en: "kpass", tr: "kpassim" }
+  Ana: { [LangCode.EN]: "en", [LangCode.TR]: "tr" },
+  Al: { [LangCode.EN]: "mint", [LangCode.TR]: "al" },
+  İptal: { [LangCode.EN]: "revoke", [LangCode.TR]: "iptal" },
+  Oyla: { [LangCode.EN]: "vote", [LangCode.TR]: "oyla" },
+  KPassim: { [LangCode.EN]: "kpass", [LangCode.TR]: "kpassim" }
 };
 
 /** @const {Page} */

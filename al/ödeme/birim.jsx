@@ -1,12 +1,13 @@
-import dom from "/lib/util/dom";
 import AvaxResmi from "/birim/paralar/AVAX.svg";
-import UsdtResmi from "/birim/paralar/USDT.svg";
-import TrybResmi from "/birim/paralar/TRYB.svg";
-import MaticResmi from "/birim/paralar/MATIC.svg";
 import BnbResmi from "/birim/paralar/BNB.svg";
-import FtmResmi from "/birim/paralar/FTM.svg";
 import EthResmi from "/birim/paralar/ETH.svg";
+import FtmResmi from "/birim/paralar/FTM.svg";
+import MaticResmi from "/birim/paralar/MATIC.svg";
 import MinaResmi from "/birim/paralar/MINA.png";
+import TrybResmi from "/birim/paralar/TRYB.svg";
+import UsdcResmi from "/birim/paralar/USDC.svg";
+import UsdtResmi from "/birim/paralar/USDT.svg";
+import dom from "/lib/util/dom";
 
 /** @const {!HTMLDivElement} */
 export const Kök = dom.div("od");
@@ -18,12 +19,11 @@ const Dot = {
 
 const Ödeme = () => (
   <div id="od" class="step disabled">
-    <b data-en="5. Send the payment and receive your KPass.">5. Ödemeyi yapın KPass cüzdanınıza gelsin</b>
-    <i18n
-      data-en="We'll send your wallet a request for a transaction of value &lt;span id=odf>$1.5&lt;/span>. When confirmed, your KPass will be minted in the same transaction.">
-      Cüzdanınıza <span id="odf">$1,5</span> alımı için bir istek yollayacağız. Onayladığınızda
-      cüzdanınızdan ücret alınır ve KPass'iniz cüzdanınıza mint edilir.
-    </i18n>
+    <b data-en="5. Send the payment and receive your KPass.">5. Ödemeyi yapın KPass cüzdanınıza gelsin</b>{{
+      en: <>We'll send your wallet a request for a transaction of value <span id="odf">$1.5</span>. When confirmed, your KPass will be minted in the same transaction.</>,
+      tr: <>Cüzdanınıza <span id="odf">$1,5</span> alımı için bir istek yollayacağız.Onayladığınızda
+        cüzdanınızdan ücret alınır ve KPass'iniz cüzdanınıza mint edilir.</>
+    }}
     <table id="odi">
       <tr>
         <td data-en="KimlikDAO fee">KimlikDAO ücreti</td>
@@ -85,7 +85,7 @@ const Ödeme = () => (
         </li>
       </ul>
     </div>
-  </div>
+  </div >
 );
 
 export default Ödeme;

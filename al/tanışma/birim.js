@@ -6,6 +6,7 @@ import { combineMultiple } from "/lib/did/KPass";
 import "/lib/node/error.d";
 import network from "/lib/node/network";
 import dom from "/lib/util/dom";
+import { LangCode } from "/lib/util/i18n";
 import { base64, uint8ArrayeBase64ten } from "/lib/util/çevir";
 
 /**
@@ -153,12 +154,12 @@ const açıkKPassAlVe = (ağÇeşidi, adres, sonra) => {
     nkoDüğmesi.onclick = () => {
       dom.gizle(eDevletDüğmesi);
       dom.gizle(nkoDüğmesi);
-      /** @const {Element} */
+      /** @const {!Element} */
       const dosyaBırakmaBölgesi = dom.adla("tada");
       /** @const {!HTMLInputElement} */
       const dosyaSeçici = /** @type {!HTMLInputElement} */(dom.adla("tain"));
       dom.adla("tadsbtn").onclick = () => dosyaSeçici.click();
-      /** @const {Element} */
+      /** @const {!Element} */
       const dosyaYüklemeBölümü = dom.adla("tadc");
       dom.göster(dosyaYüklemeBölümü);
 
@@ -236,18 +237,18 @@ const açıkKPassAlVe = (ağÇeşidi, adres, sonra) => {
         }
       }
 
-      dosyaBırakmaBölgesi.ondrop = (e) => {
+      dosyaBırakmaBölgesi["ondrop"] = (e) => {
         e.preventDefault();
         if (e.dataTransfer.files[0].type.includes("pdf"))
           dosyaYükle(e.dataTransfer.files[0]);
       };
 
-      dosyaBırakmaBölgesi.ondragover = (e) => {
+      dosyaBırakmaBölgesi["ondragover"] = (e) => {
         e.preventDefault();
         dosyaBırakmaBölgesi.classList.add("tasrk");
       }
 
-      dosyaBırakmaBölgesi.ondragleave = (e) => {
+      dosyaBırakmaBölgesi["ondragleave"] = (e) => {
         e.preventDefault();
         dosyaBırakmaBölgesi.classList.remove("tasrk");
       }

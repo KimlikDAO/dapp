@@ -53,14 +53,14 @@ const Şifreleme = () =>
     <a href="javascript:" id="al3a" class="act btn" data-en="Request 4 signatures">4 imza isteği yolla</a>
   </div>;
 
-const Al = () => (
-  <html>
+const Al = ({ Lang }) => (
+  <html lang={Lang}>
     <head>
       <meta charset="utf-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1" />
       <Lato400 shared />
       <Lato700 shared />
-      <title data-en="KimlikDAO | Mint KPass">KimlikDAO | KPass al</title>
+      <title>KimlikDAO | {{ tr: "KPass al", en: "Mint KPass" }}</title>
       <Favicon raster={32} rel="icon" />
       <OrtakCss />
       <Css />
