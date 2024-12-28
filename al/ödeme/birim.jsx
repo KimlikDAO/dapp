@@ -1,4 +1,12 @@
 import dom from "/lib/util/dom";
+import AvaxResmi from "/birim/paralar/AVAX.svg";
+import UsdtResmi from "/birim/paralar/USDT.svg";
+import TrybResmi from "/birim/paralar/TRYB.svg";
+import MaticResmi from "/birim/paralar/MATIC.svg";
+import BnbResmi from "/birim/paralar/BNB.svg";
+import FtmResmi from "/birim/paralar/FTM.svg";
+import EthResmi from "/birim/paralar/ETH.svg";
+import MinaResmi from "/birim/paralar/MINA.png";
 
 /** @const {!HTMLDivElement} */
 export const Kök = dom.div("od");
@@ -39,51 +47,41 @@ const Ödeme = () => (
     <div id="odc">
       <a href="javascript:" id="oda" class="act btn" data-en="Authorize payment in wallet">Ödeme isteği yolla</a>
       <a href="javascript:" id="odb">
-        <img src="/birim/paralar/AVAX.svg" height={32} width={32} />
+        <AvaxResmi height={32} width={32} />
       </a>
       <ul id="odd" style="display:none">
         <li id="odd2">
-          <span class="ods" data-en="1.00">1,00</span><span class="odp">USDC</span><img src="/birim/paralar/USDC.svg"
-            height={32} width={32} />
+          <span class="ods" data-en="1.00">1,00</span><span class="odp">USDC</span><UsdcResmi height={32} width={32} />
         </li>
         <li id="odd1">
-          <span class="ods" data-en="1.00">1,00</span><span class="odp">USDT</span><img src="/birim/paralar/USDT.svg"
-            height={32} width={32} />
+          <span class="ods" data-en="1.00">1,00</span><span class="odp">USDT</span><UsdtResmi height={32} width={32} />
         </li>
         <li id="odd3">
-          <span class="ods" data-en="19.00">19,00</span><span class="odp">TRYB</span><img src="/birim/paralar/TRYB.svg"
-            height={32} width={32} />
+          <span class="ods" data-en="19.00">19,00</span><span class="odp">TRYB</span><TrybResmi height={32} width={32} />
         </li>
         <li id="odd0xa86a">
-          <span class="ods" data-en="0.01">0,01</span><span class="odp">AVAX</span><img src="/birim/paralar/AVAX.svg"
-            height={32} width={32} />
+          <span class="ods" data-en="0.01">0,01</span><span class="odp">AVAX</span><AvaxResmi height={32} width={32} />
         </li>
         <li id="odd0x1">
-          <span class="ods" data-en="0.0006">0,0006</span><span class="odp">ETH</span><img src="/birim/paralar/ETH.svg"
-            height={32} width={32} />
+          <span class="ods" data-en="0.0006">0,0006</span><span class="odp">ETH</span><EthResmi height={32} width={32} />
         </li>
         <li id="odd0x89">
-          <span class="ods" data-en="0.0006">0,0006</span><span class="odp">MATIC</span><img
-            src="/birim/paralar/MATIC.svg" height={32} width={32} />
+          <span class="ods" data-en="0.0006">0,0006</span><span class="odp">MATIC</span><MaticResmi height={32} width={32} />
         </li>
         <li id="odd0xa4b1">
-          <span class="ods" data-en="0.0006">0,0006</span><span class="odp">ETH</span><img src="/birim/paralar/ETH.svg"
-            height={32} width={32} />
+          <span class="ods" data-en="0.0006">0,0006</span><span class="odp">ETH</span><EthResmi height={32} width={32} />
         </li>
         <li id="odd0x38">
-          <span class="ods" data-en="0.0006">0,0006</span><span class="odp">BNB</span><img src="/birim/paralar/BNB.svg"
-            height={32} width={32} />
+          <span class="ods" data-en="0.0006">0,0006</span><span class="odp">BNB</span><BnbResmi height={32} width={32} />
         </li>
         <li id="odd0xfa">
-          <span class="ods" data-en="0.0006">0,0006</span><span class="odp">FTM</span><img src="/birim/paralar/FTM.svg"
-            height={32} width={32} />
+          <span class="ods" data-en="0.0006">0,0006</span><span class="odp">FTM</span><FtmResmi height={32} width={32} />
         </li>
         <li id="odd0x144">
-          <span class="ods" data-en="0.0006">0,0006</span><span class="odp">ETH</span><img src="/birim/paralar/ETH.svg"
-            height={32} width={32} />
+          <span class="ods" data-en="0.0006">0,0006</span><span class="odp">ETH</span><EthResmi height={32} width={32} />
         </li>
         <li id="oddmina:mainnet">
-          <span class="ods">1</span><span class="odp">tMINA</span><img src="/birim/paralar/MINA.png" height={32} width={32} />
+          <span class="ods">1</span><span class="odp">tMINA</span><MinaResmi height={32} width={32} />
         </li>
       </ul>
     </div>

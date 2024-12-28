@@ -1,10 +1,16 @@
 import Script from "kastro:./sayfa.js";
+import OkResmi from "./dropdownok.svg";
 import Css from "./sayfa.css";
 import Başlık from "/birim/başlık/birim.jsx";
 import Favicon from "/birim/icon.svg";
 import Lato400 from "/birim/lato/l400.ttf";
 import Lato700 from "/birim/lato/l700.ttf";
 import OrtakCss from "/birim/ortakcss/birim.jsx";
+import AvaxResmi from "/birim/paralar/AVAX.svg";
+import EthResmi from "/birim/paralar/ETH.svg";
+import TrybResmi from "/birim/paralar/TRYB.svg";
+import UsdcResmi from "/birim/paralar/USDC.svg";
+import UsdtResmi from "/birim/paralar/USDT.svg";
 import { ChainId } from "/lib/crosschain/chains";
 
 /** @const {!Array<ChainId>} */
@@ -51,7 +57,7 @@ const Oyla = () => (
               <div id="oyyso0" data-en="Price Change" style="display:none">Fiyat Değişikliği</div>
               <div id="oyyso1" data-en="Trade Proposal" style="display:none">Takas Önerisi</div>
               <div id="oyyso3" data-en="Custom Proposal" style="display:none">Kendin Belirle</div>
-              <img id="oyyddok" src="/oyla/dropdownok.svg" width="10" height="10" data-inline />
+              <OkResmi id="oyyddok" width={10} height={10} inline />
             </button>
             <ul id="oyyul" style="display:none">
               <li id="oyyo2" class="oyyli" data-en="Community Vote">Topluluk Önerisi</li>
@@ -67,15 +73,11 @@ const Oyla = () => (
                 <div id="oyyfddc">
                   <input type="number" id="oyyfi" placeholder="0.0" />
                   <button id="oyytb">
-                    <div id="oyyst2" class="oyyst"><img src="/birim/paralar/USDC.svg" height="24" width="24" /> USDC</div>
-                    <div id="oyyst1" class="oyyst" style="display:none"><img src="/birim/paralar/USDT.svg" height="24"
-                      width="24" /> USDT</div>
-                    <div id="oyyst3" class="oyyst" style="display:none"><img src="/birim/paralar/TRYB.svg" height="24"
-                      width="24" /> TRYB</div>
-                    <div id="oyyst0x1" class="oyyst" style="display:none"><img src="/birim/paralar/ETH.svg" height="24"
-                      width="24" /> ETH</div>
-                    <div id="oyyst0xa86a" class="oyyst" style="display:none"><img src="/birim/paralar/AVAX.svg" height="24"
-                      width="24" /> AVAX</div>
+                    <div id="oyyst2" class="oyyst"><UsdcResmi height="24" width="24" /> USDC</div>
+                    <div id="oyyst1" class="oyyst" style="display:none"><UsdtResmi height="24" width="24" /> USDT</div>
+                    <div id="oyyst3" class="oyyst" style="display:none"><TrybResmi height="24" width="24" /> TRYB</div>
+                    <div id="oyyst0x1" class="oyyst" style="display:none"><EthResmi height="24" width="24" /> ETH</div>
+                    <div id="oyyst0xa86a" class="oyyst" style="display:none"><AvaxResmi height="24" width="24" /> AVAX</div>
                   </button>
                 </div>
               </div>

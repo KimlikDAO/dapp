@@ -37,7 +37,7 @@ const DefaultChain = ChainId.xa4b1;
 
 const CüzdanBağlama = () =>
   <div id="al1" class="step">
-    <b data-en="1. Connect your wallet.">1. Cüzdanınızı bağlayın. </b>{{
+    <b data-en="1. Connect your wallet.">1. Cüzdanınızı bağlayın.</b>{{
       tr: "Cüzdan bağlayarak devam edin.",
       en: "Proceed with a crypto wallet."
     }}<br /><br />

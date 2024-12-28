@@ -1,6 +1,7 @@
+import Css from "./birim.css";
 import Bağlantı from "./external-link.svg";
 import UploadResmi from "./upload.svg";
-import Css from "./birim.css";
+import KopyalaResmi from "/al/paste.svg";
 
 const Tanışma = () => (
   <div id="ta" class="step disabled">
@@ -42,14 +43,14 @@ const Tanışma = () => (
           <tr>
             <td data-en="Institution name">Kurum adı</td>
             <td><b id="tano" data-en="Calculating...">Hesaplanıyor...</b><a href="javascript:" id="tacopy"
-                data-en:title="Copy" title="Kopyala" style="display:none"><img src="/al/paste.svg" data-inline /></a>
+                data-en:title="Copy" title="Kopyala" style="display:none"><KopyalaResmi inline /></a>
             </td>
           </tr>
         </table>{{
           en: "Please enter the information above at ", tr: ""
         }}<a class="lnk" target="_blank" href="//www.turkiye.gov.tr/nvi-nufus-kayit-ornegi-belgesi-sorgulama">
           {{ en: "e-devlet registry", tr: "E-devlet Nüfus Kayıt Örneği" }}
-          <Bağlantı data-inline />
+          <Bağlantı inline />
         </a>{{
           en: " to obtain a verifiable PDF. Once you have the file, drag and drop it here.",
           tr: " sayfasından yukarıdaki bilgileri girerek bir PDF dosyası alın. Aldığınız dosyayı bu kutuya sürükleyin."

@@ -79,9 +79,10 @@ const Ağ = () => (
         KPass’ler birbirinden bağımsız en az 7 KimlikDAO ağı düğümünün onay ve dijital imzası ile üretilebilir.
         Onay aşamasında veri gizliliğiniz tamamıyla korunur.
       </div>
-      <a href="//github.com/KimlikDAO/kimlikdao-node" target="_blank" rel="noreferrer" class="info btn anust"><span
-        data-phantom data-en="Learn about KimlikDAO nodes">KimlikDAO düğümü detayları</span>
-      </a>
+      <a href="//github.com/KimlikDAO/kimlikdao-node" target="_blank" rel="noreferrer" class="info btn anust">{{
+        en: "Learn about KimlikDAO nodes",
+        tr: "KimlikDAO düğümü detayları"
+      }}</a>
     </div>
     <div id="agt">
       <div id="agtc">

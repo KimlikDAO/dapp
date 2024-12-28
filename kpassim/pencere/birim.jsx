@@ -32,14 +32,16 @@ export default () =>
           <a href="javascript:" id="inesr" class="btn" data-en="Cancel">İptal</a>
         </div>
       </div>
-      <div id="inmsy" class="inm" style="display:none">
-        <span data-phantom data-en="You don't need to revoke your KPass to get a new one.">Yeni
-          bir KPass almak için eskisini iptal etmeye gerek yok.</span><br /><br />
-        <span data-phantom data-en="Only revoke your KPass if you think your private key was exposed.">Sadece
-          cüzdanınızın gizli anahtarını başkasına verdiğinizi düşünüyorsanız KPass’inizi iptal etmeniz
-          gerekir.</span><br /><br />
-        <span data-phatnom data-en="Confirm below to proceed.">Devam etmek için onay verin.</span>
-        <div class="inorc">
+      <div id="inmsy" class="inm" style="display:none">{{
+        en: "You don't need to revoke your KPass to get a new one.",
+        tr: "Yeni bir KPass almak için eskisini iptal etmeye gerek yok."
+      }}<br /><br />{{
+        en: "Only revoke your KPass if you think your private key was exposed.",
+        tr: "Sadece cüzdanınızın gizli anahtarını başkasına verdiğinizi düşünüyorsanız KPass’inizi iptal etmeniz gerekir."
+      }}<br /><br />{{
+        en: "Confirm below to proceed.",
+        tr: "Devam etmek için onay verin."
+      }}<div class="inorc">
           <a href="javascript:" id="insyo" class="btn lft danger" data-en="Confirm in wallet">Cüzdana istek yolla</a>
           <a href="javascript:" id="insyr" class="btn" data-en="Cancel">İptal</a>
         </div>

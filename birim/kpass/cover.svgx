@@ -1,5 +1,5 @@
 
-const Kapak = () => (
+const Cover = () => (
   <svg id="kpk" width="280" height="280" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg"
     xmlns:svg="http://www.w3.org/2000/svg">
     <defs>
@@ -86,8 +86,6 @@ const Kapak = () => (
       <rect id="kpks7" width="44" height="22" rx="10" />
       <path id="kpks8" d="M0 0a22 22 0 0 0 44 0z" />
       <rect id="kpks15" width="66" height="22" rx="10" />
-      <g data-phantom="true" data-generate="üret/şekilkod"></g>
-      <g data-phantom="true" data-generate="üret/rakamlar"></g>
       <clipPath id="kpkz">
         <use href="#kpks0" x="277" y="57" />
         <use href="#kpks0" x="189" y="13" />
@@ -236,4 +234,4 @@ const Kapak = () => (
   </svg>
 );
 
-export default Kapak();
+export default Cover;

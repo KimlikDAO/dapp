@@ -430,7 +430,7 @@ const bağlantıResmi = (ad) => `/birim/cüzdan/img/${ad.split(" ")[0].toLowerCa
  */
 const Bağlantı = ({ idx, name }) => (
   <li id={"cu" + idx}>
-    <img src={bağlantıResmi(name)} width={32} height={32} />
+    <Image src={bağlantıResmi(name)} width={32} height={32} />
     <div class="cust"></div> {name}<span class="cui" style="display:none" data-en="GET">İNDİR</span>
   </li>
 );
@@ -464,7 +464,7 @@ const render = ({ DefaultChain, Chains, piggyback, children }) => (
         <div id="cueh">
           <img id="cutc" height={80} width={80} src="/birim/cüzdan/img/qmark.svg" />
           <div>
-            <div id="cuad"><span>0xcCc...cCc</span><span id="cuadi"><img src="/birim/paste.svg" data-inline /></span></div>
+            <div id="cuad"><span>0xcCc...cCc</span><span id="cuadi"><img src="/birim/paste.svg" inline /></span></div>
             <DebankLinki>DeBank</DebankLinki> <span id="cuex">Explorer</span>
             <div id="cuin" date-en="MINT KPASS">KPASS AL</div>
           </div>

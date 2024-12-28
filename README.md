@@ -1,4 +1,4 @@
-<h1><img src="birim/icon.svg" align="top" height="44"> KimlikDAO dApp'ı</a></h1>
+<h1><img src="birim/icon.svg" align="top" height="44"> KimlikDAO dApp</a></h1>
 
 ## Dizinler
 
@@ -28,13 +28,16 @@ Yazılımcıların dApp'i test etmesi için gereken adımlar:
 - `bun run dev` dev sunucuyu çalıştırır.
   - http://localhost:8787/
 
-Kanarya ve deployment adımları için birkaç araca daha ihtiyacımız var
+dApp 3 farklı şekilde çalıştırılabilir:
+
+ - `bun run dev` en az işi yaparak en hızlı şekilde dApp'i yükler
+ - `bun run compiled` istenen sayfa ve assetleri derleyip yollar
+ - `bun run canary` deploy için hazırlanmış `crate`'i sunar
+
+Deploy için gerekli crate `bun run build` ile oluşturulur. `canary` ve `build` için npm paketlerine ek
+olarak şu araçlar gerekli:
 
 ```shell
 brew install pngcrush brotli zopfli woff2 webp librsvg
 pip install fonttools
 ```
-
-- `bun run dev --build` veya `bun run build; bun run canary` deploya hazır dApp'i `build` edip kanarya
-  sunucusunu çalıştırır
-  - http://localhost:8787/

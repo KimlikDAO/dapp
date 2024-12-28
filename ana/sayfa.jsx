@@ -39,8 +39,8 @@ const ChainNotes = {
 /** @const {ChainId} */
 const DefaultChain = ChainId.xa4b1;
 
-const Ana = () => (
-  <html>
+const Ana = ({ Lang }) => (
+  <html lang={Lang}>
     <head>
       <meta charset="utf-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1" />

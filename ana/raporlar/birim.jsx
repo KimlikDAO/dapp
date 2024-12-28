@@ -1,4 +1,4 @@
-import Jan24 from "birim/blog/2024.01/birim.jsx";
+import Jan24 from "birim/blog/2025.01/birim.jsx";
 
 export default () => (
   <div id="ra" class="an3">
