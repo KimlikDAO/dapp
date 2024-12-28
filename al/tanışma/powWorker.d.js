@@ -1,5 +1,7 @@
 /** @externs */
 
+import "worker";
+
 /**
  * @constructor
  * @extends {MessageEvent<*>}

@@ -1,4 +1,5 @@
-import Script from "kastro:./sayfa.js";
+import Script from "script:./sayfa.js";
+import PowWorker from "script:./tanışma/powWorker.js";
 import İmeceİptal from "./imeceİptal/birim.jsx";
 import Css from "./sayfa.css";
 import Tanışma from "./tanışma/birim.jsx";
@@ -64,7 +65,9 @@ const Al = ({ Lang }) => (
       <Favicon raster={32} rel="icon" />
       <OrtakCss />
       <Css />
-      <Script Chains={Chains} DefaultChain={DefaultChain} loose />
+      <Script Chains={Chains} DefaultChain={DefaultChain}>
+        <PowWorker bundleKey="POW_WORKER_PATH" strict />
+      </Script>
     </head>
     <body>
       <Başlık href="/" DefaultChain={DefaultChain} Chains={Chains} ChainNotes={ChainNotes} />

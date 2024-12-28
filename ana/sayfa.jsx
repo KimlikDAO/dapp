@@ -1,4 +1,4 @@
-import Script from "kastro:./sayfa.js";
+import Script from "script:./sayfa.js";
 import Ağ from "./ağ/birim.jsx";
 import Hero from "./hero/birim";
 import Kazan from "./kazan/birim.jsx";

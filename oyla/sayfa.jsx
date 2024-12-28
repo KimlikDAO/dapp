@@ -1,4 +1,4 @@
-import Script from "kastro:./sayfa.js";
+import Script from "script:./sayfa.js";
 import OkResmi from "./dropdownok.svg";
 import Css from "./sayfa.css";
 import Başlık from "/birim/başlık/birim.jsx";

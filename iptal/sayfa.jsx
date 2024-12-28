@@ -1,3 +1,4 @@
+import Script from "script:./sayfa.js";
 import Css from "./sayfa.css";
 import Başlık from "/birim/başlık/birim.jsx";
 import Favicon from "/birim/icon.svg";
@@ -6,7 +7,6 @@ import Lato700 from "/birim/lato/l700.ttf";
 import OrtakCss from "/birim/ortakcss/birim.jsx";
 import { ChainId } from "/lib/crosschain/chains";
 import dom from "/lib/util/dom";
-import Script from "kastro:./sayfa.js";
 
 /** @const {!HTMLDivElement} */
 export const AdresKutusu = dom.div("iptac");
@@ -38,12 +38,12 @@ const ChainNotes = {
 /** @const {ChainId} */
 const DefaultChain = ChainId.xa4b1;
 
-const İptal = () => (
-  <html>
+const İptal = ({ Lang }) => (
+  <html lang={Lang}>
     <head>
       <meta charset="utf-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1" />
-      <title data-en="KimlikDAO | Revoke KPass">KimlikDAO | İptal işlemleri</title>
+      <title>KimlikDAO | {{ tr: "İptal işlemleri", en: "Revoke KPass" }}</title>
       <Lato400 shared />
       <Lato700 shared />
       <Favicon raster={32} rel="icon" />

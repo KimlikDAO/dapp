@@ -9,6 +9,9 @@ import dom from "/lib/util/dom";
 import { LangCode } from "/lib/util/i18n";
 import { base64, uint8ArrayeBase64ten } from "/lib/util/çevir";
 
+/** @define {string} */
+const POW_WORKER_PATH = "/al/tanışma/powWorker.js";
+
 /**
  * AçıkKPass alır ve `sonra`'ya aktarır.
  *
@@ -19,7 +22,7 @@ import { base64, uint8ArrayeBase64ten } from "/lib/util/çevir";
  */
 const açıkKPassAlVe = (ağÇeşidi, adres, sonra) => {
   /** @const {!Worker} */
-  const powWorker = new Worker("/al/tanışma/powWorker.js", { type: "module" });
+  const powWorker = new Worker(POW_WORKER_PATH, { type: "module" });
 
   /**
    * Kriptografik taahhüt için rastgele bitdizisi.
