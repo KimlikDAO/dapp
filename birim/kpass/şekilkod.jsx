@@ -291,20 +291,14 @@ const yuvartı = (w) => new SVGPathData([
 
 /** @const {!Object<string, string>} */
 const ŞekilKod = {
-  "tcks10": bubble(22, 1, 12, 7).round(1e3),
-  "tcks11": kumsaati(22, 1, 9, 0.04).round(1e3),
-  "tcks12": ikiliGemi(22, 4, 0.9).round(1e3),
-  "tcks13": sivriGemi(22, 6, 0.8).round(1e3),
-  "tcks14": new SVGPathData("M0.454 32.788C0.454 26.394 12.758 26.859 12.758 21.984C12.758 17.334 0.454 17.574 0.454 11.621C0.454 7.595 8.815 2.97 15.009 1.123C18.349 0.127 21.546 2.714 21.546 6.211V37.776C21.546 41.272 18.348 43.861 15.003 42.884C8.81 41.075 0.454 36.535 0.454 32.788z"),
-  "tcks16": yuvartı(22).round(1e3),
+  "kpks10": bubble(22, 1, 12, 7).round(1e3),
+  "kpks11": kumsaati(22, 1, 9, 0.04).round(1e3),
+  "kpks12": ikiliGemi(22, 4, 0.9).round(1e3),
+  "kpks13": sivriGemi(22, 6, 0.8).round(1e3),
+  "kpks14": new SVGPathData("M0.454 32.788C0.454 26.394 12.758 26.859 12.758 21.984C12.758 17.334 0.454 17.574 0.454 11.621C0.454 7.595 8.815 2.97 15.009 1.123C18.349 0.127 21.546 2.714 21.546 6.211V37.776C21.546 41.272 18.348 43.861 15.003 42.884C8.81 41.075 0.454 36.535 0.454 32.788z"),
+  "kpks16": yuvartı(22).round(1e3),
 }
 
-let out = "";
-
-export const üret = () => {
-  if (!out) {
-    for (const kod in ŞekilKod)
-      out += `<path id="${kod}" d="${ŞekilKod[kod].encode()}" />\n    `;
-  }
-  return out
-};
+export default () => <>
+  {Object.entries(ŞekilKod).map(([kod, yol]) => <path key={kod} id={kod} d={yol.encode()} />)}
+</>;

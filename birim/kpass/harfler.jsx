@@ -84,18 +84,10 @@ const RobotoMono = {
   ),
 };
 
-let out = "";
-
-export const üret = () => {
-  if (!out) {
-    /** @type {number} */
-    let i = 0;
-    for (const harf in RobotoMono) {
-      /** @const {string} */
-      const d = RobotoMono[harf].translate(0, harf == "T" ? i - 18 : i).round(1e3).encode();
-      out += `<path id="tck${harf}" d="${d}"/>\n    `;
-      i -= 6;
-    }
-  }
-  return out;
-};
+export default () => (
+  <>
+    {Object.entries(RobotoMono).map(([harf, path], i) => (
+      <path key={harf} id={`kpk${harf}`} d={path.translate(0, harf == "T" ? -6 * i - 18 : -6 * i).round(1e3).encode()} />
+    ))}
+  </>
+);

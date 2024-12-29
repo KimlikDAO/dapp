@@ -1,3 +1,5 @@
+import Harfler from "./harfler";
+import ŞekilKod from "./şekilkod";
 
 const Cover = () => (
   <svg id="kpk" width="280" height="280" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg"
@@ -86,6 +88,8 @@ const Cover = () => (
       <rect id="kpks7" width="44" height="22" rx="10" />
       <path id="kpks8" d="M0 0a22 22 0 0 0 44 0z" />
       <rect id="kpks15" width="66" height="22" rx="10" />
+      <Harfler />
+      <ŞekilKod />
       <clipPath id="kpkz">
         <use href="#kpks0" x="277" y="57" />
         <use href="#kpks0" x="189" y="13" />

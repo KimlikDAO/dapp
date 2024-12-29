@@ -23,7 +23,7 @@ const NODES = {
   td: ["0x77c60E68158De0bC70260DFd1201be9445EfFc07", "timedogankoy.com", "edc7c7", "E5AFAF"],
   yl: ["0xE3581636Df37f1eBfFbdFE22F8719F57c555d4f7", "yenilira.org", "#bbe7d5", "9EDDC3", "üst"],
   di: ["0x4F1DBED3c377646c89B4F8864E0b41806f2B79fd", "dobbyinu.com", "#fe94f4", "FE66EF"],
-  k3: ["0xc855dB548A6feB1f34AcAE6531c84261008ea55A", "kopru3.com", "#b06ceb", "8E2DE2"],
+  k3: ["0xc855dB548A6feB1f34AcAE6531c84261008ea55A", "kopru.xyz", "#b06ceb", "8E2DE2"],
   ls: ["0x384bF113dcdF3e7084C1AE2Bb97918c3Bf15A6d2", "lstcm.co", "666", "111"],
 };
 
