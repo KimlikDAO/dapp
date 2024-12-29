@@ -1,5 +1,5 @@
+import Kapak from "kastro:./cover.svg.jsx";
 import Css from "./birim.css";
-import Kapak from "./kapak.m.svg";
 import dom from "/lib/util/dom";
 
 /** @const {!HTMLDivElement} */
@@ -105,7 +105,7 @@ const KPass = ({ style }) => (
         <use href="#bak" width="24" height="24" />
       </svg>
       <SolDüğme href="javascript:" class="kpd kpso"></SolDüğme>
-      <SağDüğme href="javascript:" id="kpsa" class="kpd kpsa"></SağDüğme>
+      <SağDüğme href="javascript:" class="kpd kpsa"></SağDüğme>
     </div>
   </Kök >
 );

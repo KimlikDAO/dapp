@@ -1,5 +1,5 @@
-import Script from "script:./sayfa.js";
-import PowWorker from "script:./tanışma/powWorker.js";
+import Script from "kastro:./sayfa.js";
+import PowWorker from "kastro:./tanışma/powWorker.js";
 import İmeceİptal from "./imeceİptal/birim.jsx";
 import Css from "./sayfa.css";
 import Tanışma from "./tanışma/birim.jsx";

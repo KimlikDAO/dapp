@@ -151,7 +151,7 @@ const Cover = () => (
         <use href="#kpks15" x="123" y="365" />
       </clipPath>
     </defs>
-    <rect width="400" height="400" fill="url(#tckw)" />
+    <rect width="400" height="400" fill="url(#kpkw)" />
     <g id="kpkaddr" fill="#4299E1">
       <use href="#kpk0" x="15" y="256" />
       <use href="#kpkx" x="15" y="250" />
@@ -197,9 +197,9 @@ const Cover = () => (
       <use href="#kpkc" x="15" y="10" />
     </g>
     <g transform="translate(10,365)scale(0.23)">
-      <path fill="url(#tckp)"
+      <path fill="url(#kpkp)"
         d="M50,6.25C70,6.25,70,6.25,80,15L90,25c21,25,21,25,0,50L80,85C70,93.75,70,93.75,50,93.75Z" />
-      <g clip-path="url(#tcksq)">
+      <g clip-path="url(#kpksq)">
         <path fill="#90cdf4" d="M0,50h50V0Z" />
         <path fill="#63B3ED" d="M50,0v50h50Z" />
         <path fill="#3182CE" d="M100,50H50v50Z" />
@@ -212,21 +212,21 @@ const Cover = () => (
       <use href="#kpkC" x="15" y="281" />
       <use href="#kpkT" x="15" y="288" />
     </g>
-    <g clip-path="url(#tckz)">
+    <g clip-path="url(#kpkz)">
       <g transform="rotate(-5 100 50)">
         <rect x="0" y="0" width="400" height="400" fill="white" />
-        <path filter="url(#tcksam)"
+        <path filter="url(#kpksam)"
           d="M257.64 313.656C258.601 348.517 141.426 526.8 107.983 527.721C74.5394 528.642 31 521 30 486.832C29.041 451.971 31.8738 157.571 65.3173 156.649C107.983 527.721 256.68 278.795 257.64 313.656Z"
           fill="#935BCA" />
-        <path filter="url(#tckugk)"
+        <path filter="url(#kpkugk)"
           d="M80.5168 -126.302C127.687 -173.472 209.531 -150.698 274.32 -85.9088C339.11 -21.1195 258.092 283.46 210.922 330.63C163.752 377.8 58.4887 14.4413 -6.30057 -50.348C-71.0899 -115.137 33.3469 -79.1324 80.5168 -126.302Z"
-          fill="url(#tckrm)" />
-        <ellipse filter="url(#tckaom)" cx="365" cy="307" rx="275" ry="194" transform="rotate(-67 365 307)"
-          fill="url(#tckcg2)" />
-        <path filter="url(#tckcgb)" style="mix-blend-mode:color-dodge"
+          fill="url(#kpkrm)" />
+        <ellipse filter="url(#kpkaom)" cx="365" cy="307" rx="275" ry="194" transform="rotate(-67 365 307)"
+          fill="url(#kpkcg2)" />
+        <path filter="url(#kpkcgb)" style="mix-blend-mode:color-dodge"
           d="M207 190C227 -234 457 226 537 130C527 533 371 305 371 305C371 305 315 610 121 559C-58 402 -38 59 207 190Z"
-          fill="url(#tckcg)" />
-        <circle filter="url(#tcksum)" cx="400" cy="20" fill="url(#tcksu)" r="180" />
+          fill="url(#kpkcg)" />
+        <circle filter="url(#kpksum)" cx="400" cy="20" fill="url(#kpksu)" r="180" />
         <animateTransform attributeName="transform" dur="10s" repeatCount="indefinite" type="rotate" calcMode="spline"
           keySplines="0.8 0 0.2 1; 0.8 0 0.2 1" values="-5 100 50;12 50 100;-5 100 50" />
       </g>

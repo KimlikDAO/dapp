@@ -1,4 +1,4 @@
-import Script from "script:./sayfa.js";
+import Script from "kastro:./sayfa.js";
 import Css from "./sayfa.css";
 import Başlık from "/birim/başlık/birim.jsx";
 import Favicon from "/birim/icon.svg";

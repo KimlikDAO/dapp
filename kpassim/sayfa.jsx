@@ -1,4 +1,4 @@
-import Script from "script:./sayfa.js";
+import Script from "kastro:./sayfa.js";
 import Pencere from "./pencere/birim.jsx";
 import Css from "./sayfa.css";
 import Başlık from "/birim/başlık/birim";
