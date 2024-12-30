@@ -79,7 +79,7 @@ export default ({ piggyback }) => (
     <use href="#tcks4" x="342.125" y="203.375" fill="#84f0f0" />
 
     <g transform="translate(90,20)" filter="url(#bleie)">
-      <KPass piggyback={piggyback} clip-path="url(#bleia)" height="250" width="250" inSvg />
+      <KPass piggyback={piggyback} bundleName="KPASS.svg" clip-path="url(#bleia)" height="250" width="250" inSvg />
     </g>
   </svg>
 );

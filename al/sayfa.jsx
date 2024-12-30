@@ -38,7 +38,7 @@ const DefaultChain = ChainId.xa4b1;
 
 const CüzdanBağlama = () =>
   <div id="al1" class="step">
-    <b data-en="1. Connect your wallet.">1. Cüzdanınızı bağlayın.</b>{{
+    <b data-en="1. Connect your wallet.">1. Cüzdanınızı bağlayın.</b>{" "}{{
       tr: "Cüzdan bağlayarak devam edin.",
       en: "Proceed with a crypto wallet."
     }}<br /><br />
@@ -47,7 +47,7 @@ const CüzdanBağlama = () =>
 
 const Şifreleme = () =>
   <div id="al3" class="step disabled">
-    <b data-en="3. Let’s encrypt your KPass.">3. KPass’inizi şifreleyelim. </b>{{
+    <b data-en="3. Let’s encrypt your KPass.">3. KPass’inizi şifreleyelim.</b>{" "}{{
       en: "We need 4 signatures from you to encrypt your KPass.",
       tr: "KPass’ini şifrelememiz için sizden 4 adet imzaya ihtiyacımız var. Bu işlem off-chain, tamamen ücretsiz ve güvenli."
     }}<br /><br />

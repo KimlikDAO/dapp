@@ -56,7 +56,7 @@ const AddressInfoKartı = () => (
 const KPass = ({ style }) => (
   <Kök style={style}>
     <Css />
-    <Kapak id="kpk" />
+    <Kapak bundleName="KPASS.svg" id="kpk" />
     <div id="kpi">
       <Kartlar>
         <PersonInfoKartı />

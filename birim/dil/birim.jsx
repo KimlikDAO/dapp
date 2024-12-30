@@ -13,8 +13,8 @@ const Dil = () => (
     <Css />
     <DilButonu class="bae" data-en="EN" href="javascript:">TR</DilButonu>
     <DilListesi style="display:none">
-      <li id="ditr"><TrFlag width={16} height={16} /> Türkçe</li>
       <li id="dien"><EnFlag width={16} height={16} /> English</li>
+      <li id="ditr"><TrFlag width={16} height={16} /> Türkçe</li>
     </DilListesi>
   </div>
 );

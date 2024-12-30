@@ -7,8 +7,8 @@ on:
     branches: ["ana", "prod"]
 
 jobs:
-  build-dapp:
-    name: dApp'ı oluştur
+  birimler-derle:
+    name: Birimleri derle
     strategy:
       fail-fast: true
 
@@ -22,6 +22,9 @@ jobs:
       - name: Bun kur
         uses: oven-sh/setup-bun@v2
 
+      - name: npm depleri kur
+        run: bun i
+
       - name: "`cüzdan` birimini derle"
         run: bun lib/kdjs/kdjs.js birim/cüzdan/birim.js --globals '{"GEN":false,"DefaultChain":"0x1","Chains":["0x1","0xa4b1"],"Lang":"tr"}'
 
@@ -31,8 +34,26 @@ jobs:
       - name: "`kpass` birimini derle"
         run: bun lib/kdjs/kdjs.js birim/kpass/birim.js --globals '{"GEN":false,"Lang":"en"}'
 
-      - name: Araçları kur
-        run: |
-          bun i
-          brew install pngcrush brotli zopfli woff2 webp librsvg
-          pip install fonttools
+  dappi-derle:
+    name: dApp'ı derle
+    runs-on: macos-latest
+    steps:
+      - name: Repoyu al
+        uses: actions/checkout@v3
+        with:
+          submodules: true
+
+      - name: Bun kur
+        uses: oven-sh/setup-bun@v2
+
+      - name: npm depleri al
+        run: bun i
+
+      - name: brew depleri kur
+        run: brew install pngcrush brotli zopfli woff2 webp librsvg
+
+      - name: pip depleri kur
+        run: pip install fonttools
+
+      - name: dApp'ı derle
+        run: bun run build

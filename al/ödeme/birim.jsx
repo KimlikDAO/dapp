@@ -19,7 +19,7 @@ const Dot = {
 
 const Ödeme = () => (
   <div id="od" class="step disabled">
-    <b data-en="5. Send the payment and receive your KPass.">5. Ödemeyi yapın KPass cüzdanınıza gelsin</b>{{
+    <b data-en="5. Send the payment and receive your KPass.">5. Ödemeyi yapın KPass cüzdanınıza gelsin</b>{" "}{{
       en: <>We'll send your wallet a request for a transaction of value <span id="odf">$1.5</span>. When confirmed, your KPass will be minted in the same transaction.</>,
       tr: <>Cüzdanınıza <span id="odf">$1,5</span> alımı için bir istek yollayacağız.Onayladığınızda
         cüzdanınızdan ücret alınır ve KPass'iniz cüzdanınıza mint edilir.</>

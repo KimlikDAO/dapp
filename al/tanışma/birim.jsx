@@ -6,7 +6,7 @@ import KopyalaResmi from "/al/paste.svg";
 const Tanışma = () => (
   <div id="ta" class="step disabled">
     <Css />
-    <b>{{ en: "2. Introduce yourself.", tr: "2. Kendinizi tanıtın." }}</b>{{
+    <b>{{ en: "2. Introduce yourself.", tr: "2. Kendinizi tanıtın." }}</b>{" "}{{
       en: "Authenticate by uploading a verifiable e-devlet PDF.",
       tr: "Kendinizi e-devlet’ten alınmış nüfus kayıt örneği yükleyerek veya e-devlet girişi ile tanıtabilirsiniz."
     }}<br />

@@ -21,6 +21,8 @@ export const AğButonu = dom.button("cuc");
 export const DebankLinki = dom.span("cude");
 /** @const {!HTMLDivElement} */
 export const Menü = dom.div("cub");
+/** @const {!HTMLUListElement} */
+export const SağPanel = dom.ul("cue");
 
 /**
  * @param {string} ad
@@ -73,7 +75,7 @@ const Cüzdan = ({ DefaultChain, Chains, ChainNotes, piggyback }) => (
       <ul id="cufmi" class="cuf" style="display:none">
         <Bağlantı idx="au" name="Auro" />
       </ul>
-      <ul id="cue" style="display:none">
+      <SağPanel style="display:none">
         <div id="cueh">
           <QmarkResmi id="cutc" height={80} width={80} />
           <div>
@@ -99,7 +101,7 @@ const Cüzdan = ({ DefaultChain, Chains, ChainNotes, piggyback }) => (
           en: " Switch wallet",
           tr: " Cüzdan değiştir"
         }}</li>
-      </ul>
+      </SağPanel>
     </Menü>
   </div >
 );

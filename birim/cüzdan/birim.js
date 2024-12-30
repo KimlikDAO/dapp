@@ -3,7 +3,8 @@ import {
   AdresMetni,
   AğButonu,
   DebankLinki,
-  Menü
+  Menü,
+  SağPanel
 } from "./birim.jsx";
 import { CoreBağlantısı, MetaMaskBağlantısı, RabbyBağlantısı } from "./evmBağlantısı";
 import { AuroConnection as AuroBağlantısı } from "./minaBağlantısı";
@@ -179,10 +180,10 @@ const ağDeğişti = (yeniAğ) => {
 
 const kpassDeğişti = () => {
   if (!Adres) return;
-  /** @const {!Element} */
-  const kpassDüğmesi = dom.adla("cuin");
+  /** @const {!HTMLDivElement} */
+  const kpassDüğmesi = dom.div("cuin");
   /** @const {!HTMLImageElement} */
-  const kpassResmi = /** @type {!HTMLImageElement} */(dom.adla("cutc"));
+  const kpassResmi = dom.img("cutc");
 
   /** @const {ChainId} */
   const ağ = Ağ;
@@ -199,7 +200,7 @@ const kpassDeğişti = () => {
       ? dom.i18n({ tr: "KPASS’İNİ İNCELE", en: "VIEW KPASS" })
       : dom.i18n({ tr: "KPASS AL", en: "MINT KPASS" });
     kpassDüğmesi.onclick = kpassResmi.onclick = () =>
-      window.location.href = "//kimlikdao.org" + (varMı
+      window.location.href = "//kimlikdao.org/" + (varMı
         ? dom.i18n({ tr: "kpassim", en: "kpass" })
         : dom.i18n({ tr: "al", en: "mint" }));
     if (!varMı && KPassYokResmi) kpassResmi.src = KPassYokResmi;
@@ -222,7 +223,7 @@ const koptu = () => {
   Adres = null;
   AdresButonu.innerText = BağlaMetni;
   bağlantıSeçildi("", BoşBağlantı);
-  dom.adlaGizle("cue");
+  dom.gizle(SağPanel);
   bağlantıSeçiciGöster();
   for (const f of Kopunca) f();
 }
@@ -247,7 +248,7 @@ const adresDeğişti = (adresler) => {
     if (!eskiAdres) {
       dom.gösterGizle(DebankLinki, Ağ.startsWith(ChainGroup.EVM));
       bağlantıSeçiciGizle();
-      dom.adlaGöster("cue");
+      dom.göster(SağPanel);
     }
     for (const f of AdresDeğişince) f(Adres);
   }
@@ -398,7 +399,7 @@ const kur = () => {
     ağSeçildi(ağ);
   }
 
-  const düğmeler = dom.adla("cue").children;
+  const düğmeler = SağPanel.children;
   düğmeler[2].onclick = () =>
     window.location.href = "//join.kimlikdao.org/#sa-ambassador1";
   düğmeler[3].onclick = () =>
