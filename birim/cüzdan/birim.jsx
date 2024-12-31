@@ -81,7 +81,7 @@ const Cüzdan = ({ DefaultChain, Chains, ChainNotes, piggyback }) => (
           <div>
             <div id="cuad"><span>0xcCc...cCc</span><span id="cuadi"><KopyalaResmi inline /></span></div>
             <DebankLinki>DeBank</DebankLinki> <span id="cuex">Explorer</span>
-            <div id="cuin" date-en="MINT KPASS">KPASS AL</div>
+            <div id="cuin" data-en="MINT KPASS">KPASS AL</div>
           </div>
         </div>
         <hr />

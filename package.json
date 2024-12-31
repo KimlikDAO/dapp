@@ -8,10 +8,11 @@
   "type": "module",
   "scripts": {
     "postinstall": "mkdir -p ./node_modules/@kimlikdao && ln -sfn ../../lib ./node_modules/@kimlikdao/lib && ln -sfn ../../lib/kdjs ./node_modules/@kimlikdao/kdjs",
-    "build": "NODE_ENV=production bun lib/kastro/kastro.js build",
-    "canary": "NODE_ENV=production bun lib/kastro/workers/canaryServer.js",
     "dev": "NODE_ENV=production bun lib/kastro/kastro.js serve",
     "compiled": "NODE_ENV=production bun lib/kastro/kastro.js serve --compiled",
+    "build": "NODE_ENV=production bun lib/kastro/kastro.js build",
+    "canary": "NODE_ENV=production bun lib/kastro/workers/canaryServer.js",
+    "deploy": "NODE_ENV=production bun lib/kastro/kastro.js deploy",
     "clean": "rm -rf build && clear"
   },
   "devDependencies": {

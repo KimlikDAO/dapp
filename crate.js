@@ -1,5 +1,8 @@
 import { I18nString, LangCode } from "/lib/util/i18n";
 
+/** @define {string} */
+const HOST_URL = "https://kimlikdao.org/";
+
 /** @enum {I18nString} */
 const Page = {
   Ana: { [LangCode.EN]: "en", [LangCode.TR]: "tr" },
@@ -42,6 +45,7 @@ const devModeJsTransform = (id, code, globals) => {
 }
 
 export {
+  HOST_URL,
   CodebaseLang,
   devModeJsTransform,
   Entry,
