@@ -39,10 +39,10 @@ const kutuKapat = () => {
 /**
  * Ana sayfa Telefon görselinin içinde temsili nft'yi gösterir.
  *
- * @param {boolean} kutudaGöster NFT tek başına kutuda gösterilsin mi.
+ * @param {boolean} büyükGöster NFT tek başına kutuda gösterilsin mi.
  * @param {boolean} bilgiYüzü NFT'nin bilgi yüzü gösterilsin.
  */
-const nftGöster = (kutudaGöster, bilgiYüzü) => {
+const nftGöster = (büyükGöster, bilgiYüzü) => {
   KPass.yüzGöster(bilgiYüzü);
 
   const yüzGöster = () => {
@@ -52,7 +52,7 @@ const nftGöster = (kutudaGöster, bilgiYüzü) => {
       : dom.i18n({ tr: "Aç", en: "Decrypt" });
   }
   yüzGöster();
-  if (kutudaGöster) {
+  if (büyükGöster) {
     KPass.Kök.style.opacity = "";
     dom.göster(NftDüğmesi);
     NftDüğmesi.onclick ||= () => {
@@ -60,9 +60,8 @@ const nftGöster = (kutudaGöster, bilgiYüzü) => {
       yüzGöster();
     }
   }
-
-  KPass.Kök.classList.toggle("tew", !kutudaGöster);
-  NftDüğmesi.classList.toggle("teg", kutudaGöster);
+  KPass.Kök.classList.toggle("tew", !büyükGöster);
+  NftDüğmesi.classList.toggle("teg", büyükGöster);
 }
 
 const nftGeriAl = () => {

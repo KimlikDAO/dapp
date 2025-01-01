@@ -7,6 +7,7 @@ import KPass from "/birim/kpass/birim.jsx";
 import Lato400 from "/birim/lato/l400.ttf";
 import Lato700 from "/birim/lato/l700.ttf";
 import OrtakCss from "/birim/ortakcss/birim";
+import { Page } from "/crate";
 import { ChainId } from "/lib/crosschain/chains";
 import dom from "/lib/util/dom";
 
@@ -64,17 +65,17 @@ const KPassim = ({ Lang }) =>
               en: "The connected wallet does not have a KPass on this chain.",
               tr: "Bağlıcüzdanda bu ağda KPass yok."
             }}<br /><br />
-              <a href="/al" class="inl">{{ en: "Almak için tıklayın.", tr: "Almak için tıklayın." }}</a>
+              <a href={Page.Al} class="inl">{{ en: "Almak için tıklayın.", tr: "Almak için tıklayın." }}</a>
             </span>
           </KPassYok>
           <KPass style="display:none" />
           <AçDüğmesi style="display:none">{{ en: "Unlock", tr: "Aç" }}</AçDüğmesi>
         </div>
         <div id="inbtn">
-          <DiscordDüğmesi href="javascript:" class="info btn" data-en="Claim Discord role">Discord rolü al</DiscordDüğmesi>
-          <İmeceİptalDüğmesi href="javascript:" class="more btn" data-en="Add social revoker">İmece iptal adresi ekle</İmeceİptalDüğmesi>
-          <EşikAzaltmaDüğmesi href="javascript:" class="more btn" data-en="Decrease revoke threshold">Eşik azalt</EşikAzaltmaDüğmesi>
-          <SilDüğmesi href=" javascript:" id="inbtn3" class="danger btn" data-en="Revoke KPass">KPass iptal et</SilDüğmesi>
+          <DiscordDüğmesi href="javascript:" class="info btn">{{ en: "Claim Discord role", tr: "Discord rolü al" }}</DiscordDüğmesi>
+          <İmeceİptalDüğmesi href="javascript:" class="more btn">{{ en: "Add social revoker", tr: "İmece iptal adresi ekle" }}</İmeceİptalDüğmesi>
+          <EşikAzaltmaDüğmesi href="javascript:" class="more btn">{{ en: "Decrease revoke threshold", tr: "Eşik azalt" }}</EşikAzaltmaDüğmesi>
+          <SilDüğmesi href="javascript:" class="danger btn">{{ en: "Revoke KPass", tr: "KPass iptal et" }}</SilDüğmesi>
         </div>
       </div>
       <Pencere />

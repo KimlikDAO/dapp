@@ -1,10 +1,8 @@
-import { Description, Title } from "../opengraph/birim";
+import { Description, Title } from "./opengraph.jsx";
 
-const TwitterCard = () => (<>
+export default () => (<>
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content={Title} />
   <meta name="twitter:description" content={Description} />
   <meta name="twitter:image" content="https://kimlikdao.org/KPASS.svg" />
 </>);
-
-export default TwitterCard;

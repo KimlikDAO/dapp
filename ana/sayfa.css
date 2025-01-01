@@ -1,3 +1,7 @@
+/**
+ * Ana sayfaya özel başlık stili
+ * @name {Başlık}
+ */
 #baa {
   align-items: center;
   background-color: rgba(255, 255, 255, 0.95);
@@ -8,6 +12,10 @@
   z-index: 20;
 }
 
+/**
+ * Sağ üstteki eylem düğmesi
+ * @export {EylemDüğmesi}
+ */
 #bal {
   align-items: center;
   display: flex;
@@ -17,7 +25,10 @@
   padding: 0 1em;
 }
 
-/* Açıklama */
+/**
+ * Alt hero'ların açıklama metinleri
+ * @name {Açıklama}
+ */
 .anac {
   font-size: 16px;
   line-height: 1.4;
@@ -36,6 +47,10 @@
   padding: 0 20px;
 }
 
+/**
+ * Ana sayfa ayraçları
+ * @name {Ayraç}
+ */
 .anhr {
   margin: 100px 0;
 }

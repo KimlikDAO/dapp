@@ -3,11 +3,11 @@ import Ağ from "./ağ/birim.jsx";
 import Hero from "./hero/birim";
 import Kazan from "./kazan/birim.jsx";
 import OkResmi from "./ok.svg";
-import OpenGraph, { Description, Title } from "./opengraph/birim";
+import OpenGraph, { Description, Title } from "./opengraph";
 import Raporlar from "./raporlar/birim";
 import Sahipler from "./sahipler/birim.jsx";
 import Css from "./sayfa.css";
-import TwitterCard from "./twittercard/birim";
+import TwitterCard from "./twittercard";
 import Altdizin from "/birim/altdizin/birim";
 import Cüzdan from "/birim/cüzdan/birim";
 import Dil from "/birim/dil/birim";
@@ -57,7 +57,7 @@ const Ana = ({ Lang }) => (
       <Script Chains={Chains} DefaultChain={DefaultChain} />
     </head>
     <body id="an">
-      <div id="baa">
+      <div id={Css.Başlık}>
         <a href="/" id="bag"><Logo id="bak" height={35} inline />KimlikDAO</a>
         <div id="baf">
           <a class="bae" href={{ en: "//join.kimlikdao.org/en", tr: "//join.kimlikdao.org/tr" }}
@@ -65,7 +65,7 @@ const Ana = ({ Lang }) => (
           <a class="bae" href="//discord.gg/H2wg6pcWXG" target="_blank" rel="noreferrer">Discord</a>
           <Dil />
           <Cüzdan Chains={Chains} DefaultChain={DefaultChain} ChainNotes={ChainNotes} />
-          <a id="bal" href={Page.Al} class="btn act">{{
+          <a id={Css.EylemDüğmesi} href={Page.Al} class="btn act">{{
             en: "Mint KPass",
             tr: "Hemen KPass al"
           }}<OkResmi inline /></a>
@@ -75,7 +75,7 @@ const Ana = ({ Lang }) => (
       <Kazan />
       <Sahipler />
       <Ağ />
-      <hr class="anhr" />
+      <hr class={Css.Ayraç} />
       <Raporlar />
       <Altdizin />
     </body>

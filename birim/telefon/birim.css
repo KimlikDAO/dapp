@@ -99,6 +99,7 @@
   top: 190px;
   transition: opacity 0.3s ease-in-out;
   width: 270px;
+  pointer-events: none;
 }
 
 #tek.teg {
