@@ -7,6 +7,18 @@
   width: 100%;
 }
 
+/**
+ * @name {Logomark}
+ */
+#bak {
+  /* need a no-op */
+  all: unset;
+}
+
+/**
+ * Sol üsteekki KimlikDAO logo ve yazısı
+ * @name {Logo}
+ */
 #bag {
   display: flex;
   align-items: center;
@@ -17,10 +29,18 @@
   padding: 3px;
 }
 
+/**
+ * Başlıktaki linkleri içeren div
+ * @name {Linkler}
+ */
 #baf {
   display: flex;
 }
 
+/**
+ * Başlıktaki metin link
+ * @name {Link}
+ */
 .bae {
   padding: 10px;
   margin: auto 15px;

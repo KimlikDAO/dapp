@@ -62,6 +62,9 @@ body {
   cursor: default;
 }
 
+/**
+ * @name {Düğme}
+ */
 .btn {
   font-weight: 700;
   color: #666;

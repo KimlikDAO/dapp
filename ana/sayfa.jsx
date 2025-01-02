@@ -56,16 +56,18 @@ const Ana = ({ Lang }) => (
       <Favicon raster={32} rel="icon" />
       <Script Chains={Chains} DefaultChain={DefaultChain} />
     </head>
-    <body id="an">
+    <body id={Css.Kök}>
       <div id={Css.Başlık}>
-        <a href="/" id="bag"><Logo id="bak" height={35} inline />KimlikDAO</a>
-        <div id="baf">
-          <a class="bae" href={{ en: "//join.kimlikdao.org/en", tr: "//join.kimlikdao.org/tr" }}
-            data-en="Join us">Aramıza katıl</a>
-          <a class="bae" href="//discord.gg/H2wg6pcWXG" target="_blank" rel="noreferrer">Discord</a>
+        <a href="/" id={OrtakCss.Başlık.Logo}>
+          <Logo id={OrtakCss.Başlık.Logomark} height={35} inline />KimlikDAO</a>
+        <div id={OrtakCss.Başlık.Linkler}>
+          <a class={OrtakCss.Başlık.Link} href={{ en: "//join.kimlikdao.org/en", tr: "//join.kimlikdao.org/tr" }}>{{
+            tr: "Aramıza katıl", en: "Join us"
+          }}</a>
+          <a class={OrtakCss.Başlık.Link} href="//discord.gg/H2wg6pcWXG" target="_blank" rel="noreferrer">Discord</a>
           <Dil />
           <Cüzdan Chains={Chains} DefaultChain={DefaultChain} ChainNotes={ChainNotes} />
-          <a id={Css.EylemDüğmesi} href={Page.Al} class="btn act">{{
+          <a id={Css.EylemDüğmesi} href={Page.Al} class={[OrtakCss.Düğme, "act"]}>{{
             en: "Mint KPass",
             tr: "Hemen KPass al"
           }}<OkResmi inline /></a>
