@@ -1,8 +1,15 @@
+/**
+ * @name {Kök}
+ */
 #ag {
   row-gap: 50px;
   margin: 80px auto;
 }
 
+/**
+ * Açıklama metnini içeren sütun
+ * @name {YazıSütunu}
+ */
 #agy {
   padding: 0 20px;
 }
@@ -99,6 +106,10 @@
   background: #8E2DE2;
 }
 
+/**
+ * KPass imzalarıni gösteren orta sütun
+ * @name {OrtaSütun}
+ */
 #agt {
   overflow: hidden;
   display: flex;
@@ -106,7 +117,11 @@
   align-items: center;
 }
 
-#agtc {
+/**
+ * KPass temsili
+ * @name {KPass}
+ */
+#agkp {
   width: 280px;
   height: 145px;
   margin: -25px auto 20px;

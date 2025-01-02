@@ -1,4 +1,6 @@
+import AnaCss from "../sayfa.css";
 import Css from "./birim.css";
+import OrtakCss from "/birim/ortakcss/birim.css";
 import { keccak256 } from "/lib/crypto/sha3";
 
 /**
@@ -70,27 +72,29 @@ const Grafik = ({ width }) => {
 }
 
 const Ağ = () => (
-  <div id="ag" class="an3">
+  <div id={Css.Kök} class={AnaCss.Üçlü}>
     <Css />
-    <div id="agy">
-      <h2 class="oblu" data-en="Verified and signed by 7+ independent nodes.">7 bağımsız onay ve imza.</h2>
-      <div class="anac"
-        data-en="The contents of each KPass are verified and digitally signed by at least seven independent nodes in the KimlikDAO network, all while fully preserving your privacy.">
-        KPass’ler birbirinden bağımsız en az 7 KimlikDAO ağı düğümünün onay ve dijital imzası ile üretilebilir.
-        Onay aşamasında veri gizliliğiniz tamamıyla korunur.
-      </div>
-      <a href="//github.com/KimlikDAO/kimlikdao-node" target="_blank" rel="noreferrer" class="info btn anust">{{
+    <div id={Css.YazıSütunu}>
+      <h2 class={OrtakCss.Mavi}>{{
+        en: "Verified and signed by 7+ independent nodes.",
+        tr: "7 bağımsız onay ve imza."
+      }}</h2>
+      <div class={AnaCss.Açıklama}>{{
+        en: "The contents of each KPass are verified and digitally signed by at least seven independent nodes in the KimlikDAO network, all while fully preserving your privacy.",
+        tr: "KPass’ler birbirinden bağımsız en az 7 KimlikDAO ağı düğümünün onay ve dijital imzası ile üretilebilir. Onay aşamasında veri gizliliğiniz tamamıyla korunur."
+      }}</div>
+      <a href="//github.com/KimlikDAO/kimlikdao-node" target="_blank" rel="noreferrer" class={[OrtakCss.Düğme, "info", "anust"]}>{{
         en: "Learn about KimlikDAO nodes",
         tr: "KimlikDAO düğümü detayları"
       }}</a>
     </div>
-    <div id="agt">
-      <div id="agtc">
+    <div id={Css.OrtaSütun}>
+      <div id={Css.KPass}>
         <div class="kpip">
-          <div class="kpl" data-en="City of birth">Doğum yeri</div>
-          <div data-en="Istanbul">İstanbul</div>
-          <div class="kpl" data-en="Gender">Cinsiyet</div>
-          <div data-en="F">K</div>
+          <div class="kpl">{{ tr: "Doğum yeri", en: "City of birth" }}</div>
+          <div>{{ tr: "İstanbul", en: "Istanbul" }}</div>
+          <div class="kpl">{{ tr: "Cinsiyet", en: "Gender" }}</div>
+          <div>{{ tr: "K", en: "F" }}</div>
         </div>
         <svg id="kplo" height={24} width={24}>
           <use href="#bak" width={24} height={24} />

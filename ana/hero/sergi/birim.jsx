@@ -7,7 +7,7 @@ export const Boncuklar = dom.div("sen");
 export const Kartlar = dom.ul("sem");
 
 const Sergi = () => (
-  <div id="se">
+  <div id={Css.Kök}>
     <Css />
     <div id="sec">
       <Kartlar>

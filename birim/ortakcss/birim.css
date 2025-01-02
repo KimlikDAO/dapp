@@ -148,10 +148,18 @@ button:hover {
   transition-duration: 0.1s;
 }
 
+/**
+ * Tema mavisi
+ * @name {Mavi}
+ */
 .oblu {
   color: #3182CE
 }
 
+/**
+ * Tema moru
+ * @name {Mor}
+ */
 .oprp {
   color: #5256c9;
 }

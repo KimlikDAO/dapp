@@ -1,4 +1,5 @@
 import OkResmi from "../ok.svg";
+import AnaCss from "../sayfa.css";
 import Css from "./birim.css";
 import { ağResmi } from "/birim/ağlar/birim";
 import { Page } from "/crate";
@@ -33,10 +34,10 @@ const Balon = ({ chainId }) => (
 );
 
 const Sahipler = () => (
-  <div id="sa">
+  <div id={Css.Kök}>
     <Css />
-    <div id="sai">
-      <div class="ansag">
+    <div id={Css.İçerik}>
+      <div class={AnaCss.SağaYaslı}>
         <h2>{{
           tr: <>Ağlara göre<br />KPass sahipleri.</>,
           en: <>KPass holders<br />by chain.</>
@@ -51,7 +52,7 @@ const Sahipler = () => (
         }} <OkResmi inline /></a>
         </div>
       </div>
-      <div id="sak">{Object.keys(Tablo).map((chainId) => <Balon chainId={chainId} />)}</div>
+      <div id={Css.Balonlar}>{Object.keys(Tablo).map((chainId) => <Balon chainId={chainId} />)}</div>
     </div>
   </div>
 );

@@ -7,10 +7,10 @@ export default ({ href, piggyback, loading }) => (
     <BlogCss />
     <div>
       <BannerResmi piggyback={piggyback} class="blpp" width="100%" loading={loading} />
-      <h4 data-en="January 2024 progress report">Ocak 2025 ilerleme raporu</h4>
+      <h4 data-en="January 2025 progress report">Ocak 2025 ilerleme raporu</h4>
       <Yazar ad="KimlikDAO" />
       <div class="bly">{{
-        en: "KimlikDAO January 2024 progress report will be published on January 31st.",
+        en: "KimlikDAO January 2025 progress report will be published on January 31st.",
         tr: "KimlikDAO Ocak 2025 aylık ilerleme raporu 31 Ocak'ta yayıma alınacak."
       }}</div>
     </div>

@@ -1,3 +1,4 @@
+import Css from "./birim.css";
 import Kaydol from "/birim/kaydol/birim";
 
-Kaydol.bind("altb");
+Kaydol.bind(Css.KaydolBirimi);

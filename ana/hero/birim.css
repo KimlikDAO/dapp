@@ -1,3 +1,7 @@
+/**
+ * Hero bileşeni
+ * @name {Kök}
+ */
 #he {
   padding: 40px 60px;
   border-radius: 22px;
@@ -13,6 +17,10 @@
     radial-gradient(circle at 75% 60%, rgba(99, 55, 186, 0.3) 0%, rgba(255, 255, 255, 0) 40%);
 }
 
+/**
+ * Hero içeriği sergi + telefonu içerir
+ * @name {İçerik}
+ */
 #het {
   display: flex;
   justify-content: space-between;
@@ -20,6 +28,10 @@
   max-width: 1200px;
 }
 
+/**
+ * Başlık ve sergiyi içeren sol kısım
+ * @name {Sol}
+ */
 #hes {
   margin: auto 20px;
   max-width: 750px;
@@ -33,10 +45,18 @@ h1 {
   text-align: left;
 }
 
+/**
+ * Eylem duğmeleri
+ * @name {Düğmeler}
+ */
 #heb {
   display: flex;
 }
 
+/**
+ * Al duğmesi
+ * @name {AlDüğmesi}
+ */
 #hel {
   margin-right: 20px;
 }

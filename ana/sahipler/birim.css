@@ -1,7 +1,13 @@
+/**
+ * @name {Kök}
+ */
 #sa {
   background: linear-gradient(90deg, #F8F8F8 -9.07%, rgba(132, 199, 255, 0.2) 100%, rgba(255, 255, 255, 0.8) 69.02%);
 }
 
+/**
+ * @name {İçerik}
+ */
 #sai {
   display: flex;
   flex-direction: row-reverse;
@@ -11,6 +17,10 @@
   padding: 0 20px;
 }
 
+/**
+ * Ağları gösteren balonlar
+ * @name {Balonlar}
+ */
 #sak {
   margin: 0 auto;
   padding: 35px 0 50px;

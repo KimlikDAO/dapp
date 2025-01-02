@@ -1,3 +1,7 @@
+/**
+ * Alt dizin
+ * @name {Kök}
+ */
 #alt {
   display: flex;
   justify-content: space-between;
@@ -6,6 +10,10 @@
   padding: 70px 0 40px;
 }
 
+/**
+ * Alt dizin sütunu
+ * @name {Sütun}
+ */
 .altc {
   margin: 7px 40px 0;
 }
@@ -26,10 +34,18 @@
   }
 }
 
+/**
+ * Alt dizin kaydol kutusu
+ * @name {KaydolKutusu}
+ */
 #altk {
   padding: 0 20px;
 }
 
+/**
+ * Alt dizin logo
+ * @name {Logo}
+ */
 #altl {
   display: flex;
   align-items: center;
@@ -37,6 +53,10 @@
   font-weight: 700;
 }
 
+/**
+ * Brand mark metni
+ * @name {BrandMark}
+ */
 #altt {
   margin-top: 20px;
   display: inline-block;
@@ -45,12 +65,20 @@
   line-height: 1.5;
 }
 
+/**
+ * Kaydol metni
+ * @name {KaydolMetni}
+ */
 #altm {
   margin: 50px 0 10px;
   font-weight: 700;
   font-size: 13px;
 }
 
+/**
+ * Kaydol birimi
+ * @export {KaydolBirimi}
+ */
 #altb {
   width: 330px;
 }

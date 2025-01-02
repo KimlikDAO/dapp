@@ -1,23 +1,26 @@
 import Css from "./birim.css";
 import Kaydol from "/birim/kaydol/birim.jsx";
+import OrtakCss from "/birim/ortakcss/birim.jsx";
 
 const Altdizin = () => (
-  <div id="alt">
+  <div id={Css.Kök}>
     <Css />
-    <div id="altk">
-      <div id="altl">
-        <svg height="30" width="39">
-          <use href="#bak" height="30" x="-4" />
+    <div id={Css.KaydolKutusu}>
+      <div id={Css.Logo}>
+        <svg height={30} width={39}>
+          <use href={"#" + OrtakCss.Başlık.Logomark} height={30} x={-4} />
         </svg>KimlikDAO
       </div>
-      <span id="altt" data-en="Wallet-login to all on/off-ramps with a single account you truly own.">Bir kez KPass al,
-        tüm on/off-ramp’leri cüzdanınla hesap açmadan kullan</span>
-      <div id="altm" data-en="SUBSCRIBE TO THE KIMLIKDAO NEWSLETTER">KİMLİKDAO BÜLTEN'E KAYDOLUN</div>
-      <Kaydol id="altb" />
+      <span id={Css.BrandMark}>{{
+        en: "Wallet-login to all on/off-ramps with a single account you truly own.",
+        tr: "Bir kez KPass al, tüm on/off-ramp’leri cüzdanınla hesap açmadan kullan."
+      }}</span>
+      <div id={Css.KaydolMetni} data-en="SUBSCRIBE TO THE KIMLIKDAO NEWSLETTER">KİMLİKDAO BÜLTEN'E KAYDOLUN</div>
+      <Kaydol id={Css.KaydolBirimi} />
     </div>
-    <div class="altc">
+    <div class={Css.Sütun}>
       <b data-en="COMMUNITY">TOPLULUK</b>
-      <a href="//x.com/KimlikDAO">X (Twitter)</a>
+      <a href="//x.com/KimlikDAO">X</a>
       <a href="//discord.gg/H2wg6pcWXG">Discord</a>
       <a href="//join.kimlikdao.org/#sa-ambassador1" data-en="Ambassador program">Ambassador ol</a>
       <a href="//zealy.io/c/kimlikdao">Zealy</a>
@@ -25,12 +28,17 @@ const Altdizin = () => (
       <a href="//dappradar.com/dapp/kimlikdao-2">DappRadar</a>
       <a href="//linkedin.com/company/KimlikDAO/">LinkedIn</a>
     </div>
-    <div class="altc">
+    <div class={Css.Sütun}>
       <b data-en="DEVELOPERS">GELİŞTİRİCİLER</b>
       <a href="//github.com/KimlikDAO">GitHub</a>
-      <a href="//docs.kimlikdao.org/v/turkce" en:href="//docs.kimlikdao.org">Docs</a>
-      <a href="//join.kimlikdao.org/tr" en:href="//join.kimlikdao.org/en" data-en="Join KimlikDAO">KimlikDAO’ya
-        katıl</a>
+      <a href={{
+        tr: "//docs.kimlikdao.org/v/turkce",
+        en: "//docs.kimlikdao.org"
+      }}>Docs</a>
+      <a href={{
+        tr: "//join.kimlikdao.org/tr",
+        en: "//join.kimlikdao.org/en"
+      }}>{{ tr: "KimlikDAO’ya katıl", en: "Join KimlikDAO" }}</a>
       <a href="//discord.gg/H2wg6pcWXG">Discord</a>
     </div>
   </div>

@@ -1,3 +1,7 @@
+/**
+ * KPass kök
+ * @export {Kök}
+ */
 #kp {
   background: #fff;
   border-radius: 10px;
@@ -23,7 +27,10 @@
   width: 100%;
 }
 
-/* Kapak yüzü */
+/**
+ * KPass'ın kapak yüzü
+ * @name {KapakYüzü}
+ */
 #kpk {
   align-items: center;
   display: flex;
@@ -31,7 +38,10 @@
   transform: rotateY(0deg);
 }
 
-/* Bilgi yüzü */
+/**
+ * KPass'ın bilgi yüzü
+ * @name {BilgiYüzü}
+ */
 #kpi {
   transform: rotateY(180deg);
 }
@@ -44,12 +54,19 @@
   width: 1400px;
 }
 
+/**
+ * Bilgi kartı
+ * @name {BilgiKartı}
+ */
 .kpp {
   width: 280px;
   height: 280px;
 }
 
-/* KPass Düğmesi */
+/**
+ * KPass Düğmesi
+ * @name {Düğme}
+ */
 .kpd {
   bottom: 5px;
   height: 10px;
@@ -71,6 +88,10 @@
   right: 3px;
 }
 
+/**
+ * KPass Logo
+ * @name {Logo}
+ */
 #kplo {
   bottom: 6px;
   left: 10px;
@@ -98,21 +119,37 @@
   transform: rotate(-45deg);
 }
 
+/**
+ * Bilgi kartı içeriği
+ * @name {BilgiKartıİçi}
+ */
 .kpip {
   padding: 3ex 20px;
 }
 
+/**
+ * Bilgi adı
+ * @name {Ad}
+ */
 .kpl {
   font-size: 7px;
   padding: 5px 0 0;
 }
 
+/**
+ * Çift sütunlu bilgi kartı
+ * @name {ÇiftSütun}
+ */
 .kppc {
   display: flex;
   justify-content: space-between;
 }
 
-#kpam {
+/**
+ * Sağ sütun
+ * @name {SağSütun}
+ */
+#kpss {
   min-width: 4em;
 }
 
