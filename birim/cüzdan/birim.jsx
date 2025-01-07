@@ -1,28 +1,28 @@
 import { AğBilgileri, ağResmi } from "../ağlar/birim";
 import Css from "./birim.css";
+import AmbassadorResmi from "/birim/cüzdan/img/ambassador.svg";
+import DeğiştirResmi from "/birim/cüzdan/img/external-link.svg";
+import İptalResmi from "/birim/cüzdan/img/iptal.svg";
+import QmarkResmi from "/birim/cüzdan/img/qmark.svg";
+import VoteResmi from "/birim/cüzdan/img/vote.svg";
+import KopyalaResmi from "/birim/paste.svg";
 import { ChainId } from "/lib/crosschain/chains";
+import { Image } from "/lib/kastro/image";
 import dom from "/lib/util/dom";
 import { I18nString } from "/lib/util/i18n";
-import { Image } from "/lib/kastro/image";
-import QmarkResmi from "/birim/cüzdan/img/qmark.svg";
-import AmbassadorResmi from "/birim/cüzdan/img/ambassador.svg";
-import VoteResmi from "/birim/cüzdan/img/vote.svg";
-import İptalResmi from "/birim/cüzdan/img/iptal.svg";
-import DeğiştirResmi from "/birim/cüzdan/img/external-link.svg";
-import KopyalaResmi from "/birim/paste.svg";
 
 /** @const {!HTMLButtonElement} */
-export const AdresButonu = dom.button("cua");
-/** @const {!HTMLSpanElement} */
-export const AdresMetni = dom.span("cuad");
+export const AdresDüğmesi = dom.button(Css.AdresDüğmesi);
 /** @const {!HTMLButtonElement} */
-export const AğButonu = dom.button("cuc");
-/** @const {!HTMLSpanElement} */
-export const DebankLinki = dom.span("cude");
+export const AğDüğmesi = dom.button(Css.AğDüğmesi);
 /** @const {!HTMLDivElement} */
-export const Menü = dom.div("cub");
+export const CüzdanAdresi = dom.div(Css.CüzdanAdresi);
+/** @const {!HTMLSpanElement} */
+export const DebankLinki = dom.span(Css.DebankLinki);
+/** @const {!HTMLDivElement} */
+export const Menü = dom.div(Css.Menü);
 /** @const {!HTMLUListElement} */
-export const SağPanel = dom.ul("cue");
+export const SağPanel = dom.ul(Css.SağPanel);
 
 /**
  * @param {string} ad
@@ -35,7 +35,7 @@ const bağlantıResmi = (ad) => `birim/cüzdan/img/${ad.split(" ")[0].toLowerCas
  * @return {string}
  */
 const Bağlantı = ({ idx, name }) => (
-  <li id={"cu" + idx}>
+  <li id={Css.Kök + idx}>
     <Image src={bağlantıResmi(name)} width={32} height={32} />
     <div class="cust"></div> {name}<span class="cui" style="display:none" data-en="GET">İNDİR</span>
   </li>
@@ -51,37 +51,37 @@ const Bağlantı = ({ idx, name }) => (
  * @return {string}
  */
 const Cüzdan = ({ DefaultChain, Chains, ChainNotes, piggyback }) => (
-  <div id="cu">
+  <div id={Css.Kök}>
     <Css />
-    <AğButonu><Image src={ağResmi(DefaultChain)} height={32} width={32} /></AğButonu>
-    <AdresButonu data-en="Connect wallet">Cüzdan bağla</AdresButonu>
-    <Menü style="display:none" tabindex="0">
-      <ul id="cud">
+    <AğDüğmesi><Image src={ağResmi(DefaultChain)} height={32} width={32} inline /></AğDüğmesi>
+    <AdresDüğmesi>{{ tr: "Cüzdan bağla", en: "Connect wallet" }}</AdresDüğmesi>
+    <Menü style="display:none" tabindex={0}>
+      <ul id={Css.AğListesi}>
         {Chains.map((id) => (
-          <li id={`cud${id}`} class={id == DefaultChain ? "sel" : ""}>
+          <li id={Css.AğListesi + id} class={id == DefaultChain ? "sel" : ""}>
             {id == DefaultChain ? <span></span> : <Image src={ağResmi(id)} width={32} height={32} />}
             {" "}
             {ChainNotes[id]
-              ? <div>{AğBilgileri[id].ad}<div class="cuo">{ChainNotes[id]}</div></div>
+              ? <div>{AğBilgileri[id].ad}<div class={Css.AğNotu}>{ChainNotes[id]}</div></div>
               : AğBilgileri[id].ad}
           </li>
         ))}
       </ul>
-      <ul id="cuf0x" class="cuf">
+      <ul id="cuf0x" class={Css.BağlantıListesi}>
         <Bağlantı idx="ra" name="Rabby Wallet" />
         <Bağlantı idx="co" name="Core" />
         <Bağlantı idx="mm" name="Metamask" />
       </ul>
-      <ul id="cufmi" class="cuf" style="display:none">
+      <ul id="cufmi" class={Css.BağlantıListesi} style="display:none">
         <Bağlantı idx="au" name="Auro" />
       </ul>
       <SağPanel style="display:none">
-        <div id="cueh">
-          <QmarkResmi id="cutc" height={80} width={80} />
+        <div id={Css.Profil}>
+          <QmarkResmi id={Css.ProfilResmi} height={80} width={80} />
           <div>
-            <div id="cuad"><span>0xcCc...cCc</span><span id="cuadi"><KopyalaResmi inline /></span></div>
-            <DebankLinki>DeBank</DebankLinki> <span id="cuex">Explorer</span>
-            <div id="cuin" data-en="MINT KPASS">KPASS AL</div>
+            <CüzdanAdresi><span>0xcCc...cCc</span><span id="cuadi"><KopyalaResmi inline /></span></CüzdanAdresi>
+            <DebankLinki>DeBank</DebankLinki> <span id={Css.ExplorerLinki}>Explorer</span>
+            <div id={Css.KPassDüğmesi} data-en="MINT KPASS">KPASS AL</div>
           </div>
         </div>
         <hr />
@@ -89,7 +89,7 @@ const Cüzdan = ({ DefaultChain, Chains, ChainNotes, piggyback }) => (
           en: " Ambassador program",
           tr: " Ambassador ol"
         }}</li>
-        <li><VoteResmi width="16" height="16" />{{
+        <li><VoteResmi width={16} height={16} />{{
           en: " Vote",
           tr: " Oy kullan"
         }}</li>

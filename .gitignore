@@ -2,6 +2,7 @@
 .gizli
 .ipynb_checkpoints/
 .kdjs_isolate
+.secrets.js
 .vscode/
 *.lock*
 *.out.js

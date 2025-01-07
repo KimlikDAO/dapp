@@ -1,7 +1,8 @@
+import Css from "./birim.css";
 import {
-  AdresButonu,
-  AdresMetni,
-  AğButonu,
+  AdresDüğmesi,
+  AğDüğmesi,
+  CüzdanAdresi,
   DebankLinki,
   Menü,
   SağPanel
@@ -98,7 +99,7 @@ const Bağlantılar = {
 /** @const {!Set<ChainId>} */
 const Ağlar = new Set(Chains);
 /** @const {string} */
-const BağlaMetni = AdresButonu.innerText;
+const BağlaMetni = AdresDüğmesi.innerText;
 /** @type {!Array<function(?string)>} */
 const AdresDeğişince = [];
 /** @const {!Array<function()>} */
@@ -165,9 +166,9 @@ const ağDeğişti = (yeniAğ) => {
   } else if (yeniAğ != Ağ) {
     dom.adla("cud" + Ağ).classList.remove("sel");
     dom.adla("cud" + yeniAğ).classList.add("sel");
-    AğButonu.replaceChild(
+    AğDüğmesi.replaceChild(
       dom.adla("cud" + yeniAğ).firstElementChild.cloneNode(true),
-      AğButonu.firstElementChild);
+      AğDüğmesi.firstElementChild);
     /** @const {boolean} */
     const ağGrubuDeğişti = !Ağ.startsWith(yeniAğ.slice(0, 2));
     Ağ = yeniAğ;
@@ -181,9 +182,9 @@ const ağDeğişti = (yeniAğ) => {
 const kpassDeğişti = () => {
   if (!Adres) return;
   /** @const {!HTMLDivElement} */
-  const kpassDüğmesi = dom.div("cuin");
+  const kpassDüğmesi = dom.div(Css.KPassDüğmesi);
   /** @const {!HTMLImageElement} */
-  const kpassResmi = dom.img("cutc");
+  const kpassResmi = dom.img(Css.ProfilResmi);
 
   /** @const {ChainId} */
   const ağ = Ağ;
@@ -221,7 +222,7 @@ const kpassDeğişti = () => {
 
 const koptu = () => {
   Adres = null;
-  AdresButonu.innerText = BağlaMetni;
+  AdresDüğmesi.innerText = BağlaMetni;
   bağlantıSeçildi("", BoşBağlantı);
   dom.gizle(SağPanel);
   bağlantıSeçiciGöster();
@@ -238,11 +239,11 @@ const adresDeğişti = (adresler) => {
     /** @const {?string} */
     const eskiAdres = Adres;
     Adres = adresler[0];
-    AdresMetni.firstElementChild.innerText =
-      AdresButonu.innerText = hızlıArabirimAdı(Adres);
+    CüzdanAdresi.firstElementChild.innerText =
+      AdresDüğmesi.innerText = hızlıArabirimAdı(Adres);
 
     nihaiArabirimAdı(Adres).then((ad) => {
-      if (ad) AdresButonu.innerText = ad;
+      if (ad) AdresDüğmesi.innerText = ad;
     });
     kpassDeğişti();
     if (!eskiAdres) {
@@ -373,20 +374,20 @@ const izinliyseBağla = () => {
 
 const aç = () => {
   dom.göster(Menü);
-  AğButonu.onclick = null;
-  AdresButonu.onclick = null;
+  AğDüğmesi.onclick = null;
+  AdresDüğmesi.onclick = null;
   Menü.focus();
 }
 
 const kur = () => {
   /** @const {!Element} */
   const seçiliAğ = dom.adla("cud" + DefaultChain);
-  seçiliAğ.replaceChild(AğButonu.firstElementChild.cloneNode(true),
+  seçiliAğ.replaceChild(AğDüğmesi.firstElementChild.cloneNode(true),
     seçiliAğ.firstElementChild);
-  AdresButonu.onclick = AğButonu.onclick = aç;
+  AdresDüğmesi.onclick = AğDüğmesi.onclick = aç;
   Menü.onblur = () => {
     dom.gizle(Menü);
-    setTimeout(() => AdresButonu.onclick = AğButonu.onclick = aç, 300);
+    setTimeout(() => AdresDüğmesi.onclick = AğDüğmesi.onclick = aç, 300);
   };
 
   dom.adla("cud").onclick = (event) => {
@@ -408,7 +409,7 @@ const kur = () => {
     window.location.href = "//kimlikdao.org/" + dom.i18n({ tr: "iptal", en: "revoke" });
   düğmeler[5].onclick = () => koptu();
 
-  AdresMetni.onclick = () => navigator.clipboard.writeText(/** @type {string} */(Adres));
+  CüzdanAdresi.onclick = () => navigator.clipboard.writeText(/** @type {string} */(Adres));
   dom.adla("cuex").onclick = () => {
     const adresEki = Ağ.startsWith("mi") ? "wallet" : "address";
     const url = `//${AğBilgileri[Ağ].izleyici}/${adresEki}/${Adres}`;

@@ -23,8 +23,8 @@ import { I18nString } from "/lib/util/i18n"
 /** @const {!Array<ChainId>} */
 const Chains = [
   ChainId.x1,
-  ChainId.MinaMainnet,
   ChainId.xa4b1,
+  ChainId.MinaMainnet,
   ChainId.x89,
   ChainId.xa86a,
   ChainId.x38
@@ -32,8 +32,8 @@ const Chains = [
 
 /** @const {!Object<ChainId, I18nString>} */
 const ChainNotes = {
+  [ChainId.xa4b1]: { tr: "Ana ağ", en: "Signal chain" },
   [ChainId.MinaMainnet]: { tr: "Yeni ✨", en: "New ✨" },
-  [ChainId.xa4b1]: { tr: "Ana ağ", en: "Signal chain" }
 };
 
 /** @const {ChainId} */
