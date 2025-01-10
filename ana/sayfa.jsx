@@ -61,7 +61,7 @@ const Ana = ({ Lang }) => (
         <a href="/" id={OrtakCss.Başlık.Logo}>
           <Logo id={OrtakCss.Başlık.Logomark} height={35} inline />KimlikDAO</a>
         <div id={OrtakCss.Başlık.Linkler}>
-          <a class={OrtakCss.Başlık.Link} href={{ en: "//join.kimlikdao.org/en", tr: "//join.kimlikdao.org/tr" }}>{{
+          <a class={OrtakCss.Başlık.Link} href={{ en: "//join.kimlikdao.org/?en", tr: "//join.kimlikdao.org/?tr" }}>{{
             tr: "Aramıza katıl", en: "Join us"
           }}</a>
           <a class={OrtakCss.Başlık.Link} href="//discord.gg/H2wg6pcWXG" target="_blank" rel="noreferrer">Discord</a>

@@ -13,7 +13,7 @@ export default ({ href }) =>
     <Css />
     <BlogCss />
     <div>
-      <Banner class="blpp" width="100%" />
+      <Banner class="blpp" width="100%" quality={60} />
       <h4 data-en="Elliptic curves and their applications in crypto">Eliptik eğriler ve kriptoda kullanımı</h4>
       <Yazar ad={{ tr: "KimlikDAO öğren & kazan", en: "KimlikDAO learn & earn" }} />
       <div class="bly">{{
@@ -28,11 +28,10 @@ export default ({ href }) =>
         <div class="blpi dobby" style="width:180px"></div>
         <div class="blpit">
           <DobbyResmi width="22" height="22" id="bldob" />{" "}
-          <RemainingBar data-en="50,000">50.000</RemainingBar>/{{
-            en: "50,000",
-            tr: "50.000"
+          <RemainingBar>{{ en: "50,000", tr: "50.000" }}</RemainingBar>/{{
+            en: "50,000", tr: "50.000"
           }} DOBBY
         </div>
       </div>
     </div>
-  </a >;
+  </a>;

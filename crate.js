@@ -1,7 +1,7 @@
 import { I18nString, LangCode } from "/lib/util/i18n";
 
 /** @define {string} */
-const HOST_URL = "https://kimlikdao.org/";
+const HostUrl = "https://kimlikdao.org";
 
 /** @enum {I18nString} */
 const Page = {
@@ -21,6 +21,6 @@ const CodebaseLang = LangCode.TR;
 export {
   CodebaseLang,
   Entry,
-  HOST_URL,
+  HostUrl,
   Page
 };

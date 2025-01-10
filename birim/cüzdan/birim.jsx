@@ -59,7 +59,7 @@ const Cüzdan = ({ DefaultChain, Chains, ChainNotes, piggyback }) => (
       <ul id={Css.AğListesi}>
         {Chains.map((id) => (
           <li id={Css.AğListesi + id} class={id == DefaultChain ? "sel" : ""}>
-            {id == DefaultChain ? <span></span> : <Image src={ağResmi(id)} width={32} height={32} />}
+            {id == DefaultChain ? <span></span> : <Image src={ağResmi(id)} width={32} height={32} bundleWidth={40} bundleHeight={40} />}
             {" "}
             {ChainNotes[id]
               ? <div>{AğBilgileri[id].ad}<div class={Css.AğNotu}>{ChainNotes[id]}</div></div>

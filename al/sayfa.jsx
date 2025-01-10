@@ -20,8 +20,8 @@ export const BağlaDüğmesi = dom.a("al1a");
 /** @const {!Array<ChainId>} */
 const Chains = [
   ChainId.x1,
-  ChainId.MinaMainnet,
   ChainId.xa4b1,
+  ChainId.MinaMainnet,
   ChainId.x89,
   ChainId.xa86a,
   ChainId.x38
@@ -29,8 +29,8 @@ const Chains = [
 
 /** @const {!Object<ChainId, I18nString>} */
 const ChainNotes = {
+  [ChainId.xa4b1]: { tr: "Ana ağ", en: "Signal chain" },
   [ChainId.MinaMainnet]: { tr: "Yeni ✨", en: "New ✨" },
-  [ChainId.xa4b1]: { tr: "Ana ağ", en: "Signal chain" }
 };
 
 /** @const {ChainId} */
@@ -38,20 +38,26 @@ const DefaultChain = ChainId.xa4b1;
 
 const CüzdanBağlama = () =>
   <div id="al1" class="step">
-    <b data-en="1. Connect your wallet.">1. Cüzdanınızı bağlayın.</b>{" "}{{
-      tr: "Cüzdan bağlayarak devam edin.",
-      en: "Proceed with a crypto wallet."
+    <b data-en="1. Connect your wallet.">1. Cüzdanınızı bağlayın.</b>{{
+      en: " Proceed with a crypto wallet.",
+      tr: " Cüzdan bağlayarak devam edin.",
     }}<br /><br />
-    <BağlaDüğmesi href="javascript:" class="act btn" data-en="Connect wallet">Cüzdan bağla</BağlaDüğmesi>
+    <BağlaDüğmesi href="javascript:" class={[OrtakCss.Düğme, "act"]}>{{
+      en: "Connect wallet",
+      tr: "Cüzdan bağla"
+    }}</BağlaDüğmesi>
   </div>;
 
 const Şifreleme = () =>
   <div id="al3" class="step disabled">
-    <b data-en="3. Let’s encrypt your KPass.">3. KPass’inizi şifreleyelim.</b>{" "}{{
-      en: "We need 4 signatures from you to encrypt your KPass.",
-      tr: "KPass’ini şifrelememiz için sizden 4 adet imzaya ihtiyacımız var. Bu işlem off-chain, tamamen ücretsiz ve güvenli."
+    <b data-en="3. Let’s encrypt your KPass.">3. KPass’inizi şifreleyelim.</b>{{
+      en: " We need 4 signatures from you to encrypt your KPass.",
+      tr: " KPass’ini şifrelememiz için sizden 4 adet imzaya ihtiyacımız var. Bu işlem off-chain, tamamen ücretsiz ve güvenli."
     }}<br /><br />
-    <a href="javascript:" id="al3a" class="act btn" data-en="Request 4 signatures">4 imza isteği yolla</a>
+    <a href="javascript:" id="al3a" class={[OrtakCss.Düğme, "act"]}>{{
+      en: "Request 4 signatures",
+      tr: "4 imza isteği yolla"
+    }}</a>
   </div>;
 
 const Al = ({ Lang }) => (
@@ -71,16 +77,16 @@ const Al = ({ Lang }) => (
     </head>
     <body>
       <Başlık href="/" DefaultChain={DefaultChain} Chains={Chains} ChainNotes={ChainNotes} />
-      <div id="al">
-        <div id="als">
+      <div id={Css.Kök}>
+        <div id={Css.SolSütun}>
           <CüzdanBağlama />
           <Tanışma />
           <Şifreleme />
           <İmeceİptal />
           <Ödeme />
         </div>
-        <div id="alr">
-          <div id="alu">
+        <div id={Css.SağSütun}>
+          <div id={Css.KPassContainer}>
             <KPass />
           </div>
           <Telefon style="opacity:0" kpass={false} />

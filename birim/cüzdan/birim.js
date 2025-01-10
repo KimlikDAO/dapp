@@ -164,10 +164,10 @@ const ağDeğişti = (yeniAğ) => {
     // kopmasını sağlıyor.
     ağSeçildi(Ağ);
   } else if (yeniAğ != Ağ) {
-    dom.adla("cud" + Ağ).classList.remove("sel");
-    dom.adla("cud" + yeniAğ).classList.add("sel");
+    dom.adla(Css.AğListesi + Ağ).classList.remove("sel");
+    dom.adla(Css.AğListesi + yeniAğ).classList.add("sel");
     AğDüğmesi.replaceChild(
-      dom.adla("cud" + yeniAğ).firstElementChild.cloneNode(true),
+      dom.adla(Css.AğListesi + yeniAğ).firstElementChild.cloneNode(true),
       AğDüğmesi.firstElementChild);
     /** @const {boolean} */
     const ağGrubuDeğişti = !Ağ.startsWith(yeniAğ.slice(0, 2));
@@ -381,7 +381,7 @@ const aç = () => {
 
 const kur = () => {
   /** @const {!Element} */
-  const seçiliAğ = dom.adla("cud" + DefaultChain);
+  const seçiliAğ = dom.adla(Css.AğListesi + DefaultChain);
   seçiliAğ.replaceChild(AğDüğmesi.firstElementChild.cloneNode(true),
     seçiliAğ.firstElementChild);
   AdresDüğmesi.onclick = AğDüğmesi.onclick = aç;
@@ -390,7 +390,7 @@ const kur = () => {
     setTimeout(() => AdresDüğmesi.onclick = AğDüğmesi.onclick = aç, 300);
   };
 
-  dom.adla("cud").onclick = (event) => {
+  dom.adla(Css.AğListesi).onclick = (event) => {
     /** @type {Element} */
     let li = event.target;
     for (; li.nodeName != 'LI'; li = li.parentElement)

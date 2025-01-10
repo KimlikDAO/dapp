@@ -30,6 +30,10 @@
   gap: 40px 10px;
 }
 
+/**
+ * Eylem düğmesi
+ * @name {EylemDüğmesi}
+ */
 #sal {
   align-items: center;
   display: flex;
@@ -38,6 +42,10 @@
   padding: 10px;
 }
 
+/**
+ * Eylem bölümü
+ * @name {Eylem}
+ */
 #saz {
   display: flex;
   justify-content: right;
@@ -48,6 +56,10 @@ h2 {
   font-size: 40px;
 }
 
+/**
+ * Ağları gösteren balonlar
+ * @name {Balon}
+ */
 .sac {
   display: flex;
   height: 74px;
@@ -58,11 +70,19 @@ h2 {
   justify-content: space-evenly;
 }
 
+/**
+ * KPass sahipleri sayısı
+ * @name {BalonSayı}
+ */
 .sau {
   font-weight: 700;
   font-size: 20px;
 }
 
+/**
+ * Ağ adı
+ * @name {BalonAd}
+ */
 .saa {
   font-size: 12px;
 }
@@ -91,6 +111,10 @@ h2 {
   background-color: #C6FFCB;
 }
 
+/**
+ * Başlık altı metin
+ * @name {Metin}
+ */
 .sat {
   display: inline-block;
   max-width: 375px;

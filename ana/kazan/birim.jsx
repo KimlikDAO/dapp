@@ -21,7 +21,7 @@ export default () => (
           "KPass’inin %100 anonim HumanID kısmını sunarak on binlerce dolarlık havuzdan ödülünü topla.Çok yakında!"
       }}</span>
       <br />
-      <a href={{ en: "//blog.kimlikdao.org/en", tr: "//blog.kimlikdao.org/tr" }}
+      <a href={{ en: "//blog.kimlikdao.org/?en", tr: "//blog.kimlikdao.org/?tr" }}
         class={[OrtakCss.Düğme, "info", "anust"]}>{{
           en: "Learn & earn (Soon!)",
           tr: "Öğren ve kazan (Yakında!)"

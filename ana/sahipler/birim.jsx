@@ -2,6 +2,7 @@ import OkResmi from "../ok.svg";
 import AnaCss from "../sayfa.css";
 import Css from "./birim.css";
 import { ağResmi } from "/birim/ağlar/birim";
+import OrtakCss from "/birim/ortakcss/birim.jsx";
 import { Page } from "/crate";
 import { ChainId } from "/lib/crosschain/chains";
 import { Image } from "/lib/kastro/image";
@@ -23,11 +24,11 @@ const Tablo = {
 };
 
 const Balon = ({ chainId }) => (
-  <div class={`sac ${chainId == ChainId.MinaMainnet ? "mina" : chainId.slice(1)}`}>
-    <Image src={ağResmi(chainId)} height={40} width={40} />
+  <div class={[Css.Balon, chainId == ChainId.MinaMainnet ? "mina" : chainId.slice(1)]}>
+    <Image src={ağResmi(chainId)} height={40} width={40} bundleHeight={40} bundleWidth={40} />
     <div>
-      <div class="sau">{Tablo[chainId].holders}</div>
-      <span class="saa" data-en={`HOLDERS ON ${Tablo[chainId].ad}`}>{
+      <div class={Css.BalonSayı}>{Tablo[chainId].holders}</div>
+      <span class={Css.BalonAd} data-en={`HOLDERS ON ${Tablo[chainId].ad}`}>{
         Tablo[chainId].ad + Tablo[chainId].ek} KPASS</span>
     </div>
   </div>
@@ -42,14 +43,15 @@ const Sahipler = () => (
           tr: <>Ağlara göre<br />KPass sahipleri.</>,
           en: <>KPass holders<br />by chain.</>
         }}</h2>
-        <span class="sat anac">{{
+        <span class={[Css.Metin, "anac"]}>{{
           en: `Join over ${Object.values(Tablo).reduce((sum, x) => sum + x.holders, 0)} KPass holders across 6 different chains.`,
           tr: `6 farklı zincirde ${Object.values(Tablo).reduce((sum, x) => sum + x.holders, 0)} KPass sahibi arasına katılın.`
         }}</span>
-        <div id="saz"><a href={Page.Al} id="sal" class="act btn">{{
-          en: "Become a KPass holder",
-          tr: "Sen de KPass sahibi ol"
-        }} <OkResmi inline /></a>
+        <div id={Css.Eylem}>
+          <a href={Page.Al} id={Css.EylemDüğmesi} class={[OrtakCss.Düğme, "act"]}>{{
+            en: "Become a KPass holder",
+            tr: "Sen de KPass sahibi ol"
+          }} <OkResmi inline /></a>
         </div>
       </div>
       <div id={Css.Balonlar}>{Object.keys(Tablo).map((chainId) => <Balon chainId={chainId} />)}</div>
