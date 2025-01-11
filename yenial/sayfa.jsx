@@ -7,6 +7,10 @@ import Lato400 from "/birim/lato/l400.ttf";
 import Lato700 from "/birim/lato/l700.ttf";
 import OrtakCss from "/birim/ortakcss/birim";
 import { ChainId } from "/lib/crosschain/chains";
+import dom from "/lib/util/dom";
+
+/** @const {!HtmlDivElement} */
+export const GalleryGrid = dom.div(Css.GalleryGrid);
 
 /** @const {!Array<ChainId>} */
 const Chains = [
@@ -36,14 +40,14 @@ const Gallery = () => (
         id={Css.GallerySearch}
         placeholder={{ en: "Type country, state, or source", tr: "Ülke veya kaynak gir" }}
       />
-      <div id={Css.GalleryGrid}>
+      <GalleryGrid>
         <div class={Css.InfoSource}>{{ en: "Passport", tr: "Pasaport" }}</div>
         <div class={Css.InfoSource}>{{ en: "Population registry", tr: "Nüfus kayıt örneği" }}</div>
         <div class={Css.InfoSource}>ID.me</div>
         <div class={Css.InfoSource}>{{ en: "National ID card", tr: "Kimlik Kartı" }}</div>
         <div class={Css.InfoSource}>REAL ID</div>
         <div class={Css.InfoSource}>login.gov</div>
-      </div>
+      </GalleryGrid>
     </div>
     <div style="display:none">
       <button>

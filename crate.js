@@ -10,6 +10,7 @@ const Page = {
   YeniAl: { [LangCode.EN]: "newmint", [LangCode.TR]: "yenial" },
   İptal: { [LangCode.EN]: "revoke", [LangCode.TR]: "iptal" },
   Oyla: { [LangCode.EN]: "vote", [LangCode.TR]: "oyla" },
+  KDAO: { [LangCode.EN]: "KDAO", [LangCode.TR]: "kdao" },
   KPassim: { [LangCode.EN]: "kpass", [LangCode.TR]: "kpassim" }
 };
 
