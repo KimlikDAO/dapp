@@ -15,18 +15,18 @@ export const SağDüğme = dom.a("kpsa");
 const PersonInfoKartı = () => (
   <div class={Css.BilgiKartı}>
     <div class={Css.BilgiKartıİçi}>
-      <div class={Css.Ad}>TCKN</div>
-      <div id="kplocalIdNumber">22345678902</div>
+      <div class={Css.Ad}>{{ en: "SSN", tr: "TCKN" }}</div>
+      <div id="kplocalIdNumber">{{ en: "555-55-5555", tr: "22345678902" }}</div>
       <div class={Css.Ad} data-en="Name">Ad</div>
-      <div id="kpfirst">Kaan</div>
+      <div id="kpfirst">{{ en: "John", tr: "Kaan" }}</div>
       <div class={Css.Ad} data-en="Last name">Soyad</div>
-      <div id="kplast">Ankara</div>
+      <div id="kplast">{{ en: "Doe", tr: "Ankata" }}</div>
       <div class={Css.Ad} data-en="Date of birth">Doğum tarihi</div>
-      <div id="kpdateOfBirth">12.06.1975</div>
+      <div id="kpdateOfBirth">{{ en: "12.06.1975", tr: "12.06.1975" }}</div>
       <div class={Css.Ad} data-en="City of birth">Doğum yeri</div>
-      <div id="kpcityOfBirth">Ankara</div>
+      <div id="kpcityOfBirth">{{ en: "New York", tr: "Ankara" }}</div>
       <div class={Css.Ad} data-en="Gender">Cinsiyet</div>
-      <div id="kpgender" data-en="M">E</div>
+      <div id="kpgender">{{ en: "M", tr: "E" }}</div>
     </div>
   </div>
 );

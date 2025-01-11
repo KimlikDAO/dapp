@@ -6,7 +6,8 @@ export default ({ href, piggyback, loading }) => (
   <a href={href} class="blp">
     <BlogCss />
     <div>
-      <BannerResmi piggyback={piggyback} class="blpp" width="100%" loading={loading} />
+      <BannerResmi piggyback={piggyback} class="blpp" width="100%" loading={loading}
+        quality={60} bundleWidth={36 * 13} bundleHeight={19 * 13} />
       <h4 data-en="January 2025 progress report">Ocak 2025 ilerleme raporu</h4>
       <Yazar ad="KimlikDAO" />
       <div class="bly">{{

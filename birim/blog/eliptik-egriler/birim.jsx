@@ -13,7 +13,8 @@ export default ({ href }) =>
     <Css />
     <BlogCss />
     <div>
-      <Banner class="blpp" width="100%" quality={60} />
+      <Banner class="blpp" width="100%"
+        quality={60} bundleWidth={36 * 13} bundleHeight={19 * 13} />
       <h4 data-en="Elliptic curves and their applications in crypto">Eliptik eğriler ve kriptoda kullanımı</h4>
       <Yazar ad={{ tr: "KimlikDAO öğren & kazan", en: "KimlikDAO learn & earn" }} />
       <div class="bly">{{
