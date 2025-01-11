@@ -300,5 +300,5 @@ const ŞekilKod = {
 }
 
 export default () => <>
-  {Object.entries(ŞekilKod).map(([kod, yol]) => <path key={kod} id={kod} d={yol.encode()} />)}
+  {Object.entries(ŞekilKod).map(([kod, yol]) => <path id={kod} d={yol.encode()} />)}
 </>;

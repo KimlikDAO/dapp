@@ -1,6 +1,7 @@
 import Css from "./birim.css";
 import Kaydol from "/birim/kaydol/birim.jsx";
 import OrtakCss from "/birim/ortakcss/birim.jsx";
+import { ExternalPage } from "/crate";
 
 const Altdizin = () => (
   <div id={Css.Kök}>
@@ -22,7 +23,7 @@ const Altdizin = () => (
       <b data-en="COMMUNITY">TOPLULUK</b>
       <a href="//x.com/KimlikDAO">X</a>
       <a href="//discord.gg/H2wg6pcWXG">Discord</a>
-      <a href="//join.kimlikdao.org/#sa-ambassador1" data-en="Ambassador program">Ambassador ol</a>
+      <a href="//join.kimlikdao.org/#sa-ambassador1">{{ en: "Ambassador program", tr: "Ambassador ol" }}</a>
       <a href="//zealy.io/c/kimlikdao">Zealy</a>
       <a href="//github.com/KimlikDAO">GitHub</a>
       <a href="//dappradar.com/dapp/kimlikdao-2">DappRadar</a>
@@ -31,14 +32,8 @@ const Altdizin = () => (
     <div class={Css.Sütun}>
       <b data-en="DEVELOPERS">GELİŞTİRİCİLER</b>
       <a href="//github.com/KimlikDAO">GitHub</a>
-      <a href={{
-        tr: "//docs.kimlikdao.org/v/turkce",
-        en: "//docs.kimlikdao.org"
-      }}>Docs</a>
-      <a href={{
-        tr: "//join.kimlikdao.org/tr",
-        en: "//join.kimlikdao.org/en"
-      }}>{{ tr: "KimlikDAO’ya katıl", en: "Join KimlikDAO" }}</a>
+      <a href={ExternalPage.Docs}>Docs</a>
+      <a href={ExternalPage.Join}>{{ en: "Join KimlikDAO", tr: "KimlikDAO’ya katıl" }}</a>
       <a href="//discord.gg/H2wg6pcWXG">Discord</a>
     </div>
   </div>

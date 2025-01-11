@@ -64,7 +64,7 @@ const Al = ({ Lang }) => (
   <html lang={Lang}>
     <head>
       <meta charset="utf-8" />
-      <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <meta name="viewport" content="width=device-width,initial-scale=1" />
       <Lato400 shared />
       <Lato700 shared />
       <title>KimlikDAO | {{ tr: "KPass al", en: "Mint KPass" }}</title>

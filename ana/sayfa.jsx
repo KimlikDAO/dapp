@@ -16,7 +16,7 @@ import Lato400 from "/birim/lato/l400.ttf";
 import Lato700 from "/birim/lato/l700.ttf";
 import Logo from "/birim/logo.svg";
 import OrtakCss from "/birim/ortakcss/birim";
-import { Page } from "/crate";
+import { ExternalPage, Page } from "/crate";
 import { ChainId } from "/lib/crosschain/chains";
 import { I18nString } from "/lib/util/i18n"
 
@@ -61,15 +61,14 @@ const Ana = ({ Lang }) => (
         <a href="/" id={OrtakCss.Başlık.Logo}>
           <Logo id={OrtakCss.Başlık.Logomark} height={35} inline />KimlikDAO</a>
         <div id={OrtakCss.Başlık.Linkler}>
-          <a class={OrtakCss.Başlık.Link} href={{ en: "//join.kimlikdao.org/?en", tr: "//join.kimlikdao.org/?tr" }}>{{
-            tr: "Aramıza katıl", en: "Join us"
+          <a class={OrtakCss.Başlık.Link} href={ExternalPage.Join}>{{
+            en: "Join us", tr: "Aramıza katıl"
           }}</a>
           <a class={OrtakCss.Başlık.Link} href="//discord.gg/H2wg6pcWXG" target="_blank" rel="noreferrer">Discord</a>
           <Dil />
           <Cüzdan Chains={Chains} DefaultChain={DefaultChain} ChainNotes={ChainNotes} />
           <a id={Css.EylemDüğmesi} href={Page.Al} class={[OrtakCss.Düğme, "act"]}>{{
-            en: "Mint KPass",
-            tr: "Hemen KPass al"
+            en: "Mint KPass", tr: "Hemen KPass al"
           }}<OkResmi inline /></a>
         </div>
       </div>
