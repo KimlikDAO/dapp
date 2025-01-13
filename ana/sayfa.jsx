@@ -10,15 +10,16 @@ import Css from "./sayfa.css";
 import TwitterCard from "./twittercard";
 import Altdizin from "/birim/altdizin/birim";
 import Cüzdan from "/birim/cüzdan/birim";
+import SağMenü from "/birim/cüzdan/sağMenü";
 import Dil from "/birim/dil/birim";
 import Favicon from "/birim/icon.svg";
 import Lato400 from "/birim/lato/l400.ttf";
 import Lato700 from "/birim/lato/l700.ttf";
 import Logo from "/birim/logo.svg";
 import OrtakCss from "/birim/ortakcss/birim";
-import { ExternalPage, Page } from "/crate";
+import { ExternalPage, HostUrl, Page } from "/crate";
 import { ChainId } from "/lib/crosschain/chains";
-import { I18nString } from "/lib/util/i18n"
+import { I18nString, LangCode } from "/lib/util/i18n"
 
 /** @const {!Array<ChainId>} */
 const Chains = [
@@ -39,6 +40,10 @@ const ChainNotes = {
 /** @const {ChainId} */
 const DefaultChain = ChainId.xa4b1;
 
+/**
+ * @param {{ Lang: LangCode }} props
+ * @return {!Promise<string>}
+ */
 const Ana = ({ Lang }) => (
   <html lang={Lang}>
     <head>
@@ -50,7 +55,7 @@ const Ana = ({ Lang }) => (
       <Lato400 shared />
       <Lato700 shared />
       <title>{Title}</title>
-      <link rel="canonical" href="https://kimlikdao.org" />
+      <link rel="canonical" href={HostUrl} />
       <OrtakCss />
       <Css />
       <Favicon raster={32} rel="icon" />
@@ -66,7 +71,9 @@ const Ana = ({ Lang }) => (
           }}</a>
           <a class={OrtakCss.Başlık.Link} href="//discord.gg/H2wg6pcWXG" target="_blank" rel="noreferrer">Discord</a>
           <Dil />
-          <Cüzdan Chains={Chains} DefaultChain={DefaultChain} ChainNotes={ChainNotes} />
+          <Cüzdan Chains={Chains} DefaultChain={DefaultChain} ChainNotes={ChainNotes}>
+            <SağMenü />
+          </Cüzdan>
           <a id={Css.EylemDüğmesi} href={Page.Al} class={[OrtakCss.Düğme, "act"]}>{{
             en: "Mint KPass", tr: "Hemen KPass al"
           }}<OkResmi inline /></a>

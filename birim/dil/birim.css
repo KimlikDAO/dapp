@@ -1,8 +1,19 @@
+/**
+ * @name {Kök}
+ */
 #di {
   position: relative;
   margin: auto 40px auto 5px;
 }
 
+/**
+ * @export {DilDüğmesi}
+ */
+#dib {}
+
+/**
+ * @export {DilListesi}
+ */
 #did {
   background-color: #fff;
   border-radius: 10px;

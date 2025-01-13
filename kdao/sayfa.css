@@ -8,6 +8,7 @@
  */
 #kdh {
   max-width: 1080px;
+  min-height: 400px;
   padding: 40px 60px;
   border-radius: 22px;
   margin: 30px auto;

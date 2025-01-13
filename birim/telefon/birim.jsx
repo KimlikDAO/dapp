@@ -13,7 +13,7 @@ export const Kutu = dom.div("tek");
 /** @const {!HTMLDivElement} */
 export const NftDüğmesi = dom.div("tez");
 
-const Telefon = ({ kpass = true, style } = {}) => (
+const Telefon = ({ kpassli = true, style } = {}) => (
   <div id="te" style={style}>
     <Css />
     <AnaEkran>
@@ -29,7 +29,7 @@ const Telefon = ({ kpass = true, style } = {}) => (
       </div>
     </AnaEkran>
     <DüğmeliNft>
-      {kpass && <KPass />}
+      {kpassli && <KPass />}
       <NftDüğmesi style="display:none" data-en="Encrypt">Gizle</NftDüğmesi>
     </DüğmeliNft>
     <Kutu style="opacity:0">

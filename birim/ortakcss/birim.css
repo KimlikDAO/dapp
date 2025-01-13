@@ -30,6 +30,11 @@ body {
   color: #444;
 }
 
+.hide {
+  opacity: 0;
+  pointer-events: none;
+}
+
 .btn.lft {
   margin-right: 1ex;
 }

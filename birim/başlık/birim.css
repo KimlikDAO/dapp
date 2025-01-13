@@ -1,3 +1,7 @@
+/**
+ * Başlık
+ * @name {Kök}
+ */
 #ba {
   align-items: center;
   display: flex;
@@ -10,10 +14,7 @@
 /**
  * @name {Logomark}
  */
-#bak {
-  /* need a no-op */
-  all: unset;
-}
+#bak {}
 
 /**
  * Sol üsteekki KimlikDAO logo ve yazısı

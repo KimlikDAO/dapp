@@ -23,7 +23,7 @@ const Altdizin = () => (
       <b data-en="COMMUNITY">TOPLULUK</b>
       <a href="//x.com/KimlikDAO">X</a>
       <a href="//discord.gg/H2wg6pcWXG">Discord</a>
-      <a href="//join.kimlikdao.org/#sa-ambassador1">{{ en: "Ambassador program", tr: "Ambassador ol" }}</a>
+      <a href={ExternalPage.Join + "#sa-ambassador1"}>{{ en: "Ambassador program", tr: "Ambassador ol" }}</a>
       <a href="//zealy.io/c/kimlikdao">Zealy</a>
       <a href="//github.com/KimlikDAO">GitHub</a>
       <a href="//dappradar.com/dapp/kimlikdao-2">DappRadar</a>

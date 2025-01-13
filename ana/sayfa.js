@@ -3,6 +3,7 @@ import "./kazan/birim";
 import Css from "./sayfa.css";
 import "/birim/altdizin/birim";
 import Cüzdan from "/birim/cüzdan/birim";
+import "/birim/cüzdan/sağMenü";
 import "/birim/dil/birim";
 import { Page } from "/crate";
 import dom from "/lib/util/dom";

@@ -17,10 +17,12 @@ const Page = {
 /** @enum {I18nString} */
 const ExternalPage = {
   Join: {
-    [LangCode.EN]: "//join.kimlikdao.org/?en", [LangCode.TR]: "//join.kimlikdao.org/?tr"
+    [LangCode.EN]: "//join.kimlikdao.org/?en",
+    [LangCode.TR]: "//join.kimlikdao.org/?tr"
   },
   Docs: {
-    [LangCode.EN]: "//docs.kimlikdao.org", [LangCode.TR]: "//docs.kimlikdao.org/v/turkce"
+    [LangCode.EN]: "//docs.kimlikdao.org",
+    [LangCode.TR]: "//docs.kimlikdao.org/v/turkce"
   }
 };
 

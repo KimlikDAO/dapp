@@ -220,7 +220,7 @@ const kpassDeğişti = () => {
   })
 }
 
-const koptu = () => {
+const kopar = () => {
   Adres = null;
   AdresDüğmesi.innerText = BağlaMetni;
   bağlantıSeçildi("", BoşBağlantı);
@@ -234,7 +234,7 @@ const koptu = () => {
  */
 const adresDeğişti = (adresler) => {
   if (!adresler || !adresler.length)
-    koptu();
+    kopar();
   else if (adresler[0] != Adres) {
     /** @const {?string} */
     const eskiAdres = Adres;
@@ -290,7 +290,7 @@ const bağlantıDeğişince = (f) => BağlantıDeğişince.push(f);
  * @param {ChainId} ağ
  */
 const ağSeçildi = (ağ) => {
-  if (!Bağlı.isChainSupported(ağ)) koptu();
+  if (!Bağlı.isChainSupported(ağ)) kopar();
   Bağlı.switchChain(ağ);
 }
 
@@ -372,42 +372,24 @@ const izinliyseBağla = () => {
     bağlantıSeçiciGöster();
 }
 
-const aç = () => {
-  dom.göster(Menü);
-  AğDüğmesi.onclick = null;
-  AdresDüğmesi.onclick = null;
-  Menü.focus();
-}
+
+const aç = () => AğDüğmesi.click();
 
 const kur = () => {
   /** @const {!Element} */
   const seçiliAğ = dom.adla(Css.AğListesi + DefaultChain);
   seçiliAğ.replaceChild(AğDüğmesi.firstElementChild.cloneNode(true),
     seçiliAğ.firstElementChild);
-  AdresDüğmesi.onclick = AğDüğmesi.onclick = aç;
-  Menü.onblur = () => {
-    dom.gizle(Menü);
-    setTimeout(() => AdresDüğmesi.onclick = AğDüğmesi.onclick = aç, 300);
-  };
 
-  dom.adla(Css.AğListesi).onclick = (event) => {
-    /** @type {Element} */
-    let li = event.target;
-    for (; li.nodeName != 'LI'; li = li.parentElement)
-      if (li.nodeName == 'BODY') return;
-    /** @const {ChainId} */
-    const ağ = /** @type {ChainId} */(li.id.slice(3));
-    ağSeçildi(ağ);
+  dom.menüYarat(AğDüğmesi, Menü);
+  AdresDüğmesi.onclick = AğDüğmesi.onclick;
+  Menü.onclick = (event) => {
+    /** @type {HTMLLIElement} */
+    const maybeLi = /** @type {HTMLLIElement} */(event.target.closest("li"));
+    if (maybeLi && maybeLi.id && maybeLi.id.startsWith(Css.AğListesi))
+      ağSeçildi(/** @type {ChainId} */(maybeLi.id.slice(3)));
+    event.stopPropagation();
   }
-
-  const düğmeler = SağPanel.children;
-  düğmeler[2].onclick = () =>
-    window.location.href = "//join.kimlikdao.org/#sa-ambassador1";
-  düğmeler[3].onclick = () =>
-    window.location.href = "//kimlikdao.org/" + dom.i18n({ tr: "oyla", en: "vote" });
-  düğmeler[4].onclick = () =>
-    window.location.href = "//kimlikdao.org/" + dom.i18n({ tr: "iptal", en: "revoke" });
-  düğmeler[5].onclick = () => koptu();
 
   CüzdanAdresi.onclick = () => navigator.clipboard.writeText(/** @type {string} */(Adres));
   dom.adla("cuex").onclick = () => {
@@ -424,6 +406,7 @@ const kur = () => {
 kur();
 
 export default {
+  SağPanel,
   aç,
   adres,
   adresDeğişince,
@@ -433,5 +416,6 @@ export default {
   bağlantıDeğişince,
   kopunca,
   hızlıArabirimAdı,
+  kopar,
   kpassDeğişince,
 };

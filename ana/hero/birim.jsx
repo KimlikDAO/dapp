@@ -21,7 +21,7 @@ const Hero = () => (
           }}</a>
         </div>
       </div>
-      <Telefon kpass={true} />
+      <Telefon kpassli />
     </div>
   </div>
 );

@@ -44,6 +44,7 @@
   outline: 0;
   position: absolute;
   top: 53px;
+  transition: opacity 0.2s;
   width: 380px;
   z-index: 20;
 }

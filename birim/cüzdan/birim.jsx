@@ -1,10 +1,6 @@
 import { AğBilgileri, ağResmi } from "../ağlar/birim";
 import Css from "./birim.css";
-import AmbassadorResmi from "/birim/cüzdan/img/ambassador.svg";
-import DeğiştirResmi from "/birim/cüzdan/img/external-link.svg";
-import İptalResmi from "/birim/cüzdan/img/iptal.svg";
 import QmarkResmi from "/birim/cüzdan/img/qmark.svg";
-import VoteResmi from "/birim/cüzdan/img/vote.svg";
 import KopyalaResmi from "/birim/paste.svg";
 import { ChainId } from "/lib/crosschain/chains";
 import { Image } from "/lib/kastro/image";
@@ -50,12 +46,12 @@ const Bağlantı = ({ idx, name }) => (
  * }} props
  * @return {string}
  */
-const Cüzdan = ({ DefaultChain, Chains, ChainNotes, piggyback }) => (
+const Cüzdan = ({ DefaultChain, Chains, ChainNotes, children, piggyback }) => (
   <div id={Css.Kök}>
     <Css />
     <AğDüğmesi><Image src={ağResmi(DefaultChain)} height={32} width={32} inline /></AğDüğmesi>
     <AdresDüğmesi>{{ tr: "Cüzdan bağla", en: "Connect wallet" }}</AdresDüğmesi>
-    <Menü style="display:none" tabindex={0}>
+    <Menü style="display:none">
       <ul id={Css.AğListesi}>
         {Chains.map((id) => (
           <li id={Css.AğListesi + id} class={id == DefaultChain ? "sel" : ""}>
@@ -81,29 +77,14 @@ const Cüzdan = ({ DefaultChain, Chains, ChainNotes, piggyback }) => (
           <div>
             <CüzdanAdresi><span>0xcCc...cCc</span><span id="cuadi"><KopyalaResmi inline /></span></CüzdanAdresi>
             <DebankLinki>DeBank</DebankLinki> <span id={Css.ExplorerLinki}>Explorer</span>
-            <div id={Css.KPassDüğmesi} data-en="MINT KPASS">KPASS AL</div>
+            <div id={Css.KPassDüğmesi}>{{ en: "MINT KPASS", tr: "KPASS AL" }}</div>
           </div>
         </div>
         <hr />
-        <li><AmbassadorResmi inline />{{
-          en: " Ambassador program",
-          tr: " Ambassador ol"
-        }}</li>
-        <li><VoteResmi width={16} height={16} />{{
-          en: " Vote",
-          tr: " Oy kullan"
-        }}</li>
-        <li><İptalResmi inline />{{
-          en: " Revoke KPass",
-          tr: " İptal işlemleri"
-        }}</li>
-        <li><DeğiştirResmi inline />{{
-          en: " Switch wallet",
-          tr: " Cüzdan değiştir"
-        }}</li>
+        {children}
       </SağPanel>
     </Menü>
-  </div >
+  </div>
 );
 
 export default Cüzdan;
