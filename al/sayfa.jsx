@@ -89,7 +89,7 @@ const Al = ({ Lang }) => (
           <div id={Css.KPassContainer}>
             <KPass />
           </div>
-          <Telefon style="opacity:0" kpass={false} />
+          <Telefon style="opacity:0" kpassli={false} />
         </div>
       </div>
     </body>

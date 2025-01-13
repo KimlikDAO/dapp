@@ -25,17 +25,26 @@ const yerleştir = () => {
  * @param {number} yeniKart
  */
 const kartDeğiştir = (yeniKart) => {
-  Telefon.nftGöster(yeniKart <= 1, !yeniKart);
-  yeniKart === 3
+  if (Kart > 2 && yeniKart == 0) yeniKart = 4;
+  const yeniKartDengi = yeniKart % 4;
+  Telefon.nftGöster(yeniKartDengi <= 1, !yeniKartDengi);
+  yeniKartDengi === 3
     ? Telefon.kutuGöster(dom.i18n({
       tr: "Bağlı app KPass’inizdeki iletişim bilgilerinize erişmek istiyor. İzin veriyor musunuz?",
       en: "The connected app would like to access your contact info section of your KPass."
     }))
     : Telefon.kutuKapat();
-  Boncuklar.children[Kart].firstElementChild.classList.remove("sel");
-  Boncuklar.children[yeniKart].firstElementChild.classList.add("sel");
+  Boncuklar.children[Kart % 4].firstElementChild.classList.remove("sel");
+  Boncuklar.children[yeniKartDengi].firstElementChild.classList.add("sel");
   Kart = yeniKart;
   yerleştir();
+  if (yeniKart == 4)
+    setTimeout(() => {
+      Kartlar.style.transition = "none";
+      Kart = 0;
+      yerleştir();
+      setTimeout(() => Kartlar.style.transition = "", 600)
+    }, 1200);
 }
 
 window.onresize = () => {
@@ -52,9 +61,11 @@ for (let /** number */ i = 0; i < Boncuklar.childElementCount; ++i) {
 
 const sergiSaatiKur = () => {
   if (SergiSaati) clearInterval(SergiSaati);
-  SergiSaati = setInterval(() => kartDeğiştir((Kart + 1) % 4), 12000);
+  SergiSaati = setInterval(() => kartDeğiştir(Kart + 1), 12000);
 }
 
 Cüzdan.adresDeğişince((adres) => Telefon.adresGir(adres));
 
+Kartlar.appendChild(Kartlar.firstElementChild.cloneNode(true));
+Kartlar.style.width = "500%";
 sergiSaatiKur();

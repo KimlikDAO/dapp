@@ -63,8 +63,8 @@ const paraVeMiktar = (para, miktar) => {
  * @param {number} eşik imece iptal için gereken oy eşiği.
  */
 const öde = (cidSözü, adresAğırlığı, eşik) => {
-  /** @const {Element} */
-  const paraDüğmesi = dom.adla("odb");
+  /** @const {!HTMLAnchorElement} */
+  const paraDüğmesi = dom.a("odb");
   /** @const {!Element} */
   const döküm = /** @type {!Element} */(dom.adla("odi").firstElementChild);
   /** @const {!Element} */
@@ -163,7 +163,7 @@ const öde = (cidSözü, adresAğırlığı, eşik) => {
   // Ek ücreti göster / gizle.
   döküm.children[1].style.display = iptalli ? "none" : "";
   // Para menüsünü yarat.
-  dom.menüYarat(paraDüğmesi, paraDüğmesi.nextElementSibling);
+  dom.menüYarat(paraDüğmesi, /** @type {!Element} */(paraDüğmesi.nextElementSibling));
   paraDüğmesi.nextElementSibling.onclick = (event) => {
     /** @const {Element} */
     const li = event.target.nodeName == "LI"

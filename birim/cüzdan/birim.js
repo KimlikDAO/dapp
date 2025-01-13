@@ -372,7 +372,6 @@ const izinliyseBağla = () => {
     bağlantıSeçiciGöster();
 }
 
-
 const aç = () => AğDüğmesi.click();
 
 const kur = () => {

@@ -20,19 +20,30 @@ h3 {
   padding: 0;
 }
 
+/**
+ * @name {KartSahnesi}
+ */
 #sec {
   overflow: hidden;
 }
 
+/**
+ * @export {Kartlar}
+ */
 #sem {
   display: flex;
   list-style: none;
   padding: 0;
   position: relative;
+  transform: translate3d(0, 0, 0);
   transition: transform 1s ease-in-out;
   width: 400%;
+  will-change: transform;
 }
 
+/**
+ * @name {Kart}
+ */
 .sek {
   font-size: 18px;
   font-weight: 400;
@@ -42,17 +53,26 @@ h3 {
   width: 25%;
 }
 
+/**
+ * @export {Boncuklar}
+ */
 #sen {
   height: 20px;
   margin: 0 0 40px;
 }
 
+/**
+ * @name {Boncuklu}
+ */
 .seb {
   cursor: pointer;
   display: inline-block;
   padding: 10px 8px;
 }
 
+/**
+ * @name {Boncuk}
+ */
 .sei {
   background-color: rgba(82, 86, 201, 0.2);
   border-radius: 5px;

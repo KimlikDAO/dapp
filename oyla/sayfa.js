@@ -15,10 +15,10 @@ ProposeButton.onclick = () => {
   dom.adlaGizle("oyyb");
   dom.adlaGöster("oyy");
   if (!SeçilmişÖneriId) SeçilmişÖneriId = "2";
-  /** @const {Element} */
-  const önergeDüğmesi = dom.adla("oyyddb");
-  /** @const {Element} */
-  const önergeMenusu = dom.adla("oyyul");
+  /** @const {!Element} */
+  const önergeDüğmesi = /** @type {!Element} */(dom.adla("oyyddb"));
+  /** @const {!Element} */
+  const önergeMenusu = /** @type {!Element} */(dom.adla("oyyul"));
   dom.menüYarat(önergeDüğmesi, önergeMenusu);
   önergeMenusu.onclick = (e) => {
     const li = e.target;
