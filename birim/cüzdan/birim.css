@@ -85,7 +85,7 @@
 
 /**
  * Bağlantı listesi
- * @name {BağlantıListesi}
+ * @export {BağlantıListesi}
  */
 .cuf {
   cursor: pointer;
@@ -200,6 +200,10 @@ li.on>.cust {
   background: green;
 }
 
+/**
+ * Cüzdan ışığı
+ * @name {CüzdanIşığı}
+ */
 .cust {
   width: 6px;
   height: 6px;
@@ -232,6 +236,10 @@ li.on>.cust {
   margin-top: 20px;
 }
 
+/**
+ * Cüzdan indir düğmesi
+ * @export {Cüzdanİndir}
+ */
 .cui {
   position: absolute;
   right: 7px;

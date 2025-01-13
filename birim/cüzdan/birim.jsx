@@ -33,7 +33,10 @@ const bağlantıResmi = (ad) => `birim/cüzdan/img/${ad.split(" ")[0].toLowerCas
 const Bağlantı = ({ idx, name }) => (
   <li id={Css.Kök + idx}>
     <Image src={bağlantıResmi(name)} width={32} height={32} />
-    <div class="cust"></div> {name}<span class="cui" style="display:none" data-en="GET">İNDİR</span>
+    <div class={Css.CüzdanIşığı}></div> {name}<span class={Css.Cüzdanİndir} style="display:none">{{
+      en: "GET",
+      tr: "İNDİR"
+    }}</span>
   </li>
 );
 

@@ -10,6 +10,7 @@ import {
 import { CoreBağlantısı, MetaMaskBağlantısı, RabbyBağlantısı } from "./evmBağlantısı";
 import { AuroConnection as AuroBağlantısı } from "./minaBağlantısı";
 import { AğBilgileri } from "/birim/ağlar/birim";
+import { HostUrl } from "/crate";
 import { ChainGroup, ChainGroups, ChainId } from "/lib/crosschain/chains";
 import { Provider } from "/lib/crosschain/provider";
 import "/lib/ethereum/ERC721Unlockable.d";
@@ -305,7 +306,7 @@ const bağlantıSeçildi = (bağlantıAdı, bağlantı) => {
   Bağlı = bağlantı;
   bağlantı.connect(Ağ, ağDeğişti, adresDeğişti)
     .then(() => {
-      document.cookie = `cu=${bağlantıAdı};domain=.kimlikdao.org;SameSite=Strict;max-age=` + 1e6;
+      document.cookie = `cu=${bağlantıAdı};domain=.${HostUrl.slice(8)};SameSite=Strict;max-age=` + 1e6;
       eskiBağlantı.disconnect();
       for (const f of BağlantıDeğişince) f(bağlantı);
     })
@@ -317,17 +318,17 @@ const bağlantıSeçildi = (bağlantıAdı, bağlantı) => {
 
 const bağlantıSeçiciGizle = () => {
   for (const grup of ChainGroups)
-    dom.adlaGizle("cuf" + grup);
+    dom.adlaGizle(Css.BağlantıListesi + grup);
 }
 
 const bağlantıSeçiciGöster = () => {
   /** @const {ChainGroup} */
   const ağGrubu = /** @type {ChainGroup} */(Ağ.slice(0, 2));
   for (const grup of ChainGroups)
-    dom.adlaGösterGizle("cuf" + grup, grup == ağGrubu)
+    dom.adlaGösterGizle(Css.BağlantıListesi + grup, grup == ağGrubu)
 
   /** @const {!Element} */
-  const seçici = dom.adla("cuf" + ağGrubu);
+  const seçici = dom.adla(Css.BağlantıListesi + ağGrubu);
 
   /** @const {!NodeList<!Element>} */
   const satırlar = seçici.children;
@@ -345,7 +346,7 @@ const bağlantıSeçiciGöster = () => {
     /** @const {string} */
     const indirURLi = varMı ? "" : bağlantı.downloadURL();
     /** @const {boolean} */
-    const düğmeGöster = indirURLi != "" && düğmeMi.classList.contains("cui");
+    const düğmeGöster = indirURLi != "" && düğmeMi.classList.contains(Css.Cüzdanİndir);
     dom.gösterGizle(düğmeMi, düğmeGöster);
     düğmeMi.onclick = düğmeGöster
       ? () => window.open(indirURLi, "_blank").focus()
@@ -391,7 +392,7 @@ const kur = () => {
   }
 
   CüzdanAdresi.onclick = () => navigator.clipboard.writeText(/** @type {string} */(Adres));
-  dom.adla("cuex").onclick = () => {
+  dom.span(Css.ExplorerLinki).onclick = () => {
     const adresEki = Ağ.startsWith("mi") ? "wallet" : "address";
     const url = `//${AğBilgileri[Ağ].izleyici}/${adresEki}/${Adres}`;
     window.open(url, "_blank");
