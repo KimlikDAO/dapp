@@ -1,3 +1,6 @@
+/**
+ * @name {Kök}
+ */
 #te {
   border-radius: 40px;
   border: 5px solid #333;
@@ -8,6 +11,9 @@
   background: white;
 }
 
+/**
+ * @export {AnaEkran}
+ */
 #tea {
   background-color: #fff;
   border-radius: 40px;
@@ -17,11 +23,17 @@
   width: 100%;
 }
 
+/** @export {Blurred} */
+.tem {}
+
 #tea.tem {
   filter: blur(3px);
 }
 
-/* Bakiye */
+/**
+ * Bakiye
+ * @name {Bakiye}
+ */
 #teb {
   display: flex;
   font-size: 24px;
@@ -29,7 +41,10 @@
   padding-top: 60px;
 }
 
-/* Hesap adı */
+/**
+ * Hesap adı
+ * @name {HesapAdı}
+ */
 #tec {
   display: flex;
   font-size: 9pt;
@@ -37,6 +52,10 @@
   padding-bottom: 20px;
 }
 
+/**
+ * Temisili cüzdanın adresi
+ * @export {Adres}
+ */
 #ted {
   background-color: #E8F9FD;
   border-radius: 13px;
@@ -46,14 +65,20 @@
   width: fit-content;
 }
 
-/* Token NFT seçici */
+/**
+ * Token NFT seçici
+ * @name {CüzdanSekmeler}
+ */
 #tee {
   display: flex;
   font-size: 12px;
   padding-top: 30px;
 }
 
-/* Tokens */
+/**
+ * Tokens
+ * @name {Tokenler}
+ */
 #tef {
   border-bottom: 1px solid #73777B;
   color: #73777B;
@@ -62,7 +87,10 @@
   width: 50%;
 }
 
-/* NFTler */
+/**
+ * NFTler
+ * @name {Nftler}
+ */
 #teg {
   border-bottom: 2px solid #3d67ab;
   color: #3d67ab;
@@ -71,14 +99,17 @@
   width: 50%;
 }
 
-/* NFT örnekleri gösteren bölme */
+/**
+ * NFT örnekleri gösteren bölme
+ * @name {NftGaleri}
+ */
 #teh {
   display: flex;
   justify-content: left;
   padding: 15px 5px;
 }
 
-/* NFT örneği */
+/** @name {NftÖrnek} */
 .tei {
   border-radius: 5px;
   border: 1px solid #ccc;
@@ -88,6 +119,10 @@
   margin: 5px;
 }
 
+/**
+ * Bilgi kutusu
+ * @export {Kutu}
+ */
 #tek {
   background: rgb(255 255 255 / 0.8);
   border-radius: 10px;
@@ -102,19 +137,33 @@
   pointer-events: none;
 }
 
+/** @export {Göster} */
+.teg {}
+
 #tek.teg {
   opacity: 1;
 }
 
+/**
+ * Bilgi kutusu metni
+ * @name {KutuMetni}
+ */
 #tet {
   padding: 35px 10px;
 }
 
+/**
+ * Bilgi kutusu düğmeleri
+ * @name {KutuDüğmeleri}
+ */
 #tes {
   border-top: 0.3px solid #ccc;
   display: flex;
   height: 40px;
 }
+
+/** @name {Hayır} */
+#ten {}
 
 #ten,
 #tey {
@@ -122,12 +171,16 @@
   width: 50%;
 }
 
+/** @export {Evet} */
 #tey {
   border-left: 0.3px solid #ccc;
   font-weight: 700;
 }
 
-/* NFT ve altındaki düğme */
+/**
+ * NFT ve altındaki düğme
+ * @export {DüğmeliNft}
+ */
 #tel {
   height: 100%;
   perspective: 750px;
@@ -139,6 +192,10 @@
   filter: blur(3px);
 }
 
+/**
+ * NFT aç kapa düğmesi
+ * @export {NftDüğmesi}
+ */
 #tez {
   align-items: center;
   background-color: #fff;
@@ -177,6 +234,9 @@
   width: 250px;
   height: 250px;
 }
+
+/** @export {BüyükGöster} */
+.tew {}
 
 #kp.tew {
   transform: translate(65px, 120px) scale(0.5);

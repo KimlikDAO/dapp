@@ -1,4 +1,7 @@
-/* Blog post */
+/**
+ * Blog post preview
+ * @name {Preview}
+ */
 .blp {
   padding: 0;
   margin: 0;
@@ -11,6 +14,10 @@
   justify-content: space-between;
 }
 
+/**
+ * Blog post preview banner
+ * @name {PreviewBanner}
+ */
 .blpp {
   width: 100%;
 }
@@ -21,6 +28,10 @@ h4 {
   margin: 18px 20px 15px;
 }
 
+/**
+ * Blog post yazar
+ * @name {Yazar}
+ */
 .bla {
   display: flex;
   align-items: center;
@@ -28,12 +39,18 @@ h4 {
   color: #666;
 }
 
-/* Blog post author name */
+/**
+ * Blog pos yazar adı
+ * @name {YazarAdı}
+ */
 .blan {
   margin-left: 5px;
 }
 
-/* Blog post yazı */
+/**
+ * Blog post preview metni
+ * @name {PreviewMetni}
+ */
 .bly {
   font-size: 16px;
   line-height: 1.4;
@@ -41,6 +58,10 @@ h4 {
   margin: 10px 20px;
 }
 
+/**
+ * Blog post preview footer
+ * @name {PreviewFooter}
+ */
 .blf {
   display: flex;
   flex-direction: row-reverse;
@@ -49,7 +70,10 @@ h4 {
   margin: 20px;
 }
 
-/* Progress container */
+/**
+ * Progress container
+ * @name {ProgressContainer}
+ */
 .blpc {
   display: flex;
   align-items: center;
@@ -61,7 +85,10 @@ h4 {
   position: relative;
 }
 
-/* Progress indicator */
+/**
+ * Progress indicator
+ * @name {ProgressIndicator}
+ */
 .blpi {
   height: 100%;
   position: absolute;
@@ -71,7 +98,10 @@ h4 {
   z-index: -1;
 }
 
-/* Progress indicator text */
+/**
+ * Progress indicator text
+ * @name {ProgressText}
+ */
 .blpit {
   margin-left: 7px;
   display: flex;
@@ -81,13 +111,20 @@ h4 {
   color: #555;
 }
 
-/** Oku düğmesi */
+/**
+ * Oku düğmesi
+ * @name {OkuDüğmesi}
+ */
 .bloku {
   border: none;
   border-radius: 10px;
   padding: 0 20px;
 }
 
+/**
+ * Oku düğmesi aktif
+ * @name {Mavi}
+ */
 .blmav {
   color: #3182ce;
   background-color: #eaf3fa

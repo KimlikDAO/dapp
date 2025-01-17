@@ -83,6 +83,9 @@
   right: 0;
 }
 
+/** @export {SağMenü} */
+#cuep {}
+
 /**
  * Bağlantı listesi
  * @export {BağlantıListesi}

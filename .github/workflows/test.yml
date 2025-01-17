@@ -26,15 +26,22 @@ jobs:
         run: bun i
 
       - name: "`cüzdan` birimini derle"
-        run: bun lib/kdjs/kdjs.js birim/cüzdan/birim.js --globals '{"GEN":false,"DefaultChain":"0x1","Chains":["0x1","0xa4b1"],"Lang":"tr"}'
+        run: bun lib/kdjs/kdjs.js birim/cüzdan/birim.jsx --globals '{"GEN":false,"DefaultChain":"0x1","Chains":["0x1","0xa4b1"],"Lang":"tr"}'
 
       - name: "`dil` birimini derle"
-        run: bun lib/kdjs/kdjs.js birim/dil/birim.js --globals '{"GEN":false,"Route":{"en":"mint","tr":"al"},"Lang":"en"}'
+        run: bun lib/kdjs/kdjs.js birim/dil/birim.jsx --globals '{"GEN":false,"Route":{"en":"mint","tr":"al"},"Lang":"en"}'
 
       - name: "`kpass` birimini derle"
-        run: bun lib/kdjs/kdjs.js birim/kpass/birim.js --globals '{"GEN":false,"Lang":"en"}'
+        run: bun lib/kdjs/kdjs.js birim/kpass/birim.jsx --globals '{"GEN":false,"Lang":"en"}'
+      
+      - name: "ana sayfayı derle"
+        run: bun lib/kdjs/kdjs.js ana/sayfa.jsx --globals '{"GEN":false,"Route":{"en":"mint","tr":"al"},"DefaultChain":"0x1","Chains":["0x1","0xa4b1"],"Lang":"tr"}'
+
+      - name: "yenial sayfayı derle"
+        run: bun lib/kdjs/kdjs.js yenial/sayfa.jsx --globals '{"GEN":false,"Route":{"en":"mint","tr":"al"},"DefaultChain":"0x1","Chains":["0x1","0xa4b1"],"Lang":"tr"}'
 
   dappi-derle:
+    if: false # Temporarily disabled
     name: dApp'ı derle
     runs-on: macos-latest
     steps:

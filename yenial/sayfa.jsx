@@ -8,8 +8,9 @@ import Lato700 from "/birim/lato/l700.ttf";
 import OrtakCss from "/birim/ortakcss/birim";
 import { ChainId } from "/lib/crosschain/chains";
 import dom from "/lib/util/dom";
+import { I18nString, LangCode } from "/lib/util/i18n";
 
-/** @const {!HtmlDivElement} */
+/** @const {!HTMLDivElement} */
 export const GalleryGrid = dom.div(Css.GalleryGrid);
 
 /** @const {!Array<ChainId>} */
@@ -67,6 +68,22 @@ const InfoSectionNav = () => (
   </ul>
 );
 
+const Welcome = () =>
+  <div>
+    <h2>{{ en: "Welcome 👋", tr: "Hoşgeldiniz 👋" }}</h2>
+    <p>{{
+      en: "Here is your KPass. You can click on the regenerate button to customize its appearance. For now it contains no data and it's not written on chain. Let's add some data into it.",
+      tr: "İşte KPass'iniz. Görünümünü özelleştirmek için yeniden oluştur düğmesini kullanabilirsiniz. Şu anda içinde veri yok ve zincire yazılmamış. Haydi içine bazı veriler ekleyelim."
+    }}</p>
+    <button class={[OrtakCss.Düğme, OrtakCss.Act]}>
+      {{ en: "Got it!", tr: "Anladım!" }}
+    </button>
+  </div>;
+
+/**
+ * @param {{ Lang: LangCode}=} props
+ * @return {Promise<string>}
+ */
 const Al = ({ Lang }) => (
   <html lang={Lang}>
     <head>
@@ -88,7 +105,10 @@ const Al = ({ Lang }) => (
           <InfoSectionNav />
         </div>
         <div id={Css.RightColumn}>
-          <Gallery />
+          <div>
+            <Welcome />
+            <Gallery />
+          </div>
         </div>
       </div>
     </body>

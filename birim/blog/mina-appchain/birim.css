@@ -6,7 +6,11 @@
   background-color: #f5f5fd;
 }
 
+/** @name {Turuncu} */
 .bltur {
   color: #ff603b;
   background-color: #ffdfd8
 }
+
+/** @export {RemainingBar} */
+#blmb {}

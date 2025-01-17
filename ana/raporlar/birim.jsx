@@ -1,13 +1,16 @@
 import AnaCss from "../sayfa.css";
-import Jan25 from "/birim/blog/2025.01/birim.jsx";
+import Jan25 from "/birim/blog/2025.01/birim";
 import OrtakCss from "/birim/ortakcss/birim.css";
 
-export default () => (
+const Raporlar = () => (
   <div id="ra" class={AnaCss.Üçlü}>
     <div></div>
-    <Jan25 href={{ en: "", tr: "" }} loading="lazy" />
+    <Jan25 href={""} loading="lazy" />
     <div class={AnaCss.SağaYaslı}>
-      <h2 data-en="KimlikDAO progress reports." class={OrtakCss.Mor}>KimlikDAO ilerleme raporları.</h2>
+      <h2 class={OrtakCss.Mor}>{{
+        en: "KimlikDAO progress reports.",
+        tr: "KimlikDAO ilerleme raporları."
+      }}</h2>
       <span class={AnaCss.Açıklama}>{{
         en:
           "Read about the progress at KimlikDAO, from advancements in the KimlikDAO " +
@@ -18,10 +21,12 @@ export default () => (
           "katıldığımız etkinliklerden, kurduğumuz yeni ortaklıklara tüm " +
           "gelişmelerini aylık ilerleme raporlarından okuyun."
       }}</span><br />
-      <a href="//blog.kimlikdao.org" class={[OrtakCss.Düğme, "more", "anust"]}>{{
+      <a href="//blog.kimlikdao.org" class={[OrtakCss.Düğme, OrtakCss.More, "anust"]}>{{
         en: "All progress reports",
         tr: "Tüm ilerleme raporları"
       }}</a>
     </div>
-  </div >
+  </div>
 );
+
+export default Raporlar;

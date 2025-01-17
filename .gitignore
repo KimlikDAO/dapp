@@ -6,6 +6,7 @@
 .vscode/
 *.lock*
 *.out.js
+*.out.jsx
 **/*.rs.bk
 /build
 /dist

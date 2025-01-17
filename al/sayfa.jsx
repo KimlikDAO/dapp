@@ -1,16 +1,16 @@
 import Script from "kastro:./sayfa.js";
 import PowWorker from "kastro:./tanışma/powWorker.js";
-import İmeceİptal from "./imeceİptal/birim.jsx";
+import İmeceİptal from "./imeceİptal/birim";
 import Css from "./sayfa.css";
-import Tanışma from "./tanışma/birim.jsx";
+import Tanışma from "./tanışma/birim";
 import Ödeme from "./ödeme/birim.jsx";
 import Başlık from "/birim/başlık/birim";
 import Favicon from "/birim/icon.svg";
-import KPass from "/birim/kpass/birim.jsx";
+import KPass from "/birim/kpass/birim";
 import Lato400 from "/birim/lato/l400.ttf";
 import Lato700 from "/birim/lato/l700.ttf";
 import OrtakCss from "/birim/ortakcss/birim";
-import Telefon from "/birim/telefon/birim.jsx";
+import Telefon from "/birim/telefon/birim";
 import { ChainId } from "/lib/crosschain/chains";
 import dom from "/lib/util/dom";
 
@@ -38,7 +38,7 @@ const DefaultChain = ChainId.xa4b1;
 
 const CüzdanBağlama = () =>
   <div id="al1" class="step">
-    <b data-en="1. Connect your wallet.">1. Cüzdanınızı bağlayın.</b>{{
+    <b>{{ en: "1. Cüzdanınızı bağlayın.", tr: "1. Cüzdanınızı bağlayın." }}</b>{{
       en: " Proceed with a crypto wallet.",
       tr: " Cüzdan bağlayarak devam edin.",
     }}<br /><br />

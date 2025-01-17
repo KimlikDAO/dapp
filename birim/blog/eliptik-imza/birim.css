@@ -6,7 +6,11 @@
   background-color: rgba(42, 157, 143, 0.1);
 }
 
+/** @name {Mor} */
 .blmor {
   color: rgb(88, 84, 214);
   background-color: #EDE6FC
 }
+
+/** @export {RemainingBar} */
+#blei {}

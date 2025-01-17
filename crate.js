@@ -14,7 +14,7 @@ const Page = {
   KPassim: { [LangCode.EN]: "kpass", [LangCode.TR]: "kpassim" }
 };
 
-/** @enum {I18nString} */
+/** @enum {I18nString|string} */
 const ExternalPage = {
   Join: {
     [LangCode.EN]: "//join.kimlikdao.org/?en",
@@ -23,7 +23,17 @@ const ExternalPage = {
   Docs: {
     [LangCode.EN]: "//docs.kimlikdao.org",
     [LangCode.TR]: "//docs.kimlikdao.org/v/turkce"
-  }
+  },
+  Blog: {
+    [LangCode.EN]: "//blog.kimlikdao.org/?en",
+    [LangCode.TR]: "//blog.kimlikdao.org/?tr"
+  },
+  X: "//x.com/KimlikDAO",
+  Discord: "//discord.gg/H2wg6pcWXG",
+  Zealy: "//zealy.io/c/kimlikdao",
+  GitHub: "//github.com/KimlikDAO",
+  LinkedIn: "//linkedin.com/company/KimlikDAO/",
+  DappRadar: "//dappradar.com/dapp/kimlikdao-2",
 };
 
 /** @const {Page} */

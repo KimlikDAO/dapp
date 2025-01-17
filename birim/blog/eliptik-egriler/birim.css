@@ -6,10 +6,24 @@
   background-color: rgba(244, 188, 253, 0.3);
 }
 
+/** @name {Dobby} */
+.dobby {}
+
+/** @export {RemainingBar} */
+#blee {}
+
+/**
+ * Dobby resmi
+ * @name {DobbyResmi}
+ */
 #bldob {
   border-radius: 11px;
 }
 
+/**
+ * Yeşil düğme
+ * @name {Yeşil}
+ */
 .blyes {
   color: #066a52;
   background-color: #cff4ea;

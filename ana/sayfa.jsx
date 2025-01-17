@@ -1,11 +1,11 @@
 import Script from "kastro:./sayfa.js";
-import Ağ from "./ağ/birim.jsx";
+import Ağ from "./ağ/birim";
 import Hero from "./hero/birim";
-import Kazan from "./kazan/birim.jsx";
+import Kazan from "./kazan/birim";
 import OkResmi from "./ok.svg";
 import OpenGraph, { Description, Title } from "./opengraph";
 import Raporlar from "./raporlar/birim";
-import Sahipler from "./sahipler/birim.jsx";
+import Sahipler from "./sahipler/birim";
 import Css from "./sayfa.css";
 import TwitterCard from "./twittercard";
 import Altdizin from "/birim/altdizin/birim";
@@ -19,7 +19,8 @@ import Logo from "/birim/logo.svg";
 import OrtakCss from "/birim/ortakcss/birim";
 import { ExternalPage, HostUrl, Page } from "/crate";
 import { ChainId } from "/lib/crosschain/chains";
-import { I18nString, LangCode } from "/lib/util/i18n"
+import dom from "/lib/util/dom";
+import { I18nString, LangCode } from "/lib/util/i18n";
 
 /** @const {!Array<ChainId>} */
 const Chains = [
@@ -41,53 +42,66 @@ const ChainNotes = {
 const DefaultChain = ChainId.xa4b1;
 
 /**
- * @param {{ Lang: LangCode }} props
- * @return {!Promise<string>}
+ * @param {{ Lang: LangCode }=} props
+ * @return {Promise<string>}
  */
-const Ana = ({ Lang }) => (
-  <html lang={Lang}>
-    <head>
-      <meta charset="utf-8" />
-      <meta name="viewport" content="width=device-width, initial-scale=1" />
-      <meta name="description" content={Description} />
-      <OpenGraph />
-      <TwitterCard />
-      <Lato400 shared />
-      <Lato700 shared />
-      <title>{Title}</title>
-      <link rel="canonical" href={HostUrl} />
-      <OrtakCss />
-      <Css />
-      <Favicon raster={32} rel="icon" />
-      <Script Chains={Chains} DefaultChain={DefaultChain} />
-    </head>
-    <body id={Css.Kök}>
-      <div id={Css.Başlık}>
-        <a href="/" id={OrtakCss.Başlık.Logo}>
-          <Logo id={OrtakCss.Başlık.Logomark} height={35} inline />KimlikDAO</a>
-        <div id={OrtakCss.Başlık.Linkler}>
-          <a class={OrtakCss.Başlık.Link} href={ExternalPage.Join}>{{
-            en: "Join us", tr: "Aramıza katıl"
-          }}</a>
-          <a class={OrtakCss.Başlık.Link} href="//discord.gg/H2wg6pcWXG" target="_blank" rel="noreferrer">Discord</a>
-          <Dil />
-          <Cüzdan Chains={Chains} DefaultChain={DefaultChain} ChainNotes={ChainNotes}>
-            <SağMenü />
-          </Cüzdan>
-          <a id={Css.EylemDüğmesi} href={Page.Al} class={[OrtakCss.Düğme, "act"]}>{{
-            en: "Mint KPass", tr: "Hemen KPass al"
-          }}<OkResmi inline /></a>
+const Ana = ({ Lang }) => {
+  Cüzdan.kpassDeğişince((_, dosyaSözü) => {
+    /** @const {!HTMLAnchorElement} */
+    const eylemDüğmesi = dom.a(Css.EylemDüğmesi);
+    /** @type {!Text} */(eylemDüğmesi.firstChild).data = dosyaSözü
+      ? dom.i18n({ tr: "KPass’ini incele", en: "View KPass" })
+      : dom.i18n({ tr: "Hemen KPass al", en: "Mint KPass" })
+    eylemDüğmesi.href = dosyaSözü
+      ? dom.i18n(Page.KPassim)
+      : dom.i18n(Page.Al);
+  });
+
+  return (
+    <html lang={Lang}>
+      <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="description" content={Description} />
+        <OpenGraph />
+        <TwitterCard />
+        <Lato400 shared />
+        <Lato700 shared />
+        <title>{Title}</title>
+        <link rel="canonical" href={HostUrl} />
+        <OrtakCss />
+        <Css />
+        <Favicon raster={32} rel="icon" />
+        <Script Chains={Chains} DefaultChain={DefaultChain} />
+      </head>
+      <body id={Css.Kök}>
+        <div id={Css.Başlık}>
+          <a href="/" id={OrtakCss.Başlık.Logo}>
+            <Logo id={OrtakCss.Başlık.Logomark} height={35} inline />KimlikDAO</a>
+          <div id={OrtakCss.Başlık.Linkler}>
+            <a class={OrtakCss.Başlık.Link} href={ExternalPage.Join}>{{
+              en: "Join us", tr: "Aramıza katıl"
+            }}</a>
+            <a class={OrtakCss.Başlık.Link} href={ExternalPage.Discord} target="_blank" rel="noreferrer">Discord</a>
+            <Dil />
+            <Cüzdan Chains={Chains} DefaultChain={DefaultChain} ChainNotes={ChainNotes}>
+              <SağMenü />
+            </Cüzdan>
+            <a id={Css.EylemDüğmesi} href={Page.Al} class={[OrtakCss.Düğme, "act"]}>{{
+              en: "Mint KPass", tr: "Hemen KPass al"
+            }}<OkResmi inline /></a>
+          </div>
         </div>
-      </div>
-      <Hero />
-      <Kazan />
-      <Sahipler />
-      <Ağ />
-      <hr class={Css.Ayraç} />
-      <Raporlar />
-      <Altdizin />
-    </body>
-  </html>
-);
+        <Hero />
+        <Kazan />
+        <Sahipler />
+        <Ağ />
+        <hr class={Css.Ayraç} />
+        <Raporlar />
+        <Altdizin />
+      </body>
+    </html>
+  );
+}
 
 export default Ana;

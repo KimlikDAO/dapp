@@ -13,7 +13,7 @@ export const Title = {
   [LangCode.TR]: "KimlikDAO | Blokzincirdeki kimlik NFT’niz"
 };
 
-export default () => (<>
+const OpenGraph = () => (<>
   <meta property="og:type" content="website" />
   <meta property="og:url" content={HostUrl} />
   <meta property="og:title" content={Title} />
@@ -22,3 +22,5 @@ export default () => (<>
   <meta property="og:locale" content={{ [LangCode.EN]: "en_US", [LangCode.TR]: "tr_TR" }} />
   <meta property="og:site_name" content="KimlikDAO" />
 </>);
+
+export default OpenGraph;

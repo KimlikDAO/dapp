@@ -68,6 +68,23 @@ body {
 }
 
 /**
+ * @name {More}
+ */
+.more {}
+
+/**
+ * Eylem düğmesi
+ * @name {Act}
+ */
+.act {}
+
+/**
+ * Bilgi düğmesi
+ * @name {Info}
+ */
+.info {}
+
+/**
  * @name {Düğme}
  */
 .btn {

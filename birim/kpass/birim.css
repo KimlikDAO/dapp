@@ -46,13 +46,33 @@
   transform: rotateY(180deg);
 }
 
-/* KPass Carousel */
+/**
+ * KPass Kartlar
+ * @export {Kartlar}
+ */
 #kpc {
   display: flex;
   height: 100%;
   transition: transform 1s;
   width: 1400px;
 }
+
+/**
+ * @export {AddressInfoCard}
+ */
+#kpc2 {}
+
+/**
+ * KPass Kartları
+ * @export {RegistryInfoCard}
+ */
+#kpc3 {}
+
+/**
+ * Aile bilgileri kartı
+ * @name {FamilyInfoCard}
+ */
+#kpc4 {}
 
 /**
  * Bilgi kartı
@@ -89,6 +109,18 @@
 }
 
 /**
+ * KPass Sağ Düğmesi
+ * @export {SağDüğme}
+ */
+#kpsa {}
+
+/**
+ * KPass Sol Düğmesi
+ * @export {SolDüğme}
+ */
+#kpso {}
+
+/**
  * KPass Logo
  * @name {Logo}
  */
@@ -121,7 +153,7 @@
 
 /**
  * Bilgi kartı içeriği
- * @name {BilgiKartıİçi}
+ * @export {BilgiKartıİçi}
  */
 .kpip {
   padding: 3ex 20px;

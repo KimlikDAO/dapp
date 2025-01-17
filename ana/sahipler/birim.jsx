@@ -23,9 +23,13 @@ const Tablo = {
   [ChainId.x89]: { ad: "POLYGON", ek: "’DA", holders: 2 },
 };
 
+/**
+ * @param {{ chainId: ChainId }=} props
+ * @return {Promise<string>}
+ */
 const Balon = ({ chainId }) => (
   <div class={[Css.Balon, chainId == ChainId.MinaMainnet ? "mina" : chainId.slice(1)]}>
-    <Image src={ağResmi(chainId)} height={40} width={40} bundleHeight={40} bundleWidth={40} />
+    <Image src={ağResmi(chainId)} height={40} width={40} bundleHeight={64} bundleWidth={64} />
     <div>
       <div class={Css.BalonSayı}>{Tablo[chainId].holders}</div>
       <span class={Css.BalonAd} data-en={`HOLDERS ON ${Tablo[chainId].ad}`}>{

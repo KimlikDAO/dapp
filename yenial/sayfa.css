@@ -37,6 +37,7 @@
  * @name {NavItem}
  */
 .aln {
+  color: #444;
   padding: 12px 16px;
   cursor: pointer;
   border-radius: 4px;
@@ -83,7 +84,7 @@
 }
 
 /**
- * @name {GalleryGrid}
+ * @export {GalleryGrid}
  */
 #alisg {
   display: grid;

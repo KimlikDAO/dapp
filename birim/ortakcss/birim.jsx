@@ -4,20 +4,18 @@ import Cüzdan from "/birim/cüzdan/birim.css";
 import Dil from "/birim/dil/birim.css";
 import KPass from "/birim/kpass/birim.css";
 
-export default Object.assign(
-  (props) => {
-    props.shared = true;
-    Css(props);
-    Başlık(props);
-    Cüzdan(props);
-    Dil(props);
-    KPass(props);
-  },
-  Css,
-  {
-    Başlık,
-    Cüzdan,
-    Dil,
-    KPass
-  }
-);
+const OrtakCss = () => <>
+  <Css shared />
+  <Başlık shared />
+  <Cüzdan shared />
+  <Dil shared />
+  <KPass shared />
+</>;
+
+Object.assign(OrtakCss, Css);
+OrtakCss.Başlık = Başlık;
+OrtakCss.Cüzdan = Cüzdan;
+OrtakCss.Dil = Dil;
+OrtakCss.KPass = KPass;
+
+export default OrtakCss;

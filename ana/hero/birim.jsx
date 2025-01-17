@@ -1,5 +1,5 @@
 import Css from "./birim.css";
-import Sergi from "./sergi/birim";
+import Sergi from "./Sergi";
 import OrtakCss from "/birim/ortakcss/birim.css";
 import Telefon from "/birim/telefon/birim.jsx";
 import { Page } from "/crate";
