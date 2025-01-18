@@ -69,11 +69,12 @@ const ağDeğişti = (yeniAğ) => {
     // kopmasını sağlıyor.
     ağSeçildi(Ağ);
   } else if (yeniAğ != Ağ) {
-    dom.adla(Css.AğListesi + Ağ).classList.remove("sel");
-    dom.adla(Css.AğListesi + yeniAğ).classList.add("sel");
+    /** @const {!HTMLLIElement} */
+    const yeniAğLi = dom.li(Css.AğListesi + yeniAğ);
+    dom.li(Css.AğListesi + Ağ).classList.remove("sel");
+    yeniAğLi.classList.add("sel");
     AğDüğmesi.replaceChild(
-      dom.adla(Css.AğListesi + yeniAğ).firstElementChild.cloneNode(true),
-      AğDüğmesi.firstElementChild);
+      yeniAğLi.firstElementChild.cloneNode(true), AğDüğmesi.firstElementChild);
     /** @const {boolean} */
     const ağGrubuDeğişti = !Ağ.startsWith(yeniAğ.slice(0, 2));
     Ağ = yeniAğ;
@@ -189,8 +190,8 @@ const bağlantıSeçiciGöster = () => {
   for (const grup of ChainGroups)
     dom.adlaGösterGizle(Css.BağlantıListesi + grup, grup == ağGrubu)
 
-  /** @const {!Element} */
-  const seçici = dom.adla(Css.BağlantıListesi + ağGrubu);
+  /** @const {!HTMLUListElement} */
+  const seçici = dom.ul(Css.BağlantıListesi + ağGrubu);
 
   /** @const {!NodeList<!Element>} */
   const satırlar = seçici.children;
@@ -246,12 +247,11 @@ const izinliyseBağla = () => {
  * @return {Promise<string>}
  */
 const Cüzdan = ({ DefaultChain: defaultChain, Chains: chains, ChainNotes: chainNotes, children, piggyback }) => {
-  /** @const {!Element} */
-  const seçiliAğ = dom.adla(Css.AğListesi + DefaultChain);
+  /** @const {!HTMLLIElement} */
+  const seçiliAğ = dom.li(Css.AğListesi + DefaultChain);
   seçiliAğ.replaceChild(AğDüğmesi.firstElementChild.cloneNode(true),
     seçiliAğ.firstElementChild);
 
-  dom.menüYarat(AğDüğmesi, Menü);
   AdresDüğmesi.onclick = AğDüğmesi.onclick;
   Menü.onclick = (event) => {
     /** @type {HTMLLIElement} */
@@ -270,21 +270,21 @@ const Cüzdan = ({ DefaultChain: defaultChain, Chains: chains, ChainNotes: chain
     const url = "//debank.com/profile/" + Adres;
     window.open(url, "_blank");
   }
-  setTimeout(izinliyseBağla, 200);
+  dom.schedule(izinliyseBağla, 200);
 
   return (
     <div id={Css.Kök}>
       <Css />
-      <AğDüğmesi>
+      <AğDüğmesi controlsDropdown={Menü}>
         <Image src={ağResmi(defaultChain)} height={32} width={32} inline />
       </AğDüğmesi>
-      <AdresDüğmesi>{{
+      <AdresDüğmesi onClick={AğDüğmesi.onclick}>{{
         tr: "Cüzdan bağla", en: "Connect wallet"
       }}</AdresDüğmesi>
-      <Menü style="display:none">
+      <Menü nodisplay>
         <ul id={Css.AğListesi}>
           {chains.map((id) => (
-            <li id={Css.AğListesi + id} class={id == DefaultChain ? "sel" : ""}>
+            <li id={Css.AğListesi + id} class={id == defaultChain ? "sel" : ""}>
               {id == defaultChain
                 ? <span></span>
                 : <Image src={ağResmi(id)} width={32} height={32} bundleWidth={64} bundleHeight={64} piggyback={piggyback} />}
@@ -300,14 +300,16 @@ const Cüzdan = ({ DefaultChain: defaultChain, Chains: chains, ChainNotes: chain
           <Bağlantı idx={BağlantıAdı.Core} name="Core" />
           <Bağlantı idx={BağlantıAdı.MetaMask} name="Metamask" />
         </ul>
-        <ul id={Css.BağlantıListesi + ChainGroup.MINA} class={Css.BağlantıListesi} style="display:none">
+        <ul id={Css.BağlantıListesi + ChainGroup.MINA} class={Css.BağlantıListesi} nodisplay>
           <Bağlantı idx={BağlantıAdı.Auro} name="Auro" />
         </ul>
-        <SağPanel style="display:none">
+        <SağPanel nodisplay>
           <div id={Css.Profil}>
             <QmarkResmi id={Css.ProfilResmi} height={80} width={80} />
             <div>
-              <CüzdanAdresi><span>0xcCc...cCc</span><span id="cuadi"><KopyalaResmi inline /></span></CüzdanAdresi>
+              <CüzdanAdresi>
+                <span>0xcCc...cCc</span><span id="cuadi"><KopyalaResmi inline /></span>
+              </CüzdanAdresi>
               <DebankLinki>DeBank</DebankLinki> <span id={Css.ExplorerLinki}>Explorer</span>
               <div id={Css.KPassDüğmesi}>{{ en: "MINT KPASS", tr: "KPASS AL" }}</div>
             </div>

@@ -31,8 +31,10 @@ const Dil = () => {
   return (
     <div id={Css.Kök}>
       <Css />
-      <DilDüğmesi class={BaşlıkCss.Link} href="javascript:">{{ en: "EN", tr: "TR" }}</DilDüğmesi>
-      <DilListesi style="display:none">
+      <DilDüğmesi
+        controlsDropdown={DilListesi}
+        class={BaşlıkCss.Link} href="javascript:">{{ en: "EN", tr: "TR" }}</DilDüğmesi>
+      <DilListesi nodisplay>
         <li id={Css.Kök + LangCode.EN}><EnFlag width={16} height={16} /> English</li>
         <li id={Css.Kök + LangCode.TR}><TrFlag width={16} height={16} /> Türkçe</li>
       </DilListesi>

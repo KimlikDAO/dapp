@@ -163,7 +163,7 @@ const öde = (cidSözü, adresAğırlığı, eşik) => {
   // Ek ücreti göster / gizle.
   döküm.children[1].style.display = iptalli ? "none" : "";
   // Para menüsünü yarat.
-  dom.menüYarat(paraDüğmesi, /** @type {!Element} */(paraDüğmesi.nextElementSibling));
+  dom.bindDropdown(paraDüğmesi, /** @type {!Element} */(paraDüğmesi.nextElementSibling));
   paraDüğmesi.nextElementSibling.onclick = (event) => {
     /** @const {Element} */
     const li = event.target.nodeName == "LI"

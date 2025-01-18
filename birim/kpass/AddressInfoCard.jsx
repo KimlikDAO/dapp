@@ -1,7 +1,7 @@
 import Css from "./birim.css";
 
 const AddressInfoCard = () => (
-  <div id={Css.AddressInfoCard} class={Css.BilgiKartı} style="display:none">
+  <div id={Css.AddressInfoCard} class={Css.BilgiKartı} nodisplay>
     <div class={Css.BilgiKartıİçi}>
       <h7 data-en="ADDRESS INFO">ADRES BİLGİLERİ</h7>
       <div class={Css.Ad} id="kpam">Mahalle</div>

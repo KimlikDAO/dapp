@@ -16,12 +16,12 @@ const NftDüğmesi = dom.div(Css.NftDüğmesi);
 const Evet = dom.div(Css.Evet);
 
 /**
- * @param {{ kpassli: boolean, style: string }=} props
+ * @param {{ kpassli: boolean, noshow: boolean }=} props
  * @return {Promise<string>}
  */
-const Telefon = ({ kpassli = true, style }) => {
+const Telefon = ({ kpassli = true, noshow }) => {
   return (
-    <div id={Css.Kök} style={style}>
+    <div id={Css.Kök} noshow={noshow}>
       <Css />
       <AnaEkran>
         <div id={Css.Bakiye}>$1523.74</div>
@@ -37,9 +37,9 @@ const Telefon = ({ kpassli = true, style }) => {
       </AnaEkran >
       <DüğmeliNft>
         {kpassli && <KPass />}
-        <NftDüğmesi style="display:none">{{ en: "Hide", tr: "Gizle" }}</NftDüğmesi>
+        <NftDüğmesi nodisplay>{{ en: "Hide", tr: "Gizle" }}</NftDüğmesi>
       </DüğmeliNft>
-      <Kutu style="opacity:0">
+      <Kutu noshow>
         <div id={Css.KutuMetni} />
         <div id={Css.KutuDüğmeleri}>
           <div id={Css.Hayır}>{{ en: "Cancel", tr: "Hayır" }}</div>

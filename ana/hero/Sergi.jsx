@@ -70,7 +70,7 @@ const Sergi = () => {
   Cüzdan.adresDeğişince((adres) => Telefon.adresGir(adres));
   Kartlar.appendChild(Kartlar.firstElementChild.cloneNode(true));
   Kartlar.style.width = "500%";
-  sergiSaatiKur();
+  dom.run(sergiSaatiKur);
 
   return (
     <div id={Css.Kök}>

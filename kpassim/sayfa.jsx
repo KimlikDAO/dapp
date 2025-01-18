@@ -61,15 +61,15 @@ const KPassim = ({ Lang }) =>
       <div id="in">
         <div id="intckt">
           <KPassYok>
-            <span style="display:none">{{
+            <span nodisplay>{{
               en: "The connected wallet does not have a KPass on this chain.",
               tr: "Bağlıcüzdanda bu ağda KPass yok."
             }}<br /><br />
               <a href={Page.Al} class="inl">{{ en: "Almak için tıklayın.", tr: "Almak için tıklayın." }}</a>
             </span>
           </KPassYok>
-          <KPass style="display:none" />
-          <AçDüğmesi style="display:none">{{ en: "Unlock", tr: "Aç" }}</AçDüğmesi>
+          <KPass nodisplay />
+          <AçDüğmesi nodisplay>{{ en: "Unlock", tr: "Aç" }}</AçDüğmesi>
         </div>
         <div id="inbtn">
           <DiscordDüğmesi href="javascript:" class="info btn">{{ en: "Claim Discord role", tr: "Discord rolü al" }}</DiscordDüğmesi>

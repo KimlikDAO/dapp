@@ -3,6 +3,7 @@ import { CoreBağlantısı, MetaMaskBağlantısı, RabbyBağlantısı } from "./
 import { AuroConnection as AuroBağlantısı } from "./minaBağlantısı";
 import { ChainId } from "/lib/crosschain/chains";
 import { Provider } from "/lib/crosschain/provider";
+import { Image } from "/lib/kastro/image";
 
 /** @enum {string} */
 const BağlantıAdı = {
@@ -104,7 +105,7 @@ const bağlantıResmi = (ad) => `birim/cüzdan/img/${ad.split(" ")[0].toLowerCas
 const Bağlantı = ({ idx, name }) => (
   <li id={Css.Kök + idx}>
     <Image src={bağlantıResmi(name)} width={32} height={32} />
-    <div class={Css.CüzdanIşığı}></div> {name}<span class={Css.Cüzdanİndir} style="display:none">{{
+    <div class={Css.CüzdanIşığı}></div> {name}<span class={Css.Cüzdanİndir} nodisplay>{{
       en: "GET",
       tr: "İNDİR"
     }}</span>

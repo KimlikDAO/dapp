@@ -1,7 +1,9 @@
 import AnaCss from "../sayfa.css";
 import Css from "./birim.css";
-import KpassCss from "/birim/kpass/birim.css";
-import OrtakCss from "/birim/ortakcss/birim.css";
+import KPass from "/birim/kpass/birim";
+import KPassCss from "/birim/kpass/birim.css";
+import OrtakCss from "/birim/ortakcss/birim";
+import { ExternalPage } from "/crate";
 import { keccak256 } from "/lib/crypto/sha3";
 
 /**
@@ -88,17 +90,24 @@ const Ağ = () => (
     </div>
     <div id={Css.OrtaSütun}>
       <div id={Css.KPass}>
-        <div class={KpassCss.BilgiKartıİçi}>
-          <div class={KpassCss.Ad}>{{ tr: "Doğum yeri", en: "City of birth" }}</div>
+        <div class={KPassCss.BilgiKartıİçi}>
+          <div class={KPassCss.Ad}>{{ tr: "Doğum yeri", en: "City of birth" }}</div>
           <div>{{ tr: "İstanbul", en: "Palo Alto, CA" }}</div>
-          <div class={KpassCss.Ad}>{{ tr: "Cinsiyet", en: "Gender" }}</div>
+          <div class={KPassCss.Ad}>{{ tr: "Cinsiyet", en: "Gender" }}</div>
           <div>{{ tr: "K", en: "F" }}</div>
         </div>
-        <svg height={24} width={24}>
-          <use href={"#" + OrtakCss.Başlık.Logomark} width={24} height={24} />
+        <svg height={24} width={24} class={KPassCss.Logo}>
+          <use href={`#${OrtakCss.Başlık.Logomark}`} width={24} height={24} />
         </svg>
-        <a href="javascript:" class={[KpassCss.Düğme, KpassCss.SolDüğme]}></a>
-        <a href="javascript:" class={[KpassCss.Düğme, KpassCss.SağDüğme]}></a>
+        <div class={KPassCss.Nav}>
+          <button class={[KPassCss.Düğme, KPassCss.SolDüğme]}>
+            <KPass.SolOk />
+          </button>
+          1 / 5
+          <button class={[KPassCss.Düğme, KPassCss.SağDüğme]}>
+            <KPass.SağOk />
+          </button>
+        </div>
       </div>
       {Object.keys(NODES).map((key) => <Node idx={key} />)}
     </div>

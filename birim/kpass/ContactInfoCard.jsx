@@ -6,7 +6,7 @@ import dom from "/lib/util/dom";
 const Fields = ["email", "phone"];
 
 const ContactInfoCard = () => (
-  <div id="kpibp" class={Css.BilgiKartı} style="display:none">
+  <div id="kpibp" class={Css.BilgiKartı} nodisplay>
     <div class={Css.BilgiKartıİçi}>
       <h7>{{ en: "CONTACT INFO", tr: "İLETİŞİM BİLGİLERİ" }}</h7>
       <div class={Css.Ad}>{{ en: "E-mail", tr: "E-posta" }}</div>

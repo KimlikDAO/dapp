@@ -7,11 +7,8 @@ import eth from "/lib/ethereum/eth.d";
 /** @const {eth.UiProvider|undefined} */
 window.ethereum;
 
-/** @const {boolean} */
+/** @const {boolean|undefined} */
 window.ethereum.isRabby;
-
-/** @const {boolean} */
-window.ethereum.isMetaMask;
 
 /**
  * @interface

@@ -19,7 +19,7 @@ const Tanışma = () => (
       tr: "E-devlet ile giriş (Yakında!)",
       en: "Login with e-devlet (Soon!)"
     }}</a>
-    <div id="tadc" style="display:none">
+    <div id="tadc" nodisplay>
       <div id="taip" class="kux"></div>
       <div id="tada">
         <input type="file" id="tain" accept="application/pdf" />{{
@@ -49,7 +49,7 @@ const Tanışma = () => (
               en: "Calculating...",
               tr: "Hesaplanıyor..."
             }}</b><a href="javascript:" id="tacopy"
-              title={{ tr: "Kopyala", en: "Copy" }} style="display:none"><KopyalaResmi inline /></a>
+              title={{ tr: "Kopyala", en: "Copy" }} nodisplay><KopyalaResmi inline /></a>
             </td>
           </tr>
         </table>{{
@@ -65,8 +65,8 @@ const Tanışma = () => (
           <div id="taimg">
             <UploadResmi alt="" width={48} height={48} />
           </div>
-          <div id="tal" style="display:none"></div>
-          <div id="tafail" style="display:none"></div>
+          <div id="tal" nodisplay></div>
+          <div id="tafail" nodisplay></div>
         </div>
         <div id="tafb"></div>
         <a href="javascript:" id="tadsbtn" class="btn act lft">{{

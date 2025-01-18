@@ -88,24 +88,19 @@
  * @name {Düğme}
  */
 .kpd {
-  bottom: 5px;
-  height: 10px;
-  opacity: 0.3;
-  padding: 7px;
-  position: absolute;
-  width: 10px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 20px;
+  border-radius: 10px;
+  transition: opacity 0.3s;
 }
 
 .kpd:hover {
   opacity: 0.7;
-}
-
-.kpso {
-  right: 20px;
-}
-
-.kpsa {
-  right: 3px;
 }
 
 /**
@@ -121,34 +116,42 @@
 #kpso {}
 
 /**
+ * KPass Ok
+ * @name {Ok}
+ */
+#kpok {}
+
+/**
+ * KPass Nav
+ * @export {Nav}
+ */
+.kpn {
+  align-items: center;
+  background: #fefefe;
+  border-radius: 10px;
+  border: 1px solid #eee;
+  cursor: pointer;
+  display: flex;
+  font-size: 10px;
+  height: 20px;
+  position: absolute;
+  bottom: 8px;
+  right: 5px;
+  transition: border-color, color 0.3s;
+}
+
+.kpn:hover {
+  border-color: #eee;
+}
+
+/**
  * KPass Logo
  * @name {Logo}
  */
-#kplo {
+.kplo {
   bottom: 6px;
   left: 10px;
   position: absolute;
-}
-
-.kpso::before,
-.kpsa::before {
-  border-radius: 2px;
-  border: solid #000;
-  box-sizing: border-box;
-  content: "";
-  height: 10px;
-  position: absolute;
-  width: 10px;
-}
-
-.kpso::before {
-  border-width: 0 0 4px 4px;
-  transform: rotate(45deg);
-}
-
-.kpsa::before {
-  border-width: 0 4px 4px 0;
-  transform: rotate(-45deg);
 }
 
 /**
@@ -156,7 +159,7 @@
  * @export {BilgiKartıİçi}
  */
 .kpip {
-  padding: 3ex 20px;
+  padding: 2ex 15px;
 }
 
 /**

@@ -19,7 +19,7 @@ ProposeButton.onclick = () => {
   const önergeDüğmesi = /** @type {!Element} */(dom.adla("oyyddb"));
   /** @const {!Element} */
   const önergeMenusu = /** @type {!Element} */(dom.adla("oyyul"));
-  dom.menüYarat(önergeDüğmesi, önergeMenusu);
+  dom.bindDropdown(önergeDüğmesi, önergeMenusu);
   önergeMenusu.onclick = (e) => {
     const li = e.target;
     if (li.nodeName != "LI") return;

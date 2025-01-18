@@ -49,7 +49,7 @@ const Ödeme = () => (
       <a href="javascript:" id="odb">
         <AvaxResmi height={32} width={32} />
       </a>
-      <ul id="odd" style="display:none">
+      <ul id="odd" nodisplay>
         <li id="odd2">
           <span class="ods" data-en="1.00">1,00</span><span class="odp">USDC</span><UsdcResmi height={32} width={32} />
         </li>

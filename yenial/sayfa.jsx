@@ -50,7 +50,7 @@ const Gallery = () => (
         <div class={Css.InfoSource}>login.gov</div>
       </GalleryGrid>
     </div>
-    <div style="display:none">
+    <div nodisplay>
       <button>
         {{ en: "Back", tr: "Geri" }}
       </button>

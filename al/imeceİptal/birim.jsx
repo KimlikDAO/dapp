@@ -44,7 +44,7 @@ export default () =>
     <br />
     <GösterDüğmesi href="javascript:" class="act btn lft" data-en="Yes">Evet</GösterDüğmesi>
     <İptalDüğmesi href="javascript:" class="btn" data-en="No">Hayır</İptalDüğmesi>
-    <Kutu style="display:none">
+    <Kutu nodisplay>
       <div id="imlbl">
         <b data-en="Address">Adres</b>
         <b data-en="Weight">Ağırlık</b>

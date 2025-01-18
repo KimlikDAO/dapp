@@ -119,12 +119,6 @@ a {
   color: #444;
 }
 
-button:hover {
-  background-color: #F3F4F6;
-  text-decoration: none;
-  transition-duration: 0.1s;
-}
-
 button:disabled {
   background-color: #FAFBFC;
   border-color: rgba(27, 31, 35, 0.15);
@@ -142,14 +136,6 @@ button:focus {
   outline: 1px transparent;
 }
 
-button:before {
-  display: none;
-}
-
-button:-webkit-details-marker {
-  display: none;
-}
-
 button {
   background-color: #FAFBFC;
   border-radius: 5px;
@@ -160,14 +146,8 @@ button {
   margin: 0;
   min-height: 45px;
   touch-action: manipulation;
-  transition: background-color 0.2s cubic-bezier(0.3, 0, 0.5, 1);
+  transition: background-color 0.3s;
   user-select: none;
-}
-
-button:hover {
-  background-color: #F3F4F6;
-  text-decoration: none;
-  transition-duration: 0.1s;
 }
 
 /**

@@ -202,7 +202,7 @@ const CoreBağlantısı = /** @type {!Provider} */({
 const MetaMaskBağlantısı = /** @type {!Provider} */({
   initIfAvailable: () => {
     /** @const {boolean} */
-    const varMı = !!(window?.ethereum);
+    const varMı = !!window.ethereum;
     if (varMı)
       /** @const {!eth.UiProvider} */
       MetaMaskBağlantısı.provider = /** @type {!eth.UiProvider} */(window.ethereum);
@@ -280,7 +280,7 @@ const RabbyBağlantısı = /** @type {!Provider} */({
    */
   initIfAvailable: () => {
     /** @const {boolean} */
-    const varMı = !!(window?.ethereum?.isRabby);
+    const varMı = !!(window.ethereum?.isRabby);
     if (varMı)
       /** @const {!eth.UiProvider} */
       RabbyBağlantısı.provider = /** @type {!eth.UiProvider} */(window.ethereum);

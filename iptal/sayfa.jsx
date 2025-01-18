@@ -46,7 +46,7 @@ const İptal = ({ Lang }) => (
       <title>KimlikDAO | {{ tr: "İptal işlemleri", en: "Revoke KPass" }}</title>
       <Lato400 shared />
       <Lato700 shared />
-      <Favicon raster={32} rel="icon" />
+      <Favicon raster={32} />
       <OrtakCss />
       <Css />
       <Script Chains={Chains} DefaultChain={DefaultChain} />
@@ -64,31 +64,31 @@ const İptal = ({ Lang }) => (
           <BenDüğmesi href="javascript:" class="act btn lft" data-en="Mine">Bana ait</BenDüğmesi>
           <BaşkasıDüğmesi href="javascript:" class="act btn" data-en="Someone else's">Başkasına ait</BaşkasıDüğmesi>
         </KiminKutusu>
-        <KimKutusu class="ipstep" style="display:none">
+        <KimKutusu class="ipstep" nodisplay>
           <b data-en="2. Select KPass address.">2. KPass adresi seçin.</b>
           <span>{{
             en: "The following addresses nominated you as a revoker. Select the one you would like to revoke.",
             tr: "Aşağıdaki adresler size iptal yetkisi vermiş. İptal etmek istediğiniz adresi seçin."
           }}</span>
-          <div id="iplc" style="display:none">
+          <div id="iplc" nodisplay>
             <div class="ipl"></div>{{
               en: "Loading",
               tr: "Yükleniyor"
             }}
           </div>
-          <div id="ipmc" style="display:none">
-            <div id="ipaym" style="display:none" data-en="There is no revoke address.">İptal edebileceğiniz bir adres yok.
+          <div id="ipmc" nodisplay>
+            <div id="ipaym" nodisplaydata-en="There is no revoke address.">İptal edebileceğiniz bir adres yok.
             </div>
-            <div id="iphm" style="display:none" data-en="Failed to fetch addresses.">Adresler alınırken hata oluştu.</div>
+            <div id="iphm" nodisplay data-en="Failed to fetch addresses.">Adresler alınırken hata oluştu.</div>
           </div>
-          <div id="ipiilc" style="display:none">
-            <b id="ipiilh" data-en="Addresses">Adresler</b>
+          <div id="ipiilc" nodisplay>
+            <b id="ipiilh">{{ en: "Addresses", tr: "Adresler" }}</b>
             <ul id="ipiil"></ul>
           </div>
-          <a href="javascript:" id="ipiio" class="act btn lft" data-en="Confirm">Onayla</a>
-          <a href="javascript:" id="ipiir" class="btn" data-en="Cancel">İptal</a>
+          <a href="javascript:" id="ipiio" class="act btn lft">{{ en: "Confirm", tr: "Onayla" }}</a>
+          <a href="javascript:" id="ipiir" class="btn">{{ en: "Cancel", tr: "İptal" }}</a>
         </KimKutusu>
-        <AdresKutusu class="ipstep" style="display:none">
+        <AdresKutusu class="ipstep" nodisplay>
           <b data-en="2. Select KPass address.">2. KPass adresi seçin.</b>{{
             en: "Do you want to revoke the KPass in your connected wallet?",
             tr: "Bağlı cüzdanınızdaki KPass'i mi iptal etmek istiyorsunuz?"
@@ -98,7 +98,7 @@ const İptal = ({ Lang }) => (
           <a href="javascript:" id="ip1a" class="act btn lft" data-en="Yes">Evet</a>
           <a href="javascript:" data-en-href="/report" id="ip1b" class="btn" data-en="No">Hayır</a>
         </AdresKutusu>
-        <div id="iptaic" class="ipstep" style="display:none">
+        <div id="iptaic" class="ipstep" nodisplay>
           <b data-en="2. Revoke connected KPass." data-tr="2. Bağlı KPass iptali."></b>{{
             en: "Now you'll revoke the KPass in your connected wallet. You don't need to revoke your KPass to get a new one.",
             tr: "Devam ederseniz bağlı cüzdanınızdaki KPass'i iptal edeceksiniz. Yeni bir KPass almak için eskisini iptaletmeye gerek yok."

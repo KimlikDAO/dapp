@@ -84,7 +84,10 @@
 }
 
 /** @export {SağMenü} */
-#cuep {}
+#cuep {
+  margin: 0;
+  padding: 0;
+}
 
 /**
  * Bağlantı listesi
@@ -102,7 +105,7 @@
 }
 
 #cud>li,
-#cue>li,
+#cuep>li,
 .cuf>li {
   cursor: pointer;
   align-items: center;
@@ -119,7 +122,7 @@
 }
 
 #cud>li:hover,
-#cue>li:hover,
+#cuep>li:hover,
 .cuf>li:hover {
   background-color: #f2f2f2;
 }
