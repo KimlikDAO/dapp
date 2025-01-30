@@ -1,25 +1,10 @@
 html {
+  -webkit-text-size-adjust: 100%;
+  background: #fff;
+  color: #444;
   font-family: 'l', sans-serif;
   font-size: 11pt;
   font-weight: 400;
-}
-
-input {
-  font-family: 'l', sans-serif;
-}
-
-button {
-  color: #555;
-  font-family: 'l', sans-serif;
-  font-size: 11pt;
-  font-weight: 700;
-}
-
-html {
-  -webkit-text-size-adjust: 100%;
-  background-size: 8px 8px;
-  background: #fff;
-  color: #444;
   margin: 0;
   min-height: 100%;
   overflow-y: scroll;
@@ -30,88 +15,21 @@ body {
   color: #444;
 }
 
-.hide {
-  opacity: 0;
-  pointer-events: none;
-}
-
-.btn.lft {
-  margin-right: 1ex;
-}
-
-.act.btn {
-  background: #5256c9;
-  border: 1px solid #5256c9;
-  color: white;
-  opacity: 0.9;
-  transition: opacity 0.2s;
-}
-
-.act.btn:hover {
-  opacity: 1;
-}
-
-.info.btn {
-  background: none;
-  border: 1px solid #5256c9;
-  color: #5256c9;
-}
-
-.more.btn {
-  color: #3182CE;
-  border: 1px solid #3182CE;
-  background: none;
-}
-
-.dis.btn {
-  cursor: default;
-}
-
-/**
- * @name {More}
- */
-.more {}
-
-/**
- * Eylem düğmesi
- * @name {Act}
- */
-.act {}
-
-/**
- * Bilgi düğmesi
- * @name {Info}
- */
-.info {}
-
-/**
- * @name {Düğme}
- */
-.btn {
-  font-weight: 700;
-  color: #666;
-  background-color: #FAFBFC;
-  border: 1px solid rgba(27, 31, 35, 0.15);
-  touch-action: manipulation;
-  display: inline-block;
-  padding: 12px;
-  line-height: 1;
-  user-select: none;
-  border-radius: 8px;
+button {
   cursor: pointer;
-  margin: 0;
-  text-align: center;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: 700;
+  touch-action: manipulation;
+  user-select: none;
 }
 
-.btn.danger {
-  color: #fff;
-  background-color: #d9534f;
-  border-color: #d43f3a;
-  opacity: 0.9;
+button:disabled {
+  cursor: not-allowed;
 }
 
-.btn.danger:hover {
-  opacity: 1;
+input {
+  font-family: inherit;
 }
 
 a {
@@ -119,49 +37,88 @@ a {
   color: #444;
 }
 
-button:disabled {
-  background-color: #FAFBFC;
-  border-color: rgba(27, 31, 35, 0.15);
-  color: #959DA5;
+hr {
+  border: 0;
+  height: 0;
+  padding: 0;
+  margin: 3px 0;
+  border-bottom: 1px solid #f2f2f2;
+}
+
+.Gizle {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.Düğme.SolBoşluk {
+  margin-right: 1ex;
+}
+
+.Düğme.Eylem {
+  background: #5256c9;
+  border-color: #5256c9;
+  color: white;
+  opacity: 0.9;
+  transition: opacity 0.3s;
+}
+
+.Düğme.Eylem:hover {
+  opacity: 1;
+}
+
+.Düğme.Bilgi {
+  background: none;
+  border: 1px solid #5256c9;
+  color: #5256c9;
+}
+
+.Düğme.Mavi {
+  color: #3182CE;
+  border: 1px solid #3182CE;
+  background: none;
+}
+
+.Düğme.Kapalı {
   cursor: default;
 }
 
-button:active {
-  background-color: #EDEFF2;
-  box-shadow: rgba(225, 228, 232, 0.2) 0 1px 0 inset;
-  transition: none 0s;
-}
-
-button:focus {
-  outline: 1px transparent;
-}
-
-button {
-  background-color: #FAFBFC;
-  border-radius: 5px;
-  border: 1px solid rgba(27, 31, 35, 0.15);
-  box-shadow: rgba(27, 31, 35, 0.04) 0 1px 0, rgba(255, 255, 255, 0.25) 0 1px 0 inset;
+.Düğme {
+  background: none;
+  border-radius: 10px;
+  border: 1px solid #D1D5DB;
+  color: #666;
   cursor: pointer;
+  display: inline-block;
+  font-weight: 700;
   line-height: 1;
   margin: 0;
-  min-height: 45px;
+  padding: 12px;
+  text-align: center;
   touch-action: manipulation;
-  transition: background-color 0.3s;
   user-select: none;
+}
+
+.Düğme.Tehlike {
+  color: #fff;
+  background-color: #d9534f;
+  border-color: #d43f3a;
+  opacity: 0.9;
+}
+
+.Düğme.Tehlike:hover {
+  opacity: 1;
 }
 
 /**
  * Tema mavisi
- * @name {Mavi}
  */
-.oblu {
+.Mavi {
   color: #3182CE
 }
 
 /**
  * Tema moru
- * @name {Mor}
  */
-.oprp {
+.Mor {
   color: #5256c9;
 }

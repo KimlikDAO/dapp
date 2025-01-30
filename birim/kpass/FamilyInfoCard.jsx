@@ -1,6 +1,11 @@
 import Css from "./birim.css";
 import { setFieldsFrom } from "./util";
+import { css } from "/lib/kastro/stylesheet";
 import dom from "/lib/util/dom";
+
+const Ids = css`
+  /** @export */ #FamilyInfoCard {}
+`;
 
 /** @const {!Array<string>} */
 const LeftFields = ["annead", "babaad", "mhali"];
@@ -11,7 +16,7 @@ const FamilyInfoCard = () => (
   <div class={Css.BilgiKartı}>
     <div class={Css.BilgiKartıİçi}>
       <h7>{{ en: "FAMILY INFO", tr: "AİLE BİLGİLERİ" }}</h7>
-      <div class={Css.ÇiftSütun} id={Css.AileBilgileri}>
+      <div class={Css.ÇiftSütun} id={Ids.FamilyInfo}>
         <div>
           <div class={Css.Ad}>{{ en: "Mother's name", tr: "Anne adı" }}</div>
           <div>{{ en: "Marry", tr: "Ayşe" }}</div>
@@ -37,8 +42,10 @@ const FamilyInfoCard = () => (
  * @param {!did.KütükBilgileri} registryInfo
  */
 FamilyInfoCard.set = (registryInfo) => {
-  setFieldsFrom(dom.div(Css.BilgiKartıİçi).children[0].children, 1, LeftFields, registryInfo);
-  setFieldsFrom(dom.div(Css.BilgiKartıİçi).children[1].children, 1, RightFields, registryInfo);
+  /** @const {!HTMLDivElement} */
+  const div = dom.div(Ids.FamilyInfoCard);
+  setFieldsFrom(div.children[0].children, 1, LeftFields, registryInfo);
+  setFieldsFrom(div.children[1].children, 1, RightFields, registryInfo);
 };
 
 export default FamilyInfoCard;

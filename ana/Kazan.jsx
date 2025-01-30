@@ -1,12 +1,18 @@
-import AnaCss from "../sayfa.css";
-import Css from "./birim.css";
+import AnaCss from "./sayfa.css";
 import EliptikEğriler from "/birim/blog/eliptik-egriler/birim";
 import EliptikImza from "/birim/blog/eliptik-imza/birim";
 import OrtakCss from "/birim/ortakcss/birim.css";
 import { ExternalPage } from "/crate";
+import { css } from "/lib/kastro/stylesheet";
+
+const Css = css`
+  #İçerik {
+    padding: 20px;
+  }
+`;
 
 const Kazan = () => (
-  <div id={Css.Kök} class={AnaCss.Üçlü}>
+  <div class={AnaCss.Üçlü}>
     <Css />
     <div id={Css.İçerik}>
       <h2 class={OrtakCss.Mavi}>{{
@@ -23,7 +29,7 @@ const Kazan = () => (
           topla. Çok yakında!</>
       }}</span>
       <br />
-      <a href={ExternalPage.Blog} class={[OrtakCss.Düğme, OrtakCss.Info, "anust"]}>{{
+      <a href={ExternalPage.Blog} class={[OrtakCss.Düğme, OrtakCss.Bilgi, AnaCss.ÜstBoşluk]}>{{
         en: "Learn & earn (Soon!)",
         tr: "Öğren ve kazan (Yakında!)"
       }}</a>

@@ -1,14 +1,10 @@
-/**
- * Sergi bileşeni
- * @name {Kök}
- */
-#se {
+#Sergi {
   max-width: 550px;
   margin-left: 2px;
 }
 
 @media (max-width: 600px) {
-  #se {
+  #Sergi {
     width: 400px;
   }
 }
@@ -20,17 +16,12 @@ h3 {
   padding: 0;
 }
 
-/**
- * @name {KartSahnesi}
- */
-#sec {
+#KartSahnesi {
   overflow: hidden;
 }
 
-/**
- * @export {Kartlar}
- */
-#sem {
+/** @export */
+#Kartlar {
   display: flex;
   list-style: none;
   padding: 0;
@@ -41,10 +32,7 @@ h3 {
   will-change: transform;
 }
 
-/**
- * @name {Kart}
- */
-.sek {
+.Kart {
   font-size: 18px;
   font-weight: 400;
   height: 100%;
@@ -53,27 +41,19 @@ h3 {
   width: 25%;
 }
 
-/**
- * @export {Boncuklar}
- */
-#sen {
+/** @export */
+#Boncuklar {
   height: 20px;
   margin: 0 0 40px;
 }
 
-/**
- * @name {Boncuklu}
- */
-.seb {
+.Boncuklu {
   cursor: pointer;
   display: inline-block;
   padding: 10px 8px;
 }
 
-/**
- * @name {Boncuk}
- */
-.sei {
+.Boncuk {
   background-color: rgba(82, 86, 201, 0.2);
   border-radius: 5px;
   height: 10px;
@@ -81,10 +61,13 @@ h3 {
   width: 10px;
 }
 
-.sei:hover {
+.Boncuk:hover {
   background-color: rgba(82, 86, 201, 1);
 }
 
-.sei.sel {
+/** @export */
+.Seçili {}
+
+.Boncuk.Seçili {
   background-color: rgba(82, 86, 201, 0.9);
 }

@@ -1,44 +1,15 @@
 /**
- * Ana sayfaya özel başlık stili
- * @name {Başlık}
- */
-#baa {
-  align-items: center;
-  background-color: rgba(255, 255, 255, 0.95);
-  display: flex;
-  height: 80px;
-  justify-content: space-between;
-  position: sticky;
-  z-index: 20;
-}
-
-/**
- * Sağ üstteki eylem düğmesi
- * @export {EylemDüğmesi}
- */
-#bal {
-  align-items: center;
-  display: flex;
-  justify-content: center;
-  margin-left: 2px;
-  min-width: 10ex;
-  padding: 0 1em;
-}
-
-/**
  * Alt hero'ların açıklama metinleri
- * @name {Açıklama}
  */
-.anac {
+.Açıklama {
   font-size: 16px;
   line-height: 1.4;
 }
 
 /**
  * Üç sütunlu alt hero
- * @name {Üçlü}
  */
-.an3 {
+.Üçlü {
   display: grid;
   gap: 20px;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -48,44 +19,30 @@
 
 /**
  * Raporların sağ üstteki eylem düğmesi
- * @name {SağaYaslı}
  */
-.ansag {
+.SağaYaslı {
   text-align: right;
   padding: 0 20px;
 }
 
-/**
- * Ana sayfa ayraçları
- * @name {Ayraç}
- */
-.anhr {
+.Ayraç {
   margin: 100px 0;
 }
 
-.btn.anust {
+.ÜstBoşluk {
   margin-top: 30px;
 }
 
-@media (max-width: 1000px) {
-  #bal {
-    display: none;
-  }
-
-  /**
-   * @name {Kök}
-   */
-  #an {
-    margin: 0;
-  }
+#Kök {
+  margin: 0;
 }
 
 @media (min-width: 1000px) {
-  #an {
+  #Kök {
     margin: 0 20px;
   }
+}
 
-  #sa {
-    margin: 0 -20px;
-  }
+h2 {
+  font-size: 40px;
 }

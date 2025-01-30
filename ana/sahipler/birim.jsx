@@ -1,7 +1,7 @@
-import OkResmi from "../ok.svg";
 import AnaCss from "../sayfa.css";
 import Css from "./birim.css";
 import { ağResmi } from "/birim/ağlar/birim";
+import OkResmi from "/birim/ok.svg";
 import OrtakCss from "/birim/ortakcss/birim.jsx";
 import { Page } from "/crate";
 import { ChainId } from "/lib/crosschain/chains";
@@ -28,18 +28,20 @@ const Tablo = {
  * @return {Promise<string>}
  */
 const Balon = ({ chainId }) => (
-  <div class={[Css.Balon, chainId == ChainId.MinaMainnet ? "mina" : chainId.slice(1)]}>
+  <div class={[Css.Balon, Css[chainId == ChainId.MinaMainnet ? "mina" : chainId.slice(1)]]}>
     <Image src={ağResmi(chainId)} height={40} width={40} bundleHeight={64} bundleWidth={64} />
     <div>
       <div class={Css.BalonSayı}>{Tablo[chainId].holders}</div>
-      <span class={Css.BalonAd} data-en={`HOLDERS ON ${Tablo[chainId].ad}`}>{
-        Tablo[chainId].ad + Tablo[chainId].ek} KPASS</span>
+      <span class={Css.BalonAd}>{{
+        en: `HOLDERS ON ${Tablo[chainId].ad}`,
+        tr: `${Tablo[chainId].ad} ${Tablo[chainId].ek} KPASS`
+      }}</span>
     </div>
   </div>
 );
 
 const Sahipler = () => (
-  <div id={Css.Kök}>
+  <div id={Css.Sahipler}>
     <Css />
     <div id={Css.İçerik}>
       <div class={AnaCss.SağaYaslı}>
@@ -52,7 +54,7 @@ const Sahipler = () => (
           tr: `6 farklı zincirde ${Object.values(Tablo).reduce((sum, x) => sum + x.holders, 0)} KPass sahibi arasına katılın.`
         }}</span>
         <div id={Css.Eylem}>
-          <a href={Page.Al} id={Css.EylemDüğmesi} class={[OrtakCss.Düğme, "act"]}>{{
+          <a href={Page.Al} id={Css.EylemDüğmesi} class={[OrtakCss.Düğme, OrtakCss.Eylem]}>{{
             en: "Become a KPass holder",
             tr: "Sen de KPass sahibi ol"
           }} <OkResmi inline /></a>

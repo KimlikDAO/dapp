@@ -1,47 +1,58 @@
 import KPass from "kastro:../../kpass/cover.svg.jsx";
+import { url } from "/lib/kastro/image";
+import { css } from "/lib/kastro/stylesheet";
 
+const Css = css`
+  #Clip {}
+  #ShadowFilter {}
+  #Filter1 {}
+  #Filter2 {}
+  #Filter3 {}
+  #Gradient1 {}
+  #Gradient2 {}
+  #Gradient3 {}
+`;
+
+/**
+ * @param {{ piggyback: string }} props
+ * @return {Promise<string>}
+ */
 export default ({ piggyback }) => (
-  <svg viewBox="0 0 440 232" xmlns="http://www.w3.org/2000/svg">
+  <svg viewBox="0 0 440 232">
     <defs>
-      <clipPath id="bleia">
-        <rect width="250" height="250" rx="15" />
+      <clipPath id={Css.Clip}>
+        <rect width={250} height={250} rx={15} />
       </clipPath>
-      <filter id="bleib" x="-600" y="-360" width="1040" height="830" filterUnits="userSpaceOnUse">
+      <filter id={Css.Filter1} x="-600" y="-360" width="1040" height="830" filterUnits="userSpaceOnUse">
         <feGaussianBlur stdDeviation="30" />
       </filter>
-      <filter id="bleic" x="134" y="-525" width="690" height="1015" filterUnits="userSpaceOnUse">
+      <filter id={Css.Filter2} x="134" y="-525" width="690" height="1015" filterUnits="userSpaceOnUse">
         <feGaussianBlur stdDeviation="30" />
       </filter>
-      <filter id="bleid" x="-656" y="-400" width="1215" height="960" filterUnits="userSpaceOnUse">
+      <filter id={Css.Filter3} x="-656" y="-400" width="1215" height="960" filterUnits="userSpaceOnUse">
         <feGaussianBlur stdDeviation="18" />
       </filter>
-      <filter id="bleie" color-interpolation-filters="sRGB">
+      <filter id={Css.ShadowFilter} color-interpolation-filters="sRGB">
         <feDropShadow dx="5" dy="5" stdDeviation="3" flood-opacity="0.2" />
       </filter>
-      <radialGradient id="bleif" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse"
+      <radialGradient id={Css.Gradient1} cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse"
         gradientTransform="translate(426 92) rotate(-148) scale(650 550)">
         <stop offset="0.44" stop-color="#7D8AFA" />
         <stop offset="0.57" stop-color="#5698E2" />
         <stop offset="0.87" stop-color="#2A4DC1" />
       </radialGradient>
-      <radialGradient id="bleig" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse"
+      <radialGradient id={Css.Gradient2} cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse"
         gradientTransform="translate(688 -400) rotate(165) scale(1422 1200)">
         <stop offset="0.12" stop-color="#2A4DC1" />
         <stop offset="0.28" stop-color="#935BCA" />
         <stop offset="0.46" stop-color="#5698E2" />
       </radialGradient>
-      <linearGradient id="bleih" x1="-661" y1="81" x2="276" y2="-264" gradientUnits="userSpaceOnUse">
+      <linearGradient id={Css.Gradient3} x1="-661" y1="81" x2="276" y2="-264" gradientUnits="userSpaceOnUse">
         <stop stop-color="#A0A2B4" />
         <stop offset="0.2" stop-color="#CFD3F2" />
         <stop offset="0.44" stop-color="#5698E2" />
         <stop offset="0.5" stop-color="#2A4DC1" />
       </linearGradient>
-      <radialGradient id="tckrm" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse"
-        gradientTransform="translate(526.348 89.6089) rotate(-125.623) scale(441.78 373.984)">
-        <stop offset="0.447917" stop-color="#7D8AFA" />
-        <stop offset="0.572917" stop-color="#5698E2" />
-        <stop offset="0.869792" stop-color="#3c6aff" />
-      </radialGradient>
       <circle id="tcks0" cx="6.875" cy="6.875" r="6.875" />
       <path id="tcks1" d="M5,5c6-6,6-6,12,0s6,6,0,12s-6,6-12,0s-6-6,0-12Z" transform="scale(0.625)" />
       <rect id="tcks2" x="0.5" y="0.5" width="21" height="21" transform="scale(0.625)" />
@@ -55,31 +66,31 @@ export default ({ piggyback }) => (
       <path id="tcks8" d="M0 0a13.75 13.75 0 0 1 0 27.5z" />
     </defs>
     <rect width="440" height="230" fill="#6337BA" />
-    <circle cx="-280" cy="-230" r="630" fill="url(#bleif)" filter="url(#bleib)" />
-    <path style="mix-blend-mode:color-dodge" filter="url(#bleic)"
+    <circle cx="-280" cy="-230" r="630" fill={url(Css.Gradient1)} filter={url(Css.Filter1)} />
+    <path style="mix-blend-mode:color-dodge" filter={url(Css.Filter2)}
       d="M327.831 -405.479C405.215 -502.585 561.355 -477.571 694.73 -371.281C828.11 -264.991 741.93 315.294 664.547 412.4C587.163 509.506 385.179 -4.72531 251.801 -111.015C118.423 -217.305 250.446 -308.373 327.831 -405.479Z"
-      fill="url(#bleig)" />
-    <circle cx="-205" cy="115" style="mix-blend-mode:color-dodge" filter="url(#bleid)" fill="url(#bleih)" r="415" />
+      fill={url(Css.Gradient2)} />
+    <circle cx="-205" cy="115" style="mix-blend-mode:color-dodge" filter={url(Css.Filter3)} fill={url(Css.Gradient3)} r="415" />
 
-    <rect height="250" x="162" y="92" width="250" fill="#fff" rx="15" filter="url(#bleie)" />
-    <use href="#tcks5" x="390.125" y="100.125" fill="url(#bleig)" />
-    <use href="#tcks1" x="390.125" y="127.625" fill="url(#bleif)" />
-    <use href="#tcks6" x="390.125" y="141.375" fill="url(#bleif)" />
-    <use href="#tcks7" x="390.125" y="196.375" fill="url(#bleig)" />
+    <rect height="250" x="162" y="92" width="250" fill="#fff" rx="15" filter={url(Css.ShadowFilter)} />
+    <use href="#tcks5" x="390.125" y="100.125" fill={url(Css.Gradient2)} />
+    <use href="#tcks1" x="390.125" y="127.625" fill={url(Css.Gradient1)} />
+    <use href="#tcks6" x="390.125" y="141.375" fill={url(Css.Gradient1)} />
+    <use href="#tcks7" x="390.125" y="196.375" fill={url(Css.Gradient2)} />
 
-    <rect x="138" y="68" height="250" width="250" fill="#fff" rx="15" filter="url(#bleie)" />
-    <use href="#tcks0" x="366.125" y="76.125" fill="url(#bleih)" />
-    <use href="#tcks2" x="366.125" y="158.625" fill="url(#bleig)" />
+    <rect x="138" y="68" height="250" width="250" fill="#fff" rx="15" filter={url(Css.ShadowFilter)} />
+    <use href="#tcks0" x="366.125" y="76.125" fill={url(Css.Gradient3)} />
+    <use href="#tcks2" x="366.125" y="158.625" fill={url(Css.Gradient2)} />
     <use href="#tcks8" x="366.125" y="186.125" fill="#7D8AFA" />
 
-    <rect x="114" y="44" height="250" width="250" fill="#fff" rx="15" filter="url(#bleie)" />
+    <rect x="114" y="44" height="250" width="250" fill="#fff" rx="15" filter={url(Css.ShadowFilter)} />
     <use href="#tcks6" x="342.125" y="65.875" fill="#5698E2" />
     <use href="#tcks3" x="342.125" y="134.625" fill="#7D8AFA" />
     <use href="#tcks4" x="342.125" y="189.625" fill="#0aeeee" />
     <use href="#tcks4" x="342.125" y="203.375" fill="#84f0f0" />
 
-    <g transform="translate(90,20)" filter="url(#bleie)">
-      <KPass piggyback={piggyback} bundleName="KPASS.svg" clip-path="url(#bleia)" height="250" width="250" inSvg />
+    <g transform="translate(90,20)" filter={url(Css.ShadowFilter)}>
+      <KPass piggyback={piggyback} bundleName="KPASS.svg" clip-path={url(Css.Clip)} height={250} width={250} inSvg />
     </g>
   </svg>
 );

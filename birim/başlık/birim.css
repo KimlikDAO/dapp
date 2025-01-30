@@ -1,8 +1,7 @@
 /**
  * Başlık
- * @name {Kök}
  */
-#ba {
+#Başlık {
   align-items: center;
   display: flex;
   justify-content: space-between;
@@ -11,16 +10,12 @@
   width: 100%;
 }
 
-/**
- * @name {Logomark}
- */
-#bak {}
+#Logomark {}
 
 /**
  * Sol üsteekki KimlikDAO logo ve yazısı
- * @name {Logo}
  */
-#bag {
+#Logo {
   display: flex;
   align-items: center;
   font-size: 20pt;
@@ -34,23 +29,14 @@
  * Başlıktaki linkleri içeren div
  * @name {Linkler}
  */
-#baf {
+#Linkler {
   display: flex;
 }
 
 /**
  * Başlıktaki metin link
- * @name {Link}
  */
-.bae {
+.Link {
   padding: 10px;
   margin: auto 15px;
-}
-
-@media (max-width: 820px) {
-
-  .bae,
-  #di {
-    display: none;
-  }
 }

@@ -1,5 +1,7 @@
 import Css from "./birim.css";
 import KPass from "/birim/kpass/birim";
+import KPassCss from "/birim/kpass/birim.css";
+import { css } from "/lib/kastro/stylesheet";
 import dom from "/lib/util/dom";
 
 /** @const {!HTMLDivElement} */
@@ -15,40 +17,58 @@ const NftDüğmesi = dom.div(Css.NftDüğmesi);
 /** @const {!HTMLDivElement} */
 const Evet = dom.div(Css.Evet);
 
+const BileşikCss = css`
+  /** @export  */ .BüyükGöster {}
+  #${KPassCss.Kök}.BüyükGöster {
+    transform: translate(65px, 120px) scale(0.5);
+  }
+  #DüğmeliNft > #${KPassCss.Kök} {
+    font-size: 10pt;
+    height: 250px;
+    left: 15px;
+    position: absolute;
+    top: 45px;
+    width: 250px;
+  }
+  #DüğmeliNft .${KPassCss.BilgiKartı} {
+    width: 250px;
+    height: 250px;
+  }
+`;
+
 /**
  * @param {{ kpassli: boolean, noshow: boolean }=} props
  * @return {Promise<string>}
  */
-const Telefon = ({ kpassli = true, noshow }) => {
-  return (
-    <div id={Css.Kök} noshow={noshow}>
-      <Css />
-      <AnaEkran>
-        <div id={Css.Bakiye}>$1523.74</div>
-        <div id={Css.HesapAdı}>KimlikDAO</div>
-        <Adres>0xcCc0...0cCc</Adres>
-        <div id={Css.CüzdanSekmeler}>
-          <div id={Css.Tokenler}>{{ en: "Tokens", tr: "Tokenler" }}</div>
-          <div id={Css.Nftler}>{{ en: "NFTs", tr: "NFT’ler" }}</div>
-        </div>
-        <div id={Css.NftGaleri}>
-          <div class={Css.NftÖrnek} />
-        </div>
-      </AnaEkran >
-      <DüğmeliNft>
-        {kpassli && <KPass />}
-        <NftDüğmesi nodisplay>{{ en: "Hide", tr: "Gizle" }}</NftDüğmesi>
-      </DüğmeliNft>
-      <Kutu noshow>
-        <div id={Css.KutuMetni} />
-        <div id={Css.KutuDüğmeleri}>
-          <div id={Css.Hayır}>{{ en: "Cancel", tr: "Hayır" }}</div>
-          <Evet>{{ en: "Provide", tr: "Evet" }}</Evet>
-        </div>
-      </Kutu>
-    </div >
-  );
-}
+const Telefon = ({ kpassli = true, noshow }) => (
+  <div id={Css.Kök} noshow={noshow}>
+    <Css />
+    <BileşikCss />
+    <AnaEkran>
+      <div id={Css.Bakiye}>$1523.74</div>
+      <div id={Css.HesapAdı}>KimlikDAO</div>
+      <Adres>0xcCc0...0cCc</Adres>
+      <div id={Css.CüzdanSekmeler}>
+        <div id={Css.Tokenler}>{{ en: "Tokens", tr: "Tokenler" }}</div>
+        <div id={Css.Nftler}>{{ en: "NFTs", tr: "NFT’ler" }}</div>
+      </div>
+      <div id={Css.NftGaleri}>
+        <div class={Css.NftÖrnek} />
+      </div>
+    </AnaEkran >
+    <DüğmeliNft>
+      {kpassli && <KPass />}
+      <NftDüğmesi nodisplay>{{ en: "Hide", tr: "Gizle" }}</NftDüğmesi>
+    </DüğmeliNft>
+    <Kutu noshow>
+      <div id={Css.KutuMetni} />
+      <div id={Css.KutuDüğmeleri}>
+        <div id={Css.Hayır}>{{ en: "Cancel", tr: "Hayır" }}</div>
+        <Evet>{{ en: "Provide", tr: "Evet" }}</Evet>
+      </div>
+    </Kutu>
+  </div >
+);
 
 /**
  * @param {?string} adres Telefonda gösterilecek adres.
@@ -86,7 +106,6 @@ Telefon.kutuKapat = () => {
  */
 Telefon.nftGöster = (büyükGöster, bilgiYüzü) => {
   KPass.yüzGöster(bilgiYüzü);
-
   const yüzGöster = () => {
     KPass.yüzGöster(bilgiYüzü);
     NftDüğmesi.innerText = bilgiYüzü
@@ -102,16 +121,12 @@ Telefon.nftGöster = (büyükGöster, bilgiYüzü) => {
       yüzGöster();
     }
   }
-  KPass.Kök.classList.toggle(Css.BüyükGöster, !büyükGöster);
+  KPass.Kök.classList.toggle(BileşikCss.BüyükGöster, !büyükGöster);
   NftDüğmesi.classList.toggle(Css.Göster, büyükGöster);
 }
 
-/**
- * Telefon görselinde temsili nft'yi geri alır.
- */
-Telefon.nftGeriAl = () => {
-  KPass.Kök.classList.add("tex");
-  Telefon.nftGöster(true, false);
-}
+Telefon.nftGeriAl = () => { }
+
+Telefon.Css = Css;
 
 export default Telefon;

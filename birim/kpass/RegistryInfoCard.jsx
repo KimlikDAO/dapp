@@ -1,13 +1,18 @@
 import Css from "./birim.css";
 import { setFieldsFrom } from "./util";
 import dom from "/lib/util/dom";
+import { css } from "/lib/kastro/stylesheet";
+
+const Ids = css`
+  /** @export */ #RegistryInfoCard {}
+`;
 
 /** @const {!Array<string>} */
 const Fields = ["il", "ilçe", "mahalle", "tescil"];
 
 const RegistryInfoCard = () => (
   <div class={Css.BilgiKartı}>
-    <div class={Css.BilgiKartıİçi} id={Css.RegistryInfoCard}>
+    <div class={Css.BilgiKartıİçi} id={Ids.RegistryInfoCard}>
       <h7>{{ en: "REGISTRY INFO", tr: "KÜTÜK KAYIT BİLGİLERİ" }}</h7>
       <div class={Css.Ad}>{{ en: "City", tr: "İl" }}</div>
       <div>Ankara</div>
@@ -25,6 +30,6 @@ const RegistryInfoCard = () => (
  * @param {!did.KütükBilgileri} kütükBilgileri
  */
 RegistryInfoCard.set = (kütükBilgileri) => setFieldsFrom(
-  dom.div(Css.RegistryInfoCard).children, 2, Fields, kütükBilgileri);
+  dom.div(Ids.RegistryInfoCard).children, 2, Fields, kütükBilgileri);
 
 export default RegistryInfoCard;

@@ -7,7 +7,15 @@
       "/*": [
         "*"
       ]
-    }
+    },
+    "plugins": [
+      {
+        "name": "@styled/typescript-styled-plugin",
+        "tags": [
+          "css"
+        ]
+      }
+    ]
   },
   "exclude": [
     "node_modules",

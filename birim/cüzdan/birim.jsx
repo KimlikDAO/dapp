@@ -1,5 +1,13 @@
 import { AğBilgileri, ağResmi } from "../ağlar/birim";
-import { Bağlantı, BağlantıAdı, Bağlantılar, BoşBağlantı } from "./bağlantılar";
+import OrtakCss from "../ortakcss/birim";
+import {
+  Bağlantı,
+  BağlantıAdı,
+  Bağlantılar,
+  BoşBağlantı,
+  EvmBağlantıları,
+  MinaBağlantıları
+} from "./bağlantılar";
 import Css from "./birim.css";
 import QmarkResmi from "/birim/cüzdan/img/qmark.svg";
 import KopyalaResmi from "/birim/paste.svg";
@@ -25,10 +33,6 @@ const KIMLIKDAO_IPFS_URL = "//ipfs.kimlikdao.org";
 const AdresDüğmesi = dom.button(Css.AdresDüğmesi);
 /** @const {!HTMLButtonElement} */
 const AğDüğmesi = dom.button(Css.AğDüğmesi);
-/** @const {!HTMLDivElement} */
-const CüzdanAdresi = dom.div(Css.CüzdanAdresi);
-/** @const {!HTMLSpanElement} */
-const DebankLinki = dom.span(Css.DebankLinki);
 /** @const {!HTMLDivElement} */
 const Menü = dom.div(Css.Menü);
 /** @const {!HTMLDivElement} */
@@ -136,11 +140,10 @@ const adresDeğişti = (adresler) => {
     /** @const {?string} */
     const eskiAdres = Adres;
     Adres = adresler[0];
-    CüzdanAdresi.firstElementChild.innerText =
-      AdresDüğmesi.innerText = Adres.slice(0, 6) + "..." + Adres.slice(-4);
+    AdresDüğmesi.innerText = Profil.adresGir(Adres.slice(0, 6) + "..." + Adres.slice(-4));
     kpassDeğişti();
     if (!eskiAdres) {
-      dom.gösterGizle(DebankLinki, Ağ.startsWith(ChainGroup.EVM));
+      dom.gösterGizle(Profil.DebankLinki, Ağ.startsWith(ChainGroup.EVM));
       bağlantıSeçiciGizle();
       dom.göster(SağPanel);
     }
@@ -148,7 +151,7 @@ const adresDeğişti = (adresler) => {
   }
 }
 
-BoşBağlantı.connect(ChainId.x1, ağDeğişti, adresDeğişti);
+BoşBağlantı.connect(DefaultChain, ağDeğişti, adresDeğişti);
 
 /**
  * @param {ChainId} ağ
@@ -197,12 +200,12 @@ const bağlantıSeçiciGöster = () => {
   const satırlar = seçici.children;
   for (const satır of satırlar) {
     /** @const {BağlantıAdı} */
-    const bağlantıAdı = /** @type {BağlantıAdı} */(satır.id.slice(2))
+    const bağlantıAdı = /** @type {BağlantıAdı} */(satır.id.slice(Css.Cüzdan.length))
     /** @const {!Provider} */
     const bağlantı = Bağlantılar[bağlantıAdı];
     /** @const {boolean} */
     const varMı = bağlantı.initIfAvailable();
-    satır.classList.toggle("on", varMı);
+    satır.classList.toggle(Css.Açık, varMı);
     satır.onclick = varMı ? () => bağlantıSeçildi(bağlantıAdı, bağlantı) : null;
     /** @const {Element} */
     const düğmeMi = satır.lastElementChild;
@@ -236,6 +239,64 @@ const izinliyseBağla = () => {
     bağlantıSeçiciGöster();
 }
 
+const Profil = () => {
+  /** @const {!HTMLDivElement} */
+  Profil.AdresMetni = dom.div(Css.ProfilAdresMetni);
+  /** @const {!HTMLSpanElement} */
+  Profil.DebankLinki = dom.span(Css.DebankLinki);
+  /** @const {!HTMLSpanElement} */
+  const ExplorerLinki = dom.span(Css.ExplorerLinki);
+
+  const explorerAç = () => {
+    const adresEki = Ağ.startsWith("mi") ? "wallet" : "address";
+    const url = `//${AğBilgileri[Ağ].izleyici}/${adresEki}/${Adres}`;
+    window.open(url, "_blank");
+  }
+  return (
+    <div id={Css.Profil}>
+      <QmarkResmi id={Css.ProfilResmi} height={80} width={80} />
+      <div>
+        <Profil.AdresMetni
+          onClick={() => navigator.clipboard.writeText(/** @type {string} */(Adres))}>
+          <span>0xcCc...cCc</span><span><KopyalaResmi inline /></span>
+        </Profil.AdresMetni>
+        <Profil.DebankLinki
+          onClick={() => window.open("//debank.com/profile/" + Adres, "_blank")}
+        >DeBank</Profil.DebankLinki>
+        <ExplorerLinki onClick={explorerAç}>Explorer</ExplorerLinki>
+        <div id={Css.KPassDüğmesi}>{{ en: "MINT KPASS", tr: "KPASS AL" }}</div>
+      </div>
+    </div>
+  );
+}
+
+Profil.adresGir = (adres) => Profil.AdresMetni.firstElementChild.innerText = adres;
+
+/**
+ * @param {{
+ *   chains: !Array<ChainId>,
+ *   chainNotes: !Object<ChainId, I18nString>,
+ *   defaultChain: ChainId,
+ *   piggyback: string
+ * }=} props
+ * @return {Promise<string>}
+ */
+const AğListesi = ({ chains, chainNotes, defaultChain, piggyback }) => (
+  <ul id={Css.AğListesi}>
+    {chains.map((id) => (
+      <li id={Css.AğListesi + id} class={id == defaultChain ? "sel" : ""}>
+        {id == defaultChain
+          ? <span></span>
+          : <Image src={ağResmi(id)} width={32} height={32} bundleWidth={64} bundleHeight={64} piggyback={piggyback} />}
+        {" "}
+        {chainNotes[id]
+          ? <div>{AğBilgileri[id].ad}<div class={Css.AğNotu}>{chainNotes[id]}</div></div>
+          : AğBilgileri[id].ad}
+      </li>
+    ))}
+  </ul>
+);
+
 /**
  * @param {{
  *   DefaultChain: ChainId,
@@ -246,74 +307,42 @@ const izinliyseBağla = () => {
  * }=} props
  * @return {Promise<string>}
  */
-const Cüzdan = ({ DefaultChain: defaultChain, Chains: chains, ChainNotes: chainNotes, children, piggyback }) => {
+const Cüzdan = ({
+  DefaultChain: defaultChain,
+  Chains: chains,
+  ChainNotes: chainNotes,
+  children,
+  piggyback
+}) => {
   /** @const {!HTMLLIElement} */
   const seçiliAğ = dom.li(Css.AğListesi + DefaultChain);
   seçiliAğ.replaceChild(AğDüğmesi.firstElementChild.cloneNode(true),
     seçiliAğ.firstElementChild);
 
-  AdresDüğmesi.onclick = AğDüğmesi.onclick;
   Menü.onclick = (event) => {
-    /** @type {HTMLLIElement} */
+    /** @const {HTMLLIElement} */
     const maybeLi = /** @type {HTMLLIElement} */(event.target.closest("li"));
     if (maybeLi && maybeLi.id && maybeLi.id.startsWith(Css.AğListesi))
       ağSeçildi(/** @type {ChainId} */(maybeLi.id.slice(3)));
     event.stopPropagation();
   }
-  CüzdanAdresi.onclick = () => navigator.clipboard.writeText(/** @type {string} */(Adres));
-  dom.span(Css.ExplorerLinki).onclick = () => {
-    const adresEki = Ağ.startsWith("mi") ? "wallet" : "address";
-    const url = `//${AğBilgileri[Ağ].izleyici}/${adresEki}/${Adres}`;
-    window.open(url, "_blank");
-  }
-  DebankLinki.onclick = () => {
-    const url = "//debank.com/profile/" + Adres;
-    window.open(url, "_blank");
-  }
   dom.schedule(izinliyseBağla, 200);
 
   return (
-    <div id={Css.Kök}>
+    <div id={Css.Cüzdan}>
       <Css />
-      <AğDüğmesi controlsDropdown={Menü}>
+      <AğDüğmesi controlsDropdown={Menü} class={OrtakCss.Düğme}>
         <Image src={ağResmi(defaultChain)} height={32} width={32} inline />
       </AğDüğmesi>
-      <AdresDüğmesi onClick={AğDüğmesi.onclick}>{{
+      <AdresDüğmesi onClick={AğDüğmesi.onclick} class={OrtakCss.Düğme}>{{
         tr: "Cüzdan bağla", en: "Connect wallet"
       }}</AdresDüğmesi>
       <Menü nodisplay>
-        <ul id={Css.AğListesi}>
-          {chains.map((id) => (
-            <li id={Css.AğListesi + id} class={id == defaultChain ? "sel" : ""}>
-              {id == defaultChain
-                ? <span></span>
-                : <Image src={ağResmi(id)} width={32} height={32} bundleWidth={64} bundleHeight={64} piggyback={piggyback} />}
-              {" "}
-              {chainNotes[id]
-                ? <div>{AğBilgileri[id].ad}<div class={Css.AğNotu}>{chainNotes[id]}</div></div>
-                : AğBilgileri[id].ad}
-            </li>
-          ))}
-        </ul>
-        <ul id={Css.BağlantıListesi + ChainGroup.EVM} class={Css.BağlantıListesi}>
-          <Bağlantı idx={BağlantıAdı.Rabby} name="Rabby Wallet" />
-          <Bağlantı idx={BağlantıAdı.Core} name="Core" />
-          <Bağlantı idx={BağlantıAdı.MetaMask} name="Metamask" />
-        </ul>
-        <ul id={Css.BağlantıListesi + ChainGroup.MINA} class={Css.BağlantıListesi} nodisplay>
-          <Bağlantı idx={BağlantıAdı.Auro} name="Auro" />
-        </ul>
+        <AğListesi chains={chains} chainNotes={chainNotes} defaultChain={defaultChain} piggyback={piggyback} />
+        <EvmBağlantıları />
+        <MinaBağlantıları nodisplay />
         <SağPanel nodisplay>
-          <div id={Css.Profil}>
-            <QmarkResmi id={Css.ProfilResmi} height={80} width={80} />
-            <div>
-              <CüzdanAdresi>
-                <span>0xcCc...cCc</span><span id="cuadi"><KopyalaResmi inline /></span>
-              </CüzdanAdresi>
-              <DebankLinki>DeBank</DebankLinki> <span id={Css.ExplorerLinki}>Explorer</span>
-              <div id={Css.KPassDüğmesi}>{{ en: "MINT KPASS", tr: "KPASS AL" }}</div>
-            </div>
-          </div>
+          <Profil />
           <hr />
           {children}
         </SağPanel>

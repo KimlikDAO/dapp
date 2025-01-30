@@ -29,10 +29,13 @@ const Kaydol = ({ id }) => {
   }
 
   /**
+   * Email bültene kayıt isteğini gönderir ve sonucu görüntülemek için
+   * {@link güncelle()}'yi çağırır.
+   *
    * @param {Event=} event
    */
   const yolla = (event) => {
-    if (event) event.preventDefault();
+    event?.preventDefault();
     KaydolMetni ||= düğme.innerText;
     düğme.innerText = KaydolMetni + " ⏳";
     fetch("//bulten.kimlikdao.org/ekle", {
@@ -55,7 +58,7 @@ const Kaydol = ({ id }) => {
         placeholder={{ en: "Your email address", tr: "E-posta adresiniz" }}
       />
       <button
-        class={[OrtakCss.Düğme, OrtakCss.Act, Css.KaydolDüğmesi]}
+        class={[OrtakCss.Düğme, OrtakCss.Eylem, Css.KaydolDüğmesi]}
         type="submit"
       >{{
         en: "Subscribe", tr: "Kaydol"

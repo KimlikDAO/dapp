@@ -14,8 +14,7 @@ import dom from "/lib/util/dom";
 const AğBilgisi = {};
 
 /**
- * @const
- * @type {!Object<ChainId, AğBilgisi>}
+ * @const {!Object<ChainId, AğBilgisi>}
  */
 const AğBilgileri = {
   [ChainId.x1]: {
@@ -54,13 +53,6 @@ const AğBilgileri = {
     tokenKodu: "BNB",
     tokenEki: dom.i18n({ tr: ["’den", "’ye"], en: [] }),
     rpcUrl: "bsc-dataseed3.binance.org"
-  },
-  [ChainId.xfa]: {
-    ad: "Fantom",
-    izleyici: "ftmscan.com",
-    tokenKodu: "FTM",
-    tokenEki: dom.i18n({ tr: ["’dan", "’a"], en: [] }),
-    rpcUrl: "rpc.ankr.com/fantom"
   },
   [ChainId.MinaMainnet]: {
     ad: "Mina",

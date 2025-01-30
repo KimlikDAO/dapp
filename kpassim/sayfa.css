@@ -1,22 +1,32 @@
-#in {
+/** @name {Kök} */
+#vk {
   margin: 5em 0;
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
 }
 
-#intckt {
+/**
+ * @name {KPassKutusu}
+ */
+#vkk {
   position: relative;
   width: 280px;
   height: 390px;
   perspective: 1000px;
 }
 
+/** @export {DiscordDüğmesi} */
+#vkdc {}
+
 .inl {
   text-decoration: none;
   border-bottom: 1px dotted;
 }
 
+/**
+ * @name {KPassYokPaneli}
+ */
 #inn {
   width: 280px;
   height: 280px;
@@ -28,6 +38,9 @@
   flex-direction: column;
 }
 
+/**
+ * @export {AçDüğmesi}
+ */
 #intcktb {
   align-items: center;
   background: #fff;

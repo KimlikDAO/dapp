@@ -4,25 +4,29 @@ import OrtakCss from "/birim/ortakcss/birim";
 import { ExternalPage } from "/crate";
 import { i18n } from "/lib/util/i18n";
 
+const KaydolKutusu = () => (
+  <div id={Css.KaydolKutusu}>
+    <div id={Css.Logo}>
+      <svg height={30} width={39}>
+        <use href={`#${OrtakCss.Başlık.Logomark}`} height={30} x={-4} />
+      </svg>KimlikDAO
+    </div>
+    <span id={Css.BrandMark}>{{
+      en: "Wallet-login to all on/off-ramps with a single account you truly own.",
+      tr: "Bir kez KPass al, tüm on/off-ramp’leri cüzdanınla hesap açmadan kullan."
+    }}</span>
+    <div id={Css.KaydolMetni}>{{
+      en: "SUBSCRIBE TO THE KIMLIKDAO NEWSLETTER",
+      tr: "KİMLİKDAO BÜLTEN'E KAYDOLUN"
+    }}</div>
+    <Kaydol id={Css.Kaydol} />
+  </div>
+);
+
 const Altdizin = () => (
   <div id={Css.Kök}>
     <Css />
-    <div id={Css.KaydolKutusu}>
-      <div id={Css.Logo}>
-        <svg height={30} width={39}>
-          <use href={`#${OrtakCss.Başlık.Logomark}`} height={30} x={-4} />
-        </svg>KimlikDAO
-      </div>
-      <span id={Css.BrandMark}>{{
-        en: "Wallet-login to all on/off-ramps with a single account you truly own.",
-        tr: "Bir kez KPass al, tüm on/off-ramp’leri cüzdanınla hesap açmadan kullan."
-      }}</span>
-      <div id={Css.KaydolMetni}>{{
-        en: "SUBSCRIBE TO THE KIMLIKDAO NEWSLETTER",
-        tr: "KİMLİKDAO BÜLTEN'E KAYDOLUN"
-      }}</div>
-      <Kaydol id={Css.Kaydol} />
-    </div>
+    <KaydolKutusu />
     <div class={Css.Sütun}>
       <b>{{ en: "COMMUNITY", tr: "TOPLULUK" }}</b>
       <a href={ExternalPage.X}>X</a>

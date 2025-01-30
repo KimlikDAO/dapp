@@ -1,18 +1,30 @@
 import BlogCss from "../birim.css";
 import Yazar from "../Yazar";
 import BannerResmi from "./banner.png";
+import { css } from "/lib/kastro/stylesheet";
+
+const Css = css`
+  .Mavi {
+    color: #3182ce;
+    background-color: #eaf3fa
+  }
+  .Mavi:hover {
+    background-color: #d6e8f7
+  }
+`;
 
 /**
  * @param {{
  *   href: string,
  *   piggyback: string,
- *   loading: boolean
+ *   loading: string
  * }=} props
  * @return {Promise<string>}
  */
 const Jan25 = ({ href, piggyback, loading }) => (
   <a href={href} class={BlogCss.Preview}>
     <BlogCss />
+    <Css />
     <div>
       <BannerResmi piggyback={piggyback} class={BlogCss.PreviewBanner} width="100%"
         loading={loading}
@@ -29,7 +41,7 @@ const Jan25 = ({ href, piggyback, loading }) => (
       }}</div>
     </div>
     <div class={BlogCss.PreviewFooter}>
-      <button class={[BlogCss.OkuDüğmesi, BlogCss.Mavi]}>{{
+      <button class={[BlogCss.OkuDüğmesi, Css.Mavi]}>{{
         en: "Read", tr: "Oku"
       }}</button>
     </div>

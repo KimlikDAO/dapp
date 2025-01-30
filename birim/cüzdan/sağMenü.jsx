@@ -5,13 +5,22 @@ import DeğiştirResmi from "/birim/cüzdan/img/external-link.svg";
 import İptalResmi from "/birim/cüzdan/img/iptal.svg";
 import VoteResmi from "/birim/cüzdan/img/vote.svg";
 import dom from "/lib/util/dom";
+import { css } from "/lib/kastro/stylesheet";
+
+const Css = css`
+  /** @export */
+  #Kök {
+    margin: 0;
+    padding: 0;
+  }
+`;
 
 /**
  * @return {Promise<string>} 
  */
 const SağMenü = () => {
   /** @const {HTMLUListElement} */
-  const Kök = dom.ul(CüzdanCss.SağMenü);
+  const Kök = dom.ul(Css.Kök);
   /** @const {!NodeList<!Element>} */
   const children = Kök.children;
   children[0].onclick = () => window.location.href = "//join.kimlikdao.org/#sa-ambassador1";

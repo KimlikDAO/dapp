@@ -1,7 +1,4 @@
-/**
- * @name {Girdi}
- */
-.kayi {
+.Girdi {
   border-color: #3182CE;
   border-radius: 8px 0 0 8px;
   border-style: solid;
@@ -11,12 +8,7 @@
   padding: 0 10px;
 }
 
-/**
- * @export {KaydolDüğmesi}
- */
-.kayb {}
-
-.act.btn.kayb {
-  box-shadow: none;
-  border-radius: 0 8px 8px 0;
+.KaydolDüğmesi {
+  border-radius: 0 10px 10px 0;
+  min-height: 45px;
 }

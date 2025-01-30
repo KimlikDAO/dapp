@@ -1,42 +1,27 @@
-/**
- * @name {Root}
- */
-#al {
+#Al {
   margin: 40px auto;
   max-width: 1200px;
   display: flex;
 }
 
-/**
- * @name {LeftColumn}
- */
-#als {
+#LeftColumn {
   width: 300px;
   flex-shrink: 0;
 }
 
-/**
- * @name {RightColumn}
- */
-#alr {
+#RightColumn {
   flex: 1;
   min-width: 0;
 }
 
-/**
- * @name {NavList}
- */
-#alnl {
+#NavList {
   font-weight: 700;
   list-style: none;
   padding: 0;
   margin: 50px 0;
 }
 
-/**
- * @name {NavItem}
- */
-.aln {
+#NavItem {
   color: #444;
   padding: 12px 16px;
   cursor: pointer;
@@ -44,19 +29,16 @@
   margin: 4px 0;
 }
 
-.aln:hover {
+#NavItem:hover {
   background: rgba(0, 0, 0, 0.05);
 }
 
-.aln.active {
+#NavItem.active {
   background: rgba(0, 0, 0, 0.1);
   font-weight: 500;
 }
 
-/**
- * @name {Gallery}
- */
-#alis {
+#Gallery {
   background: white;
   border-radius: 25px;
   padding: 24px;
@@ -65,17 +47,11 @@
   margin: 0 20px;
 }
 
-/**
- * @name {GalleryTitle}
- */
-.alist {
+#GalleryTitle {
   margin: 0 0 15px 7px;
 }
 
-/**
- * @name {GallerySearch}
- */
-#aliss {
+#GallerySearch {
   width: 100%;
   padding: 12px 16px;
   border: 1px solid #eee;
@@ -84,18 +60,15 @@
 }
 
 /**
- * @export {GalleryGrid}
+ * @export
  */
-#alisg {
+#GalleryGrid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   gap: 16px;
 }
 
-/**
- * @name {InfoSource}
- */
-.alisi {
+.InfoSource {
   aspect-ratio: 1.4;
   background: #f5f5f5;
   border-radius: 8px;
@@ -105,6 +78,6 @@
   cursor: pointer;
 }
 
-.alisi:hover {
+.InfoSource:hover {
   background: #eee;
 }

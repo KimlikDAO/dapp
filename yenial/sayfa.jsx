@@ -1,4 +1,4 @@
-import Script from "kastro:./sayfa.js";
+import Script from "kastro:./sayfa.jsx";
 import Css from "./sayfa.css";
 import Başlık from "/birim/başlık/birim";
 import Favicon from "/birim/icon.svg";
@@ -9,9 +9,6 @@ import OrtakCss from "/birim/ortakcss/birim";
 import { ChainId } from "/lib/crosschain/chains";
 import dom from "/lib/util/dom";
 import { I18nString, LangCode } from "/lib/util/i18n";
-
-/** @const {!HTMLDivElement} */
-export const GalleryGrid = dom.div(Css.GalleryGrid);
 
 /** @const {!Array<ChainId>} */
 const Chains = [
@@ -31,6 +28,9 @@ const ChainNotes = {
 
 /** @const {ChainId} */
 const DefaultChain = ChainId.xa4b1;
+
+/** @const {!HTMLDivElement} */
+const GalleryGrid = dom.div(Css.GalleryGrid);
 
 const Gallery = () => (
   <div id={Css.Gallery}>

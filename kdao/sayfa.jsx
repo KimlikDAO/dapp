@@ -1,4 +1,4 @@
-import Script from "kastro:./sayfa.js";
+import Script from "kastro:./sayfa.jsx";
 import Css from "./sayfa.css";
 import Başlık from "/birim/başlık/birim";
 import Favicon from "/birim/icon.svg";
@@ -6,6 +6,7 @@ import Lato400 from "/birim/lato/l400.ttf";
 import Lato700 from "/birim/lato/l700.ttf";
 import OrtakCss from "/birim/ortakcss/birim";
 import { ChainId } from "/lib/crosschain/chains";
+import { I18nString, LangCode } from "/lib/util/i18n";
 
 /** @const {!Array<ChainId>} */
 const Chains = [
@@ -20,6 +21,10 @@ const ChainNotes = {
 /** @const {ChainId} */
 const DefaultChain = ChainId.x1;
 
+/**
+ * @param {{ Lang: LangCode }=} props
+ * @return {Promise<string>}
+ */
 const KDAO = ({ Lang }) => (
   <html lang={Lang}>
     <head>
@@ -37,7 +42,7 @@ const KDAO = ({ Lang }) => (
       <Başlık href="/" DefaultChain={DefaultChain} Chains={Chains} ChainNotes={ChainNotes} />
       <div id={Css.Hero}>Graph</div>
     </body>
-  </html >
+  </html>
 );
 
 export default KDAO;

@@ -3,10 +3,19 @@ import Sergi from "./Sergi";
 import OrtakCss from "/birim/ortakcss/birim.css";
 import Telefon from "/birim/telefon/birim.jsx";
 import { Page } from "/crate";
+import { css } from "/lib/kastro/stylesheet";
+
+const BileşikCss = css`
+  @media (max-width: 1000px) {
+    #Hero { border-radius: 0; }
+    #${Telefon.Css.Kök} { display: none; }
+  }
+`
 
 const Hero = () => (
-  <div id={Css.Kök}>
+  <div id={Css.Hero}>
     <Css />
+    <BileşikCss />
     <div id={Css.İçerik}>
       <div id={Css.Sol}>
         <h1>{{
@@ -15,7 +24,7 @@ const Hero = () => (
         }}</h1>
         <Sergi />
         <div id={Css.Düğmeler}>
-          <a href={Page.Al} id={Css.AlDüğmesi} class={[OrtakCss.Düğme, "act"]}>{{
+          <a href={Page.Al} id={Css.AlDüğmesi} class={[OrtakCss.Düğme, OrtakCss.Eylem]}>{{
             tr: "Hemen KPass al | ₺29",
             en: "Mint your KPass | $1"
           }}</a>

@@ -95,11 +95,11 @@ KPass.SolOk = SolOk;
 /**
  * @param {boolean} bilgiYüzü
  */
-KPass.yüzGöster = (bilgiYüzü) => Kök.classList.toggle("flp", bilgiYüzü);
+KPass.yüzGöster = (bilgiYüzü) => Kök.classList.toggle(Css.Ters, bilgiYüzü);
 
 /**
  * @return {boolean}
  */
-KPass.çevir = () => Kök.classList.toggle("flp");
+KPass.çevir = () => Kök.classList.toggle(Css.Ters);
 
 export default KPass;

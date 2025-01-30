@@ -1,14 +1,14 @@
-/**
- * @name {Kök}
- */
-#sa {
+#Sahipler {
   background: linear-gradient(90deg, #F8F8F8 -9.07%, rgba(132, 199, 255, 0.2) 100%, rgba(255, 255, 255, 0.8) 69.02%);
 }
 
-/**
- * @name {İçerik}
- */
-#sai {
+@media (max-width: 1000px) {
+  #Sahipler {
+    margin: 0 -20px;
+  }
+}
+
+#İçerik {
   display: flex;
   flex-direction: row-reverse;
   flex-wrap: wrap;
@@ -19,9 +19,8 @@
 
 /**
  * Ağları gösteren balonlar
- * @name {Balonlar}
  */
-#sak {
+#Balonlar {
   margin: 0 auto;
   padding: 35px 0 50px;
   display: grid;
@@ -32,9 +31,8 @@
 
 /**
  * Eylem düğmesi
- * @name {EylemDüğmesi}
  */
-#sal {
+#EylemDüğmesi {
   align-items: center;
   display: flex;
   justify-content: center;
@@ -44,23 +42,17 @@
 
 /**
  * Eylem bölümü
- * @name {Eylem}
  */
-#saz {
+#Eylem {
   display: flex;
   justify-content: right;
   margin-top: 30px;
 }
 
-h2 {
-  font-size: 40px;
-}
-
 /**
  * Ağları gösteren balonlar
- * @name {Balon}
  */
-.sac {
+.Balon {
   display: flex;
   height: 74px;
   width: 210px;
@@ -72,50 +64,47 @@ h2 {
 
 /**
  * KPass sahipleri sayısı
- * @name {BalonSayı}
  */
-.sau {
+.BalonSayı {
   font-weight: 700;
   font-size: 20px;
 }
 
 /**
  * Ağ adı
- * @name {BalonAd}
  */
-.saa {
+.BalonAd {
   font-size: 12px;
 }
 
-.sac.x1 {
+.Balon.x1 {
   background-color: #F1EBFF;
 }
 
-.sac.x38 {
+.Balon.x38 {
   background-color: #FFC3C3;
 }
 
-.sac.mina {
+.Balon.mina {
   background-color: #B0FFDE;
 }
 
-.sac.xa4b1 {
+.Balon.xa4b1 {
   background-color: #FEEDFA;
 }
 
-.sac.xa86a {
+.Balon.xa86a {
   background-color: #D7AEFF;
 }
 
-.sac.x89 {
+.Balon.x89 {
   background-color: #C6FFCB;
 }
 
 /**
  * Başlık altı metin
- * @name {Metin}
  */
-.sat {
+.Metin {
   display: inline-block;
   max-width: 375px;
 }
@@ -131,39 +120,40 @@ h2 {
 }
 
 @media (min-width: 800px) {
-  .sac.x89 {
+
+  .Balon.x89 {
     position: relative;
     left: 60px;
     top: 20px;
     animation: doner 5s linear infinite;
   }
 
-  .sac.xa86a {
+  .Balon.xa86a {
     position: relative;
     left: 40px;
     top: 20px;
     animation: doner 5.4s linear infinite;
   }
 
-  .sac.xa4b1 {
+  .Balon.xa4b1 {
     position: relative;
     top: 20px;
     animation: doner 4.8s linear infinite reverse;
   }
 
-  .sac.mina {
+  .Balon.mina {
     position: relative;
     left: 10px;
     animation: doner 5.2s linear infinite;
   }
 
-  .sac.x38 {
+  .Balon.x38 {
     position: relative;
     left: -40px;
     animation: doner 5.3s linear infinite reverse;
   }
 
-  .sac.x1 {
+  .Balon.x1 {
     animation: doner 4.4s linear infinite;
   }
 }

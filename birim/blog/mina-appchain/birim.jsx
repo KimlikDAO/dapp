@@ -1,31 +1,42 @@
+import BlogCss from "../birim.css";
+import RemainingBar from "../RemainingBar";
 import Yazar from "../Yazar";
 import Banner from "./banner.png";
-import Css from "./birim.css";
 import { AğBilgileri } from "/birim/ağlar/birim";
-import BlogCss from "/birim/blog/birim.css";
 import MINA from "/birim/paralar/MINA.png";
 import { ChainId } from "/lib/crosschain/chains";
-import dom from "/lib/util/dom";
+import { css } from "/lib/kastro/stylesheet";
 
-/** @const {!HTMLSpanElement} */
-const RemainingBar = dom.span(Css.RemainingBar);
+const Css = css`
+  .${RemainingBar.Css.Container}.MINA {
+    border: 2px solid #979bed
+  }
+  .${RemainingBar.Css.Bar}.MINA {
+    background-color: #f5f5fd;
+  }
+  /** @export */ #MINA {}
+  .Turuncu {
+    color: #ff603b;
+    background-color: #ffdfd8
+  }
+`;
+
 /** @const {string} */
 const ZkAppAddress = "B62qmuv9skuJS8564ZptVbp9NmMR5a1wjMaFDEUFcmBciZuekQJZ4gD";
+/** @const {number} */
+const TOTAL = 10_000_000_000_000;
 
 /**
  * @param {{ href: string, piggyback: string }=} props
  * @return {Promise<string>}
  */
 const MinaAppchain = ({ href, piggyback }) => {
-  fetch(`https://${AğBilgileri[ChainId.MinaTestnet].rpcUrl}/accounts/${ZkAppAddress}`)
+  fetch(`https://${AğBilgileri[ChainId.MinaMainnet].rpcUrl}/accounts/${ZkAppAddress}`)
     .then((res) => res.json())
-    .then((data) => {
-      /** @const {number} */
-      const kalan = +data["account"]["balance"]["total"] | 0;
-      RemainingBar.innerText = kalan;
-      RemainingBar.parentElement.previousElementSibling.style.width =
-        (kalan * 180) / 5000 + "px";
-    });
+    .then((data) =>
+      RemainingBar.setRemaining(Css.MINA, +data["account"]["balance"]["total"] | 0, TOTAL)
+    );
+
   return (
     <a href={href} class={BlogCss.Preview}>
       <BlogCss />
@@ -47,13 +58,9 @@ const MinaAppchain = ({ href, piggyback }) => {
           en: "Read",
           tr: "Oku"
         }}</button>
-        <div class={[BlogCss.ProgressContainer, "mina"]}>
-          <div class={[BlogCss.ProgressIndicator, "mina"]} style="width:180px"></div>
-          <div class={[BlogCss.ProgressText, "mina"]}>
-            <MINA width={22} height={22} />{" "}
-            <RemainingBar data-en="5,000">5.000</RemainingBar>/{{ en: "5,000", tr: "5.000" }} MINA
-          </div>
-        </div>
+        <RemainingBar id={Css.MINA} className={Css.MINA} maximum={TOTAL} ticker="MINA">
+          <MINA inline width={22} height={22} />
+        </RemainingBar>
       </div>
     </a>
   );

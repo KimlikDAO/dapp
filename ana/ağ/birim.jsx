@@ -12,41 +12,45 @@ import { keccak256 } from "/lib/crypto/sha3";
  * }=} props
  * @return {Promise<string>}
  */
-const Node = ({ idx }) => (
-  <div class={[Css.Düğümİmza, `ag${idx}`]}>
-    <div class={[Css.DüğümNokta, `ag${idx}n`]}></div>{
-      `0x${keccak256(idx).slice(0, 8)}...${keccak256(idx).slice(8, 16)}`
-    }
-  </div>
-);
+const Node = ({ idx }) => {
+  const kısaAd = (addr) => `0x${addr.slice(0, 8)}...${addr.slice(8, 16)}`;
+  return (
+    <div class={[Css.Düğümİmza, Css[idx]]}>
+      <div class={[Css.DüğümNokta, Css[`${idx}n`]]}></div>{kısaAd(keccak256(idx))}
+    </div>
+  );
+}
 
 /** @const {!Object<string, !Array<string>>} */
 const NODES = {
-  kd: ["0x299A3490c8De309D855221468167aAD6C44c59E0", "node.kimlikdao.org", "9266ec", "4A00E0"],
-  yb: ["0x86f6B34A26705E6a22B8e2EC5ED0cC5aB3f6F828", "yenibank.org", "83b4e2", "3182CE", "üst"],
-  td: ["0x77c60E68158De0bC70260DFd1201be9445EfFc07", "timedogankoy.com", "edc7c7", "E5AFAF"],
-  yl: ["0xE3581636Df37f1eBfFbdFE22F8719F57c555d4f7", "yenilira.org", "#bbe7d5", "9EDDC3", "üst"],
-  di: ["0x4F1DBED3c377646c89B4F8864E0b41806f2B79fd", "dobbyinu.com", "#fe94f4", "FE66EF"],
-  k3: ["0xc855dB548A6feB1f34AcAE6531c84261008ea55A", "kopru.xyz", "#b06ceb", "8E2DE2"],
-  ls: ["0x384bF113dcdF3e7084C1AE2Bb97918c3Bf15A6d2", "lstcm.co", "666", "111"],
+  KDAON: ["0x299A3490c8De309D855221468167aAD6C44c59E0", "node.kimlikdao.org", "9266ec", "4A00E0"],
+  YeniB: ["0x86f6B34A26705E6a22B8e2EC5ED0cC5aB3f6F828", "yenibank.org", "83b4e2", "3182CE", "üst"],
+  TimeD: ["0x77c60E68158De0bC70260DFd1201be9445EfFc07", "timedogankoy.com", "edc7c7", "E5AFAF"],
+  YenLi: ["0xE3581636Df37f1eBfFbdFE22F8719F57c555d4f7", "yenilira.org", "#bbe7d5", "9EDDC3", "üst"],
+  UBINU: ["0x4F1DBED3c377646c89B4F8864E0b41806f2B79fd", "dobbyinu.com", "#fe94f4", "FE66EF"],
+  Kopru: ["0xc855dB548A6feB1f34AcAE6531c84261008ea55A", "kopru.xyz", "#b06ceb", "8E2DE2"],
+  LSTCM: ["0x384bF113dcdF3e7084C1AE2Bb97918c3Bf15A6d2", "lstcm.co", "666", "111"],
 };
-
-/**
- * @param {string} renk
- * @return {string} Başında # bulunan renk.
- */
-const h = (renk) => (renk.startsWith("#") ? renk : "#" + renk).toUpperCase();
 
 /**
  * @param {{ width: number }=} props
  * @return {Promise<string>}
  */
 const Grafik = ({ width }) => {
+  /**
+   * @param {string} renk
+   * @return {string} Başında # bulunan renk.
+   */
+  const h = (renk) => (renk.startsWith("#") ? renk : "#" + renk).toUpperCase();
+  /** @const {!Array<string>} */
   const keys = Object.keys(NODES);
   /** @const {number} */
   const n = keys.length;
+  /** @const {number} */
   const cx = width / 2;
+  /** @const {number} */
   const cy = cx;
+  /** @const {number} */
   const r = cx - 80;
 
   return (
@@ -56,8 +60,8 @@ const Grafik = ({ width }) => {
           d="M3.33 47.5C0.65 42.859 0.65 37.141 3.33 32.5L17.17 8.53C19.85 3.89 24.8 1 30.16 1.03H57.84C63.2 1 68.15 3.89 70.83 8.53L84.67 32.5C87.35 37.141 87.3494 42.859 84.67 47.5L70.83 71.47C68.15 76.11 63.2 78.97 57.84 78.97H30.16C24.8 78.97 19.85 76.11 17.17 71.47L3.33 47.5Z"
           stroke-width={2} shape-rendering="geometricPrecision" />
       </defs>
-      <text class={Css.AğSvgText} x={cx} y={cy - 30}>{{ en: "The KimlikDAO", tr: "KimlikDAO" }}</text>
-      <text class={Css.AğSvgText} x={cx} y={cy + 7}>{{ en: "Network", tr: "Ağı" }}</text>
+      <text class={Css.GrafikMetin} x={cx} y={cy - 30}>{{ en: "The KimlikDAO", tr: "KimlikDAO" }}</text>
+      <text class={Css.GrafikMetin} x={cx} y={cy + 7}>{{ en: "Network", tr: "Ağı" }}</text>
       {keys.map((key, i) => {
         const x = Math.round(cx + r * Math.sin((Math.PI * 2 * i) / n));
         const y = Math.round(cy - r * Math.cos((Math.PI * 2 * i) / n));
@@ -71,6 +75,29 @@ const Grafik = ({ width }) => {
   );
 }
 
+const KPassTemsili = () => (
+  <div id={Css.KPassTemsili}>
+    <div class={KPassCss.BilgiKartıİçi}>
+      <div class={KPassCss.Ad}>{{ tr: "Doğum yeri", en: "City of birth" }}</div>
+      <div>{{ tr: "İstanbul", en: "Palo Alto, CA" }}</div>
+      <div class={KPassCss.Ad}>{{ tr: "Cinsiyet", en: "Gender" }}</div>
+      <div>{{ tr: "K", en: "F" }}</div>
+    </div>
+    <svg height={24} width={24} class={KPassCss.Logo}>
+      <use href={`#${OrtakCss.Başlık.Logomark}`} width={24} height={24} />
+    </svg>
+    <div class={KPassCss.Nav}>
+      <button class={[KPassCss.Düğme, KPassCss.SolDüğme]}>
+        <KPass.SolOk />
+      </button>
+      1 / 5
+      <button class={[KPassCss.Düğme, KPassCss.SağDüğme]}>
+        <KPass.SağOk />
+      </button>
+    </div>
+  </div>
+);
+
 const Ağ = () => (
   <div id={Css.Kök} class={AnaCss.Üçlü}>
     <Css />
@@ -83,32 +110,13 @@ const Ağ = () => (
         en: "The contents of each KPass are verified and digitally signed by at least seven independent nodes in the KimlikDAO network, all while fully preserving your privacy.",
         tr: "KPass’ler birbirinden bağımsız en az 7 KimlikDAO ağı düğümünün onay ve dijital imzası ile üretilebilir. Onay aşamasında veri gizliliğiniz tamamıyla korunur."
       }}</div>
-      <a href={ExternalPage.GitHub + "/kimlikdao-node"} target="_blank" rel="noreferrer" class={[OrtakCss.Düğme, OrtakCss.Info, "anust"]}>{{
+      <a href={ExternalPage.GitHub + "/kimlikdao-node"} target="_blank" rel="noreferrer" class={[OrtakCss.Düğme, OrtakCss.Bilgi, AnaCss.ÜstBoşluk]}>{{
         en: "Learn about KimlikDAO nodes",
         tr: "KimlikDAO düğümü detayları"
       }}</a>
     </div>
     <div id={Css.OrtaSütun}>
-      <div id={Css.KPass}>
-        <div class={KPassCss.BilgiKartıİçi}>
-          <div class={KPassCss.Ad}>{{ tr: "Doğum yeri", en: "City of birth" }}</div>
-          <div>{{ tr: "İstanbul", en: "Palo Alto, CA" }}</div>
-          <div class={KPassCss.Ad}>{{ tr: "Cinsiyet", en: "Gender" }}</div>
-          <div>{{ tr: "K", en: "F" }}</div>
-        </div>
-        <svg height={24} width={24} class={KPassCss.Logo}>
-          <use href={`#${OrtakCss.Başlık.Logomark}`} width={24} height={24} />
-        </svg>
-        <div class={KPassCss.Nav}>
-          <button class={[KPassCss.Düğme, KPassCss.SolDüğme]}>
-            <KPass.SolOk />
-          </button>
-          1 / 5
-          <button class={[KPassCss.Düğme, KPassCss.SağDüğme]}>
-            <KPass.SağOk />
-          </button>
-        </div>
-      </div>
+      <KPassTemsili />
       {Object.keys(NODES).map((key) => <Node idx={key} />)}
     </div>
     <Grafik width={500} />

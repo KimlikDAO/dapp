@@ -1,8 +1,14 @@
 import Harfler from "./harfler";
 import ŞekilKod from "./şekilkod";
+import { css } from "/lib/kastro/stylesheet";
+
+const Ids = css`
+  /** @domNamspace {KPass} */
+  #Root {}  
+`;
 
 const Cover = () => (
-  <svg id="kpk" width="280" height="280" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg"
+  <svg id={Ids.Root} width={280} height={280} viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg"
     xmlns:svg="http://www.w3.org/2000/svg">
     <defs>
       <linearGradient id="kpkp" x1="50%" x2="57%" y1="0%" y2="100%">

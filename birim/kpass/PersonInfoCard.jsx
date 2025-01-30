@@ -1,13 +1,18 @@
 import Css from "./birim.css";
 import { setFieldsFrom } from "./util";
+import { css } from "/lib/kastro/stylesheet";
 import dom from "/lib/util/dom";
+
+const Ids = css`
+  /** @export */ #PersonInfoCard {}
+`;
 
 /** @const {!Array<string>} */
 const Fields = ["localIdNumber", "first", "last", "dateOfBirth", "cityOfBirth", "gender"];
 
 const PersonInfoCard = () => (
   <div class={Css.BilgiKartı}>
-    <div class={Css.BilgiKartıİçi}>
+    <div class={Css.BilgiKartıİçi} id={Ids.PersonInfoCard}>
       <div class={Css.Ad}>{{ en: "SSN", tr: "TCKN" }}</div>
       <div>{{ en: "555-55-5555", tr: "22345678902" }}</div>
       <div class={Css.Ad}>{{ en: "First name", tr: "Ad" }}</div>
@@ -28,6 +33,6 @@ const PersonInfoCard = () => (
  * @param {!did.PersonInfo} personInfo
  */
 PersonInfoCard.set = (personInfo) => setFieldsFrom(
-  dom.div(Css.BilgiKartıİçi).children, 1, Fields, personInfo);
+  dom.div(Ids.PersonInfoCard).children, 1, Fields, personInfo);
 
 export default PersonInfoCard;

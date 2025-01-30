@@ -1,8 +1,5 @@
-/**
- * Cüzdan
- * @name {Kök}
- */
-#cu {
+/** @export */
+#Cüzdan {
   display: flex;
   align-items: center;
   position: relative;
@@ -10,31 +7,32 @@
 
 /**
  * Ağ düğmesi
- * @export {AğDüğmesi}
+ * @export
  */
-#cuc {
-  min-width: 48px;
-  border-radius: 8px 0 0 8px;
-  padding-top: 4px;
+#AğDüğmesi {
+  border-radius: 10px 0 0 10px;
+  height: 45px;
+  padding: 5px 7px;
 }
 
 /**
  * Adres düğmesi
- * @export {AdresDüğmesi}
+ * @export
  */
-#cua {
+#AdresDüğmesi {
+  min-height: 45px;
   margin-right: 10px;
   white-space: nowrap;
   width: 10em;
   border-left: 0;
-  border-radius: 0 8px 8px 0;
+  border-radius: 0 10px 10px 0;
 }
 
 /**
  * Cüzdan dropdownı
- * @export {Menü}
+ * @export
  */
-#cub {
+#Menü {
   background-color: #fff;
   border-radius: 10px;
   box-shadow: 0px 1px 20px rgba(0, 0, 0, 0.2);
@@ -50,7 +48,7 @@
 }
 
 @media (max-width: 1350px) {
-  #cub {
+  #Menü {
     left: auto;
     right: 10px;
   }
@@ -58,9 +56,9 @@
 
 /**
  * Ağ listesi
- * @export {AğListesi}
+ * @export
  */
-#cud {
+#AğListesi {
   cursor: pointer;
   list-style: none;
   margin: 0;
@@ -70,10 +68,12 @@
 }
 
 /**
- * Cüzdan sağ paneli
- * @export {SağPanel}
+ * Cüzdan sağ paneli, bağlantı seçili değilse bağlantıları görüntüler,
+ * seçiliyse profili görüntüler.
+ *
+ * @export
  */
-#cue {
+#SağPanel {
   list-style: none;
   margin: 0;
   padding: 0;
@@ -83,17 +83,11 @@
   right: 0;
 }
 
-/** @export {SağMenü} */
-#cuep {
-  margin: 0;
-  padding: 0;
-}
-
 /**
  * Bağlantı listesi
- * @export {BağlantıListesi}
+ * @export
  */
-.cuf {
+#BağlantıListesi {
   cursor: pointer;
   list-style: none;
   margin: 0;
@@ -104,9 +98,9 @@
   width: 210px;
 }
 
-#cud>li,
-#cuep>li,
-.cuf>li {
+#AğListesi>li,
+#SağMenü>li,
+#BağlantıListesi>li {
   cursor: pointer;
   align-items: center;
   border-radius: 8px;
@@ -117,25 +111,24 @@
   padding: 6px 12px;
 }
 
-.cuf>li {
+#BağlantıListesi>li {
   position: relative;
 }
 
-#cud>li:hover,
-#cuep>li:hover,
-.cuf>li:hover {
+#AğListesi>li:hover,
+#SağMenü>li:hover,
+#BağlantıListesi>li:hover {
   background-color: #f2f2f2;
 }
 
-#cud>li.sel {
+#BağlantıListesi>li.sel {
   background-color: #eee;
 }
 
 /**
- * Profil
- * @name {Profil}
+ * Profil kutusu
  */
-#cueh {
+#Profil {
   display: flex;
   height: 90px;
   padding: 8px;
@@ -143,9 +136,9 @@
 
 /**
  * Profil resmi
- * @export {ProfilResmi}
+ * @export
  */
-#cutc {
+#ProfilResmi {
   cursor: pointer;
   margin-right: 8px;
   background: #fff;
@@ -154,9 +147,9 @@
 
 /**
  * Adres metni
- * @export {CüzdanAdresi}
+ * @export
  */
-#cuad {
+#ProfilAdresMetni {
   color: #666;
   cursor: pointer;
   font-size: 10pt;
@@ -165,20 +158,20 @@
   margin-top: 5px;
 }
 
-#cuadi {
+#ProfilAdresMetni>span {
   margin-left: 5px;
 }
 
-#cuadi:active {
+#ProfilAdresMetni>span:active {
   position: relative;
   top: 1px;
 }
 
 /**
  * Debank linki
- * @export {DebankLinki}
+ * @export
  */
-#cude {
+#DebankLinki {
   cursor: pointer;
   font-size: 9pt;
   color: #666;
@@ -186,31 +179,25 @@
 
 /**
  * Explorer linki
- * @export {ExplorerLinki}
+ * @export
  */
-#cuex {
+#ExplorerLinki {
   cursor: pointer;
   font-size: 9pt;
   color: #666;
 }
 
-hr {
-  border: 0;
-  height: 0;
-  padding: 0;
-  margin: 3px 0;
-  border-bottom: 1px solid #f2f2f2;
-}
+/** @export */
+.Açık {}
 
-li.on>.cust {
+li.Açık>.CüzdanIşığı {
   background: green;
 }
 
 /**
  * Cüzdan ışığı
- * @name {CüzdanIşığı}
  */
-.cust {
+.CüzdanIşığı {
   width: 6px;
   height: 6px;
   border-radius: 3px;
@@ -220,8 +207,8 @@ li.on>.cust {
   left: 42px;
 }
 
-#cuin,
-.cui {
+#KPassDüğmesi,
+.Cüzdanİndir {
   background: #f2f2f2;
   border-radius: 10px;
   border: 1px solid #ddd;
@@ -236,26 +223,25 @@ li.on>.cust {
 
 /**
  * KPass eylem düğmesi
- * @export {KPassDüğmesi}
+ * @export
  */
-#cuin {
+#KPassDüğmesi {
   margin-top: 20px;
 }
 
 /**
  * Cüzdan indir düğmesi
- * @export {Cüzdanİndir}
+ * @export
  */
-.cui {
+.Cüzdanİndir {
   position: absolute;
   right: 7px;
 }
 
 /**
  * Ağ notu metni
- * @name {AğNotu}
  */
-.cuo {
+.AğNotu {
   color: #6337ba;
   font-size: 9pt;
 }
