@@ -7,60 +7,54 @@ on:
     branches: ["ana", "prod"]
 
 jobs:
-  birimler-derle:
-    name: Birimleri derle
+  compile-components:
+    name: Compile individual components
     strategy:
       fail-fast: true
 
     runs-on: macos-latest
     steps:
-      - name: Repoyu al
+      - name: Get the source code
         uses: actions/checkout@v3
         with:
           submodules: true
 
-      - name: Bun kur
+      - name: Install Bun
         uses: oven-sh/setup-bun@v2
 
-      - name: npm depleri kur
+      - name: Install npm dependencies
         run: bun i
 
-      - name: "`cüzdan` birimini derle"
-        run: bun lib/kdjs/kdjs.js birim/cüzdan/birim.jsx --globals '{"GEN":false,"DefaultChain":"0x1","Chains":["0x1","0xa4b1"],"Lang":"tr"}'
+      - name: Compile `LangPicker` component
+        run: bun lib/kdjs/kdjs.js components/langPicker/LangPicker.jsx --globals '{"GEN":false,"Route":{"en":"mint","tr":"al"},"Lang":"en"}'
 
-      - name: "`dil` birimini derle"
-        run: bun lib/kdjs/kdjs.js birim/dil/birim.jsx --globals '{"GEN":false,"Route":{"en":"mint","tr":"al"},"Lang":"en"}'
-
-      - name: "`kpass` birimini derle"
-        run: bun lib/kdjs/kdjs.js birim/kpass/birim.jsx --globals '{"GEN":false,"Lang":"en"}'
+      - name: Compile `KPass` component
+        run: bun lib/kdjs/kdjs.js components/kpass/KPass.jsx --globals '{"GEN":false,"Lang":"en"}'
       
-      - name: "ana sayfayı derle"
-        run: bun lib/kdjs/kdjs.js ana/sayfa.jsx --globals '{"GEN":false,"Route":{"en":"mint","tr":"al"},"DefaultChain":"0x1","Chains":["0x1","0xa4b1"],"Lang":"tr"}'
+      - name: Compile `Landing` page
+        run: bun lib/kdjs/kdjs.js landing/page.jsx --globals '{"GEN":false,"Route":{"en":"mint","tr":"al"},"DefaultChain":"0x1","Chains":["0x1","0xa4b1"],"Lang":"tr"}'
 
-      - name: "yenial sayfayı derle"
-        run: bun lib/kdjs/kdjs.js yenial/sayfa.jsx --globals '{"GEN":false,"Route":{"en":"mint","tr":"al"},"DefaultChain":"0x1","Chains":["0x1","0xa4b1"],"Lang":"tr"}'
-
-  dappi-derle:
+  compile-dapp:
     if: false # Temporarily disabled
-    name: dApp'ı derle
+    name: Compile the dApp
     runs-on: macos-latest
     steps:
-      - name: Repoyu al
+      - name: Get the source code
         uses: actions/checkout@v3
         with:
           submodules: true
 
-      - name: Bun kur
+      - name: Install Bun
         uses: oven-sh/setup-bun@v2
 
-      - name: npm depleri al
+      - name: Install npm dependencies
         run: bun i
 
-      - name: brew depleri kur
+      - name: Install brew dependencies
         run: brew install pngcrush brotli zopfli woff2 webp librsvg
 
-      - name: pip depleri kur
+      - name: Install pip dependencies
         run: pip install fonttools
 
-      - name: dApp'ı derle
+      - name: Compile the dApp
         run: bun run build

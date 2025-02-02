@@ -8,7 +8,7 @@ import {
   KiminKutusu,
   KimKutusu
 } from "./sayfa.jsx";
-import { Cüzdan } from "/birim/başlık/birim";
+import { Cüzdan } from "/components/başlık/birim";
 import KPass from "/lib/ethereum/KPass";
 import dom from "/lib/util/dom";
 

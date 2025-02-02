@@ -12,9 +12,9 @@ import {
   KPassYok,
   SilDüğmesi
 } from "./sayfa.jsx";
-import Cüzdan from "/birim/cüzdan/birim";
-import "/birim/dil/birim";
-import Kpass from "/birim/kpass/birim";
+import Cüzdan from "/components/cüzdan/birim";
+import "/components/dil/birim";
+import Kpass from "../components/kpass/KPass";
 import {
   eşikKutusuGöster,
   imeceİptalKutusuGöster,

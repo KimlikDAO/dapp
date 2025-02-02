@@ -1,0 +1,73 @@
+#Footer {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 auto;
+  max-width: 1200px;
+  padding: 70px 0 40px;
+}
+
+.Column {
+  margin: 7px 40px 0;
+}
+
+.Column>b {
+  color: #061C3D;
+}
+
+.Column>a {
+  display: block;
+  margin: 15px 0;
+  color: #666;
+}
+
+@media (max-width: 700px) {
+  #SubscribeBox {
+    display: none;
+  }
+}
+
+/**
+ * Alt dizin kaydol kutusu
+ */
+#SubscribeBox {
+  padding: 0 20px;
+}
+
+/**
+ * Alt dizin logo
+ */
+#Logo {
+  display: flex;
+  align-items: center;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+/**
+ * Brand mark metni
+ */
+#BrandMark {
+  margin-top: 20px;
+  display: inline-block;
+  max-width: 320px;
+  color: #666;
+  line-height: 1.5;
+}
+
+/**
+ * Kaydol metni
+ */
+#SubscribeText {
+  margin: 50px 0 12px;
+  font-weight: 700;
+  font-size: 13px;
+}
+
+/**
+ * Kaydol birimi
+ * @export
+ */
+#Subscribe {
+  width: 330px;
+  display: flex;
+}

@@ -1,0 +1,245 @@
+/** @export */
+#Cüzdan {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+/**
+ * Ağ düğmesi
+ * @export
+ */
+#AğDüğmesi {
+  border-radius: 10px 0 0 10px;
+  height: 45px;
+  padding: 5px 7px;
+}
+
+/**
+ * Adres düğmesi
+ * @export
+ */
+#AdresDüğmesi {
+  min-height: 45px;
+  margin-right: 10px;
+  white-space: nowrap;
+  width: 10em;
+  border-left: 0;
+  border-radius: 0 10px 10px 0;
+}
+
+/**
+ * Cüzdan dropdownı
+ * @export
+ */
+#Menü {
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0px 1px 20px rgba(0, 0, 0, 0.2);
+  display: flex;
+  left: -121px;
+  min-height: 349px;
+  outline: 0;
+  position: absolute;
+  top: 53px;
+  transition: opacity 0.2s;
+  width: 380px;
+  z-index: 20;
+}
+
+@media (max-width: 1350px) {
+  #Menü {
+    left: auto;
+    right: 10px;
+  }
+}
+
+/**
+ * List of chains the wallet widget supports
+ * @export
+ */
+#ChainList {
+  cursor: pointer;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  width: 168px;
+  border-right: 1px solid #f2f2f2;
+}
+
+/**
+ * Cüzdan sağ paneli, bağlantı seçili değilse bağlantıları görüntüler,
+ * seçiliyse profili görüntüler.
+ *
+ * @export
+ */
+#SağPanel {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  width: 210px;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+
+/**
+ * Bağlantı listesi
+ * @export
+ */
+.MenüListesi {
+  cursor: pointer;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 210px;
+}
+
+#AğListesi>li,
+.MenüListesi>li {
+  cursor: pointer;
+  align-items: center;
+  border-radius: 8px;
+  display: flex;
+  height: 45px;
+  justify-content: left;
+  margin: 1px;
+  padding: 6px 12px;
+}
+
+.BağlantıListesi>li {
+  position: relative;
+}
+
+#AğListesi>li:hover,
+.MenüListesi>li:hover {
+  background-color: #f2f2f2;
+}
+
+.MenüListesi>li.sel {
+  background-color: #eee;
+}
+
+/**
+ * Profil kutusu
+ */
+#Profil {
+  display: flex;
+  height: 90px;
+  padding: 8px;
+}
+
+/**
+ * Profil resmi
+ * @export
+ */
+#ProfilResmi {
+  cursor: pointer;
+  margin-right: 8px;
+  background: #fff;
+  border: 1px solid rgba(200, 200, 200, 0.5);
+}
+
+/**
+ * Adres metni
+ * @export
+ */
+#ProfilAdresMetni {
+  color: #666;
+  cursor: pointer;
+  font-size: 10pt;
+  font-weight: 700;
+  line-height: 0.4;
+  margin-top: 5px;
+}
+
+#ProfilAdresMetni>span {
+  margin-left: 5px;
+}
+
+#ProfilAdresMetni>span:active {
+  position: relative;
+  top: 1px;
+}
+
+/**
+ * Debank linki
+ * @export
+ */
+#DebankLinki {
+  cursor: pointer;
+  font-size: 9pt;
+  color: #666;
+}
+
+/**
+ * Explorer linki
+ * @export
+ */
+#ExplorerLinki {
+  cursor: pointer;
+  font-size: 9pt;
+  color: #666;
+}
+
+/** @export */
+.Açık {}
+
+li.Açık>.CüzdanIşığı {
+  background: green;
+}
+
+/**
+ * Cüzdan ışığı
+ */
+.CüzdanIşığı {
+  width: 6px;
+  height: 6px;
+  border-radius: 3px;
+  background: rgb(241, 29, 29);
+  position: absolute;
+  bottom: 14px;
+  left: 42px;
+}
+
+#KPassDüğmesi,
+.Cüzdanİndir {
+  background: #f2f2f2;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  color: #6337ba;
+  cursor: pointer;
+  font-size: 9pt;
+  font-weight: 700;
+  padding: 5px 2px;
+  text-align: center;
+  text-wrap: nowrap;
+}
+
+/**
+ * KPass eylem düğmesi
+ * @export
+ */
+#KPassDüğmesi {
+  margin-top: 20px;
+}
+
+/**
+ * Cüzdan indir düğmesi
+ * @export
+ */
+.Cüzdanİndir {
+  position: absolute;
+  right: 7px;
+}
+
+/**
+ * Ağ notu metni
+ */
+.AğNotu {
+  color: #6337ba;
+  font-size: 9pt;
+}

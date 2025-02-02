@@ -2,8 +2,8 @@
  * @fileoverview Oyla sayfası giriş noktası
  * @author KimlikDAO
  */
-import "/birim/cüzdan/birim";
-import "/birim/dil/birim";
+import "/components/cüzdan/birim";
+import "/components/dil/birim";
 import dom from "/lib/util/dom";
 
 let SeçilmişÖneriId;

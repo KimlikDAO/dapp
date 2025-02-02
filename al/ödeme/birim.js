@@ -1,7 +1,7 @@
 import { Kök } from "./birim.jsx";
-import { AğBilgileri, AğBilgisi } from "/birim/ağlar/birim";
-import Cüzdan from "/birim/cüzdan/birim";
-import Telefon from "/birim/telefon/birim";
+import { AğBilgileri, AğBilgisi } from "../../components/chains/chains.js";
+import Cüzdan from "/components/cüzdan/birim";
+import Phone from "../../components/phone/Phone.jsx";
 import { ChainGroup, ChainId } from "/lib/crosschain/chains";
 import KPass from "/lib/ethereum/KPass";
 import { whenMined } from "/lib/ethereum/transaction";
@@ -221,7 +221,7 @@ const öde = (cidSözü, adresAğırlığı, eşik) => {
             .then(([/** @type {string} */ cid, _]) =>
               KPass.createWithRevokersWithTokenPayment(ağ, adres, cid, eşik, adresAğırlığı, para)))
         .then((txHash) => {
-          Telefon.nftGeriAl();
+          Phone.nftGeriAl();
           const provider = /** @type {!eth.Provider} */(Cüzdan.bağlantı().provider);
           whenMined(provider, txHash, zincireYazılınca);
         });

@@ -1,0 +1,54 @@
+import Css from "./LangPicker.css";
+import EnFlag from "./en.svg";
+import TrFlag from "./tr.svg";
+import HeaderCss from "/components/header/Header.css";
+import { HostUrl } from "/crate";
+import dom from "/lib/util/dom";
+import { I18nString, LangCode } from "/lib/util/i18n";
+
+/** @define {I18nString} */
+const Route = { tr: "tr", en: "en" };
+/** @const {!HTMLAnchorElement} */
+const LangButton = dom.a(Css.LangButton);
+/** @const {!HTMLUListElement} */
+const LangDropdown = dom.ul(Css.LangDropdown);
+
+/**
+ * @param {Event} event 
+ */
+const langChanged = (event) => {
+  /** @const {!Element} */
+  const targetElem = /** @type {!Element} */(event.target);
+  /** @const {!HTMLLIElement} */
+  const li = /** @type {!HTMLLIElement} */(targetElem.closest("li"));
+
+  /** @const {LangCode} */
+  const newLang = /** @type {LangCode} */(li.id.slice(Css.LangPicker.length));
+  if (newLang != dom.Lang) {
+    document.cookie = `l=${newLang};path=/;domain=.${HostUrl.slice(8)};SameSite=Strict;max-age=${1e6}`;
+    window.location.href = Route[newLang] + window.location.hash;
+  }
+};
+
+const LangPicker = () => (
+  <div id={Css.LangPicker}>
+    <Css />
+    <LangButton
+      controlsDropdown={LangDropdown}
+      class={HeaderCss.Link} href="javascript:">{{ en: "EN", tr: "TR" }}
+    </LangButton>
+    <LangDropdown nodisplay onClick={langChanged}>
+      <li id={Css.LangPicker + LangCode.EN}>
+        <EnFlag width={16} height={16} /> English
+      </li>
+      <li id={Css.LangPicker + LangCode.TR}>
+        <TrFlag width={16} height={16} /> Türkçe
+      </li>
+    </LangDropdown>
+  </div>
+);
+
+/** @enum {string} */
+LangPicker.Css = Css;
+
+export default LangPicker;

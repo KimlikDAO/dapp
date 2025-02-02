@@ -1,10 +1,10 @@
 import Script from "kastro:./sayfa.js";
 import Css from "./sayfa.css";
-import Başlık from "/birim/başlık/birim.jsx";
-import Favicon from "/birim/icon.svg";
-import Lato400 from "/birim/lato/l400.ttf";
-import Lato700 from "/birim/lato/l700.ttf";
-import OrtakCss from "/birim/ortakcss/birim.jsx";
+import Başlık from "/components/başlık/birim.jsx";
+import Favicon from "/components/icon.svg";
+import Lato400 from "/components/lato/l400.ttf";
+import Lato700 from "/components/lato/l700.ttf";
+import OrtakCss from "/components/ortakcss/birim.jsx";
 import { ChainId } from "/lib/crosschain/chains";
 import dom from "/lib/util/dom";
 

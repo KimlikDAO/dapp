@@ -1,16 +1,16 @@
 import Script from "kastro:./sayfa.js";
 import OkResmi from "./dropdownok.svg";
 import Css from "./sayfa.css";
-import Başlık from "/birim/başlık/birim.jsx";
-import Favicon from "/birim/icon.svg";
-import Lato400 from "/birim/lato/l400.ttf";
-import Lato700 from "/birim/lato/l700.ttf";
-import OrtakCss from "/birim/ortakcss/birim.jsx";
-import AvaxResmi from "/birim/paralar/AVAX.svg";
-import EthResmi from "/birim/paralar/ETH.svg";
-import TrybResmi from "/birim/paralar/TRYB.svg";
-import UsdcResmi from "/birim/paralar/USDC.svg";
-import UsdtResmi from "/birim/paralar/USDT.svg";
+import Başlık from "/components/başlık/birim.jsx";
+import Favicon from "/components/icon.svg";
+import Lato400 from "/components/lato/l400.ttf";
+import Lato700 from "/components/lato/l700.ttf";
+import OrtakCss from "/components/ortakcss/birim.jsx";
+import AvaxResmi from "/components/paralar/AVAX.svg";
+import EthResmi from "/components/paralar/ETH.svg";
+import TrybResmi from "/components/paralar/TRYB.svg";
+import UsdcResmi from "/components/paralar/USDC.svg";
+import UsdtResmi from "/components/paralar/USDT.svg";
 import { ChainId } from "/lib/crosschain/chains";
 
 /** @const {!Array<ChainId>} */

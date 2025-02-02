@@ -5,9 +5,9 @@ import { BağlaDüğmesi } from "./sayfa.jsx";
 import İmeceİptal from "/al/imeceİptal/birim";
 import Tanışma from "/al/tanışma/birim";
 import { öde } from "/al/ödeme/birim";
-import { Cüzdan } from "/birim/başlık/birim";
-import Kpass from "/birim/kpass/birim";
-import Telefon from "/birim/telefon/birim";
+import { Cüzdan } from "/components/başlık/birim";
+import Kpass from "../components/kpass/KPass.jsx";
+import Phone from "../components/phone/Phone.jsx";
 import { ChainGroup } from "/lib/crosschain/chains";
 import { checkVerifiableIDs, toUnlockableNFT } from "/lib/did/KPass";
 import { VerificationKeys, metadataAndSections, userPrompt } from "/lib/did/KPassMetadata";
@@ -34,7 +34,7 @@ const kpassYarat = (adres, açıkKPass) => {
 
   /** @const {string} */
   const telefonMetni = userPrompt(["personInfo"]);
-  Telefon.kutuGöster(telefonMetni.slice(0, dom.Lang == LangCode.TR ? 25 : 35) +
+  Phone.kutuGöster(telefonMetni.slice(0, dom.Lang == LangCode.TR ? 25 : 35) +
     telefonMetni.slice(35, dom.Lang == LangCode.TR ? 161 : 193), dom.i18n({ tr: "İmzala", en: "Sign" }));
 
   /** @const {!Promise<!did.DecryptedSections>} */
@@ -51,7 +51,7 @@ const kpassYarat = (adres, açıkKPass) => {
         Cüzdan.bağlantı(),
         adres)
     }).then((/** @type {!eth.ERC721Unlockable} */ unlockableNFT) => {
-      Telefon.kutuKapat();
+      Phone.kutuKapat();
       şifreleDüğmesi.innerText = dom.i18n({ tr: "KPass’inizi şifreledik ✓", en: "We encrypted your KPass ✓" });
       şifreleDüğmesi.classList.remove("act");
       Kpass.yüzGöster(false);
@@ -80,7 +80,7 @@ const bağlaAdımı = () => {
   BağlaDüğmesi.onclick = Cüzdan.aç;
 
   Cüzdan.adresDeğişince((adres) => {
-    Telefon.adresGir(adres);
+    Phone.adresGir(adres);
     if (!adres) return;
     BağlaDüğmesi.innerText = dom.i18n({ tr: "Cüzdan bağlandı ✓", en: "Wallet connected ✓" });
     BağlaDüğmesi.classList.remove("act");

@@ -1,11 +1,11 @@
 import Script from "kastro:./sayfa.jsx";
+import KPass from "../components/kpass/KPass";
 import Css from "./sayfa.css";
-import Başlık from "/birim/başlık/birim";
-import Favicon from "/birim/icon.svg";
-import KPass from "/birim/kpass/birim.jsx";
-import Lato400 from "/birim/lato/l400.ttf";
-import Lato700 from "/birim/lato/l700.ttf";
-import OrtakCss from "/birim/ortakcss/birim";
+import Header from "/components/header/Header";
+import Favicon from "/components/icon.svg";
+import Lato400 from "/components/lato/l400.ttf";
+import Lato700 from "/components/lato/l700.ttf";
+import SharedCss from "/components/ortakcss/birim";
 import { ChainId } from "/lib/crosschain/chains";
 import dom from "/lib/util/dom";
 import { I18nString, LangCode } from "/lib/util/i18n";
@@ -75,7 +75,7 @@ const Welcome = () =>
       en: "Here is your KPass. You can click on the regenerate button to customize its appearance. For now it contains no data and it's not written on chain. Let's add some data into it.",
       tr: "İşte KPass'iniz. Görünümünü özelleştirmek için yeniden oluştur düğmesini kullanabilirsiniz. Şu anda içinde veri yok ve zincire yazılmamış. Haydi içine bazı veriler ekleyelim."
     }}</p>
-    <button class={[OrtakCss.Düğme, OrtakCss.Act]}>
+    <button class={[SharedCss.Düğme, SharedCss.Act]}>
       {{ en: "Got it!", tr: "Anladım!" }}
     </button>
   </div>;
@@ -93,12 +93,12 @@ const Al = ({ Lang }) => (
       <Lato700 shared />
       <title>KimlikDAO | {{ en: "Mint KPass", tr: "KPass al" }}</title>
       <Favicon raster={32} rel="icon" />
-      <OrtakCss />
+      <SharedCss />
       <Css />
       <Script Chains={Chains} DefaultChain={DefaultChain} />
     </head>
     <body>
-      <Başlık href="/" DefaultChain={DefaultChain} Chains={Chains} ChainNotes={ChainNotes} />
+      <Header href="/" DefaultChain={DefaultChain} Chains={Chains} ChainNotes={ChainNotes} />
       <div id={Css.Root}>
         <div id={Css.LeftColumn}>
           <KPass />

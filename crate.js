@@ -5,13 +5,13 @@ const HostUrl = "https://kimlikdao.org";
 
 /** @enum {I18nString} */
 const Page = {
-  Ana: { [LangCode.EN]: "en", [LangCode.TR]: "tr" },
-  Al: { [LangCode.EN]: "mint", [LangCode.TR]: "al" },
-  YeniAl: { [LangCode.EN]: "newmint", [LangCode.TR]: "yenial" },
-  İptal: { [LangCode.EN]: "revoke", [LangCode.TR]: "iptal" },
-  Oyla: { [LangCode.EN]: "vote", [LangCode.TR]: "oyla" },
+  Landing: { [LangCode.EN]: "en", [LangCode.TR]: "tr" },
+  Mint: { [LangCode.EN]: "mint", [LangCode.TR]: "al" },
+  NewMint: { [LangCode.EN]: "newmint", [LangCode.TR]: "yenial" },
+  Revoke: { [LangCode.EN]: "revoke", [LangCode.TR]: "iptal" },
+  Vote: { [LangCode.EN]: "vote", [LangCode.TR]: "oyla" },
   KDAO: { [LangCode.EN]: "KDAO", [LangCode.TR]: "kdao" },
-  KPassim: { [LangCode.EN]: "kpass", [LangCode.TR]: "kpassim" }
+  KPass: { [LangCode.EN]: "kpass", [LangCode.TR]: "kpassim" }
 };
 
 /** @enum {I18nString|string} */
@@ -37,10 +37,10 @@ const ExternalPage = {
 };
 
 /** @const {Page} */
-const Entry = Page.Ana;
+const Entry = Page.Landing;
 
 /** @const {LangCode} */
-const CodebaseLang = LangCode.TR;
+const CodebaseLang = LangCode.EN;
 
 /** @const {!Object<string, string>} */
 const Aliases = {

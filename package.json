@@ -11,7 +11,7 @@
     "dev": "NODE_ENV=production bun lib/kastro/kastro.js serve",
     "compiled": "NODE_ENV=production bun lib/kastro/kastro.js serve --compiled",
     "build": "NODE_ENV=production bun lib/kastro/kastro.js build",
-    "canary": "NODE_ENV=production bun lib/kastro/workers/canaryServer.js",
+    "canary": "bun run build && NODE_ENV=production bun lib/kastro/workers/canaryServer.js",
     "deploy": "NODE_ENV=production bun lib/kastro/kastro.js deploy",
     "clean": "rm -rf build && clear"
   },
@@ -21,7 +21,7 @@
     "acorn-jsx": "^5.3.2",
     "acorn-walk": "^8.3.4",
     "astring": "^1.9.0",
-    "bun-types": "^1.2.1",
+    "bun-types": "^1.2.2",
     "css-tree": "^3.1.0",
     "csso": "^5.0.5",
     "google-closure-compiler": "^20240317.0.0",

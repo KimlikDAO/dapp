@@ -1,4 +1,4 @@
-<h1><img src="birim/icon.svg" align="top" height="44"> KimlikDAO dApp</a></h1>
+<h1><img src="components/icon.svg" align="top" height="44"> KimlikDAO dApp</a></h1>
 
 ## Dizinler
 

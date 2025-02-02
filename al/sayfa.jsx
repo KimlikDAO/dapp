@@ -4,13 +4,13 @@ import İmeceİptal from "./imeceİptal/birim";
 import Css from "./sayfa.css";
 import Tanışma from "./tanışma/birim";
 import Ödeme from "./ödeme/birim.jsx";
-import Başlık from "/birim/başlık/birim";
-import Favicon from "/birim/icon.svg";
-import KPass from "/birim/kpass/birim";
-import Lato400 from "/birim/lato/l400.ttf";
-import Lato700 from "/birim/lato/l700.ttf";
-import OrtakCss from "/birim/ortakcss/birim";
-import Telefon from "/birim/telefon/birim";
+import Başlık from "/components/başlık/birim";
+import Favicon from "/components/icon.svg";
+import KPass from "../components/kpass/KPass";
+import Lato400 from "/components/lato/l400.ttf";
+import Lato700 from "/components/lato/l700.ttf";
+import OrtakCss from "/components/ortakcss/birim";
+import Phone from "../components/phone/Phone";
 import { ChainId } from "/lib/crosschain/chains";
 import dom from "/lib/util/dom";
 
@@ -89,7 +89,7 @@ const Al = ({ Lang }) => (
           <div id={Css.KPassContainer}>
             <KPass />
           </div>
-          <Telefon noshow kpassli={false} />
+          <Phone noshow kpassli={false} />
         </div>
       </div>
     </body>
