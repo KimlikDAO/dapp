@@ -28,8 +28,8 @@ const Chains = [
 
 /** @const {!Object<ChainId, I18nString>} */
 const ChainNotes = {
-  [ChainId.xa4b1]: { tr: "Ana ağ", en: "Signal chain" },
-  [ChainId.MinaMainnet]: { tr: "Yeni ✨", en: "New ✨" },
+  [ChainId.xa4b1]: { en: "Signal chain", tr: "Ana ağ" },
+  [ChainId.MinaMainnet]: { en: "New ✨", tr: "Yeni ✨" },
 };
 
 /** @const {ChainId} */

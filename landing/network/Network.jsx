@@ -14,8 +14,8 @@ import { keccak256 } from "/lib/crypto/sha3";
 const Node = ({ idx }) => {
   const shortAddress = (addr) => `0x${addr.slice(0, 8)}...${addr.slice(8, 16)}`;
   return (
-    <div class={[Css.Düğümİmza, Css[idx]]}>
-      <div class={[Css.DüğümNokta, Css[`${idx}n`]]}></div>{shortAddress(keccak256(idx))}
+    <div class={[Css.NodeSignature, Css[idx]]}>
+      <div class={[Css.NodePoint, Css[`${idx}n`]]}></div>{shortAddress(keccak256(idx))}
     </div>
   );
 }
@@ -65,7 +65,8 @@ const Graph = ({ width }) => {
         const x = Math.round(cx + r * Math.sin((Math.PI * 2 * i) / n));
         const y = Math.round(cy - r * Math.cos((Math.PI * 2 * i) / n));
         return (<>
-          <use href={`#${Css.Altıgen}`} x={x - 45} y={y - 75} fill={h(NODES[key][2])} stroke={h(NODES[key][3])} />
+          <use href={`#${Css.Altıgen}`} x={x - 45} y={y - 75}
+            fill={h(NODES[key][2])} stroke={h(NODES[key][3])} />
           <text x={x} y={y - 30} text-anchor="middle" fill="#fff">{NODES[key][0].slice(0, 8)}</text>
           <text x={x} y={y + 23} text-anchor="middle" fill="#444">{NODES[key][1]}</text>
         </>);
@@ -75,7 +76,7 @@ const Graph = ({ width }) => {
 }
 
 const Network = () => (
-  <div id={Css.Network} class={LandingCss.Üçlü}>
+  <div id={Css.Network} class={LandingCss.ThreeColumn}>
     <Css />
     <div id={Css.TextColumn}>
       <h2 class={SharedCss.Mavi}>{{
@@ -86,10 +87,11 @@ const Network = () => (
         en: "The contents of each KPass are verified and digitally signed by at least seven independent nodes in the KimlikDAO network, all while fully preserving your privacy.",
         tr: "KPass’ler birbirinden bağımsız en az 7 KimlikDAO ağı düğümünün onay ve dijital imzası ile üretilebilir. Onay aşamasında veri gizliliğiniz tamamıyla korunur."
       }}</div>
-      <a href={ExternalPage.GitHub + "/kimlikdao-node"} target="_blank" rel="noreferrer" class={[SharedCss.Düğme, SharedCss.Bilgi, LandingCss.ÜstBoşluk]}>{{
-        en: "Learn about KimlikDAO nodes",
-        tr: "KimlikDAO düğümü detayları"
-      }}</a>
+      <a href={ExternalPage.GitHub + "/kimlikdao-node"} target="_blank" rel="noreferrer"
+        class={[SharedCss.Düğme, SharedCss.Bilgi, LandingCss.TopSpaced]}>{{
+          en: "Learn about KimlikDAO nodes",
+          tr: "KimlikDAO düğümü detayları"
+        }}</a>
     </div>
     <div id={Css.MiddleColumn}>
       <KPassDemo />

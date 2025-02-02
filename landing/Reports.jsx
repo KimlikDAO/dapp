@@ -3,7 +3,7 @@ import Feb25 from "/components/blog/2025.02/birim";
 import SharedCss from "/components/ortakcss/birim.css";
 
 const Reports = () => (
-  <div class={LandingCss.Üçlü}>
+  <div class={LandingCss.ThreeColumn}>
     <div></div>
     <Feb25 href={""} loading="lazy" />
     <div class={LandingCss.SağaYaslı}>
@@ -21,7 +21,7 @@ const Reports = () => (
           katıldığımız etkinliklerden, kurduğumuz yeni ortaklıklara tüm
           gelişmelerini aylık ilerleme raporlarından okuyun.</>
       }}</span><br />
-      <a href="//blog.kimlikdao.org" class={[SharedCss.Düğme, SharedCss.Mavi, LandingCss.ÜstBoşluk]}>{{
+      <a href="//blog.kimlikdao.org" class={[SharedCss.Düğme, SharedCss.Mavi, LandingCss.TopSpaced]}>{{
         en: "All progress reports",
         tr: "Tüm ilerleme raporları"
       }}</a>

@@ -1,43 +1,46 @@
 <h1><img src="components/icon.svg" align="top" height="44"> KimlikDAO dApp</a></h1>
 
-## Dizinler
 
-Her http request gerektiren bölümü 'sayfa' olarak adlandırıyoruz.
-Her sayfa için gerekli dosyalar http `pathname`'i ile aynı isimli
-bir dizinde toplanıyor.
+# 👋 Introduction
 
-Buna istisna `/` pathindeki ana sayfa; bu sayfaya `ana` dizinini
-ayırıyoruz.
+Using the KimlikDAO dApp, you can mint your KPass by interacting with the
+KimlikDAO network and inscribe it on one of the blockchains we support
+(such as Ethereum, Arbitrum, Mina, etc).
 
-Sayfaların bazı `altbirim`leri olabilir; bunlar sayfa içindeki sınırları belli
-bileşenler ve bu bileşenlere ait her dosya altbirimle aynı adda bir dizinde
-duruyor. Örneğin `al/` sayfasının `tanışma` ve `ödeme` gibi altbirimleri
-`al/tanışma` ve `al/ödeme` dizininde duruyor.
+The KimlikDAO dApp is truly decentralized: you can run it locally, deploy it
+on your own server, or use the reference deployment at [kimlikdao.org](https://kimlikdao.org).
 
-Birden çok yerde kullanılabilen bileşenlere ise `birim` adını
-veriyoruz ve bunları `birim/` dizinine koyuyoruz.
+The dApp will connect to the KimlikDAO network nodes and the node discovery will be initiated
+through the seeed nodes at `node.kimlikdao.org`, `kdao-node.yenibank.org`, `kdao-node.blinkbridge.xyz`.
+To modify the seed nodes, edit the list in `lib/node/network.js`.
 
-## Kullanım
+For blockchain nodes, the dApp has no hardcoded rpc urls and will rely on your wallet's provider.
 
-Yazılımcıların dApp'i test etmesi için gereken adımlar:
+## 🧑‍💻 Developer Guide
+
+The KimlikDAO dApp is built with our in-house framework, [kastro](https://github.com/KimlikDAO/kimlikdao-js/tree/ana/kastro). Kastro provides a familiar react-like experience yet allows us to build
+highly optimized and lightweight fontends by pushing as much work as possible to the compile time.
+
+To run the dApp, follow these steps:
 
 - `git clone --recursive https://github.com/KimlikDAO/dapp`
 
-- `bun i` gerekli build araçlarını ve dev sunucusunu yükler
+- `bun i` install the required npm packages
 
-- `bun run dev` dev sunucuyu çalıştırır.
+- `bun dev` run the dev server
   - http://localhost:8787/
 
-dApp 3 farklı şekilde çalıştırılabilir:
-
- - `bun run dev` en az işi yaparak en hızlı şekilde dApp'i yükler
- - `bun run compiled` istenen sayfa ve assetleri derleyip yollar
- - `bun run canary` deploy için hazırlanmış `crate`'i sunar
-
-Deploy için gerekli crate `bun run build` ile oluşturulur. `canary` ve `build` için npm paketlerine ek
-olarak şu araçlar gerekli:
+The dApp can also be run in `compiled` and `canary` modes.
+To run the dApp in these modes, we need other tools installed:
 
 ```shell
+# brew dependencies
 brew install pngcrush brotli zopfli woff2 webp librsvg
+# pip dependencies
 pip install fonttools
 ```
+
+With these dependencies installed, we can run the dApp in `compiled` and `canary` modes:
+
+- `bun compiled` compile the required pages and assets
+- `bun canary` serve the `bundle` prepared for deployment

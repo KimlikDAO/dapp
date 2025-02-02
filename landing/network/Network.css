@@ -22,11 +22,11 @@
 
 #Altıgen {}
 
-.Düğümİmza:hover {
+.NodeSignature:hover {
   opacity: 1;
 }
 
-.Düğümİmza {
+.NodeSignature {
   align-items: center;
   border-radius: 15px;
   color: rgba(10, 10, 100, 0.9);
@@ -40,7 +40,7 @@
   width: 180px;
 }
 
-.DüğümNokta {
+.NodePoint {
   width: 10px;
   height: 10px;
   border-radius: 10px;

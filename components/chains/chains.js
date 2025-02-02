@@ -20,7 +20,7 @@ const ChainInfos = {
   [ChainId.x1]: {
     uiName: "Ethereum",
     explorer: "etherscan.io",
-    tokenKodu: "ETH",
+    tokenCode: "ETH",
     token: "ether",
     tokenSuffix: dom.i18n({ tr: ["’den", "’e"], en: [] }),
     rpcUrl: "cloudflare-eth.com",
@@ -28,21 +28,21 @@ const ChainInfos = {
   [ChainId.xa86a]: {
     uiName: "Avalanche",
     explorer: "snowtrace.io",
-    tokenKodu: "AVAX",
+    tokenCode: "AVAX",
     tokenSuffix: dom.i18n({ tr: ["’tan", "’a"], en: [] }),
     rpcUrl: "api.avax.network/ext/bc/C/rpc",
   },
   [ChainId.x89]: {
     uiName: "Polygon",
     explorer: "polygonscan.com",
-    tokenKodu: "MATIC",
+    tokenCode: "MATIC",
     tokenSuffix: dom.i18n({ tr: ["’ten", "’e"], en: [] }),
     rpcUrl: "polygon-rpc.com"
   },
   [ChainId.xa4b1]: {
     uiName: "Arbitrum One",
     explorer: "arbiscan.io",
-    tokenKodu: "ETH",
+    tokenCode: "ETH",
     token: "ether",
     tokenSuffix: dom.i18n({ tr: ["’den", "’e"], en: [] }),
     rpcUrl: "arb1.arbitrum.io/rpc",
@@ -50,14 +50,14 @@ const ChainInfos = {
   [ChainId.x38]: {
     uiName: "BNB Chain",
     explorer: "bscscan.com",
-    tokenKodu: "BNB",
+    tokenCode: "BNB",
     tokenSuffix: dom.i18n({ tr: ["’den", "’ye"], en: [] }),
     rpcUrl: "bsc-dataseed3.binance.org"
   },
   [ChainId.MinaMainnet]: {
     uiName: "Mina",
     explorer: "minaexplorer:.com",
-    tokenKodu: "MINA",
+    tokenCode: "MINA",
     tokenSuffix: dom.i18n({ tr: ["’dan", "’ya"], en: [] }),
     rpcUrl: "api.minaexplorer:.com"
   },

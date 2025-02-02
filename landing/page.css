@@ -9,7 +9,7 @@
 /**
  * Üç sütunlu alt hero
  */
-.Üçlü {
+.ThreeColumn {
   display: grid;
   gap: 20px;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -29,7 +29,7 @@
   margin: 100px 0;
 }
 
-.ÜstBoşluk {
+.TopSpaced {
   margin-top: 30px;
 }
 

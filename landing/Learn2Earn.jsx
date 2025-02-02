@@ -30,7 +30,7 @@ const Learn2Earn = () => (
           topla. Çok yakında!</>
       }}</span>
       <br />
-      <a href={ExternalPage.Blog} class={[SharedCss.Düğme, SharedCss.Bilgi, LandingCss.ÜstBoşluk]}>{{
+      <a href={ExternalPage.Blog} class={[SharedCss.Düğme, SharedCss.Bilgi, LandingCss.TopSpaced]}>{{
         en: "Learn & earn (Soon!)",
         tr: "Öğren ve kazan (Yakında!)"
       }}</a>
