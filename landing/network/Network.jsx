@@ -1,7 +1,7 @@
 import LandingCss from "../page.css";
 import KPassDemo from "./KPassDemo";
 import Css from "./Network.css";
-import SharedCss from "/components/ortakcss/birim";
+import SharedCss from "/components/sharedCss/SharedCss";
 import { ExternalPage } from "/crate";
 import { keccak256 } from "/lib/crypto/sha3";
 
@@ -26,7 +26,7 @@ const NODES = {
   YeniB: ["0x86f6B34A26705E6a22B8e2EC5ED0cC5aB3f6F828", "yenibank.org", "83b4e2", "3182CE", "üst"],
   TimeD: ["0x77c60E68158De0bC70260DFd1201be9445EfFc07", "timedogankoy.com", "edc7c7", "E5AFAF"],
   YenLi: ["0xE3581636Df37f1eBfFbdFE22F8719F57c555d4f7", "yenilira.org", "#bbe7d5", "9EDDC3", "üst"],
-  UBINU: ["0x4F1DBED3c377646c89B4F8864E0b41806f2B79fd", "dobbyinu.com", "#fe94f4", "FE66EF"],
+  UBINU: ["0x4F1DBED3c377646c89B4F8864E0b41806f2B79fd", "blinkbridge.xyz", "#fe94f4", "FE66EF"],
   Kopru: ["0xc855dB548A6feB1f34AcAE6531c84261008ea55A", "kopru.xyz", "#b06ceb", "8E2DE2"],
   LSTCM: ["0x384bF113dcdF3e7084C1AE2Bb97918c3Bf15A6d2", "lstcm.co", "666", "111"],
 };
@@ -79,7 +79,7 @@ const Network = () => (
   <div id={Css.Network} class={LandingCss.ThreeColumn}>
     <Css />
     <div id={Css.TextColumn}>
-      <h2 class={SharedCss.Mavi}>{{
+      <h2 class={SharedCss.Blue}>{{
         en: "Verified and signed by 7+ independent nodes.",
         tr: "7 bağımsız onay ve imza."
       }}</h2>
@@ -88,7 +88,7 @@ const Network = () => (
         tr: "KPass’ler birbirinden bağımsız en az 7 KimlikDAO ağı düğümünün onay ve dijital imzası ile üretilebilir. Onay aşamasında veri gizliliğiniz tamamıyla korunur."
       }}</div>
       <a href={ExternalPage.GitHub + "/kimlikdao-node"} target="_blank" rel="noreferrer"
-        class={[SharedCss.Düğme, SharedCss.Bilgi, LandingCss.TopSpaced]}>{{
+        class={[SharedCss.Button, SharedCss.Info, LandingCss.TopSpaced]}>{{
           en: "Learn about KimlikDAO nodes",
           tr: "KimlikDAO düğümü detayları"
         }}</a>

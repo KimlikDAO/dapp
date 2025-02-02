@@ -1,6 +1,6 @@
 import Css from "./Footer.css";
-import Subscribe from "../subscribe/Subscribe";
-import SharedCss from "/components/ortakcss/birim";
+import SharedCss from "/components/sharedCss/SharedCss";
+import Subscribe from "/components/subscribe/Subscribe";
 import { ExternalPage } from "/crate";
 import { i18n } from "/lib/util/i18n";
 

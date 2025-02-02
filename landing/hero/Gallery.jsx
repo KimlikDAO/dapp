@@ -1,5 +1,5 @@
 import Css from "./Gallery.css";
-import SharedCss from "/components/ortakcss/birim.css";
+import SharedCss from "/components/sharedCss/SharedCss.css";
 import Phone from "/components/phone/Phone";
 import dom from "/lib/util/dom";
 

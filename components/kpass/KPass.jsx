@@ -5,7 +5,7 @@ import FamilyInfoCard from "./FamilyInfoCard";
 import Css from "./KPass.css";
 import PersonInfoCard from "./PersonInfoCard";
 import RegistryInfoCard from "./RegistryInfoCard";
-import SharedCss from "/components/ortakcss/birim";
+import SharedCss from "/components/sharedCss/SharedCss";
 import "/lib/did/section.d";
 import dom from "/lib/util/dom";
 

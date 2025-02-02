@@ -1,5 +1,5 @@
 import Css from "./Subscribe.css";
-import SharedCss from "/components/ortakcss/birim";
+import SharedCss from "/components/sharedCss/SharedCss";
 import dom from "/lib/util/dom";
 
 /**
@@ -58,7 +58,7 @@ const Subscribe = ({ id }) => {
         placeholder={{ en: "Your email address", tr: "E-posta adresiniz" }}
       />
       <button
-        class={[SharedCss.Düğme, SharedCss.Eylem, Css.SubscribeButton]}
+        class={[SharedCss.Button, SharedCss.Action, Css.SubscribeButton]}
         type="submit"
       >{{
         en: "Subscribe", tr: "Kaydol"

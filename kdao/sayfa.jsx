@@ -4,7 +4,7 @@ import Başlık from "/components/başlık/birim";
 import Favicon from "/components/icon.svg";
 import Lato400 from "/components/lato/l400.ttf";
 import Lato700 from "/components/lato/l700.ttf";
-import OrtakCss from "/components/ortakcss/birim";
+import OrtakCss from "/components/sharedCss/SharedCss";
 import { ChainId } from "/lib/crosschain/chains";
 import { I18nString, LangCode } from "/lib/util/i18n";
 

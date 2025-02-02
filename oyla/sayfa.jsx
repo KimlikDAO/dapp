@@ -5,7 +5,7 @@ import Başlık from "/components/başlık/birim.jsx";
 import Favicon from "/components/icon.svg";
 import Lato400 from "/components/lato/l400.ttf";
 import Lato700 from "/components/lato/l700.ttf";
-import OrtakCss from "/components/ortakcss/birim.jsx";
+import OrtakCss from "/components/sharedCss/SharedCss.jsx";
 import AvaxResmi from "/components/paralar/AVAX.svg";
 import EthResmi from "/components/paralar/ETH.svg";
 import TrybResmi from "/components/paralar/TRYB.svg";

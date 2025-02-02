@@ -1,6 +1,6 @@
 import Gallery from "./Gallery";
 import Css from "./Hero.css";
-import SharedCss from "/components/ortakcss/birim.css";
+import SharedCss from "/components/sharedCss/SharedCss.css";
 import Phone from "/components/phone/Phone";
 import { Page } from "/crate";
 import { css } from "/lib/kastro/stylesheet";
@@ -9,7 +9,7 @@ import { css } from "/lib/kastro/stylesheet";
 const JointCss = css`
   @media (max-width: 1000px) {
     #Hero { border-radius: 0; }
-    #${Phone.Css.Phone} { display: none; }
+    #${Phone.Css.Root} { display: none; }
   }
 `;
 
@@ -25,9 +25,9 @@ const Hero = () => (
         }}</h1>
         <Gallery />
         <div id={Css.Buttons}>
-          <a href={Page.Mint} id={Css.MintButton} class={[SharedCss.Düğme, SharedCss.Eylem]}>{{
+          <a href={Page.Mint} id={Css.MintButton} class={[SharedCss.Button, SharedCss.Action]}>{{
+            en: "Mint your KPass | $1",
             tr: "Hemen KPass al | ₺29",
-            en: "Mint your KPass | $1"
           }}</a>
         </div>
       </div>

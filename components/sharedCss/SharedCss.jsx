@@ -1,10 +1,10 @@
-import Css from "./birim.css";
+import Css from "./SharedCss.css";
 import Header from "/components/header/Header.css";
 import KPass from "/components/kpass/KPass.css";
 import LangPicker from "/components/langPicker/LangPicker.css";
 import Wallet from "/components/wallet/Wallet.css";
 
-const OrtakCss = () => (<>
+const SharedCss = () => (<>
   <Css shared />
   <Header shared />
   <Wallet shared />
@@ -12,14 +12,14 @@ const OrtakCss = () => (<>
   <KPass shared />
 </>);
 
-Object.assign(OrtakCss, Css);
+Object.assign(SharedCss, Css);
 /** @enum {string} */
-OrtakCss.Header = Header;
+SharedCss.Header = Header;
 /** @enum {string} */
-OrtakCss.Wallet = Wallet;
+SharedCss.Wallet = Wallet;
 /** @enum {string} */
-OrtakCss.LangPicker = LangPicker;
+SharedCss.LangPicker = LangPicker;
 /** @enum {string} */
-OrtakCss.KPass = KPass;
+SharedCss.KPass = KPass;
 
-export default OrtakCss;
+export default SharedCss;

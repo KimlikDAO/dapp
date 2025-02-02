@@ -2,7 +2,7 @@ import Css from "./Header.css";
 import ArrowImage from "/components/arrow.svg";
 import LangPicker from "/components/langPicker/LangPicker";
 import Logo from "/components/logo.svg";
-import SharedCss from "/components/ortakcss/birim";
+import SharedCss from "/components/sharedCss/SharedCss";
 import { ExternalPage, Page } from "/crate";
 import { ChainId } from "/lib/crosschain/chains";
 import { I18nString } from "/lib/util/i18n";
@@ -38,7 +38,7 @@ const Header = ({ Chains, ChainNotes, DefaultChain }) => {
         <a class={SharedCss.Header.Link} href={ExternalPage.Discord} target="_blank"
           rel="noreferrer">Discord</a>
         <LangPicker />
-        <a id={Css.ActionButton} href={Page.Mint} class={[SharedCss.Düğme, SharedCss.Eylem]}>{{
+        <a id={Css.ActionButton} href={Page.Mint} class={[SharedCss.Button, SharedCss.Action]}>{{
           en: "Mint KPass", tr: "Hemen KPass al"
         }}<ArrowImage inline /></a>
       </div>

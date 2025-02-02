@@ -7,7 +7,7 @@ import KPass from "../components/kpass/KPass.jsx";
 import KPassContract from "/lib/ethereum/KPassLite";
 import Lato400 from "/components/lato/l400.ttf";
 import Lato700 from "/components/lato/l700.ttf";
-import OrtakCss from "/components/ortakcss/birim";
+import OrtakCss from "/components/sharedCss/SharedCss";
 import { Page } from "/crate";
 import { ChainId } from "/lib/crosschain/chains";
 import dom from "/lib/util/dom";

@@ -3,7 +3,7 @@ import BlogCss from "../blog.css";
 import RemainingBar from "../RemainingBar";
 import Banner from "./banner.png";
 import { ChainInfos } from "/components/chains/chains";
-import UBInuResmi from "/components/tokens/UBINU.png";
+import UBInuImage from "/components/tokens/UBINU.png";
 import { ChainId } from "/lib/crosschain/chains";
 import { ERC20 } from "/lib/ethereum/ERC20";
 import { css } from "/lib/kastro/stylesheet";
@@ -41,7 +41,7 @@ const TOTAL = 50_000_000_000;
  * @param {{ href: string, piggyback: string }=} props
  * @return {Promise<string>}
  */
-const EliptikEğriler = ({ href, piggyback }) => {
+const EllipticCurves = ({ href, piggyback }) => {
   dom.schedule(
     () => new ERC20("https://" + ChainInfos[ChainId.xa86a].rpcUrl, USDC_AVALANCHE)
       .allowance(DEV_FUND, ODUL)
@@ -57,8 +57,8 @@ const EliptikEğriler = ({ href, piggyback }) => {
       <div>
         <Banner class={BlogCss.PreviewBanner} width="100%" quality={60}
           piggyback={piggyback}
-          bundleWidth={36 * 13}
-          bundleHeight={19 * 13} />
+          bundleWidth={36 * 15}
+          bundleHeight={19 * 15} />
         <h4>{{
           en: "Elliptic curves and their applications in crypto",
           tr: "Eliptik eğriler ve kriptoda kullanımı"
@@ -79,11 +79,11 @@ const EliptikEğriler = ({ href, piggyback }) => {
           en: "Read", tr: "Oku"
         }}</button>
         <RemainingBar id={Css.UBInu} className={Css.UBInu} maximum={TOTAL} ticker="UBINU">
-          <UBInuResmi width={22} height={22} class={Css.UBInu} piggyback={piggyback} />
+          <UBInuImage width={22} height={22} class={Css.UBInu} piggyback={piggyback} />
         </RemainingBar>
       </div>
     </a>
   );
 }
 
-export default EliptikEğriler;
+export default EllipticCurves;

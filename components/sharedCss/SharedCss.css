@@ -68,16 +68,18 @@ hr {
  */
 .sel {}
 
-.Gizle {
-  opacity: 0;
-  pointer-events: none;
-}
+/**
+ * @export {Disabled}
+ * @preserve
+ */
+.dis {}
 
-.Düğme.SolBoşluk {
+/** left padded ;) */
+.Button.LeftPadded {
   margin-right: 1ex;
 }
 
-.Düğme.Eylem {
+.Button.Action {
   background: #5256c9;
   border-color: #5256c9;
   color: white;
@@ -85,27 +87,27 @@ hr {
   transition: opacity 0.3s;
 }
 
-.Düğme.Eylem:hover {
+.Button.Action:hover {
   opacity: 1;
 }
 
-.Düğme.Bilgi {
+.Button.Info {
   background: none;
   border: 1px solid #5256c9;
   color: #5256c9;
 }
 
-.Düğme.Mavi {
+.Button.Blue {
   color: #3182CE;
   border: 1px solid #3182CE;
   background: none;
 }
 
-.Düğme.Kapalı {
+.Button.dis {
   cursor: default;
 }
 
-.Düğme {
+.Button {
   background: none;
   border-radius: 10px;
   border: 1px solid #D1D5DB;
@@ -121,27 +123,27 @@ hr {
   user-select: none;
 }
 
-.Düğme.Tehlike {
+.Button.Danger {
   color: #fff;
   background-color: #d9534f;
   border-color: #d43f3a;
   opacity: 0.9;
 }
 
-.Düğme.Tehlike:hover {
+.Button.Danger:hover {
   opacity: 1;
 }
 
 /**
  * Tema mavisi
  */
-.Mavi {
+.Blue {
   color: #3182CE
 }
 
 /**
  * Tema moru
  */
-.Mor {
+.Purple {
   color: #5256c9;
 }

@@ -1,13 +1,13 @@
 import LandingCss from "./page.css";
 import Feb25 from "/components/blog/2025.02/birim";
-import SharedCss from "/components/ortakcss/birim.css";
+import SharedCss from "/components/sharedCss/SharedCss.css";
 
 const Reports = () => (
   <div class={LandingCss.ThreeColumn}>
     <div></div>
     <Feb25 href={""} loading="lazy" />
-    <div class={LandingCss.SağaYaslı}>
-      <h2 class={SharedCss.Mor}>{{
+    <div class={LandingCss.RightAligned}>
+      <h2 class={SharedCss.Purple}>{{
         en: "KimlikDAO progress reports.",
         tr: "KimlikDAO ilerleme raporları."
       }}</h2>
@@ -21,7 +21,7 @@ const Reports = () => (
           katıldığımız etkinliklerden, kurduğumuz yeni ortaklıklara tüm
           gelişmelerini aylık ilerleme raporlarından okuyun.</>
       }}</span><br />
-      <a href="//blog.kimlikdao.org" class={[SharedCss.Düğme, SharedCss.Mavi, LandingCss.TopSpaced]}>{{
+      <a href="//blog.kimlikdao.org" class={[SharedCss.Button, SharedCss.Blue, LandingCss.TopSpaced]}>{{
         en: "All progress reports",
         tr: "Tüm ilerleme raporları"
       }}</a>

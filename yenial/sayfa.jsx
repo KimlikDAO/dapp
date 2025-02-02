@@ -1,14 +1,14 @@
 import Script from "kastro:./sayfa.jsx";
-import KPass from "../components/kpass/KPass";
 import Css from "./sayfa.css";
 import Header from "/components/header/Header";
 import Favicon from "/components/icon.svg";
+import KPass from "/components/kpass/KPass";
 import Lato400 from "/components/lato/l400.ttf";
 import Lato700 from "/components/lato/l700.ttf";
-import SharedCss from "/components/ortakcss/birim";
+import SharedCss from "/components/sharedCss/SharedCss";
 import { ChainId } from "/lib/crosschain/chains";
 import dom from "/lib/util/dom";
-import { I18nString, LangCode } from "/lib/util/i18n";
+import { LangCode } from "/lib/util/i18n";
 
 /** @const {!Array<ChainId>} */
 const Chains = [
@@ -75,7 +75,7 @@ const Welcome = () =>
       en: "Here is your KPass. You can click on the regenerate button to customize its appearance. For now it contains no data and it's not written on chain. Let's add some data into it.",
       tr: "İşte KPass'iniz. Görünümünü özelleştirmek için yeniden oluştur düğmesini kullanabilirsiniz. Şu anda içinde veri yok ve zincire yazılmamış. Haydi içine bazı veriler ekleyelim."
     }}</p>
-    <button class={[SharedCss.Düğme, SharedCss.Act]}>
+    <button class={[SharedCss.Button, SharedCss.Action]}>
       {{ en: "Got it!", tr: "Anladım!" }}
     </button>
   </div>;

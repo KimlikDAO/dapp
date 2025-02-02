@@ -2,7 +2,7 @@ import LandingCss from "../page.css";
 import Css from "./Holders.css";
 import ArrowImage from "/components/arrow.svg";
 import { chainImage } from "/components/chains/chains";
-import SharedCss from "/components/ortakcss/birim.jsx";
+import SharedCss from "/components/sharedCss/SharedCss.jsx";
 import { Page } from "/crate";
 import { ChainId } from "/lib/crosschain/chains";
 import { Image } from "/lib/kastro/image";
@@ -44,7 +44,7 @@ const Holders = () => (
   <div id={Css.Holders}>
     <Css />
     <div id={Css.Content}>
-      <div class={LandingCss.SağaYaslı}>
+      <div class={LandingCss.RightAligned}>
         <h2>{{
           en: <>KPass holders<br />by chain.</>,
           tr: <>Ağlara göre<br />KPass sahipleri.</>,
@@ -56,7 +56,7 @@ const Holders = () => (
             } KPass sahibi arasına katılın.`
         }}</span>
         <div id={Css.ActionBox}>
-          <a href={Page.Mint} id={Css.ActionButton} class={[SharedCss.Düğme, SharedCss.Eylem]}>{{
+          <a href={Page.Mint} id={Css.ActionButton} class={[SharedCss.Button, SharedCss.Action]}>{{
             en: "Become a KPass holder",
             tr: "Sen de KPass sahibi ol"
           }} <ArrowImage inline /></a>

@@ -1,7 +1,7 @@
 import LandingCss from "./page.css";
 import ECDSA from "/components/blog/ecdsa/ECDSA";
-import EliptikEğriler from "/components/blog/eliptik-egriler/birim";
-import SharedCss from "/components/ortakcss/birim.css";
+import EllipticCurves from "/components/blog/ellipticCurves/EllipticCurves";
+import SharedCss from "/components/sharedCss/SharedCss.css";
 import { ExternalPage } from "/crate";
 import { css } from "/lib/kastro/stylesheet";
 
@@ -13,10 +13,10 @@ const Css = css`
 `;
 
 const Learn2Earn = () => (
-  <div class={LandingCss.Üçlü}>
+  <div class={LandingCss.ThreeColumn}>
     <Css />
     <div id={Css.Content}>
-      <h2 class={SharedCss.Mavi}>{{
+      <h2 class={SharedCss.Blue}>{{
         en: "Learn & Earn with your KPass.",
         tr: "KPass’inle öğren ve kazan."
       }}</h2>
@@ -30,13 +30,13 @@ const Learn2Earn = () => (
           topla. Çok yakında!</>
       }}</span>
       <br />
-      <a href={ExternalPage.Blog} class={[SharedCss.Düğme, SharedCss.Bilgi, LandingCss.TopSpaced]}>{{
+      <a href={ExternalPage.Blog} class={[SharedCss.Button, SharedCss.Info, LandingCss.TopSpaced]}>{{
         en: "Learn & earn (Soon!)",
         tr: "Öğren ve kazan (Yakında!)"
       }}</a>
     </div>
     <ECDSA href="" />
-    <EliptikEğriler href="" />
+    <EllipticCurves href="" />
   </div>
 );
 

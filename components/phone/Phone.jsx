@@ -41,7 +41,7 @@ const JointCss = css`
  * @return {Promise<string>}
  */
 const Phone = ({ withKPass = true, noshow }) => (
-  <div id={Css.Phone} noshow={noshow}>
+  <div id={Css.Root} noshow={noshow}>
     <Css />
     <JointCss />
     <AnaEkran>

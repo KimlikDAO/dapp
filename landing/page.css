@@ -20,7 +20,7 @@
 /**
  * Raporların sağ üstteki eylem düğmesi
  */
-.SağaYaslı {
+.RightAligned {
   text-align: right;
   padding: 0 20px;
 }
