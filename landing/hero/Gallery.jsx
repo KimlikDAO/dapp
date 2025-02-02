@@ -1,6 +1,6 @@
 import Css from "./Gallery.css";
-import SharedCss from "/components/sharedCss/SharedCss.css";
 import Phone from "/components/phone/Phone";
+import SharedCss from "/components/sharedCss/SharedCss.css";
 import dom from "/lib/util/dom";
 
 /** @const {!HTMLDivElement} */
@@ -19,11 +19,7 @@ let SlideTimer = 0;
  * Slides the cards to the correct position based on the `SelectedCard` value.
  * Uses CSS transform to smoothly animate the horizontal movement.
  */
-const slideCards = () => {
-  /** @const {number} */
-  const width = CardSlider.firstElementChild.getBoundingClientRect().width;
-  CardSlider.style.transform = `translate3d(-${SelectedCard * width}px,0,0)`;
-}
+const slideCards = () => dom.slideCard(CardSlider, SelectedCard);
 
 /**
  * @param {number} newCard
@@ -31,7 +27,7 @@ const slideCards = () => {
 const selectCard = (newCard) => {
   if (SelectedCard > 2 && newCard == 0) newCard = 4;
   const newCardModulo = newCard % 4;
-  Phone.nftGöster(newCardModulo <= 1, !newCardModulo);
+  Phone.showKPass(newCardModulo <= 1, !newCardModulo);
   newCardModulo === 3
     ? Phone.showDialog(dom.i18n({
       en: "The connected app would like to access your contact info section of your KPass.",
@@ -81,11 +77,13 @@ const Gallery = () => {
       startGalleryTimer();
     }
   }
-  Phone.nftGöster(true, true);
   // Cüzdan.adresDeğişince((adres) => Telefon.adresGir(adres));
   CardSlider.appendChild(CardSlider.firstElementChild.cloneNode(true));
   CardSlider.style.width = "500%";
-  dom.run(startGalleryTimer);
+  dom.schedule(() => {
+    startGalleryTimer();
+    Phone.showKPass(true, true);
+  }, 100);
 
   return (
     <div id={Css.Gallery}>

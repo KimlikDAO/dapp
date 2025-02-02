@@ -1,7 +1,6 @@
 <h1><img src="components/icon.svg" align="top" height="44"> KimlikDAO dApp</a></h1>
 
-
-# 👋 Introduction
+## 👋 Introduction
 
 <img align="right" width="280" height="280" src="https://kimlikdao.org/KPASS.svg" style="border-radius:10px;box-shadow:0px 2px 10px rgb(0 0 0 / 15%);">
 

@@ -5,8 +5,6 @@ import { ChainId, ChainGroup } from "/lib/crosschain/chains";
 import { Provider } from "/lib/crosschain/provider";
 import { Image } from "/lib/kastro/image";
 
-
-
 /** @const {!Object<string, !Provider>} */
 const Bağlantılar = {
   [BağlantıAdı.Core]: CoreBağlantısı,

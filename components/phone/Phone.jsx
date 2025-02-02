@@ -18,8 +18,8 @@ const Evet = dom.div(Css.Evet);
 
 /** @enum {string} */
 const JointCss = css`
-  /** @export  */ .BüyükGöster {}
-  #${KPass.Css.Root}.BüyükGöster {
+  /** @export  */ .ShowInWallet {}
+  #${KPass.Css.Root}.ShowInWallet {
     transform: translate(65px, 120px) scale(0.5);
   }
   #KPassDialog > #${KPass.Css.Root} {
@@ -58,7 +58,7 @@ const Phone = ({ withKPass = true, noshow }) => (
     </AnaEkran >
     <KPassDialog>
       {withKPass && <KPass />}
-      <KPassDialogButton nodisplay>{{ en: "Hide", tr: "Gizle" }}</KPassDialogButton>
+      <KPassDialogButton>{{ en: "Hide", tr: "Gizle" }}</KPassDialogButton>
     </KPassDialog>
     <Kutu noshow>
       <div id={Css.KutuMetni} />
@@ -84,7 +84,7 @@ Phone.showDialog = (prompt, buttonText) => {
   if (buttonText) Evet.innerText = buttonText;
   Kutu.style.opacity = "";
   Kutu.firstElementChild.innerText = prompt;
-  Kutu.classList.add(Css.Göster);
+  Kutu.classList.add(Css.Show);
   AnaEkran.classList.add(Css.Blurred);
   KPassDialog.classList.add(Css.Blurred);
 }
@@ -93,7 +93,7 @@ Phone.showDialog = (prompt, buttonText) => {
  * Closes the dialog box on the phone.
  */
 Phone.closeDialog = () => {
-  Kutu.classList.remove(Css.Göster);
+  Kutu.classList.remove(Css.Show);
   KPassDialog.classList.remove(Css.Blurred);
   AnaEkran.classList.remove(Css.Blurred);
 }
@@ -101,28 +101,28 @@ Phone.closeDialog = () => {
 /**
  * Displays the NFT mock in the phone image.
  *
- * @param {boolean} büyükGöster NFT tek başına kutuda gösterilsin mi.
- * @param {boolean} bilgiYüzü NFT'nin bilgi yüzü gösterilsin.
+ * @param {boolean} showInDialog NFT tek başına kutuda gösterilsin mi.
+ * @param {boolean} infoSide NFT'nin bilgi yüzü gösterilsin.
  */
-Phone.nftGöster = (büyükGöster, bilgiYüzü) => {
-  KPass.showSide(bilgiYüzü);
+Phone.showKPass = (showInDialog, infoSide) => {
+  KPass.showSide(infoSide);
   const showSide = () => {
-    KPass.showSide(bilgiYüzü);
-    KPassDialogButton.innerText = bilgiYüzü
+    KPass.showSide(infoSide);
+    KPassDialogButton.innerText = infoSide
       ? dom.i18n({ tr: "Gizle", en: "Encrypt" })
       : dom.i18n({ tr: "Aç", en: "Decrypt" });
   }
   showSide();
-  if (büyükGöster) {
+  if (showInDialog) {
     KPass.Root.style.opacity = "";
     dom.göster(KPassDialogButton);
     KPassDialogButton.onclick ||= () => {
-      bilgiYüzü = !bilgiYüzü;
+      infoSide = !infoSide;
       showSide();
     }
   }
-  KPass.Root.classList.toggle(JointCss.BüyükGöster, !büyükGöster);
-  KPassDialogButton.classList.toggle(Css.Göster, büyükGöster);
+  KPass.Root.classList.toggle(JointCss.ShowInWallet, !showInDialog);
+  KPassDialogButton.classList.toggle(Css.Hide, !showInDialog);
 }
 
 /** @enum {string} */

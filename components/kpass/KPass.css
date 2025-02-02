@@ -13,10 +13,7 @@
   z-index: 4;
 }
 
-/** @export */
-.Flipped {}
-
-#Root.Flipped {
+#Root.InfoSide {
   transform: rotateY(-180deg);
 }
 
@@ -39,6 +36,7 @@
 
 /**
  * KPass info side
+ * @export
  */
 #InfoSide {
   transform: rotateY(180deg);

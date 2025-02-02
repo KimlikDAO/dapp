@@ -17,10 +17,10 @@ const KPassDemo = () => (
   <div id={Css.KPassDemo}>
     <Css />
     <div class={KPass.Css.CardContent}>
-      <div class={KPass.Css.Label}>{{ tr: "Doğum yeri", en: "City of birth" }}</div>
-      <div>{{ tr: "İstanbul", en: "Palo Alto, CA" }}</div>
-      <div class={KPass.Css.Label}>{{ tr: "Cinsiyet", en: "Gender" }}</div>
-      <div>{{ tr: "K", en: "F" }}</div>
+      <div class={KPass.Css.Label}>{{ en: "City of birth", tr: "Doğum yeri" }}</div>
+      <div>{{ en: "Palo Alto, CA", tr: "İstanbul" }}</div>
+      <div class={KPass.Css.Label}>{{ en: "Gender", tr: "Cinsiyet" }}</div>
+      <div>{{ en: "F", tr: "K" }}</div>
     </div>
     <svg height={24} width={24} class={KPass.Css.Logo}>
       <use href={`#${HeaderCss.Logomark}`} width={24} height={24} />

@@ -7,14 +7,14 @@ import dom from "/lib/util/dom";
  * @return {Promise<string>}
  */
 const Subscribe = ({ id }) => {
-  /** @type {?string} */
-  let subscribeText;
   /** @const {!HTMLFormElement} */
   const Root = dom.form(id);
   /** @const {!HTMLInputElement} */
   const input = /** @type {!HTMLInputElement} */(Root.firstElementChild);
   /** @const {!Element} */
   const button = /** @type {!Element} */(input.nextElementSibling);
+  /** @type {?string} */
+  let subscribeText;
 
   /**
    * @param {boolean} success
@@ -29,8 +29,8 @@ const Subscribe = ({ id }) => {
   }
 
   /**
-   * Email bültene kayıt isteğini gönderir ve sonucu görüntülemek için
-   * {@link update()}'yi çağırır.
+   * Sends the email newsletter registration request and calls
+   * {@link update()} to update the UI.
    *
    * @param {Event=} event
    */

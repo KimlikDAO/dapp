@@ -120,17 +120,11 @@
 }
 
 /** @export */
-.Göster {}
+.Show {}
 
-#KPassDialogButton.Göster {
-  transform: none;
+#Kutu.Show {
   opacity: 1;
 }
-
-#Kutu.Göster {
-  opacity: 1;
-}
-
 
 /**
  * Bilgi kutusu metni
@@ -191,10 +185,17 @@
   height: 30px;
   justify-content: center;
   left: 15px;
-  opacity: 0;
+  opacity: 1;
   position: absolute;
   transform-style: preserve-3d;
-  transform: scale(0.5) translate3d(80px, 80px, -250px);
   transition: transform 1s ease-in-out, opacity 1s ease-in-out;
   width: 250px;
 }
+
+#KPassDialogButton.Hide {
+  transform: scale(0.5) translate3d(80px, 80px, -250px);
+  opacity: 0;
+}
+
+/** @export */
+.Hide {}
