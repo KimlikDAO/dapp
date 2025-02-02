@@ -23,7 +23,7 @@ const langChanged = (event) => {
   const li = /** @type {!HTMLLIElement} */(targetElem.closest("li"));
 
   /** @const {LangCode} */
-  const newLang = /** @type {LangCode} */(li.id.slice(Css.LangPicker.length));
+  const newLang = /** @type {LangCode} */(li.id.slice(Css.Root.length));
   if (newLang != dom.Lang) {
     document.cookie = `l=${newLang};path=/;domain=.${HostUrl.slice(8)};SameSite=Strict;max-age=${1e6}`;
     window.location.href = Route[newLang] + window.location.hash;
@@ -31,17 +31,17 @@ const langChanged = (event) => {
 };
 
 const LangPicker = () => (
-  <div id={Css.LangPicker}>
+  <div id={Css.Root}>
     <Css />
     <LangButton
       controlsDropdown={LangDropdown}
       class={HeaderCss.Link} href="javascript:">{{ en: "EN", tr: "TR" }}
     </LangButton>
     <LangDropdown nodisplay onClick={langChanged}>
-      <li id={Css.LangPicker + LangCode.EN}>
+      <li id={Css.Root + LangCode.EN}>
         <EnFlag width={16} height={16} /> English
       </li>
-      <li id={Css.LangPicker + LangCode.TR}>
+      <li id={Css.Root + LangCode.TR}>
         <TrFlag width={16} height={16} /> Türkçe
       </li>
     </LangDropdown>

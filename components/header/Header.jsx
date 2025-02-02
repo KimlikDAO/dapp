@@ -10,7 +10,7 @@ import { I18nString } from "/lib/util/i18n";
 /** @enum {string} */
 const JointCss = css`
   @media (max-width: 820px) {
-    .Link, #${LangPicker.Css.LangPicker} {
+    .Link, #${LangPicker.Css.Root} {
       display: none;
     }
   }`;

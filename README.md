@@ -3,6 +3,8 @@
 
 # 👋 Introduction
 
+<img align="right" width="280" height="280" src="https://kimlikdao.org/KPASS.svg" style="border-radius:10px;box-shadow:0px 2px 10px rgb(0 0 0 / 15%);">
+
 Using the KimlikDAO dApp, you can mint your KPass by interacting with the
 KimlikDAO network and inscribe it on one of the blockchains we support
 (such as Ethereum, Arbitrum, Mina, etc).

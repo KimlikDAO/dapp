@@ -17,7 +17,7 @@ const SubscribeBox = () => (
     }}</span>
     <div id={Css.SubscribeText}>{{
       en: "SUBSCRIBE TO THE KIMLIKDAO NEWSLETTER",
-      tr: "KİMLİKDAO BÜLTEN'E KAYDOLUN"
+      tr: "KİMLİKDAO BÜLTEN’E KAYDOLUN"
     }}</div>
     <Subscribe id={Css.Subscribe} />
   </div>

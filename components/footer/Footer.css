@@ -26,15 +26,12 @@
   }
 }
 
-/**
- * Alt dizin kaydol kutusu
- */
 #SubscribeBox {
   padding: 0 20px;
 }
 
 /**
- * Alt dizin logo
+ * Logo in the subscribe box
  */
 #Logo {
   display: flex;
@@ -44,7 +41,7 @@
 }
 
 /**
- * Brand mark metni
+ * Brand mark text
  */
 #BrandMark {
   margin-top: 20px;
@@ -55,7 +52,7 @@
 }
 
 /**
- * Kaydol metni
+ * Text prompting the user to subscribe to the newsletter
  */
 #SubscribeText {
   margin: 50px 0 12px;
@@ -64,7 +61,7 @@
 }
 
 /**
- * Kaydol birimi
+ * Dom id for the Subscribe stateless component.
  * @export
  */
 #Subscribe {
