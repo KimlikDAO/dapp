@@ -1,5 +1,5 @@
 import Cüzdan from "/components/cüzdan/birim";
-import Kpass from "../../components/kpass/KPass";
+import Kpass from "/components/kpass/KPass";
 import { ChainGroup, ChainId } from "/lib/crosschain/chains";
 import { commitDouble } from "/lib/did/commitment";
 import { combineMultiple } from "/lib/did/KPass";

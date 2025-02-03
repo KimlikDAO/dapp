@@ -7,7 +7,7 @@ import {
   İptalDüğmesi,
   İptalciler
 } from "./birim.jsx";
-import { AğBilgileri, AğBilgisi } from "../../components/chains/chains.js";
+import { AğBilgileri, AğBilgisi } from "/components/chains/chains.js";
 import Cüzdan from "/components/cüzdan/birim";
 import { ChainId } from "/lib/crosschain/chains";
 import KPass from "/lib/ethereum/KPass";

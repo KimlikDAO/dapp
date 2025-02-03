@@ -1,8 +1,6 @@
 import Css from "./Header.css";
-import RightPane from "/components/cüzdan/sağMenü";
 import LangPicker from "/components/langPicker/LangPicker";
 import Logo from "/components/logo.svg";
-import Wallet from "/components/wallet/Wallet";
 import { ChainId } from "/lib/crosschain/chains";
 import { css } from "/lib/kastro/stylesheet";
 import { I18nString } from "/lib/util/i18n";
@@ -49,6 +47,6 @@ const Header = ({
   </div>
 );
 
-export { LangPicker, Wallet };
+export { LangPicker };
 
 export default Header;

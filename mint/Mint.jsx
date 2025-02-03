@@ -1,14 +1,14 @@
-import Script from "kastro:./sayfa.jsx";
-import Css from "./sayfa.css";
+import Script from "kastro:./Mint.jsx";
+import Css from "./Mint.css";
 import Header from "/components/header/Header";
 import Favicon from "/components/icon.svg";
 import KPass from "/components/kpass/KPass";
 import Lato400 from "/components/lato/l400.ttf";
 import Lato700 from "/components/lato/l700.ttf";
-import SharedCss from "/components/sharedCss/SharedCss";
+import SharedCss from "/components/shared/SharedCss";
 import { ChainId } from "/lib/crosschain/chains";
 import dom from "/lib/util/dom";
-import { LangCode } from "/lib/util/i18n";
+import { I18nString, LangCode } from "/lib/util/i18n";
 
 /** @const {!Array<ChainId>} */
 const Chains = [
@@ -22,8 +22,8 @@ const Chains = [
 
 /** @const {!Object<ChainId, I18nString>} */
 const ChainNotes = {
-  [ChainId.xa4b1]: { tr: "Ana ağ", en: "Signal chain" },
-  [ChainId.MinaMainnet]: { tr: "Yeni ✨", en: "New ✨" },
+  [ChainId.xa4b1]: { en: "Signal chain", tr: "Ana ağ" },
+  [ChainId.MinaMainnet]: { en: "New ✨", tr: "Yeni ✨" },
 };
 
 /** @const {ChainId} */
@@ -84,7 +84,7 @@ const Welcome = () =>
  * @param {{ Lang: LangCode}=} props
  * @return {Promise<string>}
  */
-const Al = ({ Lang }) => (
+const Mint = ({ Lang }) => (
   <html lang={Lang}>
     <head>
       <meta charset="utf-8" />
@@ -98,7 +98,7 @@ const Al = ({ Lang }) => (
       <Script Chains={Chains} DefaultChain={DefaultChain} />
     </head>
     <body>
-      <Header href="/" DefaultChain={DefaultChain} Chains={Chains} ChainNotes={ChainNotes} />
+      <Header DefaultChain={DefaultChain} Chains={Chains} ChainNotes={ChainNotes} />
       <div id={Css.Root}>
         <div id={Css.LeftColumn}>
           <KPass />
@@ -115,4 +115,4 @@ const Al = ({ Lang }) => (
   </html >
 );
 
-export default Al;
+export default Mint;

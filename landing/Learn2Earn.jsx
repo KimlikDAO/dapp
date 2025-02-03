@@ -1,7 +1,7 @@
 import LandingCss from "./Landing.css";
 import ECDSA from "/components/blog/ecdsa/ECDSA";
 import EllipticCurves from "/components/blog/ellipticCurves/EllipticCurves";
-import SharedCss from "/components/sharedCss/SharedCss.css";
+import SharedCss from "/components/shared/SharedCss.css";
 import { ExternalPage } from "/crate";
 import { css } from "/lib/kastro/stylesheet";
 

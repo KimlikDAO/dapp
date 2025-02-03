@@ -1,5 +1,5 @@
 import { ChainInfos, chainImage } from "../chains/chains";
-import OrtakCss from "../sharedCss/SharedCss.css";
+import OrtakCss from "../shared/SharedCss.css";
 import {
   Bağlantı,
   BağlantıAdı,

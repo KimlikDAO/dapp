@@ -1,5 +1,5 @@
 import Css from "./Footer.css";
-import SharedCss from "/components/sharedCss/SharedCss";
+import SharedCss from "../shared/SharedCss";
 import Subscribe from "/components/subscribe/Subscribe";
 import { ExternalPage } from "/crate";
 import { i18n } from "/lib/util/i18n";

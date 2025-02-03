@@ -2,7 +2,7 @@ import Css from "./Header.css";
 import ArrowImage from "/components/arrow.svg";
 import LangPicker from "/components/langPicker/LangPicker";
 import Logo from "/components/logo.svg";
-import SharedCss from "/components/sharedCss/SharedCss";
+import SharedCss from "/components/shared/SharedCss";
 import { ExternalPage, Page } from "/crate";
 import { ChainId } from "/lib/crosschain/chains";
 import { I18nString } from "/lib/util/i18n";

@@ -1,5 +1,5 @@
 import Css from "./Subscribe.css";
-import SharedCss from "/components/sharedCss/SharedCss";
+import SharedCss from "../shared/SharedCss";
 import dom from "/lib/util/dom";
 
 /**

@@ -4,7 +4,7 @@ import Başlık from "/components/başlık/birim.jsx";
 import Favicon from "/components/icon.svg";
 import Lato400 from "/components/lato/l400.ttf";
 import Lato700 from "/components/lato/l700.ttf";
-import OrtakCss from "/components/sharedCss/SharedCss.jsx";
+import OrtakCss from "/components/shared/SharedCss.jsx";
 import { ChainId } from "/lib/crosschain/chains";
 import dom from "/lib/util/dom";
 

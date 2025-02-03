@@ -14,7 +14,7 @@ import {
 } from "./sayfa.jsx";
 import Cüzdan from "/components/cüzdan/birim";
 import "/components/dil/birim";
-import Kpass from "../components/kpass/KPass";
+import Kpass from "/components/kpass/KPass";
 import {
   eşikKutusuGöster,
   imeceİptalKutusuGöster,

@@ -34,6 +34,9 @@ jobs:
       - name: Compile `Landing` page
         run: bun lib/kdjs/kdjs.js landing/Landing.jsx --globals '{"GEN":false,"Route":{"en":"mint","tr":"al"},"DefaultChain":"0x1","Chains":["0x1","0xa4b1"],"Lang":"tr"}'
 
+      - name: Compile `Mint` page
+        run: bun lib/kdjs/kdjs.js mint/Mint.jsx --globals '{"GEN":false,"Route":{"en":"mint","tr":"al"},"DefaultChain":"0x1","Chains":["0x1","0xa4b1"],"Lang":"tr"}'
+
   compile-dapp:
     if: false # Temporarily disabled
     name: Compile the dApp

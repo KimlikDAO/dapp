@@ -11,7 +11,7 @@ import Footer from "/components/footer/Footer";
 import Favicon from "/components/icon.svg";
 import Lato400 from "/components/lato/l400.ttf";
 import Lato700 from "/components/lato/l700.ttf";
-import SharedCss from "/components/sharedCss/SharedCss";
+import SharedCss from "/components/shared/SharedCss";
 import { HostUrl } from "/crate";
 import { ChainId } from "/lib/crosschain/chains";
 import { I18nString, LangCode } from "/lib/util/i18n";

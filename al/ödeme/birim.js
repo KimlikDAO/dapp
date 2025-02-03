@@ -1,7 +1,7 @@
 import { Kök } from "./birim.jsx";
-import { AğBilgileri, AğBilgisi } from "../../components/chains/chains.js";
+import { AğBilgileri, AğBilgisi } from "/components/chains/chains.js";
 import Cüzdan from "/components/cüzdan/birim";
-import Phone from "../../components/phone/Phone.jsx";
+import Phone from "/components/phone/Phone.jsx";
 import { ChainGroup, ChainId } from "/lib/crosschain/chains";
 import KPass from "/lib/ethereum/KPass";
 import { whenMined } from "/lib/ethereum/transaction";

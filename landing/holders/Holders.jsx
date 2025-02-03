@@ -2,7 +2,7 @@ import LandingCss from "../Landing.css";
 import Css from "./Holders.css";
 import ArrowImage from "/components/arrow.svg";
 import { chainImage } from "/components/chains/chains";
-import SharedCss from "/components/sharedCss/SharedCss.jsx";
+import SharedCss from "/components/shared/SharedCss.jsx";
 import { Page } from "/crate";
 import { ChainId } from "/lib/crosschain/chains";
 import { Image } from "/lib/kastro/image";

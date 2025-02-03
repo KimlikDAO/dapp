@@ -1,6 +1,6 @@
 import LandingCss from "./Landing.css";
 import Feb25 from "/components/blog/2025.02/Feb25";
-import SharedCss from "/components/sharedCss/SharedCss.css";
+import SharedCss from "/components/shared/SharedCss.css";
 
 const Reports = () => (
   <div class={LandingCss.ThreeColumn}>

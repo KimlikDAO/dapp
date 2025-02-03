@@ -6,11 +6,11 @@ import Tanışma from "./tanışma/birim";
 import Ödeme from "./ödeme/birim.jsx";
 import Başlık from "/components/başlık/birim";
 import Favicon from "/components/icon.svg";
-import KPass from "../components/kpass/KPass";
+import KPass from "/components/kpass/KPass";
 import Lato400 from "/components/lato/l400.ttf";
 import Lato700 from "/components/lato/l700.ttf";
-import OrtakCss from "/components/sharedCss/SharedCss";
-import Phone from "../components/phone/Phone";
+import Phone from "/components/phone/Phone";
+import OrtakCss from "/components/shared/SharedCss";
 import { ChainId } from "/lib/crosschain/chains";
 import dom from "/lib/util/dom";
 

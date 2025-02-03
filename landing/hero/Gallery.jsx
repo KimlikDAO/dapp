@@ -1,6 +1,6 @@
 import Css from "./Gallery.css";
 import Phone from "/components/phone/Phone";
-import SharedCss from "/components/sharedCss/SharedCss.css";
+import SharedCss from "/components/shared/SharedCss.css";
 import dom from "/lib/util/dom";
 
 /** @const {!HTMLDivElement} */
@@ -28,12 +28,10 @@ const selectCard = (newCard) => {
   if (SelectedCard > 2 && newCard == 0) newCard = 4;
   const newCardModulo = newCard % 4;
   Phone.showKPass(newCardModulo <= 1, !newCardModulo);
-  newCardModulo === 3
-    ? Phone.showDialog(dom.i18n({
-      en: "The connected app would like to access your contact info section of your KPass.",
-      tr: "Bağlı app KPass’inizdeki iletişim bilgilerinize erişmek istiyor. İzin veriyor musunuz?",
-    }))
-    : Phone.closeDialog();
+  Phone.showDialog(newCardModulo == 3 ? dom.i18n({
+    en: "The connected app would like to access your contact info section of your KPass.",
+    tr: "Bağlı app KPass’inizdeki iletişim bilgilerinize erişmek istiyor. İzin veriyor musunuz?",
+  }) : "");
   Bullets.children[SelectedCard % 4].firstElementChild.classList.remove(SharedCss.Selected);
   Bullets.children[newCardModulo].firstElementChild.classList.add(SharedCss.Selected);
   SelectedCard = newCard;
@@ -77,7 +75,7 @@ const Gallery = () => {
       startGalleryTimer();
     }
   }
-  // Cüzdan.adresDeğişince((adres) => Telefon.adresGir(adres));
+  // Wallet.onAddressChange((address) => Phone.setAddress(address));
   CardSlider.appendChild(CardSlider.firstElementChild.cloneNode(true));
   CardSlider.style.width = "500%";
   dom.schedule(() => {
@@ -91,8 +89,8 @@ const Gallery = () => {
       <div id={Css.Carousel}>
         <CardSlider>
           <Card title={{
+            en: "An on-chain account that you truly own",
             tr: "Kontrolü tamamen sende olan on-chain bir hesap",
-            en: "An on-chain account that you truly own"
           }}>{{
             en: <>
               Mint your KPass and wallet login to all supported on/off-ramps
@@ -102,11 +100,11 @@ const Gallery = () => {
               gerekli bilgileri güvenle sun, hesap açmadan işlem yap</>
           }}</Card>
           <Card title={{
+            en: "Your data is encrypted under your wallet private key",
             tr: "İçeriği kendi cüzdan anahtarlarınla şifrelenir",
-            en: "Your data is encrypted under your wallet private key"
           }}>{{
+            tr: "KPass içeriği kendi tarayıcında kendi cüzdan anahtarlarınla şifrelenir. KimlikDAO asla bilgilerini göremez ve saklamaz",
             en: "The contents of your KPass is encrypted in your browser under your wallet private key. KimlikDAO will never store your data",
-            tr: "KPass içeriği kendi tarayıcında kendi cüzdan anahtarlarınla şifrelenir. KimlikDAO asla bilgilerini göremez ve saklamaz"
           }}</Card>
           <Card title={{
             en: "Store your KPass in your favorite NFT wallet like MetaMask",
