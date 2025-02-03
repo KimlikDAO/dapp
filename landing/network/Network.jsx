@@ -1,4 +1,4 @@
-import LandingCss from "../page.css";
+import LandingCss from "../Landing.css";
 import KPassDemo from "./KPassDemo";
 import Css from "./Network.css";
 import SharedCss from "/components/sharedCss/SharedCss";

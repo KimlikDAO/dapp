@@ -1,4 +1,4 @@
-import LandingCss from "../page.css";
+import LandingCss from "../Landing.css";
 import Css from "./Holders.css";
 import ArrowImage from "/components/arrow.svg";
 import { chainImage } from "/components/chains/chains";

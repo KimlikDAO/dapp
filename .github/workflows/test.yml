@@ -32,7 +32,7 @@ jobs:
         run: bun lib/kdjs/kdjs.js components/kpass/KPass.jsx --globals '{"GEN":false,"Lang":"en"}'
       
       - name: Compile `Landing` page
-        run: bun lib/kdjs/kdjs.js landing/page.jsx --globals '{"GEN":false,"Route":{"en":"mint","tr":"al"},"DefaultChain":"0x1","Chains":["0x1","0xa4b1"],"Lang":"tr"}'
+        run: bun lib/kdjs/kdjs.js landing/Landing.jsx --globals '{"GEN":false,"Route":{"en":"mint","tr":"al"},"DefaultChain":"0x1","Chains":["0x1","0xa4b1"],"Lang":"tr"}'
 
   compile-dapp:
     if: false # Temporarily disabled

@@ -1,11 +1,11 @@
-import Script from "kastro:./page.jsx";
+import Script from "kastro:./Landing.jsx";
 import Header from "./header/Header";
 import Hero from "./hero/Hero";
 import Holders from "./holders/Holders";
+import Css from "./Landing.css";
 import Learn2Earn from "./Learn2Earn";
 import Meta, { Title } from "./Meta";
 import Network from "./network/Network";
-import Css from "./page.css";
 import Reports from "./Reports";
 import Footer from "/components/footer/Footer";
 import Favicon from "/components/icon.svg";

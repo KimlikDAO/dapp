@@ -12,7 +12,7 @@ The KimlikDAO dApp is truly decentralized: you can run it locally, deploy it
 on your own server, or use the reference deployment at [kimlikdao.org](https://kimlikdao.org).
 
 The dApp will connect to the KimlikDAO network nodes and the node discovery will be initiated
-through the seeed nodes at `node.kimlikdao.org`, `kdao-node.yenibank.org`, `kdao-node.blinkbridge.xyz`.
+through the seed nodes at `node.kimlikdao.org`, `kdao-node.yenibank.org`, `kdao-node.blinkbridge.xyz`.
 To modify the seed nodes, edit the list in `lib/node/network.js`.
 
 For blockchain nodes, the dApp has no hardcoded rpc urls and will rely on your wallet's provider.
@@ -20,7 +20,7 @@ For blockchain nodes, the dApp has no hardcoded rpc urls and will rely on your w
 ## 🧑‍💻 Developer Guide
 
 The KimlikDAO dApp is built with our in-house framework, [kastro](https://github.com/KimlikDAO/kimlikdao-js/tree/ana/kastro). Kastro provides a familiar react-like experience yet allows us to build
-highly optimized and lightweight fontends by pushing as much work as possible to the compile time.
+highly optimized and lightweight frontends by pushing as much work as possible to the compile time.
 
 To run the dApp, follow these steps:
 

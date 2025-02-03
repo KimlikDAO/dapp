@@ -1,4 +1,4 @@
-import LandingCss from "./page.css";
+import LandingCss from "./Landing.css";
 import ECDSA from "/components/blog/ecdsa/ECDSA";
 import EllipticCurves from "/components/blog/ellipticCurves/EllipticCurves";
 import SharedCss from "/components/sharedCss/SharedCss.css";

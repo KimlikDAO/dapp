@@ -1,4 +1,4 @@
-import LandingCss from "./page.css";
+import LandingCss from "./Landing.css";
 import Feb25 from "/components/blog/2025.02/Feb25";
 import SharedCss from "/components/sharedCss/SharedCss.css";
 
