@@ -30,9 +30,9 @@ const JointCss = css`
 
 const WalletApp = () => {
   /** @const {!HTMLDivElement} */
-  WalletApp.Root = dom.div(Css.WalletApp)
+  WalletApp.root = dom.div(Css.WalletApp)
   return (
-    <WalletApp.Root>
+    <WalletApp.root>
       <div id={Css.Balance}>$1523.74</div>
       <div id={Css.Account}>KimlikDAO</div>
       <div id={Css.Address}>0x1DA0...1DA0</div>
@@ -43,7 +43,7 @@ const WalletApp = () => {
       <div id={Css.WalletAppGallery}>
         <div class={Css.WalletAppNft} />
       </div>
-    </WalletApp.Root>
+    </WalletApp.root>
   );
 }
 
@@ -52,23 +52,23 @@ const WalletApp = () => {
  * @return {string}
  */
 WalletApp.setAddress = (address = "0x1DA01DAO") => WalletApp
-  .Root
+  .root
   .children[2]
   .innerText = address.slice(0, 6) + "..." + address.slice(-4);
 
 
 const InfoDialog = () => {
   /** @const {!HTMLDivElement} */
-  InfoDialog.Root = dom.div(Css.InfoDialog);
-  InfoDialog.Root.style.opacity = "";
+  InfoDialog.root = dom.div(Css.InfoDialog);
+  InfoDialog.root.style.opacity = "";
   return (
-    <InfoDialog.Root noshow>
+    <InfoDialog.root noshow>
       <div id={Css.InfoDialogText} />
       <div id={Css.InfoDialogButtons}>
         <div id={Css.InfoDialogNo}>{{ en: "Cancel", tr: "Hayır" }}</div>
         <div id={Css.InfoDialogYes}>{{ en: "Provide", tr: "Evet" }}</div>
       </div>
-    </InfoDialog.Root>
+    </InfoDialog.root>
   );
 }
 
@@ -77,11 +77,12 @@ const InfoDialog = () => {
  * @param {string=} buttonText
  */
 InfoDialog.show = (prompt, buttonText) => {
-  if (buttonText) InfoDialog.Root.children[1].children[1].innerText = buttonText;
+  if (buttonText) InfoDialog.root.children[1].children[1].innerText = buttonText;
+  /** @const {boolean} */
   const show = !!prompt;
-  if (show) InfoDialog.Root.children[0].innerText = prompt;
-  WalletApp.Root.classList.toggle(Css.Blurred, show);
-  InfoDialog.Root.classList.toggle(Css.Show, show);
+  if (show) InfoDialog.root.children[0].innerText = prompt;
+  WalletApp.root.classList.toggle(Css.Blurred, show);
+  InfoDialog.root.classList.toggle(Css.Show, show);
   KPassDialog.classList.toggle(Css.Blurred, show);
 }
 
@@ -121,19 +122,19 @@ Phone.showDialog = InfoDialog.show;
  */
 Phone.showKPass = (showInDialog, infoSide) => {
   /** @type {boolean} */
-  Phone.InfoSide = infoSide;
+  Phone.infoSide = infoSide;
   const showSide = () => {
-    KPass.showSide(Phone.InfoSide);
-    KPassDialogButton.innerText = Phone.InfoSide
+    KPass.showSide(Phone.infoSide);
+    KPassDialogButton.innerText = Phone.infoSide
       ? dom.i18n({ tr: "Gizle", en: "Encrypt" })
       : dom.i18n({ en: "Decrypt", tr: "Aç" });
   }
   showSide();
   KPassDialogButton.onclick ||= () => {
-    Phone.InfoSide = !Phone.InfoSide;
+    Phone.infoSide = !Phone.infoSide;
     showSide();
   }
-  KPass.Root.classList.toggle(JointCss.ShowInWallet, !showInDialog);
+  KPass.root.classList.toggle(JointCss.ShowInWallet, !showInDialog);
   KPassDialogButton.classList.toggle(Css.Hide, !showInDialog);
 }
 

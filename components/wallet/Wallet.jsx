@@ -330,7 +330,7 @@ const Wallet = ({
   dom.schedule(izinliyseBağla, 200);
 
   return (
-    <div id={Css.Cüzdan}>
+    <div id={Css.Root}>
       <Css />
       <ChainButton controlsDropdown={Dropdown} class={OrtakCss.Düğme}>
         <Image src={ağResmi(defaultChain)} height={32} width={32} inline />

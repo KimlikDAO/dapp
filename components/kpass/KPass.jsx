@@ -69,10 +69,10 @@ const Nav = () => {
  */
 const KPass = ({ style, piggyback }) => {
   /** @const {!HTMLDivElement} */
-  KPass.Root = dom.div(Css.Root);
+  KPass.root = dom.div(Css.Root);
 
   return (
-    <KPass.Root style={style}>
+    <KPass.root style={style}>
       <Css />
       <Cover id={Css.CoverSide} bundleName="KPASS.svg" piggyback={piggyback} />
       <div id={Css.InfoSide}>
@@ -86,7 +86,7 @@ const KPass = ({ style, piggyback }) => {
         <Logo />
         <Nav />
       </div>
-    </KPass.Root>
+    </KPass.root>
   );
 }
 /** @enum {string} */
@@ -99,11 +99,11 @@ KPass.LeftArrow = LeftArrow;
 /**
  * @param {boolean} infoSide
  */
-KPass.showSide = (infoSide) => KPass.Root.classList.toggle(Css.InfoSide, infoSide);
+KPass.showSide = (infoSide) => KPass.root.classList.toggle(Css.InfoSide, infoSide);
 
 /**
  * @return {boolean}
  */
-KPass.flip = () => KPass.Root.classList.toggle(Css.InfoSide);
+KPass.flip = () => KPass.root.classList.toggle(Css.InfoSide);
 
 export default KPass;
