@@ -11,9 +11,6 @@ const Ids = css`
 /** @const {!Array<string>} */
 const Fields = ["localIdNumber", "first", "last", "dateOfBirth", "cityOfBirth", "gender"];
 
-/**
- * @return {Promise<string>}
- */
 const PersonInfoCard = () => (
   <div class={Css.Card}>
     <div class={Css.CardContent} id={Ids.PersonInfoCard}>

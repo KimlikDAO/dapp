@@ -15,9 +15,6 @@ const Css = css`
   }
 `;
 
-/**
- * @return {Promise<string>} 
- */
 const SağMenü = () => {
   /** @const {HTMLUListElement} */
   const Kök = dom.ul(Css.Kök);

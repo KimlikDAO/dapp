@@ -67,12 +67,12 @@ const ChainInfos = {
  * @param {ChainId} chainId
  * @return {string} url
  */
-const chainImage = (chainId) => "components/chains/" + (chainId.startsWith("mi")
+const chainImageSrc = (chainId) => "components/chains/" + (chainId.startsWith("mi")
   ? "mina.png"
   : ChainInfos[chainId].uiName.replaceAll(" ", "").toLowerCase() + ".svg");
 
 export {
   ChainInfos,
   ChainInfo,
-  chainImage
+  chainImageSrc
 };

@@ -28,7 +28,6 @@ const TOTAL = 10_000_000_000_000;
 
 /**
  * @param {{ href: string, piggyback: string }=} props
- * @return {Promise<string>}
  */
 const MinaAppchain = ({ href, piggyback }) => {
   fetch(`https://${ChainInfos[ChainId.MinaMainnet].rpcUrl}/accounts/${ZkAppAddress}`)

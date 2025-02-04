@@ -39,7 +39,6 @@ const TOTAL = 50_000_000_000;
 
 /**
  * @param {{ href: string, piggyback: string }=} props
- * @return {Promise<string>}
  */
 const EllipticCurves = ({ href, piggyback }) => {
   dom.schedule(

@@ -9,7 +9,6 @@ import { keccak256 } from "/lib/crypto/sha3";
  * @param {{
  *   idx: string,
  * }=} props
- * @return {Promise<string>}
  */
 const Node = ({ idx }) => {
   const shortAddress = (addr) => `0x${addr.slice(0, 8)}...${addr.slice(8, 16)}`;
@@ -33,7 +32,6 @@ const NODES = {
 
 /**
  * @param {{ width: number }=} props
- * @return {Promise<string>}
  */
 const Graph = ({ width }) => {
   /**

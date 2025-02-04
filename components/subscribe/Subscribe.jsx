@@ -4,7 +4,6 @@ import dom from "/lib/util/dom";
 
 /**
  * @param {{ id: string }} props
- * @return {Promise<string>}
  */
 const Subscribe = ({ id }) => {
   /** @const {!HTMLFormElement} */

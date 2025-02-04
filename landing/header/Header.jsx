@@ -3,6 +3,7 @@ import ArrowImage from "/components/arrow.svg";
 import LangPicker from "/components/langPicker/LangPicker";
 import Logo from "/components/logo.svg";
 import SharedCss from "/components/shared/SharedCss";
+import Wallet from "/components/wallet/Wallet";
 import { ExternalPage, Page } from "/crate";
 import { ChainId } from "/lib/crosschain/chains";
 import { I18nString } from "/lib/util/i18n";
@@ -13,19 +14,8 @@ import { I18nString } from "/lib/util/i18n";
  *   ChainNotes: !Object<ChainId, I18nString>,
  *   DefaultChain: ChainId,
  * }=} props
- * @return {Promise<string>}
  */
 const Header = ({ Chains, ChainNotes, DefaultChain }) => {
-  // Wallet.onKPassChange((_, dosyaSözü) => {
-  //   /** @const {!HTMLAnchorElement} */
-  //   const eylemDüğmesi = dom.a(Css.ActionButton);
-  //   /** @type {!Text} */(eylemDüğmesi.firstChild).data = dosyaSözü
-  //     ? dom.i18n({ tr: "KPass’ini incele", en: "View KPass" })
-  //     : dom.i18n({ tr: "Hemen KPass al", en: "Mint KPass" })
-  //   eylemDüğmesi.href = dosyaSözü
-  //     ? dom.i18n(Page.KPass)
-  //     : dom.i18n(Page.Mint);
-  // });
   return (
     <div id={Css.Header}>
       <Css />
@@ -38,6 +28,11 @@ const Header = ({ Chains, ChainNotes, DefaultChain }) => {
         <a class={SharedCss.Header.Link} href={ExternalPage.Discord} target="_blank"
           rel="noreferrer">Discord</a>
         <LangPicker />
+        <Wallet
+          defaultChain={DefaultChain}
+          chains={Chains}
+          chainNotes={ChainNotes}
+        />
         <a id={Css.ActionButton} href={Page.Mint} class={[SharedCss.Button, SharedCss.Action]}>{{
           en: "Mint KPass", tr: "Hemen KPass al"
         }}<ArrowImage inline /></a>

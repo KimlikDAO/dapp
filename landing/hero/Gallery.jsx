@@ -55,7 +55,6 @@ const startGalleryTimer = () => {
  *   title: string,
  *   children: !Array<Promise<string>>
  * }=} props
- * @return {Promise<string>}
  */
 const Card = ({ title, children }) => (
   <li class={Css.Card}>

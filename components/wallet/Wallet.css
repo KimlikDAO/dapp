@@ -6,21 +6,17 @@
 }
 
 /**
- * Ağ düğmesi
  * @export
  */
-#AğDüğmesi {
+#ChainButton {
   border-radius: 10px 0 0 10px;
-  height: 45px;
   padding: 5px 7px;
 }
 
 /**
- * Adres düğmesi
  * @export
  */
-#AdresDüğmesi {
-  min-height: 45px;
+#AddressButton {
   margin-right: 10px;
   white-space: nowrap;
   width: 10em;
@@ -28,11 +24,15 @@
   border-radius: 0 10px 10px 0;
 }
 
-/**
- * Cüzdan dropdownı
- * @export
- */
-#Menü {
+#AddressButton,
+#ChainButton {
+  background-color: #fcfcfc;
+  height: 45px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+}
+
+/** @export */
+#Dropdown {
   background-color: #fff;
   border-radius: 10px;
   box-shadow: 0px 1px 20px rgba(0, 0, 0, 0.2);
@@ -48,58 +48,33 @@
 }
 
 @media (max-width: 1350px) {
-  #Menü {
+  #Dropdown {
     left: auto;
     right: 10px;
   }
 }
 
-/**
- * List of chains the wallet widget supports
- * @export
- */
 #ChainList {
-  cursor: pointer;
-  list-style: none;
-  margin: 0;
-  padding: 0;
   width: 168px;
   border-right: 1px solid #f2f2f2;
 }
 
 /**
- * Cüzdan sağ paneli, bağlantı seçili değilse bağlantıları görüntüler,
- * seçiliyse profili görüntüler.
- *
- * @export
+ * Description under the chain entry
  */
-#SağPanel {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  width: 210px;
-  position: absolute;
-  bottom: 0;
-  right: 0;
+.ChainNote {
+  color: #6337ba;
+  font-size: 9pt;
 }
 
-/**
- * Bağlantı listesi
- * @export
- */
-.MenüListesi {
+.DropdownList {
   cursor: pointer;
   list-style: none;
   margin: 0;
   padding: 0;
-  position: absolute;
-  right: 0;
-  top: 0;
-  width: 210px;
 }
 
-#AğListesi>li,
-.MenüListesi>li {
+.DropdownList>li {
   cursor: pointer;
   align-items: center;
   border-radius: 8px;
@@ -110,18 +85,25 @@
   padding: 6px 12px;
 }
 
-.BağlantıListesi>li {
-  position: relative;
-}
-
-#AğListesi>li:hover,
-.MenüListesi>li:hover {
+.DropdownList>li:hover {
   background-color: #f2f2f2;
 }
 
-.MenüListesi>li.sel {
+.DropdownList>li.sel {
   background-color: #eee;
 }
+
+.ConnectionList {
+  cursor: pointer;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 210px;
+}
+
 
 /**
  * Profil kutusu
@@ -234,12 +216,4 @@ li.Açık>.CüzdanIşığı {
 .Cüzdanİndir {
   position: absolute;
   right: 7px;
-}
-
-/**
- * Ağ notu metni
- */
-.AğNotu {
-  color: #6337ba;
-  font-size: 9pt;
 }

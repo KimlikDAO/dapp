@@ -87,8 +87,10 @@ InfoDialog.show = (prompt, buttonText) => {
 }
 
 /**
- * @param {{ withKPass: boolean, noshow: boolean }=} props
- * @return {Promise<string>}
+ * @param {{
+ *   withKPass: boolean,
+ *   noshow: boolean
+ * }=} props
  */
 const Phone = ({ withKPass = true, noshow }) => (
   <div id={Css.Root} noshow={noshow}>
@@ -126,7 +128,7 @@ Phone.showKPass = (showInDialog, infoSide) => {
   const showSide = () => {
     KPass.showSide(Phone.infoSide);
     KPassDialogButton.innerText = Phone.infoSide
-      ? dom.i18n({ tr: "Gizle", en: "Encrypt" })
+      ? dom.i18n({ en: "Encrypt", tr: "Gizle" })
       : dom.i18n({ en: "Decrypt", tr: "Aç" });
   }
   showSide();

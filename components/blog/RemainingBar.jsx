@@ -41,7 +41,6 @@ const Css = css`
  *   maximum: (number|undefined),
  *   ticker: (string|undefined)
  * }} props
- * @return {Promise<string>}
  */
 const RemainingBar = ({ id, className, children, maximum, ticker }) => (
   <div id={id} class={[Css.Container, className]}>

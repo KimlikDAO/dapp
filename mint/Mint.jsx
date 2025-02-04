@@ -81,8 +81,7 @@ const Welcome = () =>
   </div>;
 
 /**
- * @param {{ Lang: LangCode}=} props
- * @return {Promise<string>}
+ * @param {{ Lang: LangCode }=} props
  */
 const Mint = ({ Lang }) => (
   <html lang={Lang}>

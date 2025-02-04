@@ -23,7 +23,6 @@ const DefaultChain = ChainId.x1;
 
 /**
  * @param {{ Lang: LangCode }=} props
- * @return {Promise<string>}
  */
 const KDAO = ({ Lang }) => (
   <html lang={Lang}>

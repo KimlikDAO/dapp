@@ -15,7 +15,6 @@ const Css = css`
 
 /**
  * @param {{ name: string }=} props
- * @return {Promise<string>}
  */
 const Author = ({ name }) => (
   <div class={Css.Author}>

@@ -1,8 +1,8 @@
 import LandingCss from "../Landing.css";
 import Css from "./Holders.css";
 import ArrowImage from "/components/arrow.svg";
-import { chainImage } from "/components/chains/chains";
-import SharedCss from "/components/shared/SharedCss.jsx";
+import { chainImageSrc } from "/components/chains/chains";
+import SharedCss from "/components/shared/SharedCss";
 import { Page } from "/crate";
 import { ChainId } from "/lib/crosschain/chains";
 import { Image } from "/lib/kastro/image";
@@ -25,11 +25,10 @@ const Chains = {
 
 /**
  * @param {{ chainId: ChainId }=} props
- * @return {Promise<string>}
  */
 const Bubble = ({ chainId }) => (
   <div class={[Css.Bubble, Css[chainId == ChainId.MinaMainnet ? "mina" : chainId.slice(1)]]}>
-    <Image src={chainImage(chainId)} height={40} width={40} bundleHeight={64} bundleWidth={64} />
+    <Image src={chainImageSrc(chainId)} height={40} width={40} bundleHeight={64} bundleWidth={64} />
     <div>
       <div class={Css.BubbleCount}>{Chains[chainId].holders}</div>
       <span class={Css.BubbleName}>{{

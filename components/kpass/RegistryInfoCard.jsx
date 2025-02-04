@@ -10,9 +10,6 @@ const Ids = css`
 /** @const {!Array<string>} */
 const Fields = ["il", "ilçe", "mahalle", "tescil"];
 
-/**
- * @return {Promise<string>}
- */
 const RegistryInfoCard = () => (
   <div class={Css.Card}>
     <div class={Css.CardContent} id={Ids.RegistryInfoCard}>

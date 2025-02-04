@@ -37,7 +37,6 @@ const DefaultChain = ChainId.xa4b1;
 
 /**
  * @param {{ Lang: LangCode }=} props
- * @return {Promise<string>}
  */
 const Landing = ({ Lang }) => (
   <html lang={Lang}>

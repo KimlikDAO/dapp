@@ -1,7 +1,7 @@
 import Author from "../Author";
 import BlogCss from "../blog.css";
 import RemainingBar from "../RemainingBar";
-import Banner from "./Banner.jsx";
+import Banner from "./Banner";
 import { ChainInfos } from "/components/chains/chains";
 import USDT from "/components/tokens/USDT.svg";
 import { ChainId } from "/lib/crosschain/chains";
@@ -36,7 +36,6 @@ const TOTAL = 5_000e6;
 
 /**
  * @param {{ href: string, piggyback: string }=} props
- * @return {Promise<string>}
  */
 const ECDSA = ({ href, piggyback }) => {
   dom.schedule(() =>

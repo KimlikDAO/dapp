@@ -17,7 +17,6 @@ const bağlantıResmi = (ad) => `components/wallet/img/${ad.split(" ")[0].toLowe
 
 /**
  * @param {{ id: ConnectionId, name: (string|undefined) }} props
- * @return {Promise<string>}
  */
 const Connection = ({ id, name }) => (
   <li id={Css.Cüzdan + id}>

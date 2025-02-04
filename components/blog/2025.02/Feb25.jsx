@@ -20,7 +20,6 @@ const Css = css`
  *   piggyback: string,
  *   loading: string
  * }=} props
- * @return {Promise<string>}
  */
 const Feb25 = ({ href, piggyback, loading }) => (
   <a href={href} class={BlogCss.Preview}>

@@ -65,7 +65,6 @@ const Nav = () => {
 
 /**
  * @param {{ style: string, piggyback: string }=} props
- * @return {Promise<string>}
  */
 const KPass = ({ style, piggyback }) => {
   /** @const {!HTMLDivElement} */
@@ -97,13 +96,11 @@ KPass.RightArrow = RightArrow;
 KPass.LeftArrow = LeftArrow;
 
 /**
- * @param {boolean} infoSide
+ * Shows the side given by the infoSide parameter. If no parameter is given,
+ * the side is toggled.
+ *
+ * @param {boolean|undefined} infoSide
  */
 KPass.showSide = (infoSide) => KPass.root.classList.toggle(Css.InfoSide, infoSide);
-
-/**
- * @return {boolean}
- */
-KPass.flip = () => KPass.root.classList.toggle(Css.InfoSide);
 
 export default KPass;

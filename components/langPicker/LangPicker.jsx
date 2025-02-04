@@ -8,10 +8,6 @@ import { I18nString, LangCode } from "/lib/util/i18n";
 
 /** @define {I18nString} */
 const Route = { tr: "tr", en: "en" };
-/** @const {!HTMLAnchorElement} */
-const LangButton = dom.a(Css.LangButton);
-/** @const {!HTMLUListElement} */
-const LangDropdown = dom.ul(Css.LangDropdown);
 
 /**
  * @param {Event} event 
@@ -30,23 +26,30 @@ const langChanged = (event) => {
   }
 };
 
-const LangPicker = () => (
-  <div id={Css.Root}>
-    <Css />
-    <LangButton
-      controlsDropdown={LangDropdown}
-      class={HeaderCss.Link} href="javascript:">{{ en: "EN", tr: "TR" }}
-    </LangButton>
-    <LangDropdown nodisplay onClick={langChanged}>
-      <li id={Css.Root + LangCode.EN}>
-        <EnFlag width={16} height={16} /> English
-      </li>
-      <li id={Css.Root + LangCode.TR}>
-        <TrFlag width={16} height={16} /> Türkçe
-      </li>
-    </LangDropdown>
-  </div>
-);
+const LangPicker = () => {
+  /** @const {!HTMLAnchorElement} */
+  const LangButton = dom.a(Css.LangButton);
+  /** @const {!HTMLUListElement} */
+  const LangDropdown = dom.ul(Css.LangDropdown);
+
+  return (
+    <div id={Css.Root}>
+      <Css />
+      <LangButton
+        controlsDropdown={LangDropdown}
+        class={HeaderCss.Link} href="javascript:">{{ en: "EN", tr: "TR" }}
+      </LangButton>
+      <LangDropdown nodisplay onClick={langChanged}>
+        <li id={Css.Root + LangCode.EN}>
+          <EnFlag width={16} height={16} /> English
+        </li>
+        <li id={Css.Root + LangCode.TR}>
+          <TrFlag width={16} height={16} /> Türkçe
+        </li>
+      </LangDropdown>
+    </div>
+  );
+}
 
 /** @enum {string} */
 LangPicker.Css = Css;

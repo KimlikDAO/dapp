@@ -22,7 +22,6 @@ const JointCss = css`
  *   title: string,
  *   piggyback: (string|undefined)
  * }=} props
- * @return {Promise<string>}
  */
 const Header = ({
   Chains,
