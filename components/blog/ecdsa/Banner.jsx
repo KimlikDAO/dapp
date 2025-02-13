@@ -14,7 +14,9 @@ const Css = css`
 `;
 
 /**
- * @param {{ piggyback: string }} props
+ * @param {{
+ *   piggyback: (string | undefined),
+ * }} props
  */
 export default ({ piggyback }) => (
   <svg viewBox="0 0 440 232">

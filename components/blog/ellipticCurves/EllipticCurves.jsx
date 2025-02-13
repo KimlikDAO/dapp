@@ -38,7 +38,10 @@ const ODUL = "0xfd086bc7cd5c481dcc9c85ebe478a1c0b69fcbb9"
 const TOTAL = 50_000_000_000;
 
 /**
- * @param {{ href: string, piggyback: string }=} props
+ * @param {{
+ *   href: string,
+ *   piggyback: (string | undefined)
+ * }} props
  */
 const EllipticCurves = ({ href, piggyback }) => {
   dom.schedule(

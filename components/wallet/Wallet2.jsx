@@ -182,11 +182,6 @@ const bağlantıSeçildi = (bağlantıAdı, bağlantı) => {
     });
 }
 
-const bağlantıSeçiciGizle = () => {
-  for (const grup of ChainGroups)
-    dom.adlaGizle(Css.BağlantıListesi + grup);
-}
-
 const bağlantıSeçiciGöster = () => {
   /** @const {ChainGroup} */
   const ağGrubu = chainIdToGroup(Chain);

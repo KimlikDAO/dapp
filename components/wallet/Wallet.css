@@ -26,9 +26,8 @@
 
 #AddressButton,
 #ChainButton {
-  background-color: #fcfcfc;
+  background-color: #fafafa;
   height: 45px;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
 }
 
 /** @export */
@@ -54,6 +53,7 @@
   }
 }
 
+/** @export */
 #ChainList {
   width: 168px;
   border-right: 1px solid #f2f2f2;
@@ -67,6 +67,14 @@
   font-size: 9pt;
 }
 
+/** @export */
+#RightPane {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 210px;
+}
+
 .DropdownList {
   cursor: pointer;
   list-style: none;
@@ -75,6 +83,7 @@
 }
 
 .DropdownList>li {
+  position: relative;
   cursor: pointer;
   align-items: center;
   border-radius: 8px;
@@ -93,102 +102,30 @@
   background-color: #eee;
 }
 
-.ConnectionList {
-  cursor: pointer;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  position: absolute;
-  right: 0;
-  top: 0;
-  width: 210px;
-}
-
-
-/**
- * Profil kutusu
- */
-#Profil {
-  display: flex;
-  height: 90px;
-  padding: 8px;
-}
-
-/**
- * Profil resmi
- * @export
- */
-#ProfilResmi {
-  cursor: pointer;
-  margin-right: 8px;
-  background: #fff;
-  border: 1px solid rgba(200, 200, 200, 0.5);
-}
-
-/**
- * Adres metni
- * @export
- */
-#ProfilAdresMetni {
-  color: #666;
-  cursor: pointer;
-  font-size: 10pt;
-  font-weight: 700;
-  line-height: 0.4;
-  margin-top: 5px;
-}
-
-#ProfilAdresMetni>span {
-  margin-left: 5px;
-}
-
-#ProfilAdresMetni>span:active {
-  position: relative;
-  top: 1px;
-}
-
-/**
- * Debank linki
- * @export
- */
-#DebankLinki {
-  cursor: pointer;
-  font-size: 9pt;
-  color: #666;
-}
-
-/**
- * Explorer linki
- * @export
- */
-#ExplorerLinki {
-  cursor: pointer;
-  font-size: 9pt;
-  color: #666;
-}
+/** @export */
+#ConnectedPane {}
 
 /** @export */
-.Açık {}
+.Off {}
 
-li.Açık>.CüzdanIşığı {
-  background: green;
+li.Off>.ProviderLight {
+  background: rgb(241, 29, 29);
 }
 
 /**
- * Cüzdan ışığı
+ * Provider availability light
  */
-.CüzdanIşığı {
-  width: 6px;
-  height: 6px;
+.ProviderLight {
+  background: green;
   border-radius: 3px;
-  background: rgb(241, 29, 29);
-  position: absolute;
   bottom: 14px;
+  height: 6px;
   left: 42px;
+  position: absolute;
+  width: 6px;
 }
 
-#KPassDüğmesi,
-.Cüzdanİndir {
+.Button {
   background: #f2f2f2;
   border-radius: 10px;
   border: 1px solid #ddd;
@@ -201,19 +138,7 @@ li.Açık>.CüzdanIşığı {
   text-wrap: nowrap;
 }
 
-/**
- * KPass eylem düğmesi
- * @export
- */
-#KPassDüğmesi {
-  margin-top: 20px;
-}
-
-/**
- * Cüzdan indir düğmesi
- * @export
- */
-.Cüzdanİndir {
+.DownloadWalletButton {
   position: absolute;
   right: 7px;
 }

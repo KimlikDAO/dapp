@@ -46,18 +46,21 @@ hr {
 }
 
 /**
- * @export {nodisplay}
+ * Througout kastro nodisplay and noshare have shortcuts since we strive to render
+ * as much as possible to the DOM upfont.
+ *
+ * @export {NoDisplay}
  * @preserve
  */
-.ndsp {
+.ndp {
   display: none;
 }
 
 /**
- * @export {noshow}
+ * @export {NoShow}
  * @preserve
  */
-.nshw {
+.nsh {
   opacity: 0;
   pointer-events: none;
 }

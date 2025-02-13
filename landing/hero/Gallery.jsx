@@ -2,6 +2,7 @@ import Css from "./Gallery.css";
 import Phone from "/components/phone/Phone";
 import SharedCss from "/components/shared/SharedCss.css";
 import dom from "/lib/util/dom";
+import { I18nString } from "/lib/util/i18n";
 
 /** @const {!HTMLDivElement} */
 const Bullets = dom.div(Css.Bullets);
@@ -52,9 +53,9 @@ const startGalleryTimer = () => {
 
 /**
  * @param {{
- *   title: string,
- *   children: !Array<Promise<string>>
- * }=} props
+ *   title: (string | I18nString),
+ *   children: (* | undefined)
+ * }} props
  */
 const Card = ({ title, children }) => (
   <li class={Css.Card}>

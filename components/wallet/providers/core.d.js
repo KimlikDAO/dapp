@@ -1,14 +1,4 @@
-/**
- * @externs
- */
-
 import eth from "/lib/ethereum/eth.d";
-
-/** @const {eth.UiProvider|undefined} */
-window.ethereum;
-
-/** @const {boolean|undefined} */
-window.ethereum.isRabby;
 
 /**
  * @interface

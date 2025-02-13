@@ -26,11 +26,11 @@ const KPassDemo = () => (
       <use href={`#${HeaderCss.Logomark}`} width={24} height={24} />
     </svg>
     <div class={KPass.Css.Nav}>
-      <button class={[KPass.Css.Button, KPass.Css.LeftButton]}>
+      <button class={KPass.Css.Button}>
         <KPass.LeftArrow />
       </button>
       1 / 5
-      <button class={[KPass.Css.Button, KPass.Css.RightButton]}>
+      <button class={KPass.Css.Button}>
         <KPass.RightArrow />
       </button>
     </div>

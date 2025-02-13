@@ -32,10 +32,8 @@ const Logo = () => (
 );
 
 const Nav = () => {
-  /** @const {!HTMLButtonElement} */
-  const LeftButton = dom.button(Css.LeftButton);
-  /** @const {!HTMLButtonElement} */
-  const RightButton = dom.button(Css.RightButton);
+  /** @const {!HTMLDivElement} */
+  const Root = dom.div(Css.Nav);
   /** @type {number} */
   let currentCard = 0;
   /** @type {number} */
@@ -44,27 +42,30 @@ const Nav = () => {
   const nextCard = () => {
     currentCard = (currentCard + 1) % totalCards;
     dom.slideCard(Cards, currentCard);
-    /** @type {!Text} */(LeftButton.nextSibling).data = `${currentCard + 1} / ${totalCards}`;
+    /** @type {!Text} */(Root.childNodes[1]).data = `${currentCard + 1} / ${totalCards}`;
   }
   const prevCard = () => {
     currentCard += totalCards - 2;
     nextCard();
   }
   return (
-    <div class={Css.Nav}>
-      <LeftButton onClick={prevCard} class={[Css.Button, Css.LeftButton]}>
+    <Root class={Css.Nav}>
+      <button onClick={prevCard} class={Css.Button}>
         <LeftArrow />
-      </LeftButton>
+      </button>
       1 / {totalCards}
-      <RightButton onClick={nextCard} class={[Css.Button, Css.RightButton]}>
+      <button onClick={nextCard} class={Css.Button}>
         <RightArrow />
-      </RightButton>
-    </div>
+      </button>
+    </Root>
   );
 }
 
 /**
- * @param {{ style: string, piggyback: string }=} props
+ * @param {{
+ *   style: (string | undefined),
+ *   piggyback: (string | undefined)
+ * }} props
  */
 const KPass = ({ style, piggyback }) => {
   /** @const {!HTMLDivElement} */

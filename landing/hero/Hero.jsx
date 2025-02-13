@@ -31,7 +31,7 @@ const Hero = () => (
           }}</a>
         </div>
       </div>
-      <Phone withKPass />
+      <Phone noshow={false} />
     </div>
   </div>
 );

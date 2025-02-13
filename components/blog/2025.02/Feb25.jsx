@@ -17,9 +17,9 @@ const Css = css`
 /**
  * @param {{
  *   href: string,
- *   piggyback: string,
- *   loading: string
- * }=} props
+ *   piggyback: (string | undefined),
+ *   loading: (string | undefined)
+ * }} props
  */
 const Feb25 = ({ href, piggyback, loading }) => (
   <a href={href} class={BlogCss.Preview}>

@@ -1,4 +1,3 @@
-import Script from "kastro:./Landing.jsx";
 import Header from "./header/Header";
 import Hero from "./hero/Hero";
 import Holders from "./holders/Holders";
@@ -26,7 +25,7 @@ const Chains = [
   ChainId.x38
 ];
 
-/** @const {!Object<ChainId, I18nString>} */
+/** @type {!Object<ChainId, I18nString>} */
 const ChainNotes = {
   [ChainId.xa4b1]: { en: "Signal chain", tr: "Ana ağ" },
   [ChainId.MinaMainnet]: { en: "New ✨", tr: "Yeni ✨" },
@@ -36,7 +35,7 @@ const ChainNotes = {
 const DefaultChain = ChainId.xa4b1;
 
 /**
- * @param {{ Lang: LangCode }=} props
+ * @param {{ Lang: LangCode }} props
  */
 const Landing = ({ Lang }) => (
   <html lang={Lang}>
@@ -49,10 +48,9 @@ const Landing = ({ Lang }) => (
       <title>{Title}</title>
       <link rel="canonical" href={HostUrl} />
       <Favicon raster={32} rel="icon" />
-      <Script DefaultChain={DefaultChain} Chains={Chains} />
     </head>
     <body id={Css.Root}>
-      <Header DefaultChain={DefaultChain} Chains={Chains} ChainNotes={ChainNotes} />
+      <Header defaultChain={DefaultChain} chains={Chains} chainNotes={ChainNotes} />
       <Hero />
       <Learn2Earn />
       <Holders />

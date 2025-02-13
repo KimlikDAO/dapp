@@ -23,6 +23,9 @@ const Css = css`
     color: rgb(88, 84, 214);
     background-color: #EDE6FC
   }
+  .Purple:hover {
+    background-color: #DED8F9;
+  }
 `;
 
 /** @const {string} */
@@ -35,11 +38,14 @@ const USDT_ARB = "0xfd086bc7cd5c481dcc9c85ebe478a1c0b69fcbb9";
 const TOTAL = 5_000e6;
 
 /**
- * @param {{ href: string, piggyback: string }=} props
+ * @param {{
+ *   href: string,
+ *   piggyback: (string | undefined)
+ * }} props
  */
 const ECDSA = ({ href, piggyback }) => {
   dom.schedule(() =>
-    new ERC20("//" + ChainInfos[ChainId.xa4b1].rpcUrl, USDT_ARB)
+    new ERC20("https://" + ChainInfos[ChainId.xa4b1].rpcUrl, USDT_ARB)
       .allowance(DEV_FUND, ODUL)
       .then((allowance) =>
         RemainingBar.setRemaining(Css.USDT, parseInt(allowance.slice(-36), 16), TOTAL)
@@ -51,7 +57,7 @@ const ECDSA = ({ href, piggyback }) => {
       <Css />
       <BlogCss />
       <div>
-        <Banner class={BlogCss.PreviewBanner} inline piggyback={piggyback} />
+        <Banner piggyback={piggyback} />
         <h4>{{
           en: "Elliptic curve digital signature algorithm",
           tr: "Eliptik eğri imza algoritması"

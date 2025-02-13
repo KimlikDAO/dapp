@@ -24,7 +24,7 @@ const Chains = {
 };
 
 /**
- * @param {{ chainId: ChainId }=} props
+ * @param {{ chainId: ChainId }} props
  */
 const Bubble = ({ chainId }) => (
   <div class={[Css.Bubble, Css[chainId == ChainId.MinaMainnet ? "mina" : chainId.slice(1)]]}>
@@ -48,7 +48,7 @@ const Holders = () => (
           en: <>KPass holders<br />by chain.</>,
           tr: <>Ağlara göre<br />KPass sahipleri.</>,
         }}</h2>
-        <span class={[Css.Text, "anac"]}>{{
+        <span class={[Css.Text, LandingCss.Description]}>{{
           en: `Join over ${Object.values(Chains).reduce((sum, x) => sum + x.holders, 0)
             } KPass holders across ${Object.keys(Chains).length} different chains.`,
           tr: `6 farklı zincirde ${Object.values(Chains).reduce((sum, x) => sum + x.holders, 0)

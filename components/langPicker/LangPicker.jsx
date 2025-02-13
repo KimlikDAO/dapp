@@ -2,7 +2,6 @@ import Css from "./LangPicker.css";
 import EnFlag from "./en.svg";
 import TrFlag from "./tr.svg";
 import HeaderCss from "/components/header/Header.css";
-import { HostUrl } from "/crate";
 import dom from "/lib/util/dom";
 import { I18nString, LangCode } from "/lib/util/i18n";
 
@@ -10,27 +9,30 @@ import { I18nString, LangCode } from "/lib/util/i18n";
 const Route = { tr: "tr", en: "en" };
 
 /**
- * @param {Event} event 
+ * @param {{ cookieDomain: string }} props
  */
-const langChanged = (event) => {
-  /** @const {!Element} */
-  const targetElem = /** @type {!Element} */(event.target);
-  /** @const {!HTMLLIElement} */
-  const li = /** @type {!HTMLLIElement} */(targetElem.closest("li"));
-
-  /** @const {LangCode} */
-  const newLang = /** @type {LangCode} */(li.id.slice(Css.Root.length));
-  if (newLang != dom.Lang) {
-    document.cookie = `l=${newLang};path=/;domain=.${HostUrl.slice(8)};SameSite=Strict;max-age=${1e6}`;
-    window.location.href = Route[newLang] + window.location.hash;
-  }
-};
-
-const LangPicker = () => {
+const LangPicker = ({ cookieDomain }) => {
   /** @const {!HTMLAnchorElement} */
   const LangButton = dom.a(Css.LangButton);
   /** @const {!HTMLUListElement} */
   const LangDropdown = dom.ul(Css.LangDropdown);
+
+  /**
+   * @param {Event} event 
+   */
+  const langChanged = (event) => {
+    /** @const {!Element} */
+    const targetElem = /** @type {!Element} */(event.target);
+    /** @const {!HTMLLIElement} */
+    const li = /** @type {!HTMLLIElement} */(targetElem.closest("li"));
+
+    /** @const {LangCode} */
+    const newLang = /** @type {LangCode} */(li.id.slice(Css.Root.length));
+    if (newLang != dom.Lang) {
+      document.cookie = `l=${newLang};path=/;domain=${cookieDomain};SameSite=Strict;max-age=${1e6}`;
+      window.location.href = Route[newLang] + window.location.hash;
+    }
+  };
 
   return (
     <div id={Css.Root}>

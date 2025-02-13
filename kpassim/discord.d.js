@@ -1,6 +1,5 @@
 /**
  * @author KimlikDAO
- * @externs
  */
 
 import eth from "/lib/ethereum/eth.d";

@@ -1,0 +1,50 @@
+#Root {
+  display: flex;
+  height: 90px;
+  padding: 8px;
+}
+
+/** @export */
+#Pane {}
+
+/** @export */
+#KPassImage {
+  cursor: pointer;
+  margin-right: 8px;
+  background: #fff;
+  border: 1px solid rgba(200, 200, 200, 0.5);
+}
+
+#AddresText {
+  color: #666;
+  cursor: pointer;
+  font-size: 10pt;
+  font-weight: 700;
+  line-height: 0.4;
+  margin-top: 5px;
+}
+
+#AddresText>span {
+  margin-right: 5px;
+}
+
+#AddresText>span:active {
+  position: relative;
+  top: 1px;
+}
+
+#DeBankLink {
+  cursor: pointer;
+  font-size: 9pt;
+  color: #666;
+}
+
+#ExplorerLink {
+  cursor: pointer;
+  font-size: 9pt;
+  color: #666;
+}
+
+#KPassButton {
+  margin-top: 20px;
+}

@@ -88,17 +88,17 @@ InfoDialog.show = (prompt, buttonText) => {
 
 /**
  * @param {{
- *   withKPass: boolean,
- *   noshow: boolean
- * }=} props
+ *   noshow: (boolean | undefined),
+ *   piggyback: (string | undefined)
+ * }} props
  */
-const Phone = ({ withKPass = true, noshow }) => (
+const Phone = ({ noshow, piggyback }) => (
   <div id={Css.Root} noshow={noshow}>
     <Css />
     <JointCss />
     <WalletApp />
     <KPassDialog>
-      {withKPass && <KPass />}
+      <KPass piggyback={piggyback} />
       <KPassDialogButton>{{ en: "Encrypt", tr: "Gizle" }}</KPassDialogButton>
     </KPassDialog>
     <InfoDialog />

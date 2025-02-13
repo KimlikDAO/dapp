@@ -1,7 +1,3 @@
-/**
- * @externs
- */
-
 import mina from "/lib/mina/mina.d";
 import "/lib/mina/provider.d";
 

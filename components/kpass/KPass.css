@@ -80,18 +80,6 @@
 }
 
 /**
- * KPass Sağ Düğmesi
- * @export
- */
-#RightButton {}
-
-/**
- * KPass Sol Düğmesi
- * @export
- */
-#LeftButton {}
-
-/**
  * KPass Ok
  */
 #Arrow {}

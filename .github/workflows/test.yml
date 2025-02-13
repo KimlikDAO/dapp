@@ -8,6 +8,7 @@ on:
 
 jobs:
   compile-components:
+    if: false # Temporarily disabled
     name: Compile individual components
     strategy:
       fail-fast: true

@@ -1,7 +1,8 @@
 {
   "compilerOptions": {
+    "strictNullChecks": true,
     "jsx": "react-jsx",
-    "jsxImportSource": "/lib/kastro/compiler",
+    "jsxImportSource": "/lib/kastro/transpiler",
     "baseUrl": ".",
     "paths": {
       "/*": [
