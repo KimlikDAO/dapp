@@ -183,6 +183,20 @@ const dropdownClicked = (event) => {
   event.stopPropagation();
 }
 
+const connectProvider = () => {
+  SelectedProvider.connect(ChainId.x1, chainChanged, addressChanged);
+  /** @const {string} */
+  const cookie = document.cookie;
+  /** @const {number} */
+  const idx = cookie.indexOf("cu=");
+  /** @const {ProviderId} */
+  const providerId = /** @type {ProviderId} */(cookie.slice(idx + 3, idx + 5));
+  /** @const {Provider} */
+  const provider = Providers[providerId];
+  if (provider && provider.initIfAvailable())
+    providerSelected(providerId);
+}
+
 /**
  * @param {{
  *   defaultChain: ChainId,
@@ -215,10 +229,8 @@ const Wallet = ({
   Wallet.connectText = Wallet.addressButton.innerText;
   /** @const {!HTMLDivElement} */
   const Dropdown = dom.div(Css.Dropdown);
-  /** @const {!HTMLDivElement} */
-  const ConnectedPane = dom.div(Css.ConnectedPane);
 
-  SelectedProvider.connect(defaultChain, chainChanged, addressChanged);
+  connectProvider();
 
   return (
     <div id={Css.Root}>
@@ -238,11 +250,11 @@ const Wallet = ({
         <Switch id={Css.RightPane} instance={Wallet.rightPane} initialSelected={0}>
           <EvmProviderList />
           <MinaProviderList />
-          <ConnectedPane>
+          <div>
             <Profile mintKPassUrl$={mintKPassUrl$} viewKPassUrl={viewKPassUrl} />
             <hr />
             {children}
-          </ConnectedPane>
+          </div>
         </Switch>
       </Dropdown>
     </div>

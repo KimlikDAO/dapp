@@ -48,7 +48,6 @@ const ProviderListItem = ({ id, name$ }) => {
   const isAvailable = provider.initIfAvailable();
 
   if (!isAvailable) {
-    console.log(`${id} is unavailable`);
     Root.classList.add(Css.Off);
     /** @const {!Element} */
     const button = Root.children[2];
