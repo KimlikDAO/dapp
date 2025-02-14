@@ -1,5 +1,6 @@
 import { Auro } from "./providers/auro";
 import { Core } from "./providers/core";
+import { Dummy } from "./providers/dummy";
 import { MetaMask } from "./providers/metamask";
 import { Rabby } from "./providers/rabby";
 import Css from "./Wallet.css";
@@ -9,6 +10,7 @@ import dom from "/lib/util/dom";
 
 /** @enum {string} */
 const ProviderId = {
+  Dummy: "__",
   Core: "co",
   MetaMask: "mm",
   Rabby: "ra",
@@ -17,6 +19,7 @@ const ProviderId = {
 
 /** @type {!Object<ProviderId, !Provider>} */
 const Providers = {
+  [ProviderId.Dummy]: Dummy,
   [ProviderId.Rabby]: Rabby,
   [ProviderId.Core]: Core,
   [ProviderId.MetaMask]: MetaMask,
@@ -27,7 +30,7 @@ const Providers = {
  * @param {string} name
  * @return {string} url
  */
-const connectionImageSrc = (name) => `components/wallet/img/${name.split(" ")[0].toLowerCase()}.svg`;
+const providerImageSrc = (name) => `components/wallet/img/${name.split(" ")[0].toLowerCase()}.svg`;
 
 /**
  * @noinline
@@ -55,7 +58,7 @@ const ProviderListItem = ({ id, name$ }) => {
 
   return (
     <Root>
-      <Image src={connectionImageSrc(name$)} width={32} height={32} />
+      <Image src={providerImageSrc(name$)} width={32} height={32} />
       <div class={Css.ProviderLight}></div> {name$}
       <span class={[Css.Button, Css.DownloadWalletButton]} nodisplay>{{
         en: "GET",
@@ -82,6 +85,6 @@ const MinaProviderList = () => (
 export {
   EvmProviderList,
   MinaProviderList,
-  Providers,
-  ProviderId
+  ProviderId,
+  Providers
 };

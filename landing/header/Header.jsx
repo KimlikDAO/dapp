@@ -3,10 +3,13 @@ import ArrowImage from "/components/arrow.svg";
 import LangPicker from "/components/langPicker/LangPicker";
 import Logo from "/components/logo.svg";
 import SharedCss from "/components/shared/SharedCss";
+import LandingMenu from "/components/wallet/rightPanes/LandingMenu";
 import Wallet from "/components/wallet/Wallet";
 import { ExternalPage, HostUrl, Page } from "/crate";
 import { ChainId } from "/lib/crosschain/chains";
 import { I18nString } from "/lib/util/i18n";
+import dom from "/lib/util/dom";
+import { i18n } from "/lib/util/i18n";
 
 /**
  * @param {{
@@ -32,7 +35,15 @@ const Header = ({ defaultChain, chains, chainNotes }) => (
         defaultChain={defaultChain}
         chains={chains}
         chainNotes={chainNotes}
-      />
+        mintKPassUrl={dom.i18n(Page.Mint)}
+        viewKPassUrl={dom.i18n(Page.KPass)}
+      >
+        <LandingMenu
+          ambassadorUrl$={i18n`${ExternalPage.Join}#sa-ambassador1`}
+          voteUrl$={Page.Vote}
+          revokeUrl$={Page.Revoke}
+        />
+      </Wallet>
       <a id={Css.ActionButton} href={Page.Mint} class={[SharedCss.Button, SharedCss.Action]}>{{
         en: "Mint KPass", tr: "Hemen KPass al"
       }}<ArrowImage inline /></a>

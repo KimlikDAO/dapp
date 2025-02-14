@@ -5,9 +5,6 @@
 }
 
 /** @export */
-#Pane {}
-
-/** @export */
 #KPassImage {
   cursor: pointer;
   margin-right: 8px;
@@ -15,6 +12,7 @@
   border: 1px solid rgba(200, 200, 200, 0.5);
 }
 
+/** @export */
 #AddresText {
   color: #666;
   cursor: pointer;
@@ -33,18 +31,21 @@
   top: 1px;
 }
 
+/** @export */
 #DeBankLink {
   cursor: pointer;
   font-size: 9pt;
   color: #666;
 }
 
+/** @export */
 #ExplorerLink {
   cursor: pointer;
   font-size: 9pt;
   color: #666;
 }
 
+/** @export */
 #KPassButton {
   margin-top: 20px;
 }

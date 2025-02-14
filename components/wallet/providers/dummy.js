@@ -1,14 +1,6 @@
 import { ChainId } from "/lib/crosschain/chains";
 import { Provider } from "/lib/crosschain/provider";
 
-/** @enum {string} */
-const ProviderId = {
-  Core: "co",
-  Rabby: "ra",
-  MetaMask: "mm",
-  Auro: "au",
-};
-
 /**
  * @interface
  * @struct
@@ -27,9 +19,8 @@ class IDummyProvider extends Provider {
 
 /**
  * @type {!IDummyProvider}
- * @const
  */
-const DummyProvider = /** @type {!IDummyProvider} */({
+const Dummy = /** @type {!IDummyProvider} */({
   /**
    * @override
    *
@@ -52,8 +43,8 @@ const DummyProvider = /** @type {!IDummyProvider} */({
    * @return {Promise<void>|void}
    */
   connect: (chain, chainChanged, addressChanged, onlyIfApproved) => {
-    DummyProvider.chainChanged = chainChanged;
-    DummyProvider.addressChanged = addressChanged;
+    Dummy.chainChanged = chainChanged;
+    Dummy.addressChanged = addressChanged;
   },
 
   /**
@@ -68,7 +59,7 @@ const DummyProvider = /** @type {!IDummyProvider} */({
    * @return {Promise<void>|void}
    */
   switchChain(chainId) {
-    DummyProvider.chainChanged(chainId);
+    Dummy.chainChanged(chainId);
   },
 
   /**
@@ -89,6 +80,5 @@ const DummyProvider = /** @type {!IDummyProvider} */({
 });
 
 export {
-  DummyProvider,
-  ProviderId
+  Dummy
 };
