@@ -6,21 +6,33 @@ import { ChainInfos } from "/components/chains/chains";
 import { ChainGroup, ChainId } from "/lib/crosschain/chains";
 import dom from "/lib/util/dom";
 
-const Profile = () => (
-  <div id={Css.Root}>
-    <Css />
-    <QmarkImage id={Css.KPassImage} height={80} width={80} />
-    <div>
-      <div id={Css.AddresText}>
-        <span>0xcCc0...0cCc</span>
-        <span><CopyImage inline /></span>
+/**
+ * @param {{
+ *   mintKPassUrl$: (string | undefined),
+ *   viewKPassUrl: string,
+ * }} props
+ */
+const Profile = ({ mintKPassUrl$, viewKPassUrl }) => {
+  /** @const {string} */
+  Profile.viewKPassUrl = viewKPassUrl;
+  return (
+    <div id={Css.Root}>
+      <Css />
+      <QmarkImage id={Css.KPassImage} height={80} width={80} />
+      <div>
+        <div id={Css.AddresText}>
+          <span>0xcCc0...0cCc</span>
+          <span><CopyImage inline /></span>
+        </div>
+        <span id={Css.DeBankLink}>DeBank</span>{" "}
+        <span id={Css.ExplorerLink}>Explorer</span>
+        <a href={mintKPassUrl$} class={WalletCss.Button} id={Css.KPassButton}>{{
+          en: "MINT KPASS", tr: "KPASS AL"
+        }}</a>
       </div>
-      <span id={Css.DeBankLink}>DeBank</span>{" "}
-      <span id={Css.ExplorerLink}>Explorer</span>
-      <div class={WalletCss.Button} id={Css.KPassButton}>{{ en: "MINT KPASS", tr: "KPASS AL" }}</div>
-    </div>
-  </div >
-);
+    </div >
+  );
+}
 
 /**
  * @param {string} address
@@ -44,19 +56,20 @@ Profile.setAddress = (address, chainId) => {
 
 /**
  * @param {boolean} exists
- * @param {string} url
  */
-Profile.setKPass = (exists, url) => {
-  const button = dom.div(Css.KPassButton);
+Profile.setKPass = (exists) => {
+  const link = dom.a(Css.KPassButton);
   const image = dom.img(Css.KPassImage);
   if (exists) {
-    Profile.mintText ||= button.innerText;
-    button.innerText = dom.i18n({ tr: "KPASS’İNİ İNCELE", en: "VIEW KPASS" });
+    Profile.mintText ||= link.innerText;
+    Profile.mintKPassUrl ||= link.href;
+    link.innerText = dom.i18n({ tr: "KPASS’İNİ İNCELE", en: "VIEW KPASS" });
+    link.href = Profile.viewKPassUrl;
     if (Profile.placeholderImage) image.src = Profile.placeholderImage;
   } else {
-    if (Profile.mintText) button.innerText = Profile.mintText;
+    if (Profile.mintText) link.innerText = Profile.mintText;
+    link.href = Profile.mintKPassUrl;
   }
-  button.onclick = image.onclick = () => window.location.href = url;
 }
 
 /**

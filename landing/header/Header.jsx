@@ -7,9 +7,8 @@ import LandingMenu from "/components/wallet/rightPanes/LandingMenu";
 import Wallet from "/components/wallet/Wallet";
 import { ExternalPage, HostUrl, Page } from "/crate";
 import { ChainId } from "/lib/crosschain/chains";
-import { I18nString } from "/lib/util/i18n";
 import dom from "/lib/util/dom";
-import { i18n } from "/lib/util/i18n";
+import { i18n, I18nString } from "/lib/util/i18n";
 
 /**
  * @param {{
@@ -35,7 +34,7 @@ const Header = ({ defaultChain, chains, chainNotes }) => (
         defaultChain={defaultChain}
         chains={chains}
         chainNotes={chainNotes}
-        mintKPassUrl={dom.i18n(Page.Mint)}
+        mintKPassUrl$={Page.Mint}
         viewKPassUrl={dom.i18n(Page.KPass)}
       >
         <LandingMenu

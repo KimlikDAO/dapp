@@ -129,7 +129,7 @@ const kpassChanged = () => {
     .then((cidHex) => {
       if (chainId != ChainList.selected || address != Address) return;
       const hasKPass = cidHex.replaceAll("0", "") != "x";
-      Profile.setKPass(hasKPass, hasKPass ? Wallet.viewKPassUrl : Wallet.mintKPassUrl);
+      Profile.setKPass(hasKPass);
 
       const filePromise = hasKPass
         ? ipfs.readWithCIDBytes(KIMLIKDAO_IPFS_URL, hex.toUint8Array(cidHex.slice(2)))
@@ -191,7 +191,7 @@ const dropdownClicked = (event) => {
  *   cookieDomain: string,
  *   piggyback: (string | undefined),
  *   children: (!Array<Element> | undefined),
- *   mintKPassUrl: string,
+ *   mintKPassUrl$: (string | undefined),
  *   viewKPassUrl: string,
  * }} props
  */
@@ -202,7 +202,7 @@ const Wallet = ({
   cookieDomain,
   piggyback,
   children,
-  mintKPassUrl,
+  mintKPassUrl$,
   viewKPassUrl
 }) => {
   /** @const {!HTMLButtonElement} */
@@ -213,10 +213,6 @@ const Wallet = ({
   Wallet.cookieDomain = cookieDomain;
   /** @const {string} */
   Wallet.connectText = Wallet.addressButton.innerText;
-  /** @const {string} */
-  Wallet.mintKPassUrl = mintKPassUrl;
-  /** @const {string} */
-  Wallet.viewKPassUrl = viewKPassUrl;
   /** @const {!HTMLDivElement} */
   const Dropdown = dom.div(Css.Dropdown);
   /** @const {!HTMLDivElement} */
@@ -243,7 +239,7 @@ const Wallet = ({
           <EvmProviderList />
           <MinaProviderList />
           <ConnectedPane>
-            <Profile />
+            <Profile mintKPassUrl$={mintKPassUrl$} viewKPassUrl={viewKPassUrl} />
             <hr />
             {children}
           </ConnectedPane>
