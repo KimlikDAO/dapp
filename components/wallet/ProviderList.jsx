@@ -5,6 +5,7 @@ import { MetaMask } from "./providers/metamask";
 import { Rabby } from "./providers/rabby";
 import Css from "./Wallet.css";
 import { Provider } from "/lib/crosschain/provider";
+import "/lib/ethereum/provider.d";
 import { Image } from "/lib/kastro/image";
 import dom from "/lib/util/dom";
 
@@ -12,7 +13,7 @@ import dom from "/lib/util/dom";
 const ProviderId = {
   Dummy: "__",
   Core: "co",
-  MetaMask: "mm",
+  MetaMask: "me",
   Rabby: "ra",
   Auro: "au"
 };
@@ -35,49 +36,75 @@ const providerImageSrc = (name) => `components/wallet/img/${name.split(" ")[0].t
 /**
  * @noinline
  * @param {{
- *   id: ProviderId,
+ *   providerId: ProviderId,
  *   name$: (string|undefined)
  * }} props
  */
-const ProviderListItem = ({ id, name$ }) => {
+const ProviderListItem = ({ providerId, name$ }) => {
   /** @const {!HTMLLIElement} */
-  const Root = dom.li(`${Css.Root}.${id}`);
+  const Item = dom.li(`${Css.Root}.${providerId}`);
+  /** @const {!Element} */
+  const button = Item.children[2];
   /** @const {!Provider} */
-  const provider = Providers[id];
-  /** @const {boolean} */
-  const isAvailable = provider.initIfAvailable();
+  const provider = Providers[providerId];
 
-  if (!isAvailable) {
-    Root.classList.add(Css.Off);
-    /** @const {!Element} */
-    const button = Root.children[2];
+  if (provider.isInitialized()) {
+    dom.hide(button);
+    Item.classList.add(Css.On);
+  } else
     button.onclick = () => window.open(provider.downloadURL(), "_blank").focus();
-    dom.show(button);
-  }
 
   return (
-    <Root>
+    <Item>
       <Image src={providerImageSrc(name$)} width={32} height={32} />
       <div class={Css.ProviderLight}></div> {name$}
-      <span class={[Css.Button, Css.DownloadWalletButton]} nodisplay>{{
+      <span class={[Css.Button, Css.DownloadWalletButton]}>{{
         en: "GET",
         tr: "İNDİR"
       }}</span>
-    </Root>
+    </Item>
   );
 }
 
+/**
+ * @param {ProviderId} providerId
+ * @param {*} nativeProvider
+ */
+ProviderListItem.initialize = (providerId, nativeProvider) => {
+  const item = dom.li(`${Css.Root}.${providerId}`);
+  dom.hide(item.children[2]);
+  item.classList.add(Css.On);
+  const provider = Providers[providerId];
+  if (provider)
+    provider.setNativeProvider(nativeProvider);
+}
+
+/**
+ * @param {!Event} event
+ */
+const onAnnounceProvider = (event) => {
+  const { info, provider } = /** @type {eth.ProviderDetail} */(event["detail"]);
+  /** @const {number} */
+  const idx = info.rdns.indexOf(".");
+  /** @const {ProviderId} */
+  const providerId = /** @type {ProviderId} */(info.rdns.slice(idx + 1, idx + 3));
+  if (providerId in Providers)
+    ProviderListItem.initialize(providerId, provider);
+}
+window.addEventListener("eip6963:announceProvider", onAnnounceProvider);
+window.dispatchEvent(new Event("eip6963:requestProvider"));
+
 const EvmProviderList = () => (
   <ul class={Css.DropdownList}>
-    <ProviderListItem id={ProviderId.Rabby} name$="Rabby Wallet" />
-    <ProviderListItem id={ProviderId.Core} name$="Core" />
-    <ProviderListItem id={ProviderId.MetaMask} name$="Metamask" />
+    <ProviderListItem providerId={ProviderId.Rabby} name$="Rabby Wallet" />
+    <ProviderListItem providerId={ProviderId.Core} name$="Core" />
+    <ProviderListItem providerId={ProviderId.MetaMask} name$="Metamask" />
   </ul>
 );
 
 const MinaProviderList = () => (
   <ul class={Css.DropdownList}>
-    <ProviderListItem id={ProviderId.Auro} name$="Auro" />
+    <ProviderListItem providerId={ProviderId.Auro} name$="Auro" />
   </ul>
 );
 

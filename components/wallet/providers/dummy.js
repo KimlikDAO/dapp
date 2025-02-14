@@ -2,31 +2,11 @@ import { ChainId } from "/lib/crosschain/chains";
 import { Provider } from "/lib/crosschain/provider";
 
 /**
- * @interface
- * @struct
+ * @type {!Provider}
  */
-class IDummyProvider extends Provider {
-  /**
-   * @param {ChainId} chainId
-   */
-  chainChanged(chainId) { }
-
-  /**
-   * @param {!Array<string>} addresses
-   */
-  addressChanged(addresses) { }
-}
-
-/**
- * @type {!IDummyProvider}
- */
-const Dummy = /** @type {!IDummyProvider} */({
-  /**
-   * @override
-   *
-   * @return {boolean}
-   */
-  initIfAvailable: () => true,
+const Dummy = /** @type {!Provider} */({
+  isInitialized: () => true,
+  setNativeProvider: () => { },
 
   /**
    * @return {string}
@@ -42,9 +22,8 @@ const Dummy = /** @type {!IDummyProvider} */({
    * @param {boolean=} onlyIfApproved
    * @return {Promise<void>|void}
    */
-  connect: (chain, chainChanged, addressChanged, onlyIfApproved) => {
-    Dummy.chainChanged = chainChanged;
-    Dummy.addressChanged = addressChanged;
+  connect(chain, chainChanged, addressChanged, onlyIfApproved) {
+    this.chainChanged = chainChanged;
   },
 
   /**
@@ -59,7 +38,7 @@ const Dummy = /** @type {!IDummyProvider} */({
    * @return {Promise<void>|void}
    */
   switchChain(chainId) {
-    Dummy.chainChanged(chainId);
+    this.chainChanged(chainId);
   },
 
   /**

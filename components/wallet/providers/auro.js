@@ -1,5 +1,5 @@
 import "./auro.d";
-import { ChainGroup, ChainId } from "/lib/crosschain/chains";
+import { ChainId } from "/lib/crosschain/chains";
 import { Provider } from "/lib/crosschain/provider";
 import { Signature } from "/lib/mina/mina";
 
@@ -13,12 +13,12 @@ const Auro = /** @type {!Provider} */({
    *
    * @return {boolean}
    */
-  initIfAvailable() {
+  isInitialized: () => {
     /** @const {boolean} */
     const isAvailable = !!(window?.mina?.isAuro);
     if (isAvailable)
       /** @type {!mina.Provider} */
-      this.provider = /** @type {!mina.Provider} */(window.mina);
+      Auro.nativeProvider = /** @type {!mina.Provider} */(window.mina);
     return isAvailable;
   },
 
@@ -34,40 +34,38 @@ const Auro = /** @type {!Provider} */({
    * @param {boolean=} onlyIfApproved
    * @return {!Promise<void>}
    */
-  connect(chainId, chainChanged, addressChanged, onlyIfApproved) {
-    return onlyIfApproved
-      ? this.provider.getAccounts()
-        .then((addresses) => {
-          if (!addresses || !addresses.length) return Promise.reject();
-          this.provider.requestNetwork()
-            .then((/** @type {!mina.ChainInfoArgs} */ chainInfo) => {
-              chainChanged(/** @type {ChainId} */(chainInfo.networkID));
-              addressChanged(addresses);
-              this.provider.on("accountsChanged", addressChanged);
-              this.provider.on("chainChanged",
-                (/** @type {!mina.ChainInfoArgs} */ chainInfo) =>
-                  chainChanged(/** @type {ChainId} */(chainInfo.networkID))
-              );
-            })
-        })
-      : this.provider.requestAccounts()
-        .then((addresses) => this.provider.switchChain(/** @type {!mina.SwitchChainArgs} */({
-          networkID: chainId
-        }))
-          .then(() => {
-            this.provider.on("accountsChanged", addressChanged);
-            this.provider.on("chainChanged",
+  connect: (chainId, chainChanged, addressChanged, onlyIfApproved) => onlyIfApproved
+    ? Auro.nativeProvider.getAccounts()
+      .then((addresses) => {
+        if (!addresses || !addresses.length) return Promise.reject();
+        Auro.nativeProvider.requestNetwork()
+          .then((/** @type {!mina.ChainInfoArgs} */ chainInfo) => {
+            chainChanged(/** @type {ChainId} */(chainInfo.networkID));
+            addressChanged(addresses);
+            Auro.nativeProvider.on("accountsChanged", addressChanged);
+            Auro.nativeProvider.on("chainChanged",
               (/** @type {!mina.ChainInfoArgs} */ chainInfo) =>
                 chainChanged(/** @type {ChainId} */(chainInfo.networkID))
             );
-            addressChanged(addresses);
           })
-        );
-  },
+      })
+    : Auro.nativeProvider.requestAccounts()
+      .then((addresses) => Auro.nativeProvider.switchChain(/** @type {!mina.SwitchChainArgs} */({
+        networkID: chainId
+      }))
+        .then(() => {
+          Auro.nativeProvider.on("accountsChanged", addressChanged);
+          Auro.nativeProvider.on("chainChanged",
+            (/** @type {!mina.ChainInfoArgs} */ chainInfo) =>
+              chainChanged(/** @type {ChainId} */(chainInfo.networkID))
+          );
+          addressChanged(addresses);
+        })
+      ),
 
   disconnect() {
-    this.provider.on("accountChanged", () => { });
-    this.provider.on("chainChanged", () => { });
+    Auro.nativeProvider.on("accountChanged", () => { });
+    Auro.nativeProvider.on("chainChanged", () => { });
   },
 
   /**
@@ -76,13 +74,11 @@ const Auro = /** @type {!Provider} */({
    * @param {ChainId} chainId
    * @return {!Promise<void>}
    */
-  switchChain(chainId) {
-    return this.provider.switchChain(
+  switchChain: (chainId) => Auro.nativeProvider.switchChain(
     /** @type {!mina.SwitchChainArgs} */({
-        networkID: chainId
-      })
-    ).then((_) => { });
-  },
+      networkID: chainId
+    })
+  ).then((_) => { }),
 
   /**
    * @override
@@ -91,16 +87,14 @@ const Auro = /** @type {!Provider} */({
    * @param {string} address
    * @return {!Promise<mina.SignerSignature>}
    */
-  signMessage(message, address) {
-    return this.provider.signMessage(
+  signMessage: (message, address) => Auro.nativeProvider.signMessage(
       /** @type {mina.SignMessageArgs} */({
-        message
-      }))
-      .then((/** @type {mina.SignedData} */ signed) => /** @type {mina.SignerSignature} */({
-        signer: signed.publicKey,
-        signature: new Signature(BigInt(signed.signature.field), BigInt(signed.signature.scalar)).toBase58()
-      }));
-  },
+      message
+    }))
+    .then((/** @type {mina.SignedData} */ signed) => /** @type {mina.SignerSignature} */({
+      signer: signed.publicKey,
+      signature: new Signature(BigInt(signed.signature.field), BigInt(signed.signature.scalar)).toBase58()
+    })),
 
   /**
    * @override
@@ -109,7 +103,7 @@ const Auro = /** @type {!Provider} */({
    * @param {string} address
    * @return {!Promise<!ArrayBuffer>}
    */
-  deriveSecret: (message, address) => Auro.provider.signMessage(
+  deriveSecret: (message, address) => Auro.nativeProvider.signMessage(
     /** @type {mina.SignMessageArgs} */({
       message
     }))
@@ -122,7 +116,7 @@ const Auro = /** @type {!Provider} */({
    * @param {ChainId} chainId
    * @return {boolean}
    */
-  isChainSupported: (chainId) => chainId.startsWith(ChainGroup.MINA)
+  isChainSupported: (chainId) => chainId == ChainId.MinaMainnet
 });
 
 export { Auro };

@@ -24,8 +24,8 @@ const Profile = ({ mintKPassUrl$, viewKPassUrl }) => {
           <span>0xcCc0...0cCc</span>
           <span><CopyImage inline /></span>
         </div>
-        <span id={Css.DeBankLink}>DeBank</span>{" "}
-        <span id={Css.ExplorerLink}>Explorer</span>
+        <span id={Css.ExplorerLink}>Explorer</span>{" "}
+        <span id={Css.DeBankLink}>DeBank</span>
         <a href={mintKPassUrl$} class={WalletCss.Button} id={Css.KPassButton}>{{
           en: "MINT KPASS", tr: "KPASS AL"
         }}</a>
@@ -47,8 +47,7 @@ Profile.setAddress = (address, chainId) => {
   const isEvm = chainId.startsWith(ChainGroup.EVM);
   if (isEvm)
     dom.span(Css.DeBankLink).onclick = () => window.open(`https://debank.com/profile/${address}`, "_blank");
-  else
-    dom.hideById(Css.DeBankLink);
+  dom.toggleById(Css.DeBankLink, isEvm);
   dom.span(Css.ExplorerLink).onclick = () =>
     window.open(`https://${ChainInfos[chainId].explorer}/${isEvm ? "address" : "wallet"}/${address}`, "_blank");
   return shortAddr;
@@ -65,11 +64,11 @@ Profile.setKPass = (exists) => {
     Profile.mintKPassUrl ||= link.href;
     link.innerText = dom.i18n({ tr: "KPASS’İNİ İNCELE", en: "VIEW KPASS" });
     link.href = Profile.viewKPassUrl;
-    if (Profile.placeholderImage) image.src = Profile.placeholderImage;
   } else {
     if (Profile.mintText) link.innerText = Profile.mintText;
     link.href = Profile.mintKPassUrl;
   }
+  if (Profile.placeholderImage) image.src = Profile.placeholderImage;
 }
 
 /**

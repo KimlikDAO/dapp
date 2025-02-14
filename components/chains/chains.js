@@ -56,10 +56,10 @@ const ChainInfos = {
   },
   [ChainId.MinaMainnet]: {
     uiName: "Mina",
-    explorer: "minaexplorer:.com",
+    explorer: "minaexplorer.com",
     tokenCode: "MINA",
     tokenSuffix: dom.i18n({ tr: ["’dan", "’ya"], en: [] }),
-    rpcUrl: "api.minaexplorer:.com"
+    rpcUrl: "api.minaexplorer.com"
   },
 }
 

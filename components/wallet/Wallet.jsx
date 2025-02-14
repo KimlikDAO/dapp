@@ -125,7 +125,7 @@ const kpassChanged = () => {
   const chainId = ChainList.selected;
   const address = Address;
   if (!address) return;
-  KPass.handleOf(SelectedProvider.provider, chainId, address)
+  KPass.handleOf(SelectedProvider.nativeProvider, chainId, address)
     .then((cidHex) => {
       if (chainId != ChainList.selected || address != Address) return;
       const hasKPass = cidHex.replaceAll("0", "") != "x";
@@ -151,17 +151,22 @@ const chainSelected = (chainId) => {
   SelectedProvider.switchChain(chainId);
 }
 
-/** @param {ProviderId} providerId */
-const providerSelected = (providerId) => {
+/**
+ * @param {ProviderId} providerId
+ * @param {boolean=} gentle
+ */
+const providerSelected = (providerId, gentle) => {
   const currentProvider = SelectedProvider;
   const provider = Providers[providerId];
-  if (currentProvider == provider) return;
+  if (currentProvider == provider || !provider || !provider.isInitialized())
+    return;
   SelectedProvider = provider;
-  const connected = provider.connect(ChainList.selected, chainChanged, addressChanged)
+  const connected = provider.connect(ChainList.selected, chainChanged, addressChanged, gentle)
   if (!connected) return;
   connected
     .then(() => {
-      document.cookie = `cu=${providerId};domain=${Wallet.cookieDomain};SameSite=Strict;max-age=` + 1e6;
+      if (!gentle)
+        document.cookie = `cu=${providerId};domain=${Wallet.cookieDomain};SameSite=Strict;max-age=` + 1e6;
       currentProvider.disconnect();
       for (const f of OnProviderChange) f(provider);
     })
@@ -191,10 +196,7 @@ const connectProvider = () => {
   const idx = cookie.indexOf("cu=");
   /** @const {ProviderId} */
   const providerId = /** @type {ProviderId} */(cookie.slice(idx + 3, idx + 5));
-  /** @const {Provider} */
-  const provider = Providers[providerId];
-  if (provider && provider.initIfAvailable())
-    providerSelected(providerId);
+  dom.schedule(() => providerSelected(providerId, true), 100);
 }
 
 /**

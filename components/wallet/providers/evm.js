@@ -6,13 +6,18 @@ import hex from "/lib/util/hex";
 
 /** @const {!Provider} */
 const BaseEvmProvider = /** @type {!Provider} */({
+
+  isInitialized() {
+    return !!this.nativeProvider;
+  },
+
   /**
    * @noinline
    * @param {ChainId} chainId
    * @return {!Promise<void>}
    */
   switchChain(chainId) {
-    return this.provider.request(/** @type {!eth.Request} */({
+    return this.nativeProvider.request(/** @type {!eth.Request} */({
       method: "wallet_switchEthereumChain",
       params: [/** @type {!eth.SwitchChainParam} */({
         chainId
@@ -24,7 +29,7 @@ const BaseEvmProvider = /** @type {!Provider} */({
        */
       const chainInfo = ChainInfos[chainId];
       if (/** @type {eth.ProviderRpcError} */(e).code == 4902)
-        return this.provider.request(/** @type {!eth.Request} */({
+        return this.nativeProvider.request(/** @type {!eth.Request} */({
           method: "wallet_addEthereumChain",
           params: [/** @type {!eth.AddChainParam} */({
             chainId: chainId,
@@ -42,7 +47,7 @@ const BaseEvmProvider = /** @type {!Provider} */({
   },
 
   disconnect() {
-    this.provider.removeAllListeners();
+    this.nativeProvider.removeAllListeners();
   },
 
   /**
@@ -62,30 +67,34 @@ const BaseEvmProvider = /** @type {!Provider} */({
    * @return {!Promise<void>}
    */
   connect(chainId, chainChanged, addressChanged, onlyIfApproved) {
-    if (!this.provider) return Promise.reject();
+    if (!this.nativeProvider) return Promise.reject();
     return onlyIfApproved
-      ? this.provider.request(/** @type {!eth.Request} */({
+      ? this.nativeProvider.request(/** @type {!eth.Request} */({
         method: "eth_accounts"
       })).then((addresses) => {
         if (!addresses || !addresses.length) return Promise.reject();
         addressChanged(addresses);
-        this.provider.request(/** @type {!eth.Request} */({
+        this.nativeProvider.request(/** @type {!eth.Request} */({
           method: "eth_chainId"
         })).then((chainId) => {
           chainChanged(chainId);
-          this.provider.on("accountsChanged", addressChanged);
-          this.provider.on("chainChanged", chainChanged);
+          this.nativeProvider.on("accountsChanged", addressChanged);
+          this.nativeProvider.on("chainChanged", chainChanged);
         })
       })
-      : this.provider.request(/** @type {!eth.Request} */({
+      : this.nativeProvider.request(/** @type {!eth.Request} */({
         method: "eth_requestAccounts"
       })).then((addresses) =>
         this.switchChain(chainId).then(() => {
-          this.provider.on("accountsChanged", addressChanged);
-          this.provider.on("chainChanged", chainChanged);
+          this.nativeProvider.on("accountsChanged", addressChanged);
+          this.nativeProvider.on("chainChanged", chainChanged);
           addressChanged(addresses);
         })
       )
+  },
+
+  setNativeProvider(nativeProvider) {
+    this.nativeProvider = nativeProvider;
   },
 
   /**
@@ -96,7 +105,7 @@ const BaseEvmProvider = /** @type {!Provider} */({
    * @return {!Promise<eth.CompactSignature>}
    */
   signMessage(text, address, hexEncode) {
-    return this.provider.request(
+    return this.nativeProvider.request(
       /** @type {!eth.Request} */({
         method: "personal_sign",
         params: [hexEncode
@@ -114,7 +123,7 @@ const BaseEvmProvider = /** @type {!Provider} */({
    * @return {!Promise<!ArrayBuffer>}
    */
   deriveSecret(text, address, hexEncode) {
-    return this.provider.request(
+    return this.nativeProvider.request(
       /** @type {!eth.Request} */({
         method: "personal_sign",
         params: [hexEncode

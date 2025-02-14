@@ -11,7 +11,7 @@ const LedgerBağlantısı = /** @type {!Provider} */({
    *
    * @return {boolean}
    */
-  initIfAvailable: () => {
+  isAvailable() {
     if ("hid" in navigator) {
       LedgerBağlantısı.hid = navigator.hid;
       return true;

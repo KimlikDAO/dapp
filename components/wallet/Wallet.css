@@ -106,17 +106,17 @@
 #ConnectedPane {}
 
 /** @export */
-.Off {}
+.On {}
 
-li.Off>.ProviderLight {
-  background: rgb(241, 29, 29);
+li.On>.ProviderLight {
+  background: green;
 }
 
 /**
  * Provider availability light
  */
 .ProviderLight {
-  background: green;
+  background: rgb(241, 29, 29);
   border-radius: 3px;
   bottom: 14px;
   height: 6px;
