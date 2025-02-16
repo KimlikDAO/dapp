@@ -91,6 +91,7 @@ const onAnnounceProvider = (event) => {
   if (providerId in Providers)
     ProviderListItem.initialize(providerId, provider);
 }
+
 window.addEventListener("eip6963:announceProvider", onAnnounceProvider);
 window.dispatchEvent(new Event("eip6963:requestProvider"));
 

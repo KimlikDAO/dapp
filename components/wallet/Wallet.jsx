@@ -43,35 +43,33 @@ let Address = null;
 
 /**
  * @param {{
- *   defaultChain: ChainId,
- *   chains: !Array<ChainId>,
- *   chainNotes$: (!Object<ChainId, I18nString> | undefined),
+ *   chainConfig: ChainConfig,
  *   piggyback: (string | undefined)
  * }} props
  */
-const ChainList = ({ defaultChain, chains, chainNotes$, piggyback }) => {
+const ChainList = ({ chainConfig, piggyback }) => {
   /** @const {!Set<ChainId>} */
-  ChainList.chains = new Set(chains);
+  ChainList.chains = new Set(chainConfig.chains);
   /** @type {ChainId} */
-  ChainList.selected = defaultChain;
+  ChainList.selected = chainConfig.defaultChain;
 
   /** @const {!HTMLLIElement} */
-  const SelectedChain = dom.li(Css.ChainList + defaultChain);
+  const SelectedChain = dom.li(Css.ChainList + chainConfig.defaultChain);
   SelectedChain.replaceChild(Wallet.chainButton.firstElementChild.cloneNode(true),
     SelectedChain.firstElementChild);
 
   return (
     <ul id={Css.ChainList} class={Css.DropdownList}>
-      {chains.map((id) => (
-        <li id={Css.ChainList + id} class={id == defaultChain ? SharedCss.Selected : ""}>
-          {id == defaultChain
+      {chainConfig.chains.map((id) => (
+        <li id={Css.ChainList + id} class={id == chainConfig.defaultChain ? SharedCss.Selected : ""}>
+          {id == chainConfig.defaultChain
             ? <span></span>
             : <Image src={chainImageSrc(id)}
               width={32} height={32}
               bundleWidth={64} bundleHeight={64} piggyback={piggyback} />}
           {" "}
-          {chainNotes$[id]
-            ? <div>{ChainInfos[id].uiName}<div class={Css.ChainNote}>{chainNotes$[id]}</div></div>
+          {chainConfig.chainNotes$[id]
+            ? <div>{ChainInfos[id].uiName}<div class={Css.ChainNote}>{chainConfig.chainNotes$[id]}</div></div>
             : ChainInfos[id].uiName}
         </li>
       ))}
@@ -200,10 +198,17 @@ const connectProvider = () => {
 }
 
 /**
- * @param {{
+ * @typedef {{
  *   defaultChain: ChainId,
  *   chains: !Array<ChainId>,
- *   chainNotes: !Object<ChainId, I18nString>,
+ *   chainNotes$: (!Object<ChainId, I18nString> | undefined),
+ * }}
+ */
+export const ChainConfig = {};
+
+/**
+ * @param {{
+ *   chainConfig: ChainConfig,
  *   cookieDomain: string,
  *   piggyback: (string | undefined),
  *   children: (!Array<Element> | undefined),
@@ -212,9 +217,7 @@ const connectProvider = () => {
  * }} props
  */
 const Wallet = ({
-  defaultChain,
-  chains,
-  chainNotes,
+  chainConfig,
   cookieDomain,
   piggyback,
   children,
@@ -238,7 +241,7 @@ const Wallet = ({
     <div id={Css.Root}>
       <Css />
       <Wallet.chainButton class={SharedCss.Button} controlsDropdown={Dropdown}>
-        <Image src={chainImageSrc(defaultChain)}
+        <Image src={chainImageSrc(chainConfig.defaultChain)}
           width={32} height={32}
           bundleWidth={64} bundleHeight={64}
           inline piggyback={piggyback} />
@@ -247,8 +250,7 @@ const Wallet = ({
         en: "Connect wallet", tr: "Cüzdan bağla",
       }}</Wallet.addressButton>
       <Dropdown nodisplay onClick={dropdownClicked}>
-        <ChainList
-          defaultChain={defaultChain} chains={chains} chainNotes$={chainNotes} piggyback={piggyback} />
+        <ChainList chainConfig={chainConfig} piggyback={piggyback} />
         <Switch id={Css.RightPane} instance={Wallet.rightPane} initialSelected={0}>
           <EvmProviderList />
           <MinaProviderList />

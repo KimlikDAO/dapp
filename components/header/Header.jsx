@@ -1,10 +1,8 @@
 import Css from "./Header.css";
 import LangPicker from "/components/langPicker/LangPicker";
 import Logo from "/components/logo.svg";
-import { Wallet } from "/components/wallet/Wallet";
-import { ChainId } from "/lib/crosschain/chains";
+import Wallet, { ChainConfig } from "/components/wallet/Wallet";
 import { css } from "/lib/kastro/stylesheet";
-import { I18nString } from "/lib/util/i18n";
 
 /** @enum {string} */
 const JointCss = css`
@@ -16,37 +14,47 @@ const JointCss = css`
 
 /**
  * @param {{
- *   Chains: !Array<ChainId>,
- *   DefaultChain: ChainId,
- *   ChainNotes: !Object<ChainId, I18nString>,
- *   href: string,
- *   title: string,
- *   piggyback: (string|undefined)
- * }=} props
+ *   chainConfig: ChainConfig,
+ *   piggyback: (string|undefined),
+ *   logoUrl$: (string|undefined),
+ *   title$: (string|undefined),
+ *   cookieDomain: string,
+ *   mintKPassUrl$: (string | undefined),
+ *   viewKPassUrl: string,
+ *   children: (* | undefined),
+ * }} props
  */
 const Header = ({
-  Chains,
-  DefaultChain,
-  ChainNotes,
-  href = "/",
-  title = "KimlikDAO",
-  piggyback
+  chainConfig,
+  piggyback,
+  logoUrl$,
+  title$,
+  cookieDomain,
+  mintKPassUrl$,
+  viewKPassUrl,
+  children
 }) => (
   <div id={Css.Header}>
     <Css />
     <JointCss />
-    <a href={href} id={Css.Logo}>
-      <Logo id={Css.Logomark} inline />{title}
+    <a href={logoUrl$} id={Css.Logo}>
+      <Logo id={Css.Logomark} inline />{title$}
     </a>
     <div id={Css.Links}>
-      <LangPicker piggyback={piggyback} />
-      <Wallet Chains={Chains} DefaultChain={DefaultChain} ChainNotes={ChainNotes} piggyback={piggyback}>
-        <RightPane />
+      <LangPicker cookieDomain={cookieDomain} piggyback={piggyback} />
+      <Wallet
+        chainConfig={chainConfig}
+        cookieDomain={cookieDomain}
+        piggyback={piggyback}
+        mintKPassUrl$={mintKPassUrl$}
+        viewKPassUrl={viewKPassUrl}
+      >
+        {children}
       </Wallet>
     </div>
   </div>
 );
 
-export { LangPicker };
+export { LangPicker, Wallet };
 
 export default Header;

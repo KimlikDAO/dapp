@@ -7,7 +7,6 @@ const HostUrl = "https://kimlikdao.org";
 const Page = {
   Landing: { [LangCode.EN]: "en", [LangCode.TR]: "tr" },
   Mint: { [LangCode.EN]: "mint", [LangCode.TR]: "al" },
-  NewMint: { [LangCode.EN]: "newmint", [LangCode.TR]: "yenial" },
   Revoke: { [LangCode.EN]: "revoke", [LangCode.TR]: "iptal" },
   Vote: { [LangCode.EN]: "vote", [LangCode.TR]: "oyla" },
   KDAO: { [LangCode.EN]: "KDAO", [LangCode.TR]: "kdao" },

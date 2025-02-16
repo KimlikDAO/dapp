@@ -1,83 +1,41 @@
-#Al {
-  margin: 40px auto;
+#Root {
   max-width: 1200px;
-  display: flex;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  grid-template-rows: auto 1fr;
+  gap: 40px 40px;
 }
 
 #LeftColumn {
-  width: 300px;
-  flex-shrink: 0;
+  grid-column: 1;
+  grid-row: 2
 }
 
 #RightColumn {
-  flex: 1;
-  min-width: 0;
+  grid-column: 2;
+  grid-row: 2;
+  overflow: hidden;
 }
 
-#NavList {
-  font-weight: 700;
-  list-style: none;
-  padding: 0;
-  margin: 50px 0;
+#RightScroll {
+  height: 100%;
+  overflow-y: auto;
 }
 
-#NavItem {
-  color: #444;
-  padding: 12px 16px;
-  cursor: pointer;
-  border-radius: 4px;
-  margin: 4px 0;
+/** @export */
+#Panes {}
+
+#Welcome {
+  max-width: 550px;
+  margin: 0 0 30px 24px;
 }
 
-#NavItem:hover {
-  background: rgba(0, 0, 0, 0.05);
+h2 {
+  margin: 5px 0;
 }
 
-#NavItem.active {
-  background: rgba(0, 0, 0, 0.1);
-  font-weight: 500;
-}
-
-#Gallery {
-  background: white;
-  border-radius: 25px;
-  padding: 24px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  min-height: 280px;
-  margin: 0 20px;
-}
-
-#GalleryTitle {
-  margin: 0 0 15px 7px;
-}
-
-#GallerySearch {
-  width: 100%;
-  padding: 12px 16px;
-  border: 1px solid #eee;
-  border-radius: 8px;
-  margin-bottom: 24px;
-}
-
-/**
- * @export
- */
-#GalleryGrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 16px;
-}
-
-.InfoSource {
-  aspect-ratio: 1.4;
-  background: #f5f5f5;
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-}
-
-.InfoSource:hover {
-  background: #eee;
+#Welcome>p {
+  font-size: 15px;
+  line-height: 1.4;
 }

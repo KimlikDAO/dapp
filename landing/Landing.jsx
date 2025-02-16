@@ -11,28 +11,27 @@ import Favicon from "/components/icon.svg";
 import Lato400 from "/components/lato/l400.ttf";
 import Lato700 from "/components/lato/l700.ttf";
 import SharedCss from "/components/shared/SharedCss";
+import { ChainConfig } from "/components/wallet/Wallet";
 import { HostUrl } from "/crate";
 import { ChainId } from "/lib/crosschain/chains";
-import { I18nString, LangCode } from "/lib/util/i18n";
+import { LangCode } from "/lib/util/i18n";
 
-/** @const {!Array<ChainId>} */
-const Chains = [
-  ChainId.x1,
-  ChainId.xa4b1,
-  ChainId.MinaMainnet,
-  ChainId.x89,
-  ChainId.xa86a,
-  ChainId.x38
-];
-
-/** @type {!Object<ChainId, I18nString>} */
-const ChainNotes = {
-  [ChainId.xa4b1]: { en: "Signal chain", tr: "Ana ağ" },
-  [ChainId.MinaMainnet]: { en: "New ✨", tr: "Yeni ✨" },
+/** @type {ChainConfig} */
+const WalletConfig = {
+  defaultChain: ChainId.xa4b1,
+  chains: [
+    ChainId.x1,
+    ChainId.xa4b1,
+    ChainId.MinaMainnet,
+    ChainId.x89,
+    ChainId.xa86a,
+    ChainId.x38,
+  ],
+  chainNotes$: {
+    [ChainId.xa4b1]: { en: "Signal chain", tr: "Ana ağ" },
+    [ChainId.MinaMainnet]: { en: "New ✨", tr: "Yeni ✨" },
+  },
 };
-
-/** @const {ChainId} */
-const DefaultChain = ChainId.xa4b1;
 
 /**
  * @param {{ Lang: LangCode }} props
@@ -50,7 +49,7 @@ const Landing = ({ Lang }) => (
       <Favicon raster={32} rel="icon" />
     </head>
     <body id={Css.Root}>
-      <Header defaultChain={DefaultChain} chains={Chains} chainNotes={ChainNotes} />
+      <Header chainConfig={WalletConfig} />
       <Hero />
       <Learn2Earn />
       <Holders />

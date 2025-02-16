@@ -65,8 +65,8 @@ Profile.setKPass = (exists) => {
     link.innerText = dom.i18n({ tr: "KPASS’İNİ İNCELE", en: "VIEW KPASS" });
     link.href = Profile.viewKPassUrl;
   } else {
-    if (Profile.mintText) link.innerText = Profile.mintText;
-    link.href = Profile.mintKPassUrl;
+    link.innerText = Profile.mintText || link.innerText;
+    link.href = Profile.mintKPassUrl || link.href;
   }
   if (Profile.placeholderImage) image.src = Profile.placeholderImage;
 }
