@@ -278,6 +278,9 @@ Wallet.disconnect = () => {
   for (const f of OnDisconnect) f();
 }
 
+/** @return {?string} */
+Wallet.address = () => Address;
+
 /**
  * Registers a callback function to be called whenever the selected blockchain
  * network changes.
@@ -323,7 +326,8 @@ Wallet.onKPassChange = (f) => {
  * Registers a callback function to be called whenever the wallet is
  * disconnected.
  * 
- * @param {function()} f Callback function that will be invoked when the wallet is disconnected.
+ * @param {function()} f Callback function that will be invoked when the wallet
+ *                       is disconnected.
  */
 Wallet.onDisconnect = (f) => OnDisconnect.push(f);
 

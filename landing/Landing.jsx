@@ -17,7 +17,7 @@ import { ChainId } from "/lib/crosschain/chains";
 import { LangCode } from "/lib/util/i18n";
 
 /** @type {ChainConfig} */
-const WalletConfig = {
+const LandingChainConfig = {
   defaultChain: ChainId.xa4b1,
   chains: [
     ChainId.x1,
@@ -49,7 +49,7 @@ const Landing = ({ Lang }) => (
       <Favicon raster={32} rel="icon" />
     </head>
     <body id={Css.Root}>
-      <Header chainConfig={WalletConfig} />
+      <Header chainConfig={LandingChainConfig} />
       <Hero />
       <Learn2Earn />
       <Holders />

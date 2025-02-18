@@ -1,7 +1,7 @@
 import LandingCss from "../Landing.css";
 import Css from "./Holders.css";
-import ArrowImage from "/components/arrow.svg";
 import { chainImageSrc } from "/components/chains/chains";
+import Arrow from "/components/icons/Arrow";
 import SharedCss from "/components/shared/SharedCss";
 import { Page } from "/crate";
 import { ChainId } from "/lib/crosschain/chains";
@@ -58,7 +58,7 @@ const Holders = () => (
           <a href={Page.Mint} id={Css.ActionButton} class={[SharedCss.Button, SharedCss.Action]}>{{
             en: "Become a KPass holder",
             tr: "Sen de KPass sahibi ol"
-          }} <ArrowImage inline /></a>
+          }} <Arrow /></a>
         </div>
       </div>
       <div id={Css.Bubbles}>

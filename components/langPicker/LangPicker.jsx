@@ -1,6 +1,6 @@
 import Css from "./LangPicker.css";
-import EnFlag from "./en.svg";
-import TrFlag from "./tr.svg";
+import EnFlag from "/components/flags/en.svg";
+import TrFlag from "/components/flags/tr.svg";
 import HeaderCss from "/components/header/Header.css";
 import dom from "/lib/util/dom";
 import { I18nString, LangCode } from "/lib/util/i18n";

@@ -1,6 +1,7 @@
-import Gallery from "./Gallery";
+
 import Css from "./Mint.css";
-import Header from "/components/header/Header";
+import Credentials from "/components/crendentials/Credentials";
+import Header, { Wallet } from "/components/header/Header";
 import HeaderCss from "/components/header/Header.css";
 import Favicon from "/components/icon.svg";
 import KPass from "/components/kpass/KPass";
@@ -41,51 +42,62 @@ const JointCss = css`
 `;
 
 const Welcome = () => {
-  return (<div id={Css.Welcome}>
-    <h2>{{ en: "Welcome, here's your KPass 👋", tr: "Hoşgeldiniz, işte KPass'iniz 👋" }}</h2>
-    <p>{{
-      en: "You can click on the regenerate button to customize its appearance. For now, it contains no data and it's not written on chain. Let's add some data into it.",
-      tr: "Görünümünü özelleştirmek için yeniden oluştur düğmesini kullanabilirsiniz. Şu anda içinde veri yok ve zincire yazılmamış. Haydi içine bazı veriler ekleyelim."
-    }}</p>
-    <button class={[SharedCss.Button, SharedCss.Action]}>
-      {{ en: "Let's do it!", tr: "Haydi yapalım!" }}
-    </button>
-  </div>);
+  const Button = dom.button(Css.WelcomeButton);
+  return (
+    <div id={Css.Welcome}>
+      <h2>{{ en: "Welcome, here's your KPass 👋", tr: "Hoşgeldiniz, işte KPass'iniz 👋" }}</h2>
+      <p>{{
+        en: "You can click on the regenerate button to customize its appearance. For now, it contains no data and it's not written on chain. Let's add some data into it.",
+        tr: "Görünümünü özelleştirmek için yeniden oluştur düğmesini kullanabilirsiniz. Şu anda içinde veri yok ve zincire yazılmamış. Haydi içine bazı veriler ekleyelim."
+      }}</p>
+      <Button
+        onClick={(event) => {
+          if (!Wallet.address()) Wallet.open();
+          Mint.panes.showPane(1);
+          event.stopPropagation();
+        }}
+        class={[SharedCss.Button, SharedCss.Action]}>
+        {{ en: "Let's do it!", tr: "Haydi yapalım!" }}
+      </Button>
+    </div>
+  );
 }
 
 /**
  * @param {{ Lang: LangCode }} props
  */
-const Mint = ({ Lang }) => (
-  <html lang={Lang}>
-    <head>
-      <meta charset="utf-8" />
-      <meta name="viewport" content="width=device-width,initial-scale=1" />
-      <title>KimlikDAO | {{ en: "Mint KPass", tr: "KPass al" }}</title>
-      <Lato400 shared />
-      <Lato700 shared />
-      <Favicon raster={32} rel="icon" />
-      <SharedCss />
-      <Css />
-      <JointCss />
-    </head>
-    <body id={Css.Root}>
-      <Header
-        chainConfig={MintChainConfig}
-        logoUrl$="/"
-        title$="KimlikDAO"
-        cookieDomain={`.${HostUrl.slice(8)}`}
-        mintKPassUrl$={Page.Mint}
-        viewKPassUrl={dom.i18n(Page.KPass)} />
-      <div id={Css.LeftColumn}>
-        <KPass style="" />
-      </div>
-      <Switch instance={Mint.panes} id={Css.Panes} initialSelected={0}>
-        <Welcome />
-        <Gallery />
-      </Switch>
-    </body>
-  </html >
-);
+const Mint = ({ Lang }) => {
+  return (
+    <html lang={Lang}>
+      <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <title>KimlikDAO | {{ en: "Mint KPass", tr: "KPass al" }}</title>
+        <Lato400 shared />
+        <Lato700 shared />
+        <Favicon raster={32} rel="icon" />
+        <SharedCss />
+        <Css />
+        <JointCss />
+      </head>
+      <body id={Css.Root}>
+        <Header
+          chainConfig={MintChainConfig}
+          logoUrl$="/"
+          title$="KimlikDAO"
+          cookieDomain={`.${HostUrl.slice(8)}`}
+          mintKPassUrl$={Page.Mint}
+          viewKPassUrl={dom.i18n(Page.KPass)} />
+        <div id={Css.LeftColumn}>
+          <KPass style="" />
+        </div>
+        <Switch instance={Mint.panes} id={Css.Panes} initialSelected={0}>
+          <Welcome />
+          <Credentials />
+        </Switch>
+      </body>
+    </html >
+  );
+}
 
 export default Mint;

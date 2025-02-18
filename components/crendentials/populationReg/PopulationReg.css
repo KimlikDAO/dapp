@@ -1,0 +1,21 @@
+/** @export */
+#FileDrop {}
+
+#Table {
+  width: 100%;
+  margin-bottom: 16px;
+  border-collapse: collapse;
+}
+
+#Table td {
+  padding: 8px 0;
+  border-bottom: 1px solid #eee;
+}
+
+#Table td:first-child {
+  color: #666;
+  width: 40%;
+}
+
+/** @export */
+#Commitment {}

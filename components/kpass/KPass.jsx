@@ -5,6 +5,7 @@ import FamilyInfoCard from "./FamilyInfoCard";
 import Css from "./KPass.css";
 import PersonInfoCard from "./PersonInfoCard";
 import RegistryInfoCard from "./RegistryInfoCard";
+import Paths from "/components/icons/paths";
 import SharedCss from "/components/shared/SharedCss";
 import "/lib/did/section.d";
 import dom from "/lib/util/dom";
@@ -14,18 +15,18 @@ const Cards = dom.div(Css.Cards);
 
 const LeftArrow = () =>
   <svg width="10" height="10" viewBox="0 0 10 10">
-    <use href={`#${Css.Arrow}`} width={10} height={10} />
+    <use href={`#${Css.Arrow}`} width={10} height={10} transform="translate(10,0)scale(-1,1)" />
   </svg>;
 
 const RightArrow = () =>
   <svg width="10" height="10" viewBox="0 0 10 10">
-    <use href={`#${Css.Arrow}`} width={10} height={10} transform="translate(10,0)scale(-1,1)" />
+    <use href={`#${Css.Arrow}`} width={10} height={10} />
   </svg>;
 
 const Logo = () => (
   <svg class={Css.Logo} height={24} width={24}>
     <defs>
-      <path id={Css.Arrow} d="M6.5 1.5L3 5L6.5 8.5C6.8 8.8 6.8 9.2 6.5 9.5C6.2 9.8 5.8 9.8 5.5 9.5L1.5 5.5C1.2 5.2 1.2 4.8 1.5 4.5L5.5 0.5C5.8 0.2 6.2 0.2 6.5 0.5C6.8 0.8 6.8 1.2 6.5 1.5Z" />
+      <path id={Css.Arrow} d={Paths.RightBrace} />
     </defs>
     <use href={`#${SharedCss.Header.Logomark}`} width={24} height={24} />
   </svg>

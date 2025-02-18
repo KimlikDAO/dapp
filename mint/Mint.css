@@ -4,7 +4,7 @@
   display: grid;
   grid-template-columns: 300px 1fr;
   grid-template-rows: auto 1fr;
-  gap: 40px 40px;
+  gap: 40px 2%;
 }
 
 #LeftColumn {
@@ -39,3 +39,6 @@ h2 {
   font-size: 15px;
   line-height: 1.4;
 }
+
+/** @export */
+#WelcomeButton {}
