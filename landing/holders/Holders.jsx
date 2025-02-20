@@ -1,7 +1,7 @@
 import LandingCss from "../Landing.css";
 import Css from "./Holders.css";
 import { chainImageSrc } from "/components/chains/chains";
-import Arrow from "/components/icons/Arrow";
+import { Arrow } from "/components/icons/Icons";
 import SharedCss from "/components/shared/SharedCss";
 import { Page } from "/crate";
 import { ChainId } from "/lib/crosschain/chains";

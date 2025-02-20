@@ -14,19 +14,19 @@ import dom from "/lib/util/dom";
 const Cards = dom.div(Css.Cards);
 
 const LeftArrow = () =>
-  <svg width="10" height="10" viewBox="0 0 10 10">
-    <use href={`#${Css.Arrow}`} width={10} height={10} transform="translate(10,0)scale(-1,1)" />
+  <svg width={10} height={10} viewBox="0 0 24 24">
+    <use href={`#${Css.Arrow}`} transform="translate(24,0)scale(-1,1)" />
   </svg>;
 
 const RightArrow = () =>
-  <svg width="10" height="10" viewBox="0 0 10 10">
-    <use href={`#${Css.Arrow}`} width={10} height={10} />
+  <svg width={10} height={10} viewBox="0 0 24 24">
+    <use href={`#${Css.Arrow}`} />
   </svg>;
 
 const Logo = () => (
   <svg class={Css.Logo} height={24} width={24}>
     <defs>
-      <path id={Css.Arrow} d={Paths.RightBrace} />
+      <path id={Css.Arrow} d={Paths.Chevron2} />
     </defs>
     <use href={`#${SharedCss.Header.Logomark}`} width={24} height={24} />
   </svg>

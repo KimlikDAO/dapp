@@ -1,5 +1,5 @@
 import Css from "./Header.css";
-import ArrowImage from "/components/arrow.svg";
+import { Arrow } from "/components/icons/Icons";
 import LangPicker from "/components/langPicker/LangPicker";
 import Logo from "/components/logo.svg";
 import SharedCss from "/components/shared/SharedCss";
@@ -38,7 +38,7 @@ const Header = ({ chainConfig }) => (
       </Wallet>
       <a id={Css.ActionButton} href={Page.Mint} class={[SharedCss.Button, SharedCss.Action]}>{{
         en: "Mint KPass", tr: "Hemen KPass al"
-      }}<ArrowImage inline /></a>
+      }}<Arrow /></a>
     </div>
   </div>
 );

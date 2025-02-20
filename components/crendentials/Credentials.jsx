@@ -1,9 +1,10 @@
 import Css from "./Credentials.css";
 import CredentialSource from "./CredentialSource";
 import PopulationReg from "./populationReg/PopulationReg";
-import Switch from "/lib/kastro/Switch";
+import KeyedSwitch from "/lib/kastro/KeyedSwitch";
 import dom from "/lib/util/dom";
 import { LangCode } from "/lib/util/i18n";
+import Router from "/lib/kastro/Router";
 
 const CredentialSearch = () => {
   /** @const {!HTMLDivElement} */
@@ -39,21 +40,15 @@ const CredentialSearch = () => {
 }
 
 const Credentials = () => {
-  dom.div("population-registry").onclick = () => Credentials.panes.showPane(1);
+  dom.div("population-registry").onclick = () => Router.navigate("pop-reg");
 
   return (
     <div id={Css.Root}>
       <Css />
-      <Switch instance={Credentials.panes} id={Css.Panes} initialSelected={0}>
-        <CredentialSearch />
-        <PopulationReg />
-      </Switch>
-
-      <div nodisplay>
-        <button>
-          {{ en: "Back", tr: "Geri" }}
-        </button>
-      </div>
+      <KeyedSwitch instance={Credentials.panes} id={Css.Panes}>
+        <CredentialSearch key="sources" />
+        <PopulationReg key="pop-reg" />
+      </KeyedSwitch>
     </div>
   );
 }

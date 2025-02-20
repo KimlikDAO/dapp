@@ -102,7 +102,7 @@ const chainChanged = (newChain) => {
     if (!Address && !oldChain.startsWith(chainGroup))
       Wallet.rightPane.showPane(+(chainGroup == ChainGroup.MINA));
     kpassChanged();
-    for (const f of OnChainChange) f(newChain);
+    OnChainChange.forEach((f) => f(newChain));
   }
 }
 
@@ -251,7 +251,7 @@ const Wallet = ({
       }}</Wallet.addressButton>
       <Dropdown nodisplay onClick={dropdownClicked}>
         <ChainList chainConfig={chainConfig} piggyback={piggyback} />
-        <Switch id={Css.RightPane} instance={Wallet.rightPane} initialSelected={0}>
+        <Switch id={Css.RightPane} instance={Wallet.rightPane} initialPane={0}>
           <EvmProviderList />
           <MinaProviderList />
           <div>

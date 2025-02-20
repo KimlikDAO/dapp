@@ -1,9 +1,11 @@
 import Wallet from "../Wallet";
 import WalletCss from "../Wallet.css";
-import AmbassadorImage from "../img/ambassador.svg";
-import SwitchImage from "../img/external-link.svg";
-import RevokeImage from "../img/iptal.svg";
-import VoteImage from "../img/vote.svg";
+import {
+  Briefcase2,
+  Revoke,
+  SwitchWallet,
+  Vote
+} from "/components/icons/Icons";
 import { css } from "/lib/kastro/stylesheet";
 import dom from "/lib/util/dom";
 import { I18nString } from "/lib/util/i18n";
@@ -41,7 +43,7 @@ export default ({ ambassadorUrl$, voteUrl$, revokeUrl$ }) => {
       <Css />
       <li>
         <a href={ambassadorUrl$}>
-          <AmbassadorImage inline />{" "}{{
+          <Briefcase2 height={16} width={16} />{" "}{{
             en: "Ambassador program",
             tr: "Ambassador ol"
           }}
@@ -49,7 +51,7 @@ export default ({ ambassadorUrl$, voteUrl$, revokeUrl$ }) => {
       </li>
       <li>
         <a href={voteUrl$}>
-          <VoteImage width={16} height={16} />{" "}{{
+          <Vote height={16} width={16} />{" "}{{
             en: "Vote",
             tr: "Oy kullan"
           }}
@@ -57,14 +59,14 @@ export default ({ ambassadorUrl$, voteUrl$, revokeUrl$ }) => {
       </li>
       <li>
         <a href={revokeUrl$}>
-          <RevokeImage inline />{" "}{{
+          <Revoke height={16} width={16} />{" "}{{
             en: "Revoke KPass",
             tr: "İptal işlemleri"
           }}
         </a>
       </li>
       <li onClick={() => Wallet.disconnect()}>
-        <SwitchImage inline />{" "}{{
+        <SwitchWallet height={16} width={16} />{" "}{{
           en: "Switch wallet",
           tr: "Cüzdan değiştir"
         }}
