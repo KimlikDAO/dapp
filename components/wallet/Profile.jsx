@@ -1,8 +1,8 @@
-import CopyImage from "../paste.svg";
 import QmarkImage from "./img/qmark.svg";
 import Css from "./Profile.css";
 import WalletCss from "./Wallet.css";
 import { ChainInfos } from "/components/chains/chains";
+import CopyButton from "/components/elements/CopyButton";
 import { ChainGroup, ChainId } from "/lib/crosschain/chains";
 import dom from "/lib/util/dom";
 
@@ -21,8 +21,8 @@ const Profile = ({ mintKPassUrl$, viewKPassUrl }) => {
       <QmarkImage id={Css.KPassImage} height={80} width={80} />
       <div>
         <div id={Css.AddresText}>
-          <span>0xcCc0...0cCc</span>
-          <span><CopyImage inline /></span>
+          0xcCc0...0cCc
+          <CopyButton id$={Css.CopyButton} height$={12} width$={12} />
         </div>
         <span id={Css.ExplorerLink}>Explorer</span>{" "}
         <span id={Css.DeBankLink}>DeBank</span>
@@ -42,11 +42,12 @@ const Profile = ({ mintKPassUrl$, viewKPassUrl }) => {
 Profile.setAddress = (address, chainId) => {
   const shortAddr = address.slice(0, 6) + "..." + address.slice(-4);
   const addressText = dom.div(Css.AddresText);
-  addressText.children[0].innerText = shortAddr;
-  addressText.onclick = () => navigator.clipboard.writeText(address);
+  /** @type {!Text} */(addressText.firstChild).data = shortAddr;
+  addressText.onclick = CopyButton.setText(Css.CopyButton, address);
   const isEvm = chainId.startsWith(ChainGroup.EVM);
   if (isEvm)
-    dom.span(Css.DeBankLink).onclick = () => window.open(`https://debank.com/profile/${address}`, "_blank");
+    dom.span(Css.DeBankLink).onclick = () =>
+      window.open(`https://debank.com/profile/${address}`, "_blank");
   dom.toggleById(Css.DeBankLink, isEvm);
   dom.span(Css.ExplorerLink).onclick = () =>
     window.open(`https://${ChainInfos[chainId].explorer}/${isEvm ? "address" : "wallet"}/${address}`, "_blank");

@@ -50,16 +50,16 @@ const NavTitle = ({ id, title$, backFn }) => {
     <Root class={Css.NavTitle}>
       <Css />
       <button class={Css.Button} onClick={backFn}>
-        <svg viewBox="0 0 24 24" width={18} height={18}>
-          <path d={Paths.Chevron} fill="#5256c9" transform="scale(-1,1) translate(-8,0)" />
+        <svg height={24} width={24}>
+          <path d={Paths.ChevronLeft} stroke="#5256c9" fill="none" stroke-width="2" />
         </svg>
       </button>
       <h3 class={Css.Title}>
         {title$}
       </h3>
       <button class={Css.Button} onClick={backFn}>
-        <svg viewBox="0 0 24 24" width={18} height={18}>
-          <path d={Paths.X} />
+        <svg width={24} height={24}>
+          <path d={Paths.X} stroke="#666" stroke-width="2" />
         </svg>
       </button>
     </Root>

@@ -23,13 +23,9 @@
   white-space: nowrap;
 }
 
-#AddresText>span {
-  margin-right: 5px;
-}
-
-#AddresText>span:active {
-  position: relative;
-  top: 1px;
+/** @export */
+#CopyButton {
+  margin-left: 5px;
 }
 
 /** @export */

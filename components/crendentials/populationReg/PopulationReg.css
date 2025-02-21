@@ -1,24 +1,103 @@
 /** @export */
-#FileDrop {}
+#FileDrop {
+  margin: 12px 0;
+  padding: 32px;
+  border: 2px dashed #ccc;
+  border-radius: 8px;
+  text-align: center;
+  background: #fafafa;
+  cursor: pointer;
+  transition: border-color 0.2s, background-color 0.2s, transform 0.2s;
+}
+
+#FileDrop:hover {
+  border-color: #2196F3;
+  background: #f5f9ff;
+}
+
+#FileDrop.Active {
+  border-color: #2196F3;
+  background: #f5f9ff;
+  transform: scale(1.02);
+}
 
 #Table {
   width: 100%;
-  margin-bottom: 16px;
+  margin: 12px 0 20px;
   border-collapse: collapse;
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
 }
 
 #Table td {
-  padding: 8px 0;
+  padding: 12px 16px;
   border-bottom: 1px solid #eee;
 }
 
 #Table td:first-child {
   color: #666;
   width: 40%;
+  background: #fafafa;
 }
 
 /** @export */
-#Commitment {}
+#Commitment {
+  font-family: monospace;
+  font-weight: 500;
+  color: #2196F3;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+#CopyButton {}
 
 /** @export */
-#Button {}
+#Button {
+  margin-top: 20px;
+}
+
+.Tip {
+  margin: 16px 0;
+  padding: 12px 16px;
+  line-height: 1.5;
+  border-radius: 8px;
+}
+
+/** @export */
+#Steps {
+  padding-left: 32px;
+  margin: 24px 0;
+}
+
+#Steps li {
+  margin: 24px 0;
+  line-height: 1.5;
+}
+
+.Link {
+  color: #2196F3;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.Link:hover {
+  text-decoration: underline;
+}
+
+#CopyButton {
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 4px;
+  display: inline-flex;
+  align-items: center;
+  opacity: 0.7;
+  transition: opacity 0.2s;
+}
+
+#CopyButton:hover {
+  opacity: 1;
+}

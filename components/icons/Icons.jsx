@@ -8,31 +8,27 @@ import Paths from "./paths";
  */
 const Arrow = ({ width = 24, height = 24 }) => (
   <svg width={width} height={height}>
-    <path d={Paths.Arrow} stroke="#fff" stroke-width={1.5} stroke-miterlimit={10} />
+    <path d={Paths.Arrow} stroke="#fff" fill="none" stroke-width={1.5} stroke-miterlimit={10} />
   </svg>
 );
 
 const SwitchWallet = ({ width = 24, height = 24 }) => (
-  <svg width={width} height={height} viewBox="0 0 24 24" fill="none" stroke="#666" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" >
-    <path d="M11 17a4 4 0 0 1-8 0V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2Z" />
-    <path d="M16.7 13H19a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2H7" />
-    <path d="M 7 17h.01" />
-    <path d="m11 8 2.3-2.3a2.4 2.4 0 0 1 3.404.004L18.6 7.6a2.4 2.4 0 0 1 .026 3.434L9.9 19.8" />
+  <svg width={width} height={height} viewBox="0 0 24 24" fill="none"
+    stroke="#666" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M11 17a4 4 0 0 1-8 0V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2ZM16.7 13H19a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2H7M7 17h.01M11 8l2.3-2.3a2.4 2.4 0 0 1 3.404.004L18.6 7.6a2.4 2.4 0 0 1 .026 3.434L9.9 19.8" />
   </svg>
 );
 
 const Revoke = ({ width = 24, height = 24 }) => (
   <svg width={width} height={height} viewBox="0 0 24 24" fill="none" stroke="#666" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" >
-    <circle cx="12" cy="12" r="10" />
-    <line x1="9" x2="15" y1="15" y2="9" />
+    <path d="M12 2a10 10 0 1 0 0 20 10 10 0 1 0 0-20zM9 15l6-6" />
   </svg>
 );
 
 const Vote = ({ width = 24, height = 24 }) => (
-  <svg width={width} height={height} viewBox="0 0 24 24" fill="none" stroke="#666" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" >
-    <path d="m9 12 2 2 4-4" />
-    <path d="M5 7c0-1.1.9-2 2-2h10a2 2 0 0 1 2 2v12H5V7Z" />
-    <path d="M22 19H2" />
+  <svg width={width} height={height} viewBox="0 0 24 24" fill="none"
+    stroke="#666" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="m9 12l2 2 4-4M5 7c0-1.1.9-2 2-2h10a2 2 0 0 1 2 2v12H5V7ZM22 19H2" />
   </svg>
 );
 

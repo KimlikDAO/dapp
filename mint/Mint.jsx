@@ -61,11 +61,11 @@ const Mint = ({ Lang }) => (
     </head>
     <body id={Css.Root}>
       <Router routeHandler={(route) => {
-        if (!route || route == "welcome") Mint.panes.showPane(0);
-        else {
+        if (route) {
           Mint.panes.showPane(1);
           Credentials.panes.showPane(route);
-        }
+        } else
+          Mint.panes.showPane(0);
       }} />
       <Header
         chainConfig={MintChainConfig}
