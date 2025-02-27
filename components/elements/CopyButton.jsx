@@ -2,6 +2,14 @@
 
 import Paths from "/components/icons/paths";
 import dom from "/lib/util/dom";
+import { css } from "/lib/kastro/stylesheet";
+
+/** @enum {string} */
+const Css = css`
+  .CopyButton {
+    cursor: pointer;
+  }
+`;
 
 /**
  * @param {{
@@ -12,6 +20,7 @@ import dom from "/lib/util/dom";
  */
 const CopyButton = ({ id$, height$ = 24, width$ = 24 }) => (
   <svg id={id$}
+    class={Css.CopyButton}
     width={width$}
     height={height$}
     viewBox="0 0 24 24"
@@ -25,6 +34,7 @@ const CopyButton = ({ id$, height$ = 24, width$ = 24 }) => (
       <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" />
     </g>
     <path d={Paths.Check} visibility="hidden" />
+    <Css />
   </svg>
 );
 

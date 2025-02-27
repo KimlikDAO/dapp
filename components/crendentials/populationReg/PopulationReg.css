@@ -44,8 +44,7 @@
 /** @export */
 #Commitment {
   font-family: monospace;
-  font-weight: 500;
-  color: #2196F3;
+  font-weight: 700;
   display: flex;
   align-items: center;
   gap: 8px;
@@ -65,19 +64,14 @@
   border-radius: 8px;
 }
 
-/** @export */
 #Steps {
   padding-left: 32px;
-  margin: 24px 0;
-}
-
-#Steps li {
   margin: 24px 0;
   line-height: 1.5;
 }
 
 .Link {
-  color: #2196F3;
+  color: #3182CE;
   text-decoration: none;
   display: inline-flex;
   align-items: center;
@@ -86,18 +80,4 @@
 
 .Link:hover {
   text-decoration: underline;
-}
-
-#CopyButton {
-  cursor: pointer;
-  padding: 4px;
-  border-radius: 4px;
-  display: inline-flex;
-  align-items: center;
-  opacity: 0.7;
-  transition: opacity 0.2s;
-}
-
-#CopyButton:hover {
-  opacity: 1;
 }

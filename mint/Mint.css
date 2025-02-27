@@ -1,20 +1,20 @@
 #Root {
   max-width: 1200px;
-  margin: 0 auto;
+  margin: 2em auto;
   display: grid;
   grid-template-columns: 300px 1fr;
-  grid-template-rows: auto 1fr;
   gap: 40px 2%;
 }
 
 #LeftColumn {
+  margin: 0 auto;
   grid-column: 1;
-  grid-row: 2
 }
 
 #RightColumn {
   grid-column: 2;
-  grid-row: 2;
+  min-width: 0;
+  /* Allow content to shrink */
   overflow: hidden;
 }
 
@@ -42,3 +42,9 @@ h2 {
 
 /** @export */
 #WelcomeButton {}
+
+@media (max-width: 900px) {
+  #Root {
+    grid-template-columns: 1fr;
+  }
+}

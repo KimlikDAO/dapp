@@ -1,5 +1,3 @@
-import "worker";
-
 /**
  * @constructor
  * @extends {MessageEvent<*>}

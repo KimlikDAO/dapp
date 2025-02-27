@@ -1,10 +1,12 @@
+import PowWorker from "kastro:./powWorker.js";
 import Css from "./PopulationReg.css";
 import ExternalLink from "/al/tanışma/external-link.svg";
+import CopyButton from "/components/elements/CopyButton";
 import NavTitle from "/components/elements/NavTitle";
 import SharedCss from "/components/shared/SharedCss.css";
 import Router from "/lib/kastro/Router";
 import dom from "/lib/util/dom";
-import CopyButton from "/components/elements/CopyButton";
+
 
 const PopulationReg = () => {
   /** @const {!HTMLDivElement} */
@@ -19,6 +21,7 @@ const PopulationReg = () => {
   return (
     <Root>
       <Css />
+      <PowWorker instance={PopulationReg.powWorker} />
       <NavTitle
         id="pop-reg-title"
         title$={{ en: "Add Population Registry", tr: "Nüfus kayıt örneği ekle" }}
@@ -26,12 +29,10 @@ const PopulationReg = () => {
 
       <ol id={Css.Steps}>
         <li>{{
-          en: <>You'll need a population registry document from the Turkish e-Government Portal.
-            When you visit e-Devlet, you'll be asked to fill out a form to get your document.
-            Here are the exact settings you need to use:</>,
-          tr: <>E-devlet'ten nüfus kayıt örneği almanız gerekiyor.
-            E-devlet'te belgenizi almak için bir form dolduracaksınız.
-            Formu tam olarak şu şekilde doldurmanız gerekiyor:</>
+          en: <>You need a <b>population registry document</b> from Turkish e-Government.
+            Use these exact settings when filling out the form:</>,
+          tr: <>e-Devlet'ten <b>nüfus kayıt örneği</b> almanız gerekiyor.
+            Formu doldururken şu ayarları kullanın:</>
         }}
           <table id={Css.Table}>
             <tr>
@@ -56,29 +57,30 @@ const PopulationReg = () => {
                 <CopyButton width$={16} height$={16} id$={Css.CopyButton} />
               </Commitment>
             </tr>
-          </table><p class={Css.Tip}>{{
+          </table>
+          <p class={Css.Tip}>{{
             en: <>
               <b>Important:</b> You can only request one document per day, so please review
               the required settings above carefully before proceeding.
             </>,
             tr: <>
               <b>Önemli:</b> Günde sadece bir belge talep edebilirsiniz,
-              bu nedenle lütfen yukarıdaki ayarları dikkatlice inceleyin.
+              bu nedenle lütfen yukarıdaki bilgileri dikkatlice inceleyin.
             </>
           }}</p>
         </li>
 
         <li>{{
-          en: <>Once you've reviewed the settings above, visit the <a href="https://www.turkiye.gov.tr/nvi-nufus-kayit-ornegi-belgesi-sorgulama"
+          en: <>Review the settings above and visit the <a href="https://www.turkiye.gov.tr/nvi-nufus-kayit-ornegi-belgesi-sorgulama"
             target="_blank"
             class={Css.Link}>
             e-Government Portal <ExternalLink inline /></a>{" "}
             and enter them exactly as shown. The institution name must match precisely.</>,
-          tr: <>Yukarıdaki ayarları inceledikten sonra <a href="https://www.turkiye.gov.tr/nvi-nufus-kayit-ornegi-belgesi-sorgulama"
+          tr: <>Yukarıdaki tabloyu inceleyin ve <a href="https://www.turkiye.gov.tr/nvi-nufus-kayit-ornegi-belgesi-sorgulama"
             target="_blank"
             class={Css.Link}>
-            E-devlet Nüfus Kayıt Örneği sayfasını ziyaret edin <ExternalLink inline /></a>{" "}
-            ve ayarları birebir girin. Kurum adının tam olarak aynı olması gerekiyor.</>
+            E-devlet Nüfus Kayıt Örneği sayfası <ExternalLink inline /></a>’na gidip
+            ve bilgileri girin. Kurum adının birebir aynı olması gerekiyor.</>
         }}<p class={Css.Tip}>{{
           en: <>
             <b>Tip:</b> If you make a mistake, you can try again with a different "Certificate type".
@@ -86,18 +88,27 @@ const PopulationReg = () => {
           </>,
           tr: <>
             <b>İpucu:</b> Eğer bir hata yaparsanız, farklı bir belge tipi ile tekrar deneyebilirsiniz.
-            Her belge tipi için günde bir belge talep edebilirsiniz: Birey, Aile veya Nüfus Aile.
-            Tüm bunları kabul ediyoruz.
+            Kişi, Aile veya Nüfus Aile olmak üzere her belge tipi için günde bir belge alabilirsiniz.
           </>
         }}</p>
         </li>
-
         <li>
           {{
-            en: "Download the PDF document and upload it here",
-            tr: "PDF belgesini indirin ve buraya yükleyin"
+            en: "Download the PDF document and upload it here.",
+            tr: "PDF belgesini indirin ve buraya yükleyin."
           }}
-          <FileDrop class={[SharedCss.Card, Css.FileDrop]}>
+          <p class={Css.Tip}>{{
+            en: <><b>Note: </b>
+              The PDF document is parsed, validated against e-government and signed by KimlikDAO nodes inside
+              Trusted Execution Environment (TEE).
+              KimlikDAO node operators cannot see your personal data.</>,
+            tr: <><b>Not: </b>
+              Yüklediğiniz PDF belgesi KimlikDAO düğümleri tarafından
+              Trusted Execution Environment (TEE) içerisinde e-devlet'ten doğrulanır,
+              metine çevrilir ve imzalanır. KimlikDAO düğüm operatörleri kişisel
+              verilerinize erişemez.</>
+          }}</p>
+          <FileDrop class={Css.FileDrop}>
             {{ en: "Upload Population Registry Document", tr: "Nüfus Kayıt Örneği Belgesi Yükle" }}
             <br />
             <Button class={[SharedCss.Button, SharedCss.Action]}>{{

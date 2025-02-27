@@ -1,10 +1,11 @@
 import Css from "./Credentials.css";
 import CredentialSource from "./CredentialSource";
 import PopulationReg from "./populationReg/PopulationReg";
+import Wallet from "/components/wallet/Wallet";
 import KeyedSwitch from "/lib/kastro/KeyedSwitch";
+import Router from "/lib/kastro/Router";
 import dom from "/lib/util/dom";
 import { LangCode } from "/lib/util/i18n";
-import Router from "/lib/kastro/Router";
 
 const CredentialSearch = () => {
   /** @const {!HTMLDivElement} */
@@ -40,7 +41,18 @@ const CredentialSearch = () => {
 }
 
 const Credentials = () => {
-  dom.div("population-registry").onclick = () => Router.navigate("pop-reg");
+  dom.div("population-registry").onclick = (e) => {
+    e.stopPropagation();
+    if (!Wallet.address()) {
+      Wallet.open();
+      Wallet.onAddressChange((address) => {
+        if (!address) return;
+        Router.navigate("pop-reg");
+        Wallet.close();
+      });
+    } else
+      Router.navigate("pop-reg");
+  }
 
   return (
     <div id={Css.Root}>

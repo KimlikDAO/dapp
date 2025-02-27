@@ -270,6 +270,11 @@ const Wallet = ({
  */
 Wallet.open = () => Wallet.chainButton.click();
 
+/**
+ * TODO(KimlikDAO-bot): Maybe keep Dropdown reference and close consistently.
+ */
+Wallet.close = () => Wallet.chainButton.click();
+
 Wallet.disconnect = () => {
   Address = null;
   Wallet.addressButton.innerText = Wallet.connectText;

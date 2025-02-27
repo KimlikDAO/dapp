@@ -1,9 +1,7 @@
-
 import Css from "./Mint.css";
 import Welcome from "./Welcome";
 import Credentials from "/components/crendentials/Credentials";
 import Header from "/components/header/Header";
-import HeaderCss from "/components/header/Header.css";
 import Favicon from "/components/icon.svg";
 import KPass from "/components/kpass/KPass";
 import Lato400 from "/components/lato/l400.ttf";
@@ -37,7 +35,7 @@ const MintChainConfig = {
 
 /** @enum {string} */
 const JointCss = css`
-  #${HeaderCss.Header} {
+  .Header {
     grid-column: 1 / 3;
     grid-row: 1;
   }
@@ -59,14 +57,7 @@ const Mint = ({ Lang }) => (
       <Css />
       <JointCss />
     </head>
-    <body id={Css.Root}>
-      <Router routeHandler={(route) => {
-        if (route) {
-          Mint.panes.showPane(1);
-          Credentials.panes.showPane(route);
-        } else
-          Mint.panes.showPane(0);
-      }} />
+    <body>
       <Header
         chainConfig={MintChainConfig}
         logoUrl$="/"
@@ -74,15 +65,24 @@ const Mint = ({ Lang }) => (
         cookieDomain={`.${HostUrl.slice(8)}`}
         mintKPassUrl$={Page.Mint}
         viewKPassUrl={dom.i18n(Page.KPass)} />
-      <div id={Css.LeftColumn}>
-        <KPass style="" />
+      <Router routeHandler={(route) => {
+        if (route) {
+          Mint.panes.showPane(1);
+          Credentials.panes.showPane(route);
+        } else
+          Mint.panes.showPane(0);
+      }} />
+      <div id={Css.Root}>
+        <div id={Css.LeftColumn}>
+          <KPass style="" />
+        </div>
+        <Switch instance={Mint.panes} id={Css.Panes} initialPane={0}>
+          <Welcome />
+          <Credentials />
+        </Switch>
       </div>
-      <Switch instance={Mint.panes} id={Css.Panes} initialPane={0}>
-        <Welcome />
-        <Credentials />
-      </Switch>
     </body>
-  </html >
+  </html>
 );
 
 export default Mint;
