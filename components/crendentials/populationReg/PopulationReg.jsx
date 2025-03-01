@@ -1,5 +1,5 @@
 import PowWorker from "kastro:./powWorker.js";
-import { getCommitmentPow, getRand } from "./commitment";
+import { getCommitmentPow, getRand, splitCommitment } from "./commitment";
 import Css from "./PopulationReg.css";
 import ExternalLink from "/al/tanışma/external-link.svg";
 import CopyButton from "/components/elements/CopyButton";
@@ -7,17 +7,20 @@ import NavTitle from "/components/elements/NavTitle";
 import SharedCss from "/components/shared/SharedCss.css";
 import Wallet from "/components/wallet/Wallet";
 import { chainIdToGroup } from "/lib/crosschain/chains";
+import { combineMultiple } from "/lib/did/KPass";
 import Router from "/lib/kastro/Router";
 import network from "/lib/node/network";
 import dom from "/lib/util/dom";
 
 const PopulationReg = () => {
-  /** @type {?string} */
-  PopulationReg.calculatingText;
   /** @type {boolean} */
   PopulationReg.isVisible = false;
   /** @const {!HTMLTableCellElement} */
   PopulationReg.commitment = dom.td(Css.Commitment);
+  /** @type {?string} */
+  PopulationReg.commitmentPow;
+  /** @type {Uint8Array} */
+  PopulationReg.commitmentRand;
   /** @const {!HTMLDivElement} */
   const Root = dom.div("pop-reg-root");
   /** @const {!HTMLDivElement} */
@@ -25,7 +28,7 @@ const PopulationReg = () => {
   /** @const {!HTMLButtonElement} */
   const Button = dom.button(Css.Button);
 
-  Wallet.onAddressChange((address) => address && PopulationReg.computeCommitment(address));
+  Wallet.onAddressChange(PopulationReg.computeCommitment);
   return (
     <Root>
       <Css />
@@ -130,42 +133,57 @@ const PopulationReg = () => {
   );
 };
 
-/**
- * @param {string=} text
- */
-PopulationReg.setCommitText = (text) => {
-  /** @const {!Text} */
-  const node = /** @type {!Text} */(PopulationReg.commitment.firstChild);
-  if (PopulationReg.calculatingText)
-    node.data = text || PopulationReg.calculatingText;
-  else {
-    PopulationReg.calculatingText = node.data;
-    if (text) node.data = text;
-  }
-}
-
-/** @param {string} address */
+/** @param {?string} address */
 PopulationReg.computeCommitment = (address) => {
-  if (!PopulationReg.isVisible) return;
-  PopulationReg.setCommitText();
+  if (!PopulationReg.isVisible || !address) return;
+  dom.text.setPreserve(PopulationReg.commitment);
   const chainGroup = chainIdToGroup(Wallet.chainId());
 
   const rand = getRand(address);
-  const commitmentPow = getCommitmentPow(chainGroup, address, rand, PopulationReg.powWorker);
-  commitmentPow
-    .then((commitmentPow) => network.nko.getPDFCommitment(commitmentPow))
-    .then((pdfCommitment) => {
-      pdfCommitment = "KimlikDAO-" + pdfCommitment;
-      /** @type {!Text} */(PopulationReg.commitment.firstChild).data = pdfCommitment;
-      CopyButton.setText(Css.CopyButton, pdfCommitment);
-    });
+  getCommitmentPow(chainGroup, address, rand, PopulationReg.powWorker)
+    .then((commitmentPow) => network.nko.getPDFCommitment(commitmentPow)
+      .then((pdfCommitment) => {
+        PopulationReg.commitmentPow = commitmentPow;
+        PopulationReg.commitmentRand = rand;
+        pdfCommitment = "KimlikDAO-" + pdfCommitment;
+        dom.text.setPreserve(PopulationReg.commitment, pdfCommitment);
+        CopyButton.setText(Css.CopyButton, pdfCommitment);
+      }));
+}
+
+/** @param {!File} file */
+PopulationReg.uploadPDF = (file) => {
+  const commitmentPow = PopulationReg.commitmentPow;
+  if (!commitmentPow) return;
+  const clientTime = Date.now() / 1000 | 0;
+  const { commitmentR, commitmentAnonR } = splitCommitment(
+    /** @type {!Uint8Array} */(PopulationReg.commitmentRand)
+  );
+
+  /** @const {!FormData} */
+  const formData = new FormData();
+  formData.set("f", file);
+
+  network.nko.getCredentialsFromPDF(
+    commitmentPow,
+    formData,
+    clientTime,
+    7
+  ).then((credentials) => {
+    const decryptedCredentials = combineMultiple(
+      credentials,
+      commitmentR,
+      commitmentAnonR,
+      3
+    );
+    console.log(decryptedCredentials);
+    Router.navigate("sources");
+  });
 }
 
 PopulationReg.show = () => {
   PopulationReg.isVisible = true;
-  const address = Wallet.address();
-  if (address)
-    PopulationReg.computeCommitment(address);
+  PopulationReg.computeCommitment(Wallet.address());
 }
 
 PopulationReg.close = () => {

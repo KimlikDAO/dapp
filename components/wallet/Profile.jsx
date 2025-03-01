@@ -48,7 +48,7 @@ Profile.setAddress = (address, chainId) => {
   if (isEvm)
     dom.span(Css.DeBankLink).onclick = () =>
       window.open(`https://debank.com/profile/${address}`, "_blank");
-  dom.toggleById(Css.DeBankLink, isEvm);
+  dom.showById(Css.DeBankLink, isEvm);
   dom.span(Css.ExplorerLink).onclick = () =>
     window.open(`https://${ChainInfos[chainId].explorer}/${isEvm ? "address" : "wallet"}/${address}`, "_blank");
   return shortAddr;

@@ -44,7 +44,21 @@ const getCommitmentPow = (chainGroup, address, rand, powWorker) => {
   });
 }
 
+/**
+ * @param {!Uint8Array} commitment
+ * @return {{
+ *   commitmentR: string,
+ *   commitmentAnonR: string
+ * }}
+ */
+const splitCommitment = (commitment) => {
+  const commitmentR = base64.from(commitment.subarray(0, 32));
+  const commitmentAnonR = base64.from(commitment.subarray(32));
+  return { commitmentR, commitmentAnonR };
+}
+
 export {
   getRand,
   getCommitmentPow,
+  splitCommitment,
 };
