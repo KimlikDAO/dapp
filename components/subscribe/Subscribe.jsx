@@ -1,5 +1,5 @@
-import Css from "./Subscribe.css";
 import SharedCss from "../shared/SharedCss";
+import Css from "./Subscribe.css";
 import dom from "/lib/util/dom";
 
 /**
@@ -12,31 +12,28 @@ const Subscribe = ({ id }) => {
   const input = /** @type {!HTMLInputElement} */(Root.firstElementChild);
   /** @const {!Element} */
   const button = /** @type {!Element} */(input.nextElementSibling);
-  /** @type {?string} */
-  let subscribeText;
 
   /**
    * @param {boolean} success
    */
   const update = (success) => {
-    button.innerText = success
-      ? subscribeText + dom.i18n({ tr: "dunuz 👍", en: "d 👍" })
-      : dom.i18n({ tr: "Hata 🫨", en: "Error 🫨" });
-    setTimeout(() => button.innerText = subscribeText, 3000);
-    if (success)
+    if (success) {
       input.value = "";
+      dom.text.appendPreserve(button, dom.i18n({ en: "d 👍", tr: "dunuz 👍" }));
+    } else
+      dom.text.update(button, dom.i18n({ en: "Error 🫨", tr: "Hata 🫨" }));
+    setTimeout(() => dom.text.setPreserve(button), 3000);
   }
 
   /**
    * Sends the email newsletter registration request and calls
    * {@link update()} to update the UI.
    *
-   * @param {Event=} event
+   * @param {Event=} e
    */
-  const submit = (event) => {
-    event?.preventDefault();
-    subscribeText ||= button.innerText;
-    button.innerText = subscribeText + " ⏳";
+  const submit = (e) => {
+    e?.preventDefault();
+    dom.text.appendPreserve(button, " ⏳");
     fetch("//bulten.kimlikdao.org/ekle", {
       method: "POST",
       body: JSON.stringify({ "email": input.value, "dil": dom.Lang })

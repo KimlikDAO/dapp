@@ -68,7 +68,7 @@ const Mint = ({ Lang }) => (
       <Router routeHandler={(route) => {
         if (route) {
           Mint.panes.showPane(1);
-          Credentials.panes.showPane(route);
+          Credentials.show(route);
         } else
           Mint.panes.showPane(0);
       }} />

@@ -42,7 +42,7 @@ const Profile = ({ mintKPassUrl$, viewKPassUrl }) => {
 Profile.setAddress = (address, chainId) => {
   const shortAddr = address.slice(0, 6) + "..." + address.slice(-4);
   const addressText = dom.div(Css.AddresText);
-  /** @type {!Text} */(addressText.firstChild).data = shortAddr;
+  dom.text.update(addressText, shortAddr);
   addressText.onclick = CopyButton.setText(Css.CopyButton, address);
   const isEvm = chainId.startsWith(ChainGroup.EVM);
   if (isEvm)
@@ -61,12 +61,11 @@ Profile.setKPass = (exists) => {
   const link = dom.a(Css.KPassButton);
   const image = dom.img(Css.KPassImage);
   if (exists) {
-    Profile.mintText ||= link.innerText;
     Profile.mintKPassUrl ||= link.href;
-    link.innerText = dom.i18n({ tr: "KPASS’İNİ İNCELE", en: "VIEW KPASS" });
+    dom.text.setPreserve(link, dom.i18n({ tr: "KPASS’İNİ İNCELE", en: "VIEW KPASS" }));
     link.href = Profile.viewKPassUrl;
   } else {
-    link.innerText = Profile.mintText || link.innerText;
+    dom.text.setPreserve(link);
     link.href = Profile.mintKPassUrl || link.href;
   }
   if (Profile.placeholderImage) image.src = Profile.placeholderImage;

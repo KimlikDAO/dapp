@@ -43,12 +43,12 @@ const Css = css`
  * }} props
  */
 const RemainingBar = ({ id, className, children, maximum, ticker }) => (
-  <div id={id} class={[Css.Container, className]}>
+  <div class={[Css.Container, className]}>
     <Css />
-    <div class={[Css.Bar, className]} style={`width:${Width}px`}></div>
+    <div id={id} class={[Css.Bar, className]} style={`width:${Width}px`}></div>
     <div class={Css.Text}>
       {children}{" "}
-      <span>{dom.paradanMetne(maximum)}</span>{" / "}{dom.paradanMetne(maximum)}
+      <span id={[id, "t"]}>{dom.renderCurrency(maximum)}</span>{" / "}{dom.renderCurrency(maximum)}
       {" " + ticker}
     </div>
   </div>
@@ -63,14 +63,14 @@ const RemainingBar = ({ id, className, children, maximum, ticker }) => (
  * @param {number} maximum
  */
 RemainingBar.setRemaining = (id, remaining, maximum) => {
-  /** @const {!HTMLDivElement} */
-  const root = dom.div(id);
   /** @const {number} */
   const remainingWidth = remaining * Width / maximum;
-  root.firstElementChild.style.width = remainingWidth + "px";
-  root.lastElementChild
-    .lastElementChild
-    .innerText = dom.paradanMetne(remaining);
+  /** @const {!HTMLDivElement} */
+  const bar = dom.div(id);
+  bar.style.width = remainingWidth + "px";
+  /** @const {!Text} */
+  const text = /** @type {!Text} */(dom.span(`${id}.t`).firstChild);
+  text.data = dom.renderCurrency(remaining);
 }
 
 RemainingBar.Css = Css;

@@ -1,23 +1,31 @@
 import PowWorker from "kastro:./powWorker.js";
+import { getCommitmentPow, getRand } from "./commitment";
 import Css from "./PopulationReg.css";
 import ExternalLink from "/al/tanışma/external-link.svg";
 import CopyButton from "/components/elements/CopyButton";
 import NavTitle from "/components/elements/NavTitle";
 import SharedCss from "/components/shared/SharedCss.css";
+import Wallet from "/components/wallet/Wallet";
+import { chainIdToGroup } from "/lib/crosschain/chains";
 import Router from "/lib/kastro/Router";
+import network from "/lib/node/network";
 import dom from "/lib/util/dom";
 
-
 const PopulationReg = () => {
+  /** @type {?string} */
+  PopulationReg.calculatingText;
+  /** @type {boolean} */
+  PopulationReg.isVisible = false;
+  /** @const {!HTMLTableCellElement} */
+  PopulationReg.commitment = dom.td(Css.Commitment);
   /** @const {!HTMLDivElement} */
   const Root = dom.div("pop-reg-root");
   /** @const {!HTMLDivElement} */
   const FileDrop = dom.div(Css.FileDrop);
-  /** @const {!HTMLTableCellElement} */
-  const Commitment = dom.td(Css.Commitment);
   /** @const {!HTMLButtonElement} */
   const Button = dom.button(Css.Button);
 
+  Wallet.onAddressChange((address) => address && PopulationReg.computeCommitment(address));
   return (
     <Root>
       <Css />
@@ -25,7 +33,7 @@ const PopulationReg = () => {
       <NavTitle
         id="pop-reg-title"
         title$={{ en: "Add Population Registry", tr: "Nüfus kayıt örneği ekle" }}
-        backFn={() => Router.navigate("sources")} />
+        backFn={PopulationReg.close} />
 
       <ol id={Css.Steps}>
         <li>{{
@@ -53,9 +61,9 @@ const PopulationReg = () => {
             </tr>
             <tr>
               <td>{{ en: "Institution name", tr: "Kurum adı" }}</td>
-              <Commitment>KimlikDAO-a234sfd
+              <PopulationReg.commitment>Calculating...
                 <CopyButton width$={16} height$={16} id$={Css.CopyButton} />
-              </Commitment>
+              </PopulationReg.commitment>
             </tr>
           </table>
           <p class={Css.Tip}>{{
@@ -121,5 +129,48 @@ const PopulationReg = () => {
     </Root>
   );
 };
+
+/**
+ * @param {string=} text
+ */
+PopulationReg.setCommitText = (text) => {
+  /** @const {!Text} */
+  const node = /** @type {!Text} */(PopulationReg.commitment.firstChild);
+  if (PopulationReg.calculatingText)
+    node.data = text || PopulationReg.calculatingText;
+  else {
+    PopulationReg.calculatingText = node.data;
+    if (text) node.data = text;
+  }
+}
+
+/** @param {string} address */
+PopulationReg.computeCommitment = (address) => {
+  if (!PopulationReg.isVisible) return;
+  PopulationReg.setCommitText();
+  const chainGroup = chainIdToGroup(Wallet.chainId());
+
+  const rand = getRand(address);
+  const commitmentPow = getCommitmentPow(chainGroup, address, rand, PopulationReg.powWorker);
+  commitmentPow
+    .then((commitmentPow) => network.nko.getPDFCommitment(commitmentPow))
+    .then((pdfCommitment) => {
+      pdfCommitment = "KimlikDAO-" + pdfCommitment;
+      /** @type {!Text} */(PopulationReg.commitment.firstChild).data = pdfCommitment;
+      CopyButton.setText(Css.CopyButton, pdfCommitment);
+    });
+}
+
+PopulationReg.show = () => {
+  PopulationReg.isVisible = true;
+  const address = Wallet.address();
+  if (address)
+    PopulationReg.computeCommitment(address);
+}
+
+PopulationReg.close = () => {
+  PopulationReg.isVisible = false;
+  Router.navigate("sources");
+}
 
 export default PopulationReg;

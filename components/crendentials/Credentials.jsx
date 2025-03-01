@@ -43,15 +43,7 @@ const CredentialSearch = () => {
 const Credentials = () => {
   dom.div("population-registry").onclick = (e) => {
     e.stopPropagation();
-    if (!Wallet.address()) {
-      Wallet.open();
-      Wallet.onAddressChange((address) => {
-        if (!address) return;
-        Router.navigate("pop-reg");
-        Wallet.close();
-      });
-    } else
-      Router.navigate("pop-reg");
+    Wallet.connectThen(() => Router.navigate("pop-reg"));
   }
 
   return (
@@ -63,6 +55,12 @@ const Credentials = () => {
       </KeyedSwitch>
     </div>
   );
+}
+
+Credentials.show = (route) => {
+  Credentials.panes.showPane(route);
+  if (route === "pop-reg")
+    PopulationReg.show();
 }
 
 export default Credentials;

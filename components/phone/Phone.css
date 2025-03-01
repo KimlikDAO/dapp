@@ -145,6 +145,7 @@
   width: 50%;
 }
 
+/** @export */
 #InfoDialogYes {
   border-left: 0.3px solid #ccc;
   font-weight: 700;

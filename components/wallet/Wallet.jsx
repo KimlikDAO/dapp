@@ -112,7 +112,7 @@ const addressChanged = (addresses) => {
     Wallet.disconnect();
   else if (addresses[0] != Address) {
     Address = addresses[0];
-    Wallet.addressButton.innerText = Profile.setAddress(Address, ChainList.selected);
+    dom.text.setPreserve(Wallet.addressButton, Profile.setAddress(Address, ChainList.selected));
     Wallet.rightPane.showPane(2);
     kpassChanged();
     OnAddressChange.forEach((f) => f(Address));
@@ -230,8 +230,6 @@ const Wallet = ({
   Wallet.addressButton = dom.button(Css.AddressButton);
   /** @const {string} */
   Wallet.cookieDomain = cookieDomain;
-  /** @const {string} */
-  Wallet.connectText = Wallet.addressButton.innerText;
   /** @const {!HTMLDivElement} */
   const Dropdown = dom.div(Css.Dropdown);
 
@@ -266,9 +264,21 @@ const Wallet = ({
 }
 
 /**
- * Opens the wallet dropdown
+ * @param {function()} f
  */
-Wallet.open = () => Wallet.chainButton.click();
+Wallet.connectThen = (f) => {
+  if (Address)
+    f();
+  else {
+    OnAddressChange.push((address) => {
+      if (!address) return;
+      OnAddressChange.pop();
+      Wallet.chainButton.click();
+      f();
+    });
+    Wallet.chainButton.click();
+  }
+}
 
 /**
  * TODO(KimlikDAO-bot): Maybe keep Dropdown reference and close consistently.
@@ -277,11 +287,14 @@ Wallet.close = () => Wallet.chainButton.click();
 
 Wallet.disconnect = () => {
   Address = null;
-  Wallet.addressButton.innerText = Wallet.connectText;
+  dom.text.setPreserve(Wallet.addressButton);
   providerSelected(ProviderId.Dummy);
   Wallet.rightPane.showPane(+ChainList.selected.startsWith(ChainGroup.MINA));
   for (const f of OnDisconnect) f();
 }
+
+/** @return {ChainId} */
+Wallet.chainId = () => ChainList.selected;
 
 /** @return {?string} */
 Wallet.address = () => Address;

@@ -51,11 +51,8 @@ const WalletApp = () => {
  * @param {string=} address
  * @return {string}
  */
-WalletApp.setAddress = (address = "0x1DA01DAO") => WalletApp
-  .root
-  .children[2]
-  .innerText = address.slice(0, 6) + "..." + address.slice(-4);
-
+WalletApp.setAddress = (address = "0x1DA01DAO") => dom.text.update(
+  WalletApp.root.children[2], address.slice(0, 6) + "..." + address.slice(-4));
 
 const InfoDialog = () => {
   /** @const {!HTMLDivElement} */
@@ -77,10 +74,12 @@ const InfoDialog = () => {
  * @param {string=} buttonText
  */
 InfoDialog.show = (prompt, buttonText) => {
-  if (buttonText) InfoDialog.root.children[1].children[1].innerText = buttonText;
+  if (buttonText)
+    dom.text.update(dom.div(Css.InfoDialogYes), buttonText);
   /** @const {boolean} */
   const show = !!prompt;
-  if (show) InfoDialog.root.children[0].innerText = prompt;
+  if (show)
+    InfoDialog.root.children[0].textContent = prompt;
   WalletApp.root.classList.toggle(Css.Blurred, show);
   InfoDialog.root.classList.toggle(Css.Show, show);
   KPassDialog.classList.toggle(Css.Blurred, show);
@@ -127,9 +126,9 @@ Phone.showKPass = (showInDialog, infoSide) => {
   Phone.infoSide = infoSide;
   const showSide = () => {
     KPass.showSide(Phone.infoSide);
-    KPassDialogButton.innerText = Phone.infoSide
+    dom.text.update(KPassDialogButton, Phone.infoSide
       ? dom.i18n({ en: "Encrypt", tr: "Gizle" })
-      : dom.i18n({ en: "Decrypt", tr: "Aç" });
+      : dom.i18n({ en: "Decrypt", tr: "Aç" }));
   }
   showSide();
   KPassDialogButton.onclick ||= () => {

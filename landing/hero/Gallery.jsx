@@ -1,6 +1,7 @@
 import Css from "./Gallery.css";
 import Phone from "/components/phone/Phone";
 import SharedCss from "/components/shared/SharedCss.css";
+import Wallet from "/components/wallet/Wallet";
 import dom from "/lib/util/dom";
 import { I18nString } from "/lib/util/i18n";
 
@@ -75,7 +76,7 @@ const Gallery = () => {
       startGalleryTimer();
     }
   }
-  // Wallet.onAddressChange((address) => Phone.setAddress(address));
+  Wallet.onAddressChange((address) => Phone.setAddress(/** @type {string|undefined} */(address)));
   CardSlider.appendChild(CardSlider.firstElementChild.cloneNode(true));
   CardSlider.style.width = "500%";
   dom.schedule(() => {
