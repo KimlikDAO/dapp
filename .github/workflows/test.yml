@@ -8,7 +8,7 @@ on:
 
 jobs:
   compile-components:
-    name: Compile individual components
+    name: Compile individual pages
     strategy:
       fail-fast: true
 
@@ -31,7 +31,7 @@ jobs:
       - name: Install pip dependencies
         run: pip install fonttools
 
-      - name: Compile Landing page
+      - name: Compile Landing and Mint pages
         run: bun run build --lang en
 
   compile-dapp:

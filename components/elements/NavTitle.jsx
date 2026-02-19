@@ -40,8 +40,8 @@ const Css = css`
 /**
  * @param {{
  *   id: string,
- *   title$: (I18nString | undefined),
- *   backFn: function():void
+ *   title$: I18nString,
+ *   backFn: () => void
  * }} props 
  */
 const NavTitle = ({ id, title$, backFn }) => {

@@ -6,9 +6,9 @@ import { LangCode, I18nString } from "/lib/util/i18n";
 /**
  * @param {{
 *   id: string,
-*   title$: (I18nString | undefined),
-*   description$: (I18nString | undefined),
-*   countries$: (!Array<LangCode> | undefined),
+*   title$: I18nString,
+*   description$: I18nString,
+*   countries$: LangCode[]
 * }} props
 */
 const CredentialSource = ({ id, title$, description$, countries$ }) => {

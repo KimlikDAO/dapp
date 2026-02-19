@@ -42,6 +42,11 @@ CopyButton.toggle = (button, isCopy) => {
   check.setAttribute("visibility", isCopy ? "hidden" : "visible");
 }
 
+/**
+ * @param {string} id
+ * @param {string} text
+ * @return {(e: Event | null) => void}
+ */
 CopyButton.setText = (id, text) => {
   const svg = dom.byId(id);
   return svg.onclick = (e) => {
