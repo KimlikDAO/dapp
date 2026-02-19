@@ -2,13 +2,12 @@ import Author from "../Author";
 import BlogCss from "../blog.css";
 import RemainingBar from "../RemainingBar";
 import Banner from "./banner.png";
-import { ChainInfos } from "/components/chains/chains";
+import { PublicProvider } from "/components/chains/provider";
 import UBInuImage from "/components/tokens/UBINU.png";
 import { ChainId } from "/lib/crosschain/chains";
-import { ERC20 } from "../../../lib/ethereum/contract/ERC20";
+import { ERC20 } from "/lib/ethereum/contract/ERC20";
 import { css } from "/lib/kastro/stylesheet";
 import dom from "/lib/util/dom";
-import { Provider } from "/lib/ethereum/provider";
 
 /** @enum {string} */
 const Css = css`
@@ -45,10 +44,9 @@ const TOTAL = 50_000_000_000;
  * }} props
  */
 const EllipticCurves = ({ href, piggyback }) => {
-  const provider = new Provider((_params) => Promise.resolve(""));
   dom.schedule(() =>
     new ERC20(ChainId.xa86a, USDC_AVALANCHE)
-      .allowance(provider, DEV_FUND, ODUL)
+      .allowance(PublicProvider, DEV_FUND, ODUL)
       .then((allowance) =>
         RemainingBar.setRemaining(Css.UBInu, parseInt(allowance.slice(-36), 16), TOTAL))
     , 1000

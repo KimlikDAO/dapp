@@ -18,7 +18,7 @@ import { LangCode } from "/lib/util/i18n";
 
 /** @type {ChainConfig} */
 const MintChainConfig = {
-  defaultChain: ChainId.xa4b1,
+  defaultChain: ChainId.x1,
   chains: [
     ChainId.x1,
     ChainId.xa4b1,
@@ -28,7 +28,7 @@ const MintChainConfig = {
     ChainId.x38,
   ],
   chainNotes$: {
-    [ChainId.xa4b1]: { en: "Signal chain", tr: "Ana ağ" },
+    [ChainId.x1]: { en: "Signal chain", tr: "Ana ağ" },
     [ChainId.MinaMainnet]: { en: "New ✨", tr: "Yeni ✨" },
   },
 };

@@ -41,7 +41,7 @@ const Entry = Page.Landing;
 /** @const {LangCode} */
 const CodebaseLang = LangCode.EN;
 
-/** @const {Object<string, string>} */
+/** @const {Record<string, string>} */
 const Aliases = {
   "TCKT.svg": "KPASS.svg"
 };
