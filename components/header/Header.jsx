@@ -15,13 +15,13 @@ const JointCss = css`
 /**
  * @param {{
  *   chainConfig: ChainConfig,
- *   piggyback: (string|undefined),
- *   logoUrl$: (string|undefined),
- *   title$: (string|undefined),
+ *   piggyback?: string,
+ *   logoUrl$: string,
+ *   title$: string,
  *   cookieDomain: string,
- *   mintKPassUrl$: (string | undefined),
+ *   mintKPassUrl$: string,
  *   viewKPassUrl: string,
- *   children: (* | undefined),
+ *   children?: unknown[],
  * }} props
  */
 const Header = ({

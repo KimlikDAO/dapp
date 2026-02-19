@@ -82,3 +82,29 @@
 .Link:hover {
   text-decoration: underline;
 }
+
+.FileDrop {
+  border: 2px dashed #ccc;
+  border-radius: 8px;
+  padding: 30px;
+  text-align: center;
+  margin: 20px 0;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+/** @export */
+#FileInput {}
+
+/** @export */
+.Active {}
+
+.FileDrop.Active {
+  border-color: #0078ff;
+  background-color: rgba(0, 120, 255, 0.05);
+}
+
+#ProcessingStatus {
+  display: none;
+  margin-top: 20px;
+}

@@ -1,7 +1,8 @@
 import PowWorker from "kastro:./powWorker.js";
 import { getCommitmentPow, getRand, splitCommitment } from "./commitment";
 import Css from "./PopulationReg.css";
-import ExternalLink from "/al/tanışma/external-link.svg";
+import ProcessingStatus from "./ProcessingStatus";
+import ExternalLink from "/components/arrow.svg";
 import CopyButton from "/components/elements/CopyButton";
 import NavTitle from "/components/elements/NavTitle";
 import SharedCss from "/components/shared/SharedCss.css";
@@ -9,24 +10,26 @@ import Wallet from "/components/wallet/Wallet";
 import { chainIdToGroup } from "/lib/crosschain/chains";
 import { combineMultiple } from "/lib/did/KPass";
 import Router from "/lib/kastro/Router";
-import network from "/lib/node/network";
+import protocol from "/lib/protocol/client";
 import dom from "/lib/util/dom";
 
 const PopulationReg = () => {
   /** @type {boolean} */
   PopulationReg.isVisible = false;
-  /** @const {!HTMLTableCellElement} */
+  /** @const {HTMLTableCellElement} */
   PopulationReg.commitment = dom.td(Css.Commitment);
-  /** @type {?string} */
+  /** @type {string | null} */
   PopulationReg.commitmentPow;
   /** @type {Uint8Array} */
   PopulationReg.commitmentRand;
-  /** @const {!HTMLDivElement} */
+  /** @const {HTMLDivElement} */
   const Root = dom.div("pop-reg-root");
-  /** @const {!HTMLDivElement} */
+  /** @const {HTMLDivElement} */
   const FileDrop = dom.div(Css.FileDrop);
-  /** @const {!HTMLButtonElement} */
+  /** @const {HTMLButtonElement} */
   const Button = dom.button(Css.Button);
+  /** @const {HTMLInputElement} */
+  const FileInput = dom.input(Css.FileInput);
 
   Wallet.onAddressChange(PopulationReg.computeCommitment);
   return (
@@ -119,14 +122,16 @@ const PopulationReg = () => {
               metine çevrilir ve imzalanır. KimlikDAO düğüm operatörleri kişisel
               verilerinize erişemez.</>
           }}</p>
-          <FileDrop class={Css.FileDrop}>
+          <FileDrop class={Css.FileDrop} onDrop={PopulationReg.handleFileDrop} onDragOver={PopulationReg.handleDragOver} onDragLeave={PopulationReg.handleDragLeave}>
             {{ en: "Upload Population Registry Document", tr: "Nüfus Kayıt Örneği Belgesi Yükle" }}
             <br />
-            <Button class={[SharedCss.Button, SharedCss.Action]}>{{
+            <Button class={[SharedCss.Button, SharedCss.Action]} onClick={() => FileInput.click()}>{{
               en: "Upload",
               tr: "Yükle"
             }}</Button>
+            <FileInput type="file" accept="application/pdf" onChange={PopulationReg.handleFileSelect} />
           </FileDrop>
+          <ProcessingStatus />
         </li>
       </ol>
     </Root>
@@ -141,7 +146,7 @@ PopulationReg.computeCommitment = (address) => {
 
   const rand = getRand(address);
   getCommitmentPow(chainGroup, address, rand, PopulationReg.powWorker)
-    .then((commitmentPow) => network.nko.getPDFCommitment(commitmentPow)
+    .then((commitmentPow) => protocol.nko.getPDFCommitment(commitmentPow)
       .then((pdfCommitment) => {
         PopulationReg.commitmentPow = commitmentPow;
         PopulationReg.commitmentRand = rand;
@@ -151,35 +156,99 @@ PopulationReg.computeCommitment = (address) => {
       }));
 }
 
-/** @param {!File} file */
+/**
+ * Handles file selection from the file input
+ * @param {Event | null} event
+ */
+PopulationReg.handleFileSelect = (event) => {
+  const fileInput = /** @type {HTMLInputElement} */(event.target);
+  if (fileInput.files && fileInput.files.length > 0) {
+    const file = fileInput.files[0];
+    if (file.type === "application/pdf") {
+      PopulationReg.uploadPDF(file);
+    } else {
+      ProcessingStatus.showError(7, () => {
+        fileInput.value = '';
+        ProcessingStatus.hide();
+      });
+    }
+  }
+};
+
+/**
+ * Handles file drop on the drop zone
+ * @param {DragEvent | null} event
+ */
+PopulationReg.handleFileDrop = (event) => {
+  event.preventDefault();
+  const dropZone = dom.byId(Css.FileDrop);
+  dropZone.classList.remove(Css.Active);
+
+  if (event.dataTransfer.files && event.dataTransfer.files.length > 0) {
+    const file = event.dataTransfer.files[0];
+    if (file.type === "application/pdf") {
+      PopulationReg.uploadPDF(file);
+    } else {
+      ProcessingStatus.showError(7, () => {
+        ProcessingStatus.hide();
+      });
+    }
+  }
+};
+
+/**
+ * Handles drag over event on the drop zone
+ * @param {DragEvent} event
+ */
+PopulationReg.handleDragOver = (event) => {
+  event.preventDefault();
+  dom.byId(Css.FileDrop).classList.add(Css.Active);
+};
+
+/**
+ * Handles drag leave event on the drop zone
+ * @param {DragEvent} event
+ */
+PopulationReg.handleDragLeave = (event) => {
+  event.preventDefault();
+  dom.byId(Css.FileDrop).classList.remove(Css.Active);
+};
+
+/** @param {File} file */
 PopulationReg.uploadPDF = (file) => {
   const commitmentPow = PopulationReg.commitmentPow;
   if (!commitmentPow) return;
   const clientTime = Date.now() / 1000 | 0;
   const { commitmentR, commitmentAnonR } = splitCommitment(
-    /** @type {!Uint8Array} */(PopulationReg.commitmentRand)
+    /** @type {Uint8Array} */(PopulationReg.commitmentRand)
   );
 
-  /** @const {!FormData} */
+  /** @const {FormData} */
   const formData = new FormData();
   formData.set("f", file);
 
-  network.nko.getCredentialsFromPDF(
+  ProcessingStatus.startProgress();
+
+  protocol.nko.getCredentialsFromPDF(
     commitmentPow,
     formData,
     clientTime,
     7
-  ).then((credentials) => {
-    const decryptedCredentials = combineMultiple(
-      credentials,
-      commitmentR,
-      commitmentAnonR,
-      3
-    );
-    console.log(decryptedCredentials);
-    Router.navigate("sources");
-  });
-}
+  ).then(
+    (credentials) => {
+      ProcessingStatus.hide();
+
+      const decryptedCredentials = combineMultiple(
+        credentials,
+        commitmentR,
+        commitmentAnonR,
+        3
+      );
+      console.log(decryptedCredentials);
+      Router.navigate("sources");
+    },
+    (error) => ProcessingStatus.showError(/** @type {{ ek: unknown[], kod: number }} */(error))
+  )}
 
 PopulationReg.show = () => {
   PopulationReg.isVisible = true;

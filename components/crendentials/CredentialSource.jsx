@@ -12,10 +12,10 @@ import { LangCode, I18nString } from "/lib/util/i18n";
 * }} props
 */
 const CredentialSource = ({ id, title$, description$, countries$ }) => {
-  /** @const {!HTMLDivElement} */
+  /** @const {HTMLDivElement} */
   const Root = dom.div(id);
 
-  /** @const {!HTMLDivElement} */
+  /** @const {HTMLDivElement} */
   const CountryFlags = dom.div(`${id}_flags`);
 
   return (

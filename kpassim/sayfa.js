@@ -24,11 +24,11 @@ import { ChainId } from "/lib/crosschain/chains";
 import { Provider } from "/lib/crosschain/provider";
 import { Signature, Signer } from "/lib/crosschain/signer";
 import { fromUnlockableNFT } from "/lib/did/KPass";
-import KPass from "/lib/ethereum/KPass";
+import KPass from "../lib/ethereum/contract/KPass";
 import dom from "/lib/util/dom";
 
 
-/** @const {!Object<string, !did.DecryptedSections>} */
+/** @const {Object<string, !did.DecryptedSections>} */
 const Bellek = {};
 
 /**
@@ -50,7 +50,7 @@ const kapalıYüzGöster = () => {
    */
   const ağ = Cüzdan.ağ();
   /**
-   * @type {!Provider}
+   * @type {Provider}
    * @const
    */
   const bağlantı = Cüzdan.bağlantı();
@@ -59,7 +59,7 @@ const kapalıYüzGöster = () => {
   Kpass.yüzGöster(false);
   AçDüğmesi.innerText = dom.i18n({ tr: "Aç", en: "Unlock" });
 
-  /** @const {!did.DecryptedSections} */
+  /** @const {did.DecryptedSections} */
   const bellektenKPass = Bellek[ağ + adres];
   AçDüğmesi.onclick = bellektenKPass
     ? () => açıkYüzGöster(bellektenKPass)
@@ -85,7 +85,7 @@ const discordRolüAl = () => {
     if (event.origin != "https://discord.kimlikdao.org") return;
     DiscordDüğmesiMetni ||= DiscordDüğmesi.innerText;
     DiscordDüğmesi.innerText = DiscordDüğmesiMetni + " ⏳";
-    /** @const {!Signer} */
+    /** @const {Signer} */
     const imzacı = Cüzdan.bağlantı();
     /** @const {ChainId} */
     const ağ = Cüzdan.ağ();
@@ -99,7 +99,7 @@ const discordRolüAl = () => {
       .then((/** @type {Signature} */ signerSignature) => fetch("//discord.kimlikdao.org", {
         method: "PUT",
         headers: { "content-type": "application/json" },
-        body: JSON.stringify(/** @type {!discord.RoleRequest} */({
+        body: JSON.stringify(/** @type {discord.RoleRequest} */({
           discordID,
           role,
           chainID: ağ,
@@ -151,4 +151,4 @@ kpassDeğişti("", null);
 
 Cüzdan.kpassDeğişince(kpassDeğişti);
 Cüzdan.bağlantıDeğişince((bağlantı) =>
-  KPass.setProvider(/** @type {!eth.Provider} */(bağlantı.provider)));
+  KPass.setProvider(/** @type {eth.Provider} */(bağlantı.provider)));

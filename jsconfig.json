@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "module": "ESNext",
     "strictNullChecks": true,
     "jsx": "react-jsx",
     "jsxImportSource": "/lib/kastro/transpiler",

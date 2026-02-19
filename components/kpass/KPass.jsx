@@ -10,7 +10,7 @@ import SharedCss from "/components/shared/SharedCss";
 import "/lib/did/section.d";
 import dom from "/lib/util/dom";
 
-/** @const {!HTMLDivElement} */
+/** @const {HTMLDivElement} */
 const Cards = dom.div(Css.Cards);
 
 const LeftArrow = () =>
@@ -33,7 +33,7 @@ const Logo = () => (
 );
 
 const Nav = () => {
-  /** @const {!HTMLDivElement} */
+  /** @const {HTMLDivElement} */
   const Root = dom.div(Css.Nav);
   /** @type {number} */
   let currentCard = 0;
@@ -43,7 +43,7 @@ const Nav = () => {
   const nextCard = () => {
     currentCard = (currentCard + 1) % totalCards;
     dom.slideCard(Cards, currentCard);
-    /** @type {!Text} */(Root.childNodes[1]).data = `${currentCard + 1} / ${totalCards}`;
+    /** @type {Text} */(Root.childNodes[1]).data = `${currentCard + 1} / ${totalCards}`;
   }
   const prevCard = () => {
     currentCard += totalCards - 2;
@@ -69,7 +69,7 @@ const Nav = () => {
  * }} props
  */
 const KPass = ({ style, piggyback }) => {
-  /** @const {!HTMLDivElement} */
+  /** @const {HTMLDivElement} */
   KPass.root = dom.div(Css.Root);
 
   return (

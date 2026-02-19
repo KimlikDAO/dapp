@@ -8,8 +8,8 @@ import dom from "/lib/util/dom";
 
 /**
  * @param {{
- *   mintKPassUrl$: (string | undefined),
- *   viewKPassUrl: string,
+ *   mintKPassUrl$: string,
+ *   viewKPassUrl: string
  * }} props
  */
 const Profile = ({ mintKPassUrl$, viewKPassUrl }) => {

@@ -2,10 +2,10 @@ import Author from "../Author";
 import BlogCss from "../blog.css";
 import RemainingBar from "../RemainingBar";
 import Banner from "./Banner";
-import { ChainInfos } from "/components/chains/chains";
 import USDT from "/components/tokens/USDT.svg";
 import { ChainId } from "/lib/crosschain/chains";
-import { ERC20 } from "/lib/ethereum/ERC20";
+import { ERC20 } from "/lib/ethereum/contract/ERC20";
+import { Provider } from "/lib/ethereum/provider";
 import { css } from "/lib/kastro/stylesheet";
 import dom from "/lib/util/dom";
 
@@ -40,13 +40,14 @@ const TOTAL = 5_000e6;
 /**
  * @param {{
  *   href: string,
- *   piggyback: (string | undefined)
+ *   piggyback?: string
  * }} props
  */
 const ECDSA = ({ href, piggyback }) => {
+  const provider = new Provider((_params) => Promise.resolve(""));
   dom.schedule(() =>
-    new ERC20("https://" + ChainInfos[ChainId.xa4b1].rpcUrl, USDT_ARB)
-      .allowance(DEV_FUND, ODUL)
+    new ERC20(ChainId.xa4b1, USDT_ARB)
+      .allowance(provider, DEV_FUND, ODUL)
       .then((allowance) =>
         RemainingBar.setRemaining(Css.USDT, parseInt(allowance.slice(-36), 16), TOTAL)
       ),

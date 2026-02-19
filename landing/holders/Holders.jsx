@@ -8,7 +8,7 @@ import { ChainId } from "/lib/crosschain/chains";
 import { Image } from "/lib/kastro/image";
 
 /**
- * @const {!Object<ChainId, {
+ * @const {Object<ChainId, {
  *   chainName: string,
  *   chainSuffix: string,
  *   holders: number

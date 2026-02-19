@@ -1,5 +1,6 @@
 import Css from "./KPass.css";
 import { setFieldsFrom } from "./util";
+import { PersonInfo } from "/lib/did/section.d";
 import { css } from "/lib/kastro/stylesheet";
 import dom from "/lib/util/dom";
 
@@ -8,7 +9,7 @@ const Ids = css`
   /** @export */ #PersonInfoCard {}
 `;
 
-/** @const {!Array<string>} */
+/** @const {string[]} */
 const Fields = ["localIdNumber", "first", "last", "dateOfBirth", "cityOfBirth", "gender"];
 
 const PersonInfoCard = () => (
@@ -31,7 +32,7 @@ const PersonInfoCard = () => (
 );
 
 /**
- * @param {!did.PersonInfo} personInfo
+ * @param {PersonInfo} personInfo
  */
 PersonInfoCard.set = (personInfo) => setFieldsFrom(
   dom.div(Ids.PersonInfoCard).children, 1, Fields, personInfo);

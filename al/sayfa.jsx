@@ -14,10 +14,10 @@ import OrtakCss from "/components/shared/SharedCss";
 import { ChainId } from "/lib/crosschain/chains";
 import dom from "/lib/util/dom";
 
-/** @const {!HTMLAnchorElement} */
+/** @const {HTMLAnchorElement} */
 export const BağlaDüğmesi = dom.a("al1a");
 
-/** @const {!Array<ChainId>} */
+/** @const {Array<ChainId>} */
 const Chains = [
   ChainId.x1,
   ChainId.xa4b1,
@@ -27,7 +27,7 @@ const Chains = [
   ChainId.x38
 ];
 
-/** @const {!Object<ChainId, I18nString>} */
+/** @const {Object<ChainId, I18nString>} */
 const ChainNotes = {
   [ChainId.xa4b1]: { tr: "Ana ağ", en: "Signal chain" },
   [ChainId.MinaMainnet]: { tr: "Yeni ✨", en: "New ✨" },

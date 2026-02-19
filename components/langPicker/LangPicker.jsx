@@ -12,19 +12,19 @@ const Route = { tr: "tr", en: "en" };
  * @param {{ cookieDomain: string }} props
  */
 const LangPicker = ({ cookieDomain }) => {
-  /** @const {!HTMLAnchorElement} */
+  /** @const {HTMLAnchorElement} */
   const LangButton = dom.a(Css.LangButton);
-  /** @const {!HTMLUListElement} */
+  /** @const {HTMLUListElement} */
   const LangDropdown = dom.ul(Css.LangDropdown);
 
   /**
-   * @param {Event} event 
+   * @param {Event | null} event 
    */
   const langChanged = (event) => {
-    /** @const {!Element} */
-    const targetElem = /** @type {!Element} */(event.target);
-    /** @const {!HTMLLIElement} */
-    const li = /** @type {!HTMLLIElement} */(targetElem.closest("li"));
+    /** @const {Element} */
+    const targetElem = /** @type {Element} */(event.target);
+    /** @const {HTMLLIElement} */
+    const li = /** @type {HTMLLIElement} */(targetElem.closest("li"));
 
     /** @const {LangCode} */
     const newLang = /** @type {LangCode} */(li.id.slice(Css.Root.length));

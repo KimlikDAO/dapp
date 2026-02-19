@@ -8,7 +8,7 @@ import { SVGPathData } from "svg-pathdata";
  * @param {number} pay yarım halkanın payı
  * @param {number} payda yarım halkanın paydası
  * @param {number} innerR
- * @return {!SVGPathData}
+ * @return {SVGPathData}
  */
 const bubble = (w, pay, payda, innerR) => {
   const r = w / 2;
@@ -51,7 +51,7 @@ const bubble = (w, pay, payda, innerR) => {
  * @param {number} pay
  * @param {number} payda
  * @param {number} boyun
- * @return {!SVGPathData}
+ * @return {SVGPathData}
  */
 const kumsaati = (w, pay, payda, boyun) => {
   const r = w / 2;
@@ -98,7 +98,7 @@ const kumsaati = (w, pay, payda, boyun) => {
  * @param {number} w ızgara kenar uzunluğu
  * @param {number} r köşe yuvarlama yarıçapı
  * @param {number} delta gradyan vektör uzunluğu çarpanı
- * @return {!SVGPathData}
+ * @return {SVGPathData}
  */
 const ikiliGemi = (w, r, delta) => {
   const D = r * (1 - delta);
@@ -148,7 +148,7 @@ const ikiliGemi = (w, r, delta) => {
  * @param {number} w ızgara kenar uzunluğu
  * @param {number} r köşe yuvarlama yarıçapı
  * @param {number} delta gradyan vektör uzunluğu çarpanı
- * @return {!SVGPathData}
+ * @return {SVGPathData}
  */
 const sivriGemi = (w, r, delta) => {
   const D = r * (1 - delta);
@@ -221,7 +221,7 @@ const sivriGemi = (w, r, delta) => {
 
 /**
  * @param {number} w kare genişliği
- * @return {!SVGPathData}
+ * @return {SVGPathData}
  */
 const yuvartı = (w) => new SVGPathData([
   {
@@ -289,7 +289,7 @@ const yuvartı = (w) => new SVGPathData([
   }
 ]);
 
-/** @const {!Object<string, string>} */
+/** @const {Object<string, string>} */
 const ŞekilKod = {
   "kpks10": bubble(22, 1, 12, 7).round(1e3),
   "kpks11": kumsaati(22, 1, 9, 0.04).round(1e3),

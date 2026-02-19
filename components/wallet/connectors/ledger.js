@@ -3,9 +3,9 @@ import { Provider } from "/lib/crosschain/provider";
 const LedgerVendorId = 0x2c97;
 
 /**
- * @const {!Provider}
+ * @const {Provider}
  */
-const LedgerBağlantısı = /** @type {!Provider} */({
+const LedgerBağlantısı = /** @type {Provider} */({
   /**
    * @override
    *
@@ -32,7 +32,7 @@ const LedgerBağlantısı = /** @type {!Provider} */({
     chainChanged(chain);
     return LedgerBağlantısı.hid.getDevices()
       .then((devices) => {
-        /** @const {!Array<!HIDDevice>} */
+        /** @const {Array<!HIDDevice>} */
         const approvedDevices = devices.filter(
           (device) => device.vendorId == LedgerVendorId)
         return approvedDevices.length

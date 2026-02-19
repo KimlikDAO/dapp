@@ -8,7 +8,6 @@ on:
 
 jobs:
   compile-components:
-    if: false # Temporarily disabled
     name: Compile individual components
     strategy:
       fail-fast: true
@@ -26,17 +25,14 @@ jobs:
       - name: Install npm dependencies
         run: bun i
 
-      - name: Compile `LangPicker` component
-        run: bun lib/kdjs/kdjs.js components/langPicker/LangPicker.jsx --globals '{"GEN":false,"Route":{"en":"mint","tr":"al"},"Lang":"en"}'
+      - name: Install brew dependencies
+        run: brew install pngcrush brotli zopfli woff2 webp librsvg
 
-      - name: Compile `KPass` component
-        run: bun lib/kdjs/kdjs.js components/kpass/KPass.jsx --globals '{"GEN":false,"Lang":"en"}'
-      
-      - name: Compile `Landing` page
-        run: bun lib/kdjs/kdjs.js landing/Landing.jsx --globals '{"GEN":false,"Route":{"en":"mint","tr":"al"},"DefaultChain":"0x1","Chains":["0x1","0xa4b1"],"Lang":"tr"}'
+      - name: Install pip dependencies
+        run: pip install fonttools
 
-      - name: Compile `Mint` page
-        run: bun lib/kdjs/kdjs.js mint/Mint.jsx --globals '{"GEN":false,"Route":{"en":"mint","tr":"al"},"DefaultChain":"0x1","Chains":["0x1","0xa4b1"],"Lang":"tr"}'
+      - name: Compile Landing page
+        run: bun run build --lang en
 
   compile-dapp:
     if: false # Temporarily disabled

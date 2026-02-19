@@ -6,12 +6,12 @@ import dom from "/lib/util/dom";
  * @param {{ id: string }} props
  */
 const Subscribe = ({ id }) => {
-  /** @const {!HTMLFormElement} */
+  /** @const {HTMLFormElement} */
   const Root = dom.form(id);
-  /** @const {!HTMLInputElement} */
-  const input = /** @type {!HTMLInputElement} */(Root.firstElementChild);
-  /** @const {!Element} */
-  const button = /** @type {!Element} */(input.nextElementSibling);
+  /** @const {HTMLInputElement} */
+  const input = /** @type {HTMLInputElement} */(Root.firstElementChild);
+  /** @const {Element} */
+  const button = /** @type {Element} */(input.nextElementSibling);
 
   /**
    * @param {boolean} success
@@ -29,7 +29,7 @@ const Subscribe = ({ id }) => {
    * Sends the email newsletter registration request and calls
    * {@link update()} to update the UI.
    *
-   * @param {Event=} e
+   * @param {Event | null=} e
    */
   const submit = (e) => {
     e?.preventDefault();

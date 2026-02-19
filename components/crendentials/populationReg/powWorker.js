@@ -4,11 +4,11 @@ import { f } from "/lib/crypto/sha3";
 /** @define {number} */
 const POW_THRESHOLD = 20_000;
 
-onmessage = (/** @type {!MessageEvent} */ e) => {
+onmessage = (/** @type {MessageEvent} */ e) => {
   console.time('pow');
-  /** @const {!Uint32Array} */
+  /** @const {Uint32Array} */
   const inp = new Uint32Array(/** @type {PowWorkerEvent} */(e).data, 0, 18);
-  /** @const {!Uint32Array} */
+  /** @const {Uint32Array} */
   const out = new Uint32Array(50);
   inp.fill(0, 16);
   // We'll increment n--the nonce--until we hit a desired hash.

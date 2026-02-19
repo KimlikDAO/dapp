@@ -1,8 +1,8 @@
-import discord from "./discord.d";
+import { SignedID } from "./discord.d";
 import { LangCode } from "/lib/util/i18n";
 
 /**
- * @param {!discord.SignedID} discordID
+ * @param {SignedID} discordID
  * @param {string} role
  * @param {LangCode} lang
  * @return {string}

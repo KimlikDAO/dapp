@@ -13,7 +13,7 @@ import { ChainId } from "/lib/crosschain/chains";
 import dom from "/lib/util/dom";
 import { I18nString } from "/lib/util/i18n";
 
-/** @const {!Array<ChainId>} */
+/** @const {Array<ChainId>} */
 const Chains = [
   ChainId.x1,
   ChainId.MinaMainnet,
@@ -23,7 +23,7 @@ const Chains = [
   ChainId.x38
 ];
 
-/** @const {!Object<ChainId, I18nString>} */
+/** @const {Object<ChainId, I18nString>} */
 const ChainNotes = {
   [ChainId.MinaMainnet]: { tr: "Yeni ✨", en: "New ✨" },
   [ChainId.xa4b1]: { tr: "Ana ağ", en: "Signal chain" }
@@ -32,17 +32,17 @@ const ChainNotes = {
 /** @const {ChainId} */
 const DefaultChain = ChainId.xa4b1;
 
-/** @const {!HTMLDivElement} */
+/** @const {HTMLDivElement} */
 const AçDüğmesi = dom.div(Css.AçDüğmesi);
-/** @const {!HTMLAnchorElement} */
+/** @const {HTMLAnchorElement} */
 const DiscordDüğmesi = dom.button("inbtn0");
-/** @const {!HTMLAnchorElement} */
+/** @const {HTMLAnchorElement} */
 const EşikAzaltmaDüğmesi = dom.a("inbtn2");
-/** @const {!HTMLAnchorElement} */
+/** @const {HTMLAnchorElement} */
 const İmeceİptalDüğmesi = dom.a("inbtn1");
-/** @const {!HTMLDivElement} */
+/** @const {HTMLDivElement} */
 const KPassYokPaneli = dom.div(Css.KPassYokPaneli);
-/** @const {!HTMLAnchorElement} */
+/** @const {HTMLAnchorElement} */
 const SilDüğmesi = dom.a("inbtn3");
 
 const KPassim = ({ Lang }) => {

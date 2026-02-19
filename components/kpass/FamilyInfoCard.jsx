@@ -1,5 +1,6 @@
 import Css from "./KPass.css";
 import { setFieldsFrom } from "./util";
+import { KütükBilgileri } from "/lib/did/section.d";
 import { css } from "/lib/kastro/stylesheet";
 import dom from "/lib/util/dom";
 
@@ -8,9 +9,9 @@ const Ids = css`
   /** @export */ #FamilyInfoCard {}
 `;
 
-/** @const {!Array<string>} */
+/** @const {string[]} */
 const LeftFields = ["annead", "babaad", "mhali"];
-/** @const {!Array<string>} */
+/** @const {string[]} */
 const RightFields = ["BSN", "cilt", "hane"];
 
 const FamilyInfoCard = () => (
@@ -40,10 +41,10 @@ const FamilyInfoCard = () => (
 );
 
 /**
- * @param {!did.KütükBilgileri} registryInfo
+ * @param {KütükBilgileri} registryInfo
  */
 FamilyInfoCard.set = (registryInfo) => {
-  /** @const {!HTMLDivElement} */
+  /** @const {HTMLDivElement} */
   const div = dom.div(Ids.FamilyInfoCard);
   setFieldsFrom(div.children[0].children, 1, LeftFields, registryInfo);
   setFieldsFrom(div.children[1].children, 1, RightFields, registryInfo);

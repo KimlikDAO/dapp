@@ -8,17 +8,17 @@ import dom from "/lib/util/dom";
 
 let SeçilmişÖneriId;
 
-/** @const {!Element} */
+/** @const {Element} */
 const ProposeButton = dom.adla("oyyb");
 
 ProposeButton.onclick = () => {
   dom.adlaGizle("oyyb");
   dom.adlaGöster("oyy");
   if (!SeçilmişÖneriId) SeçilmişÖneriId = "2";
-  /** @const {!Element} */
-  const önergeDüğmesi = /** @type {!Element} */(dom.adla("oyyddb"));
-  /** @const {!Element} */
-  const önergeMenusu = /** @type {!Element} */(dom.adla("oyyul"));
+  /** @const {Element} */
+  const önergeDüğmesi = /** @type {Element} */(dom.adla("oyyddb"));
+  /** @const {Element} */
+  const önergeMenusu = /** @type {Element} */(dom.adla("oyyul"));
   dom.bindDropdown(önergeDüğmesi, önergeMenusu);
   önergeMenusu.onclick = (e) => {
     const li = e.target;

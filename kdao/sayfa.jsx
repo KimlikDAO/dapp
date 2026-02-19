@@ -8,12 +8,12 @@ import OrtakCss from "/components/shared/SharedCss";
 import { ChainId } from "/lib/crosschain/chains";
 import { I18nString, LangCode } from "/lib/util/i18n";
 
-/** @const {!Array<ChainId>} */
+/** @const {Array<ChainId>} */
 const Chains = [
   ChainId.x1,
 ];
 
-/** @const {!Object<ChainId, I18nString>} */
+/** @const {Object<ChainId, I18nString>} */
 const ChainNotes = {
   [ChainId.x1]: { tr: "Ana ağ", en: "Treasury chain" },
 };

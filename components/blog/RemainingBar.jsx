@@ -36,10 +36,10 @@ const Css = css`
 /**
  * @param {{
  *   id: string,
- *   className: (string|undefined),
- *   children: (!Array<!Promise<string>>|undefined),
- *   maximum: (number|undefined),
- *   ticker: (string|undefined)
+ *   className?: string,
+ *   children?: Promise<string>[],
+ *   maximum?: number,
+ *   ticker?: string,
  * }} props
  */
 const RemainingBar = ({ id, className, children, maximum, ticker }) => (
@@ -65,11 +65,11 @@ const RemainingBar = ({ id, className, children, maximum, ticker }) => (
 RemainingBar.setRemaining = (id, remaining, maximum) => {
   /** @const {number} */
   const remainingWidth = remaining * Width / maximum;
-  /** @const {!HTMLDivElement} */
+  /** @const {HTMLDivElement} */
   const bar = dom.div(id);
   bar.style.width = remainingWidth + "px";
-  /** @const {!Text} */
-  const text = /** @type {!Text} */(dom.span(`${id}.t`).firstChild);
+  /** @const {Text} */
+  const text = /** @type {Text} */(dom.span(`${id}.t`).firstChild);
   text.data = dom.renderCurrency(remaining);
 }
 

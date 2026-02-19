@@ -4,5 +4,5 @@
  */
 function PowWorkerEvent() { };
 
-/** @const {!ArrayBuffer} */
+/** @const {ArrayBuffer} */
 PowWorkerEvent.prototype.data;

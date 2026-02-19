@@ -9,11 +9,11 @@ import {
   KimKutusu
 } from "./sayfa.jsx";
 import { Cüzdan } from "/components/başlık/birim";
-import KPass from "/lib/ethereum/KPass";
+import KPass from "../lib/ethereum/contract/KPass.js";
 import dom from "/lib/util/dom";
 
 Cüzdan.bağlantıDeğişince((bağlantı) =>
-  KPass.setProvider(/** @type {!eth.Provider} */(bağlantı.provider)));
+  KPass.setProvider(/** @type {eth.Provider} */(bağlantı.provider)));
 
 BaşkasıDüğmesi.onclick = () => {
   revokeeAdımınıGöster();
@@ -29,8 +29,8 @@ const revokeeAdımınıGöster = () => {
   dom.gizle(AdresKutusu);
   dom.göster(KimKutusu);
 
-  /** @const {!HTMLAnchorElement} */
-  const onaylaDüğmesi = /** @type {!HTMLAnchorElement} */(dom.adla("ipiio"));
+  /** @const {HTMLAnchorElement} */
+  const onaylaDüğmesi = /** @type {HTMLAnchorElement} */(dom.adla("ipiio"));
 
   const onaylaDüğmesiDüzelt = () => {
     onaylaDüğmesi.classList.add("act");

@@ -5,9 +5,10 @@ import Banner from "./banner.png";
 import { ChainInfos } from "/components/chains/chains";
 import UBInuImage from "/components/tokens/UBINU.png";
 import { ChainId } from "/lib/crosschain/chains";
-import { ERC20 } from "/lib/ethereum/ERC20";
+import { ERC20 } from "../../../lib/ethereum/contract/ERC20";
 import { css } from "/lib/kastro/stylesheet";
 import dom from "/lib/util/dom";
+import { Provider } from "/lib/ethereum/provider";
 
 /** @enum {string} */
 const Css = css`
@@ -40,13 +41,14 @@ const TOTAL = 50_000_000_000;
 /**
  * @param {{
  *   href: string,
- *   piggyback: (string | undefined)
+ *   piggyback?: string
  * }} props
  */
 const EllipticCurves = ({ href, piggyback }) => {
-  dom.schedule(
-    () => new ERC20("https://" + ChainInfos[ChainId.xa86a].rpcUrl, USDC_AVALANCHE)
-      .allowance(DEV_FUND, ODUL)
+  const provider = new Provider((_params) => Promise.resolve(""));
+  dom.schedule(() =>
+    new ERC20(ChainId.xa86a, USDC_AVALANCHE)
+      .allowance(provider, DEV_FUND, ODUL)
       .then((allowance) =>
         RemainingBar.setRemaining(Css.UBInu, parseInt(allowance.slice(-36), 16), TOTAL))
     , 1000

@@ -1,16 +1,16 @@
 import Cüzdan from "/components/cüzdan/birim";
 import { ChainId } from "/lib/crosschain/chains";
-import KPass from "/lib/ethereum/KPass";
+import KPass from "../../lib/ethereum/contract/KPass";
 import evm from "/lib/ethereum/evm";
 import dom from "/lib/util/dom";
 
-/** @const {!Element} */
+/** @const {Element} */
 const Mask = dom.adla("inbd");
-/** @const {!Element} */
+/** @const {Element} */
 const İmeceİptalKutusu = dom.adla("inmii");
-/** @const {!Element} */
+/** @const {Element} */
 const EşikKutusu = dom.adla("inmes");
-/** @const {!Element} */
+/** @const {Element} */
 const SilKutusu = dom.adla("inmsy");
 
 const kutuKapat = () => {
@@ -29,13 +29,13 @@ dom.adla("inx").onclick = kutuKapat;
 const imeceİptalKutusuGöster = () => {
   dom.göster(Mask);
   dom.göster(İmeceİptalKutusu);
-  /** @const {!HTMLInputElement} */
-  const adresGirdisi = /** @const {!HTMLInputElement} */(dom.adla("iniii"));
+  /** @const {HTMLInputElement} */
+  const adresGirdisi = /** @const {HTMLInputElement} */(dom.adla("iniii"));
   let address = adresGirdisi.value;
-  /** @const {!HTMLInputElement} */
-  const agirlikGirdisi = /** @const {!HTMLInputElement} */(dom.adla("iniiw"));
+  /** @const {HTMLInputElement} */
+  const agirlikGirdisi = /** @const {HTMLInputElement} */(dom.adla("iniiw"));
   adresGirdisi.classList.remove("inin");
-  adresGirdisi.onblur = (e) => girdiDüzelt(/** @const {!HTMLInputElement} */(e.target));
+  adresGirdisi.onblur = (e) => girdiDüzelt(/** @const {HTMLInputElement} */(e.target));
   adresGirdisi.value = "";
   dom.adla("iniiy").onclick = yapıştır;
   dom.adla("iniim").onclick = birAzalt;
@@ -60,8 +60,8 @@ const eşikKutusuGöster = () => {
   const ağ = Cüzdan.ağ();
   /** @const {string} */
   const adres = /** @type {string} */(Cüzdan.adres());
-  /** @const {!HTMLInputElement} */
-  const girdi = /** @type {!HTMLInputElement} */(dom.adla("inesw"));
+  /** @const {HTMLInputElement} */
+  const girdi = /** @type {HTMLInputElement} */(dom.adla("inesw"));
 
   dom.göster(Mask);
   dom.göster(EşikKutusu);
@@ -105,12 +105,12 @@ const silKutusuGöster = (iptelEdince) => {
  * @param {Event} event
  */
 const yapıştır = (event) => {
-  /** @const {!Element} */
-  const target = /** @type {!Element} */(event.target);
+  /** @const {Element} */
+  const target = /** @type {Element} */(event.target);
   let a = target.nodeName === 'A'
     ? target : target.parentElement;
-  /** @const {!HTMLInputElement} */
-  const girdi = /** @type {!HTMLInputElement} */(a.previousElementSibling);
+  /** @const {HTMLInputElement} */
+  const girdi = /** @type {HTMLInputElement} */(a.previousElementSibling);
   navigator.clipboard.readText().then((değer) => {
     girdi.value = değer;
     girdiDüzelt(girdi);

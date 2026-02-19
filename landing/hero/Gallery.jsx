@@ -5,9 +5,9 @@ import Wallet from "/components/wallet/Wallet";
 import dom from "/lib/util/dom";
 import { I18nString } from "/lib/util/i18n";
 
-/** @const {!HTMLDivElement} */
+/** @const {HTMLDivElement} */
 const Bullets = dom.div(Css.Bullets);
-/** @const {!HTMLUListElement} */
+/** @const {HTMLUListElement} */
 const CardSlider = dom.ul(Css.CardSlider);
 
 /** @type {number} */
@@ -54,8 +54,8 @@ const startGalleryTimer = () => {
 
 /**
  * @param {{
- *   title: (string | I18nString),
- *   children: (* | undefined)
+ *   title: string | I18nString,
+ *   children?: unknown
  * }} props
  */
 const Card = ({ title, children }) => (

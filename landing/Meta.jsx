@@ -7,7 +7,7 @@ const Description = {
   [LangCode.TR]: "Bir kez KPass al, tüm on/off-ramp’leri cüzdanınla hesap açmadan kullan"
 };
 
-/** @const {I18nString} */
+/** @type {I18nString} */
 export const Title = {
   [LangCode.EN]: "KimlikDAO | Self-custody digital IDs",
   [LangCode.TR]: "KimlikDAO | Blokzincirdeki kimlik NFT’niz"

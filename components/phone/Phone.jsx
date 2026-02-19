@@ -3,9 +3,9 @@ import Css from "./Phone.css";
 import { css } from "/lib/kastro/stylesheet";
 import dom from "/lib/util/dom";
 
-/** @const {!HTMLDivElement} */
+/** @const {HTMLDivElement} */
 const KPassDialog = dom.div(Css.KPassDialog);
-/** @const {!HTMLDivElement} */
+/** @const {HTMLDivElement} */
 const KPassDialogButton = dom.div(Css.KPassDialogButton);
 
 /** @enum {string} */
@@ -29,7 +29,7 @@ const JointCss = css`
 `;
 
 const WalletApp = () => {
-  /** @const {!HTMLDivElement} */
+  /** @const {HTMLDivElement} */
   WalletApp.root = dom.div(Css.WalletApp)
   return (
     <WalletApp.root>
@@ -55,7 +55,7 @@ WalletApp.setAddress = (address = "0x1DA01DAO") => dom.text.update(
   WalletApp.root.children[2], address.slice(0, 6) + "..." + address.slice(-4));
 
 const InfoDialog = () => {
-  /** @const {!HTMLDivElement} */
+  /** @const {HTMLDivElement} */
   InfoDialog.root = dom.div(Css.InfoDialog);
   InfoDialog.root.style.opacity = "";
   return (

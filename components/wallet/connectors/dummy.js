@@ -1,12 +1,11 @@
 import { ChainId } from "/lib/crosschain/chains";
-import { Provider } from "/lib/crosschain/provider";
+import { WalletConnector } from "/lib/crosschain/walletConnector";
 
-/**
- * @type {!Provider}
- */
-const Dummy = /** @type {!Provider} */({
+
+/** @const {WalletConnector} */
+const Dummy = /** @type {WalletConnector} */({
   isInitialized: () => true,
-  setNativeProvider: () => { },
+  setProvider: () => { },
 
   /**
    * @return {string}
@@ -35,7 +34,7 @@ const Dummy = /** @type {!Provider} */({
    * @override
    *
    * @param {ChainId} chainId
-   * @return {Promise<void>|void}
+   * @return {Promise<void> | void}
    */
   switchChain(chainId) {
     this.chainChanged(chainId);
@@ -46,7 +45,7 @@ const Dummy = /** @type {!Provider} */({
    *
    * @param {string} message
    * @param {string} address
-   * @return {!Promise<string>}
+   * @return {Promise<string>}
    */
   signMessage: (message, address) => Promise.reject(),
 

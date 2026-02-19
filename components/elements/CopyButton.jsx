@@ -1,5 +1,3 @@
-
-
 import Paths from "/components/icons/paths";
 import dom from "/lib/util/dom";
 import { css } from "/lib/kastro/stylesheet";
@@ -13,9 +11,9 @@ const Css = css`
 
 /**
  * @param {{
- *   id$: (string | undefined),
- *   height$: (number | undefined),
- *   width$: (number | undefined),
+ *   id$: string,
+ *   height$: number,
+ *   width$: number
  * }} props
  */
 const CopyButton = ({ id$, height$ = 24, width$ = 24 }) => (

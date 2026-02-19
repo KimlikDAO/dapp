@@ -8,18 +8,18 @@ import OrtakCss from "/components/shared/SharedCss.jsx";
 import { ChainId } from "/lib/crosschain/chains";
 import dom from "/lib/util/dom";
 
-/** @const {!HTMLDivElement} */
+/** @const {HTMLDivElement} */
 export const AdresKutusu = dom.div("iptac");
-/** @const {!HTMLAnchorElement} */
+/** @const {HTMLAnchorElement} */
 export const BaşkasıDüğmesi = dom.a("ipbtnb");
-/** @const {!HTMLAnchorElement} */
+/** @const {HTMLAnchorElement} */
 export const BenDüğmesi = dom.a("ipbtna");
-/** @const {!HTMLDivElement} */
+/** @const {HTMLDivElement} */
 export const KimKutusu = dom.div("ipiic");
-/** @const {!HTMLDivElement} */
+/** @const {HTMLDivElement} */
 export const KiminKutusu = dom.div("ipssc");
 
-/** @const {!Array<ChainId>} */
+/** @const {Array<ChainId>} */
 const Chains = [
   ChainId.x1,
   ChainId.MinaMainnet,
@@ -29,7 +29,7 @@ const Chains = [
   ChainId.x38
 ];
 
-/** @const {!Object<ChainId, I18nString>} */
+/** @const {Object<ChainId, I18nString>} */
 const ChainNotes = {
   [ChainId.MinaMainnet]: { tr: "Yeni ✨", en: "New ✨" },
   [ChainId.xa4b1]: { tr: "Ana ağ", en: "Signal chain" }

@@ -1,13 +1,14 @@
 import Css from "./KPass.css";
 import { setFieldsFrom } from "./util";
-import dom from "/lib/util/dom";
+import { KütükBilgileri } from "/lib/did/section.d";
 import { css } from "/lib/kastro/stylesheet";
+import dom from "/lib/util/dom";
 
 const Ids = css`
   /** @export */ #RegistryInfoCard {}
 `;
 
-/** @const {!Array<string>} */
+/** @const {string[]} */
 const Fields = ["il", "ilçe", "mahalle", "tescil"];
 
 const RegistryInfoCard = () => (
@@ -27,7 +28,7 @@ const RegistryInfoCard = () => (
 );
 
 /**
- * @param {!did.KütükBilgileri} registryInfo
+ * @param {KütükBilgileri} registryInfo
  */
 RegistryInfoCard.set = (registryInfo) => setFieldsFrom(
   dom.div(Ids.RegistryInfoCard).children, 2, Fields, registryInfo);

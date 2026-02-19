@@ -1,10 +1,10 @@
-import Profile from "./Profile";
 import {
-  EvmProviderList,
-  MinaProviderList,
-  ProviderId,
-  Providers
-} from "./ProviderList";
+  ConnectorId,
+  Connectors,
+  EthereumConnectorList,
+  MinaConnectorList
+} from "./ConnectorList";
+import Profile from "./Profile";
 import Css from "./Wallet.css";
 import { chainImageSrc, ChainInfos } from "/components/chains/chains";
 import SharedCss from "/components/shared/SharedCss.css";
@@ -13,12 +13,12 @@ import {
   ChainId,
   chainIdToGroup
 } from "/lib/crosschain/chains";
-import { Provider } from "/lib/crosschain/provider";
-import "/lib/ethereum/ERC721Unlockable.d";
-import KPass from "/lib/ethereum/KPassLite";
+import { WalletConnector as Connector } from "/lib/crosschain/walletConnector";
+import { ERC721Unlockable } from "/lib/ethereum/contract/ERC721.d";
+import KPass from "/lib/ethereum/contract/KPass";
 import { Image } from "/lib/kastro/image";
 import Switch from "/lib/kastro/Switch";
-import ipfs from "/lib/node/ipfs";
+import ipfs from "/lib/protocol/ipfs/ipfs";
 import dom from "/lib/util/dom";
 import hex from "/lib/util/hex";
 import { I18nString } from "/lib/util/i18n";
@@ -26,34 +26,34 @@ import { I18nString } from "/lib/util/i18n";
 /** @define {string} */
 const KIMLIKDAO_IPFS_URL = "//ipfs.kimlikdao.org";
 
-/** @const {!Array<function(ChainId)>} */
+/** @const {((chainId: ChainId) => void)[]} */
 const OnChainChange = [];
-/** @const {!Array<function(!Provider)>} */
-const OnProviderChange = [];
-/** @const {!Array<function(?string)>} */
+/** @const {((provider: Connector) => void)[]} */
+const OnConnectorChange = [];
+/** @const {((address: string | null) => void)[]} */
 const OnAddressChange = [];
-/** @const {!Array<function(?string, Promise<!eth.ERC721Unlockable>)>} */
+/** @type {((cidHex: string, filePromise: Promise<ERC721Unlockable> | null) => void)[]} */
 const OnKPassChange = [];
-/** @const {!Array<function()>} */
+/** @const {(() => void)[]} */
 const OnDisconnect = [];
-/** @type {!Provider} */
-let SelectedProvider = Providers[ProviderId.Dummy];
-/** @type {?string} */
+/** @type {Connector} */
+let SelectedConnector = Connectors[ConnectorId.Dummy];
+/** @type {string | null} */
 let Address = null;
 
 /**
  * @param {{
  *   chainConfig: ChainConfig,
- *   piggyback: (string | undefined)
+ *   piggyback?: string
  * }} props
  */
 const ChainList = ({ chainConfig, piggyback }) => {
-  /** @const {!Set<ChainId>} */
+  /** @const {Set<ChainId>} */
   ChainList.chains = new Set(chainConfig.chains);
   /** @type {ChainId} */
   ChainList.selected = chainConfig.defaultChain;
 
-  /** @const {!HTMLLIElement} */
+  /** @const {HTMLLIElement} */
   const SelectedChain = dom.li(Css.ChainList + chainConfig.defaultChain);
   SelectedChain.replaceChild(Wallet.chainButton.firstElementChild.cloneNode(true),
     SelectedChain.firstElementChild);
@@ -82,7 +82,7 @@ const ChainList = ({ chainConfig, piggyback }) => {
  */
 ChainList.setSelected = (chainId) => {
   dom.li(Css.ChainList + ChainList.selected).classList.remove(SharedCss.Selected);
-  /** @const {!HTMLLIElement} */
+  /** @const {HTMLLIElement} */
   const li = dom.li(Css.ChainList + chainId);
   li.classList.add(SharedCss.Selected);
   Wallet.chainButton.replaceChild(
@@ -90,7 +90,9 @@ ChainList.setSelected = (chainId) => {
   ChainList.selected = chainId;
 }
 
-/** @param {ChainId} newChain */
+/**
+ * @param {ChainId} newChain
+ */
 const chainChanged = (newChain) => {
   const oldChain = ChainList.selected;
   if (!ChainList.chains.has(newChain))
@@ -106,7 +108,9 @@ const chainChanged = (newChain) => {
   }
 }
 
-/** @param {!Array<string>} addresses */
+/**
+ * @param {string[]} addresses
+ */
 const addressChanged = (addresses) => {
   if (!addresses || !addresses.length)
     Wallet.disconnect();
@@ -123,7 +127,7 @@ const kpassChanged = () => {
   const chainId = ChainList.selected;
   const address = Address;
   if (!address) return;
-  KPass.handleOf(SelectedProvider.nativeProvider, chainId, address)
+  KPass.handleOf(chainId, address)
     .then((cidHex) => {
       if (chainId != ChainList.selected || address != Address) return;
       const hasKPass = cidHex.replaceAll("0", "") != "x";
@@ -133,7 +137,7 @@ const kpassChanged = () => {
         ? ipfs.readWithCIDBytes(KIMLIKDAO_IPFS_URL, hex.toUint8Array(cidHex.slice(2)))
           .then((/** @type {string} */ file) => {
             if (chainId != ChainList.selected || address != Address) return Promise.reject();
-            const kpassFile = /** @type {!eth.ERC721Unlockable} */(JSON.parse(file))
+            const kpassFile = /** @type {ERC721Unlockable} */(JSON.parse(file))
             Profile.setKPassImage(kpassFile.image);
             return kpassFile;
           })
@@ -144,76 +148,76 @@ const kpassChanged = () => {
 
 /** @param {ChainId} chainId */
 const chainSelected = (chainId) => {
-  if (!SelectedProvider.isChainSupported(chainId))
+  if (!SelectedConnector.isChainSupported(chainId))
     Wallet.disconnect();
-  SelectedProvider.switchChain(chainId);
+  SelectedConnector.switchChain(chainId);
 }
 
 /**
- * @param {ProviderId} providerId
+ * @param {ConnectorId} providerId
  * @param {boolean=} gentle
  */
 const providerSelected = (providerId, gentle) => {
-  const currentProvider = SelectedProvider;
-  const provider = Providers[providerId];
-  if (currentProvider == provider || !provider || !provider.isInitialized())
+  const currentConnector = SelectedConnector;
+  const provider = Connectors[providerId];
+  if (currentConnector == provider || !provider || !provider.isInitialized())
     return;
-  SelectedProvider = provider;
+  SelectedConnector = provider;
   const connected = provider.connect(ChainList.selected, chainChanged, addressChanged, gentle)
   if (!connected) return;
   connected
     .then(() => {
       if (!gentle)
         document.cookie = `cu=${providerId};domain=${Wallet.cookieDomain};SameSite=Strict;max-age=` + 1e6;
-      currentProvider.disconnect();
-      for (const f of OnProviderChange) f(provider);
+      currentConnector.disconnect();
+      for (const f of OnConnectorChange) f(provider);
     })
-    .catch(() => SelectedProvider = currentProvider);
+    .catch(() => SelectedConnector = currentConnector);
 }
 
-/** @param {Event} event */
+/** @param {Event | null} event */
 const dropdownClicked = (event) => {
-  /** @const {!Element} */
-  const targetElem = /** @type {!Element} */(event.target);
+  /** @const {Element} */
+  const targetElem = /** @type {Element} */(event.target);
   /** @const {HTMLLIElement} */
   const maybeLi = /** @type {HTMLLIElement} */(targetElem.closest("li"));
   if (maybeLi && maybeLi.id) {
     if (maybeLi.id.startsWith(Css.ChainList))
       chainSelected(/** @type {ChainId} */(maybeLi.id.slice(Css.ChainList.length)));
     else if (maybeLi.id.startsWith(Css.Root))
-      providerSelected(/** @type {ProviderId} */(maybeLi.id.slice(Css.Root.length + 1)));
+      providerSelected(/** @type {ConnectorId} */(maybeLi.id.slice(Css.Root.length + 1)));
   }
   event.stopPropagation();
 }
 
-const connectProvider = () => {
-  SelectedProvider.connect(ChainId.x1, chainChanged, addressChanged);
+const connectConnector = () => {
+  SelectedConnector.connect(ChainId.x1, chainChanged, addressChanged);
   /** @const {string} */
   const cookie = document.cookie;
   /** @const {number} */
   const idx = cookie.indexOf("cu=");
-  /** @const {ProviderId} */
-  const providerId = /** @type {ProviderId} */(cookie.slice(idx + 3, idx + 5));
+  /** @const {ConnectorId} */
+  const providerId = /** @type {ConnectorId} */(cookie.slice(idx + 3, idx + 5));
   dom.schedule(() => providerSelected(providerId, true), 100);
 }
 
 /**
  * @typedef {{
  *   defaultChain: ChainId,
- *   chains: !Array<ChainId>,
- *   chainNotes$: (!Object<ChainId, I18nString> | undefined),
+ *   chains: ChainId[],
+ *   chainNotes$: Record<ChainId, I18nString>
  * }}
  */
-export const ChainConfig = {};
+const ChainConfig = {};
 
 /**
  * @param {{
  *   chainConfig: ChainConfig,
  *   cookieDomain: string,
- *   piggyback: (string | undefined),
- *   children: (!Array<Element> | undefined),
- *   mintKPassUrl$: (string | undefined),
- *   viewKPassUrl: string,
+ *   piggyback?: string,
+ *   children?: Element[],
+ *   mintKPassUrl$: string,
+ *   viewKPassUrl: string
  * }} props
  */
 const Wallet = ({
@@ -224,16 +228,16 @@ const Wallet = ({
   mintKPassUrl$,
   viewKPassUrl
 }) => {
-  /** @const {!HTMLButtonElement} */
+  /** @const {HTMLButtonElement} */
   Wallet.chainButton = dom.button(Css.ChainButton);
-  /** @const {!HTMLButtonElement} */
+  /** @const {HTMLButtonElement} */
   Wallet.addressButton = dom.button(Css.AddressButton);
   /** @const {string} */
   Wallet.cookieDomain = cookieDomain;
-  /** @const {!HTMLDivElement} */
+  /** @const {HTMLDivElement} */
   const Dropdown = dom.div(Css.Dropdown);
 
-  connectProvider();
+  connectConnector();
 
   return (
     <div id={Css.Root}>
@@ -250,8 +254,8 @@ const Wallet = ({
       <Dropdown nodisplay onClick={dropdownClicked}>
         <ChainList chainConfig={chainConfig} piggyback={piggyback} />
         <Switch id={Css.RightPane} instance={Wallet.rightPane} initialPane={0}>
-          <EvmProviderList />
-          <MinaProviderList />
+          <EthereumConnectorList />
+          <MinaConnectorList />
           <div>
             <Profile mintKPassUrl$={mintKPassUrl$} viewKPassUrl={viewKPassUrl} />
             <hr />
@@ -264,7 +268,7 @@ const Wallet = ({
 }
 
 /**
- * @param {function()} f
+ * @param {() => void} f
  */
 Wallet.connectThen = (f) => {
   if (Address)
@@ -288,7 +292,7 @@ Wallet.close = () => Wallet.chainButton.click();
 Wallet.disconnect = () => {
   Address = null;
   dom.text.setPreserve(Wallet.addressButton);
-  providerSelected(ProviderId.Dummy);
+  providerSelected(ConnectorId.Dummy);
   Wallet.rightPane.showPane(+ChainList.selected.startsWith(ChainGroup.MINA));
   for (const f of OnDisconnect) f();
 }
@@ -296,14 +300,14 @@ Wallet.disconnect = () => {
 /** @return {ChainId} */
 Wallet.chainId = () => ChainList.selected;
 
-/** @return {?string} */
+/** @return {string | null} */
 Wallet.address = () => Address;
 
 /**
  * Registers a callback function to be called whenever the selected blockchain
  * network changes.
  * 
- * @param {function(ChainId)} f Callback function that will be invoked with the
+ * @param {(chainId: ChainId) => void} f Callback function that will be invoked with the
  *                              new chain ID whenever the chain changes.
  */
 Wallet.onChainChange = (f) => OnChainChange.push(f);
@@ -312,17 +316,16 @@ Wallet.onChainChange = (f) => OnChainChange.push(f);
  * Registers a callback function to be called whenever the selected provider
  * changes.
  * 
- * @param {function(!Provider)} f Callback function that will be invoked with
- *                                the new provider whenever the user switches
- *                                providers.
+ * @param {(connector: Connector) => void} f Callback function that will be invoked with
+ *        the new connector whenever the user switches connectors.
  */
-Wallet.onProviderChange = (f) => OnProviderChange.push(f);
+Wallet.onConnectorChange = (f) => OnConnectorChange.push(f);
 
 /**
  * Registers a callback function to be called whenever the selected address
  * changes.
  * 
- * @param {function(?string)} f Callback function that will be invoked with
+ * @param {(address: string | null) => void} f Callback function that will be invoked with
  *                              the new address whenever the address changes.
  */
 Wallet.onAddressChange = (f) => OnAddressChange.push(f);
@@ -331,8 +334,8 @@ Wallet.onAddressChange = (f) => OnAddressChange.push(f);
  * Registers a callback function to be called whenever the selected KPass
  * changes.
  * 
- * @param {function(?string, Promise<!eth.ERC721Unlockable>)} f Callback
- *     function that will be invoked with the new KPass whenever the KPass
+ * @param {(cidHex: string | null, filePromise: Promise<ERC721Unlockable> | null) => void} f
+ *     Callback function that will be invoked with the new KPass whenever the KPass
  *     changes.
  */
 Wallet.onKPassChange = (f) => {
@@ -344,9 +347,11 @@ Wallet.onKPassChange = (f) => {
  * Registers a callback function to be called whenever the wallet is
  * disconnected.
  * 
- * @param {function()} f Callback function that will be invoked when the wallet
+ * @param {() => void} f Callback function that will be invoked when the wallet
  *                       is disconnected.
  */
 Wallet.onDisconnect = (f) => OnDisconnect.push(f);
 
 export default Wallet;
+
+export { ChainConfig };

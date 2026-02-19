@@ -1,10 +1,10 @@
 import dom from "/lib/util/dom";
 
 /**
- * @param {!NodeList<!Element>} siblings
+ * @param {NodeList<Element>} siblings
  * @param {number} offset
- * @param {!Array<string>} fields
- * @param {!Object<string, string>} data
+ * @param {string[]} fields
+ * @param {Record<string, string>} data
  */
 const setFieldsFrom = (siblings, offset, fields, data) => {
   for (let i = 0; i < fields.length; ++i)

@@ -8,7 +8,7 @@ import dom from "/lib/util/dom";
 import { LangCode } from "/lib/util/i18n";
 
 const CredentialSearch = () => {
-  /** @const {!HTMLDivElement} */
+  /** @const {HTMLDivElement} */
   const Grid = dom.div(Css.Grid);
 
   return (

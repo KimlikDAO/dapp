@@ -4,7 +4,7 @@ import base64 from "/lib/util/base64";
 
 /**
  * @param {string} address
- * @return {!Uint8Array}
+ * @return {Uint8Array}
  */
 const getRand = (address) => {
   const rand = new Uint8Array(64);
@@ -21,12 +21,12 @@ const getRand = (address) => {
 /**
  * @param {ChainGroup} chainGroup
  * @param {string} address
- * @param {!Uint8Array} rand
- * @param {!Worker} powWorker
- * @return {!Promise<string>}
+ * @param {Uint8Array} rand
+ * @param {Worker} powWorker
+ * @return {Promise<string>}
  */
 const getCommitmentPow = (chainGroup, address, rand, powWorker) => {
-  /** @const {!Uint8Array} */
+  /** @const {Uint8Array} */
   const commit = commitDouble(chainGroup, address, rand);
   /** @const {string} */
   const commitBase64 = base64.from(commit);
@@ -35,7 +35,7 @@ const getCommitmentPow = (chainGroup, address, rand, powWorker) => {
   if (cached)
     return Promise.resolve(cached);
   return new Promise((resolve) => {
-    powWorker.onmessage = (/** @type {!MessageEvent} */ msg) => {
+    powWorker.onmessage = (/** @type {MessageEvent} */ msg) => {
       const commitPow = base64.from(new Uint8Array(msg.data, 0, 72));
       window.localStorage[commitBase64] = commitPow;
       resolve(commitPow);
@@ -45,7 +45,7 @@ const getCommitmentPow = (chainGroup, address, rand, powWorker) => {
 }
 
 /**
- * @param {!Uint8Array} commitment
+ * @param {Uint8Array} commitment
  * @return {{
  *   commitmentR: string,
  *   commitmentAnonR: string

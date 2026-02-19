@@ -1,5 +1,6 @@
 import Css from "./KPass.css";
 import { setFieldsFrom } from "./util";
+import { ContactInfo } from "/lib/did/section.d";
 import { css } from "/lib/kastro/stylesheet";
 import dom from "/lib/util/dom";
 
@@ -8,7 +9,7 @@ const Ids = css`
   /** @export */ #ContactInfoCard {}
 `;
 
-/** @const {!Array<string>} */
+/** @const {Array<string>} */
 const Fields = ["email", "phone"];
 
 const ContactInfoCard = () => (
@@ -24,7 +25,7 @@ const ContactInfoCard = () => (
 );
 
 /**
- * @param {!did.ContactInfo} contactInfo 
+ * @param {ContactInfo} contactInfo 
  */
 ContactInfoCard.set = (contactInfo) => setFieldsFrom(
   dom.div(Ids.ContactInfoCard).children, 2, Fields, contactInfo);

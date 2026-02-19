@@ -7,14 +7,14 @@ import dom from "/lib/util/dom";
  *   explorer: string,
  *   tokenCode: string,
  *   token: string,
- *   tokenSuffix: !Array<string>,
+ *   tokenSuffix: string[],
  *   rpcUrl: string
  * }}
  */
 const ChainInfo = {};
 
 /**
- * @const {!Object<ChainId, ChainInfo>}
+ * @const {Record<ChainId, ChainInfo>}
  */
 const ChainInfos = {
   [ChainId.x1]: {
@@ -72,7 +72,5 @@ const chainImageSrc = (chainId) => "components/chains/" + (chainId.startsWith("m
   : ChainInfos[chainId].uiName.replaceAll(" ", "").toLowerCase() + ".svg");
 
 export {
-  ChainInfos,
-  ChainInfo,
-  chainImageSrc
+  chainImageSrc, ChainInfo, ChainInfos
 };

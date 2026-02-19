@@ -17,7 +17,7 @@ const Node = ({ idx }) => {
   );
 }
 
-/** @const {!Object<string, !Array<string>>} */
+/** @const {Record<string, string[]>} */
 const NODES = {
   KDAON: ["0x299A3490c8De309D855221468167aAD6C44c59E0", "node.kimlikdao.org", "9266ec", "4A00E0"],
   YeniB: ["0x86f6B34A26705E6a22B8e2EC5ED0cC5aB3f6F828", "yenibank.org", "83b4e2", "3182CE", "üst"],
@@ -37,7 +37,7 @@ const Graph = ({ width }) => {
    * @return {string} Başında # bulunan renk.
    */
   const h = (renk) => (renk.startsWith("#") ? renk : "#" + renk).toUpperCase();
-  /** @const {!Array<string>} */
+  /** @const {string[]} */
   const keys = Object.keys(NODES);
   /** @const {number} */
   const n = keys.length;

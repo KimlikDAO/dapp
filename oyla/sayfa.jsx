@@ -13,7 +13,7 @@ import UsdcResmi from "/components/tokens/USDC.svg";
 import UsdtResmi from "/components/tokens/USDT.svg";
 import { ChainId } from "/lib/crosschain/chains";
 
-/** @const {!Array<ChainId>} */
+/** @const {Array<ChainId>} */
 const Chains = [
   ChainId.x1,
   ChainId.MinaMainnet,
@@ -23,7 +23,7 @@ const Chains = [
   ChainId.x38
 ];
 
-/** @const {!Object<ChainId, I18nString>} */
+/** @const {Object<ChainId, I18nString>} */
 const ChainNotes = {
   [ChainId.MinaMainnet]: { tr: "Yeni ✨", en: "New ✨" },
   [ChainId.xa4b1]: { tr: "Ana ağ", en: "Signal chain" }
