@@ -37,4 +37,5 @@
 .Link {
   padding: 10px;
   margin: auto 15px;
+  text-wrap: nowrap;
 }

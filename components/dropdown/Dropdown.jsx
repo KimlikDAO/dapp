@@ -1,4 +1,5 @@
 import Css from "./Dropdown.css";
+import Paths from "/components/icons/paths";
 import SharedCss from "/components/shared/SharedCss";
 import dom from "/lib/util/dom";
 import { Localizable } from "/lib/util/i18n";
@@ -23,7 +24,10 @@ const Dropdown = ({ id, label$, children }) => {
         controlsDropdown={Panel}
         class={SharedCss.Header.Link}
         href="javascript:;"
-      >{label$}</Trigger>
+      >{label$}<svg class={Css.Chevron} width={12} height={12}
+        viewBox="0 0 24 24" fill="none" stroke="#999"
+        stroke-width={2} stroke-linecap="round"
+        stroke-linejoin="round"><path d={Paths.ChevronDown} /></svg></Trigger>
       <Panel class={Css.Panel} nodisplay>{children}</Panel>
     </div>
   )

@@ -1,11 +1,10 @@
 /** @export */
-#Products {
-  position: relative;
-  margin: auto 0;
-}
+#Products {}
 
 /** @export */
-#Developers {
+#Developers {}
+
+#Products, #Developers {
   position: relative;
   margin: auto 0;
 }
@@ -34,34 +33,10 @@
   #Header {
     margin: 0;
   }
+
+  #ActionButton { display: none; }
 }
 
-.DropdownItem {
-  color: inherit;
-  display: block;
-  margin: 1px;
-  padding: 12px 16px;
-  border-radius: 8px;
-  text-decoration: none;
-}
-
-.DropdownItem:hover {
-  background-color: #f2f2f2;
-}
-
-.DropdownItemTitle {
-  display: block;
-  font-weight: 700;
-  padding: 2px 8px;
-}
-
-.DropdownItemDesc {
-  padding: 2px 8px;
-  display: block;
-  min-height: 32px;
-  line-height: 1.4;
-  font-size: 10pt;
-  font-weight: 400;
-  margin-top: 4px;
-  color: #666;
+@media (max-width: 800px) {
+  #Products, #Developers { display: none; }
 }

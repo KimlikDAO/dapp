@@ -1,3 +1,0 @@
-preload = ["./lib/kdjs/util/plugin.js"]
-[test]
-preload = ["./lib/kdjs/util/plugin.js"]
