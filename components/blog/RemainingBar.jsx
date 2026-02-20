@@ -44,7 +44,6 @@ const Css = css`
  */
 const RemainingBar = ({ id, className, children, maximum, ticker }) => (
   <div class={[Css.Container, className]}>
-    <Css />
     <div id={id} class={[Css.Bar, className]} style={`width:${Width}px`}></div>
     <div class={Css.Text}>
       {children}{" "}

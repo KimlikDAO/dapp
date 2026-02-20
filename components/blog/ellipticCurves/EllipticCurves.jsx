@@ -54,8 +54,6 @@ const EllipticCurves = ({ href, piggyback }) => {
 
   return (
     <a href={href} class={BlogCss.Preview}>
-      <Css />
-      <BlogCss />
       <div>
         <Banner class={BlogCss.PreviewBanner} width="100%" quality={60}
           piggyback={piggyback}

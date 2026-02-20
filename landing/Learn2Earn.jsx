@@ -14,7 +14,6 @@ const Css = css`
 
 const Learn2Earn = () => (
   <div class={LandingCss.ThreeColumn}>
-    <Css />
     <div id={Css.Content}>
       <h2 class={SharedCss.Blue}>{{
         en: "Learn & Earn with your KPass.",

@@ -74,7 +74,6 @@ const KPass = ({ style, piggyback }) => {
 
   return (
     <KPass.root style={style}>
-      <Css />
       <Cover id={Css.CoverSide} bundleName="KPASS.svg" piggyback={piggyback} />
       <div id={Css.InfoSide}>
         <Cards>

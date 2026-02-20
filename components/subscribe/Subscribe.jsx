@@ -45,7 +45,6 @@ const Subscribe = ({ id }) => {
 
   return (
     <Root onSubmit={submit}>
-      <Css />
       <input
         inputmode="email"
         autocomplete="email"

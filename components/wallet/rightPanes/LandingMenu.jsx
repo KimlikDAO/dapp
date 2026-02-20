@@ -29,9 +29,9 @@ const Css = css`
 
 /**
  * @param {{
- *   ambassadorUrl$: (I18nString | undefined),
- *   voteUrl$: (I18nString | undefined),
- *   revokeUrl$: (I18nString | undefined),
+ *   ambassadorUrl$: I18nString,
+ *   voteUrl$: I18nString,
+ *   revokeUrl$: I18nString,
  * }} props
  */
 export default ({ ambassadorUrl$, voteUrl$, revokeUrl$ }) => {

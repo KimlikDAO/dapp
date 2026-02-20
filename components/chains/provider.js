@@ -5,6 +5,7 @@ import { Provider } from "/lib/ethereum/provider";
 import { serialize, TransactionRequest } from "/lib/ethereum/transaction";
 
 /**
+ * A simple read-only provider using public RPC endpoints.
  * @const {Provider}
  */
 const PublicProvider = /** @type {Provider} */({

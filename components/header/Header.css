@@ -32,6 +32,7 @@
 
 /**
  * Text link in the header
+ * @export
  */
 .Link {
   padding: 10px;

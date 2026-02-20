@@ -25,7 +25,6 @@ const SubscribeBox = () => (
 
 const Footer = () => (
   <div id={Css.Footer}>
-    <Css />
     <SubscribeBox />
     <div class={Css.Column}>
       <b>{{ en: "COMMUNITY", tr: "TOPLULUK" }}</b>

@@ -15,7 +15,6 @@ const JointCss = css`
 
 const Hero = () => (
   <div id={Css.Hero}>
-    <Css />
     <JointCss />
     <div id={Css.Content}>
       <div id={Css.Left}>

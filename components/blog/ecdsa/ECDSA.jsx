@@ -54,8 +54,6 @@ const ECDSA = ({ href, piggyback }) => {
 
   return (
     <a href={href} class={BlogCss.Preview}>
-      <Css />
-      <BlogCss />
       <div>
         <Banner piggyback={piggyback} />
         <h4>{{

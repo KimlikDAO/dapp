@@ -20,7 +20,6 @@ const CredentialSource = ({ id, title$, description$, countries$ }) => {
 
   return (
     <Root class={Css.Root}>
-      <Css />
       <h3 class={Css.Title}>{title$}</h3>
       <div class={Css.Content}>
         <div class={Css.Info}>

@@ -36,7 +36,6 @@ const LangPicker = ({ cookieDomain }) => {
 
   return (
     <div id={Css.Root}>
-      <Css />
       <LangButton
         controlsDropdown={LangDropdown}
         class={HeaderCss.Link} href="javascript:">{{ en: "EN", tr: "TR" }}

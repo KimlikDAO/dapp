@@ -73,7 +73,6 @@ const Graph = ({ width }) => {
 
 const Network = () => (
   <div id={Css.Network} class={LandingCss.ThreeColumn}>
-    <Css />
     <div id={Css.TextColumn}>
       <h2 class={SharedCss.Blue}>{{
         en: "Verified and signed by 7+ independent nodes.",

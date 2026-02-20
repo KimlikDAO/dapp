@@ -23,8 +23,6 @@ const Css = css`
  */
 const Feb25 = ({ href, piggyback, loading }) => (
   <a href={href} class={BlogCss.Preview}>
-    <BlogCss />
-    <Css />
     <div>
       <BannerImage piggyback={piggyback} class={BlogCss.PreviewBanner} width="100%"
         loading={loading}

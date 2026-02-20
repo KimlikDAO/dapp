@@ -86,7 +86,6 @@ const Gallery = () => {
 
   return (
     <div id={Css.Gallery}>
-      <Css />
       <div id={Css.Carousel}>
         <CardSlider>
           <Card title={{

@@ -17,7 +17,6 @@ const Profile = ({ mintKPassUrl$, viewKPassUrl }) => {
   Profile.viewKPassUrl = viewKPassUrl;
   return (
     <div id={Css.Root}>
-      <Css />
       <QmarkImage id={Css.KPassImage} height={80} width={80} />
       <div>
         <div id={Css.AddresText}>

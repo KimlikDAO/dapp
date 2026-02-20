@@ -34,10 +34,11 @@ these dom structures if they were deleted.
 kastro is enabled by kdjs and the custom jsx and css transpilers that it provides to kdjs.
 
 In kastro each components is written in a .jsx file. The same jsx file is evaluated at compile time to generate the html
-of the component tree (which the browsers can very quickly convert to a dom structure) and also compiled to a client js.
+of the component tree (which the browsers can very quickly convert to a dom structure) and also compiled to a client js
+using kdjs via the custom jsx->js transpiler kastro provides.
 
-Now we'll work on kastro. It's been a while I worked on kastro and after a big kimlikdao-js refactor, it needs rework
-to get it working again. This is where we are.
+kastro works right now and using that we'll add new components and pages. At some point we'll get back to kastro
+to improve tooling, provide new modes (compiled, dev, build) and a nicer more uniform command line.
 
 Communication style
 ====================

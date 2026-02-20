@@ -35,7 +35,6 @@ const Header = ({
   children
 }) => (
   <div id={Css.Header}>
-    <Css />
     <JointCss />
     <a href={logoUrl$} id={Css.Logo}>
       <Logo id={Css.Logomark} inline />{title$}

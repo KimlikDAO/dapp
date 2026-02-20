@@ -41,7 +41,6 @@ const Bubble = ({ chainId }) => (
 
 const Holders = () => (
   <div id={Css.Holders}>
-    <Css />
     <div id={Css.Content}>
       <div class={LandingCss.RightAligned}>
         <h2>{{

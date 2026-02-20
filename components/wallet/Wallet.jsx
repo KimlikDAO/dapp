@@ -25,7 +25,6 @@ import { I18nString } from "/lib/util/i18n";
 
 /** @define {string} */
 const KIMLIKDAO_IPFS_URL = "//ipfs.kimlikdao.org";
-
 /** @const {((chainId: ChainId) => void)[]} */
 const OnChainChange = [];
 /** @const {((provider: Connector) => void)[]} */
@@ -241,7 +240,6 @@ const Wallet = ({
 
   return (
     <div id={Css.Root}>
-      <Css />
       <Wallet.chainButton class={SharedCss.Button} controlsDropdown={Dropdown}>
         <Image src={chainImageSrc(chainConfig.defaultChain)}
           width={32} height={32}

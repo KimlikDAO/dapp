@@ -48,7 +48,6 @@ const Credentials = () => {
 
   return (
     <div id={Css.Root}>
-      <Css />
       <KeyedSwitch instance={Credentials.panes} id={Css.Panes}>
         <CredentialSearch key="sources" />
         <PopulationReg key="pop-reg" />

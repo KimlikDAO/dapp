@@ -1,4 +1,4 @@
-import KPass from "kastro:../../kpass/cover.svg.jsx";
+import KPass from "kastro:../../kpass/Cover.svg.jsx";
 import { url } from "/lib/kastro/image";
 import { css } from "/lib/kastro/stylesheet";
 

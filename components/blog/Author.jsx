@@ -19,7 +19,6 @@ const Css = css`
  */
 const Author = ({ name }) => (
   <div class={Css.Author}>
-    <Css />
     <svg width={20} height={20}>
       <circle cx={10} cy={10} r={9.1} fill="none" stroke="#ddd" stroke-width={0.9} />
       <use href={`#${HeaderCss.Logomark}`} width={16} height={16} x={3.5} y={2} />

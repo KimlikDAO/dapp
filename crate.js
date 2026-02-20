@@ -1,4 +1,4 @@
-import { I18nString, LangCode } from "/lib/util/i18n";
+import { I18nString, LangCode, Localizable } from "/lib/util/i18n";
 
 /** @define {string} */
 const HostUrl = "https://kimlikdao.org";
@@ -13,7 +13,7 @@ const Page = {
   KPass: { [LangCode.EN]: "kpass", [LangCode.TR]: "kpassim" }
 };
 
-/** @enum {I18nString|string} */
+/** @enum {Localizable} */
 const ExternalPage = {
   Join: {
     [LangCode.EN]: "//join.kimlikdao.org/?en",

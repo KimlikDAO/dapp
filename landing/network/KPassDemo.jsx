@@ -15,7 +15,6 @@ const Css = css`
 
 const KPassDemo = () => (
   <div id={Css.KPassDemo}>
-    <Css />
     <div class={KPass.Css.CardContent}>
       <div class={KPass.Css.Label}>{{ en: "City of birth", tr: "Doğum yeri" }}</div>
       <div>{{ en: "Palo Alto, CA", tr: "İstanbul" }}</div>

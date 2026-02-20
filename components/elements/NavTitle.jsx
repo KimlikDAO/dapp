@@ -48,7 +48,6 @@ const NavTitle = ({ id, title$, backFn }) => {
   const Root = dom.div(id);
   return (
     <Root class={Css.NavTitle}>
-      <Css />
       <button class={Css.Button} onClick={backFn}>
         <svg height={24} width={24}>
           <path d={Paths.ChevronLeft} stroke="#5256c9" fill="none" stroke-width="2" />

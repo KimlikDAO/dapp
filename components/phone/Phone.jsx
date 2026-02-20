@@ -93,7 +93,6 @@ InfoDialog.show = (prompt, buttonText) => {
  */
 const Phone = ({ noshow, piggyback }) => (
   <div id={Css.Root} noshow={noshow}>
-    <Css />
     <JointCss />
     <WalletApp />
     <KPassDialog>
