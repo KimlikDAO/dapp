@@ -13,7 +13,7 @@ on your own server, or use the reference deployment at [kimlikdao.org](https://k
 
 The dApp will connect to the KimlikDAO network nodes and the node discovery will be initiated
 through the seed nodes at `node.kimlikdao.org`, `kdao-node.yenibank.org`, `kdao-node.blinkbridge.xyz`.
-To modify the seed nodes, edit the list in `lib/node/network.js`.
+To modify the seed nodes, edit the list in `lib/protocol/network/nodes.js`.
 
 For blockchain nodes, the dApp has no hardcoded rpc urls and will rely on your wallet's provider.
 
@@ -29,9 +29,9 @@ To run the dApp, follow these steps:
 - `bun i` install the required npm packages
 
 - `bun dev` run the dev server
-  - http://localhost:8787/
+  - http://localhost:3000/
 
-The dApp can also be run in `compiled` and `canary` modes.
+The dApp can also be run in `compiled` and `release` modes.
 To run the dApp in these modes, we need other tools installed:
 
 ```shell
@@ -43,5 +43,5 @@ pip install fonttools
 
 With these dependencies installed, we can run the dApp in `compiled` and `canary` modes:
 
-- `bun compiled` compile the required pages and assets
-- `bun canary` serve the `bundle` prepared for deployment
+- `bun compiled` serves a quickly built version of the app
+- `bun release` serves the most optimized version of the app, though it is significantly slower

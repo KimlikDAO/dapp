@@ -1,7 +1,7 @@
 import Paths from "/components/icons/paths";
-import { css } from "/lib/kastro/stylesheet";
-import dom from "/lib/util/dom";
-import { I18nString } from "/lib/util/i18n";
+import { css } from "/lib/kastro/StyleSheet";
+import dom from "../../lib/kastro/dom";
+import { I18nString } from "../../lib/util/i18n";
 
 /** @enum {string} */
 const Css = css`

@@ -9,30 +9,28 @@
   "scripts": {
     "postinstall": "mkdir -p ./node_modules/@kimlikdao && ln -sfn ../../lib ./node_modules/@kimlikdao/lib && ln -sfn ../../lib/kdjs ./node_modules/@kimlikdao/kdjs",
     "dev": "NODE_ENV=production bun lib/kastro/kastro.js serve",
-    "compiled": "NODE_ENV=production bun lib/kastro/kastro.js serve --compiled --lang en",
-    "build": "NODE_ENV=production bun lib/kastro/kastro.js build",
-    "canary": "bun run build && NODE_ENV=production bun lib/kastro/workers/canaryServer.js",
+    "compiled": "NODE_ENV=production bun lib/kastro/kastro.js serve --compiled",
+    "release": "NODE_ENV=production bun lib/kastro/kastro.js serve --release",
+    "build": "NODE_ENV=production bun lib/kastro/kastro.js build --release",
     "deploy": "NODE_ENV=production bun lib/kastro/kastro.js deploy",
-    "clean": "rm -rf build && clear"
+    "clean": "rm -rf build && clear",
+    "kdjs": "bun lib/kdjs/kdjs.js"
   },
   "devDependencies": {
-    "@swc/core": "^1.15.11",
+    "@swc/core": "^1.15.17",
     "acorn": "^8.16.0",
     "acorn-jsx": "^5.3.2",
-    "acorn-typescript": "^1.4.13",
     "acorn-walk": "^8.3.5",
     "astring": "^1.9.0",
-    "bun-types": "^1.3.9",
+    "bun-types": "^1.3.10",
     "css-tree": "^3.1.0",
     "csso": "^5.0.5",
-    "google-closure-compiler": "^20260217.0.0",
+    "google-closure-compiler": "^20260225.0.0",
     "html-minifier": "^4.0.0",
-    "htmlparser2": "^10.1.0",
     "js-yaml": "^4.1.1",
     "sax": "^1.4.4",
     "svg-pathdata": "^8.0.0",
     "svgo": "^4.0.0",
-    "uglify-js": "~3.19.3",
-    "vite": "^7.3.1"
+    "uglify-js": "~3.19.3"
   }
 }

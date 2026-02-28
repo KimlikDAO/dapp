@@ -2,8 +2,8 @@ import LandingCss from "../Landing.css";
 import KPassDemo from "./KPassDemo";
 import Css from "./Network.css";
 import SharedCss from "/components/shared/SharedCss";
-import { ExternalPage } from "/crate";
 import { keccak256 } from "/lib/crypto/sha3";
+import { ExternalPage } from "/mpa";
 
 /**
  * @param {{ idx: string }} props

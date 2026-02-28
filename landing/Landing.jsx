@@ -12,9 +12,9 @@ import Lato400 from "/components/lato/l400.ttf";
 import Lato700 from "/components/lato/l700.ttf";
 import SharedCss from "/components/shared/SharedCss";
 import { ChainConfig } from "/components/wallet/Wallet";
-import { HostUrl } from "/crate";
 import { ChainId } from "/lib/crosschain/chains";
-import { LangCode } from "/lib/util/i18n";
+import { LangCode } from "../lib/util/i18n";
+import { HostUrl } from "/mpa";
 
 /** @type {ChainConfig} */
 const LandingChainConfig = {

@@ -32,7 +32,7 @@ jobs:
         run: pip install fonttools
 
       - name: Compile Landing and Mint pages
-        run: bun run build --lang en
+        run: bun run build
 
   compile-dapp:
     if: false # Temporarily disabled

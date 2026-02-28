@@ -2,7 +2,7 @@ import Css from "./Header.css";
 import LangPicker from "/components/langPicker/LangPicker";
 import Logo from "/components/logo.svg";
 import Wallet, { ChainConfig } from "/components/wallet/Wallet";
-import { css } from "/lib/kastro/stylesheet";
+import { css } from "/lib/kastro/StyleSheet";
 
 /** @enum {string} */
 const JointCss = css`

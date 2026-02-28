@@ -25,7 +25,7 @@ import { Provider } from "/lib/crosschain/provider";
 import { Signature, Signer } from "/lib/crosschain/signer";
 import { fromUnlockableNFT } from "/lib/did/KPass";
 import KPass from "../lib/ethereum/contract/KPass";
-import dom from "/lib/util/dom";
+import dom from "../lib/kastro/dom";
 
 
 /** @const {Object<string, !did.DecryptedSections>} */

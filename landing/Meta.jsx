@@ -1,5 +1,5 @@
-import { HostUrl } from "/crate";
-import { I18nString, LangCode } from "/lib/util/i18n";
+import { I18nString, LangCode } from "../lib/util/i18n";
+import { HostUrl } from "/mpa";
 
 /** @const {I18nString} */
 const Description = {

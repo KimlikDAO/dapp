@@ -12,9 +12,9 @@ import { VerificationKeys, metadataAndSections, userPrompt } from "/lib/did/KPas
 import { DecryptedSections } from "/lib/did/section.d";
 import ipfs from "/lib/node/ipfs";
 import network from "/lib/node/network";
-import dom from "/lib/util/dom";
-import { LangCode } from "/lib/util/i18n";
-import { hex } from "/lib/util/çevir";
+import dom from "../lib/kastro/dom";
+import { LangCode } from "../lib/util/i18n";
+import { hex } from "/lib/util/hex";
 
 /**
  * @param {string} adres

@@ -11,7 +11,7 @@ import { chainIdToGroup } from "/lib/crosschain/chains";
 import { combineMultiple } from "/lib/did/KPass";
 import Router from "/lib/kastro/Router";
 import protocol from "/lib/protocol/client";
-import dom from "/lib/util/dom";
+import dom from "../../lib/kastro/dom";
 
 const PopulationReg = () => {
   /** @type {boolean} */
@@ -118,7 +118,7 @@ const PopulationReg = () => {
               KimlikDAO node operators cannot see your personal data.</>,
             tr: <><b>Not: </b>
               Yüklediğiniz PDF belgesi KimlikDAO düğümleri tarafından
-              Trusted Execution Environment (TEE) içerisinde e-devlet'ten doğrulanır,
+              Trusted Execution Environment (TEE) içerisinde e-devlet’ten doğrulanır,
               metine çevrilir ve imzalanır. KimlikDAO düğüm operatörleri kişisel
               verilerinize erişemez.</>
           }}</p>
@@ -138,7 +138,7 @@ const PopulationReg = () => {
   );
 };
 
-/** @param {?string} address */
+/** @param {string | null} address */
 PopulationReg.computeCommitment = (address) => {
   if (!PopulationReg.isVisible || !address) return;
   dom.text.setPreserve(PopulationReg.commitment);

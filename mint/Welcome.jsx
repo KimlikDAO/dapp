@@ -1,7 +1,7 @@
 import Css from "./Mint.css";
 import SharedCss from "/components/shared/SharedCss.css";
 import Router from "/lib/kastro/Router";
-import dom from "/lib/util/dom";
+import dom from "../lib/kastro/dom";
 
 const Welcome = () => {
   const Button = dom.button(Css.WelcomeButton);

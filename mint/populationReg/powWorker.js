@@ -5,7 +5,7 @@ import { f } from "/lib/crypto/sha3";
 const POW_THRESHOLD = 20_000;
 
 onmessage = (/** @type {MessageEvent} */ e) => {
-  console.time('pow');
+  console.time("pow");
   /** @const {Uint32Array} */
   const inp = new Uint32Array(/** @type {PowWorkerEvent} */(e).data, 0, 18);
   /** @const {Uint32Array} */
@@ -21,7 +21,7 @@ onmessage = (/** @type {MessageEvent} */ e) => {
     if (out[0] <= POW_THRESHOLD) {
       console.log('Hashes', inp[16]);
       postMessage(inp.buffer, [inp.buffer]);
-      console.timeEnd('pow')
+      console.timeEnd("pow")
       close();
     }
     ++inp[16];

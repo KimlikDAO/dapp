@@ -2,8 +2,8 @@ import Css from "./Gallery.css";
 import Phone from "/components/phone/Phone";
 import SharedCss from "/components/shared/SharedCss.css";
 import Wallet from "/components/wallet/Wallet";
-import dom from "/lib/util/dom";
-import { I18nString } from "/lib/util/i18n";
+import dom from "../../lib/kastro/dom";
+import { I18nString } from "../../lib/util/i18n";
 
 /** @const {HTMLDivElement} */
 const Bullets = dom.div(Css.Bullets);

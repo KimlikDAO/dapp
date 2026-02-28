@@ -4,8 +4,8 @@ import PopulationReg from "./populationReg/PopulationReg";
 import Wallet from "/components/wallet/Wallet";
 import KeyedSwitch from "/lib/kastro/KeyedSwitch";
 import Router from "/lib/kastro/Router";
-import dom from "../../lib/kastro/dom";
-import { LangCode } from "../../lib/util/i18n";
+import dom from "../lib/kastro/dom";
+import { LangCode } from "../lib/util/i18n";
 
 const CredentialSearch = () => {
   /** @const {HTMLDivElement} */

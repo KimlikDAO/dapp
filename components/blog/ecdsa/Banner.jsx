@@ -1,6 +1,6 @@
 import KPass from "kastro:../../kpass/Cover.svg.jsx";
-import { url } from "/lib/kastro/image";
-import { css } from "/lib/kastro/stylesheet";
+import { url } from "/lib/kastro/Image";
+import { css } from "/lib/kastro/StyleSheet";
 
 const Css = css`
   #Clip {}

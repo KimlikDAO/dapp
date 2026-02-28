@@ -3,9 +3,9 @@ import Css from "./Holders.css";
 import { chainImageSrc } from "/components/chains/chains";
 import { Arrow } from "/components/icons/Icons";
 import SharedCss from "/components/shared/SharedCss";
-import { Page } from "/crate";
 import { ChainId } from "/lib/crosschain/chains";
-import { Image } from "/lib/kastro/image";
+import Image from "/lib/kastro/Image";
+import { Page } from "/mpa";
 
 /**
  * @const {Object<ChainId, {

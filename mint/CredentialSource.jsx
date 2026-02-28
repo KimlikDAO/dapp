@@ -1,7 +1,7 @@
-import dom from "/lib/util/dom";
 import Css from "./CredentialSource.css";
-import { Image } from "/lib/kastro/image";
-import { LangCode, I18nString } from "/lib/util/i18n";
+import { FlagStack } from "/components/flags/Flags";
+import dom from "../lib/kastro/dom";
+import { I18nString, LangCode } from "../lib/util/i18n";
 
 /**
  * @param {{
@@ -15,20 +15,13 @@ const CredentialSource = ({ id, title$, description$, countries$ }) => {
   /** @const {HTMLDivElement} */
   const Root = dom.div(id);
 
-  /** @const {HTMLDivElement} */
-  const CountryFlags = dom.div(`${id}_flags`);
-
   return (
     <Root class={Css.Root}>
       <h3 class={Css.Title}>{title$}</h3>
       <div class={Css.Content}>
         <div class={Css.Info}>
           <p class={Css.Description}>{description$}</p>
-          <CountryFlags class={Css.Countries}>
-            {countries$.map(country => (
-              <span class={`${Css.Flag} flag-icon-${country.toLowerCase()}`} />
-            ))}
-          </CountryFlags>
+          <FlagStack codes={countries$} />
         </div>
         <div class={Css.ImageContainer}>
         </div>

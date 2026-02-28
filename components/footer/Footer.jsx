@@ -1,8 +1,8 @@
-import Css from "./Footer.css";
 import SharedCss from "../shared/SharedCss";
+import Css from "./Footer.css";
 import Subscribe from "/components/subscribe/Subscribe";
-import { ExternalPage } from "/crate";
-import { i18n } from "/lib/util/i18n";
+import { i18n } from "../../lib/util/i18n";
+import { ExternalPage } from "/mpa";
 
 const SubscribeBox = () => (
   <div id={Css.SubscribeBox}>

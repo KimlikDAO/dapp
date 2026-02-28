@@ -4,7 +4,7 @@
  */
 import "/components/cüzdan/birim";
 import "/components/dil/birim";
-import dom from "/lib/util/dom";
+import dom from "../lib/kastro/dom";
 
 let SeçilmişÖneriId;
 

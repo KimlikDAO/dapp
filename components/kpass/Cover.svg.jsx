@@ -1,6 +1,6 @@
 import KCode from "./KCode";
 import RobotoMono from "./RobotoMono";
-import { css } from "/lib/kastro/stylesheet";
+import { css } from "/lib/kastro/StyleSheet";
 
 const Ids = css`
   /** @domNamspace {KPass} */

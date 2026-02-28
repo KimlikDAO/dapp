@@ -1,6 +1,6 @@
-import dom from "/lib/util/dom";
+import dom from "../../lib/kastro/dom";
 import Css from "./ProcessingStatus.css";
-import { LangCode } from "/lib/util/i18n";
+import { LangCode } from "../../lib/util/i18n";
 
 const ProcessingStatus = () => {
   /** @const {HTMLDivElement} */

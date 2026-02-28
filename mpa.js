@@ -1,4 +1,4 @@
-import { I18nString, LangCode, Localizable } from "/lib/util/i18n";
+import { I18nString, LangCode, Localizable } from "./lib/util/i18n";
 
 /** @define {string} */
 const HostUrl = "https://kimlikdao.org";

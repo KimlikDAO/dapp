@@ -1,7 +1,7 @@
 import KPass from "../kpass/KPass";
 import Css from "./Phone.css";
-import { css } from "/lib/kastro/stylesheet";
-import dom from "/lib/util/dom";
+import { css } from "/lib/kastro/StyleSheet";
+import dom from "../../lib/kastro/dom";
 
 /** @const {HTMLDivElement} */
 const KPassDialog = dom.div(Css.KPassDialog);

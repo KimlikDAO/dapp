@@ -1,11 +1,11 @@
 import LandingCss from "./Landing.css";
-import Feb25 from "/components/blog/2025.02/Feb25";
+import Apr26 from "../components/blog/2026.04/Apr26";
 import SharedCss from "/components/shared/SharedCss.css";
 
 const Reports = () => (
   <div class={LandingCss.ThreeColumn}>
     <div></div>
-    <Feb25 href={""} loading="lazy" />
+    <Apr26 href={""} loading="lazy" />
     <div class={LandingCss.RightAligned}>
       <h2 class={SharedCss.Purple}>{{
         en: "KimlikDAO progress reports.",

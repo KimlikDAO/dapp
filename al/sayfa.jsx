@@ -12,7 +12,7 @@ import Lato700 from "/components/lato/l700.ttf";
 import Phone from "/components/phone/Phone";
 import OrtakCss from "/components/shared/SharedCss";
 import { ChainId } from "/lib/crosschain/chains";
-import dom from "/lib/util/dom";
+import dom from "../lib/kastro/dom";
 
 /** @const {HTMLAnchorElement} */
 export const BağlaDüğmesi = dom.a("al1a");

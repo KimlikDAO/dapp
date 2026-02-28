@@ -8,10 +8,10 @@ import KPassContract from "/lib/ethereum/KPassLite";
 import Lato400 from "/components/lato/l400.ttf";
 import Lato700 from "/components/lato/l700.ttf";
 import OrtakCss from "/components/shared/SharedCss.jsx";
-import { Page } from "/crate";
+import { Page } from "/mpa";
 import { ChainId } from "/lib/crosschain/chains";
-import dom from "/lib/util/dom";
-import { I18nString } from "/lib/util/i18n";
+import dom from "../lib/kastro/dom.js";
+import { I18nString } from "../lib/util/i18n.js";
 
 /** @const {Array<ChainId>} */
 const Chains = [

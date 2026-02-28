@@ -4,10 +4,10 @@ import Favicon from "/components/icon.svg";
 import Lato400 from "/components/lato/l400.ttf";
 import Lato700 from "/components/lato/l700.ttf";
 import SharedCss from "/components/shared/SharedCss";
-import { HostUrl, Page } from "/crate";
 import { ChainId } from "/lib/crosschain/chains";
-import dom from "/lib/util/dom";
-import { LangCode } from "/lib/util/i18n";
+import dom from "../lib/kastro/dom";
+import { LangCode } from "../lib/util/i18n";
+import { HostUrl, Page } from "/mpa";
 
 /** @type {ChainConfig} */
 const KdaoChainConfig = {

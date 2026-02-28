@@ -1,9 +1,9 @@
 import Gallery from "./Gallery";
 import Css from "./Hero.css";
-import SharedCss from "/components/shared/SharedCss.css";
 import Phone from "/components/phone/Phone";
-import { Page } from "/crate";
-import { css } from "/lib/kastro/stylesheet";
+import SharedCss from "/components/shared/SharedCss.css";
+import { css } from "/lib/kastro/StyleSheet";
+import { Page } from "/mpa";
 
 /** @enum {string} */
 const JointCss = css`

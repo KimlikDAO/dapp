@@ -21,7 +21,7 @@ const Css = css`
  *   loading: (string | undefined)
  * }} props
  */
-const Feb25 = ({ href, piggyback, loading }) => (
+const Apr26 = ({ href, piggyback, loading }) => (
   <a href={href} class={BlogCss.Preview}>
     <div>
       <BannerImage piggyback={piggyback} class={BlogCss.PreviewBanner} width="100%"
@@ -46,4 +46,4 @@ const Feb25 = ({ href, piggyback, loading }) => (
   </a>
 );
 
-export default Feb25;
+export default Apr26;

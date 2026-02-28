@@ -10,7 +10,7 @@ import {
 } from "./sayfa.jsx";
 import { Cüzdan } from "/components/başlık/birim";
 import KPass from "../lib/ethereum/contract/KPass.js";
-import dom from "/lib/util/dom";
+import dom from "../lib/kastro/dom.js";
 
 Cüzdan.bağlantıDeğişince((bağlantı) =>
   KPass.setProvider(/** @type {eth.Provider} */(bağlantı.provider)));

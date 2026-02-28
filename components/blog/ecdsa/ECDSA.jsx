@@ -6,8 +6,8 @@ import { PublicProvider } from "/components/chains/provider";
 import USDT from "/components/tokens/USDT.svg";
 import { ChainId } from "/lib/crosschain/chains";
 import { ERC20 } from "/lib/ethereum/contract/ERC20";
-import { css } from "/lib/kastro/stylesheet";
-import dom from "/lib/util/dom";
+import { css } from "/lib/kastro/StyleSheet";
+import dom from "../../../lib/kastro/dom";
 
 /** @enum {string} */
 const Css = css`

@@ -1,8 +1,8 @@
 import Css from "./KPass.css";
 import { setFieldsFrom } from "./util";
 import { KütükBilgileri } from "/lib/did/section.d";
-import { css } from "/lib/kastro/stylesheet";
-import dom from "/lib/util/dom";
+import { css } from "/lib/kastro/StyleSheet";
+import dom from "../../lib/kastro/dom";
 
 const Ids = css`
   /** @export */ #RegistryInfoCard {}

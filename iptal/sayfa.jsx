@@ -6,7 +6,7 @@ import Lato400 from "/components/lato/l400.ttf";
 import Lato700 from "/components/lato/l700.ttf";
 import OrtakCss from "/components/shared/SharedCss.jsx";
 import { ChainId } from "/lib/crosschain/chains";
-import dom from "/lib/util/dom";
+import dom from "../lib/kastro/dom";
 
 /** @const {HTMLDivElement} */
 export const AdresKutusu = dom.div("iptac");

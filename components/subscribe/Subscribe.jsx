@@ -1,16 +1,13 @@
 import SharedCss from "../shared/SharedCss";
 import Css from "./Subscribe.css";
-import dom from "/lib/util/dom";
+import dom from "../../lib/kastro/dom";
 
 /**
  * @param {{ id: string }} props
  */
 const Subscribe = ({ id }) => {
-  /** @const {HTMLFormElement} */
   const Root = dom.form(id);
-  /** @const {HTMLInputElement} */
   const input = /** @type {HTMLInputElement} */(Root.firstElementChild);
-  /** @const {Element} */
   const button = /** @type {Element} */(input.nextElementSibling);
 
   /**

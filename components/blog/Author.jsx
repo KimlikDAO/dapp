@@ -1,6 +1,6 @@
 import HeaderCss from "/components/header/Header.css";
-import { css } from "/lib/kastro/stylesheet";
-import { I18nString } from "/lib/util/i18n";
+import { css } from "/lib/kastro/StyleSheet";
+import { I18nString } from "../../lib/util/i18n";
 
 const Css = css`
   .Author {

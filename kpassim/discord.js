@@ -1,5 +1,5 @@
 import { SignedID } from "./discord.d";
-import { LangCode } from "/lib/util/i18n";
+import { LangCode } from "../lib/util/i18n";
 
 /**
  * @param {SignedID} discordID

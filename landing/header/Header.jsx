@@ -7,9 +7,9 @@ import Logo from "/components/logo.svg";
 import SharedCss from "/components/shared/SharedCss";
 import LandingMenu from "/components/wallet/rightPanes/LandingMenu";
 import Wallet, { ChainConfig } from "/components/wallet/Wallet";
-import { ExternalPage, HostUrl, Page } from "/crate";
-import dom from "/lib/util/dom";
-import { i18n } from "/lib/util/i18n";
+import dom from "../../lib/kastro/dom";
+import { i18n } from "../../lib/util/i18n";
+import { ExternalPage, HostUrl, Page } from "/mpa";
 
 /**
  * @param {{ chainConfig: ChainConfig }} props
@@ -22,32 +22,31 @@ const Header = ({ chainConfig }) => (
       <Dropdown id={Css.Products} label$={{ en: "Products", tr: "Ürünler" }}>
         <FatListItem href$={Page.Mint} title$="KPass"
           desc$={{
-            en: "Self-sovereign ID you hold in your crypto wallet",
-            tr: "Kontrolü tamamen sende olan bir kimlik" }} />
-        <FatListItem href$="#" title$="KBox"
+            en: "A fully private, self-sovereign ID you hold in your crypto wallet",
+            tr: "Kontrolü tamamen sende olan ve gizliliğini koruyan bir kimlik" }} />
+        <FatListItem href$="#" title$="Factor"
           desc$={{
             en: "Persistent storage anchored to your Ethereum account. Start with 1 GB free and scale seamlessly with USDC",
-            tr: "Ethereum hesabınıza bağlı kalıcı depolama. 1 GB ücretsiz başlayın, USDC ile sorunsuzca ölçeklendirin" }} />
+            tr: "Ethereum hesabınıza bağlı kalıcı depolama. 1 GB ücretsiz başlayın, USDC ile yükseltin" }} />
         <FatListItem href$="#" title$="e-sign"
           desc$={{
             en: "Sign PDFs with your KPass or eIDAS-compatible hardware token",
-            tr: "PDF'leri KPass veya 5070 uyumlu e-imza donanım token'ınızla imzalayın" }} />
+            tr: "PDF’leri KPass veya 5070 uyumlu e-imza donanım token’ınızla imzalayın" }} />
       </Dropdown>
       <Dropdown id={Css.Developers} label$={{ en: "Developers", tr: "Geliştiriciler" }}>
         <FatListItem href$="//github.com/KimlikDAO/KPass" title$="KPass"
           desc$={{
-            en: "Browse KPass spec and docs",
-            tr: "KPass kodunu ve belgeleri" }} />
-        <FatListItem href$="/kdjs" title$="kdjs"
+            en: "Browse KPass code, documents and specification",
+            tr: "KPass kodunu, belgelerini ve tanımlarını inceleyin" }} />
+        <FatListItem href$="//github.com/KimlikDAO/kimlikdao-js/tree/ana/kdjs" title$="kdjs"
           desc$={{
             en: "A modern JavaScript compiler with advanced type-driven optimizations",
-            tr: "Gelişmiş optimizasyonlarla donatılmış, tip bilinçli bir JavaScript derleyicisi" }} />
+            tr: "Gelişmiş optimizasyonlarla donatılmış tip bilinçli bir JavaScript derleyicisi" }} />
         <FatListItem href$="//github.com/KimlikDAO/kimlikdao-js/tree/ana/kastro" title$="kastro"
           desc$={{
-            en: "A react-like web framework with zero runtime and superb performance",
-            tr: "React benzeri bir web framework, sıfır runtime ve mükemmel performans" }} />
+            en: "A react-like web framework with high performance focus and zero runtime",
+            tr: "React benzeri, çok yüksek verimlilik odaklı web frameworkü" }} />
       </Dropdown>
-
       <LangPicker cookieDomain={`.${HostUrl.slice(8)}`} />
       <Wallet
         chainConfig={chainConfig}

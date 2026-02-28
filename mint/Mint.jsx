@@ -1,6 +1,6 @@
+import Credentials from "./Credentials";
 import Css from "./Mint.css";
 import Welcome from "./Welcome";
-import Credentials from "/components/crendentials/Credentials";
 import Header from "/components/header/Header";
 import Favicon from "/components/icon.svg";
 import KPass from "/components/kpass/KPass";
@@ -8,13 +8,13 @@ import Lato400 from "/components/lato/l400.ttf";
 import Lato700 from "/components/lato/l700.ttf";
 import SharedCss from "/components/shared/SharedCss.css";
 import { ChainConfig } from "/components/wallet/Wallet";
-import { HostUrl, Page } from "/crate";
 import { ChainId } from "/lib/crosschain/chains";
 import Router from "/lib/kastro/Router";
-import { css } from "/lib/kastro/stylesheet";
+import { css } from "/lib/kastro/StyleSheet";
 import Switch from "/lib/kastro/Switch";
-import dom from "/lib/util/dom";
-import { LangCode } from "/lib/util/i18n";
+import dom from "../lib/kastro/dom";
+import { LangCode } from "../lib/util/i18n";
+import { HostUrl, Page } from "/mpa";
 
 /** @type {ChainConfig} */
 const MintChainConfig = {

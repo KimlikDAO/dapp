@@ -5,7 +5,7 @@ import Banner from "./banner.png";
 import { ChainInfos } from "/components/chains/chains";
 import MINA from "/components/tokens/MINA.png";
 import { ChainId } from "/lib/crosschain/chains";
-import { css } from "/lib/kastro/stylesheet";
+import { css } from "/lib/kastro/StyleSheet";
 
 const Css = css`
   .${RemainingBar.Css.Container}.MINA {

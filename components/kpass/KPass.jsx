@@ -8,7 +8,7 @@ import RegistryInfoCard from "./RegistryInfoCard";
 import Paths from "/components/icons/paths";
 import SharedCss from "/components/shared/SharedCss";
 import "/lib/did/section.d";
-import dom from "/lib/util/dom";
+import dom from "../../lib/kastro/dom";
 
 /** @const {HTMLDivElement} */
 const Cards = dom.div(Css.Cards);

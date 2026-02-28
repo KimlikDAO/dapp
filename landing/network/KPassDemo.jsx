@@ -1,6 +1,6 @@
 import HeaderCss from "/components/header/Header.css";
 import KPass from "/components/kpass/KPass";
-import { css } from "/lib/kastro/stylesheet";
+import { css } from "/lib/kastro/StyleSheet";
 
 /** @enum {string} */
 const Css = css`

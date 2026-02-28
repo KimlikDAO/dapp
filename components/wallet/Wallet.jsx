@@ -16,12 +16,12 @@ import {
 import { WalletConnector as Connector } from "/lib/crosschain/walletConnector";
 import { ERC721Unlockable } from "/lib/ethereum/contract/ERC721.d";
 import KPass from "/lib/ethereum/contract/KPass";
-import { Image } from "/lib/kastro/image";
+import Image from "/lib/kastro/Image";
 import Switch from "/lib/kastro/Switch";
 import ipfs from "/lib/protocol/ipfs/ipfs";
-import dom from "/lib/util/dom";
+import dom from "../../lib/kastro/dom";
 import hex from "/lib/util/hex";
-import { I18nString } from "/lib/util/i18n";
+import { I18nString } from "../../lib/util/i18n";
 
 /** @define {string} */
 const KIMLIKDAO_IPFS_URL = "//ipfs.kimlikdao.org";
