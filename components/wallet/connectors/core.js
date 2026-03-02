@@ -1,6 +1,6 @@
 import { EthereumWalletConnector, extend } from "./ethereum";
 import { WalletConnector } from "/lib/crosschain/walletConnector";
-import dom from "../../../lib/kastro/dom";
+import dom from "/lib/kastro/dom";
 
 /** @type {WalletConnector} */
 const Core = extend({

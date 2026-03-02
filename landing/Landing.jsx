@@ -13,7 +13,7 @@ import Lato700 from "/components/lato/l700.ttf";
 import SharedCss from "/components/shared/SharedCss";
 import { ChainConfig } from "/components/wallet/Wallet";
 import { ChainId } from "/lib/crosschain/chains";
-import { LangCode } from "../lib/util/i18n";
+import { LangCode } from "/lib/util/i18n";
 import { HostUrl } from "/mpa";
 
 /** @type {ChainConfig} */

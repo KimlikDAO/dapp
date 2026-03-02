@@ -1,14 +1,14 @@
 import Css from "./Header.css";
 import Dropdown from "/components/dropdown/Dropdown";
-import { FatListItem } from "/components/elements/List";
+import { FatListItem } from "/components/elements/lists";
 import { Arrow } from "/components/icons/Icons";
 import LangPicker from "/components/langPicker/LangPicker";
 import Logo from "/components/logo.svg";
 import SharedCss from "/components/shared/SharedCss";
 import LandingMenu from "/components/wallet/rightPanes/LandingMenu";
 import Wallet, { ChainConfig } from "/components/wallet/Wallet";
-import dom from "../../lib/kastro/dom";
-import { i18n } from "../../lib/util/i18n";
+import dom from "/lib/kastro/dom";
+import { i18n } from "/lib/util/i18n";
 import { ExternalPage, HostUrl, Page } from "/mpa";
 
 /**
@@ -26,8 +26,8 @@ const Header = ({ chainConfig }) => (
             tr: "Kontrolü tamamen sende olan ve gizliliğini koruyan bir kimlik" }} />
         <FatListItem href$="#" title$="Factor"
           desc$={{
-            en: "Persistent storage anchored to your Ethereum account. Start with 1 GB free and scale seamlessly with USDC",
-            tr: "Ethereum hesabınıza bağlı kalıcı depolama. 1 GB ücretsiz başlayın, USDC ile yükseltin" }} />
+            en: "Persistent, fully encrypted storage for your Ethereum account. Start with 1 GB free and scale seamlessly with USDC",
+            tr: "Ethereum hesabınız için kalıcı, şifrelenmiş depolama. 1 GB ücretsiz başlayın, USDC ile yükseltin" }} />
         <FatListItem href$="#" title$="e-sign"
           desc$={{
             en: "Sign PDFs with your KPass or eIDAS-compatible hardware token",

@@ -1,4 +1,3 @@
-import KPass from "../lib/ethereum/contract/KPass.js";
 import { BağlaDüğmesi } from "./sayfa.jsx";
 import İmeceİptal from "/al/imeceİptal/birim";
 import Tanışma from "/al/tanışma/birim";
@@ -10,11 +9,12 @@ import { ChainGroup } from "/lib/crosschain/chains";
 import { checkVerifiableIDs, toUnlockableNFT } from "/lib/did/KPass";
 import { VerificationKeys, metadataAndSections, userPrompt } from "/lib/did/KPassMetadata";
 import { DecryptedSections } from "/lib/did/section.d";
+import KPass from "/lib/ethereum/contract/KPass.js";
+import dom from "/lib/kastro/dom";
 import ipfs from "/lib/node/ipfs";
 import network from "/lib/node/network";
-import dom from "../lib/kastro/dom";
-import { LangCode } from "../lib/util/i18n";
 import { hex } from "/lib/util/hex";
+import { LangCode } from "/lib/util/i18n";
 
 /**
  * @param {string} adres

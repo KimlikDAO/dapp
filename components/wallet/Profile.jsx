@@ -4,7 +4,7 @@ import WalletCss from "./Wallet.css";
 import { ChainInfos } from "/components/chains/chains";
 import CopyButton from "/components/elements/CopyButton";
 import { ChainGroup, ChainId } from "/lib/crosschain/chains";
-import dom from "../../lib/kastro/dom";
+import dom from "/lib/kastro/dom";
 
 /**
  * @param {{

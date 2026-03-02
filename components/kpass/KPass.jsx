@@ -1,4 +1,4 @@
-import Cover from "kastro:./cover.svg.jsx";
+import Cover from "kastro:./Cover.svg.jsx";
 import AddressInfoCard from "./AddressInfoCard";
 import ContactInfoCard from "./ContactInfoCard";
 import FamilyInfoCard from "./FamilyInfoCard";
@@ -7,11 +7,7 @@ import PersonInfoCard from "./PersonInfoCard";
 import RegistryInfoCard from "./RegistryInfoCard";
 import Paths from "/components/icons/paths";
 import SharedCss from "/components/shared/SharedCss";
-import "/lib/did/section.d";
-import dom from "../../lib/kastro/dom";
-
-/** @const {HTMLDivElement} */
-const Cards = dom.div(Css.Cards);
+import dom from "/lib/kastro/dom";
 
 const LeftArrow = () =>
   <svg width={10} height={10} viewBox="0 0 24 24">
@@ -33,16 +29,13 @@ const Logo = () => (
 );
 
 const Nav = () => {
-  /** @const {HTMLDivElement} */
   const Root = dom.div(Css.Nav);
-  /** @type {number} */
   let currentCard = 0;
-  /** @type {number} */
   let totalCards = 3;
 
   const nextCard = () => {
     currentCard = (currentCard + 1) % totalCards;
-    dom.slideCard(Cards, currentCard);
+    dom.slideCard(KPass.cards, currentCard);
     /** @type {Text} */(Root.childNodes[1]).data = `${currentCard + 1} / ${totalCards}`;
   }
   const prevCard = () => {
@@ -64,25 +57,25 @@ const Nav = () => {
 
 /**
  * @param {{
- *   style: (string | undefined),
- *   piggyback: (string | undefined)
+ *   style?: string,
+ *   piggyback?: string
  * }} props
  */
 const KPass = ({ style, piggyback }) => {
-  /** @const {HTMLDivElement} */
   KPass.root = dom.div(Css.Root);
+  KPass.cards = dom.div(Css.Cards);
 
   return (
     <KPass.root style={style}>
       <Cover id={Css.CoverSide} bundleName="KPASS.svg" piggyback={piggyback} />
       <div id={Css.InfoSide}>
-        <Cards>
+        <KPass.cards>
           <PersonInfoCard />
           <ContactInfoCard />
           <AddressInfoCard />
           <FamilyInfoCard />
           <RegistryInfoCard />
-        </Cards>
+        </KPass.cards>
         <Logo />
         <Nav />
       </div>
@@ -100,7 +93,7 @@ KPass.LeftArrow = LeftArrow;
  * Shows the side given by the infoSide parameter. If no parameter is given,
  * the side is toggled.
  *
- * @param {boolean|undefined} infoSide
+ * @param {boolean=} infoSide
  */
 KPass.showSide = (infoSide) => KPass.root.classList.toggle(Css.InfoSide, infoSide);
 

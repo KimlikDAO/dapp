@@ -1,6 +1,6 @@
 import HeaderCss from "/components/header/Header.css";
 import { css } from "/lib/kastro/StyleSheet";
-import { I18nString } from "../../lib/util/i18n";
+import { Localizable } from "/lib/util/i18n";
 
 const Css = css`
   .Author {
@@ -15,7 +15,7 @@ const Css = css`
 `;
 
 /**
- * @param {{ name: (string | I18nString) }} props
+ * @param {{ name: Localizable }} props
  */
 const Author = ({ name }) => (
   <div class={Css.Author}>

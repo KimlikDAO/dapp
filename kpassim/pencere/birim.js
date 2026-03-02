@@ -1,8 +1,8 @@
 import Cüzdan from "/components/cüzdan/birim";
 import { ChainId } from "/lib/crosschain/chains";
-import KPass from "../../lib/ethereum/contract/KPass";
+import KPass from "/lib/ethereum/contract/KPass";
 import evm from "/lib/ethereum/evm";
-import dom from "../../lib/kastro/dom";
+import dom from "/lib/kastro/dom";
 
 /** @const {Element} */
 const Mask = dom.adla("inbd");

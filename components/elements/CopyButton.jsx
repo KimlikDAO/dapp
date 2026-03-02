@@ -1,5 +1,5 @@
 import Paths from "/components/icons/paths";
-import dom from "../../lib/kastro/dom";
+import dom from "/lib/kastro/dom";
 import { css } from "/lib/kastro/StyleSheet";
 
 /** @enum {string} */

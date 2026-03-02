@@ -8,16 +8,16 @@
   "type": "module",
   "scripts": {
     "postinstall": "mkdir -p ./node_modules/@kimlikdao && ln -sfn ../../lib ./node_modules/@kimlikdao/lib && ln -sfn ../../lib/kdjs ./node_modules/@kimlikdao/kdjs",
-    "dev": "NODE_ENV=production bun lib/kastro/kastro.js serve",
-    "compiled": "NODE_ENV=production bun lib/kastro/kastro.js serve --compiled",
-    "release": "NODE_ENV=production bun lib/kastro/kastro.js serve --release",
+    "dev": "NODE_ENV=production bun --hot lib/kastro/kastro.js serve",
+    "compiled": "NODE_ENV=production bun --hot lib/kastro/kastro.js serve --compiled",
+    "release": "NODE_ENV=production bun --hot lib/kastro/kastro.js serve --release",
     "build": "NODE_ENV=production bun lib/kastro/kastro.js build --release",
     "deploy": "NODE_ENV=production bun lib/kastro/kastro.js deploy",
     "clean": "rm -rf build && clear",
     "kdjs": "bun lib/kdjs/kdjs.js"
   },
   "devDependencies": {
-    "@swc/core": "^1.15.17",
+    "@swc/core": "^1.15.18",
     "acorn": "^8.16.0",
     "acorn-jsx": "^5.3.2",
     "acorn-walk": "^8.3.5",
@@ -28,7 +28,7 @@
     "google-closure-compiler": "^20260225.0.0",
     "html-minifier": "^4.0.0",
     "js-yaml": "^4.1.1",
-    "sax": "^1.4.4",
+    "sax": "^1.5.0",
     "svg-pathdata": "^8.0.0",
     "svgo": "^4.0.0",
     "uglify-js": "~3.19.3"

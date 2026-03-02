@@ -62,3 +62,5 @@ js/ts coding style
 
 4) No exporting from a module except at the very bottom. `export const ` is not allowed.
 `export class` is not allowed. Every export must happen all the way to the bottom of the file.
+
+5) Putting every literal as a const at the beginning of a file is BANNED. We avoid memes; this one does not help.

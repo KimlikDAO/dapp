@@ -1,6 +1,6 @@
 import SharedCss from "../shared/SharedCss";
 import Css from "./Subscribe.css";
-import dom from "../../lib/kastro/dom";
+import dom from "/lib/kastro/dom";
 
 /**
  * @param {{ id: string }} props

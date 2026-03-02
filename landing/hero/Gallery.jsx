@@ -1,9 +1,9 @@
+import dom from "/lib/kastro/dom";
+import { Localizable } from "/lib/util/i18n";
 import Css from "./Gallery.css";
 import Phone from "/components/phone/Phone";
 import SharedCss from "/components/shared/SharedCss.css";
 import Wallet from "/components/wallet/Wallet";
-import dom from "../../lib/kastro/dom";
-import { I18nString } from "../../lib/util/i18n";
 
 /** @const {HTMLDivElement} */
 const Bullets = dom.div(Css.Bullets);
@@ -48,13 +48,14 @@ const selectCard = (newCard) => {
 }
 
 const startGalleryTimer = () => {
-  if (GalleryTimer) clearInterval(GalleryTimer);
-  GalleryTimer = setInterval(() => selectCard(SelectedCard + 1), 12000);
+  return;
+  // if (GalleryTimer) clearInterval(GalleryTimer);
+  // GalleryTimer = setInterval(() => selectCard(SelectedCard + 1), 12000);
 }
 
 /**
  * @param {{
- *   title: string | I18nString,
+ *   title: Localizable,
  *   children?: unknown
  * }} props
  */

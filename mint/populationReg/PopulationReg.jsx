@@ -11,7 +11,7 @@ import { chainIdToGroup } from "/lib/crosschain/chains";
 import { combineMultiple } from "/lib/did/KPass";
 import Router from "/lib/kastro/Router";
 import protocol from "/lib/protocol/client";
-import dom from "../../lib/kastro/dom";
+import dom from "/lib/kastro/dom";
 
 const PopulationReg = () => {
   /** @type {boolean} */

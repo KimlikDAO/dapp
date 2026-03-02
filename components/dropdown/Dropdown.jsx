@@ -1,8 +1,8 @@
 import Css from "./Dropdown.css";
 import Paths from "/components/icons/paths";
 import SharedCss from "/components/shared/SharedCss";
-import dom from "../../lib/kastro/dom";
-import { Localizable } from "../../lib/util/i18n";
+import dom from "/lib/kastro/dom";
+import { Localizable } from "/lib/util/i18n";
 
 /**
  * Generic dropdown: trigger button + panel. Content is supplied as children.

@@ -289,8 +289,8 @@ const yuvartı = (w) => new SVGPathData([
   }
 ]);
 
-/** @const {Object<string, string>} */
-const ŞekilKod = {
+/** @const {Record<string, string>} */
+const KCode = {
   "kpks10": bubble(22, 1, 12, 7).round(1e3),
   "kpks11": kumsaati(22, 1, 9, 0.04).round(1e3),
   "kpks12": ikiliGemi(22, 4, 0.9).round(1e3),
@@ -300,5 +300,5 @@ const ŞekilKod = {
 }
 
 export default () => <>
-  {Object.entries(ŞekilKod).map(([kod, yol]) => <path id={kod} d={yol.encode()} />)}
+  {Object.entries(KCode).map(([kod, yol]) => <path id={kod} d={yol.encode()} />)}
 </>;

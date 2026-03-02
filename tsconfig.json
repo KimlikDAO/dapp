@@ -1,0 +1,52 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "/*": [
+        "*"
+      ]
+    },
+    "jsx": "react-jsx",
+    "jsxImportSource": "/lib/kastro/transpiler",
+    "plugins": [
+      {
+        "name": "@styled/typescript-styled-plugin",
+        "tags": [
+          "css"
+        ]
+      }
+    ],
+    "target": "ESNext",
+    "module": "ESNext",
+    "lib": [
+      "ESNext"
+    ],
+    "moduleResolution": "bundler",
+    "allowJs": true,
+    "noEmit": true,
+    "strict": true,
+    "strictNullChecks": true,
+    "noUncheckedIndexedAccess": true,
+    "noImplicitOverride": true,
+    "noPropertyAccessFromIndexSignature": true,
+    "exactOptionalPropertyTypes": false,
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitReturns": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "allowUnreachableCode": false,
+    "allowUnusedLabels": false,
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true,
+    "downlevelIteration": true
+  },
+  "include": [
+    "./**/*.js",
+    "./**/*.ts"
+  ],
+  "exclude": [
+    "**/node_modules",
+    "**/.kdjs_isolate",
+    "**/build"
+  ]
+}

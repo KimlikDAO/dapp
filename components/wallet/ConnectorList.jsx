@@ -10,7 +10,7 @@ import {
 } from "/lib/crosschain/walletConnector";
 import { EIP6963ProviderDetail } from "/lib/ethereum/provider.d";
 import Image from "/lib/kastro/Image";
-import dom from "../../lib/kastro/dom";
+import dom from "/lib/kastro/dom";
 
 /** @enum {string} */
 const ConnectorId = {

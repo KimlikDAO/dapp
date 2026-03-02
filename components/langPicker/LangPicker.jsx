@@ -2,8 +2,8 @@ import Css from "./LangPicker.css";
 import EnFlag from "/components/flags/en.svg";
 import TrFlag from "/components/flags/tr.svg";
 import HeaderCss from "/components/header/Header.css";
-import dom from "../../lib/kastro/dom";
-import { I18nString, LangCode } from "../../lib/util/i18n";
+import dom from "/lib/kastro/dom";
+import { I18nString, LangCode } from "/lib/util/i18n";
 
 /** @define {I18nString} */
 const Route = { tr: "tr", en: "en" };

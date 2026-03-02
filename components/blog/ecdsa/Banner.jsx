@@ -15,7 +15,7 @@ const Css = css`
 
 /**
  * @param {{
- *   piggyback: (string | undefined),
+ *   piggyback?: string,
  * }} props
  */
 export default ({ piggyback }) => (

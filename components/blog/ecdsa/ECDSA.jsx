@@ -6,8 +6,8 @@ import { PublicProvider } from "/components/chains/provider";
 import USDT from "/components/tokens/USDT.svg";
 import { ChainId } from "/lib/crosschain/chains";
 import { ERC20 } from "/lib/ethereum/contract/ERC20";
+import dom from "/lib/kastro/dom";
 import { css } from "/lib/kastro/StyleSheet";
-import dom from "../../../lib/kastro/dom";
 
 /** @enum {string} */
 const Css = css`
@@ -28,13 +28,9 @@ const Css = css`
   }
 `;
 
-/** @const {string} */
 const DEV_FUND = "0x79883D9aCBc4aBac6d2d216693F66FcC5A0BcBC1".toLowerCase();
-/** @const {string} */
 const ODUL = "0xfd086bc7cd5c481dcc9c85ebe478a1c0b69fcbb9"
-/** @const {string} */
 const USDT_ARB = "0xfd086bc7cd5c481dcc9c85ebe478a1c0b69fcbb9";
-/** @const {number} */
 const TOTAL = 5_000e6;
 
 /**

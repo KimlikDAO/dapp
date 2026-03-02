@@ -1,5 +1,5 @@
 import { ChainId } from "/lib/crosschain/chains";
-import dom from "../../lib/kastro/dom";
+import dom from "/lib/kastro/dom";
 
 /**
  * @typedef {{

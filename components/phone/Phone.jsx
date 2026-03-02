@@ -1,11 +1,9 @@
 import KPass from "../kpass/KPass";
 import Css from "./Phone.css";
 import { css } from "/lib/kastro/StyleSheet";
-import dom from "../../lib/kastro/dom";
+import dom from "/lib/kastro/dom";
 
-/** @const {HTMLDivElement} */
 const KPassDialog = dom.div(Css.KPassDialog);
-/** @const {HTMLDivElement} */
 const KPassDialogButton = dom.div(Css.KPassDialogButton);
 
 /** @enum {string} */
@@ -87,8 +85,8 @@ InfoDialog.show = (prompt, buttonText) => {
 
 /**
  * @param {{
- *   noshow: (boolean | undefined),
- *   piggyback: (string | undefined)
+ *   noshow?: boolean,
+ *   piggyback?: string
  * }} props
  */
 const Phone = ({ noshow, piggyback }) => (

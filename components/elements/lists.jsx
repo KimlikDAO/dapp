@@ -1,5 +1,5 @@
 import { css } from "/lib/kastro/StyleSheet";
-import { I18nString, Localizable } from "../../lib/util/i18n";
+import { I18nString, Localizable } from "/lib/util/i18n";
 
 /** @enum {string} */
 const Css = css`

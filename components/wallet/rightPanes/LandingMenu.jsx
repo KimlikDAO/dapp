@@ -7,8 +7,8 @@ import {
   Vote
 } from "/components/icons/Icons";
 import { css } from "/lib/kastro/StyleSheet";
-import dom from "../../../lib/kastro/dom";
-import { I18nString } from "../../../lib/util/i18n";
+import dom from "/lib/kastro/dom";
+import { I18nString } from "/lib/util/i18n";
 
 const Css = css`
   /** @export */

@@ -1,5 +1,5 @@
 import { css } from "/lib/kastro/StyleSheet";
-import dom from "../../lib/kastro/dom";
+import dom from "/lib/kastro/dom";
 
 /** @const {number} */
 const Width = 180;

@@ -1,6 +1,6 @@
-import dom from "../../lib/kastro/dom";
 import Css from "./ProcessingStatus.css";
-import { LangCode } from "../../lib/util/i18n";
+import dom from "/lib/kastro/dom";
+import { LangCode } from "/lib/util/i18n";
 
 const ProcessingStatus = () => {
   /** @const {HTMLDivElement} */
@@ -30,7 +30,7 @@ const ProcessingStatus = () => {
   );
 };
 
-/** @type {Array<string>} */
+/** @type {string[]} */
 const ProgressMessages = dom.i18n({
   [LangCode.EN]: [
     "Uploading document",
@@ -44,7 +44,7 @@ const ProgressMessages = dom.i18n({
   ]
 });
 
-/** @type {Array<string>} */
+/** @type {string[]} */
 const ErrorMessages = dom.i18n({
   [LangCode.EN]: [
     "The document is {} hours old. Please get a new document and upload here within 24 hours.",
@@ -134,9 +134,6 @@ ProcessingStatus.showError = (error, retryFn) => {
   root.classList.add(Css.Error);
 };
 
-/**
- * Starts the automatic progress indication with predefined messages.
- */
 ProcessingStatus.startProgress = () => {
   ProcessingStatus.showProcessing(ProgressMessages[0]);
   setTimeout(() => {
@@ -147,11 +144,6 @@ ProcessingStatus.startProgress = () => {
   }, 3000);
 };
 
-/**
- * Hides the component.
- */
-ProcessingStatus.hide = () => {
-  dom.hide(dom.byId(Css.Root));
-};
+ProcessingStatus.hide = () => dom.hideById(Css.Root);
 
 export default ProcessingStatus; 

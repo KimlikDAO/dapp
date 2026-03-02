@@ -1,7 +1,7 @@
 import EnFlag from "./en.svg";
 import TrFlag from "./tr.svg";
 import { css } from "/lib/kastro/StyleSheet";
-import { LangCode } from "../../lib/util/i18n";
+import { LangCode } from "/lib/util/i18n";
 
 /** @enum {string} */
 const Css = css`

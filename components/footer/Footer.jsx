@@ -1,7 +1,7 @@
 import SharedCss from "../shared/SharedCss";
 import Css from "./Footer.css";
 import Subscribe from "/components/subscribe/Subscribe";
-import { i18n } from "../../lib/util/i18n";
+import { i18n } from "/lib/util/i18n";
 import { ExternalPage } from "/mpa";
 
 const SubscribeBox = () => (
@@ -33,8 +33,6 @@ const Footer = () => (
       <a href={i18n`${ExternalPage.Join}#sa-ambassador1`}>{{ en: "Ambassador program", tr: "Ambassador ol" }}</a>
       <a href={ExternalPage.Zealy}>Zealy</a>
       <a href={ExternalPage.GitHub}>GitHub</a>
-      <a href={ExternalPage.DappRadar}>DappRadar</a>
-      <a href={ExternalPage.LinkedIn}>LinkedIn</a>
     </div>
     <div class={Css.Column}>
       <b>{{ en: "DEVELOPERS", tr: "GELİŞTİRİCİLER" }}</b>
