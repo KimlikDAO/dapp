@@ -1,5 +1,5 @@
 import "./auro.d";
-import { ChainId } from "/lib/crosschain/chains";
+import { ChainId, MinaChainId } from "/lib/crosschain/chains";
 import { WalletConnector } from "/lib/crosschain/walletConnector";
 import {
   ChainInfoArgs,
@@ -127,7 +127,7 @@ const Auro = /** @type {WalletConnector} */({
    * @param {ChainId} chainId
    * @return {boolean}
    */
-  isChainSupported: (chainId) => chainId == ChainId.MinaMainnet
+  isChainSupported: (chainId) => chainId == MinaChainId.Mainnet
 });
 
 export { Auro };

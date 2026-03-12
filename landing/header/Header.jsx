@@ -52,12 +52,12 @@ const Header = ({ chainConfig }) => (
         chainConfig={chainConfig}
         cookieDomain={`.${HostUrl.slice(8)}`}
         mintKPassUrl$={Page.Mint}
-        viewKPassUrl={dom.i18n(Page.KPass)}
+        viewKPassUrl={""}
       >
         <LandingMenu
           ambassadorUrl$={i18n`${ExternalPage.Join}#sa-ambassador1`}
-          voteUrl$={Page.Vote}
-          revokeUrl$={Page.Revoke}
+          voteUrl$={""}
+          revokeUrl$={""}
         />
       </Wallet>
       <a id={Css.ActionButton} href={Page.Mint} class={[SharedCss.Button, SharedCss.Action]}>{{

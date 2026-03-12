@@ -13,13 +13,13 @@ const SharedCss = () => (<>
 </>);
 
 Object.assign(SharedCss, Css);
-/** @enum {string} */
+/** @const */
 SharedCss.Header = Header;
-/** @enum {string} */
+/** @const */
 SharedCss.Wallet = Wallet;
-/** @enum {string} */
+/** @const */
 SharedCss.LangPicker = LangPicker;
-/** @enum {string} */
+/** @const */
 SharedCss.KPass = KPass;
 
 export default SharedCss;

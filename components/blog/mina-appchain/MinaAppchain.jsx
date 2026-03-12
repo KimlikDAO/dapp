@@ -4,8 +4,8 @@ import RemainingBar from "../RemainingBar";
 import Banner from "./banner.png";
 import { ChainInfos } from "/components/chains/chains";
 import MINA from "/components/tokens/MINA.png";
-import { ChainId } from "/lib/crosschain/chains";
 import { css } from "/lib/kastro/StyleSheet";
+import { ChainId } from "/lib/mina/chains";
 
 const Css = css`
   .${RemainingBar.Css.Container}.MINA {
@@ -30,7 +30,7 @@ const TOTAL = 10_000_000_000_000;
  * @param {{ href: string, piggyback: string }=} props
  */
 const MinaAppchain = ({ href, piggyback }) => {
-  fetch(`https://${ChainInfos[ChainId.MinaMainnet].rpcUrl}/accounts/${ZkAppAddress}`)
+  fetch(`https://${ChainInfos[ChainId.Mainnet].rpcUrl}/accounts/${ZkAppAddress}`)
     .then((res) => res.json())
     .then((data) =>
       RemainingBar.setRemaining(Css.MINA, +data["account"]["balance"]["total"] | 0, TOTAL)

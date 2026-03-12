@@ -1,16 +1,15 @@
 import { I18nString, LangCode, Localizable } from "/lib/util/i18n";
 
-/** @define {string} */
-const HostUrl = "https://kimlikdao.org";
+const HostUrl = "https://yenibank.com";
 
 /** @enum {I18nString} */
 const Page = {
   Landing: { [LangCode.EN]: "en", [LangCode.TR]: "tr" },
   Mint: { [LangCode.EN]: "mint", [LangCode.TR]: "al" },
-  Revoke: { [LangCode.EN]: "revoke", [LangCode.TR]: "iptal" },
-  Vote: { [LangCode.EN]: "vote", [LangCode.TR]: "oyla" },
-  KDAO: { [LangCode.EN]: "KDAO", [LangCode.TR]: "kdao" },
-  KPass: { [LangCode.EN]: "kpass", [LangCode.TR]: "kpassim" }
+  // Revoke: { [LangCode.EN]: "revoke", [LangCode.TR]: "iptal" },
+  // Vote: { [LangCode.EN]: "vote", [LangCode.TR]: "oyla" },
+  // KDAO: { [LangCode.EN]: "KDAO", [LangCode.TR]: "kdao" },
+  // KPass: { [LangCode.EN]: "kpass", [LangCode.TR]: "kpassim" }
 };
 
 /** @enum {Localizable} */

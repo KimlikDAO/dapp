@@ -2,7 +2,7 @@
  * @fileoverview İncele sayfası giriş noktası
  *
  */
-import "./discord.d";
+import "./discord";
 import { roleRequestChallenge } from "./discord.js";
 import {
   AçDüğmesi,
@@ -19,13 +19,13 @@ import {
   eşikKutusuGöster,
   imeceİptalKutusuGöster,
   silKutusuGöster
-} from "/kpassim/pencere/birim";
+} from "./pencere/birim";
 import { ChainId } from "/lib/crosschain/chains";
 import { Provider } from "/lib/crosschain/provider";
 import { Signature, Signer } from "/lib/crosschain/signer";
 import { fromUnlockableNFT } from "/lib/did/KPass";
-import KPass from "../lib/ethereum/contract/KPass";
-import dom from "../lib/kastro/dom";
+import KPass from "@kimlikdao/lib/ethereum/contract/KPass";
+import dom from "@kimlikdao/lib/kastro/dom";
 
 
 /** @const {Object<string, !did.DecryptedSections>} */

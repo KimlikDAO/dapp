@@ -1,3 +1,4 @@
+import { LangCode } from "../lib/util/i18n";
 import Credentials from "./Credentials";
 import Css from "./Mint.css";
 import Welcome from "./Welcome";
@@ -8,28 +9,26 @@ import Lato400 from "/components/lato/l400.ttf";
 import Lato700 from "/components/lato/l700.ttf";
 import SharedCss from "/components/shared/SharedCss.css";
 import { ChainConfig } from "/components/wallet/Wallet";
-import { ChainId } from "/lib/crosschain/chains";
+import { EthereumChainId, MinaChainId } from "/lib/crosschain/chains";
 import Router from "/lib/kastro/Router";
 import { css } from "/lib/kastro/StyleSheet";
 import Switch from "/lib/kastro/Switch";
-import dom from "../lib/kastro/dom";
-import { LangCode } from "../lib/util/i18n";
 import { HostUrl, Page } from "/mpa";
 
 /** @type {ChainConfig} */
 const MintChainConfig = {
-  defaultChain: ChainId.x1,
+  defaultChain: EthereumChainId.x1,
   chains: [
-    ChainId.x1,
-    ChainId.xa4b1,
-    ChainId.MinaMainnet,
-    ChainId.x89,
-    ChainId.xa86a,
-    ChainId.x38,
+    EthereumChainId.x1,
+    EthereumChainId.xa4b1,
+    MinaChainId.Mainnet,
+    EthereumChainId.x89,
+    EthereumChainId.xa86a,
+    EthereumChainId.x38,
   ],
   chainNotes$: {
-    [ChainId.x1]: { en: "Signal chain", tr: "Ana ağ" },
-    [ChainId.MinaMainnet]: { en: "New ✨", tr: "Yeni ✨" },
+    [EthereumChainId.x1]: { en: "Signal chain", tr: "Ana ağ" },
+    [MinaChainId.Mainnet]: { en: "New ✨", tr: "Yeni ✨" },
   },
 };
 
@@ -64,7 +63,7 @@ const Mint = ({ Lang }) => (
         title$="KimlikDAO"
         cookieDomain={`.${HostUrl.slice(8)}`}
         mintKPassUrl$={Page.Mint}
-        viewKPassUrl={dom.i18n(Page.KPass)} />
+        viewKPassUrl={""} />
       <Router routeHandler={(route) => {
         if (route) {
           Mint.panes.showPane(1);

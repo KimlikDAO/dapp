@@ -1,20 +1,20 @@
-import Css from "./KDAO.css";
+import { LangCode } from "../lib/util/i18n";
+import Css from "./Kdao.css";
 import Header from "/components/header/Header";
 import Favicon from "/components/icon.svg";
 import Lato400 from "/components/lato/l400.ttf";
 import Lato700 from "/components/lato/l700.ttf";
 import SharedCss from "/components/shared/SharedCss";
-import { ChainId } from "/lib/crosschain/chains";
-import dom from "../lib/kastro/dom";
-import { LangCode } from "../lib/util/i18n";
+import { ChainConfig } from "/components/wallet/Wallet";
+import { EthereumChainId } from "/lib/crosschain/chains";
 import { HostUrl, Page } from "/mpa";
 
 /** @type {ChainConfig} */
 const KdaoChainConfig = {
-  defaultChain: ChainId.x1,
-  chains: [ChainId.x1],
+  defaultChain: EthereumChainId.x1,
+  chains: [EthereumChainId.x1],
   chainNotes$: {
-    [ChainId.x1]: { tr: "Ana ağ", en: "Treasury chain" },
+    [EthereumChainId.x1]: { tr: "Ana ağ", en: "Treasury chain" },
   },
 };
 
@@ -40,7 +40,7 @@ const Kdao = ({ Lang }) => (
         title$="KimlikDAO"
         cookieDomain={`.${HostUrl.slice(8)}`}
         mintKPassUrl$={Page.Mint}
-        viewKPassUrl={dom.i18n(Page.KPass)} />
+        viewKPassUrl={""} />
       <div id={Css.Hero}>Graph</div>
     </body>
   </html>

@@ -16,17 +16,19 @@
         ]
       }
     ],
-    "target": "ESNext",
-    "module": "ESNext",
+    "target": "esnext",
+    "module": "esnext",
     "lib": [
-      "ESNext"
+      "dom",
+      "esnext"
     ],
+    "strictPropertyInitialization": true,
+    "noEmit": true,
     "moduleResolution": "bundler",
     "allowJs": true,
-    "noEmit": true,
     "strict": true,
     "strictNullChecks": true,
-    "noUncheckedIndexedAccess": true,
+    "noUncheckedIndexedAccess": false,
     "noImplicitOverride": true,
     "noPropertyAccessFromIndexSignature": true,
     "exactOptionalPropertyTypes": false,
@@ -47,6 +49,7 @@
   "exclude": [
     "**/node_modules",
     "**/.kdjs_isolate",
-    "**/build"
+    "**/build",
+    "/lib/gcc"
   ]
 }

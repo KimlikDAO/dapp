@@ -1,4 +1,3 @@
-import Script from "kastro:./sayfa.jsx";
 import Pencere from "./pencere/birim.jsx";
 import Css from "./sayfa.css";
 import Başlık from "/components/başlık/birim";
@@ -10,8 +9,8 @@ import Lato700 from "/components/lato/l700.ttf";
 import OrtakCss from "/components/shared/SharedCss.jsx";
 import { Page } from "/mpa";
 import { ChainId } from "/lib/crosschain/chains";
-import dom from "../lib/kastro/dom.js";
-import { I18nString } from "../lib/util/i18n.js";
+import dom from "@kimlikdao/lib/kastro/dom.js";
+import { I18nString } from "@kimlikdao/lib/util/i18n.js";
 
 /** @const {Array<ChainId>} */
 const Chains = [
@@ -32,7 +31,6 @@ const ChainNotes = {
 /** @const {ChainId} */
 const DefaultChain = ChainId.xa4b1;
 
-/** @const {HTMLDivElement} */
 const AçDüğmesi = dom.div(Css.AçDüğmesi);
 /** @const {HTMLAnchorElement} */
 const DiscordDüğmesi = dom.button("inbtn0");

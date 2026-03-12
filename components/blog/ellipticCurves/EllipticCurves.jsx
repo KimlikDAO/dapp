@@ -4,7 +4,7 @@ import RemainingBar from "../RemainingBar";
 import Banner from "./banner.png";
 import { PublicProvider } from "/components/chains/provider";
 import UBInuImage from "/components/tokens/UBINU.png";
-import { ChainId } from "/lib/crosschain/chains";
+import { ChainId } from "/lib/ethereum/chains";
 import { ERC20 } from "/lib/ethereum/contract/ERC20";
 import dom from "/lib/kastro/dom";
 import { css } from "/lib/kastro/StyleSheet";

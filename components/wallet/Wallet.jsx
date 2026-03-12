@@ -11,15 +11,16 @@ import SharedCss from "/components/shared/SharedCss.css";
 import {
   ChainGroup,
   ChainId,
+  EthereumChainId,
   chainIdToGroup
 } from "/lib/crosschain/chains";
 import { WalletConnector as Connector } from "/lib/crosschain/walletConnector";
 import { ERC721Unlockable } from "/lib/ethereum/contract/ERC721.d";
 import KPass from "/lib/ethereum/contract/KPass";
+import dom from "/lib/kastro/dom";
 import Image from "/lib/kastro/Image";
 import Switch from "/lib/kastro/Switch";
 import ipfs from "/lib/protocol/ipfs/ipfs";
-import dom from "/lib/kastro/dom";
 import hex from "/lib/util/hex";
 import { I18nString } from "/lib/util/i18n";
 
@@ -126,7 +127,7 @@ const kpassChanged = () => {
   const chainId = ChainList.selected;
   const address = Address;
   if (!address) return;
-  KPass.handleOf(chainId, address)
+  KPass.handleOf(/** @type {EthereumChainId} */(chainId), address)
     .then((cidHex) => {
       if (chainId != ChainList.selected || address != Address) return;
       const hasKPass = cidHex.replaceAll("0", "") != "x";
@@ -190,7 +191,7 @@ const dropdownClicked = (event) => {
 }
 
 const connectConnector = () => {
-  SelectedConnector.connect(ChainId.x1, chainChanged, addressChanged);
+  SelectedConnector.connect(EthereumChainId.x1, chainChanged, addressChanged);
   /** @const {string} */
   const cookie = document.cookie;
   /** @const {number} */

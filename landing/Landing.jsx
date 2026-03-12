@@ -12,24 +12,24 @@ import Lato400 from "/components/lato/l400.ttf";
 import Lato700 from "/components/lato/l700.ttf";
 import SharedCss from "/components/shared/SharedCss";
 import { ChainConfig } from "/components/wallet/Wallet";
-import { ChainId } from "/lib/crosschain/chains";
+import { EthereumChainId, MinaChainId } from "/lib/crosschain/chains";
 import { LangCode } from "/lib/util/i18n";
 import { HostUrl } from "/mpa";
 
 /** @type {ChainConfig} */
 const LandingChainConfig = {
-  defaultChain: ChainId.x1,
+  defaultChain: EthereumChainId.x1,
   chains: [
-    ChainId.x1,
-    ChainId.xa4b1,
-    ChainId.MinaMainnet,
-    ChainId.x89,
-    ChainId.xa86a,
-    ChainId.x38,
+    EthereumChainId.x1,
+    EthereumChainId.xa4b1,
+    MinaChainId.Mainnet,
+    EthereumChainId.x89,
+    EthereumChainId.xa86a,
+    EthereumChainId.x38,
   ],
   chainNotes$: {
-    [ChainId.x1]: { en: "Signal chain", tr: "Ana ağ" },
-    [ChainId.MinaMainnet]: { en: "New ✨", tr: "Yeni ✨" },
+    [EthereumChainId.x1]: { en: "Signal chain", tr: "Ana ağ" },
+    [MinaChainId.Mainnet]: { en: "New ✨", tr: "Yeni ✨" },
   },
 };
 

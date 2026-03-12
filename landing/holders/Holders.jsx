@@ -4,30 +4,32 @@ import { chainImageSrc } from "/components/chains/chains";
 import { Arrow } from "/components/icons/Icons";
 import SharedCss from "/components/shared/SharedCss";
 import { ChainId } from "/lib/crosschain/chains";
+import { ChainId as Ethereum } from "/lib/ethereum/chains";
 import Image from "/lib/kastro/Image";
+import { ChainId as Mina } from "/lib/mina/chains";
 import { Page } from "/mpa";
 
 /**
- * @const {Object<ChainId, {
+ * @const {Record<ChainId, {
  *   chainName: string,
  *   chainSuffix: string,
  *   holders: number
  * }>}
  */
 const Chains = {
-  [ChainId.x1]: { chainName: "ETHEREUM", chainSuffix: "’DA", holders: 13 },
-  [ChainId.xa86a]: { chainName: "AVALANCHE", chainSuffix: "’TA", holders: 57 },
-  [ChainId.x38]: { chainName: "BNB CHAIN", chainSuffix: "’DE", holders: 5 },
-  [ChainId.xa4b1]: { chainName: "ARBITRUM", chainSuffix: "’DA", holders: 8 },
-  [ChainId.MinaMainnet]: { chainName: "MINA", chainSuffix: "’DA", holders: 130 },
-  [ChainId.x89]: { chainName: "POLYGON", chainSuffix: "’DA", holders: 2 },
+  [Ethereum.x1]: { chainName: "ETHEREUM", chainSuffix: "’DA", holders: 13 },
+  [Ethereum.xa86a]: { chainName: "AVALANCHE", chainSuffix: "’TA", holders: 57 },
+  [Ethereum.x38]: { chainName: "BNB CHAIN", chainSuffix: "’DE", holders: 5 },
+  [Ethereum.xa4b1]: { chainName: "ARBITRUM", chainSuffix: "’DA", holders: 8 },
+  [Mina.Mainnet]: { chainName: "MINA", chainSuffix: "’DA", holders: 130 },
+  [Ethereum.x89]: { chainName: "POLYGON", chainSuffix: "’DA", holders: 2 },
 };
 
 /**
  * @param {{ chainId: ChainId }} props
  */
 const Bubble = ({ chainId }) => (
-  <div class={[Css.Bubble, Css[chainId == ChainId.MinaMainnet ? "mina" : chainId.slice(1)]]}>
+  <div class={[Css.Bubble, Css[chainId == Mina.Mainnet ? "mina" : chainId.slice(1)]]}>
     <Image src={chainImageSrc(chainId)} height={40} width={40} bundleHeight={64} bundleWidth={64} />
     <div>
       <div class={Css.BubbleCount}>{Chains[chainId].holders}</div>
