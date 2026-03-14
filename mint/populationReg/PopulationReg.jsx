@@ -1,4 +1,4 @@
-import PowWorker from "kastro:./powWorker.js";
+import PowWorker from "kastro:./powWorker.ts";
 import { getCommitmentPow, getRand, splitCommitment } from "./commitment";
 import Css from "./PopulationReg.css";
 import ProcessingStatus from "./ProcessingStatus";

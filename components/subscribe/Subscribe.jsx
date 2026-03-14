@@ -8,7 +8,7 @@ import dom from "/lib/kastro/dom";
 const Subscribe = ({ id }) => {
   const Root = dom.form(id);
   const input = /** @type {HTMLInputElement} */(Root.firstElementChild);
-  const button = /** @type {Element} */(input.nextElementSibling);
+  const button = /** @type {HTMLButtonElement} */(input.nextElementSibling);
 
   /**
    * @param {boolean} success

@@ -26,6 +26,7 @@
     "noEmit": true,
     "moduleResolution": "bundler",
     "allowJs": true,
+    "checkJs": true,
     "strict": true,
     "strictNullChecks": true,
     "noUncheckedIndexedAccess": false,
@@ -50,6 +51,6 @@
     "**/node_modules",
     "**/.kdjs_isolate",
     "**/build",
-    "/lib/gcc"
+    "lib/kdjs/**"
   ]
 }

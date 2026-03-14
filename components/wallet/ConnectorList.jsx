@@ -44,11 +44,8 @@ const connectorImageSrc = (name) => `components/wallet/img/${name.split(" ")[0].
  * }} props
  */
 const ConnectorListItem = ({ connectorId, name$ }) => {
-  /** @const {HTMLLIElement} */
   const Item = dom.li(`${Css.Root}.${connectorId}`);
-  /** @const {Element} */
   const button = Item.children[2];
-  /** @const {Connector} */
   const provider = Connectors[connectorId];
 
   if (provider.isInitialized()) {
@@ -87,9 +84,7 @@ ConnectorListItem.initialize = (connectorId, provider) => {
  */
 const onAnnounceProvider = (event) => {
   const { info, provider } = /** @type {EIP6963ProviderDetail} */(event["detail"]);
-  /** @const {number} */
   const idx = info.rdns.indexOf(".");
-  /** @const {ConnectorId} */
   const connectorId = /** @type {ConnectorId} */(info.rdns.slice(idx + 1, idx + 3));
   if (connectorId in Connectors)
     ConnectorListItem.initialize(connectorId, provider);

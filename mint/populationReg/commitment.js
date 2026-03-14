@@ -29,7 +29,7 @@ const getCommitmentPow = (chainGroup, address, rand, powWorker) => {
   /** @const {Uint8Array} */
   const commit = commitDouble(chainGroup, address, rand);
   /** @const {string} */
-  const commitBase64 = base64.from(commit);
+  const commitBase64 = base64.from(commit.subarray(0, 64));
   /** @const {?string} */
   const cached = window.localStorage[commitBase64];
   if (cached)
